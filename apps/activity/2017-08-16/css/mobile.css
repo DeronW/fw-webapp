@@ -16,7 +16,7 @@
     width: 142px;
     height: 152px;
     background: url("../images/mobile/layer.png") no-repeat;
-    position: absolute;
+    position: fixed;
     top: 290px;
     right: 22px;
     cursor: pointer;
