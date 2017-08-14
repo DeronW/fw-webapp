@@ -58,7 +58,7 @@ class Mobile extends React.Component {
         let {close,showLayer,showExplain} =this.state;
         let { isLogin, loginHandler, timestamp,ladderData,personData,total } = this.props;
         
-        let actExplain = <div styleName="actExplain" style={{"top":Browser.inApp?"0px":"66px"}}>
+        let actExplain = <div styleName="actExplain">
             <div styleName="actTitle">活动说明</div>
             <p>1.活动期间，投资转让项目，不能参与本次活动；</p>
             <p>2.投资等额标时，＞18个月的项目按18个月计算年化投资额；</p>
@@ -130,7 +130,7 @@ class Mobile extends React.Component {
         return <div styleName="mobile" onClick={this.closeLayerHandler}>
             {Browser.inApp ? null : <MobileHeader bgColor="rgba(0,0,0,0.5)" />}
             <div styleName="banner"></div>
-            <div styleName="activityExplain" onClick={this.triggerExplain}></div>
+            <div styleName="activityExplain" onClick={this.triggerExplain} style={{"top":Browser.inApp?"0px":"66px"}}></div>
             <div styleName="layer" onClick={this.showLayerHandler}>
                 <div styleName="layerText" style={{"display":showLayer?"block":"none"}}>邀请人及被邀请人，且团队人数≥2人；<br/>例如：A邀请的好友有B、C、D、E，那么ABCDE算一个团队。</div>
             </div>
