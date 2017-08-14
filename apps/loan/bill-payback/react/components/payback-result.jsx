@@ -31,12 +31,12 @@ class PayBackResult extends React.Component{
                 loanLeftAmount: data.loanLeftAmount
             });
             if(this.state.payback_status == 1){
-                if(activityRecomUrl){
+                // if(activityRecomUrl){
                     setTimeout(() => {
                         location.href=`${activityRecomUrl}`;
                     }, 2000)
 
-                }
+                // }
             }
         }, e => $FW.Component.Toast(e.message));
     }
