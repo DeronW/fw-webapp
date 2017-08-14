@@ -11,6 +11,7 @@ import {
 import NotFound from './pages/not-found.js'
 import * as FAQ from './pages/faq.js'
 import AppDownload from './pages/app-download.js'
+import InterestRewords from './pages/interest-reward.js'
 
 export default (stores) => {
     return <Router>
@@ -19,6 +20,7 @@ export default (stores) => {
                 <Route exact path='/faq' component={FAQ.List}/>
                 <Route exact path='/faq/:kind' component={FAQ.Page}/>
                 <Route exact path='/app-download' component={AppDownload}/>
+                <Route exact path='/interest-reward' component={InterestRewords}/>
                 <Route component={NotFound}/>
             </Switch>
         </Provider>

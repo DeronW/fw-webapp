@@ -8,6 +8,7 @@ import PC from './components/pc.js'
 import { Get } from '../lib/helpers/request.js'
 import UserReady from '../lib/helpers/user-ready.js'
 import gotoPage from '../lib/helpers/goto-page.js'
+import NativeBridge from '../lib/helpers/native-bridge.js'
 
 class C extends React.Component {
     state = {
@@ -66,4 +67,5 @@ class C extends React.Component {
         </div>
     }
 }
+NativeBridge.setTitle("理财联盟，等你来战！")
 render(<C />, document.getElementById('cnt'))
