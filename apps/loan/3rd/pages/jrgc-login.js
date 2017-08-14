@@ -18,19 +18,16 @@ class JRGCLogin extends React.Component {
 
     componentDidMount() {
         // 2017-08-12, 金融工场iOS审核被拒, 临时跳转
-        // if (Browser.inIOS) {
-        //     try {
-        //         NativeBridge.trigger('show_header')
-        //     } catch (e) { }
-        //     location.href = 'https://m.dougemall.com/static/mall/waiting/index.html'
-        // }
+        if (Browser.inIOS) {
+            try {
+                NativeBridge.trigger('show_header')
+                NativeBridge.setTitle('敬请期待')
+            } catch (e) { }
+            location.href = '/static/loan/features/index.html#/waiting'
+        }
 
-        let { jrgc_login } = this.props;
-        jrgc_login.gotoLogin();
-
-        setTimeout(() => {
-            this.setState({ show: true })
-        }, 10000)
+        this.props.jrgc_login.gotoLogin()
+        setTimeout(() => this.setState({ show: true }), 8000)
     }
 
     render() {
