@@ -64,9 +64,9 @@ class LoanResult extends React.Component {
                     waitingResultShow: false,
                     successResultShow: true,
                 });
-                if (activityRecomUrl) {
+                if (this.state.activityRecomUrl) {
                     setTimeout(() => {
-                        location.href = `${activityRecomUrl}`;
+                        location.href = `${this.state.activityRecomUrl}`;
                     }, 2000)
 
                 }

@@ -31,9 +31,9 @@ class PayBackResult extends React.Component{
                 loanLeftAmount: data.loanLeftAmount
             });
             if(this.state.payback_status == 1){
-                if(activityRecomUrl){
+                if(this.state.activityRecomUrl){
                     setTimeout(() => {
-                        location.href=`${activityRecomUrl}`;
+                        location.href=`${this.state.activityRecomUrl}`;
                     }, 2000)
 
                 }
