@@ -17,7 +17,7 @@
     width: 142px;
     height: 134px;
     background: url("../images/pc/layer.png") no-repeat;
-    position: absolute;
+    position: fixed;
     top: 530px;
     right: 200px;
     cursor: pointer;
