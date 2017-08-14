@@ -8,7 +8,7 @@ import styles from '../css/app-download.css'
 class AppDownload extends React.Component {
     render() {
         return <div styleName="appDownload-box">
-            <Header title='下载APP'/>
+            <Header title='下载APP' history={this.props.history}/>
             <img src={require("../images/app-download/img_thumb.jpg")}/>
             <br/>
             <a href="http://app.9888.cn/download/apk">
