@@ -16,8 +16,8 @@ class AuthFail extends React.Component {
                 <Header title="授权失败" history={history} />
                 <div styleName="info-container">
                     <img styleName="info-img" src={require("../images/fail/auth-fail.png")}/>
-                    <div styleName="info-text">授权失败，请稍后重试</div>
-                    <div styleName="bottom-btn">返回首页</div>
+                    <div styleName="info-text">很抱歉，访问此页面暂时出现问题</div>
+                    <div styleName="bottom-btn">联系客服</div>
                 </div>
             </div>
         )
