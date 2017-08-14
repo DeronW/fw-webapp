@@ -15,11 +15,10 @@ class Fail extends React.Component {
     componentDidMount() {
         let { history } = this.props;
         return Post('/api/userext/v1/validTokenAndLogin.json', {
-            partner: Utils.hashQuery.partner,
-            sign: Utils.hashQuery.sign,
-            timestamp: Utils.hashQuery.timestamp,
-            token: Utils.hashQuery.token
-            // token: 'success'
+            partner: Utils.urlQuery.partner,
+            sign: Utils.urlQuery.sign,
+            timestamp: Utils.urlQuery.timestamp,
+            token: Utils.urlQuery.token
         }, 'silence').then((data) => {
             let dict = data;
             Storage.login({
