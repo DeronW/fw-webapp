@@ -20,6 +20,7 @@
     top: 290px;
     right: 22px;
     cursor: pointer;
+    z-index: 20
 }
 .layerText{
     width: 664px;
@@ -28,7 +29,7 @@
     background: url("../images/mobile/teamBg.png") no-repeat;
     display: none;
     position: absolute;
-    top: -120px;
+    top: -118px;
     right: -16px;
     color: #abcaff;
     font-size: 22px;

@@ -17,7 +17,7 @@ class Mobile extends React.Component {
 
     state = {
         close:true,
-        showLayer:true
+        showLayer:false
     }
     componentDidMount(){
 
@@ -27,8 +27,13 @@ class Mobile extends React.Component {
         ReactDOM.render(<PopInviteMobile gotoLogin={loginHandler} isLogin={isLogin}
                                      closePopHandler={closePopHandler}/>,document.getElementById("pop"))
     }
-    showLayerHandler = () => {
+    showLayerHandler = (e) => {
+        e.preventDefault(); 
+        e.stopPropagation(); 
         this.setState({showLayer:true})
+    }
+    closeLayerHandler = (e) => {
+        this.setState({showLayer:false})
     }
     closeHandler = () => {
         this.setState({close:false})
@@ -104,7 +109,7 @@ class Mobile extends React.Component {
                 <div styleName="m_bottom_close" onClick={this.closeHandler}></div>
             </div>
         }
-        return <div styleName="mobile">
+        return <div styleName="mobile" onClick={this.closeLayerHandler}>
             {Browser.inApp ? null : <MobileHeader bgColor="rgba(0,0,0,0.5)" />}
             <div styleName="banner"></div>
             <div styleName="layer" onClick={this.showLayerHandler}>
