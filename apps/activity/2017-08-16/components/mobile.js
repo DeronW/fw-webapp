@@ -41,7 +41,7 @@ class Mobile extends React.Component {
             let empty = <div>人气王还在堵车，马上就来！</div>
             let list = (item,index) => {
                 return <tr key={index}>
-                    <td styleNmae={`icon icon-${index}`}>{index+1}</td>
+                    <td styleName={`icon icon-${index}`}>{index+1}</td>
                     <td >{item.realName}</td>
                     <td >{item.uCount}</td>
                     <td styleName="rank" style={{"lineHeight":item.yearAmtDe?"24px":"0px"}}>
