@@ -29,7 +29,6 @@ class PopStartPC extends React.Component {
                 <p>客服电话：</p>
                 <p>400-0322-988</p>
                 <p>010-65255966</p>
-                <div styleName="closePC" onClick={this.closeHandler}></div>
             </div>
         </div>
     }
@@ -62,7 +61,6 @@ class PopStartMobile extends React.Component {
                 <p>客服电话：</p>
                 <p>400-0322-988</p>
                 <p>010-65255966</p>
-                <div styleName="closeMobile" onClick={this.closeHandler}></div>
             </div>
         </div>
     }

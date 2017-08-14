@@ -19,15 +19,6 @@
     text-align: center;
     background: url('../images/pop-start/startBg.png') no-repeat;
 }
-.closePC{
-    width: 78px;
-    height: 78px;
-    background: transparent;
-    position: absolute;
-    top: 22px;
-    right: 24px;
-    cursor: pointer;
-}
 .titlePC{
     font-size: 30px;
     color: #913e30;
@@ -72,13 +63,4 @@
     text-align: left;
     margin: auto;
     line-height: 36px;
-}
-.closeMobile{
-    width: 78px;
-    height: 78px;
-    background: transparent;
-    position: absolute;
-    top: 22px;
-    right: 24px;
-    cursor: pointer;
 }
