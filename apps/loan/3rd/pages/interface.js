@@ -18,7 +18,7 @@ class Fail extends React.Component {
             partner: Utils.urlQuery.partner,
             sign: Utils.urlQuery.sign,
             timestamp: Utils.urlQuery.timestamp,
-            token: Utils.urlQuery.token
+            tempToken: Utils.urlQuery.tempToken
         }, 'silence').then((data) => {
             let dict = data;
             Storage.login({
