@@ -1,7 +1,13 @@
+html,
 body {
     margin: 0;
+    font-family: 'San Francisco', 'PingFang SC', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 100%;
 }
 
-a {
+a,
+a:active {
+    -webkit-tap-highlight-color: transparent;
     text-decoration: none;
+    outline: 0;
 }
