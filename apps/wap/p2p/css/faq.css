@@ -26,6 +26,7 @@
     border-bottom: 1px solid #ccc;
     background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAeCAMAAAD5ENUgAAAAdVBMVEUAAAC1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vca1vcYjxOpaAAAAJnRSTlMABfjVuVkdEQzz6eTcy8ONcVAiCaWdl4JpZ0pCPjQrF+6xrn1hLoT08J4AAACdSURBVCjPbdHJAoIwDEVRUgQsoIDMg7Pm/z+RhA2kaZdn0/vaIIinwD0QYgeOjYj4qaVFZHhNJH4Zw1jizxBmf4mTJbSzxHtKaCKJt5wQS4nPC2Mh8XxibGQ9tL7Q3hc6MGYPiRXXp3I8bBcl+u7O0whqy6g3V0eaLdFrEa9tVFqpJxRqKjRM71qVtnCkrbTX/zs4X2H20r0jXxxZAX5VFChLm3dkAAAAAElFTkSuQmCC') no-repeat 650px center;
     font-size: 30px;
+
 }
 
 .topic:last-child {
