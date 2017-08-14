@@ -58,7 +58,7 @@ class Mobile extends React.Component {
         let {close,showLayer,showExplain} =this.state;
         let { isLogin, loginHandler, timestamp,ladderData,personData,total } = this.props;
         
-        let actExplain = <div styleName="actExplain">
+        let actExplain = <div styleName="actExplain" style={{"top":Browser.inApp?"0px":"66px"}}>
             <div styleName="actTitle">活动说明</div>
             <p>1.活动期间，投资转让项目，不能参与本次活动；</p>
             <p>2.投资等额标时，＞18个月的项目按18个月计算年化投资额；</p>
