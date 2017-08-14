@@ -56,8 +56,16 @@ class InterestRewords extends React.Component {
                 <div id="add-interest-text-0" styleName="div">{item ? `${item}%` : '-'}</div>
             </div>
         }
+
+        let header_section = () => {
+            if (Browser.inApp) {
+                return NativeBridge.setTitle('年化加息奖励')
+            } else {
+                return <Header title='年化加息奖励' history={this.props.history}/>
+            }
+        }
         return <div styleName="interest-box">
-            <Header title='年化加息奖励' history={this.props.history}/>
+            {header_section()}
             <div styleName="user-level">
                 <div styleName="text"> 您当前的会员等级是</div>
                 <span styleName="level" id="level">{user_level}</span>
