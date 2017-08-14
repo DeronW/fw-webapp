@@ -7,6 +7,7 @@ import MobileHeader from '../../lib/components/mobile-header.js'
 import { PopStartMobile } from '../../lib/components/pop-start.js'
 import { PopInviteMobile } from './pop-invest.js'
 import Browser from '../../lib/helpers/browser.js'
+import NativeBridge from '../../lib/helpers/native-bridge.js'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Mobile extends React.Component {
@@ -29,14 +30,17 @@ class Mobile extends React.Component {
     closeHandler = () => {
         this.setState({close:false})
     }
+    gotoCoupon = () => {
+        Browser.inApp ? NativeBridge.goto("https://m.9888.cn/static/wap/coupon-center/index.html",true)
+                        :location.href = "https://m.9888.cn/static/wap/coupon-center/index.html"
+    }
+    closePage = () => {
+        NativeBridge.close()
+    }
     render() {
         let {close,showLayer} =this.state;
         let { isLogin, loginHandler, timestamp,ladderData,personData,total } = this.props;
         
-        // let rank = item.yearAmtDe ? styles.rankAmt : styles.rankAmtDe;
-        // let rank = (item) => {
-        //     return item.yearAmtDe ? styles['rankAmtDe'] : styles['rankAmt'];
-        // }
         let empty = <div styleName="empty">人气王还在堵车，马上就来！</div>
         let ladder = () => {
             let list = (item,index) => {
@@ -81,7 +85,7 @@ class Mobile extends React.Component {
                 </div>
                 <div styleName="logged-text">
                     <span styleName="howinvite-after" onClick={this.showInvestHandler}>如何邀请</span>
-                    <a href="" styleName="after-invest">立即投资</a>
+                    <a onClick={this.closePage} styleName="after-invest">立即投资</a>
                 </div>
             </div>
             let notlogged_text = <div styleName="m-notlogged">
@@ -106,7 +110,7 @@ class Mobile extends React.Component {
             <div styleName="peopleTitle"></div>
             <div styleName="qrTittle">APP专享</div>
             <div styleName="qrText">活动期间，每天7点、14点、20点领券中心上架最划算优惠券！</div>
-            <div styleName="coupon" onClick="">去抢券</div>
+            <div styleName="coupon" onClick={this.gotoCoupon}>去抢券</div>
             <div styleName="kingTitle"></div>
             <div styleName="kingExplain">活动期间，平台累投年化金额达标，团队累计年化投资额≥350万且团队人数≥2人，排名前10的用户，将获得其团队总年化投资金额*对应团队奖金系数的奖金。累计金额越多获得的奖金就越多。
             </div>
