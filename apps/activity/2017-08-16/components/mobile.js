@@ -46,8 +46,7 @@ class Mobile extends React.Component {
         if(this.props.isLogin) {
             location.href = "https://m.9888.cn/static/wap/coupon-center/index.html"
         }else {
-            // NativeBridge.login()
-            NativeBridge.goto("https://m.9888.cn/static/wap/coupon-center/index.html",true)
+            NativeBridge.login()
         }
         // Browser.inApp ? NativeBridge.goto("https://m.9888.cn/static/wap/coupon-center/index.html",true)
         //                 :location.href = "https://m.9888.cn/static/wap/coupon-center/index.html"
