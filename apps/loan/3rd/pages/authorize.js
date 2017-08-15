@@ -60,7 +60,7 @@ class Authorize extends React.Component {
 
     getSMS = () => {
         let { phone, getSMSTimer, captchaToken, captchaInput } = this.state;
-        if (!captchaInput) return Components.showToast('请输入图形验证码');
+        if (!captchaInput) return Components.showToast('请输入图片验证码');
 
         let ableToGetSMS = getSMSTimer === 60;
         if (!ableToGetSMS) return
@@ -76,7 +76,7 @@ class Authorize extends React.Component {
             this.SMSTimerController();
         }, e => {
             if (e.code == 20020) {
-                Components.showToast('图形验证码不正确');
+                Components.showToast('请输入正确的图片验证码');
                 return this.getCaptcha();
             }
             Components.showToast(e.message);
@@ -86,6 +86,9 @@ class Authorize extends React.Component {
     submitAuthorize = () => {
         let { phone, SMSToken, SMSInput } = this.state;
         let { history } = this.props;
+
+        if ( SMSInput == '' ) return Components.toast('请输入短信验证码')
+
         return Post('/api/userBase/v1/channelRegister.json', {
             mobile: phone,
             partner: Utils.hashQuery.partner,
