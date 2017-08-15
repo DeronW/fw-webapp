@@ -18,10 +18,12 @@ class Entry extends React.Component {
         let phone = this.props.account.data.phone
 
         // 如果参数中带了phone参数, 优先使用参数中的phone, 该功为了支持第三方登录显示默认手机号
-        if (Utils.hashQuery.phone) phone = Utils.hashQuery.phone
+        if (Utils.hashQuery.mobile) phone = Utils.hashQuery.mobile
+        console.log(Utils.hashQuery.partner);
 
         this.state = {
-            phone: phone
+            phone: phone,
+            showDownloadEntry: Utils.hashQuery.partner !== undefined
         }
     }
 
@@ -60,7 +62,16 @@ class Entry extends React.Component {
 
     render() {
         let { account, history } = this.props;
-        let { phone } = this.state;
+        let { phone, showDownloadEntry } = this.state;
+
+        let downloadEntry = <a styleName="download-entry" href="/static/loan/weixin-download/index.html">
+            下载放心花，借钱不求人
+            <span styleName="fake-entry-arrow">
+                <div styleName="entry-arrow-1"></div>
+                <div styleName="entry-arrow-2"></div>
+                <div styleName="entry-arrow-3"></div>
+            </span>
+        </a>
 
         return <div styleName="bg">
             <div styleName="title">放心花</div>
@@ -75,7 +86,8 @@ class Entry extends React.Component {
                 <div styleName="underline"></div>
             </div>
             <a styleName="btn-submit" onClick={this.submitHandler}>下一步</a>
-        </div >
+            { showDownloadEntry && downloadEntry }
+        </div>
     }
 }
 
