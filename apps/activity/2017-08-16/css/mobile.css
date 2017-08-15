@@ -3,6 +3,7 @@
     height: 100%;
     background: #10172d;
     overflow-x: hidden;
+    font-family: "Microsoft YaHei"
 }
 .banner{
     height: 626px;
@@ -59,6 +60,7 @@
     font-size: 22px;
     text-align: center;
     margin: 80px 0 0; 
+    padding: 0 30px;
 }
 .coupon{
     width: 307px;
@@ -82,7 +84,7 @@
     margin: 60px auto 20px;
     text-align: left;
     color: #fff;
-    font-size: 22px;
+    font-size: 22px; 
     line-height: 36px;
     padding: 0 30px;
 }
@@ -94,6 +96,7 @@
     position: relative;
     color: #fff;
     font-size: 22px;
+    font-weight: bold;
 }
 .futureleft{
     position: absolute;
@@ -102,12 +105,14 @@
     color: #884332;
     width: 98px;
     text-align: center;
+    font-size: 22px;
 }
 .futureRight{
     position: absolute;
     top: 84px;
     right: 68px;
     color: #884332;
+    font-size: 22px;
 }
 .investTop{
     position: absolute;
@@ -181,7 +186,7 @@
 .tenTitle{
     width: 498px;
     height: 155px;
-    margin: 120px auto 0;
+    margin: 120px auto 20px;
     background: url('../images/mobile/tenTitle.png') no-repeat;
 }
 .topTen{
@@ -244,7 +249,7 @@
     font-size: 22px;
 }
 .ladder tr:nth-child(2n+1){
-    background: #2f405e;
+    background: rgba(47, 64, 94, 0.5)
 }
 .ladder .icon{
     display: block;
@@ -273,6 +278,12 @@
     height: 42px;
     background: url('../images/mobile/tong.png') no-repeat;
     color: transparent;
+}
+.ladder .rank{
+    color: #41a5e5;
+}
+.ladder .rank span{
+    color: #a0b9d9;
 }
 .ladder .rankAmt{
     color: #41a5e5;
