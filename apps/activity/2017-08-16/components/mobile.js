@@ -8,8 +8,7 @@ import gotoPage from '../../lib/helpers/goto-page.js'
 import MobileHeader from '../../lib/components/mobile-header.js'
 import { PopStartMobile } from '../../lib/components/pop-start.js'
 import { PopInviteMobile } from './pop-invest.js'
-import Browser from '../../lib/helpers/browser.js'
-import NativeBridge from '../../lib/helpers/native-bridge.js'
+import { Browser,NativeBridge } from '../../lib/helpers'
 
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
@@ -21,7 +20,7 @@ class Mobile extends React.Component {
         showExplain:false
     }
     componentDidMount(){
-
+        
     }
     showInvestHandler = () =>{
         let {loginHandler,closePopHandler,isLogin} =this.props;
@@ -151,7 +150,7 @@ class Mobile extends React.Component {
                 <div styleName="coeTop coeTop3">0.5%</div>
                 <div styleName="coeTop coeTop4">0.1%</div>
                 <div styleName="total">当前平台累投年化额：{Utils.format.price(total / 10000,2)}万</div>
-                <div styleName="totalExplain">团队奖金奖励=(非等额标年化额+等额标年化额x0.56)x奖金系数</div>
+                <div styleName="totalExplain">团队奖金奖励=(非等额标年化额+等额标年化额*0.56)*奖金系数</div>
                 <div styleName="textExplain">奖金按照对应的平台累投年化金额开启，只开启一个最高标准奖金系数。</div>
             </div>
             <div styleName="topTen">

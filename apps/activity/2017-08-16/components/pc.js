@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules'
 import { Utils } from 'fw-javascripts'
 
 import styles from '../css/pc.css'
-import gotoPage from '../../lib/helpers/goto-page.js'
+import { gotoPage } from '../../lib/helpers'
 import PCHeader from '../../lib/components/pc-header.js'
 import { PopStartPC } from '../../lib/components/pop-start.js'
 import { PopInvitePC } from './pop-invest.js'
@@ -107,7 +107,7 @@ class PC extends React.Component {
                 <div styleName="coeTop coeTop3">0.5%</div>
                 <div styleName="coeTop coeTop4">0.1%</div>
                 <div styleName="total">当前平台累投年化额：{Utils.format.price(total / 10000,2)}万</div>
-                <div styleName="totalExplain">团队奖金奖励=(非等额标年化额+等额标年化额x0.56)x奖金系数</div>
+                <div styleName="totalExplain">团队奖金奖励=(非等额标年化额+等额标年化额*0.56)*奖金系数</div>
                 <div styleName="textExplain">奖金按照对应的平台累投年化金额开启，只开启一个最高标准奖金系数。</div>
             </div>
             
