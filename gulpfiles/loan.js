@@ -94,12 +94,12 @@ const WEIXIN_PAGES = [
 //     'credit-card-products'
 // ]
 
-const MORTGAGE = [
-    'house-mortgage',
-    'outside-mortgage-apply-ten-million-loan',
-    'outside-mortgage-ten-million-loan-info',
-    'outside-mortgage-id-download'
-]
+// const MORTGAGE = [
+//     'house-mortgage',
+//     'outside-mortgage-apply-ten-million-loan',
+//     'outside-mortgage-ten-million-loan-info',
+//     'outside-mortgage-id-download'
+// ]
 
 const REFACTORY_PAGES = [{
     name: 'features', // 更多页面 , 包含 联系我们/关于我们/常见问题/退出功能
@@ -127,7 +127,7 @@ APP_NAMES.push(
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
     // ...CREDIT_CARD,
-    ...MORTGAGE,
+    // ...MORTGAGE,
     ...REFACTORY_PAGES
     // ...AUTH_PAGES
 );
