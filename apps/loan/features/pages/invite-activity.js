@@ -24,7 +24,7 @@ export default class InviteActivity extends React.Component {
     }
     nativeShare = () => {
         let inviteCode = Utils.hashQuery.yqm;
-        NativeBridge.share({
+        NativeBridge.command.share({
             title: '掌上钱包，随用随取',
             image: 'https://static.9888.cn/images/loan/invitation.jpg',
             link: `https://m.easyloan888.com/static/loan/outside-register/index.html?channelCode=OFFICIAL&invitationCode=${inviteCode}&jumpType=wx`,
@@ -39,11 +39,11 @@ export default class InviteActivity extends React.Component {
     }
     render(){
         let {invite_activity,history} = this.props;
-        // let goBack = () => {
-        //     Browser.inApp ? NativeBridge.close() : history.goBack()
-        // }
+        let goBack = () => {
+            Browser.inApp ? NativeBridge.close() : history.goBack()
+        }
         return <div styleName="bg">
-            {/*<Header title="放心花" goBack={goBack}/>*/}
+            {!Browser.inApp && !Browser.inWeixin && <Header title="放心花" goBack={goBack}/>}
             <div styleName="banner">
                 <img src={require("../images/invite-activity/banner.jpg")} />
             </div>
