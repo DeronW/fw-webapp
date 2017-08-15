@@ -58,7 +58,7 @@ class Mobile extends React.Component {
 
         let actExplain = <div styleName="actExplain">
             <div styleName="actTitle">活动说明</div>
-            <p>1.活动期间，投资转让项目，不能参与本次活动；</p>
+            <p>1.活动期间，投资转让项目、尊享金产品，不能参与本次活动；</p>
             <p>2.投资等额标时，＞18个月的项目按18个月计算年化投资额；</p>
             <p>3.排序规则：按累投年化先后顺序排名，累投年化相同时以达到该累投年化的先后顺序为准；</p>
             <p>4.奖金活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；</p>
