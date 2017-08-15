@@ -14,15 +14,32 @@ import styles from '../css/repayment-fangxin-result.css'
 class RepaymentFangXinResult extends React.Component {
 
     componentDidMount() {
+        let { history, repayment_fangxin } = this.props,
+        { repaymentAmountNow, leftAmount, repaymentResult ,activityRecomUrl } = repayment_fangxin;
         document.title = '还款结果';
-        this.props.repayment_fangxin.fetchRepaymentResult(Utils.hashQuery.id);
-    }
+        this.props.repayment_fangxin.fetchRepaymentResult(Utils.hashQuery.id).then(() => {
+            if(repayment_fangxin.status == 1){
+                setTimeout(() => {
+                    Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/${activityRecomUrl}`,false,"放心花"):
+                    location.href  = `/static/loan/features/index.html#/invite-activity`;
+                    // location.href  = `${activityRecomUrl}`;
+                },2000)
+            }
+        });
 
+    }
     render() {
         let { history, repayment_fangxin } = this.props,
-        { repaymentAmountNow, leftAmount, repaymentResult } = repayment_fangxin,
+        { repaymentAmountNow, leftAmount, repaymentResult ,activityRecomUrl } = repayment_fangxin,
         { loanGid } = repayment_fangxin.data;
-
+        // let jump = () => {
+        //     if(activityRecomUrl){
+        //         setTimeout(() => {
+        //             Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/${this.state.activityRecomUrl}`,false,"放心花"):
+        //             location.href  = `${this.state.activityRecomUrl}`;
+        //         },2000)
+        //     }
+        // }
         let USER = Storage.getUserDict();
 
         let sourceType;

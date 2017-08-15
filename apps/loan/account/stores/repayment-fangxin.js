@@ -50,15 +50,15 @@ export default class RepaymentFangXin {
 
     fetchRepaymentInfo = () => {
         this.Post('/api/repayment/v1/loandetail.json', {
-            loanGid: this.data.loanGid
-        }).then(data => {
-            this.logo = data.productLogo;
-            this.loanLeftAmount = data.loanLeftAmountStr;
-            this.overdueFee = data.overdueFeeStr || 0;
-            this.dueTimeStr = data.dueTimeStr;
-            this.repaymentAmount = data.repaymentAmountStr;
-            this.repaymentUuid = data.repaymentUuid;
-        }).then(() => this.Post("/api/bankcard/v1/bankcardlist.json"))
+                loanGid: this.data.loanGid
+            }).then(data => {
+                this.logo = data.productLogo;
+                this.loanLeftAmount = data.loanLeftAmountStr;
+                this.overdueFee = data.overdueFeeStr || 0;
+                this.dueTimeStr = data.dueTimeStr;
+                this.repaymentAmount = data.repaymentAmountStr;
+                this.repaymentUuid = data.repaymentUuid;
+            }).then(() => this.Post("/api/bankcard/v1/bankcardlist.json"))
             .then(data => {
                 let card = data.userBankList.withdrawBankcard.filter((item, index) => {
                     return item.isRealNameBindCard == true
@@ -71,12 +71,12 @@ export default class RepaymentFangXin {
 
     resendverifycode = () => {
         return this.Post(`/api/repayment/v1/checksmsverifycode.json`, {
-            repaymentAmount: this.data.inputAmount,
-            loanGid: this.data.loanGid,
-            cardGid: this.cardGid || this.defaultCardGid
-        }).then(data => {
-            this.orderGid = data.orderGid;
-        }, e => Components.showToast(e.message))
+                repaymentAmount: this.data.inputAmount,
+                loanGid: this.data.loanGid,
+                cardGid: this.cardGid || this.defaultCardGid
+            }).then(data => {
+                this.orderGid = data.orderGid;
+            }, e => Components.showToast(e.message))
             .then(() => this.Post('/api/repayment/v1/resendverifycode.json', {
                 orderGid: this.orderGid
             }))
@@ -92,12 +92,14 @@ export default class RepaymentFangXin {
     }
 
     fetchRepaymentResult = (gid) => {
-        this.Post('/api/repayment/v1/repaymentstatus.json', {
+        return this.Post('/api/repayment/v1/repaymentstatus.json', {
             repaymentGid: gid
         }).then(data => {
-            let { loanLeftAmount, repaymentAmount, status } = data;
+            let { loanLeftAmount, repaymentAmount, status, activityRecomUrl } = data;
+            this.status = status;
             this.leftAmount = loanLeftAmount;
             this.repaymentAmountNow = repaymentAmount;
+            this.activityRecomUrl = activityRecomUrl;
             if (status == 0) {
                 this.repaymentResult = 'waiting'
             } else if (status == 1) {
