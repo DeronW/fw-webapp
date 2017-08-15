@@ -29,7 +29,7 @@ class RepaymentFangXinResult extends React.Component {
         });
 
     }
-    getRelativeUrl (url){
+    getRelativeUrl = url => {
         if(typeof url !== String){
 
 　　　　    url = url.toString();
