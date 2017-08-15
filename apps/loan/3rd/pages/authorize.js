@@ -84,7 +84,7 @@ class Authorize extends React.Component {
     }
 
     submitAuthorize = () => {
-        let { phone, SMSToken, SMSInput } = this.state;
+        let { phone, SMSToken, SMSInput, captchaInput } = this.state;
         let { history } = this.props;
 
         if ( captchaInput == '' ) return Components.showToast('请输入图片验证码')
