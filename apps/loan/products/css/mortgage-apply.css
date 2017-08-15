@@ -1,8 +1,10 @@
 /*  item--height: 99px; */
 
 .cnt-container {
+    box-sizing: border-box;
     background-color: #eee;
     min-height: 100%;
+    padding-bottom: 178px;
 }
 
 .item-grp-name, .select-label {
@@ -20,7 +22,7 @@
 }
 
 .item-grp:last-child {
-    margin-bottom: 150px;
+    margin-bottom: 178px;
 }
 
 .item-container, .unselected-option {
@@ -65,7 +67,8 @@
     font-size: 32px;
 }
 
-.item-value, .input-item-container input, .area-measure-unit {
+.item-value-display, .input-item-container input {
+    box-sizing: border-box;
     float: right;
     width: 450px;
     height: 99px;
@@ -73,6 +76,21 @@
     color: #333;
     font-size: 32px;
     text-align: right;
+}
+
+.item-value, .area-measure-unit {
+    composes: item-value-display;
+}
+
+.input-item-container input {
+    line-height: 33px;
+    padding: 33px 0;
+}
+
+.item-value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .area-measure-unit {

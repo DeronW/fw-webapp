@@ -410,7 +410,7 @@ class Page extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header title="帮助中心" history={this.props.history} />
+            <Header noClose title="帮助中心" history={this.props.history} />
             <div styleName="topic-title">{this.state.topic.topic_title}</div>
             <div styleName="topic-content">
                 {this.state.topic.topic_items.map(qa)}

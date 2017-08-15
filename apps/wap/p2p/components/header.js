@@ -24,8 +24,8 @@ function goBack(props) {
 }
 
 const Header = CSSModules(styles, {
-    "allowMultiple": true,
-    "errorWhenNotFound": false
+    allowMultiple: true,
+    errorWhenNotFound: false
 })(props => {
     let back = props.noBack ? null :
         <a styleName="btn btn-back" onClick={() => goBack(props)}></a>

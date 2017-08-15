@@ -46,7 +46,7 @@ class RegisterSuccess extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header title={"注册成功"} show_back={false} show_close={false} />
+            <Header noBack noClose title={"注册成功"} />
             <img styleName="banner" src={require("../../images/user/register-success-b/b.png")} />
             <div styleName="success-title">注册成功</div>
             <div styleName="desc">恭喜您获得</div>

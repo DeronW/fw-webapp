@@ -83,7 +83,7 @@ class PC extends React.Component {
         }
 
         return <div styleName="pc">
-            <PCHeader bgColor="rgba(8,11,22,0.9)" />
+            <PCHeader bgColor="rgba(8,11,22,0.6)" />
             <div styleName="banner"></div>
             <div styleName="peopleTitle"></div>
             <div styleName="layer">

@@ -71,6 +71,7 @@ class InputItem extends React.Component {
     handleInput = e => {
         let v = e.target.value;
         if (this.props.field === 'area') v = v.replace(/\D/g, '')
+        if (v.length > 20) v = v.slice(0, 20)
         this.setState({ value: v })
     }
 

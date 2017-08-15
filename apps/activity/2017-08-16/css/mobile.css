@@ -5,13 +5,16 @@
     overflow-x: hidden;
 }
 .banner{
-    height: 280px;
+    height: 626px;
+    width: 100%;
+    background: url('../images/mobile/bannerMobile.jpg') no-repeat;
+    background-size: contain;
 }
 .activityExplain{
     width: 146px;
     height: 161px;
     background: url('../images/mobile/activityExplain.png') no-repeat;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     z-index: 30;
@@ -19,7 +22,7 @@
 .peopleTitle{
     width: 498px;
     height: 155px;
-    margin: auto;
+    margin: -60px auto 0;
     background: url('../images/mobile/peopleTitle.png') no-repeat;
 }
 .layer{
@@ -27,7 +30,7 @@
     height: 152px;
     background: url("../images/mobile/layer.png") no-repeat;
     position: fixed;
-    top: 290px;
+    top: 540px;
     right: 22px;
     cursor: pointer;
     z-index: 5
@@ -253,6 +256,24 @@
     line-height: 32px;
     margin: 18px 0 0 20px;
 }
+.ladder .icon-0{
+    width: 29px;
+    height: 42px;
+    background: url('../images/mobile/jin.png') no-repeat;
+    color: transparent;
+}
+.ladder .icon-1{
+    width: 29px;
+    height: 42px;
+    background: url('../images/mobile/yin.png') no-repeat;
+    color: transparent;
+}
+.ladder .icon-2{
+    width: 29px;
+    height: 42px;
+    background: url('../images/mobile/tong.png') no-repeat;
+    color: transparent;
+}
 .ladder .rankAmt{
     color: #41a5e5;
     line-height: 0px;
@@ -360,4 +381,5 @@
 }
 .actExplain p{
     font-size: 24px;
+    line-height: 40px;
 }
