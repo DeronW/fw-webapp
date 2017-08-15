@@ -70,7 +70,7 @@ class Authorize extends React.Component {
             userOperationType: 3,
             verifyToken: captchaToken,
             verifyCode: captchaInput
-        }).then((data) => {
+        }, true).then((data) => {
             Components.showToast('验证码已发送');
             this.setState({ SMSToken: data.codeToken });
             this.SMSTimerController();
