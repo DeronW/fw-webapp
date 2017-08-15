@@ -5,10 +5,7 @@ import ReactDOM from 'react-dom'
 import '../lib/css/common.css'
 import Mobile from './components/mobile.js'
 import PC from './components/pc.js'
-import { Get } from '../lib/helpers/request.js'
-import UserReady from '../lib/helpers/user-ready.js'
-import gotoPage from '../lib/helpers/goto-page.js'
-import NativeBridge from '../lib/helpers/native-bridge.js'
+import { Get,UserReady,gotoPage,NativeBridge } from '../lib/helpers'
 
 class C extends React.Component {
     state = {

@@ -70,15 +70,16 @@ class Authorize extends React.Component {
             userOperationType: 3,
             verifyToken: captchaToken,
             verifyCode: captchaInput
-        }, 'silence').then((data) => {
+        }).then((data) => {
             Components.showToast('验证码已发送');
             this.setState({ SMSToken: data.codeToken });
             this.SMSTimerController();
         }, e => {
             if (e.code == 20020) {
                 Components.showToast('图形验证码不正确');
-                this.getCaptcha();
+                return this.getCaptcha();
             }
+            Components.showToast(e.message);
         })
     }
 
@@ -92,7 +93,7 @@ class Authorize extends React.Component {
             timestamp: Utils.hashQuery.timestamp,
             codeToken: SMSToken,
             verifyCode: SMSInput
-        }, 'silence').then((data) => {
+        }).then((data) => {
             let dict = data;
             Storage.login({
                 token: dict.userToken,
