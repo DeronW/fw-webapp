@@ -84,7 +84,7 @@ class Authorize extends React.Component {
     }
 
     submitAuthorize = () => {
-        let { phone, SMSToken, SMSInput } = this.state;
+        let { phone, SMSToken, SMSInput, captchaInput } = this.state;
         let { history } = this.props;
 
         if ( captchaInput == '' ) return Components.showToast('请输入图片验证码')
@@ -118,7 +118,7 @@ class Authorize extends React.Component {
         let { getSMSTimer, captchaImgUrl, captchaInput, SMSInput } = this.state;
         return (
             <div>
-                <Header title="授权" history={history} />
+                <Header title="授权登录" history={history} />
 
                 <div styleName="auth-info">请授权
                     <span styleName="auth-phone">{this.maskedPhone}</span>
@@ -157,7 +157,7 @@ class Authorize extends React.Component {
                         </div>
                     </div>
 
-                    <div styleName="submit-btn" onClick={this.submitAuthorize}>确认授权</div>
+                    <div styleName="submit-btn" onClick={this.submitAuthorize}>确认登录</div>
                 </div>
             </div>
         )

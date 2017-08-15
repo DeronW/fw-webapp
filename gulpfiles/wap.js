@@ -3,7 +3,7 @@ const eslint = require('gulp-eslint');
 const PROJ = 'wap';
 
 let APP_NAMES = [
-    'home', // 首页
+    // 'home', // 首页
     // 'about-us', // 关于我们
     // 'faq', // 帮助中心
     // 'app-download', // app 下载页面
@@ -62,7 +62,6 @@ const TOPIC_PAGES = [
     'topic-invite-strategy', //邀请攻略页面
     'topic-novice-strategy', //新手策略页面
     'topic-invest-school', // 投资学堂
-    'p2p-topic-invest-school', //微金投资学堂页面
 ]
 
 const HUISHANG_PAGES = [
@@ -105,6 +104,7 @@ const P2P = [
     'p2p-app-download', //微金app下载页面
     'p2p-notice-safeguard', //p2p资金安全保障
     'p2p-notice-information-disclosure', //微金信息披露
+    'p2p-topic-invest-school', //微金投资学堂页面
 ]
 
 const REFACTOR_PAGES = [{
