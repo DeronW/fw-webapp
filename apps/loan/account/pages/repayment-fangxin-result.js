@@ -23,13 +23,17 @@ class RepaymentFangXinResult extends React.Component {
                     Browser.inApp ? NativeBridge.goto(`${activityRecomUrl}`,false,"放心花"):
                     // location.href  = `/static/loan/features/index.html#/invite-activity`;
                     location.href  = this.getRelativeUrl(`${activityRecomUrl}`);
+                    // location.href  = this.getRelativeUrl(`https://m.easyloan.888.com/static/loan/features/index.html#/invite-activity`);
                 },2000)
             }
         });
 
     }
     getRelativeUrl (url){
-　　　　 url = url.toString();
+        if(typeof url !== String){
+
+　　　　    url = url.toString();
+        }
 　　　　var arr = url.split("//");
 　　　　return arr[1].substring(arr[1].indexOf("/"));
 　　}
