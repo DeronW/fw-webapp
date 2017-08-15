@@ -36,8 +36,7 @@ export default class InviteActivity extends React.Component {
     componentDidMount(){
         let {invite_activity} = this.props;
         invite_activity.getShareLink();
-        // NativeBridge.setTitle("放心花");
-        NativeBridge.show_header("放心花");
+        NativeBridge.setTitle("放心花");
         
     }
     render(){
