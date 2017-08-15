@@ -20,7 +20,7 @@ class Mobile extends React.Component {
         showExplain:false
     }
     componentDidMount(){
-        
+        window.__nb = NativeBridge
     }
     showInvestHandler = () =>{
         let {loginHandler,closePopHandler,isLogin} =this.props;
@@ -28,8 +28,8 @@ class Mobile extends React.Component {
                                      closePopHandler={closePopHandler}/>,document.getElementById("pop"))
     }
     showLayerHandler = (e) => {
-        e.preventDefault(); 
-        e.stopPropagation(); 
+        e.preventDefault();
+        e.stopPropagation();
         this.setState({showLayer:true})
     }
     triggerExplain = () => {
@@ -42,11 +42,11 @@ class Mobile extends React.Component {
         this.setState({close:false})
     }
     gotoCoupon = () => {
-        if(this.props.isLogin) {
-            location.href = "https://m.9888.cn/static/wap/coupon-center/index.html"
-        }else {
-            NativeBridge.login()
-        }
+        location.href = "https://m.9888.cn/static/wap/coupon-center/index.html"
+        //     if(this.props.isLogin) {
+        // }else {
+        //     NativeBridge.login()
+        // }
         // Browser.inApp ? NativeBridge.goto("https://m.9888.cn/static/wap/coupon-center/index.html",true)
         //                 :location.href = "https://m.9888.cn/static/wap/coupon-center/index.html"
     }
@@ -56,7 +56,7 @@ class Mobile extends React.Component {
     render() {
         let {close,showLayer,showExplain} =this.state;
         let { isLogin, loginHandler, timestamp,ladderData,personData,total } = this.props;
-        
+
         let actExplain = <div styleName="actExplain">
             <div styleName="actTitle">活动说明</div>
             <p>1.活动期间，投资转让项目，不能参与本次活动；</p>
@@ -77,7 +77,7 @@ class Mobile extends React.Component {
                         {item.yearAmtSum}<br/>
                         <span>{item.yearAmtDe && `( 含等额标${item.yearAmtDe} )`}</span>
                     </td>
-                    <td styleName="rankAmt">{item.isValid}</td>   
+                    <td styleName="rankAmt">{item.isValid}</td>
                 </tr>
             }
             let hasprice = <span>当前可分<span styleName="blue">{personData.isValid}</span>元奖金！</span>
@@ -85,7 +85,7 @@ class Mobile extends React.Component {
             return <div>
                 <div styleName="ladderPrice">
                     {isLogin?loginPrice:"登陆后查看获奖情况"}
-                </div>    
+                </div>
                 <table>
                     <thead>
                         <td>排名</td>
