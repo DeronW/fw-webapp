@@ -60,7 +60,7 @@ class Authorize extends React.Component {
 
     getSMS = () => {
         let { phone, getSMSTimer, captchaToken, captchaInput } = this.state;
-        if (!captchaInput) return Components.showToast('请输入图形验证码');
+        if (!captchaInput) return Components.showToast('请输入图片验证码');
 
         let ableToGetSMS = getSMSTimer === 60;
         if (!ableToGetSMS) return
@@ -70,21 +70,25 @@ class Authorize extends React.Component {
             userOperationType: 3,
             verifyToken: captchaToken,
             verifyCode: captchaInput
-        }, 'silence').then((data) => {
+        }).then((data) => {
             Components.showToast('验证码已发送');
             this.setState({ SMSToken: data.codeToken });
             this.SMSTimerController();
         }, e => {
             if (e.code == 20020) {
-                Components.showToast('图形验证码不正确');
-                this.getCaptcha();
+                Components.showToast('请输入正确的图片验证码');
+                return this.getCaptcha();
             }
+            Components.showToast(e.message);
         })
     }
 
     submitAuthorize = () => {
         let { phone, SMSToken, SMSInput } = this.state;
         let { history } = this.props;
+
+        if ( SMSInput == '' ) return Components.toast('请输入短信验证码')
+
         return Post('/api/userBase/v1/channelRegister.json', {
             mobile: phone,
             partner: Utils.hashQuery.partner,
@@ -92,7 +96,7 @@ class Authorize extends React.Component {
             timestamp: Utils.hashQuery.timestamp,
             codeToken: SMSToken,
             verifyCode: SMSInput
-        }, 'silence').then((data) => {
+        }).then((data) => {
             let dict = data;
             Storage.login({
                 token: dict.userToken,
@@ -103,7 +107,7 @@ class Authorize extends React.Component {
             })
             location.href = '/static/loan/products/index.html#/';
         }, e => {
-            history.push('/fail');
+            // history.push('/fail');
         })
     }
 

@@ -47,7 +47,7 @@ const OUTSIDE_PAGES = [
 const BILL_PAGES = [
     // 'bill', //账单首页 // should removed
     // 'bill-history', //历史账单 // depracated
-    // 'bill-payback', //还款页面
+    'bill-payback', //还款页面
     // 'repayment-record' //还款列表页面
 ]
 
@@ -133,7 +133,7 @@ APP_NAMES.push(
 );
 
 
-module.exports = function (gulp, generate_task, CONSTANTS) {
+module.exports = function(gulp, generate_task, CONSTANTS) {
 
     let default_options = {
         include_components: [
