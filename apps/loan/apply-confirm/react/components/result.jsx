@@ -71,14 +71,15 @@ class LoanResult extends React.Component {
                     waitingResultShow: false,
                     successResultShow: true,
                 });
-                if (this.state.activityRecomUrl) {
+                // if (this.state.activityRecomUrl) {
                     setTimeout(() => {
-                        $FW.Browser.inApp()? NativeBridge.goto(`${this.state.activityRecomUrl}`,false,"放心花"):
-                        location.href  = this.getRelativeUrl(`${this.state.activityRecomUrl}`)
+                        $FW.Browser.inApp()? NativeBridge.goto(`https://m.easyloan888.com/$/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
+                        // location.href  = this.getRelativeUrl(`${this.state.activityRecomUrl}`)
                         // location.href  = this.getRelativeUrl(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity`);
+                        location.href  = `/static/loan/features/index.html#/invite-activity?yqm=F172001`;
                     }, 2000)
 
-                }
+                // }
                     // setTimeout(() => {
                     //     $FW.Browser.inApp()? NativeBridge.goto(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity`,false,"放心花"):
                     //     location.href  = `/static/loan/features/index.html#/invite-activity`;

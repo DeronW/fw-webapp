@@ -20,10 +20,11 @@ class RepaymentFangXinResult extends React.Component {
         this.props.repayment_fangxin.fetchRepaymentResult(Utils.hashQuery.id).then(() => {
             if(repayment_fangxin.status == 1){
                 setTimeout(() => {
-                    Browser.inApp ? NativeBridge.goto(`${activityRecomUrl}`,false,"放心花"):
+                    Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/$/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
                     // location.href  = `/static/loan/features/index.html#/invite-activity`;
-                    location.href  = this.getRelativeUrl(`${activityRecomUrl}`);
+                    // location.href  = this.getRelativeUrl(`${activityRecomUrl}`);
                     // location.href  = this.getRelativeUrl(`https://m.easyloan.888.com/static/loan/features/index.html#/invite-activity`);
+                    location.href  = `/static/loan/features/index.html#/invite-activity?yqm=F172001`;
                 },2000)
             }
         });
@@ -35,6 +36,9 @@ class RepaymentFangXinResult extends React.Component {
 　　　　    url = url.toString();
         }
 　　　　var arr = url.split("//");
+console.log(url);
+console.log(arr);
+console.log(arr[1]);
 　　　　return arr[1].substring(arr[1].indexOf("/"));
 　　}
     render() {
