@@ -4,9 +4,9 @@ import { observer, inject } from 'mobx-react'
 import { Link } from 'react-router-dom'
 
 import { Header } from '../../lib/components'
-import { Browser, Post } from '../../lib/helpers'
+import { Browser, Post, NativeBridge } from '../../lib/helpers'
 
-import * as $FW from 'fw-javascripts'
+import { Utils, Components } from 'fw-javascripts'
 
 import styles from '../css/invite-activity.css'
 @inject('invite_activity')
@@ -23,7 +23,7 @@ export default class InviteActivity extends React.Component {
         this.setState({popShow:false});
     }
     nativeShare = () => {
-        let inviteCode = $FW.Format.urlQuery().yqm;
+        let inviteCode = Utils.hashQuery.yqm;
         NativeBridge.share({
             title: '掌上钱包，随用随取',
             image: 'https://static.9888.cn/images/loan/invitation.jpg',
@@ -37,11 +37,12 @@ export default class InviteActivity extends React.Component {
     }
     render(){
         let {invite_activity,history} = this.props;
-        let goBack = () => {
-            Browser.inApp ? NativeBridge.close() : history.goBack()
-        }
+        // let goBack = () => {
+        //     Browser.inApp ? NativeBridge.close() : history.goBack()
+        // }
         return <div styleName="bg">
-            <Header title="放心花" goBack={goBack} enable={'force'}/>
+            {/*<Header title="放心花" goBack={goBack}/>*/}
+            NativeBridge.trigger('show_header');
             <div styleName="banner">
                 <img src={require("../images/invite-activity/banner.jpg")} />
             </div>
