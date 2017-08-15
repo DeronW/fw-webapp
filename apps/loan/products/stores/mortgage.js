@@ -1,5 +1,7 @@
 import { extendObservable, computed } from 'mobx'
 
+import { Components } from 'fw-javascripts'
+
 
 export default class Mortgage {
 
@@ -52,6 +54,8 @@ export default class Mortgage {
     }
 
     submit = (history) => {
+        if (!this.allFieldsFilled) return Components.showToast('请填写全部内容')
+
         this.Post('/api/public/v1/mortgage.json', {
             phone: this.phone,
             mortgAmountRange: this.amount,
@@ -62,8 +66,8 @@ export default class Mortgage {
             province: '北京市',
             city: this.city,
             realName: this.realName
-        }).then(data => history.push('/mortgage-success'))
-        .catch(e => { Components.showToast(e.message) })
+        }).then(data => history.push('/mortgage-success'),
+        e => Components.showToast(e.message) )
     }
 
 }

@@ -7,7 +7,7 @@
 .banner{
     height: 626px;
     width: 100%;
-    background: url('../images/mobile/banner.png') no-repeat;
+    background: url('../images/mobile/bannerMobile.jpg') no-repeat;
     background-size: contain;
 }
 .activityExplain{
@@ -255,6 +255,24 @@
     text-align: center;
     line-height: 32px;
     margin: 18px 0 0 20px;
+}
+.ladder .icon-0{
+    width: 29px;
+    height: 42px;
+    background: url('../images/mobile/jin.png') no-repeat;
+    color: transparent;
+}
+.ladder .icon-1{
+    width: 29px;
+    height: 42px;
+    background: url('../images/mobile/yin.png') no-repeat;
+    color: transparent;
+}
+.ladder .icon-2{
+    width: 29px;
+    height: 42px;
+    background: url('../images/mobile/tong.png') no-repeat;
+    color: transparent;
 }
 .ladder .rankAmt{
     color: #41a5e5;
