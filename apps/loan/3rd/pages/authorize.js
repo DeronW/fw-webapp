@@ -87,7 +87,8 @@ class Authorize extends React.Component {
         let { phone, SMSToken, SMSInput } = this.state;
         let { history } = this.props;
 
-        if ( SMSInput == '' ) return Components.toast('请输入短信验证码')
+        if ( captchaInput == '' ) return Components.showToast('请输入图片验证码')
+        if ( SMSInput == '' ) return Components.showToast('请输入短信验证码')
 
         return Post('/api/userBase/v1/channelRegister.json', {
             mobile: phone,
