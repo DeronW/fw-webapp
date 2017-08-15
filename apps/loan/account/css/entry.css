@@ -158,29 +158,29 @@
 }
 
 @-webkit-keyframes entry-arrow-2 {
-    0% { border-color: rgba(255, 255, 255, .5) }
-    33.33% { border-color: rgba(255, 255, 255, .15) }
-    66.67% { border-color: rgba(255, 255, 255, .8) }
-    100% { border-color: rgba(255, 255, 255, .5) }
+    0% { border-color: rgba(255, 255, 255, .15) }
+    33.33% { border-color: rgba(255, 255, 255, .8) }
+    66.67% { border-color: rgba(255, 255, 255, .5) }
+    100% { border-color: rgba(255, 255, 255, .15) }
 }
 
 @keyframes entry-arrow-2 {
+    0% { border-color: rgba(255, 255, 255, .15) }
+    33.33% { border-color: rgba(255, 255, 255, .8) }
+    66.67% { border-color: rgba(255, 255, 255, .5) }
+    100% { border-color: rgba(255, 255, 255, .15) }
+}
+
+@-webkit-keyframes entry-arrow-3 {
     0% { border-color: rgba(255, 255, 255, .5) }
     33.33% { border-color: rgba(255, 255, 255, .15) }
     66.67% { border-color: rgba(255, 255, 255, .8) }
     100% { border-color: rgba(255, 255, 255, .5) }
 }
 
-@-webkit-keyframes entry-arrow-3 {
-    0% { border-color: rgba(255, 255, 255, .15) }
-    33.33% { border-color: rgba(255, 255, 255, .8) }
-    66.67% { border-color: rgba(255, 255, 255, .5) }
-    100% { border-color: rgba(255, 255, 255, .15) }
-}
-
 @keyframes entry-arrow-3 {
-    0% { border-color: rgba(255, 255, 255, .15) }
-    33.33% { border-color: rgba(255, 255, 255, .8) }
-    66.67% { border-color: rgba(255, 255, 255, .5) }
-    100% { border-color: rgba(255, 255, 255, .15) }
+    0% { border-color: rgba(255, 255, 255, .5) }
+    33.33% { border-color: rgba(255, 255, 255, .15) }
+    66.67% { border-color: rgba(255, 255, 255, .8) }
+    100% { border-color: rgba(255, 255, 255, .5) }
 }
