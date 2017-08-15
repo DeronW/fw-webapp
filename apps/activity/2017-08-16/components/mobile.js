@@ -29,7 +29,7 @@ class Mobile extends React.Component {
     showLayerHandler = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        this.setState({showLayer:true})
+        this.setState({showLayer:!this.state.showLayer})
     }
     triggerExplain = () => {
         this.setState({showExplain:!this.state.showExplain})
