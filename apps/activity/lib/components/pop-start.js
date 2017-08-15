@@ -10,7 +10,7 @@ class PopStartPC extends React.Component {
     }
     componentDidMount() {
         let timestamp = this.props.timestamp;//当前时间
-        let now = 1502848800000 ;//活动开启时间2017年8月16日10:00 1502848800000
+        let now = 1602848800000 ;//活动开启时间2017年8月16日10:00 1502848800000
         if (timestamp > now) {
             this.setState({ start: false })
         } else {
@@ -25,10 +25,10 @@ class PopStartPC extends React.Component {
         return <div styleName="popStartPC" style={{ display: start ? 'block' : 'none' }}>
             <div styleName="popStartPanelPC">
                 <div styleName="titlePC">活动暂未开启</div>
-                <p>活动时间：2017.8.16 - 2017.9.14</p>
-                <p>客服电话：</p>
-                <p>400-0322-988</p>
-                <p>010-65255966</p>
+                <div styleName="text">活动时间：2017.8.16 10:00 - 2017.9.14</div>
+                <div styleName="text">客服电话：</div>
+                <div styleName="text">400-0322-988</div>
+                <div styleName="text">010-65255966</div>
             </div>
         </div>
     }
@@ -44,7 +44,7 @@ class PopStartMobile extends React.Component {
     }
     componentDidMount() {
         let timestamp = this.props.timestamp;//当前时间
-        let now = 1502848800000;//活动开启时间2017年8月16日10:00 1502848800000
+        let now = 1602848800000;//活动开启时间2017年8月16日10:00 1502848800000
         
         if (timestamp > now) {
             this.setState({ start: false })
@@ -57,10 +57,10 @@ class PopStartMobile extends React.Component {
         return <div styleName="popStartMobile" style={{ display: start ? 'block' : 'none' }}>
             <div styleName="popStartPanelMobile">
                 <div styleName="titleMobile">活动暂未开启</div>
-                <p>活动时间：2017.8.16 - 2017.9.14</p>
-                <p>客服电话：</p>
-                <p>400-0322-988</p>
-                <p>010-65255966</p>
+                <div styleName="text">活动时间：2017.8.16 10:00 - 2017.9.14</div>
+                <div styleName="text">客服电话：</div>
+                <div styleName="text">400-0322-988</div>
+                <div styleName="text">010-65255966</div>
             </div>
         </div>
     }

@@ -72,9 +72,9 @@ class Mobile extends React.Component {
                     <td styleName={`icon icon-${index}`}>{index+1}</td>
                     <td >{item.realName}</td>
                     <td >{item.uCount}</td>
-                    <td styleName="rank" style={{"lineHeight":item.yearAmtDe?"24px":"0px"}}>
-                        {item.yearAmtSum}<br/>
-                        <span>{item.yearAmtDe && `( 含等额标${item.yearAmtDe} )`}</span>
+                    <td styleName="rank" style={{"lineHeight":item.yearAmtDe > 0?"24px":"0px"}}>
+                        {item.yearAmtSum}
+                        <span>{item.yearAmtDe > 0 && `( 含等额标${item.yearAmtDe} )`}</span>
                     </td>
                     <td styleName="rankAmt">{item.isValid}</td>
                 </tr>
@@ -154,8 +154,6 @@ class Mobile extends React.Component {
             </div>
             <div styleName="topTen">
                 <div styleName="tenTitle"></div>
-                <div styleName="topExplain">活动期间，平台累投年化金额达标，团队累计年化投资额≥200万且团队人数≥2人，排名前10的用户，将按照其累计投资金额
-占比进行不同级别的奖金分配。累计金额越多获得的奖金就越多</div>
                 <div styleName="ladder">
                     {ladderData && ladderData.length > 0 ? ladder():empty}
                 </div>
