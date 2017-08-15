@@ -1,4 +1,4 @@
-import { Request, Components } from 'fw-javascripts'
+import {Request, Components} from 'fw-javascripts'
 
 import Browser from './browser.js'
 import NativeBridge from './native-bridge.js'
@@ -8,17 +8,19 @@ let API_PATH = document.getElementById('api-path').value;
 const Ajax = options => {
     // add default url prefix
     options.url = `${API_PATH}/mpwap${options.url}`
+    if (options.fullUrl) options.url = options.fullUrl
 
     return Request(options).catch(error => {
         /*
-        result : {
-            code: xxxx,
-            data: ...
-            message: ...
-        }
-        */
+         result : {
+         code: xxxx,
+         data: ...
+         message: ...
+         }
+         */
         return new Promise((_, reject) => {
             !options.silence && Components.showToast(error.message)
+
             if (error.code == 40101) {
                 // 处理用户登录功能
                 Browser.inApp ?
@@ -49,6 +51,7 @@ const Post = (url, params, options) => {
 }
 
 export {
+    Ajax,
     Get,
     Post
 }
