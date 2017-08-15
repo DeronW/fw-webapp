@@ -20,14 +20,19 @@ class RepaymentFangXinResult extends React.Component {
         this.props.repayment_fangxin.fetchRepaymentResult(Utils.hashQuery.id).then(() => {
             if(repayment_fangxin.status == 1){
                 setTimeout(() => {
-                    Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/${activityRecomUrl}`,false,"放心花"):
-                    location.href  = `/static/loan/features/index.html#/invite-activity`;
-                    // location.href  = `${activityRecomUrl}`;
+                    Browser.inApp ? NativeBridge.goto(`${activityRecomUrl}`,false,"放心花"):
+                    // location.href  = `/static/loan/features/index.html#/invite-activity`;
+                    location.href  = this.getRelativeUrl(`${activityRecomUrl}`);
                 },2000)
             }
         });
 
     }
+    getRelativeUrl (url){
+　　　　 url = url.toString();
+　　　　var arr = url.split("//");
+　　　　return arr[1].substring(arr[1].indexOf("/"));
+　　}
     render() {
         let { history, repayment_fangxin } = this.props,
         { repaymentAmountNow, leftAmount, repaymentResult ,activityRecomUrl } = repayment_fangxin,

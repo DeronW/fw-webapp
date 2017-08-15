@@ -24,7 +24,11 @@ class LoanResult extends React.Component {
     componentWillUnmount() {
         clearInterval(this.timer);
     }
-
+    getRelativeUrl = (url) => {
+　　　　url = url.toString();
+　　　　var arr = url.split("//");
+　　　　return arr[1].substring(arr[1].indexOf("/"));
+　　}
     resetState(props) {
         this.setState({
             waitingResultShow: props.check,
@@ -66,8 +70,8 @@ class LoanResult extends React.Component {
                 });
                 if (this.state.activityRecomUrl) {
                     setTimeout(() => {
-                        $FW.Browser.inApp()? NativeBridge.goto(`https://m.easyloan888.com/${this.state.activityRecomUrl}`,false,"放心花"):
-                        location.href  = `${this.state.activityRecomUrl}`;
+                        $FW.Browser.inApp()? NativeBridge.goto(`${this.state.activityRecomUrl}`,false,"放心花"):
+                        location.href  = this.getRelativeUrl(`${this.state.activityRecomUrl}`)
                         // location.href  = `/static/loan/features/index.html#/invite-activity`;
                     }, 2000)
 

@@ -34,6 +34,8 @@ export default class InviteActivity extends React.Component {
     componentDidMount(){
         let {invite_activity} = this.props;
         invite_activity.getShareLink();
+        NativeBridge.setTitle("放心花");
+        
     }
     render(){
         let {invite_activity,history} = this.props;
@@ -42,7 +44,6 @@ export default class InviteActivity extends React.Component {
         // }
         return <div styleName="bg">
             {/*<Header title="放心花" goBack={goBack}/>*/}
-            NativeBridge.trigger('show_header');
             <div styleName="banner">
                 <img src={require("../images/invite-activity/banner.jpg")} />
             </div>

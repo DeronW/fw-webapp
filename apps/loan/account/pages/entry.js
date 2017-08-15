@@ -12,8 +12,17 @@ import styles from '../css/entry.css'
 })
 class Entry extends React.Component {
 
-    state = {
-        phone: this.props.account.data.phone
+    constructor(props) {
+        super(props)
+
+        let phone = this.props.account.data.phone
+
+        // 如果参数中带了phone参数, 优先使用参数中的phone, 该功为了支持第三方登录显示默认手机号
+        if (Utils.hashQuery.phone) phone = Utils.hashQuery.phone
+
+        this.state = {
+            phone: phone
+        }
     }
 
     componentDidMount() {
