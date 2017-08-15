@@ -26,6 +26,7 @@ export default (stores) => {
 
                 <Route exact path='/features/faq' component={Features.FAQList}/>
                 <Route exact path='/features/faq/:kind' component={Features.FAQPage}/>
+                <Route exact path='/features/about-us' component={Features.AboutUs}/>
             </Switch>
         </Provider>
     </Router>

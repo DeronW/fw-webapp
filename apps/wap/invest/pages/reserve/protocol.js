@@ -20,8 +20,9 @@ class ReserveProtocol extends React.Component {
 
     render() {
         let { history, reserve } = this.props
+
         return <div styleName="protocol-box">
-            <Header title="预约出借服务协议" history={history} show_close={false} />
+            <Header noClose title="预约出借服务协议" history={history} />
             <div styleName="contractText" dangerouslySetInnerHTML={{ __html: reserve.contractMsg }}>
             </div>
         </div>

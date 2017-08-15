@@ -1,14 +1,14 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
-import {Header} from '../../components/'
+import { observer, inject } from 'mobx-react'
+import { Header } from '../../components/'
 import styles from '../../css/reserve/apply.css'
-import {Components} from 'fw-javascripts'
-import {NativeBridge} from '../../helpers/'
+import { Components } from 'fw-javascripts'
+import { NativeBridge } from '../../helpers/'
 
 @inject('reserve')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class ReserveApply extends React.Component {
     state = {
         pending: false,
@@ -24,12 +24,12 @@ class ReserveApply extends React.Component {
     }
 
     allMadeHandler = () => {
-        let {reserve} = this.props
+        let { reserve } = this.props
         this.props.reserve.setFormData('reserveMoney', reserve.accountAmount)
     }
 
     applyHandler = () => {
-        let {reserve, history} = this.props
+        let { reserve, history } = this.props
         reserve.fetchProduct().then(data => {
             if (reserve.reserveMoney === '') {
                 Components.showToast("预约金额不能为空")
@@ -42,15 +42,15 @@ class ReserveApply extends React.Component {
                     NativeBridge.toNative('auto_bid_second')
                 })
             } else {
-                if (this.state.pending)  return
-                this.setState({pending: true})
+                if (this.state.pending) return
+                this.setState({ pending: true })
                 reserve.submitReserveHandler()
                     .then(() => {
-                            Components.showToast('预约成功')
-                        },
-                        () => {
-                            this.setState({pending: false})
-                        })
+                        Components.showToast('预约成功')
+                    },
+                    () => {
+                        this.setState({ pending: false })
+                    })
                     .then(() => {
                         history.push(`/reserve/records`)
                     })
@@ -59,14 +59,14 @@ class ReserveApply extends React.Component {
     }
 
     jumpToProtocol = () => {
-        let {history} = this.props
+        let { history } = this.props
         history.push(`/reserve/protocol`)
     }
 
     render() {
-        let {reserve, history} = this.props
+        let { reserve, history } = this.props
         return <div styleName='applyPanel'>
-            <Header title="提交预约" history={history}/>
+            <Header title="提交预约" history={history} />
             <div styleName="submitPanel">
                 <div styleName="reserveMoney">预约金额</div>
                 <div styleName="userMoney">
@@ -75,7 +75,7 @@ class ReserveApply extends React.Component {
                     </div>
                     <div styleName="inputMoney">
                         <input type="number" placeholder="100元起预约" value={reserve.reserveMoney}
-                               onChange={this.inputChangeHandler('reserveMoney')}/>
+                            onChange={this.inputChangeHandler('reserveMoney')} />
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
                         </span>

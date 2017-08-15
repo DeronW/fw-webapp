@@ -24,29 +24,32 @@ function goBack(props) {
 }
 
 const Header = CSSModules(styles, {
-    "allowMultiple": true,
-    "errorWhenNotFound": false
-})(props => (
-    <div styleName={Browser.inIOSApp ?
-        "header-placeholder iosapp-header-placeholder" : "header-placeholder"} >
-        <div styleName={Browser.inIOSApp ? "header iosapp-header" : "header"}>
-            {props.show_back &&
-                <a styleName="btn btn-back" onClick={() => goBack(props)}></a>
-            }
-            {props.show_close &&
-                <a onClick={NativeBridge.close} styleName="btn btn-close"></a>
-            }
-            {props.title}
-            {props.sub_title &&
-                <Link to={props.sub_link} styleName="sub-title">{props.sub_title}</Link>
-            }
+    allowMultiple: true,
+    errorWhenNotFound: false
+})(props => {
+    let back = props.noBack ? null :
+        <a styleName="btn btn-back" onClick={() => goBack(props)}></a>
+    let close = props.noClose ? null :
+        <a styleName="btn btn-close" onClick={NativeBridge.close}></a>
+    let sub_title = props.sub_title &&
+        <Link to={props.sub_link} styleName="sub-title">{props.sub_title}</Link>
+
+    let cn_a = 'header-placeholder', cn_b = 'header'
+    if (Browser.inIOSApp) {
+        cn_a += ' iosapp-header-placeholder'
+        cn_b += ' iosapp-header'
+    }
+
+    return <div styleName={cn_a} >
+        <div styleName={cn_b}>
+            {back}{close}{props.title}{sub_title}
         </div>
     </div >
-))
+})
 
 Header.defaultProps = {
-    show_back: true,
-    show_close: true
+    noClose: true,
+    noBack: false
 }
 
 export default Header
