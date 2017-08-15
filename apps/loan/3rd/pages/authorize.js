@@ -96,7 +96,7 @@ class Authorize extends React.Component {
             timestamp: Utils.hashQuery.timestamp,
             codeToken: SMSToken,
             verifyCode: SMSInput
-        }).then((data) => {
+        }, true).then((data) => {
             let dict = data;
             Storage.login({
                 token: dict.userToken,
@@ -107,7 +107,8 @@ class Authorize extends React.Component {
             })
             location.href = '/static/loan/products/index.html#/';
         }, e => {
-            // history.push('/fail');
+            if (e.code == 20010) return Components.showToast('短信验证码错误，请重新输入')
+            history.push('/fail');
         })
     }
 
