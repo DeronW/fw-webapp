@@ -19,7 +19,6 @@ class Entry extends React.Component {
 
         // 如果参数中带了phone参数, 优先使用参数中的phone, 该功为了支持第三方登录显示默认手机号
         if (Utils.hashQuery.mobile) phone = Utils.hashQuery.mobile
-        console.log(Utils.hashQuery.partner);
 
         this.state = {
             phone: phone,
