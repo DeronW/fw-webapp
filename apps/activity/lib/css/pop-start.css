@@ -22,7 +22,7 @@
 .titlePC{
     font-size: 30px;
     color: #913e30;
-    margin: 160px 0 30px 0;
+    margin: 140px 0 30px 0;
 }
 .popStartPanelPC p{
     font-size: 18px;
@@ -30,6 +30,7 @@
     width: 286px;
     text-align: left;
     margin: auto;
+    line-height: 30px;
 }
 .popStartMobile{
     position: fixed;
