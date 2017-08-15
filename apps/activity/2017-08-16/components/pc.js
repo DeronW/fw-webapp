@@ -36,7 +36,7 @@ class PC extends React.Component {
                     <td >{item.uCount}</td>
                     <td styleName="rankAmt">
                         {item.yearAmtSum}<br/>
-                        <span>{item.yearAmtDe && `( 含等额标${item.yearAmtDe} )`}</span>
+                        <span>{item.yearAmtDe > 0 && `( 含等额标${item.yearAmtDe} )`}</span>
                     </td>
                     <td styleName="rankAmt">{item.isValid}</td>   
                 </tr>
