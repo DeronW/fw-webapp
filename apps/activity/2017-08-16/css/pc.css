@@ -7,7 +7,7 @@
 .banner{
     height: 604px;
     width: 100%;
-    background: url('../images/pc/banner.png') no-repeat;
+    background: url('../images/pc/bannerPC.jpg') no-repeat;
     background-size: contain;
     margin-top: -48px;
 }
