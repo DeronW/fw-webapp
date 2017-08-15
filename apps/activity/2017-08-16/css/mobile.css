@@ -5,13 +5,16 @@
     overflow-x: hidden;
 }
 .banner{
-    height: 280px;
+    height: 626px;
+    width: 100%;
+    background: url('../images/mobile/banner.png') no-repeat;
+    background-size: contain;
 }
 .activityExplain{
     width: 146px;
     height: 161px;
     background: url('../images/mobile/activityExplain.png') no-repeat;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     z-index: 30;
@@ -19,7 +22,7 @@
 .peopleTitle{
     width: 498px;
     height: 155px;
-    margin: auto;
+    margin: -60px auto 0;
     background: url('../images/mobile/peopleTitle.png') no-repeat;
 }
 .layer{
@@ -27,7 +30,7 @@
     height: 152px;
     background: url("../images/mobile/layer.png") no-repeat;
     position: fixed;
-    top: 290px;
+    top: 540px;
     right: 22px;
     cursor: pointer;
     z-index: 5
@@ -360,4 +363,5 @@
 }
 .actExplain p{
     font-size: 24px;
+    line-height: 40px;
 }
