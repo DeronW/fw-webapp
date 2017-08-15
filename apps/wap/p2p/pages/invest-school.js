@@ -19,14 +19,12 @@ class InvestSchool extends React.Component {
     }
 
     getBannerFun = () => {
-        console.log('getbannerfun')
         Ajax({
             fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
             method: 'get',
             data: {key: '0ca175b9c0f726a831d895e', id: 37},
             silence: true
         }).catch(data => {
-            console.log(data)
             this.setState({banner: data[0].thumb})
         })
     }
@@ -38,7 +36,6 @@ class InvestSchool extends React.Component {
             data: {key: '0ca175b9c0f726a831d895e', id: id},
             silence: true
         }).catch(data => {
-            console.log(data)
             this.setState({listData: data})
         })
     }
