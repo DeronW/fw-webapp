@@ -24,7 +24,7 @@ class LoanResult extends React.Component {
     componentWillUnmount() {
         clearInterval(this.timer);
     }
-    getRelativeUrl = (url) => {
+    getRelativeUrl = url => {
         if(typeof url !== String){
 
 　　　　    url = url.toString();
