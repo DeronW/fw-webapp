@@ -20,7 +20,7 @@ class Mobile extends React.Component {
         showExplain:false
     }
     componentDidMount(){
-        alert(NativeBridge)
+        
     }
     showInvestHandler = () =>{
         let {loginHandler,closePopHandler,isLogin} =this.props;
