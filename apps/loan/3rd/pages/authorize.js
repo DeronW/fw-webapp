@@ -107,7 +107,7 @@ class Authorize extends React.Component {
             })
             location.href = '/static/loan/products/index.html#/';
         }, e => {
-            history.push('/fail');
+            // history.push('/fail');
         })
     }
 
