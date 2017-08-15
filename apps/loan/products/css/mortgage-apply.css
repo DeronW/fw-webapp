@@ -1,8 +1,10 @@
 /*  item--height: 99px; */
 
 .cnt-container {
+    box-sizing: border-box;
     background-color: #eee;
     min-height: 100%;
+    padding-bottom: 178px;
 }
 
 .item-grp-name, .select-label {

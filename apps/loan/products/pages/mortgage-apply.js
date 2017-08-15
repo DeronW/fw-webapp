@@ -165,26 +165,24 @@ class MortgageApply extends React.Component {
                         :
                         <InputItem field={currentPanel} history={history} /> )}
                 { !currentPanel && <div>
-                    <div>
-                        <div styleName="item-grp-name">申请人信息</div>
-                        <div styleName="item-grp">
-                            <DisplayItem field="phone" history={history} immutable />
-                            <DisplayItem field="realName" history={history} immutable={mortgage.hasRealName} />
-                        </div>
+                    <div styleName="item-grp-name">申请人信息</div>
+                    <div styleName="item-grp">
+                        <DisplayItem field="phone" history={history} immutable />
+                        <DisplayItem field="realName" history={history} immutable={mortgage.hasRealName} />
+                    </div>
 
-                        <div styleName="item-grp-name">抵押金额及期限</div>
-                        <div styleName="item-grp">
-                            <DisplayItem field="amount" history={history} />
-                            <DisplayItem field="duration" history={history} />
-                        </div>
+                    <div styleName="item-grp-name">抵押金额及期限</div>
+                    <div styleName="item-grp">
+                        <DisplayItem field="amount" history={history} />
+                        <DisplayItem field="duration" history={history} />
+                    </div>
 
-                        <div styleName="item-grp-name">抵押物信息</div>
-                        <div styleName="item-grp">
-                            <DisplayItem field="city" history={history} immutable />
-                            <DisplayItem field="district" history={history} />
-                            <DisplayItem field="neighbour" history={history} />
-                            <DisplayItem field="area" history={history} />
-                        </div>
+                    <div styleName="item-grp-name">抵押物信息</div>
+                    <div styleName="item-grp">
+                        <DisplayItem field="city" history={history} immutable />
+                        <DisplayItem field="district" history={history} />
+                        <DisplayItem field="neighbour" history={history} />
+                        <DisplayItem field="area" history={history} />
                     </div>
 
                     <div styleName="submit-btn-container">
