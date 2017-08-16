@@ -8,7 +8,7 @@
 .banner{
     height: 626px;
     width: 100%;
-    background: url('../images/mobile/bannerMobile.jpg') no-repeat;
+    background: url('../images/mobile/bannerMobile.jpg') no-repeat center center;
     background-size: contain;
 }
 .activityExplain{
