@@ -38,7 +38,7 @@ class Fail extends React.Component {
         let { history } = this.props;
         return (
             <div>
-                <Header title="授权" history={history} />
+                <Header title="请稍等" history={history} />
                 <div styleName="info-container">
                     <img styleName="info-img" src={require("../images/interface/wait.png")}/>
                     <div styleName="info-text">请稍等，页面正在跳转...</div>
