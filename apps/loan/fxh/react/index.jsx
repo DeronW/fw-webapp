@@ -1,5 +1,5 @@
 function gotoHandler(link) {
-     location.href = encodeURI(link);
+    location.href = encodeURI(link);
 }
 
 class ApplyLoan extends React.Component {
@@ -12,12 +12,12 @@ class ApplyLoan extends React.Component {
             creditLine: this.props.data.canBorrowAmount,
             present_creditLine: this.props.data.canBorrowAmount,
             show_tip: "最高",
-            redirectProductId:this.props.data.redirectProductId,
-            redirectType:this.props.data.redirectType,
-            refuseFlag:this.props.data.refuseFlag,
-            popShow:false,
-            loanShow:false,
-            improveShow:false
+            redirectProductId: this.props.data.redirectProductId,
+            redirectType: this.props.data.redirectType,
+            refuseFlag: this.props.data.refuseFlag,
+            popShow: false,
+            loanShow: false,
+            improveShow: false
         }
     }
 
@@ -93,10 +93,10 @@ class ApplyLoan extends React.Component {
         let btn = '--', st = this.props.data.borrowBtnStatus;
 
         let credit_btn_handler = () => {
-            if(this.props.data.redirectType == 1){
-                this.setState({improveShow:true});
-            }else{
-                location.href=`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`;
+            if (this.props.data.redirectType == 1) {
+                this.setState({ improveShow: true });
+            } else {
+                location.href = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`;
             }
         }
 
@@ -111,7 +111,7 @@ class ApplyLoan extends React.Component {
                 <div className="max-loan-money money-empty">暂无额度</div>
                 <div className="max-loan-title">
                     <img src="images/warn.png" />
-                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="loan-word-tip" onClick={()=>credit_btn_handler()}>提额</a>吧！
+                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="loan-word-tip" onClick={() => credit_btn_handler()}>提额</a>吧！
                 </div>
             </div>;
 
@@ -168,10 +168,10 @@ class ApplyLoan extends React.Component {
         let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
 
         let credit_btn_handler = () => {
-            if(this.props.data.redirectType == 1){
-                 this.setState({improveShow:true});
-            }else{
-                location.href=`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`;
+            if (this.props.data.redirectType == 1) {
+                this.setState({ improveShow: true });
+            } else {
+                location.href = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`;
             }
         }
 
@@ -182,14 +182,14 @@ class ApplyLoan extends React.Component {
 
 
         let credit_btn =
-            <a className="loan-btn" onClick={()=>credit_btn_handler()}>
+            <a className="loan-btn" onClick={() => credit_btn_handler()}>
                 我要提额
             </a>;
 
         let btn_list =
             <div className="credit-btn">
                 <a className="credit-improvement-btn"
-                  href={$FW.Browser.inJRGCApp() && st == 5 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>
+                    href={$FW.Browser.inJRGCApp() && st == 5 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>
                     我要提额
                 </a>
                 <a className="credit-apply-btn"
@@ -211,19 +211,19 @@ class ApplyLoan extends React.Component {
     }
 
     popShowHandler = () => {
-        this.setState({loanShow:true})
+        this.setState({ loanShow: true })
     }
 
     callbackHandler = () => {
-        this.setState({loanShow:false, improveShow:false})
+        this.setState({ loanShow: false, improveShow: false })
     }
 
     render() {
 
         return (
             <div className="apply-loan">
-                {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} popTitle={"提示"}/>}
-                {this.state.improveShow && <ProductDisplay callbackHandler={this.callbackHandler} improve={true} popTitle={"提示"}/>}
+                {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} popTitle={"提示"} />}
+                {this.state.improveShow && <ProductDisplay callbackHandler={this.callbackHandler} improve={true} popTitle={"提示"} />}
                 <div className={$FW.Browser.inJRGCApp() ? "app-loan-num" : "loan-num"}>
                     {this.getBorrowBtn()}
                 </div>
@@ -246,12 +246,12 @@ class ApplyLoan extends React.Component {
                 {this.getBtnStatus()}
                 {this.props.data.redirectType == 1 ? <div className="loan-tip">额度为0别灰心，试试其他<span className="loan-word-tip loan-word-tip-color" onClick={this.popShowHandler}>借款</span></div> : <div className="loan-tip">完善授权信息可减免手续费</div>}
                 {/*{this.state.popShow && <div className="pop-bg">*/}
-                    {/*<div className="pop-panel">*/}
-                        {/*<div className="pop-title">提示</div>*/}
-                        {/*<div className="pop-content">为方便您快速借到钱，推荐您尝试申请其他借款产品</div>*/}
-                        {/*<a className="pop-cancel" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>仍去提额</a>*/}
-                        {/*<a className="pop-confirm" href='/static/loan/products/index.html#/'>尝试其他</a>*/}
-                    {/*</div>*/}
+                {/*<div className="pop-panel">*/}
+                {/*<div className="pop-title">提示</div>*/}
+                {/*<div className="pop-content">为方便您快速借到钱，推荐您尝试申请其他借款产品</div>*/}
+                {/*<a className="pop-cancel" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>仍去提额</a>*/}
+                {/*<a className="pop-confirm" href='/static/loan/products/index.html#/'>尝试其他</a>*/}
+                {/*</div>*/}
                 {/*</div>}*/}
             </div>
         )
@@ -262,11 +262,15 @@ const USER = $FW.Store.getUserDict();
 const user = USER;
 
 $FW.DOMReady(function () {
-    let goHome = () =>{
+    let goHome = () => {
         location.href = "/static/loan/products/index.html#/"
     }
-    NativeBridge.setTitle('放心花');
-    ReactDOM.render(<Header title={'放心花'} back_handler={goHome}/>, HEADER_NODE)
+    if ($FW.Browser.inJRGCApp()) {
+        NativeBridge.setTitle('短期借款')
+    } else {
+        NativeBridge.setTitle('放心花')
+    }
+    ReactDOM.render(<Header title={'放心花'} back_handler={goHome} />, HEADER_NODE)
     $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
         productId: $FW.Format.urlQuery().pid || 1
     }).then(data => {
