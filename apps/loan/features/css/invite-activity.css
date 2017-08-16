@@ -53,17 +53,18 @@
     width: 590px;
     margin: 0 auto;
     text-align: justify;
+    margin-top: 10px;
 }
 
 .btn-tip input {
     border: none;
     width: 590px;
-    height: 32px;
+    height: 22px;
     word-wrap: break-word;
     font-size: 18px;
     color: #5a79b1;
     text-align: center;
-    margin-top: 4px;
+    margin-left: -2px;
 }
 
 .btn-tip input:focus {
