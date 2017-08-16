@@ -70,10 +70,12 @@
 }
 
 .captcha-input, .sms-input {
+    box-sizing: border-box;
     float: left;
-    width: 400px;
-    height: 88px;
-    line-height: 88px;
+    width: 300px;
+    height: 87px;
+    padding: 29px 0;
+    line-height: 29px;
     color: #333;
     font-size: 28px;
     background: transparent;
@@ -85,6 +87,7 @@
 .captcha-img-container {
     float: right;
     width: 200px;
+    height: 88px;
 }
 
 .captcha-img-container img {
