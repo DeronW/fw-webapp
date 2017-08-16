@@ -127,60 +127,66 @@
 
 .entry-arrow-1 {
     composes: entry-arrow;
-    -webkit-animation: entry-arrow-1 1s linear 0s infinite;
-    animation: entry-arrow-1 1s linear 0s infinite;
+    -webkit-animation: entry-arrow-1 1.2s linear 0s infinite;
+    animation: entry-arrow-1 1.2s linear 0s infinite;
 }
 
 .entry-arrow-2 {
     composes: entry-arrow;
-    -webkit-animation: entry-arrow-2 1s linear 0s infinite;
-    animation: entry-arrow-2 1s linear 0s infinite;
+    -webkit-animation: entry-arrow-2 1.2s linear 0s infinite;
+    animation: entry-arrow-2 1.2s linear 0s infinite;
 }
 
 .entry-arrow-3 {
     composes: entry-arrow;
-    -webkit-animation: entry-arrow-3 1s linear 0s infinite;
-    animation: entry-arrow-3 1s linear 0s infinite;
+    -webkit-animation: entry-arrow-3 1.2s linear 0s infinite;
+    animation: entry-arrow-3 1.2s linear 0s infinite;
 }
 
 @-webkit-keyframes entry-arrow-1 {
-    0% { border-color: rgba(255, 255, 255, .8) }
-    33.33% { border-color: rgba(255, 255, 255, .5) }
-    66.67% { border-color: rgba(255, 255, 255, .15) }
-    100% { border-color: rgba(255, 255, 255, .8) }
+    0% { border-color: rgba(255, 255, 255, .15) }
+    57.14% { border-color: rgba(255, 255, 255, .15) }
+    71.43% { border-color: rgba(255, 255, 255, .8) }
+    85.71% { border-color: rgba(255, 255, 255, .5) }
+    100% { border-color: rgba(255, 255, 255, .15) }
 }
 
 @keyframes entry-arrow-1 {
-    0% { border-color: rgba(255, 255, 255, .8) }
-    33.33% { border-color: rgba(255, 255, 255, .5) }
-    66.67% { border-color: rgba(255, 255, 255, .15) }
-    100% { border-color: rgba(255, 255, 255, .8) }
+    0% { border-color: rgba(255, 255, 255, .15) }
+    57.14% { border-color: rgba(255, 255, 255, .15) }
+    71.43% { border-color: rgba(255, 255, 255, .8) }
+    85.71% { border-color: rgba(255, 255, 255, .5) }
+    100% { border-color: rgba(255, 255, 255, .15) }
 }
 
 @-webkit-keyframes entry-arrow-2 {
     0% { border-color: rgba(255, 255, 255, .5) }
-    33.33% { border-color: rgba(255, 255, 255, .15) }
-    66.67% { border-color: rgba(255, 255, 255, .8) }
+    14.29% { border-color: rgba(255, 255, 255, .15) }
+    71.43% { border-color: rgba(255, 255, 255, .15) }
+    85.71% { border-color: rgba(255, 255, 255, .8) }
     100% { border-color: rgba(255, 255, 255, .5) }
 }
 
 @keyframes entry-arrow-2 {
     0% { border-color: rgba(255, 255, 255, .5) }
-    33.33% { border-color: rgba(255, 255, 255, .15) }
-    66.67% { border-color: rgba(255, 255, 255, .8) }
+    57.14% { border-color: rgba(255, 255, 255, .15) }
+    71.43% { border-color: rgba(255, 255, 255, .15) }
+    85.71% { border-color: rgba(255, 255, 255, .8) }
     100% { border-color: rgba(255, 255, 255, .5) }
 }
 
 @-webkit-keyframes entry-arrow-3 {
-    0% { border-color: rgba(255, 255, 255, .15) }
-    33.33% { border-color: rgba(255, 255, 255, .8) }
-    66.67% { border-color: rgba(255, 255, 255, .5) }
-    100% { border-color: rgba(255, 255, 255, .15) }
+    0% { border-color: rgba(255, 255, 255, .8) }
+    14.29% { border-color: rgba(255, 255, 255, .5) }
+    28.57% { border-color: rgba(255, 255, 255, .15) }
+    85.71% { border-color: rgba(255, 255, 255, .15) }
+    100% { border-color: rgba(255, 255, 255, .8) }
 }
 
 @keyframes entry-arrow-3 {
-    0% { border-color: rgba(255, 255, 255, .15) }
-    33.33% { border-color: rgba(255, 255, 255, .8) }
-    66.67% { border-color: rgba(255, 255, 255, .5) }
-    100% { border-color: rgba(255, 255, 255, .15) }
+    0% { border-color: rgba(255, 255, 255, .8) }
+    14.29% { border-color: rgba(255, 255, 255, .5) }
+    28.57% { border-color: rgba(255, 255, 255, .15) }
+    85.71% { border-color: rgba(255, 255, 255, .15) }
+    100% { border-color: rgba(255, 255, 255, .8) }
 }

@@ -163,6 +163,7 @@
     font-size: 14px;
     width: 100%;
     text-align: center;
+    font-weight: normal;
 }
 .textExplain{
     position: absolute;
@@ -171,6 +172,7 @@
     font-size: 14px;
     width: 100%;
     text-align: center;
+    font-weight: normal;
 }
 .tenTitle{
     width: 498px;

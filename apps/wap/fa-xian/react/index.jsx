@@ -177,7 +177,7 @@ const Content = React.createClass({
                     <a onClick={() => gotoHandler("http://p-javashop-statics.oss-cn-beijing.aliyuncs.com/weixin/index.html#/home/products")}>
                         <i className="icon icon-bao"></i>工场保险</a>
 
-                    <a onClick={() => gotoHandler('https://m.9888.cn/static/insurance/weiyun-car/#/customer')}> <i className="icon icon-waiting"></i>敬请期待</a>
+                    <a><i className="icon icon-waiting"></i>敬请期待</a>
                 </div>
                 <div className="title-recommended" onClick={this.bdHandler}> 内容推荐</div>
                 <div className="events">
