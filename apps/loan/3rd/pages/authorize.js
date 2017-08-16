@@ -79,6 +79,7 @@ class Authorize extends React.Component {
                 Components.showToast('请输入正确的图片验证码');
                 return this.getCaptcha();
             }
+            if (e.code == 100011) return Components.showToast('当天获取短信验证码次数达到上限')
             Components.showToast(e.message);
         })
     }

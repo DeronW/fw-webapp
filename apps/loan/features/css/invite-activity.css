@@ -1,5 +1,5 @@
 .bg {
-    height: 100%;
+    min-height: 100%;
     background: #f0f0f0;
 }
 
@@ -9,7 +9,7 @@
     height: 74px;
     line-height: 74px;
     text-align: center;
-    margin: 200px auto 124px;
+    margin: 50px auto 210px;
     background: #639afb;
     border-radius: 3px;
     color: #fff;
@@ -21,11 +21,11 @@
     height: 42px;
     line-height: 42px;
     margin: 0 auto;
-    border: 1px solid #e2e1e1;
+    border: 1px solid #ccc;
     border-radius: 20px;
     text-align: center;
     font-size: 24px;
-    color: #bbb;
+    color: #999;
 }
 
 .arrow-right {
@@ -35,7 +35,7 @@
 .share-link {
     width: 654px;
     height: 124px;
-    margin: 200px auto 88px;
+    margin: 50px auto 170px;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
@@ -53,16 +53,18 @@
     width: 590px;
     margin: 0 auto;
     text-align: justify;
+    margin-top: 10px;
 }
 
 .btn-tip input {
-    width: 590px;
-    height: 37px;
+    border: none;
+    width: 580px;
+    height: 22px;
     word-wrap: break-word;
     font-size: 18px;
     color: #5a79b1;
     text-align: center;
-    margin-top: 2px;
+    margin-left: -4px;
 }
 
 .btn-tip input:focus {
