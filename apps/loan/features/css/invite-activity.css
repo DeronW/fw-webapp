@@ -9,7 +9,7 @@
     height: 74px;
     line-height: 74px;
     text-align: center;
-    margin: 200px auto 124px;
+    margin: 180px auto 124px;
     background: #639afb;
     border-radius: 3px;
     color: #fff;
@@ -64,7 +64,7 @@
     font-size: 18px;
     color: #5a79b1;
     text-align: center;
-    margin-left: 2px;
+    margin-left: -4px;
 }
 
 .btn-tip input:focus {
