@@ -14,6 +14,7 @@ import AppDownload from './pages/app-download.js'
 import InterestRewords from './pages/interest-reward.js'
 import Invite from './pages/invite'
 import InvestSchool from './pages/invest-school'
+import NoticeSafeguard from './pages/notice-safeguard'
 
 export default (stores) => {
     return <Router>
@@ -25,6 +26,7 @@ export default (stores) => {
                 <Route exact path='/interest-reward' component={InterestRewords}/>
                 <Route exact path='/invite' component={Invite}/>
                 <Route exact path='/invest-school' component={InvestSchool}/>
+                <Route exact path='/notice-safeguard' component={NoticeSafeguard}/>
                 <Route component={NotFound}/>
             </Switch>
         </Provider>
