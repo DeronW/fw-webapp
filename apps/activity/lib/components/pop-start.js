@@ -10,7 +10,7 @@ class PopStartPC extends React.Component {
     }
     componentDidMount() {
         let timestamp = this.props.timestamp;//当前时间
-        let now = 1602848800000 ;//活动开启时间2017年8月16日10:00 1502848800000
+        let now = 1502848800000 ;//活动开启时间2017年8月16日10:00 1502848800000
         if (timestamp > now) {
             this.setState({ start: false })
         } else {
@@ -44,7 +44,7 @@ class PopStartMobile extends React.Component {
     }
     componentDidMount() {
         let timestamp = this.props.timestamp;//当前时间
-        let now = 1602848800000;//活动开启时间2017年8月16日10:00 1502848800000
+        let now = 1502848800000;//活动开启时间2017年8月16日10:00 1502848800000
         
         if (timestamp > now) {
             this.setState({ start: false })
