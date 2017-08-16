@@ -84,6 +84,10 @@
     outline: none;
 }
 
+.captcha-input::-webkit-input-placeholder, .sms-input::-webkit-input-placeholder {
+    line-height: 32px;
+}
+
 .captcha-img-container {
     float: right;
     width: 200px;
