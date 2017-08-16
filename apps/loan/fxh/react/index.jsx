@@ -245,14 +245,6 @@ class ApplyLoan extends React.Component {
                 </div>
                 {this.getBtnStatus()}
                 {this.props.data.redirectType == 1 ? <div className="loan-tip">额度为0别灰心，试试其他<span className="loan-word-tip loan-word-tip-color" onClick={this.popShowHandler}>借款</span></div> : <div className="loan-tip">完善授权信息可减免手续费</div>}
-                {/*{this.state.popShow && <div className="pop-bg">*/}
-                {/*<div className="pop-panel">*/}
-                {/*<div className="pop-title">提示</div>*/}
-                {/*<div className="pop-content">为方便您快速借到钱，推荐您尝试申请其他借款产品</div>*/}
-                {/*<a className="pop-cancel" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>仍去提额</a>*/}
-                {/*<a className="pop-confirm" href='/static/loan/products/index.html#/'>尝试其他</a>*/}
-                {/*</div>*/}
-                {/*</div>}*/}
             </div>
         )
     }
