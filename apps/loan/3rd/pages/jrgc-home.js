@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import { Components } from 'fw-javascripts'
 
-import { Header,BottomNavBar } from '../../lib/components'
-import { Browser } from '../../lib/helpers'
+import { Header, BottomNavBar } from '../../lib/components'
+import { Browser, NativeBridge } from '../../lib/helpers'
 import styles from '../css/jrgc-home.css'
 
 const LoanProduct = inject('jrgc_home')(observer(CSSModules((props) => {
@@ -18,21 +18,28 @@ const LoanProduct = inject('jrgc_home')(observer(CSSModules((props) => {
         '3': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAYCAMAAAD9GTxlAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAkFBMVEUAAAD9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDQAAABlJT//AAAALnRSTlMAAQZhAyOywIVtTfT+EtifZy9u+0dEJuog+T8bImqXkL/Q3hUR/S1PUn+szwo6ExFmygAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAACDSURBVBjTVZBZEoIwEAUTBFQWdwFFDbhvvPsfj6SSCo/+60rX1EyEcMhAMJOQLYrZ5HTGOkfCaZrlnGIxSrHkFFhxCqy9brRtd3tDYVNHWdnUcjja1GHG1SfN2djFT1PamuHCFrjevN0fSJ/DWi9kb9pZ4cPXtl9Jlv/+/NhVo0+ksgdnkw71Jq2zFAAAAABJRU5ErkJggg=='
     }
     let generate_labels = (label) => (
-        <div key={label.labelValue} styleName="loan-product-label" style={{border:`1px solid ${labelBorderColor[label.labelType]}`}}>
+        <div key={label.labelValue} styleName="loan-product-label" style={{ border: `1px solid ${labelBorderColor[label.labelType]}` }}>
             <img src={labelImgURI[label.labelType]} />
-            <span style={{color:labelBorderColor[label.labelType]}}>{label.labelValue}</span>
-        </div>
-    );
-    return (
-        <div styleName="loan-product-card" onClick={() => { props.jrgc_home.gotoHandler(`${productLink}?pid=${props.productId}`, productToNative) }}>
-            <img styleName="loan-product-logo" src={props.productLogo} />
-            <div styleName="loan-product-name">{props.productName}</div>
-            <div styleName="loan-product-amount">借款范围({props.amountStr})</div>
-            <div>
-                {props.productLabelList.map(generate_labels)}
-            </div>
+            <span style={{ color: labelBorderColor[label.labelType] }}>{label.labelValue}</span>
         </div>
     )
+
+    let logo = props.productLogo, name = props.productName
+    if (props.productId == '1') {
+        // 金融工场App内放心花要换其它logo
+        logo = require('../images/jrgc/house-icon.png')
+        name = '短期借款'
+    }
+
+    return <div styleName="loan-product-card" onClick={() => {
+        props.jrgc_home.gotoHandler(`${productLink}?pid=${props.productId}`, productToNative)
+    }}>
+        <img styleName="loan-product-logo" src={logo} />
+        <div styleName="loan-product-name">{name}</div>
+        <div styleName="loan-product-amount">借款范围({props.amountStr})</div>
+        <div>{props.productLabelList.map(generate_labels)}</div>
+    </div>
+
 }, styles)))
 
 const SubProduct = inject('jrgc_home')(observer(CSSModules((props) => {
@@ -58,6 +65,7 @@ class JRGCHome extends React.Component {
 
     componentDidMount() {
         this.props.jrgc_home.getDataHandler()
+        NativeBridge.setTitle('借款')
     }
 
     render() {
