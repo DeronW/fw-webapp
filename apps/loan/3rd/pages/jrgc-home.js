@@ -27,7 +27,7 @@ const LoanProduct = inject('jrgc_home')(observer(CSSModules((props) => {
     let logo = props.productLogo, name = props.productName
     if (props.productId == '1') {
         // 金融工场App内放心花要换其它logo
-        logo = require('../images/jrgc/house-icon.png')
+        logo = require('../images/jrgc/fxh-jrgc-icon.png')
         name = '短期借款'
     }
 
