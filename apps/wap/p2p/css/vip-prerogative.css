@@ -1,0 +1,165 @@
+.vipContent {
+    background: #636a8c url(../images/vip-prerogative/update-banner.jpg) no-repeat top center;
+    padding-top: 622px;
+    padding-bottom: 20px;
+    font-family: 'PingFang SC';
+}
+
+.section {
+    position: relative;
+    display: table;
+    margin: 20px auto 0;
+    width: 660px;
+
+    color: #7f849f;
+    font-size: 24px;
+    line-height: 36px;
+
+    background-color: #fff;
+    border-radius: 12px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.title-img {
+    position: absolute;
+    display: block;
+    top: -2px;
+    left: -10px;
+}
+
+.section-1 {
+}
+
+.level-gift {
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.level-gift .level-gift-pic {
+    display: block;
+    margin: 10px auto;
+}
+
+.gift-title {
+    display: block;
+    margin: 10px auto;
+}
+
+.table-gift {
+    border-radius: 12px;
+    width: 615px;
+    margin: 10px auto;
+    font-size: 20px;
+    text-align: center;
+    border-spacing: 0;
+    overflow: hidden;
+}
+
+.table-gift-tr {
+    height: 60px;
+    line-height: 60px;
+    display: table;
+    width: 100%;
+    background: #8ba3e6;
+    color: white;
+}
+
+.table-gift-even {
+    height: 60px;
+    line-height: 60px;
+    display: table;
+    width: 100%;
+    background: #f6f7fa;
+}
+
+.table-gift-odd {
+    height: 60px;
+    line-height: 60px;
+    display: table;
+    width: 100%;
+    background: #fff;
+}
+
+.titlerow {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+
+.bg-a {
+    background-color: #f6f7fa;
+}
+
+.bg-b {
+    background-color: #e6e9f8;
+}
+
+.bg-c {
+    background-color: #fff;
+}
+
+.bg-d {
+    background-color: #eceef9;
+}
+
+.comments {
+    font-size: 18px;
+    line-height: 28px;
+    padding: 5px 20px;
+}
+
+.section-2 {
+}
+
+.paragraph {
+    text-indent: 2em;
+    margin: 20px;
+    font-size: 22px;
+}
+
+.value-formula {
+    border-radius: 24px;
+    color: #e84f76;
+    background-color: #e9edfd;
+    text-indent: 2em;
+    margin: 20px;
+    padding: 10px;
+}
+
+.value-describe {
+    padding: 18px 15px 14px;
+    border: 1px dashed #c8c0c0;
+    margin: 20px;
+}
+
+.oweData {
+    padding-left: 30px;
+    position: relative;
+}
+
+.oweData:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 13px;
+    left: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #7f88b2;
+}
+
+.owespan {
+    color: #e84f76;
+}
+
+.section-3 {
+}
+
+.section-3 .example-img {
+    display: block;
+    margin: 20px auto;
+}
+
