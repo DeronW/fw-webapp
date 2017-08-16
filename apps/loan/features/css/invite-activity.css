@@ -1,5 +1,5 @@
 .bg {
-    height: 100%;
+    min-height: 100%;
     background: #f0f0f0;
 }
 
@@ -9,7 +9,7 @@
     height: 74px;
     line-height: 74px;
     text-align: center;
-    margin: 50px auto 140px;
+    margin: 50px auto 170px;
     background: #639afb;
     border-radius: 3px;
     color: #fff;
@@ -26,6 +26,7 @@
     text-align: center;
     font-size: 24px;
     color: #999;
+    margin-top: -40px;
 }
 
 .arrow-right {
@@ -35,7 +36,7 @@
 .share-link {
     width: 654px;
     height: 124px;
-    margin: 50px auto 100px;
+    margin: 50px auto 130px;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
