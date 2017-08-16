@@ -21,11 +21,11 @@
     height: 42px;
     line-height: 42px;
     margin: 0 auto;
-    border: 1px solid #e2e1e1;
+    border: 1px solid #ccc;
     border-radius: 20px;
     text-align: center;
     font-size: 24px;
-    color: #bbb;
+    color: #999;
 }
 
 .arrow-right {
