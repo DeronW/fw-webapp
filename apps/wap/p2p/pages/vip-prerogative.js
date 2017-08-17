@@ -19,7 +19,6 @@ class VipPrerogative extends React.Component {
     componentDidMount() {
         Get('/api/v1/upgrade-formula.shtml')
             .then(data => {
-                console.log(data)
                 this.setState({
                     levelConfig: data.levelConfig,
                     limitCount: data.limitCount,
@@ -30,7 +29,6 @@ class VipPrerogative extends React.Component {
             })
         getJSONP('https://www.gongchangzx.com/api/userLevel/v1/giftVO.json')
             .then(data => {
-                console.log(data)
                 if (data.code != 10000) throw new Error('接口异常, 无法获取用户等级信息');
                 this.setState({level_list: data.data.levelGiftRule})
                 console.log(this.state.level_list)
