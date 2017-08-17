@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {Header} from '../components'
 import {Get, Browser} from '../helpers'
-import {getJSONP} from 'fw-javascripts'
+import {getJSONP, Utils} from 'fw-javascripts'
 import styles from '../css/vip-prerogative.css'
 
 @CSSModules(styles, {allowMultiple: true, errorWhenNotFound: false})
@@ -127,12 +127,57 @@ class VipPrerogative extends React.Component {
                 <img styleName="example-img" src={require("../images/vip-prerogative/d.jpg")}/>
             </div>
         }
+
+        let vip_section4 = () => {
+            let {levelConfig} = this.state
+            return <div styleName="section section-4">
+                <img styleName="title-img" src={require("../images/vip-prerogative/update-title3.png")}/>
+                <div styleName="table-level-box">
+                    <div styleName="tableLevelTitle">
+                        <div styleName="cell-title">等级</div>
+                        <div styleName="cell-title">所需贡献值</div>
+                    </div>
+                    <div styleName="tableLevelCell">
+                        <div styleName="cell">普通会员</div>
+                        <div styleName="cell" id="vip-0">
+                            {`${Utils.format.price(levelConfig.minLv1)}-${Utils.format.price(levelConfig.maxLv1)}`}
+                        </div>
+                    </div>
+                    <div styleName="tableLevelCell">
+                        <div styleName="cell cell-even">VIP1</div>
+                        <div styleName="cell cell-even">
+                            {`${Utils.format.price(levelConfig.minLv2)}-${Utils.format.price(levelConfig.maxLv2)}`}
+                        </div>
+                    </div>
+
+                    <div styleName="tableLevelCell">
+                        <div styleName="cell">VIP2</div>
+                        <div styleName="cell">
+                            {`${Utils.format.price(levelConfig.minLv3)}-${Utils.format.price(levelConfig.maxLv3)}`}
+                        </div>
+                    </div>
+
+                    <div styleName="tableLevelCell">
+                        <div styleName="cell cell-even">VIP3</div>
+                        <div styleName="cell cell-even">
+                            {`${Utils.format.price(levelConfig.minLv4)}-${Utils.format.price(levelConfig.maxLv4)}`}
+                        </div>
+                    </div>
+                    <div styleName="tableLevelCell">
+                        <div styleName="cell">VIP4</div>
+                        <div styleName="cell">{`${Utils.format.price(levelConfig.minLv5)}以上`}</div>
+                    </div>
+
+                </div>
+            </div>
+        }
         return <div styleName="vipBox">
             {header_section}
             <div styleName="vipContent">
                 {vip_section1()}
                 {vip_section2()}
                 {vip_section3()}
+                {vip_section4()}
             </div>
         </div>
 
