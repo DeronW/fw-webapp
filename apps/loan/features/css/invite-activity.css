@@ -9,7 +9,7 @@
     height: 74px;
     line-height: 74px;
     text-align: center;
-    margin: 50px auto 170px;
+    margin: 40px auto 170px;
     background: #639afb;
     border-radius: 3px;
     color: #fff;
@@ -22,10 +22,15 @@
     line-height: 42px;
     margin: 0 auto;
     border: 1px solid #ccc;
-    border-radius: 20px;
+    border-radius: 40px;
     text-align: center;
     font-size: 24px;
     color: #999;
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
 }
 
 .arrow-right {
@@ -35,7 +40,7 @@
 .share-link {
     width: 654px;
     height: 124px;
-    margin: 50px auto 130px;
+    margin: 40px auto 130px;
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
