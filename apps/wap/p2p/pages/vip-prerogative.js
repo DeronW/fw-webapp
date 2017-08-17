@@ -109,11 +109,14 @@ class VipPrerogative extends React.Component {
                     </div>
                     <div styleName="oweData">
                         邀友贡献值：
-                        <span id="limitDays2" styleName="owespan">{limitDays}</span><span>天内</span>
+                        <span styleName="owespan">
+                            {Utils.format.price(limitDays)}</span><span>天内</span>
                         ，每成功邀请一位好友首投
-                        <span id="firstInvestAmount2" styleName="owespan">{firstInvestAmount}</span><span>元</span>
+                        <span styleName="owespan">
+                            {Utils.format.price(firstInvestAmount)}</span><span>元</span>
                         ，邀请人获得
-                        <span id="sendStore2" styleName="owespan">{sendStore}</span>
+                        <span styleName="owespan">
+                            {Utils.format.price(sendStore)}</span>
                         贡献值
                     </div>
                 </div>
@@ -171,6 +174,32 @@ class VipPrerogative extends React.Component {
                 </div>
             </div>
         }
+        let vip_section5 = () => {
+            let {firstInvestAmount, limitDays, sendStore} = this.state
+            return <div styleName="section section-5">
+                <img styleName="title-img" src={require("../images/vip-prerogative/update-title5.png")}/>
+
+                <div styleName="text text-1">用户自身出借或邀友出借都可获得贡献值，等级实时增长。</div>
+                <div styleName="text text-2">出借贡献值:用户实时待收年化出借额度，用户出借的金额会自动折算成年化出借额度。
+                    <div styleName="formula">计算公式：出借贡献值=出借金额 &times; 出借期限/360</div>
+                </div>
+                <div styleName="text text-3">
+                    邀友贡献值：
+                    <span>{Utils.format.price(limitDays)}</span>
+                    天内，用户每邀请一位好友注册并首投（购买债权转让除外）
+                    <span>{Utils.format.price(firstInvestAmount)}</span>
+                    元，即可获得
+                    <span>{Utils.format.price(sendStore)}</span>
+                    贡献值。30天内最高可累计
+                    <span>{Utils.format.price(sendStore * 100)}</span>
+                    贡献值（100位好友）。<span styleName="red">(A码用户不获取邀友贡献值)</span>
+                </div>
+                <div styleName="text text-4">用户回款、流标后，您对应产品的出借贡献值会减少。</div>
+                <div styleName="text text-5">若贡献值减少，但距离上次等级变更时间在30天以内，则保持当前等级；若超出30天，则对应实际的等级。</div>
+                <div styleName="text text-6">用户贡献值、会员等级相关最终解释权归工场微金所有。</div>
+                <div styleName="text text-7"> 购买债权转让不参与等级贡献值的计算。</div>
+            </div>
+        }
         return <div styleName="vipBox">
             {header_section}
             <div styleName="vipContent">
@@ -178,6 +207,7 @@ class VipPrerogative extends React.Component {
                 {vip_section2()}
                 {vip_section3()}
                 {vip_section4()}
+                {vip_section5()}
             </div>
         </div>
 
