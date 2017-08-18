@@ -27,7 +27,7 @@ class JRGCLogin extends React.Component {
         // }
 
         this.props.jrgc_login.gotoLogin()
-        setTimeout(() => this.setState({ show: true }), 15000)
+        setTimeout(() => this.setState({ show: true }), 10000)
     }
 
     render() {
