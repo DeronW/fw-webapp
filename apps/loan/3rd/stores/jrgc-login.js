@@ -50,5 +50,6 @@ export default class Login {
 
     reload_jrgc = () => {
         location.href = "/static/loan/3rd/index.html#/jrgc-login"
+        location.reload()
     }
 }
