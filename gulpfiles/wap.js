@@ -94,15 +94,15 @@ const OUTSIDE_PAGES = [
 ]
 
 const P2P = [
-    'p2p-invite', //P2P邀请返利, 邀请人
+    // 'p2p-invite', //P2P邀请返利, 邀请人
     // 'p2p-interest-reward', //P2P年化加息奖励
-    'p2p-vip-prerogative',
-    'p2p-policy', //政策法规页面
+    // 'p2p-vip-prerogative',
+    // 'p2p-policy', //政策法规页面
     'p2p-pdf',
     'p2p-fa-xian', //微金发现页面
     // 'p2p-faq', //微金帮助中心页面
-    'p2p-app-download', //微金app下载页面
-    'p2p-notice-safeguard', //p2p资金安全保障
+    // 'p2p-app-download', //微金app下载页面
+    // 'p2p-notice-safeguard', //p2p资金安全保障
     'p2p-notice-information-disclosure', //微金信息披露
     // 'p2p-topic-invest-school', //微金投资学堂页面
 ]
