@@ -291,11 +291,10 @@ class Evaluate extends React.Component {
                 let option = (o, oIndex) => {
                     let cn = "select";
                     (selected && selected[myNum] == oIndex) ? cn = styles['checked'] : cn = styles['select']
-                    return <div styleName="question-select" key={oIndex}>
-                        <div className={cn}
-                            onClick={() => this.selectHandler(myNum, oIndex)}>
-                        </div>
-                        {o.a}
+                    return <div styleName="question-select" key={oIndex}
+                        onClick={() => this.selectHandler(myNum, oIndex)}
+                    >
+                        <div className={cn}></div>{o.a}
                     </div>
                 }
 
