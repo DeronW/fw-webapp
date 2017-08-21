@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../components'
 import styles from '../css/faq.css'
+import {Browser} from '../helpers'
 
 
 const QUESTIONS = [
