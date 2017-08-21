@@ -80,6 +80,7 @@ class BankCardVerify extends React.Component {
     }
 
     checkResult(result, transCode) {
+        let {history} = this.props;
         let should_hide_loading = true;
 
         if (result == 0) {
