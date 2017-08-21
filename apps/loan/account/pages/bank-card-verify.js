@@ -83,11 +83,14 @@ class BankCardVerify extends React.Component {
         let should_hide_loading = true;
 
         if (result == 0) {
+            console.log(111);
             if (transCode == 1001) {
                 Components.showToast("验证码不正确");
             } else {
                 // this.setState({ result: 0 })
+                console.log(222);
                 history.push('/bank-card');
+                console.log(333);
             }
         } else if (result == 1) {
             Browser.inJRGCApp() ?
