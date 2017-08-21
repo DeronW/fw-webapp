@@ -45,9 +45,9 @@ export default class BankCard {
             operatorType: user_status < 2 ? 1 : 2
         }).then(data => {
             this.new_card = {
-                    operatorBankcardGid: data.bindBankInfo.operatorBankcardGid,
-                    phone: phone
-                }
+                operatorBankcardGid: data.bindBankInfo.operatorBankcardGid,
+                phone: phone
+            }
         }, e => Components.showToast(e.message))
     }
 
