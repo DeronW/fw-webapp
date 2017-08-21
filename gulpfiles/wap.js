@@ -107,10 +107,10 @@ const P2P = [
     // 'p2p-topic-invest-school', //微金投资学堂页面
 ]
 
-const REFACTOR_PAGES = [{
-    name: 'invest',
-    compiler: 'webpack'
-}]
+// const REFACTOR_PAGES = [{
+//     name: 'invest',
+//     compiler: 'webpack'
+// }]
 
 APP_NAMES.push(
     ...USER_PAGES,
