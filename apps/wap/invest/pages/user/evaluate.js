@@ -222,7 +222,7 @@ class Evaluate extends React.Component {
         }
         err ?
             Components.showToast("您还有未填写试题") :
-            Get('/orderuser/riskGradeP2P.shtml', form_data)
+            Get('/orderuser/riskGradeInto.shtml', form_data)
                 .then(data => this.setState({
                     finished: true,
                     score: data.score,
