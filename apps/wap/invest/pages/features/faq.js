@@ -338,7 +338,9 @@ const QUESTIONS = [
     errorWhenNotFound: false
 })
 class List extends React.Component {
-
+    componentDidMount(){
+        document.title = "帮助中心"
+    }
     render() {
 
         let topic = (i, index) => {
@@ -391,6 +393,9 @@ class Page extends React.Component {
         }
     }
 
+    componentDidMount(){
+        document.title = "帮助中心"
+    }
     toggleHandler = (index) => {
         let opened = this.state.opened.slice();
         opened[index] = opened[index] == 'show' ? 'hide' : 'show';
