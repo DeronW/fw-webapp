@@ -19,9 +19,9 @@ const USER_PAGES = [
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
     'vip-prerogative', // VIP特权详情页
-    'user-evaluate', // 投资风险承受能力评估
-    'user-evaluate-p2p', //p2p投资风险承受能力评估
-    'user-evaluate-zx', //尊享投资风险承受能力评估
+    // 'user-evaluate', // 投资风险承受能力评估
+    // 'user-evaluate-p2p', //p2p投资风险承受能力评估
+    // 'user-evaluate-zx', //尊享投资风险承受能力评估
 ]
 
 const PROTOCOL_PAGES = [

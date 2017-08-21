@@ -17,6 +17,7 @@ import InvestSchool from './pages/invest-school'
 import NoticeSafeguard from './pages/notice-safeguard'
 import VipPrerogative from './pages/vip-prerogative'
 import PolicyBox from './pages/policy'
+import Evaluate from './pages/evaluate.js'
 
 export default (stores) => {
     return <Router>
@@ -31,6 +32,7 @@ export default (stores) => {
                 <Route exact path='/notice-safeguard' component={NoticeSafeguard}/>
                 <Route exact path='/vip-prerogative' component={VipPrerogative}/>
                 <Route exact path='/policy' component={PolicyBox}/>
+                <Route exact path='/evaluate' component={Evaluate}/>
                 <Route component={NotFound}/>
             </Switch>
         </Provider>
