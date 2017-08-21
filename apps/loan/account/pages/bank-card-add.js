@@ -59,8 +59,8 @@ class BankCardAdd extends React.Component {
                 // }, e => {
                 //     Components.showToast(err);
                 // })
-                .then((data) => {
-                    data && history.push('/bank-card-verify')
+                .then(() => {
+                     history.push('/bank-card-verify')
                 }, e => {
                     Components.showToast(err);
                 })

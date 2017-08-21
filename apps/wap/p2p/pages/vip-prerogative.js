@@ -31,7 +31,6 @@ class VipPrerogative extends React.Component {
             .then(data => {
                 if (data.code != 10000) throw new Error('接口异常, 无法获取用户等级信息');
                 this.setState({level_list: data.data.levelGiftRule})
-                console.log(this.state.level_list)
             })
     }
 
