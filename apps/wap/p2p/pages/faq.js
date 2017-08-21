@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../components'
 import styles from '../css/faq.css'
+import {Browser} from '../helpers'
 
 
 const QUESTIONS = [
@@ -277,7 +278,7 @@ class List extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header title="帮助中心" history={this.props.history} />
+            {(!Browser.inApp) && <Header title="帮助中心" history={this.props.history} />}
             {QUESTIONS.map(group)}
         </div>
     }
@@ -328,7 +329,7 @@ class Page extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header title="帮助中心" history={this.props.history} />
+            {(!Browser.inApp) && <Header title="帮助中心" history={this.props.history} />}
             <div styleName="topic-title">{this.state.topic.topic_title}</div>
             <div styleName="topic-content">
                 {this.state.topic.topic_items.map(qa)}
