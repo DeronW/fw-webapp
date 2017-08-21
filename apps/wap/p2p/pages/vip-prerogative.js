@@ -35,8 +35,9 @@ class VipPrerogative extends React.Component {
     }
 
     render() {
-        let header_section = Browser.inApp ? NativeBridge.setTitle('升级攻略') :
-            <Header title="升级攻略" history={this.props.history}/>
+        // let header_section = Browser.inApp ? NativeBridge.setTitle('升级攻略') :
+        //     <Header title="升级攻略" history={this.props.history}/>
+        let header_section =  (!Browser.inApp) && <Header title='升级攻略' history={this.props.history}/>
         let vip_section1 = () => {
             let {level_list} = this.state
             let level_list_func = (item, index) => {
