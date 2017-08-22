@@ -1,5 +1,5 @@
-import EntrustTransfer from './entrust-transfer.js'
+import Service from './service.js'
 
 export {
-    EntrustTransfer
+    Service
 }
