@@ -8,7 +8,6 @@ export {
     EntrustTransfer,
     TrusteeShip,
     UserService,
-    EntrustTransfer,
     ProtocolBatchInvest,
     ProtocolCounseling
 }
