@@ -11,8 +11,8 @@ import { Browser } from '../../helpers'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Home extends React.Component {
     render(){
-        return <div>
-
+        return <div styleName="home">
+            home
         </div>
     }
 }

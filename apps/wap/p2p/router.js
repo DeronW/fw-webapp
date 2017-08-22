@@ -1,5 +1,5 @@
 import React from 'react'
-import {Provider} from 'mobx-react'
+import { Provider } from 'mobx-react'
 import {
     HashRouter as Router,
     Route,
@@ -18,22 +18,24 @@ import NoticeSafeguard from './pages/notice-safeguard'
 import VipPrerogative from './pages/vip-prerogative'
 import PolicyBox from './pages/policy'
 import Evaluate from './pages/evaluate.js'
+import * as Protocol from './pages/protocol'
 
 export default (stores) => {
     return <Router>
         <Provider {...stores} >
             <Switch>
-                <Route exact path='/faq' component={FAQ.List}/>
-                <Route exact path='/faq/:kind' component={FAQ.Page}/>
-                <Route exact path='/app-download' component={AppDownload}/>
-                <Route exact path='/interest-reward' component={InterestRewords}/>
-                <Route exact path='/invite' component={Invite}/>
-                <Route exact path='/invest-school' component={InvestSchool}/>
-                <Route exact path='/notice-safeguard' component={NoticeSafeguard}/>
-                <Route exact path='/vip-prerogative' component={VipPrerogative}/>
-                <Route exact path='/policy' component={PolicyBox}/>
-                <Route exact path='/evaluate' component={Evaluate}/>
-                <Route component={NotFound}/>
+                <Route exact path='/faq' component={FAQ.List} />
+                <Route exact path='/faq/:kind' component={FAQ.Page} />
+                <Route exact path='/app-download' component={AppDownload} />
+                <Route exact path='/interest-reward' component={InterestRewords} />
+                <Route exact path='/invite' component={Invite} />
+                <Route exact path='/invest-school' component={InvestSchool} />
+                <Route exact path='/notice-safeguard' component={NoticeSafeguard} />
+                <Route exact path='/vip-prerogative' component={VipPrerogative} />
+                <Route exact path='/policy' component={PolicyBox} />
+                <Route exact path='/evaluate' component={Evaluate} />
+                <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransfer} />
+                <Route component={NotFound} />
             </Switch>
         </Provider>
     </Router>

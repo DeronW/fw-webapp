@@ -10,6 +10,7 @@ import * as Reserve from './pages/reserve'
 import * as User from './pages/user'
 import * as Features from './pages/features'
 import * as Faxian from './pages/fa-xian'
+import * as Protocol from './pages/protocol'
 
 export default (stores) => {
     return <Router>
@@ -25,14 +26,17 @@ export default (stores) => {
                 <Route exact path="/reserve/records" component={Reserve.Records} />
                 <Route exact path="/reserve/protocol" component={Reserve.Protocol} />
 
-                <Route exact path='/features/faq' component={Features.FAQList}/>
-                <Route exact path='/features/faq/:kind' component={Features.FAQPage}/>
-                <Route exact path='/features/about-us' component={Features.AboutUs}/>
-                <Route exact path='/features/app-download' component={Features.AppDownload}/>
+                <Route exact path='/features/faq' component={Features.FAQList} />
+                <Route exact path='/features/faq/:kind' component={Features.FAQPage} />
+                <Route exact path='/features/about-us' component={Features.AboutUs} />
+                <Route exact path='/features/app-download' component={Features.AppDownload} />
 
+                <Route exact path='/fa-xian' component={Faxian.Home} />
+                <Route exact path='/fa-xian/coupon-center' component={Faxian.CouponCenter} />
 
-                <Route exact path='/fa-xian/home' component={Faxian.Home}/>
-                <Route exact path='/fa-xian/coupon-center' component={Faxian.CouponCenter}/>
+                {/* 协议 */}
+                <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransfer} />
+
             </Switch>
         </Provider>
     </Router>
