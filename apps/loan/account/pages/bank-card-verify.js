@@ -80,6 +80,7 @@ class BankCardVerify extends React.Component {
     }
 
     checkResult(result, transCode) {
+        let {history} = this.props;
         let should_hide_loading = true;
 
         if (result == 0) {
@@ -92,7 +93,8 @@ class BankCardVerify extends React.Component {
         } else if (result == 1) {
             Browser.inJRGCApp() ?
                 NativeBridge.close() :
-                window.location.href = '/static/loan/products/index.html#/';
+                // window.location.href = '/static/loan/products/index.html#/';
+                window.location.href = '/static/loan/account/index.html#/repayment-records';
         } else if (result == 2) {
             this.setState({ result: 2, result_reason: '' })
         } else {

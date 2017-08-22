@@ -2,6 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../../components'
+import { Browser } from '../../helpers'
 import styles from '../../css/features/faq.css'
 
 
@@ -337,7 +338,9 @@ const QUESTIONS = [
     errorWhenNotFound: false
 })
 class List extends React.Component {
-
+    componentDidMount(){
+        document.title = "帮助中心"
+    }
     render() {
 
         let topic = (i, index) => {
@@ -359,7 +362,7 @@ class List extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header title="帮助中心" history={this.props.history} />
+        {(!Browser.inApp) && <Header title="帮助中心" history={this.props.history} />}
             {QUESTIONS.map(group)}
         </div>
     }
@@ -390,6 +393,9 @@ class Page extends React.Component {
         }
     }
 
+    componentDidMount(){
+        document.title = "帮助中心"
+    }
     toggleHandler = (index) => {
         let opened = this.state.opened.slice();
         opened[index] = opened[index] == 'show' ? 'hide' : 'show';
@@ -410,7 +416,7 @@ class Page extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header noClose title="帮助中心" history={this.props.history} />
+            {(!Browser.inApp) && <Header title="帮助中心" history={this.props.history} />}
             <div styleName="topic-title">{this.state.topic.topic_title}</div>
             <div styleName="topic-content">
                 {this.state.topic.topic_items.map(qa)}

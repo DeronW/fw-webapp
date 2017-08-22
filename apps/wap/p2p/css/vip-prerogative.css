@@ -214,5 +214,71 @@
     background-color: #f6f7fa;
 }
 
+.section-5 {
+}
+
+.text {
+    padding: 10px 20px 10px 60px;
+    position: relative;
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+.text:before {
+    content: ' ';
+    display: block;
+    color: white;
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    font-size: 24px;
+    text-align: center;
+    background-color: #8ba3e6;
+}
+
+.text span.red {
+    color: #e84f76;
+}
+
+.formula {
+    border-radius: 24px;
+    color: #e84f76;
+    background-color: #e9edfd;
+    padding: 10px 0 10px 20px;
+    margin-top: 10px;
+}
+
+.text-1:before {
+    content: '1';
+}
+
+.text-2:before {
+    content: '2';
+}
+
+.text-3:before {
+    content: '3';
+}
+
+.text-4:before {
+    content: '4';
+}
+
+.text-5:before {
+    content: '5';
+}
+
+.text-6:before {
+    content: '6';
+}
+
+.text-7:before {
+    content: '7';
+}
+
 
 

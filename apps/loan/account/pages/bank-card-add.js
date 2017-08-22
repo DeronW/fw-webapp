@@ -52,15 +52,15 @@ class BankCardAdd extends React.Component {
             Components.showToast(err) :
             bank_card.add_new_card_info(
                 card_info.bankName, card_no,
-                card_info.card_type, phone,
+                card_info.cardType, phone,
                 account.get_user_status())
                 // .then(() => {
                 //     history.push('/bank-card-verify')
                 // }, e => {
                 //     Components.showToast(err);
                 // })
-                .then((data) => {
-                    data && history.push('/bank-card-verify')
+                .then(() => {
+                     history.push('/bank-card-verify')
                 }, e => {
                     Components.showToast(err);
                 })

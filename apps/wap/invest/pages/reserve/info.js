@@ -71,7 +71,7 @@ class ReserveInfo extends React.Component {
                         冻结资金
                     </div>
                     <div styleName="tab-item tab-bid">
-                        投标（自动）
+                        投标(自动)
                     </div>
                     <div styleName="tab-item tab-interest">
                         起息

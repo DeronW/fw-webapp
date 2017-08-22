@@ -59,6 +59,7 @@ class RepaymentBankCard extends React.Component {
             { bank_card.all.length < 10 && // *4
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn" href="/static/loan/user-card-add/index.html">
+                    {/*<a styleName="submit-btn" href="/static/loan/account/index.html#/bank-card-add">*/}
                         添加银行卡
                     </a>
                 </div>

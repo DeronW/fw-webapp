@@ -1,10 +1,11 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Header } from '../../components'
-import { Get } from '../../helpers'
 import { Components } from 'fw-javascripts'
-import styles from '../../css/user/evaluate.css'
+
+import { Header } from '../components'
+import { Get } from '../helpers'
+import styles from '../css/evaluate.css'
 
 const QUESTIONS = [{
     q: 'Q1：您的年龄是？',
@@ -15,16 +16,13 @@ const QUESTIONS = [{
         score: 2
     }, {
         a: 'B.31-50岁',
-        score: 8
-    }, {
-        a: 'C.51-64岁',
         score: 6
     }, {
-        a: 'D.高于64岁',
-        score: 1
+        a: 'C.51-65岁',
+        score: 4
     }, {
-        a: 'E.18岁以下',
-        score: 0
+        a: 'D.高于65岁',
+        score: 2
     }]
 }, {
     q: 'Q2：您的家庭年收入为（折合人民币）？',
@@ -32,10 +30,10 @@ const QUESTIONS = [{
     name: "income",
     options: [{
         a: 'A.5万元以下',
-        score: 0
+        score: 2
     }, {
         a: 'B.5-20万元',
-        score: 2
+        score: 4
     }, {
         a: 'C.20-50万元',
         score: 6
@@ -47,7 +45,7 @@ const QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: 'Q3：一般情况下，在您每年的家庭收入中，可用于金融投资（储蓄存款的比例为）？',
+    q: 'Q3：在您每年的家庭收入中，可用于投资（储蓄存款除外）的比例为？',
     seq: 2,
     name: "can",
     options: [{
@@ -64,132 +62,131 @@ const QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: 'Q4：以下哪项最能说明您的投资经验？',
+    q: 'Q4：您过去一年投资非保本类金融产品的总金额为？',
     seq: 3,
+    name: "total",
+    options: [{
+        a: 'A.1万以下',
+        score: 2
+    }, {
+        a: 'B.1-5万',
+        score: 4
+    }, {
+        a: 'C.5-10万',
+        score: 6
+    }, {
+        a: 'D.10-50万',
+        score: 8
+    }, {
+        a: 'E.50万以上',
+        score: 10
+    }]
+}, {
+    q: 'Q5：以下哪项最能说明您的投资经验？ ',
+    seq: 4,
     name: "experience",
     options: [{
-        a: 'A.除存款、国债外，我几乎不投资其他金融产品',
-        score: 0
-    }, {
-        a: 'B.大部分投资于存款、国债等，较少投资于股票、基金等风险产品',
+        a: 'A.除存款、国债等保本类金额产品外，我从不投资其他非保本类金融产品，包括股票、基金、理财产品等。',
         score: 2
     }, {
-        a: 'C.资产均衡地分布于存款、国债、银行理财产品、信托产品、股票、基金等',
+        a: 'B.大部分投资于存款、国债等，少部分投资于股票、基金、理财产品等风险产品 ',
+        score: 4
+    }, {
+        a: 'C.资产均衡地分布于存款、国债、银行理财产品、信托产品、股票、基金等  ',
         score: 6
     }, {
-        a: 'D.大部分投资于股票、基金、外汇等高风险产品，较少投资于存款、国债',
-        score: 10
+        a: 'D.大部分投资于股票、基金、外汇、金融衍生品、海外投资产品等高风险产品，较少投资于存款、国债',
+        score: 8
     }]
 }, {
-    q: 'Q5：您有多少年投资股票、基金、外汇、金融衍生产品等风险投资品的经验？',
-    seq: 4,
+    q: 'Q6：您有多少年投资股票、基金、外汇、理财产品、网络借贷、金融衍生产品、海外投资产品等风险投资品的经验？',
+    seq: 5,
     name: "experiencePeriod",
     options: [{
-        a: 'A.没有经验',
-        score: 0
+        a: 'A.少于1年',
+        score: 1
     }, {
-        a: 'B.少于两年',
-        score: 2
+        a: 'B.1至3年',
+        score: 4
     }, {
-        a: 'C.2-5年',
+        a: 'C.3至5年',
         score: 6
     }, {
-        a: 'D.5-8年',
+        a: 'D.5年以上',
         score: 8
-    }, {
-        a: 'E.8年以上',
-        score: 10
     }]
 }, {
-    q: 'Q6：以下哪项描述最符合您的投资态度？',
-    seq: 5,
+    q: 'Q7：您的互联网操作熟练程度是怎样的？',
+    seq: 6,
+    name: "practised",
+    options: [{
+        a: 'A.1年以内互联网使用经验',
+        score: 1
+    }, {
+        a: 'B.1至5年互联网使用经验',
+        score: 4
+    }, {
+        a: 'C.5至10年互联网使用经验',
+        score: 6
+    }, {
+        a: 'D.10年以上互联网使用经验',
+        score: 8
+    }]
+}, {
+    q: 'Q8：您计划的投资期限是多久？',
+    seq: 7,
+    name: "period",
+    options: [{
+        a: 'A.3个月以内',
+        score: 1
+    }, {
+        a: 'B.3至6个月',
+        score: 2
+    }, {
+        a: 'C.6个月至1年',
+        score: 4
+    }, {
+        a: 'D.1年以上',
+        score: 7
+    }]
+}, {
+    q: 'Q9：以下哪项描述最符合您的投资态度？',
+    seq: 8,
     name: "attitude",
     options: [{
-        a: 'A.厌恶风险，不希望本金损失，希望获得稳定回报',
-        score: 0
+        a: 'A.厌恶风险，不希望本金损失 ',
+        score: 1
     }, {
-        a: 'B.保守投资，不希望本金损失，愿意承担一定幅度的收益波动',
-        score: 4
+        a: 'B.保守投资，不希望本金损失，愿意承担一定幅度的收益波动 ',
+        score: 3
     }, {
         a: 'C.寻求资金的较高收益和成长性，愿意为此承担有限本金损失',
+        score: 6
+    }, {
+        a: 'D.希望赚取高回报，愿意为此承担较大本金损失',
         score: 8
-    }, {
-        a: 'D.希望赚取高回报，能接受为期较长期间的负面波动，包括本金损失',
-        score: 10
     }]
 }, {
-    q: 'Q7：您计划的投资期限是多久？',
-    seq: 6,
-    name: "investPeriod",
-    options: [{
-        a: 'A.1年以下，我可能会随时动用投资基金，对其流动性要求比较高',
-        score: 4
-    }, {
-        a: 'B.1-3年，为获得满意的收益，我短期内不会动用投资资金',
-        score: 6
-    }, {
-        a: 'C.3-5年，我会在相对较长的一段时间内进行投资，对流动性要求较低',
-        score: 8
-    }, {
-        a: 'D.5年以上，为达到理财目标，我会持续的进行投资',
-        score: 10
-    }]
-}, {
-    q: 'Q8：您的投资目的与期望值是？',
-    seq: 7,
-    name: "hope",
-    options: [{
-        a: 'A.资产保值，与银行同期存款利率大体相同',
-        score: 2
-    }, {
-        a: 'B.资产稳健增长，略高于银行定期存款利率',
-        score: 6
-    }, {
-        a: 'C.资产迅速增长，远超银行定期存款利率',
-        score: 10
-    }]
-}, {
-    q: 'Q9：您对期限为半年的产品，投资风险适应度是？',
-    seq: 8,
-    name: "riskAjust",
-    options: [{
-        a: 'A.本金无损失，收益达到定期存款收益',
-        score: 0
-    }, {
-        a: 'B.在本金安全或者有较大保障的情况下，可以承受收益适当的波动，以便有可能获得大于同期存款收益',
-        score: 4
-    }, {
-        a: 'C.在本金损失可能性极低的情况下，愿意接受投资收益，以便获得大于同期存款收益',
-        score: 6
-    }, {
-        a: 'D.愿意承担一定风险，以寻求一定的资金收益和成长性',
-        score: 10
-    }, {
-        a: 'E.为获得一定投资回报，愿意承担投资产品市值较大波动，甚至本金损失',
-        score: 15
-    }]
-}, {
-    q: 'Q10：您投资产品的期限超过一年后，出现何种程度的波动，您会呈现明显的焦虑？',
+    q: 'Q10：您的投资出现何种程度的波动时，您会呈现明显的焦虑？',
     seq: 9,
     name: "anxious",
     options: [{
         a: 'A.本金无损失，但收益未达预期',
-        score: 0
+        score: 1
     }, {
         a: 'B.出现轻微本金损失',
-        score: 4
+        score: 3
     }, {
         a: 'C.本金10%以内的损失',
-        score: 6
+        score: 5
     }, {
         a: 'D.本金20%-50%的损失',
-        score: 10
+        score: 7
     }, {
         a: 'E.本金50%以上的损失',
-        score: 15
+        score: 9
     }]
-}]
-
+}];
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Evaluate extends React.Component {
@@ -240,7 +237,7 @@ class Evaluate extends React.Component {
         let result = () => {
             return <div>
                 <div styleName="result-top">
-                    <img styleName="result-img" src={require("../../images/user/evaluate/result.png")} />
+                    <img styleName="result-img" src={require("../images/evaluate/result.png")} />
                     <div styleName="result-score">{score}分</div>
                     <div styleName="result-text1">评估完成，您的风险承受能力为：</div>
                     <div styleName="result-text2">{evaluateType}</div>

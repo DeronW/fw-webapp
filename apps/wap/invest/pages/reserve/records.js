@@ -107,7 +107,7 @@ class ReserveRecords extends React.Component {
         let reload_btn = <div className={reload_style} onClick={this.reloadHandler}></div>
 
         return <div styleName="recordsPanel">
-            <Header title="我的预约" history={history} />
+            <Header title="我的预约" history={history} noClose={false}/>
             {reload_btn}
             {records.length == 0 ? no_records : records.map(records_func)}
         </div>
