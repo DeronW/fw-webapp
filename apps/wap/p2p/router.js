@@ -35,6 +35,8 @@ export default (stores) => {
                 <Route exact path='/policy' component={PolicyBox} />
                 <Route exact path='/evaluate' component={Evaluate} />
                 <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransfer} />
+                <Route exact path='/protocol/protocol-batch-invest' component={Protocol.ProtocolBatchInvest} />
+                <Route exact path='/protocol/protocol-counseling' component={Protocol.ProtocolCounseling} />
                 <Route component={NotFound} />
             </Switch>
         </Provider>
