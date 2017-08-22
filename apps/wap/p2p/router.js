@@ -39,6 +39,8 @@ export default (stores) => {
                 <Route exact path='/protocol/user-service' component={Protocol.UserService}/>
                 <Route exact path='/protocol/batch-invest' component={Protocol.ProtocolBatchInvest} />
                 <Route exact path='/protocol/counseling' component={Protocol.ProtocolCounseling} />
+                <Route exact path='/protocol/leader-promise' component={Protocol.LeaderPromise} />
+                <Route exact path='/protocol/perform-duty' component={Protocol.PerformDuty} />
                 <Route component={NotFound} />
             </Switch>
         </Provider>
