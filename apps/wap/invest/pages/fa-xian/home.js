@@ -11,10 +11,10 @@ import { BannerGroup } from 'fw-components'
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Home extends React.Component {
-    componentDidMount(){
-        let {faxian} = this.props;
-        faxian.getBannersHandler()
-    }
+    // componentDidMount(){
+    //     let {faxian} = this.props;
+    //     faxian.getBannersHandler()
+    // }
     render(){
         // let {faxian} = this.props;
         // console.log(faxian);
