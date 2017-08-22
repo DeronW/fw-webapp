@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 
 import { Header } from '../../components/'
-import styles from '../../css/protocol/protocol-counseling.css'
+import styles from '../../css/protocol/counseling.css'
 import { NativeBridge } from '../../helpers'
 
 @CSSModules(styles, {
