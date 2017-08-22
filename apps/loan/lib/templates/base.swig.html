@@ -23,5 +23,18 @@
 {% block content %}
 <div id="cnt" style="height: 100%"></div>
 {% endblock %}
+
+{% if ENV == 'production' %}
+{% include 'expection-handler.swig.html' with
+{SENTRY_DSN: 'https://064ad415a6de48dbbef9c9974ff6a029@sentry.dougemall.com/5'} %}
+{% endif %}
+
+{% if ENV == 'production' %}
+{% include 'growing-io.swig.html' with {
+    key: '8560a41923a914be',
+    cs1_key: 'user_id',
+    cs1_value: 'localStorage._$user_uid'
+} %}
+{% endif %}
 </body>
 </html>
