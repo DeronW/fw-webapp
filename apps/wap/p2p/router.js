@@ -34,9 +34,9 @@ export default (stores) => {
                 <Route exact path='/vip-prerogative' component={VipPrerogative} />
                 <Route exact path='/policy' component={PolicyBox} />
                 <Route exact path='/evaluate' component={Evaluate} />
-                <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransferprotocol} />
-                <Route exact path='/protocol/protocol-batch-invest' component={Protocol.ProtocolBatchInvest} />
-                <Route exact path='/protocol/protocol-counseling' component={Protocol.ProtocolCounseling} />
+                <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransfer} />
+                <Route exact path='/protocol/batch-invest' component={Protocol.ProtocolBatchInvest} />
+                <Route exact path='/protocol/counseling' component={Protocol.ProtocolCounseling} />
                 <Route component={NotFound} />
             </Switch>
         </Provider>

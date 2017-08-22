@@ -1,6 +1,6 @@
 import EntrustTransfer from './entrust-transfer.js'
-import ProtocolBatchInvest from './protocol-batch-invest.js'
-import ProtocolCounseling from './protocol-counseling.js'
+import ProtocolBatchInvest from './batch-invest.js'
+import ProtocolCounseling from './counseling.js'
 
 export {
     EntrustTransfer,
