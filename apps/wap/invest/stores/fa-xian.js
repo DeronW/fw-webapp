@@ -1,7 +1,6 @@
 import { extendObservable } from 'mobx'
 import {Components, Utils, Event} from 'fw-javascripts'
 
-<<<<<<< HEAD
 export default class FaXian{
     constructor(Ajax){
         this.Ajax = Ajax
@@ -14,7 +13,10 @@ export default class FaXian{
             position_index: 0,
             position: 0,
             coupon_count: "",
-            service_phone: '010-65255966'
+            service_phone: '010-65255966',
+            giftList: [],
+            limitList: [],
+            endList: []
         })
     }
 
@@ -27,19 +29,7 @@ export default class FaXian{
             silence: true
         }).catch(data => {
             this.data.banners = data.map(i => ({ url: i.url, img: i.thumb }))
-=======
-export default class FaXian {
-    constructor(Post) {
-        this.Post = Post
 
-        this.data = {}
-        extendObservable(this, {
-            giftList: [],
-            limitList: [],
-            endList: []
->>>>>>> e9d586381361cd38eb46d3c6fd06f4beccdb57a4
-        })
-    }
 
     requestGiftList = () => {
         return this.Post('/api/v2/getCouponList.shtml')
