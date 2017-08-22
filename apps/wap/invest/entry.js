@@ -10,6 +10,7 @@ import * as Stores from './stores'
 
 let stores = {
     reserve: new Stores.Reserve(Post),
+    faxian: new Stores.FaXian(Post),
 }
 
 render(AppRouter(stores), document.getElementById('cnt'))

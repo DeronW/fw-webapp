@@ -9,6 +9,7 @@ import {
 import * as Reserve from './pages/reserve'
 import * as User from './pages/user'
 import * as Features from './pages/features'
+import * as Faxian from './pages/fa-xian'
 
 export default (stores) => {
     return <Router>
@@ -28,6 +29,10 @@ export default (stores) => {
                 <Route exact path='/features/faq/:kind' component={Features.FAQPage}/>
                 <Route exact path='/features/about-us' component={Features.AboutUs}/>
                 <Route exact path='/features/app-download' component={Features.AppDownload}/>
+
+
+                <Route exact path='/fa-xian/home' component={Faxian.Home}/>
+                <Route exact path='/fa-xian/coupon-center' component={Faxian.CouponCenter}/>
             </Switch>
         </Provider>
     </Router>
