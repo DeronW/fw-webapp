@@ -7,7 +7,7 @@ import ProtocolCounseling from './counseling.js'
 export {
     EntrustTransfer,
     TrusteeShip,
-    UserService
+    UserService,
     EntrustTransfer,
     ProtocolBatchInvest,
     ProtocolCounseling
