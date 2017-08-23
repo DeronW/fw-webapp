@@ -55,7 +55,14 @@
     width: 652px;
     margin: 20px 34px;
     height: 175px;
-    background-image: url("../../images/fa-xian/coupon-center/none_getbg.png");
+    background: url("../../images/fa-xian/coupon-center/none_getbg.png") no-repeat center;
+}
+
+.list-item-gold {
+    width: 652px;
+    margin: 20px 34px;
+    height: 175px;
+    background: url("../../images/fa-xian/coupon-center/coupon-goldbg.png") no-repeat center;
 }
 
 .item_left {
@@ -427,6 +434,7 @@
     margin-top: 11px;
     background: url("../../images/fa-xian/coupon-center/icon-islimit.png") no-repeat center;
 }
+
 .gift_no_get {
     float: left;
     width: 25%;
@@ -435,7 +443,6 @@
     position: relative;
     margin-top: 42px;
 }
-
 
 /*礼包弹窗start*/
 .gift-pop {
