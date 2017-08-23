@@ -99,17 +99,21 @@ class Coupon extends React.Component {
                         <div styleName="detail_left">
                             <div styleName="list_amount">
                             <span styleName="list_rmb">
-                                {item.type == "1" ? "￥" : "+"}
+                                {item.type == "1" && "￥"}
+                                {item.type == "2" && "+"}
                             </span>
-                                {item.amount}
+                                {item.amount}{item.type == "5" && "g"}
                             </div>
                             <div styleName="list_name">
                                 {item.type == "1" && "返现券"}
                                 {item.type == "2" && "返息券"}
+                                {item.type == "5" && "返金券"}
                             </div>
                         </div>
                         <div styleName="detail_right">
-                            <div>满￥{item.limitAmount}可用</div>
+                            <div>
+                                {item.type == 5 ? `满${item.limitAmount}g可用` : ` 满￥${item.limitAmount}可用`}
+                            </div>
                             <div>{day}</div>
                             <div>有效期至{item.validPeriod}</div>
                         </div>
