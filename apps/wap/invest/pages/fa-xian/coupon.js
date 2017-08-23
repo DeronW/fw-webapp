@@ -1,15 +1,15 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
-import {Header} from '../../components/'
+import { observer, inject } from 'mobx-react'
+import { Components } from 'fw-javascripts'
+
+import { Header } from '../../components/'
 import styles from '../../css/fa-xian/coupon-center.css'
-import {NativeBridge} from '../../helpers'
-import {Browser} from '../../helpers'
-import {Components} from 'fw-javascripts'
+import { NativeBridge } from '../../helpers'
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Coupon extends React.Component {
     state = {
         isShowEmpty: false,
@@ -19,10 +19,11 @@ class Coupon extends React.Component {
 
     componentDidMount() {
         NativeBridge.setTitle('领券中心')
+
         this.props.faxian.requestGiftList().then(data => {
-            let {faxian} = this.props
+            let { faxian } = this.props
             if (faxian.data.giftList.length == 0 && faxian.data.limitList.length == 0 && faxian.data.endList.length == 0) {
-                this.setState({isShowEmpty: true})
+                this.setState({ isShowEmpty: true })
             }
         })
     }
@@ -35,28 +36,28 @@ class Coupon extends React.Component {
     }
 
     closePanelHandler = () => {
-        this.setState({selected_code: null})
+        this.setState({ selected_code: null })
     }
 
     render() {
         let empty_holder = this.state.isShowEmpty && <div styleName="empty-box">
-                <img src={require('../../images/fa-xian/coupon-center/icon-empty.png')} styleName="emptyImg"/>
-                <div styleName="empty_text">一大波“优惠券”即将来袭</div>
-            </div>
+            <img src={require('../../images/fa-xian/coupon-center/icon-empty.png')} styleName="emptyImg" />
+            <div styleName="empty_text">一大波“优惠券”即将来袭</div>
+        </div>
         let gift_panel = () => {
-            let {selected_code, selected_name} = this.state
-            let {giftList}= this.props.faxian.data
+            let { selected_code, selected_name } = this.state
+            let { giftList } = this.props.faxian.data
             if (!giftList || giftList.length == 0) return null;
             return <div styleName="giftbag_box">
                 <div styleName="gift_box_title">
-                    <img src={require("../../images/fa-xian/coupon-center/icon-gift.png")} styleName="icon_gift"/>
+                    <img src={require("../../images/fa-xian/coupon-center/icon-gift.png")} styleName="icon_gift" />
                     <span styleName="gift_title">优惠券礼包</span>
                 </div>
                 {giftList.map((gift, index) => <GiftBag item={gift} key={index}
-                                                        showGiftInfoHandler={this.showGiftInfoHandler}/>)}
+                    showGiftInfoHandler={this.showGiftInfoHandler} />)}
                 {selected_code &&
-                <GiftPopPanel code={selected_code}
-                              gift_name={selected_name} closeHandler={this.closePanelHandler}/>}
+                    <GiftPopPanel code={selected_code}
+                        gift_name={selected_name} closeHandler={this.closePanelHandler} />}
             </div>
         }
 
@@ -65,10 +66,10 @@ class Coupon extends React.Component {
             if (!limitList || limitList.length == 0) return null;
             return <div styleName="list_box">
                 <div styleName="list_box_title">
-                    <img styleName="icon_limit" src={require("../../images/fa-xian/coupon-center/icon-limit.png")}/>
+                    <img styleName="icon_limit" src={require("../../images/fa-xian/coupon-center/icon-limit.png")} />
                     <span styleName="limit_title">限时抢购</span>
                 </div>
-                {limitList.map((limit, index) => <ListBag item={limit} key={index}/>)}
+                {limitList.map((limit, index) => <ListBag item={limit} key={index} />)}
             </div>
         }
 
@@ -95,10 +96,10 @@ class Coupon extends React.Component {
                     <div styleName="none_item_left">
                         <div styleName="detail_left">
                             <div styleName="list_amount">
-                            <span styleName="list_rmb">
-                                {item.type == "1" && "￥"}
-                                {item.type == "2" && "+"}
-                            </span>
+                                <span styleName="list_rmb">
+                                    {item.type == "1" && "￥"}
+                                    {item.type == "2" && "+"}
+                                </span>
                                 {item.amount}{item.type == "5" && "g"}
                             </div>
                             <div styleName="list_name">
@@ -121,7 +122,7 @@ class Coupon extends React.Component {
 
             let end_section = <div>
                 <div styleName="none_box_title">
-                    <img src={require("../../images/fa-xian/coupon-center/icon-end.png")} styleName="icon_end"/>
+                    <img src={require("../../images/fa-xian/coupon-center/icon-end.png")} styleName="icon_end" />
                     <span styleName="end_title">已结束</span>
                 </div>
                 {none_list.map(none_list_func)}
@@ -143,7 +144,7 @@ class Coupon extends React.Component {
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class ListBag extends React.Component {
     constructor(props) {
         super(props)
@@ -158,14 +159,14 @@ class ListBag extends React.Component {
         // start counting down
         console.log(this.props.item)
         if (this.props.item.receiveStatus == "01") {
-            this.setState({surplus_seconds: this.props.item.intervalMilli})
+            this.setState({ surplus_seconds: this.props.item.intervalMilli })
             this.timer = setInterval(() => {
                 if (this.state.surplus_seconds < 1) {
                     clearInterval(this.timer)
-                    this.setState({receiveStatus: '02'})
+                    this.setState({ receiveStatus: '02' })
                     this.props.faxian.requestGiftList()
                 } else {
-                    this.setState({surplus_seconds: this.state.surplus_seconds - 1})
+                    this.setState({ surplus_seconds: this.state.surplus_seconds - 1 })
                 }
             }, 1000)
         }
@@ -174,11 +175,11 @@ class ListBag extends React.Component {
     getHandler = (item) => {
         // 请求处理中, 不能重复点击
         if (this.state.pending) return;
-        this.setState({pending: true})
+        this.setState({ pending: true })
         item.isGet = "1";
         this.props.faxian.limitGetHandler(item).then(data => {
             Components.showAlert(data.remainNumber)
-            this.setState({pending: false})
+            this.setState({ pending: false })
             this.props.faxian.requestGiftList()//用户点击后重新请求，改变数据
         }, () => {
             this.props.faxian.requestGiftList()//用户点击后重新请求，改变数据
@@ -190,8 +191,8 @@ class ListBag extends React.Component {
     }
 
     render() {
-        let {receiveStatus, surplus_seconds} = this.state;
-        let {item} = this.props;
+        let { receiveStatus, surplus_seconds } = this.state;
+        let { item } = this.props;
         let day_number = "期限：>=" + item.limitTerm + "天"
         let day = item.limitTerm == "0" ? "任意期限可用" : day_number
         let content;
@@ -218,7 +219,7 @@ class ListBag extends React.Component {
                     item.grapLimit == "0" ? this.getHandler(item) : this.jump()
                 }}>
                     <SVGCircleProgress percent={100 - parseInt(item.restPercent)} weight={4} radius={50}
-                                       bgColor={'#FC655A'} progressColor={'#eee'}/>
+                        bgColor={'#FC655A'} progressColor={'#eee'} />
                     {item.grapLimit == "0" ? <a styleName="content_state_red">领取</a> :
                         <a styleName="content_state_red">去投资</a>
                     }
@@ -234,7 +235,7 @@ class ListBag extends React.Component {
 
         }
         let list_type_style = (item.type == 2 ? styles['list-item-red-bg'] :
-                (item.type == 5 ? styles['list-item-gold'] : styles['list_item'])
+            (item.type == 5 ? styles['list-item-gold'] : styles['list_item'])
         )
         return <div className={list_type_style}>
             <div styleName="item_left">
@@ -269,7 +270,7 @@ class ListBag extends React.Component {
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class GiftPopPanel extends React.Component {
     constructor(props) {
         super(props)
@@ -282,7 +283,7 @@ class GiftPopPanel extends React.Component {
         console.log(this.props.code)
         this.props.faxian.giftPopHandler(this.props.code)
             .then(data => {
-                this.setState({detail_list: data.giftBagDetail})
+                this.setState({ detail_list: data.giftBagDetail })
             })
     }
 
@@ -333,7 +334,7 @@ class GiftPopPanel extends React.Component {
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class GiftBag extends React.Component {
     constructor(props) {
         super(props)
@@ -348,15 +349,15 @@ class GiftBag extends React.Component {
     componentDidMount() {
         // start counting down
         if (this.props.item.receiveStatus == "01") {
-            this.setState({remain_seconds: this.props.item.intervalMilli})
+            this.setState({ remain_seconds: this.props.item.intervalMilli })
             this.timer = setInterval(() => {
                 if (this.state.remain_seconds < 1) {
                     clearInterval(this.timer)
-                    this.setState({receiveStatus: '02'})
+                    this.setState({ receiveStatus: '02' })
                     // this.props.refreshHandler()
                     this.props.faxian.requestGiftList()
                 } else {
-                    this.setState({remain_seconds: this.state.remain_seconds - 1})
+                    this.setState({ remain_seconds: this.state.remain_seconds - 1 })
                 }
             }, 1000)
         }
@@ -367,12 +368,12 @@ class GiftBag extends React.Component {
         // 请求处理中, 不能重复点击
         if (this.state.pending) return;
 
-        this.setState({pending: true})
+        this.setState({ pending: true })
         item.isGet = "1"
 
         this.props.faixian.giftGitHandler(item).then(data => {
             $FW.Component.Alert(data.remainNumber)
-            this.setState({pending: false})
+            this.setState({ pending: false })
             this.props.faxian.requestGiftList() //用户点击后重新请求，改变数据
         }, () => {
             this.props.faxian.requestGiftList() //用户点击后重新请求，改变数据
@@ -385,8 +386,8 @@ class GiftBag extends React.Component {
 
     render() {
 
-        let {receiveStatus} = this.state;
-        let {item} = this.props;
+        let { receiveStatus } = this.state;
+        let { item } = this.props;
 
         let gift_left_section = (item) => {
             let gift_name;
@@ -452,14 +453,14 @@ class GiftBag extends React.Component {
                 (item.grapLimit == "0") ? this.getHandler(item) : this.jump()
             }}>
                 <SVGCircleProgress percent={100 - parseInt(item.restPercent)} weight={4}
-                                   radius={50} bgColor={'#FC655A'} progressColor={'#eee'}/>
+                    radius={50} bgColor={'#FC655A'} progressColor={'#eee'} />
                 {(item.grapLimit == "0") ?
                     <a styleName="content_state_red">领取</a> :
                     <a styleName="content_state_red">去投资</a>
                 }
                 <div styleName="gift_right_title_surplus"> 剩余</div>
                 <div styleName="gift_right_starttime_percent">
-                    {parseInt(item.restPercent) == 0 ? this.setState({receiveStatus: "03"}) : item.restPercent}
+                    {parseInt(item.restPercent) == 0 ? this.setState({ receiveStatus: "03" }) : item.restPercent}
                 </div>
             </div>
         }
@@ -469,7 +470,7 @@ class GiftBag extends React.Component {
             return <div className={finished_style} onClick={() => {
                 item.isGet == "1" ? this.jump() : null
             }}>
-                <img src={require("images/icon-get-gray.png")}/>
+                <img src={require("images/icon-get-gray.png")} />
                 {item.isGet == "1" && <a styleName="get_state_red">去投资</a>}
             </div>
         }
