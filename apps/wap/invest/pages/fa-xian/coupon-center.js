@@ -155,6 +155,7 @@ class ListBag extends React.Component {
 
     componentDidMount() {
         // start counting down
+        console.log(this.props.item)
         if (this.props.item.receiveStatus == "01") {
             this.setState({surplus_seconds: this.props.item.intervalMilli})
             this.timer = setInterval(() => {
@@ -273,6 +274,7 @@ class GiftPopPanel extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props.code)
         this.props.faxian.giftPopHandler(this.props.code)
             .then(data => {
                 this.setState({detail_list: data.giftBagDetail})
