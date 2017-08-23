@@ -35,6 +35,7 @@ function getStyles() {
             display:"table"
         },
         text: {
+            width:"100%",
             margin: "0 auto 30px",
             lineHeight: "50px",
             color: "#555555",
