@@ -1,8 +1,8 @@
-import { extendObservable } from 'mobx'
-import { Components, Utils, Event } from 'fw-javascripts'
+import {extendObservable} from 'mobx'
+import {Components, Utils, Event} from 'fw-javascripts'
 
 export default class FaXian {
-    
+
     constructor(Ajax, Post) {
         this.Ajax = Ajax
         this.Post = Post
@@ -17,11 +17,6 @@ export default class FaXian {
             limitList: [],
             endList: []
         })
-        extendObservable(this, {
-            giftList: [],
-            limitList: [],
-            endList: []
-        })
     }
 
     getBannersHandler = () => {
@@ -29,23 +24,23 @@ export default class FaXian {
         this.Ajax({
             fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
             method: 'get',
-            data: { key: '0ca175b9c0f726a831d895e', id: q.banner_id || '30' },
+            data: {key: '0ca175b9c0f726a831d895e', id: q.banner_id || '30'},
             silence: true
         }).catch(data => {
-            this.data.banners = data.map(i => ({ url: i.url, img: i.thumb }))
+            this.data.banners = data.map(i => ({url: i.url, img: i.thumb}))
         })
-        
+
         this.Ajax({
             fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
             method: 'get',
-            data: { key: '0ca175b9c0f726a831d895e', id: q.topic_id || '31' },
+            data: {key: '0ca175b9c0f726a831d895e', id: q.topic_id || '31'},
             silence: true
         }).catch(data => {
-            this.data.topics = data.map(i => ({ url: i.url, img: i.thumb }))
+            this.data.topics = data.map(i => ({url: i.url, img: i.thumb}))
         })
 
         // 领券中心张数接口
-        this.Post('/api/v2/getCouponNum.shtml').then(data =>{
+        this.Post('/api/v2/getCouponNum.shtml').then(data => {
             this.data.coupon_count = data.availableNum
         });
     }
@@ -53,24 +48,49 @@ export default class FaXian {
         return this.Ajax({
             fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
             method: 'get',
-            data: { key: '0ca175b9c0f726a831d895e', id: '33' },
+            data: {key: '0ca175b9c0f726a831d895e', id: '33'},
             silence: true
         }).catch(data => {
             this.data.notice = data;
         })
     }
-    
+    // 领券中心接口
     requestGiftList = () => {
         return this.Post('/api/v2/getCouponList.shtml')
             .then(data => {
-                this.giftList = data.packageList
-                this.limitList = data.couponAvailableList
-                this.endList = data.couponEndList
+                this.data.giftList = data.packageList
+                this.data.limitList = data.couponAvailableList
+                this.data.endList = data.couponEndList
                 return {
-                    giftList: this.giftList,
-                    limitList: this.limitList,
-                    endList: this.endList
+                    giftList: this.data.giftList,
+                    limitList: this.data.limitList,
+                    endList: this.data.endList
                 }
+            })
+    }
+    limitGetHandler = (item) => {
+        return this.Post('/api/v2/getCouponList.shtml')
+            .then(data => {
+                return this.Post('/api/v2/grabCoupon.shtml', {
+                    code: item.code,
+                    couponType: item.type,
+                    couponToken: data.couponToken
+                })
+            })
+    }
+
+    giftPopHandler = (code) => {
+        return this.Post('/api/v2/getCouponInfo.shtml', {code: code})
+    }
+
+    giftGitHandler = (item) => {
+        return this.Post('/api/v2/getCouponList.shtml')
+            .then(data => {
+                return this.Post('/api/v2/grabCoupon.shtml', {
+                    couponToken: data.couponToken,
+                    code: item.code,
+                    couponType: item.type
+                })
             })
     }
 }

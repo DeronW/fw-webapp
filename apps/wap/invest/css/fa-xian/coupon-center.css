@@ -44,4 +44,482 @@
     vertical-align: middle;
 }
 
+.list_item {
+    width: 652px;
+    margin: 20px 34px;
+    height: 175px;
+    background: url("../../images/fa-xian/coupon-center/coupon-bluebg.png") no-repeat center;
+}
+
+.list-item-red-bg {
+    width: 652px;
+    margin: 20px 34px;
+    height: 175px;
+    background-image: url("../../images/fa-xian/coupon-center/none_getbg.png");
+}
+
+.item_left {
+    width: 75%;
+    float: left;
+    height: 100%;
+}
+
+.item_right {
+    width: 23%;
+    float: right;
+    height: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.list_remain {
+    margin-top: 11px;
+}
+
+.list_remain_limit {
+    background: url("../../images/fa-xian/coupon-center/icon-islimit.png") no-repeat center;
+}
+
+.list_right_title {
+    font-size: 20px;
+    margin-top: 40px;
+    position: absolute;
+    top: -7px;
+    width: 100%;
+}
+
+.list_right_starttime {
+    font-size: 26px;
+    color: #333;
+    margin-top: 5px;
+    position: absolute;
+    bottom: 82px;
+    width: 100%;
+}
+
+.content_title {
+    font-size: 22px;
+    margin-top: 33px;
+}
+
+.content_time {
+    font-size: 26px;
+    color: #fd4d4c;
+    margin-top: 10px;
+
+}
+
+.content_state_gray {
+    font-size: 24px;
+    color: #fff;
+    width: 124px;
+    height: 36px;
+    background-color: #afafaf;
+    line-height: 36px;
+    text-align: center;
+    margin: 15px 0 0 12px;
+    border-radius: 4px;
+}
+
+.content_state_red {
+    display: block;
+    font-size: 24px;
+    color: #ffffff;
+    width: 124px;
+    height: 36px;
+    background-color: #fd4d4c;
+    line-height: 36px;
+    text-align: center;
+    margin: 10px 0 0 22px;
+    border-radius: 4px;
+}
+
+.detail_left {
+    width: 155px;
+    padding: 40px 40px 40px 34px;
+    height: 90px;
+    float: left;
+}
+
+.list_amount {
+    font-size: 54px;
+    color: #fff;
+}
+
+.list_rmb {
+    font-size: 40px;
+}
+
+.list_name {
+    font-size: 24px;
+    color: #fff;
+    margin-top: 10px;
+    width: 210px;
+}
+
+.detail_right {
+    width: 200px;
+    padding: 42px 40px 40px 20px;
+    height: 90px;
+    float: left;
+    font-size: 20px;
+    color: #fff;
+    line-height: 34px;
+}
+
 /*限时抢购end*/
+
+/*结束列表start*/
+.none_box {
+    display: table;
+}
+
+.none_box_title {
+    font-size: 31px;
+    color: #50627a;
+    margin: 20px 30px;
+    margin-top: 10px;
+}
+
+.icon_end {
+    vertical-align: middle;
+    padding-right: 15px;
+}
+
+.end_title {
+    vertical-align: middle;
+}
+
+.none_item_box {
+    width: 652px;
+    height: 175px;
+    margin: 20px 34px;
+}
+
+.none_item_left {
+    width: 77%;
+    height: 100%;
+    float: left;
+}
+
+.none_item_right {
+    width: 23%;
+    height: 100%;
+    float: right;
+    text-align: center;
+    font-size: 30px;
+    display: block;
+}
+
+.gray_state {
+    width: 100%;
+    height: 108px;
+    margin-top: 10px;
+    background: url("../../images/fa-xian/coupon-center/icon-get-gray.png") no-repeat 7px 8px;
+}
+
+.red_state {
+    width: 100%;
+    height: 108px;
+    margin-top: 17px;
+    background: url("../../images/fa-xian/coupon-center/icon-get.png") no-repeat 0px center;
+}
+
+.state_button {
+    width: 124px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 24px;
+    color: #fff;
+    display: block;
+    margin: 0px 10px;
+}
+
+.gray_lq {
+    background-color: #cccccc;
+}
+
+.red_invest {
+    background-color: #fd4d4c;
+}
+
+.none_noget {
+    background: url("../../images/fa-xian/coupon-center/none_nogetbg.png") no-repeat center;
+}
+
+.none_noget-blue {
+    background: url("../../images/fa-xian/coupon-center/coupon-bluebg.png") no-repeat center;
+}
+
+.none_get {
+    background: url("../../images/fa-xian/coupon-center/none_getbg.png") no-repeat center;
+}
+
+/*结束列表end*/
+
+/*礼包列表start*/
+.giftbag_box {
+    display: table;
+    margin: 0px auto;
+}
+
+.gift_box_title {
+    font-size: 31px;
+    color: #50627a;
+    margin: 20px 0px;
+    margin-top: 30px;
+}
+
+.icon_gift {
+    vertical-align: middle;
+    padding-right: 15px;
+}
+
+.gift_title {
+    vertical-align: middle;
+}
+
+.gift_item {
+    width: 652px;
+    margin: 20px auto;
+    height: 175px;
+    background: url("../../images/fa-xian/coupon-center/coupon-orangebg.png") no-repeat center;
+    display: table;
+}
+
+.gift_none {
+    width: 652px;
+    margin: 20px auto;
+    height: 175px;
+    background: url("../../images/fa-xian/coupon-center/none_nogetbg.png") no-repeat center;
+    display: table;
+}
+
+.gift_item_left {
+    width: 75%;
+    height: 175px;
+    float: left;
+    display: table;
+}
+
+.gift_one_title {
+    width: 195px;
+    padding: 40px 0px 0 34px;
+    height: 134px;
+    float: left;
+}
+
+.gift_amount {
+    font-size: 54px;
+    color: #fff;
+}
+
+.amount_rmb {
+    display: inline-block;
+    font-size: 40px;
+}
+
+.gift_type {
+    font-size: 22px;
+    color: #fff;
+    margin-top: 15px;
+}
+
+.gift_one_des {
+    width: 236px;
+    padding: 40px 0px 40px 20px;
+    height: 90px;
+    float: left;
+    font-size: 20px;
+    color: #fff;
+    line-height: 34px;
+}
+
+.space {
+    display: inline-block;
+    width: 20px;
+}
+
+.gift_item_right {
+    float: left;
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    margin-top: 11px;
+}
+
+.content_state_red {
+    display: block;
+    font-size: 24px;
+    color: #fff;
+    width: 124px;
+    height: 36px;
+    background-color: #fd4d4c;
+    line-height: 36px;
+    text-align: center;
+    margin: 0px 0 0 22px;
+    border-radius: 4px;
+    margin-top: 13px;
+}
+
+.gift_right_title {
+    font-size: 22px;
+    margin-top: 40px;
+}
+
+.gift_right_starttime {
+    font-size: 26px;
+    color: #fd4d4c;
+    margin-top: 8px;
+}
+
+.gift_right_title_surplus {
+    font-size: 20px;
+    margin-top: 40px;
+    position: absolute;
+    top: -15px;
+    width: 100%;
+}
+
+.gift_right_starttime_percent {
+    font-size: 26px;
+    color: #333;
+    margin-top: 5px;
+    position: absolute;
+    bottom: 68px;
+    width: 100%;
+}
+
+.get_state_red {
+    display: block;
+    font-size: 24px;
+    color: #fff;
+    width: 124px;
+    height: 36px;
+    background-color: #fd4d4c;
+    line-height: 36px;
+    text-align: center;
+    margin: 20px 0 0 22px;
+    border-radius: 4px;
+}
+
+.get_state_gray {
+    font-size: 24px;
+    color: #fff;
+    width: 124px;
+    height: 36px;
+    background-color: #afafaf;
+    line-height: 36px;
+    text-align: center;
+    margin: 15px 0 0 22px;
+    border-radius: 4px;
+}
+
+.gift_item_limit {
+    float: left;
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    margin-top: 11px;
+    background: url("../../images/fa-xian/coupon-center/icon-islimit.png") no-repeat center;
+}
+.gift_no_get {
+    float: left;
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    margin-top: 42px;
+}
+
+
+/*礼包弹窗start*/
+.gift-pop {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+}
+
+.pop_content {
+    width: 595px;
+    height: 790px;
+    position: absolute;
+    left: 50%;
+    margin-left: -300px;
+    top: 50%;
+    margin-top: -395px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.close-btn {
+    width: 530px;
+    height: 68px;
+    background-color: #fd4d4c;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
+    margin-left: 33px;
+    border-radius: 4px;
+    font-size: 28px;
+    color: #fff;
+    text-align: center;
+    line-height: 68px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.turnoff-btn {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 34px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.pop_title {
+    height: 80px;
+    border-bottom: 1px solid #eff0f3;
+    font-size: 32px;
+    color: #333333;
+    line-height: 80px;
+    padding-left: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px 10px 0 0;
+}
+
+.pop_content_title {
+    font-size: 32px;
+    padding-left: 30px;
+    color: #555555;
+    margin-top: 30px;
+    line-height: 62px;
+    height: 592px;
+    overflow: auto;
+    padding-right: 30px;
+}
+
+.amount_red {
+    color: #fd4d4c;
+    font-size: 36px;
+}
+
+.detail_content {
+    font-size: 27px;
+}
+
+/*礼包弹窗end*/
+
+/*礼包列表end*/
