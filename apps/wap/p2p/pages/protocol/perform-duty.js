@@ -15,7 +15,7 @@ class PerformDuty extends React.Component {
         let { history } = this.props
 
         return <div styleName="bg">
-            <Header title="出借人承诺书" history={history} />
+            <Header title="履行反洗钱义务的承诺书" history={history} />
 
             <div styleName="content">
                 履行反洗钱义务的承诺书
