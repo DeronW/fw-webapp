@@ -11,6 +11,7 @@ import * as User from './pages/user'
 import * as Features from './pages/features'
 import * as Faxian from './pages/fa-xian'
 import * as Protocol from './pages/protocol'
+import NotFound from './pages/not-found.js'
 
 export default (stores) => {
     return <Router>
@@ -38,6 +39,7 @@ export default (stores) => {
                 <Route exact path='/protocol/service' component={Protocol.Service} />
                 <Route exact path='/protocol/trusteeship' component={Protocol.Trusteeship} />
 
+                <Route component={NotFound} />
             </Switch>
         </Provider>
     </Router>
