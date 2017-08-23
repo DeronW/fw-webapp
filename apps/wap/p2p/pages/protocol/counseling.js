@@ -9,7 +9,7 @@ import { NativeBridge } from '../../helpers'
     allowMultiple: true,
     errorWhenNotFound: false
 })
-class ProtocolCounseling extends React.Component {
+class Counseling extends React.Component {
     render() {
 
         let { history } = this.props
@@ -264,4 +264,4 @@ class ProtocolCounseling extends React.Component {
     }
 }
 
-export default ProtocolCounseling
+export default Counseling

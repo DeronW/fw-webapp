@@ -9,7 +9,7 @@ import { NativeBridge } from '../../helpers'
     allowMultiple: true,
     errorWhenNotFound: false
 })
-class ProtocolBatchInvest extends React.Component {
+class BatchInvest extends React.Component {
     render() {
 
         let { history } = this.props
@@ -62,4 +62,4 @@ class ProtocolBatchInvest extends React.Component {
     }
 }
 
-export default ProtocolBatchInvest
+export default BatchInvest

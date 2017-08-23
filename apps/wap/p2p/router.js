@@ -37,6 +37,11 @@ export default (stores) => {
 
                 {/* 微金协议 */}
                 <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransfer} />
+                <Route exact path='/protocol/risk-prompt' component={Protocol.RiskPrompt} />
+                <Route exact path='/protocol/special-bind' component={Protocol.SpecialBind} />
+                <Route exact path='/protocol/special-cash' component={Protocol.SpecialCash} />
+                <Route exact path='/protocol/special-recharge' component={Protocol.SpecialRecharge} />
+                <Route exact path='/protocol/trade-service' component={Protocol.TradeService} />
                 <Route exact path='/protocol/trusteeship' component={Protocol.TrusteeShip}/>
                 <Route exact path='/protocol/user-service' component={Protocol.UserService}/>
                 <Route exact path='/protocol/batch-invest' component={Protocol.ProtocolBatchInvest} />
