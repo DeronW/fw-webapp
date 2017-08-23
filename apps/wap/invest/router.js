@@ -36,6 +36,7 @@ export default (stores) => {
 
                 {/* 协议 */}
                 <Route exact path='/protocol/service' component={Protocol.Service} />
+                <Route exact path='/protocol/trusteeship' component={Protocol.Trusteeship} />
 
             </Switch>
         </Provider>
