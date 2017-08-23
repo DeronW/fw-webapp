@@ -1,8 +1,8 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {Header} from '../../components/'
+import {Header} from '../../components'
 import {Browser} from '../../helpers'
-import styleNames from '../../css/protocol/user-service.css'
+import styleNames from '../../css/protocol/service.css'
 
 @CSSModules(styleNames, {
     allowMultiple: true,
