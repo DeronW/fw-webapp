@@ -144,6 +144,7 @@ const Content = React.createClass({
                 <div className="findBanner">
                     {banner_group}
                 </div>
+                
                 <div className="notice">
                     <img className="notice-icon" src="images/1.png" />
 

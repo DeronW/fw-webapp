@@ -5,14 +5,152 @@ import { Header } from '../../components/'
 import styles from '../../css/fa-xian/home.css'
 import { NativeBridge } from '../../helpers'
 import { Browser } from '../../helpers'
+import { BannerGroup } from 'fw-components'
 
 @inject('faxian')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Home extends React.Component {
-    render(){
-        return <div>
+    state = {
+        position_index: 0,
+        position: 0,
+        service_phone: '010-65255966',
+    }
+    componentDidMount() {
+        let { faxian } = this.props;
 
+        let d = (new Date()).getTime()
+
+        if (d > 1501225200000) {
+            this.setState({ service_phone: '400-6766-988' })
+        }
+        if (d > 1501293600000) {
+            this.setState({ service_phone: '400-0322-988' })
+        }
+        faxian.getBannersHandler();
+        faxian.getNoticeHandler().then(() => {
+            this.startMovingNotice()
+        })
+
+    }
+    gotoHandler = (link, need_login) => {
+        if (link.indexOf('://') < 0) {
+            link = location.protocol + '//' + location.hostname + link;
+        }
+        if (Browser.inApp) {
+            NativeBridge.goto(link, need_login)
+        } else {
+            location.href = encodeURI(link);
+        }
+    }
+    startMovingNotice = () => {
+        let delay = 30, duration = 3000, step = 2, singleH = 36, p, position_index;
+        let { notice } = this.props.faxian.data;
+        this._time_gap = 0;
+        let t = setInterval(() => {
+            this._time_gap += delay;
+            if (this._time_gap >= duration) {
+                p = this.state.position - step, position_index = this.state.position_index;
+                if (p <= -singleH * (this.state.position_index + 1)) {
+                    this._time_gap = 0
+                    p = Math.round(p / singleH) * singleH
+                    position_index += 1
+                }
+
+                if (p <= -singleH * notice.length) {
+                    this._time_gap = 0
+                    p = 0
+                    position_index = 0
+                }
+                this.setState({
+                    position: p,
+                    position_index: position_index
+                })
+            }
+        }, delay)
+    }
+    onImageClickHandler = (index) => {
+        let { banners } = this.props.faxian.data;
+        let link = null;
+        let bs = banners;
+        for (let i = 0; i < bs.length; i++) {
+            if (i == index) link = bs[i].url;
+        }
+        if (link) this.gotoHandler(link);
+    }
+    bdHandler = () => {
+        if (this._count++ > 6)
+            this.gotoHandler('https://m.9888.cn/static/test-native-bridge/index.html')
+    }
+
+    render() {
+        let { banners, notice, topics,coupon_count } = this.props.faxian.data;
+        let { position,service_phone } = this.state;
+        let topic = (t, index) => {
+            return <a styleName="event" key={index} onClick={() => this.gotoHandler(t.url)}>
+                <img src={t.img} />
+            </a>
+        };
+        let banner_group;
+        if (banners && banners.length > 0)
+            banner_group = <BannerGroup styleName="banners"
+                onImageClick={this.onImageClickHandler}
+                images={banners.map(i => i.img)} />;
+        let noticeFn = (item, index) => {
+            return <a onClick={() => this.gotoHandler(item.url)} key={index}> {item.title} </a>
+        };
+        return <div styleName="home">
+            <div styleName="findBanner">
+                {banner_group}
+            </div>
+
+            <div styleName="notice">
+                <img styleName="notice-icon" src= {require("../../images/fa-xian/home/1.png")} />
+
+                <div styleName="sp-line"></div>
+                <div styleName="text">
+                    <div styleName="text-scroll-panel" style={{ top: `${position}px` }}>
+                        {notice.map(noticeFn)}
+                        {notice[0] && noticeFn(notice[0])}
+                    </div>
+                </div>
+                <i styleName="icon-right-arrow"></i>
+            </div>
+
+            <div styleName="channel">
+                <a onClick={() => this.gotoHandler('https://m.9888.cn/static/wap/coupon-center/index.html', true)}>
+                    <i styleName="icon icon-coupon"></i>
+                    领券中心
+            {coupon_count != "0" &&
+                        <span styleName="coupon-count">{coupon_count}</span>}
+                </a>
+
+                <a onClick={() => this.gotoHandler("https://m.dougemall.com", true)}>
+                    <i styleName="icon icon-mall"></i>豆哥商城 </a>
+
+                <a onClick={() => this.gotoHandler("https://m.9888.cn/static/wap/faq/index.html")}>
+                    <i styleName="icon icon-help"></i>帮助中心</a>
+
+                <a onClick={() => this.gotoHandler("http://m.9888.cn/static/wap/topic-invest-school/index.html")}>
+                    <i styleName="icon icon-xt"></i>网贷学堂</a>
+
+                <a onClick={() => this.gotoHandler("http://p-javashop-statics.oss-cn-beijing.aliyuncs.com/weixin/index.html#/home/products")}>
+                    <i styleName="icon icon-bao"></i>工场保险</a>
+
+                <a><i styleName="icon icon-waiting"></i>敬请期待</a>
+            </div>
+            <div styleName="title-recommended" onClick={this.bdHandler}> 内容推荐</div>
+            <div styleName="events">
+                {topics.map(topic)}
+            </div>
+            <div styleName="contact-us">
+                <a styleName="service" href={`tel:${service_phone}`}>
+                    <i styleName="icon-service"></i><span>联系客服</span></a>
+                <a styleName="about-us">
+                    <i styleName="icon-about-us icon-about-us-grey"></i>
+                    <span styleName="about-us-grey">关于我们</span>
+                </a>
+            </div>
         </div>
     }
 }

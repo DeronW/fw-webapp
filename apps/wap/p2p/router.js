@@ -1,5 +1,5 @@
 import React from 'react'
-import {Provider} from 'mobx-react'
+import { Provider } from 'mobx-react'
 import {
     HashRouter as Router,
     Route,
@@ -18,22 +18,37 @@ import NoticeSafeguard from './pages/notice-safeguard'
 import VipPrerogative from './pages/vip-prerogative'
 import PolicyBox from './pages/policy'
 import Evaluate from './pages/evaluate.js'
+import * as Protocol from './pages/protocol'
 
 export default (stores) => {
     return <Router>
         <Provider {...stores} >
             <Switch>
-                <Route exact path='/faq' component={FAQ.List}/>
-                <Route exact path='/faq/:kind' component={FAQ.Page}/>
-                <Route exact path='/app-download' component={AppDownload}/>
-                <Route exact path='/interest-reward' component={InterestRewords}/>
-                <Route exact path='/invite' component={Invite}/>
-                <Route exact path='/invest-school' component={InvestSchool}/>
-                <Route exact path='/notice-safeguard' component={NoticeSafeguard}/>
-                <Route exact path='/vip-prerogative' component={VipPrerogative}/>
-                <Route exact path='/policy' component={PolicyBox}/>
-                <Route exact path='/evaluate' component={Evaluate}/>
-                <Route component={NotFound}/>
+                <Route exact path='/faq' component={FAQ.List} />
+                <Route exact path='/faq/:kind' component={FAQ.Page} />
+                <Route exact path='/app-download' component={AppDownload} />
+                <Route exact path='/interest-reward' component={InterestRewords} />
+                <Route exact path='/invite' component={Invite} />
+                <Route exact path='/invest-school' component={InvestSchool} />
+                <Route exact path='/notice-safeguard' component={NoticeSafeguard} />
+                <Route exact path='/vip-prerogative' component={VipPrerogative} />
+                <Route exact path='/policy' component={PolicyBox} />
+                <Route exact path='/evaluate' component={Evaluate} />
+
+                {/* 微金协议 */}
+                <Route exact path='/protocol/batch-invest' component={Protocol.BatchInvest} />
+                <Route exact path='/protocol/counseling' component={Protocol.Counseling} />
+                <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransfer} />
+                <Route exact path='/protocol/leader-promise' component={Protocol.LeaderPromise} />
+                <Route exact path='/protocol/perform-duty' component={Protocol.PerformDuty} />
+                <Route exact path='/protocol/special-bind' component={Protocol.SpecialBind} />
+                <Route exact path='/protocol/special-cash' component={Protocol.SpecialCash} />
+                <Route exact path='/protocol/special-recharge' component={Protocol.SpecialRecharge} />
+                <Route exact path='/protocol/trusteeship' component={Protocol.TrusteeShip}/>
+                <Route exact path='/protocol/service' component={Protocol.Service}/>
+                <Route exact path='/protocol/risk-prompt' component={Protocol.RiskPrompt} />
+
+                <Route component={NotFound} />
             </Switch>
         </Provider>
     </Router>
