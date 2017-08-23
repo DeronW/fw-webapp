@@ -29,11 +29,11 @@ export default class LoopLoan {
             feeAmoutExts: [],
             bankName: '',
             bankCardNo: '',
-            latedescription: '',
             loanStatus: '',
             phone: '',
             applyErrCode:'',
-            applyErrMsg:''
+            applyErrMsg:'',
+            overdueFeeRateStr:''
         })
 
         this.init_data()
@@ -63,10 +63,6 @@ export default class LoopLoan {
             return this.Post('/api/zhima/v1/credit/auth.json');
         }).then((data) => {
             this.url = data.url
-        }).then(() => {
-            return this.Post('/api/looploan/repayment/v1/lateDescription.json');
-        }).then((data) => {
-            this.latedescription = data.latedescription
         });
     }
 
@@ -123,6 +119,7 @@ export default class LoopLoan {
             this.shouldRepaymentAmount = data.shouldRepaymentAmount;
             this.totalFeeAmount = data.totalFeeAmount;
             this.feeAmoutExts = data.feeAmoutExts;
+            this.overdueFeeRateStr = data.overdueFeeRateStr;
         });
     }
 
