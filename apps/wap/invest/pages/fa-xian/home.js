@@ -11,21 +11,20 @@ import { BannerGroup } from 'fw-components'
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Home extends React.Component {
-    componentDidMount(){
-        let {faxian} = this.props;
+    componentDidMount() {
+        let { faxian } = this.props;
         faxian.getBannersHandler()
     }
-    render(){
-        // let {faxian} = this.props;
-        // console.log(faxian);
-        // let banner_group;
-        // if (banners.length > 0)
-        //     banner_group = <BannerGroup className="banners"
-        //         onImageClick={this.onImageClickHandler}
-        //         images={banners.map(i => i.img)} />;
+    render() {
+        let { banners } = this.props.faxian.data;
+        let banner_group;
+        if (banners.length > 0)
+            banner_group = <BannerGroup styleName="banners"
+                onImageClick={this.onImageClickHandler}
+                images={banners.map(i => i.img)} />;
         return <div styleName="home">
             <div styleName="findBanner">
-                {/*banner_group*/}
+                {banner_group}
             </div>
         </div>
     }

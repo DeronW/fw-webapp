@@ -2,14 +2,14 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 
 import { Header } from '../../components/'
-import styles from '../../css/protocol/protocol-counseling.css'
+import styles from '../../css/protocol/counseling.css'
 import { NativeBridge } from '../../helpers'
 
 @CSSModules(styles, {
     allowMultiple: true,
     errorWhenNotFound: false
 })
-class ProtocolCounseling extends React.Component {
+class Counseling extends React.Component {
     render() {
 
         let { history } = this.props
@@ -264,4 +264,4 @@ class ProtocolCounseling extends React.Component {
     }
 }
 
-export default ProtocolCounseling
+export default Counseling

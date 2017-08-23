@@ -2,14 +2,14 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 
 import { Header } from '../../components/'
-import styles from '../../css/protocol/protocol-batch-invest.css'
+import styles from '../../css/protocol/batch-invest.css'
 import { NativeBridge } from '../../helpers'
 
 @CSSModules(styles, {
     allowMultiple: true,
     errorWhenNotFound: false
 })
-class ProtocolBatchInvest extends React.Component {
+class BatchInvest extends React.Component {
     render() {
 
         let { history } = this.props
@@ -62,4 +62,4 @@ class ProtocolBatchInvest extends React.Component {
     }
 }
 
-export default ProtocolBatchInvest
+export default BatchInvest

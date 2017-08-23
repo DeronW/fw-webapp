@@ -34,14 +34,20 @@ export default (stores) => {
                 <Route exact path='/vip-prerogative' component={VipPrerogative} />
                 <Route exact path='/policy' component={PolicyBox} />
                 <Route exact path='/evaluate' component={Evaluate} />
+
+                {/* 微金协议 */}
                 <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransfer} />
-                <Route exact path='/protocol/protocol-batch-invest' component={Protocol.ProtocolBatchInvest} />
-                <Route exact path='/protocol/protocol-counseling' component={Protocol.ProtocolCounseling} />
                 <Route exact path='/protocol/risk-prompt' component={Protocol.RiskPrompt} />
                 <Route exact path='/protocol/special-bind' component={Protocol.SpecialBind} />
                 <Route exact path='/protocol/special-cash' component={Protocol.SpecialCash} />
                 <Route exact path='/protocol/special-recharge' component={Protocol.SpecialRecharge} />
                 <Route exact path='/protocol/trade-service' component={Protocol.TradeService} />
+                <Route exact path='/protocol/trusteeship' component={Protocol.TrusteeShip}/>
+                <Route exact path='/protocol/user-service' component={Protocol.UserService}/>
+                <Route exact path='/protocol/batch-invest' component={Protocol.ProtocolBatchInvest} />
+                <Route exact path='/protocol/counseling' component={Protocol.ProtocolCounseling} />
+                <Route exact path='/protocol/leader-promise' component={Protocol.LeaderPromise} />
+                <Route exact path='/protocol/perform-duty' component={Protocol.PerformDuty} />
                 <Route component={NotFound} />
             </Switch>
         </Provider>

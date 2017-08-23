@@ -1,9 +1,11 @@
 import { extendObservable } from 'mobx'
-import {Components, Utils, Event} from 'fw-javascripts'
+import { Components, Utils, Event } from 'fw-javascripts'
 
-export default class FaXian{
-    constructor(Ajax){
+export default class FaXian {
+    
+    constructor(Ajax, Post) {
         this.Ajax = Ajax
+        this.Post = Post
 
         this.data = {}
         extendObservable(this.data, {
@@ -18,19 +20,26 @@ export default class FaXian{
             limitList: [],
             endList: []
         })
+        extendObservable(this, {
+            giftList: [],
+            limitList: [],
+            endList: []
+        })
     }
 
     getBannersHandler = () => {
-        let q = Utils.urlQuery.banner_id;
+        let q = Utils.urlQuery.banner_id
+    
         this.Ajax({
             fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
             method: 'get',
-            data: {key: '0ca175b9c0f726a831d895e',id: q || '30'},//'30'},
+            data: { key: '0ca175b9c0f726a831d895e', id: q || '30' },//'30'},
             silence: true
         }).catch(data => {
             this.data.banners = data.map(i => ({ url: i.url, img: i.thumb }))
-
-
+        })
+    }
+    
     requestGiftList = () => {
         return this.Post('/api/v2/getCouponList.shtml')
             .then(data => {
@@ -60,6 +69,6 @@ export default class FaXian{
         //     })
         // })
     }
-
-
 }
+
+

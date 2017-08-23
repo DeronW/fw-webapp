@@ -35,7 +35,7 @@ export default (stores) => {
                 <Route exact path='/fa-xian/coupon-center' component={Faxian.CouponCenter} />
 
                 {/* 协议 */}
-                <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransfer} />
+                <Route exact path='/protocol/service' component={Protocol.Service} />
 
             </Switch>
         </Provider>
