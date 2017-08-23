@@ -232,7 +232,9 @@ class ListBag extends React.Component {
             return content;
 
         }
-        let list_type_style = item.type == 2 ? styles['list-item-red-bg'] : styles['list_item']
+        let list_type_style = (item.type == 2 ? styles['list-item-red-bg'] :
+                (item.type == 5 ? styles['list-item-gold'] : styles['list_item'])
+        )
         return <div className={list_type_style}>
             <div styleName="item_left">
                 <div styleName="detail_left">
@@ -246,13 +248,15 @@ class ListBag extends React.Component {
                     <div styleName="list_name">
                         {item.type == "1" && "返现券"}
                         {item.type == "2" && "返息券"}
+                        {item.type == "5" && "返金券"}
                     </div>
                 </div>
                 <div styleName="detail_right">
-                    <div>满￥{item.limitAmount}可用</div>
+                    <div>
+                        {item.type == "5" ? `满{item.limitAmount}g可用` : `满￥${item.limitAmount}可用`}
+                    </div>
                     <div>{day}</div>
                     <div>有效期至{item.validPeriod}</div>
-                    {/*<div>适用：</div>*/}
                 </div>
             </div>
             <div styleName="item_right">
