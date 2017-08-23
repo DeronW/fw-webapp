@@ -18,6 +18,7 @@
     position: relative;
     background: white;
 }
+
 .notice-icon {
     display: block;
     float: left;
@@ -25,6 +26,7 @@
     margin-left: 26px;
     transform: scale(0.9);
 }
+
 .sp-line {
     width: 1px;
     float: left;
@@ -33,9 +35,11 @@
     margin-top: 18px;
     margin-left: 26px;
 }
+
 .right-arrow {
     float: right;
 }
+
 .text {
     vertical-align: middle;
     position: absolute;
@@ -47,18 +51,20 @@
     line-height: 35px;
     overflow: hidden;
 }
+
 .text-scroll-panel {
     position: absolute;
 }
+
 .text a {
     display: block;
     width: 505px;
     color: #555;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap; 
-    
+    white-space: nowrap;
 }
+
 .icon-right-arrow {
     position: absolute;
     top: 32px;
@@ -75,27 +81,30 @@
     border-left: 0;
     border-right: 0;
 }
+
 .channel a {
-        position: relative;
-        display: block;
-        height: 88px;
-        line-height: 88px;
-        width: 315px;
-        float: left;
-        margin-left: 30px;
-        margin-top: 20px;
-        background: white;
-        border-radius: 8px;
-        color: #555;
-        font-size: 28px;
-        text-align: right;
-        padding-right: 60px;
-        box-sizing: border-box;
+    position: relative;
+    display: block;
+    height: 88px;
+    line-height: 88px;
+    width: 315px;
+    float: left;
+    margin-left: 30px;
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    color: #555;
+    font-size: 28px;
+    text-align: right;
+    padding-right: 60px;
+    box-sizing: border-box;
 }
+
 .channel i {
     display: block;
     float: left;
 }
+
 .icon {
     display: inline-block;
     margin: 9px 0 0 30px;
@@ -103,6 +112,7 @@
     height: 70px;
     width: 70px;
 }
+
 .icon-mall {
     background: url("../../images/fa-xian/home/icon-mall.jpg");
 }
@@ -118,9 +128,11 @@
 .icon-help {
     background: url("../../images/fa-xian/home/icon-help.jpg");
 }
+
 .icon-coupon {
     background-image: url("../images/icon-coupon.jpg");
 }
+
 .icon-waiting {
     background-image: url("../images/icon-waiting.jpg");
 }
@@ -128,7 +140,7 @@
 .title-recommended {
     color: #333;
     font-size: 30px;
-    background: #f9f9f9; 
+    background: #f9f9f9;
     height: 70px;
     line-height: 70px;
     padding-left: 30px;
@@ -140,16 +152,17 @@
     border-bottom: 1px solid #d8d8d8;
     border-top: 1px solid #e3e5ea;
 }
+
 .event {
-    display: block; 
+    display: block;
     width: 660px;
     margin: 20px auto;
 }
+
 .event img {
     display: block;
     width: 100%;
 }
-
 
 .contact-us {
     position: relative;
@@ -159,20 +172,25 @@
     color: #4aa1f9;
     padding-top: 18px;
 }
+
 .contact-us a {
-        color: #4aa1f9;
+    color: #4aa1f9;
 }
+
 .contact-us i {
     display: inline-block;
     vertical-align: middle;
 }
+
 .contact-us span {
     display: inline-block;
     vertical-align: middle;
 }
+
 .about-us-grey {
     color: #ccc;
 }
+
 .contact-us i {
     display: block;
     float: left;
@@ -182,26 +200,31 @@
     position: relative;
     top: 9px;
 }
+
 .service {
     float: left;
 }
+
 .icon-service {
     background: url("../../images/fa-xian/home/6.png");
 }
+
 .about-us {
     float: right;
 }
+
 .icon-about-us {
     background: url("../../images/fa-xian/home/7.png");
 }
+
 .icon-about-us-grey {
     background: url("../../images/fa-xian/home/7grey.png");
 }
 
 .coupon-count {
     position: absolute;
-    top: 4px;
-    left: 102px;
+    top: 6px;
+    left: 96px;
     display: inline-block;
     padding: 0px 10px;
     background-color: #fd4d4c;
