@@ -58,7 +58,7 @@ class ReserveInfo extends React.Component {
                 </div>
             </div>
             <div styleName="tipsBox">
-                <span styleName="tipsItem">预计今日起息</span>
+                {/* <span styleName="tipsItem">预计今日起息</span> */}
                 <span styleName="tipsItem">{context.minAmt}元起预约</span>
             </div>
             <div styleName="flowBox">
