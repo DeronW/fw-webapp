@@ -23,7 +23,7 @@ class C extends React.Component {
             .then(data => {
                 this.setState({ personData: data.data })
             })
-             
+
         });
 
         Get('/api/userState/v1/timestamp.json')
@@ -36,7 +36,7 @@ class C extends React.Component {
                 this.setState({ ladderData: data.teamdata, total: data.total })
             })
 
-       
+
     }
 
     closePopHandler = () => {
@@ -64,5 +64,5 @@ class C extends React.Component {
         </div>
     }
 }
-NativeBridge.setTitle("理财联盟，等你来战！")
+NativeBridge.setTitle("联盟PK，等你来战！")
 render(<C />, document.getElementById('cnt'))

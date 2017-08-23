@@ -68,9 +68,6 @@ class Coupon extends React.Component {
                     <img styleName="icon_limit" src={require("../../images/fa-xian/coupon-center/icon-limit.png")}/>
                     <span styleName="limit_title">限时抢购</span>
                 </div>
-                {/*{limitList.map((limit, index) => <ListBag item={limit} key={index}*/}
-                {/*refreshHandler={this.props.refreshHandler} token={token}*/}
-                {/*/>)}*/}
                 {limitList.map((limit, index) => <ListBag item={limit} key={index}/>)}
             </div>
         }
@@ -99,17 +96,21 @@ class Coupon extends React.Component {
                         <div styleName="detail_left">
                             <div styleName="list_amount">
                             <span styleName="list_rmb">
-                                {item.type == "1" ? "￥" : "+"}
+                                {item.type == "1" && "￥"}
+                                {item.type == "2" && "+"}
                             </span>
-                                {item.amount}
+                                {item.amount}{item.type == "5" && "g"}
                             </div>
                             <div styleName="list_name">
                                 {item.type == "1" && "返现券"}
                                 {item.type == "2" && "返息券"}
+                                {item.type == "5" && "返金券"}
                             </div>
                         </div>
                         <div styleName="detail_right">
-                            <div>满￥{item.limitAmount}可用</div>
+                            <div>
+                                {item.type == 5 ? `满${item.limitAmount}g可用` : ` 满￥${item.limitAmount}可用`}
+                            </div>
                             <div>{day}</div>
                             <div>有效期至{item.validPeriod}</div>
                         </div>
@@ -243,7 +244,7 @@ class ListBag extends React.Component {
                             {item.type == "1" ? "￥" : null}
                             {item.type == "2" ? "+" : null}
                         </span>
-                        {item.amount}
+                        {item.amount}{item.type == "5" && "g"}
                     </div>
                     <div styleName="list_name">
                         {item.type == "1" && "返现券"}
@@ -283,15 +284,6 @@ class GiftPopPanel extends React.Component {
             .then(data => {
                 this.setState({detail_list: data.giftBagDetail})
             })
-        // $FW.Ajax({
-        //     url: `${API_PATH}/mpwap/api/v2/getCouponInfo.shtml`,
-        //     method: 'POST',
-        //     data: {
-        //         code: this.props.code
-        //     }
-        // }).then(data => {
-        //     this.setState({detail_list: data.giftBagDetail})
-        // })
     }
 
     render() {
