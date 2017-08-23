@@ -10,7 +10,7 @@ import {Components} from 'fw-javascripts'
 @inject('faxian')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-class CouponCenter extends React.Component {
+class Coupon extends React.Component {
     state = {
         isShowEmpty: false,
         selected_name: null,
@@ -487,4 +487,4 @@ class GiftBag extends React.Component {
     }
 }
 
-export default CouponCenter
+export default Coupon

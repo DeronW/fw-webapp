@@ -32,7 +32,7 @@ export default (stores) => {
                 <Route exact path='/features/app-download' component={Features.AppDownload} />
 
                 <Route exact path='/fa-xian' component={Faxian.Home} />
-                <Route exact path='/fa-xian/coupon-center' component={Faxian.CouponCenter} />
+                <Route exact path='/fa-xian/coupon' component={Faxian.Coupon} />
 
                 {/* 协议 */}
                 <Route exact path='/protocol/service' component={Protocol.Service} />
