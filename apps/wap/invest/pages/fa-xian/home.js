@@ -46,7 +46,7 @@ class Home extends React.Component {
     startMovingNotice = () => {
         let delay = 30, duration = 3000, step = 2, singleH = 36, p, position_index;
         let { notice } = this.props.faxian.data;
-
+        this._time_gap = 0;
         let t = setInterval(() => {
             this._time_gap += delay;
             if (this._time_gap >= duration) {
@@ -62,7 +62,6 @@ class Home extends React.Component {
                     p = 0
                     position_index = 0
                 }
-
                 this.setState({
                     position: p,
                     position_index: position_index
@@ -87,7 +86,6 @@ class Home extends React.Component {
     render() {
         let { banners, notice, topics,coupon_count } = this.props.faxian.data;
         let { position,service_phone } = this.state;
-        console.log(notice);
         let topic = (t, index) => {
             return <a styleName="event" key={index} onClick={() => this.gotoHandler(t.url)}>
                 <img src={t.img} />
