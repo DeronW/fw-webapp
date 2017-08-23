@@ -37,6 +37,11 @@ export default (stores) => {
                 <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransfer} />
                 <Route exact path='/protocol/protocol-batch-invest' component={Protocol.ProtocolBatchInvest} />
                 <Route exact path='/protocol/protocol-counseling' component={Protocol.ProtocolCounseling} />
+                <Route exact path='/protocol/risk-prompt' component={Protocol.RiskPrompt} />
+                <Route exact path='/protocol/special-bind' component={Protocol.SpecialBind} />
+                <Route exact path='/protocol/special-cash' component={Protocol.SpecialCash} />
+                <Route exact path='/protocol/special-recharge' component={Protocol.SpecialRecharge} />
+                <Route exact path='/protocol/trade-service' component={Protocol.TradeService} />
                 <Route component={NotFound} />
             </Switch>
         </Provider>
