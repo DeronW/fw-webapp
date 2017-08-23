@@ -36,8 +36,8 @@ export default (stores) => {
                 <Route exact path='/evaluate' component={Evaluate} />
 
                 {/* 微金协议 */}
-                <Route exact path='/protocol/batch-invest' component={Protocol.ProtocolBatchInvest} />
-                <Route exact path='/protocol/counseling' component={Protocol.ProtocolCounseling} />
+                <Route exact path='/protocol/batch-invest' component={Protocol.BatchInvest} />
+                <Route exact path='/protocol/counseling' component={Protocol.Counseling} />
                 <Route exact path='/protocol/entrust-transfer' component={Protocol.EntrustTransfer} />
                 <Route exact path='/protocol/leader-promise' component={Protocol.LeaderPromise} />
                 <Route exact path='/protocol/perform-duty' component={Protocol.PerformDuty} />
