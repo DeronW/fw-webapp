@@ -356,7 +356,7 @@ class InteractWrap extends React.Component {
         let app_url = `/static/loan/outside-register-success-app/index.html`,
             wx_url = '/static/loan/outside-register-success-wx/index.html',
             other_apps_url = '/static/loan/outside-register-success-other-apps/index.html';
-        app_url += window.location.search
+        //app_url += window.location.search
         switch (jt) {
             case 'app':
                 window.location.href = app_url;
