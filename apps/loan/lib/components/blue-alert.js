@@ -18,8 +18,7 @@ function getStyles() {
             position: "absolute",
             top: "50%",
             left: "50%",
-            marginLeft: "-330px",
-            marginTop: "-101px",
+            transform: 'translate(-50%, -50%)';
             width: "600px",
             padding:"30px",
             borderRadius: "10px",
