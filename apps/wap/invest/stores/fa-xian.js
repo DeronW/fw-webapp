@@ -12,10 +12,7 @@ export default class FaXian {
             notice: [],
             banners: [],
             topics: [],
-            position_index: 0,
-            position: 0,
             coupon_count: "",
-            service_phone: '010-65255966',
             giftList: [],
             limitList: [],
             endList: []
@@ -28,15 +25,38 @@ export default class FaXian {
     }
 
     getBannersHandler = () => {
-        let q = Utils.urlQuery.banner_id
-    
+        let q = Utils.urlQuery
         this.Ajax({
             fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
             method: 'get',
-            data: { key: '0ca175b9c0f726a831d895e', id: q || '30' },//'30'},
+            data: { key: '0ca175b9c0f726a831d895e', id: q.banner_id || '30' },
             silence: true
         }).catch(data => {
             this.data.banners = data.map(i => ({ url: i.url, img: i.thumb }))
+        })
+        
+        this.Ajax({
+            fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
+            method: 'get',
+            data: { key: '0ca175b9c0f726a831d895e', id: q.topic_id || '31' },
+            silence: true
+        }).catch(data => {
+            this.data.topics = data.map(i => ({ url: i.url, img: i.thumb }))
+        })
+
+        // 领券中心张数接口
+        this.Post('/api/v2/getCouponNum.shtml').then(data =>{
+            this.data.coupon_count = data.availableNum
+        });
+    }
+    getNoticeHandler = () => {
+        return this.Ajax({
+            fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
+            method: 'get',
+            data: { key: '0ca175b9c0f726a831d895e', id: '33' },
+            silence: true
+        }).catch(data => {
+            this.data.notice = data;
         })
     }
     
@@ -52,22 +72,6 @@ export default class FaXian {
                     endList: this.endList
                 }
             })
-        // this.Post({
-        //     url: `${API_PATH}/mpwap`,
-        //     method: 'post',
-        // }).then(data => {
-        //     if ((data.packageList.length == 0 &&
-        //         data.couponAvailableList.length == 0 &&
-        //         data.couponEndList.length == 0))
-        //         this.setState({ isEmpty: true })
-        //
-        //     this.setState({
-        //         requestToken: data.couponToken,
-        //         giftList: data.packageList,
-        //         limitList: data.couponAvailableList,
-        //         endList: data.couponEndList
-        //     })
-        // })
     }
 }
 
