@@ -1,7 +1,7 @@
 import React from 'react'
 import {observer, inject} from 'mobx-react'
 import CSSModules from 'react-css-modules'
-import styles from '../../../css/fa-xian/coupon-center.css'
+import styles from '../../../css/fa-xian/coupon-bags.css'
 import {Components} from 'fw-javascripts'
 
 @inject('faxian')
@@ -55,7 +55,6 @@ class BagItem extends React.Component {
     }
 
     componentDidMount() {
-        console.log("giftbag")
         // start counting down
         if (this.props.item.receiveStatus == "01") {
             this.setState({remain_seconds: this.props.item.intervalMilli})
@@ -180,7 +179,7 @@ class BagItem extends React.Component {
             return <div className={finished_style} onClick={() => {
                 item.isGet == "1" ? this.jump() : null
             }}>
-                <img src={require("../../../images/fa-xian/coupon-center/icon-get-gray.png")}/>
+                <img src={require("../../../images/fa-xian/coupon-center/icon-get-gray.png")} styleName="gift-overImg"/>
                 {item.isGet == "1" && <a styleName="get_state_red">去投资</a>}
             </div>
         }
@@ -208,7 +207,6 @@ class BagPopPanel extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.code)
         this.props.faxian.giftPopHandler(this.props.code)
             .then(data => {
                 this.setState({detail_list: data.giftBagDetail})

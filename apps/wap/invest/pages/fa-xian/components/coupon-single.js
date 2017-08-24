@@ -2,7 +2,6 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import * as FW from 'fw-javascripts'
-import {Header} from '../../../components/'
 import styles from '../../../css/fa-xian/coupon-center.css'
 import {NativeBridge} from '../../../helpers'
 
@@ -21,7 +20,6 @@ class ListBag extends React.Component {
 
     componentDidMount() {
         // start counting down
-        console.log(this.props.item)
         if (this.props.item.receiveStatus == "01") {
             this.setState({surplus_seconds: this.props.item.intervalMilli})
             this.timer = setInterval(() => {
@@ -83,7 +81,8 @@ class ListBag extends React.Component {
                 content = <div styleName={remain_name} onClick={() => {
                     item.grapLimit == "0" ? this.getHandler(item) : this.jump()
                 }}>
-                    <SVGCircleProgress animate={true} bgColor={'#FC655A'} percent={100 - parseInt(item.restPercent)} weight={4} radius={50} progressColor={"#eee"} padding={0}/>
+                    <SVGCircleProgress animate={true} bgColor={'#FC655A'} percent={100 - parseInt(item.restPercent)}
+                                       weight={4} radius={50} progressColor={"#eee"} padding={0}/>
                     {item.grapLimit == "0" ? <a styleName="content_state_red">领取</a>
                         : <a styleName="content_state_red">去投资</a>
                     }

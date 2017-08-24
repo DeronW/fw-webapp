@@ -16,7 +16,6 @@ class Coupon extends React.Component {
     }
 
     componentDidMount() {
-        console.log(111)
         NativeBridge.setTitle('领券中心')
         this.props.faxian.requestGiftList().then(data => {
             let {faxian} = this.props
