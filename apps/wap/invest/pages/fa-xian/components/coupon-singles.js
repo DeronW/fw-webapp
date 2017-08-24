@@ -135,7 +135,7 @@ class SinglesList extends React.Component {
                 </div>
                 <div styleName="detail_right">
                     <div>
-                        {item.type == "5" ? `满${item.limitAmount}g可用` : `满￥${item.limitAmount}可用`}
+                        {item.type == "5" ? `满${item.limitAmount}克可用` : `满￥${item.limitAmount}可用`}
                     </div>
                     <div>{day}</div>
                     <div>有效期至{item.validPeriod}</div>
