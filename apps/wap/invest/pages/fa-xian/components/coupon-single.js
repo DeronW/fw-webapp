@@ -90,7 +90,7 @@ class ListBag extends React.Component {
                         剩余
                     </div>
                     <div styleName="list_right_starttime">
-                        {item.restPercent}%
+                        {item.restPercent}
                     </div>
                 </div>
             }
