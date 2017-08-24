@@ -84,7 +84,7 @@
 }
 
 .list_remain_limit {
-    background: url("../../images/fa-xian/coupon-center/icon-islimit.png") no-repeat center;
+    background: url("../../images/fa-xian/coupon-center/icon-islimit.png") no-repeat 10px 10px;
 }
 
 .list_right_title {
@@ -131,14 +131,15 @@
 .content_state_red {
     display: block;
     font-size: 24px;
-    color: #ffffff;
+    color: #fff;
     width: 124px;
     height: 36px;
     background-color: #fd4d4c;
     line-height: 36px;
     text-align: center;
-    margin: 10px 0 0 22px;
+    margin: 0 0 0 12px;
     border-radius: 4px;
+    margin-top: 10px;
 }
 
 .detail_left {
@@ -374,7 +375,7 @@
 
 .gift_right_title {
     font-size: 22px;
-    margin-top: 40px;
+    margin-top: 28px;
 }
 
 .gift_right_starttime {

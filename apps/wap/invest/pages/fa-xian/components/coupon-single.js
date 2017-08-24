@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
-import {Components} from 'fw-javascripts'
+import * as FW from 'fw-javascripts'
 import {Header} from '../../../components/'
 import styles from '../../../css/fa-xian/coupon-center.css'
 import {NativeBridge} from '../../../helpers'
@@ -42,7 +42,7 @@ class ListBag extends React.Component {
         this.setState({pending: true})
         item.isGet = "1";
         this.props.faxian.limitGetHandler(item).then(data => {
-            Components.showAlert(data.remainNumber)
+            FW.Components.showAlert(data.remainNumber)
             this.setState({pending: false})
             this.props.faxian.requestGiftList()//用户点击后重新请求，改变数据
         }, () => {
@@ -60,6 +60,7 @@ class ListBag extends React.Component {
         let day_number = "期限：>=" + item.limitTerm + "天"
         let day = item.limitTerm == "0" ? "任意期限可用" : day_number
         let content;
+        let SVGCircleProgress = FW.Components.SVGCircleProgress
         let buy_func = (item) => {
             if (receiveStatus == "00") {
                 content = <div>
@@ -82,16 +83,15 @@ class ListBag extends React.Component {
                 content = <div styleName={remain_name} onClick={() => {
                     item.grapLimit == "0" ? this.getHandler(item) : this.jump()
                 }}>
-                    {/*<SVGCircleProgress percent={100 - parseInt(item.restPercent)} weight={4} radius={50}*/}
-                                       {/*bgColor={'#FC655A'} progressColor={'#eee'}/>*/}
-                    {item.grapLimit == "0" ? <a styleName="content_state_red">领取</a> :
-                        <a styleName="content_state_red">去投资</a>
+                    <SVGCircleProgress animate={true} bgColor={'#FC655A'} percent={100 - parseInt(item.restPercent)} weight={4} radius={50} progressColor={"#eee"} padding={0}/>
+                    {item.grapLimit == "0" ? <a styleName="content_state_red">领取</a>
+                        : <a styleName="content_state_red">去投资</a>
                     }
                     <div styleName="list_right_title">
                         剩余
                     </div>
                     <div styleName="list_right_starttime">
-                        {item.restPercent}
+                        {item.restPercent}%
                     </div>
                 </div>
             }
@@ -119,7 +119,7 @@ class ListBag extends React.Component {
                 </div>
                 <div styleName="detail_right">
                     <div>
-                        {item.type == "5" ? `满{item.limitAmount}g可用` : `满￥${item.limitAmount}可用`}
+                        {item.type == "5" ? `满${item.limitAmount}g可用` : `满￥${item.limitAmount}可用`}
                     </div>
                     <div>{day}</div>
                     <div>有效期至{item.validPeriod}</div>

@@ -5,8 +5,8 @@ import {Components} from 'fw-javascripts'
 import {Header} from '../../components/'
 import styles from '../../css/fa-xian/coupon-center.css'
 import {NativeBridge} from '../../helpers'
-import GiftList from './components/giftbag.js'
-import ListBag from './components/limitlist'
+import BagsList from './components/coupon-bags'
+import ListBag from './components/coupon-single'
 
 
 @inject('faxian')
@@ -108,7 +108,7 @@ class Coupon extends React.Component {
 
         return <div styleName="totalBox">
             {empty_holder}
-            <GiftList />
+            <BagsList/>
             {limit_panel()}
             {end_panel()}
         </div>
