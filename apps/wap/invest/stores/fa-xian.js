@@ -56,20 +56,8 @@ export default class FaXian {
     }
     // 领券中心接口
     requestGiftList = () => {
-        // return this.Post('/api/v2/getCouponList.shtml')
-        //     .then(data => {
-        //         this.data.giftList = data.packageList
-        //         this.data.limitList = data.couponAvailableList
-        //         this.data.endList = data.couponEndList
-        //         return {
-        //             giftList: this.data.giftList,
-        //             limitList: this.data.limitList,
-        //             endList: this.data.endList
-        //         }
-        //     })
-        //fake-api
-        return this.Post('/api/couponCenter/v2/getCouponList.json')
-            .then(data=>{
+        return this.Post('/api/v2/getCouponList.shtml')
+            .then(data => {
                 this.data.giftList = data.packageList
                 this.data.limitList = data.couponAvailableList
                 this.data.endList = data.couponEndList
@@ -79,6 +67,18 @@ export default class FaXian {
                     endList: this.data.endList
                 }
             })
+        //fake-api
+        // return this.Post('/api/couponCenter/v2/getCouponList.json')
+        //     .then(data=>{
+        //         this.data.giftList = data.packageList
+        //         this.data.limitList = data.couponAvailableList
+        //         this.data.endList = data.couponEndList
+        //         return {
+        //             giftList: this.data.giftList,
+        //             limitList: this.data.limitList,
+        //             endList: this.data.endList
+        //         }
+        //     })
     }
     limitGetHandler = (item) => {
         return this.Post('/api/v2/getCouponList.shtml')
