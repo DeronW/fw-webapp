@@ -44,7 +44,7 @@ function getStyles() {
             textAlign: "center",
             display:"table-cell",
             verticalAlign:"middle",
-            padding:"0 30px"
+            padding:"0 30px",
         },
         btn: {
             display: "block",
@@ -71,7 +71,8 @@ function getStyles() {
             // textAlign: "center",
             display:"table-cell",
             verticalAlign:"middle",
-            padding:"0 30px"
+            padding:"0 30px",
+            textAlign:"justify"
         }
     }
 }
