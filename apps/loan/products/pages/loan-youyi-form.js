@@ -135,7 +135,7 @@ export default class LoopLoanLoan extends React.Component {
             Components.showToast("请输入借款金额")
         } else if (this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt && this.state.value % 100 == 0) {
             this.props.loopLoan.loan_confirm(this.state.value).catch(e => {
-                if ([20005, 20009, 20013, 24003, 40010].indexOf(e.code) > -1) {
+                if ([20005, 20009, 20013, 24003].indexOf(e.code) > -1) {
                     showBlueAlert(e.message).then(() => {
                         Browser.inFXHApp ? NativeBridge.close() : history.push('/')
                     })
@@ -243,7 +243,7 @@ export default class LoopLoanLoan extends React.Component {
                     <div styleName="notice-pop">
                         <div styleName="notice-title">逾期费用说明</div>
                         {/*<div styleName="close-icon" onClick={this.overdueHideHandler}></div>*/}
-                        <div styleName="notice-content">若您未能在还款日当天24点前还清全部费用，平台将每天收取待还本金的{loopLoan.overdueFeeRateStr}作为逾期罚息，直至您还清所有费用。</div>
+                        <div styleName="notice-content">{loopLoan.latedescription}</div>
                         <div styleName="notice-btn" onClick={this.overdueHideHandler}>知道了</div>
                     </div>
                 </div>}
