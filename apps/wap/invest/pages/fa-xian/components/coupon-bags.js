@@ -7,7 +7,7 @@ import {Components} from 'fw-javascripts'
 @inject('faxian')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-class BagsList extends React.Component {
+class CouponBags extends React.Component {
     state = {
         selected_name: null,
         selected_code: null
@@ -258,4 +258,4 @@ class BagPopPanel extends React.Component {
     }
 }
 
-export default BagsList
+export default CouponBags
