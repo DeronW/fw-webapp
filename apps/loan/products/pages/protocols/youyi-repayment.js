@@ -43,4 +43,3 @@ export default class YouyiRepayment extends React.Component {
         </div>
     }
 }
-

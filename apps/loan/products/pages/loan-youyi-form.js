@@ -217,7 +217,7 @@ export default class LoopLoanLoan extends React.Component {
                          onClick={this.checkHandler}></div>
                     <div styleName="check-item">同意<a
                         href="/static/loan/products/index.html#/protocols/youyi-loan-service">《借款服务协议》</a>、<a
-                        href="/static/loan/products/index.html#/protocols/youyi-loan">《借款合同》</a>、<a
+                        // href="/static/loan/products/index.html#/protocols/youyi-loan">《借款合同》</a>、<a
                         href="/static/loan/products/index.html#/protocols/youyi-repayment">《委托扣款授权书》</a>、<a
                         href="/static/loan/products/index.html#/protocols/youyi-repayment-service">《数字证书服务协议》</a>
                     </div>
@@ -277,4 +277,3 @@ export default class LoopLoanLoan extends React.Component {
         )
     }
 }
-
