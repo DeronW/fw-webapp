@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import * as FW from 'fw-javascripts'
-import styles from '../../../css/fa-xian/coupon-single.css'
+import styles from '../../../css/fa-xian/coupon-singles.css'
 import {NativeBridge} from '../../../helpers'
 
 @inject('faxian')

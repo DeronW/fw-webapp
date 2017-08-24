@@ -1,10 +1,10 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
-import styles from '../../css/fa-xian/coupon-center.css'
+import styles from '../../css/fa-xian/coupon.css'
 import {NativeBridge} from '../../helpers'
 import CouponBags from './components/coupon-bags'
-import CouponSingles from './components/coupon-single'
+import CouponSingles from './components/coupon-singles'
 import CouponEnd from './components/coupon-end'
 
 @inject('faxian')
