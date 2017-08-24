@@ -139,7 +139,7 @@ class BagItem extends React.Component {
                 <div styleName="gift_right_starttime">
                     {item.startTime.substr(-8)}
                 </div>
-                <div styleName="get_state_gray"> 领取</div>
+                <div styleName="get_state_gray">未开始</div>
             </div>
         }
 

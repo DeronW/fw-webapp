@@ -1,8 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
-import {Components} from 'fw-javascripts'
-import {Header} from '../../components/'
 import styles from '../../css/fa-xian/coupon-center.css'
 import {NativeBridge} from '../../helpers'
 import BagsList from './components/coupon-bags'
