@@ -35,8 +35,8 @@ function getStyles() {
             display:"table"
         },
         text: {
-            width:"100%",
-            margin: "0 auto 30px",
+            // width:"100%",
+            // margin: "0 auto 30px",
             lineHeight: "50px",
             color: "#555555",
             // width: "100%",
@@ -60,6 +60,18 @@ function getStyles() {
             left:"30px",
             right:"30px",
             bottom:"30px"
+        },
+        left: {
+            // width:"100%",
+            // margin: "0 auto 30px",
+            lineHeight: "50px",
+            color: "#555555",
+            // width: "100%",
+            fontSize: "30px",
+            textAlign: "center",
+            display:"table-cell",
+            verticalAlign:"middle",
+            padding:"0 30px"
         }
     }
 }
@@ -86,9 +98,9 @@ class Alert extends Component {
             <div style={styles.alert_panel}>
                 <div style={styles.text_container}>
                     <div className="_style_alert_text"
-                        style={styles.text}>{this.props.text}</div>
+                        style={this.props.text.length > 30 ? styles.text : styles.left}>{this.props.text}</div>
                 </div>
-                <a style={styles.btn} onClick={this.hideHandler}>{this.props.confirmBtnText}</a>
+                <a style={ styles.btn } onClick={this.hideHandler}>{this.props.confirmBtnText}</a>
             </div>
         </div>
     }
