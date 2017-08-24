@@ -108,7 +108,7 @@ class ListBag extends React.Component {
                             {item.type == "1" ? "￥" : null}
                             {item.type == "2" ? "+" : null}
                         </span>
-                        {item.amount}{item.type == "5" && "克"}
+                        {item.amount}<span styleName="gold-unit">{item.type == "5" && "克"}</span>
                     </div>
                     <div styleName="list_name">
                         {item.type == "1" && "返现券"}
