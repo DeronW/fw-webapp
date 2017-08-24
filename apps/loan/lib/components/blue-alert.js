@@ -98,7 +98,7 @@ class Alert extends Component {
             <div style={styles.alert_panel}>
                 <div style={styles.text_container}>
                     <div className="_style_alert_text"
-                        style={this.props.text.length > 30 ? styles.text : styles.left}>{this.props.text}</div>
+                        style={this.props.text.length > 30 ? styles.left : styles.text}>{this.props.text}</div>
                 </div>
                 <a style={ styles.btn } onClick={this.hideHandler}>{this.props.confirmBtnText}</a>
             </div>
