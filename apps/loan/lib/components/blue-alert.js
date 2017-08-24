@@ -68,7 +68,7 @@ function getStyles() {
             color: "#555555",
             // width: "100%",
             fontSize: "30px",
-            textAlign: "center",
+            // textAlign: "center",
             display:"table-cell",
             verticalAlign:"middle",
             padding:"0 30px"
