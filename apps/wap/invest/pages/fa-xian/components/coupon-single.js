@@ -90,7 +90,7 @@ class ListBag extends React.Component {
                         剩余
                     </div>
                     <div styleName="list_right_starttime">
-                        {item.restPercent}%
+                        {item.restPercent}
                     </div>
                 </div>
             }
@@ -108,7 +108,7 @@ class ListBag extends React.Component {
                             {item.type == "1" ? "￥" : null}
                             {item.type == "2" ? "+" : null}
                         </span>
-                        {item.amount}{item.type == "5" && "g"}
+                        {item.amount}{item.type == "5" && "克"}
                     </div>
                     <div styleName="list_name">
                         {item.type == "1" && "返现券"}
