@@ -269,13 +269,13 @@
 /*礼包列表start*/
 .giftbag_box {
     display: table;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 .gift_box_title {
     font-size: 31px;
     color: #50627a;
-    margin: 20px 0px;
+    margin: 20px 0;
     margin-top: 30px;
 }
 
@@ -367,7 +367,7 @@
     background-color: #fd4d4c;
     line-height: 36px;
     text-align: center;
-    margin: 0px 0 0 22px;
+    margin: 0 0 0 22px;
     border-radius: 4px;
     margin-top: 13px;
 }
@@ -486,7 +486,7 @@
 
 .turnoff-btn {
     position: absolute;
-    top: 0px;
+    top: 0;
     right: 5px;
     width: 80px;
     height: 80px;

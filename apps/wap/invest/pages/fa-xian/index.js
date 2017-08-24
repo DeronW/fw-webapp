@@ -1,5 +1,5 @@
 import Home from './home.js'
-import Coupon from './coupon-center.js'
+import Coupon from './coupon.js'
 
 
 export {
