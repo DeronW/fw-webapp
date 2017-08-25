@@ -7,7 +7,7 @@ let APP_NAMES = [
     // 'about-us', // 关于我们
     // 'faq', // 帮助中心
     // 'app-download', // app 下载页面
-    'guide-cookbook', // 用户使用引导页面
+    // 'guide-cookbook', // 用户使用引导页面
     // test page
     'test-native-bridge',
     // 'fa-xian',

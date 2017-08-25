@@ -113,7 +113,7 @@ class Contribute extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header title="我的贡献值" />
+            <Header title="我的贡献值" history={this.props.history} />
 
             <div styleName="basic">
                 <div styleName={`user-level user-level-${basic.userLevel - 1}`}>会员等级</div>
