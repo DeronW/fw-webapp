@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react'
 import { Components } from 'fw-javascripts'
 
 import { Header } from '../../components'
-import { NativeBridge, Get } from '../../helpers'
+import { NativeBridge, Browser, Get } from '../../helpers'
 import styles from '../../css/user/evaluate.css'
 
 const QUESTIONS = [{
