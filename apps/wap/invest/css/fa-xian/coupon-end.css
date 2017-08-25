@@ -3,35 +3,35 @@
     display: table;
 }
 
-.none_box_title {
+.none_box  .none_box_title {
     font-size: 31px;
     color: #50627a;
     margin: 20px 30px;
     margin-top: 10px;
 }
 
-.icon_end {
+.none_box  .icon_end {
     vertical-align: middle;
     padding-right: 15px;
 }
 
-.end_title {
+.none_box  .end_title {
     vertical-align: middle;
 }
 
-.none_item_box {
+.none_box  .none_item_box {
     width: 652px;
     height: 175px;
     margin: 20px 34px;
 }
 
-.none_item_left {
+.none_box  .none_item_left {
     width: 77%;
     height: 100%;
     float: left;
 }
 
-.none_item_right {
+.none_box  .none_item_right {
     width: 23%;
     height: 100%;
     float: right;
@@ -40,21 +40,21 @@
     display: block;
 }
 
-.gray_state {
+.none_box  .gray_state {
     width: 100%;
     height: 108px;
     margin-top: 10px;
     background: url("../../images/fa-xian/coupon-center/icon-get-gray.png") no-repeat 7px 8px;
 }
 
-.red_state {
+.none_box  .red_state {
     width: 100%;
     height: 108px;
     margin-top: 17px;
     background: url("../../images/fa-xian/coupon-center/icon-get.png") no-repeat 0px center;
 }
 
-.state_button {
+.none_box  .state_button {
     width: 124px;
     height: 36px;
     line-height: 36px;
@@ -66,24 +66,57 @@
     margin: 0px 10px;
 }
 
-.gray_lq {
+.none_box  .gray_lq {
     background-color: #cccccc;
 }
 
-.red_invest {
+.none_box  .red_invest {
     background-color: #fd4d4c;
 }
 
-.none_noget {
+.none_box  .none_noget {
     background: url("../../images/fa-xian/coupon-center/none_nogetbg.png") no-repeat center;
 }
 
-.none_noget-blue {
+.none_box  .none_noget-blue {
     background: url("../../images/fa-xian/coupon-center/coupon-bluebg.png") no-repeat center;
 }
 
-.none_get {
+.none_box  .none_get {
     background: url("../../images/fa-xian/coupon-center/none_getbg.png") no-repeat center;
+}
+
+.detail_left {
+    width: 155px;
+    padding: 40px 40px 40px 34px;
+    height: 90px;
+    float: left;
+}
+
+.list_amount {
+    font-size: 54px;
+    color: #fff;
+}
+
+.list_rmb {
+    font-size: 40px;
+}
+
+.list_name {
+    font-size: 24px;
+    color: #fff;
+    margin-top: 10px;
+    width: 210px;
+}
+
+.detail_right {
+    width: 200px;
+    padding: 42px 40px 40px 20px;
+    height: 90px;
+    float: left;
+    font-size: 20px;
+    color: #fff;
+    line-height: 34px;
 }
 
 /*结束列表end*/
