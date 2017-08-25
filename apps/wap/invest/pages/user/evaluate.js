@@ -212,10 +212,6 @@ class Evaluate extends React.Component {
             this.props.history.goBack()
     }
 
-    componentDidMount() {
-        document.title = '风险测评'
-    }
-
     selectHandler = (questionIndex, answerIndex) => {
         let { selected } = this.state
         selected[questionIndex] = answerIndex
