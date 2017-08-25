@@ -2,7 +2,6 @@ import React from 'react'
 import {observer, inject} from 'mobx-react'
 import CSSModules from 'react-css-modules'
 import styles from '../../../css/fa-xian/coupon-end.css'
-import {Components} from 'fw-javascripts'
 
 @inject('faxian')
 @observer
@@ -35,7 +34,7 @@ class CouponEnd extends React.Component {
                                     {item.type == "1" && "￥"}
                                     {item.type == "2" && "+"}
                                 </span>
-                            {item.amount}{item.type == "5" && "g"}
+                            {item.amount}<span styleName="end-gold-unit">{item.type == "5" && "克"}</span>
                         </div>
                         <div styleName="list_name">
                             {item.type == "1" && "返现券"}
@@ -45,7 +44,7 @@ class CouponEnd extends React.Component {
                     </div>
                     <div styleName="detail_right">
                         <div>
-                            {item.type == 5 ? `满${item.limitAmount}g可用` : ` 满￥${item.limitAmount}可用`}
+                            {item.type == 5 ? `满${item.limitAmount}克可用` : ` 满￥${item.limitAmount}可用`}
                         </div>
                         <div>{day}</div>
                         <div>有效期至{item.validPeriod}</div>
