@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react'
 import { Components } from 'fw-javascripts'
 
 import { Header } from '../components'
-import { Get } from '../helpers'
+import { NativeBridge, Browser, Get } from '../helpers'
 import styles from '../css/evaluate.css'
 
 const QUESTIONS = [{
@@ -198,11 +198,14 @@ class Evaluate extends React.Component {
     }
 
     back_handler = () => {
-        this.props.history.push(`/reserve/info`)
+        // this.props.history.push(`/reserve/info`)
+        Browser.inApp ?
+            NativeBridge.close() :
+            this.props.history.goBack()
     }
 
     componentDidMount() {
-        document.title = '风险测评'
+        NativeBridge.trigger('hide_header')
     }
 
     selectHandler = (questionIndex, answerIndex) => {
