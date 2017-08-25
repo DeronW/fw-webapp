@@ -2,13 +2,30 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import * as FW from 'fw-javascripts'
-import styles from '../../../css/fa-xian/coupon-center.css'
+import styles from '../../../css/fa-xian/coupon-singles.css'
 import {NativeBridge} from '../../../helpers'
 
 @inject('faxian')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-class ListBag extends React.Component {
+class CouponSingles extends React.Component {
+    render() {
+        let limitList = this.props.faxian.data.limitList
+        if (!limitList || limitList.length == 0) return null;
+        return <div styleName="list_box">
+            <div styleName="list_box_title">
+                <img styleName="icon_limit" src={require("../../../images/fa-xian/coupon-center/icon-limit.png")}/>
+                <span styleName="limit_title">限时抢购</span>
+            </div>
+            {limitList.map((limit, index) => <SinglesList item={limit} key={index}/>)}
+        </div>
+    }
+}
+
+@inject('faxian')
+@observer
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+class SinglesList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -118,7 +135,7 @@ class ListBag extends React.Component {
                 </div>
                 <div styleName="detail_right">
                     <div>
-                        {item.type == "5" ? `满${item.limitAmount}g可用` : `满￥${item.limitAmount}可用`}
+                        {item.type == "5" ? `满${item.limitAmount}克可用` : `满￥${item.limitAmount}可用`}
                     </div>
                     <div>{day}</div>
                     <div>有效期至{item.validPeriod}</div>
@@ -131,4 +148,4 @@ class ListBag extends React.Component {
     }
 }
 
-export default ListBag
+export default CouponSingles
