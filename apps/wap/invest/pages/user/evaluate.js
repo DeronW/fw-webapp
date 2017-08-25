@@ -1,9 +1,10 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Header } from '../../components'
-import { Get } from '../../helpers'
 import { Components } from 'fw-javascripts'
+
+import { Header } from '../../components'
+import { NativeBridge, Get } from '../../helpers'
 import styles from '../../css/user/evaluate.css'
 
 const QUESTIONS = [{
@@ -200,8 +201,15 @@ class Evaluate extends React.Component {
         selected: []
     }
 
+    componentDidMount() {
+        NativeBridge.trigger('hide_header')
+    }
+
     back_handler = () => {
-        this.props.history.push(`/reserve/info`)
+        // this.props.history.push(`/reserve/info`)
+        Browser.inApp ?
+            NativeBridge.close() :
+            this.props.history.goBack()
     }
 
     componentDidMount() {
@@ -226,7 +234,7 @@ class Evaluate extends React.Component {
         }
         err ?
             Components.showToast("您还有未填写试题") :
-            Get('/orderuser/riskGradeP2P.shtml', form_data)
+            Get('/orderuser/riskGradeInto.shtml', form_data)
                 .then(data => this.setState({
                     finished: true,
                     score: data.score,
