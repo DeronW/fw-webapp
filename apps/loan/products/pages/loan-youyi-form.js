@@ -239,7 +239,7 @@ export default class LoopLoanLoan extends React.Component {
                         <div styleName="know-btn" onClick={this.detailHideHandler}>知道了</div>
                     </div>
                 </div>}
-                {this.state.mask2Show && <div styleName="mask2">
+                {validate_term && <div styleName="mask2">
                     <div styleName="notice-pop">
                         <div styleName="notice-title">逾期费用说明</div>
                         {/*<div styleName="close-icon" onClick={this.overdueHideHandler}></div>*/}
