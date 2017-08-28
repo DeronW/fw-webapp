@@ -57,7 +57,7 @@ class JulyPC extends React.Component {
     }
 
     login = () => {
-        gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
+        gotoPage('登录', 'http://www.gongchangp2p.com/api/activityPullNew/ActivityControl.do?code=WZNHD')
     }
 
     render() {

@@ -20,7 +20,7 @@ export default class Reserve {
             },
             records: [],//记录的列表
             records_page_no: 1,
-            accountAmount: -1,//可用余额
+            accountAmount: null,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
             batchMaxmum: 0,//批量投资限额
             reserveMoney: '',//用户输入的预约金额
