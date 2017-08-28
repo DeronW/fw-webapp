@@ -55,7 +55,7 @@ class JulyMobile extends React.Component {
                                          isLogin={this.state.isLogin}/>, document.getElementById("pop"))
     }
     login = () => {
-        gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
+        gotoPage('登录', 'http://www.gongchangp2p.com/api/activityPullNew/ActivityControl.do?code=WZNHD')
     }
 
     bottomHandler = () => {
