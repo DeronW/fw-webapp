@@ -204,7 +204,7 @@ export default class LoopLoanLoan extends React.Component {
                         <div
                             styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.totalFeeAmount : 0}</div>
                     </div>
-                    {this.state.value && <div styleName="overdue-wrap"><div styleName="overdue-tip">
+                    {validate_term && <div styleName="overdue-wrap"><div styleName="overdue-tip">
                         请按时还款，避免<span styleName="overdue-btn" onClick={this.overdueShowHandler}>逾期费用</span>
                     </div></div>}
                     <div styleName="loan-info-item">
