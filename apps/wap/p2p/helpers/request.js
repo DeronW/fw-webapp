@@ -19,8 +19,6 @@ const Ajax = options => {
          }
          */
         return new Promise((_, reject) => {
-            !options.silence && Components.showToast(error.message)
-
             if (error.code == 40101) {
                 // 处理用户登录功能
                 Browser.inApp ?
