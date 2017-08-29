@@ -2,7 +2,8 @@ import {extendObservable} from 'mobx'
 import { getJSONP } from 'fw-javascripts'
 
 export default class Features{
-    constructor(){
+    constructor(Get){
+        this.Get = Get;
         this.data = {};
         extendObservable(this.data,{
             level_list: [],
@@ -14,7 +15,7 @@ export default class Features{
         })
     }
     getDataHandler(){
-        Get('/api/v1/upgrade-formula.shtml')
+        this.Get('/api/v1/upgrade-formula.shtml')
         .then(data => {
                 this.data.levelConfig = data.levelConfig
                 this.data.limitCount = data.limitCount
