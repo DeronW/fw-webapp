@@ -33,6 +33,7 @@ export default (stores) => {
                 <Route exact path='/features/about-us' component={Features.AboutUs} />
                 <Route exact path='/features/app-download' component={Features.AppDownload} />
                 <Route exact path='/features/cookbook' component={Features.Cookbook} />
+                <Route exact path='/features/vip-prerogative' component={Features.VipPrerogative} />
 
                 <Route exact path='/fa-xian' component={Faxian.Home} />
                 <Route exact path='/fa-xian/coupon' component={Faxian.Coupon} />

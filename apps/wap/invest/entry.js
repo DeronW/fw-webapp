@@ -12,6 +12,7 @@ import * as Stores from './stores'
 let stores = {
     reserve: new Stores.Reserve(Post),
     faxian: new Stores.FaXian(Ajax, Post),
+    features: new Stores.Features(),
 }
 
 
