@@ -30,6 +30,20 @@ class ReserveApply extends React.Component {
 
     applyHandler = () => {
         let { reserve, history } = this.props
+        let sussessHandler = () => {
+            if (this.state.pending) return
+            this.setState({ pending: true })
+            reserve.submitReserveHandler()
+                .then(() => {
+                        Components.showToast('预约成功')
+                    },
+                    () => {
+                        this.setState({ pending: false })
+                    })
+                .then(() => {
+                    history.push(`/reserve/records`)
+                })
+        }
         reserve.fetchProduct().then(data => {
             if (reserve.reserveMoney === '') {
                 Components.showToast("预约金额不能为空")
@@ -42,20 +56,11 @@ class ReserveApply extends React.Component {
                     Components.showToast("自动投标金额不足").then(() => {
                         NativeBridge.toNative('auto_bid_second')
                     })
+                }else{
+                    sussessHandler()
                 }
             } else {
-                if (this.state.pending) return
-                this.setState({ pending: true })
-                reserve.submitReserveHandler()
-                    .then(() => {
-                        Components.showToast('预约成功')
-                    },
-                    () => {
-                        this.setState({ pending: false })
-                    })
-                    .then(() => {
-                        history.push(`/reserve/records`)
-                    })
+                sussessHandler()
             }
         })
     }
