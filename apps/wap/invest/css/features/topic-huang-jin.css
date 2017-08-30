@@ -37,6 +37,7 @@
 .item-active {
     background: #fff;
     color: #ffb000;
+    font-weight: 700;
 }
 
 .gold-intro {
@@ -324,6 +325,7 @@
 .cor-name {
     margin-bottom: 30px;
     text-align: center;
+    font-weight: 700;
 }
 
 .faq-box {
