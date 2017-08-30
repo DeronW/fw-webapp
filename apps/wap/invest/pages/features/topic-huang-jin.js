@@ -215,7 +215,7 @@ class TopicGold extends React.Component {
                         </div>
                         <div styleName="case2-text">
                             <div styleName="case2-line1">到期后，李女士一共可以拿到已购黄金及收益克重合计为</div>
-                            <div styleName="case2-line2">10.125克</div>
+                            <div styleName="case2-line2">10.125<span styleName="gold-unit">克</span></div>
                             <div styleName="case2-line3">计算公式</div>
                             <div styleName="case2-line4">10+10*(4.5/100*100/360)=10.125克</div>
                         </div>
