@@ -228,7 +228,7 @@
 
 .case2-box {
     width: 640px;
-    height: 321px;
+    height: 330px;
     background: url("../../images/features/topic-huang-jin/calbg.jpg") no-repeat center;
     margin: 30px auto 0;
 }
@@ -340,6 +340,10 @@
     color: #5259ac;
 }
 
+.q-text {
+    vertical-align: middle;
+}
+
 .icon-faq {
     display: inline-block;
     width: 32px;
@@ -351,6 +355,7 @@
     text-align: center;
     font-size: 22px;
     margin-right: 13px;
+    vertical-align: middle;
 }
 
 .faq-item-a {

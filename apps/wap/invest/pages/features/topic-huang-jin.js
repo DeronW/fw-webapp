@@ -245,7 +245,7 @@ class TopicGold extends React.Component {
                     <div styleName="faq-item">
                         <div styleName="faq-item-q">
                             <span styleName="icon-faq">1</span>
-                            尊享金产品为什么没有担保公司担保?
+                            <span styleName="q-text">尊享金产品为什么没有担保公司担保?</span>
                         </div>
                         <div styleName="faq-item-a">
                             尊享金产品是用户通过工场尊享平台向平台合作方深圳众瑞珠宝申请购买黄金产品并委托 深圳众瑞珠宝进行管理以获取收益的一种交易方式，属于买卖法律关系而非借贷法律关系，因此无需担保公司担保。
@@ -254,7 +254,7 @@ class TopicGold extends React.Component {
                     <div styleName="faq-item">
                         <div styleName="faq-item-q">
                             <span styleName="icon-faq">2</span>
-                            如黄金出现下跌挤兑的情况，平台如何处理?
+                            <span styleName="q-text">如黄金出现下跌挤兑的情况，平台如何处理?</span>
                         </div>
                         <div styleName="faq-item-a">
                             黄金作为一款实物投资产品，金价会存在上下浮动现象，用户购金幵在委托管理服务期限届
