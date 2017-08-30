@@ -1,21 +1,73 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {Header} from '../../components'
 import styles from '../../css/features/topic-huang-jin.css'
 
 @CSSModules(styles, {allowMultiple: true, errorWhenNotFound: false})
 class TopicGold extends React.Component {
     state = {
-        num: 0
+        num: 0,
+        isTop: false
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll.bind(this));
+    }
+
+    handleScroll = (e) => {
+        let top = document.body.scrollTop
+        if (top > 233) {
+            this.setState({isTop: true})
+        } else {
+            this.setState({isTop: false})
+        }
+        if (top < 1800) {
+            this.setState({num: 0})
+        } else if (top < 2650) {
+            this.setState({num: 1})
+        } else if (top < 4100) {
+            this.setState({num: 2})
+        } else if (top < 4275) {
+            this.setState({num: 3})
+        } else {
+            this.setState({num: 4})
+        }
+    }
+
+    tabToggleHanler = (index) => {
+        let jump_func = (index) => {
+            this.setState({num: index})
+        }
+        if (index == 0) {
+            jump_func(index)
+            window.scrollTo(0, 233)
+        } else if (index == 1) {
+            jump_func(index)
+            window.scrollTo(0, 1800)
+        } else if (index == 2) {
+            jump_func(index)
+            window.scrollTo(0, 2650)
+        } else if (index == 3) {
+            jump_func(index)
+            window.scrollTo(0, 4100)
+        } else if (index == 4) {
+            jump_func(index)
+            window.scrollTo(0, 4275)
+        }
     }
 
     render() {
+        let {isTop} = this.state
+        let top_style = isTop ? styles['gold-tab-top'] : styles['gold-tab']
         return <div styleName="gold-box">
             <img src={require('../../images/features/topic-huang-jin/goldbanner.jpg')} styleName="gold-banner"/>
-            <div styleName="gold-tab">
+            <div className={top_style}>
                 {["项目简介", "资金安全", "投资案例", "合作机构", "常见问题"].map((item, index) => {
                     let active_style = this.state.num == index && styles['item-active']
-                    return <div styleName="gold-tab-item" key={index}>
+                    return <div styleName="gold-tab-item" key={index} onClick={() => this.tabToggleHanler(index)}>
                         <div className={active_style}>{item}</div>
                     </div>
                 })}
@@ -180,7 +232,9 @@ class TopicGold extends React.Component {
                 </div>
                 <div styleName="cor-text">
                     <div styleName="cor-name font-yellow">深圳市众瑞珠宝有限公司</div>
-                    <div>深圳市众瑞珠宝有限公司于2012年2月成立，注册资本20000万元人民币，是一家集贵金属产品生产、定做、批发、零售为一体的企业。公司拥有专业的生产、销售团队，业务 遍及深圳、北京、山东等多地，在深圳等地开设多家贵金属产品展厅，除一线城市外，公司 亦积极开拓具发展潜力的二、三线城市，将公司之零售网络拓展至中国更多地方。</div>
+                    <div>深圳市众瑞珠宝有限公司于2012年2月成立，注册资本20000万元人民币，是一家集贵金属产品生产、定做、批发、零售为一体的企业。公司拥有专业的生产、销售团队，业务
+                        遍及深圳、北京、山东等多地，在深圳等地开设多家贵金属产品展厅，除一线城市外，公司 亦积极开拓具发展潜力的二、三线城市，将公司之零售网络拓展至中国更多地方。
+                    </div>
                 </div>
             </div>
             <div styleName="gold-faq">
@@ -203,7 +257,8 @@ class TopicGold extends React.Component {
                             如黄金出现下跌挤兑的情况，平台如何处理?
                         </div>
                         <div styleName="faq-item-a">
-                            黄金作为一款实物投资产品，金价会存在上下浮动现象，用户购金幵在委托管理服务期限届 满后，如金价下跌，用户可选择通过继续持有黄金产品，并通过委托平台运营方继续提供黄金管理服务，待金价上涨后再申请变现或提金，最终实现黄金保值、增值。平台作为黄金交易信息发布方和技术服务方，将严格按照约定为用户提供交易安全保障。
+                            黄金作为一款实物投资产品，金价会存在上下浮动现象，用户购金幵在委托管理服务期限届
+                            满后，如金价下跌，用户可选择通过继续持有黄金产品，并通过委托平台运营方继续提供黄金管理服务，待金价上涨后再申请变现或提金，最终实现黄金保值、增值。平台作为黄金交易信息发布方和技术服务方，将严格按照约定为用户提供交易安全保障。
                         </div>
                     </div>
                 </div>
@@ -211,7 +266,8 @@ class TopicGold extends React.Component {
             <div styleName="gold-tips">
                 <div styleName="tips-text">风险揭示：工场尊享金项目的黄金定价标准实时参考上海黄金交易所
                     价格，由于金价下跌造成的损失， 需由用户自行承担。市场有风险，
-                    购买需谨慎。</div>
+                    购买需谨慎。
+                </div>
             </div>
         </div>
     }

@@ -17,6 +17,18 @@
     display: table;
 }
 
+.gold-tab-top {
+    width: 100%;
+    height: 80px;
+    background: #ededed;
+    text-align: center;
+    line-height: 80px;
+    display: table;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
 .gold-tab-item {
     width: 20%;
     float: left;
