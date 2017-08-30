@@ -224,6 +224,7 @@
     height: 496px;
     background: url("../../images/features/topic-huang-jin/casebg.jpg") no-repeat center;
     margin: 0 auto;
+    display: table;
 }
 
 .case2-box {
