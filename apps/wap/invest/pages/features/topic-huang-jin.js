@@ -19,11 +19,11 @@ class TopicGold extends React.Component {
 
     handleScroll = (e) => {
         let top = document.body.scrollTop
-        if (top > 233) {
-            this.setState({isTop: true})
-        } else {
-            this.setState({isTop: false})
-        }
+        // if (top > 233) {
+        //     this.setState({isTop: true})
+        // } else {
+        //     this.setState({isTop: false})
+        // }
         if (top < 1800) {
             this.setState({num: 0})
         } else if (top < 2650) {
@@ -64,7 +64,7 @@ class TopicGold extends React.Component {
         let top_style = isTop ? styles['gold-tab-top'] : styles['gold-tab']
         return <div styleName="gold-box">
             <img src={require('../../images/features/topic-huang-jin/goldbanner.jpg')} styleName="gold-banner"/>
-            <div className={top_style}>
+            <div styleName="gold-tab-top">
                 {["项目简介", "资金安全", "投资案例", "合作机构", "常见问题"].map((item, index) => {
                     let active_style = this.state.num == index && styles['item-active']
                     return <div styleName="gold-tab-item" key={index} onClick={() => this.tabToggleHanler(index)}>

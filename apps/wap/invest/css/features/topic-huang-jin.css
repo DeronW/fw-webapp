@@ -24,9 +24,9 @@
     text-align: center;
     line-height: 80px;
     display: table;
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 233px;
 }
 
 .gold-tab-item {
