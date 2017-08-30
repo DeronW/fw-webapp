@@ -1,12 +1,14 @@
 import React from 'react'
-import {observer, inject} from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import CSSModules from 'react-css-modules'
+import { Components } from 'fw-javascripts'
+
+import { NativeBridge } from '../../../helpers'
 import styles from '../../../css/fa-xian/coupon-bags.css'
-import {Components} from 'fw-javascripts'
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class CouponBags extends React.Component {
     state = {
         selected_name: null,
@@ -20,22 +22,22 @@ class CouponBags extends React.Component {
     }
 
     closePanelHandler = () => {
-        this.setState({selected_code: null})
+        this.setState({ selected_code: null })
     }
 
     render() {
-        let {selected_code, selected_name} = this.state
+        let { selected_code, selected_name } = this.state
         let giftList = this.props.faxian.data.giftList
         if (!giftList || giftList.length == 0) return null;
         return <div styleName="giftbag_box">
             <div styleName="gift_box_title">
-                <img src={require("../../../images/fa-xian/coupon-center/icon-gift.png")} styleName="icon_gift"/>
+                <img src={require("../../../images/fa-xian/coupon-center/icon-gift.png")} styleName="icon_gift" />
                 <span styleName="gift_title">优惠券礼包</span>
             </div>
             {giftList.map((gift, index) => <BagItem item={gift} key={index}
-                                                    showGiftInfoHandler={this.showGiftInfoHandler}/>)}
+                showGiftInfoHandler={this.showGiftInfoHandler} />)}
             {selected_code &&
-            <BagPopPanel code={selected_code} gift_name={selected_name} closeHandler={this.closePanelHandler}/>}
+                <BagPopPanel code={selected_code} gift_name={selected_name} closeHandler={this.closePanelHandler} />}
         </div>
     }
 }
@@ -43,7 +45,7 @@ class CouponBags extends React.Component {
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class BagItem extends React.Component {
     constructor(props) {
         super(props)
@@ -57,14 +59,14 @@ class BagItem extends React.Component {
     componentDidMount() {
         // start counting down
         if (this.props.item.receiveStatus == "01") {
-            this.setState({remain_seconds: this.props.item.intervalMilli})
+            this.setState({ remain_seconds: this.props.item.intervalMilli })
             this.timer = setInterval(() => {
                 if (this.state.remain_seconds < 1) {
                     clearInterval(this.timer)
-                    this.setState({receiveStatus: '02'})
+                    this.setState({ receiveStatus: '02' })
                     this.props.faxian.requestGiftList()
                 } else {
-                    this.setState({remain_seconds: this.state.remain_seconds - 1})
+                    this.setState({ remain_seconds: this.state.remain_seconds - 1 })
                 }
             }, 1000)
         }
@@ -75,13 +77,13 @@ class BagItem extends React.Component {
         // 请求处理中, 不能重复点击
         if (this.state.pending) return;
 
-        this.setState({pending: true})
+        this.setState({ pending: true })
         item.isGet = "1"
 
-        this.props.faixian.giftGitHandler(item).then(data => {
+        this.props.faxian.giftGitHandler(item).then(data => {
             // $FW.Component.Alert(data.remainNumber)
             Components.showAlert(data.remainNumber)
-            this.setState({pending: false})
+            this.setState({ pending: false })
             this.props.faxian.requestGiftList() //用户点击后重新请求，改变数据
         }, () => {
             this.props.faxian.requestGiftList() //用户点击后重新请求，改变数据
@@ -94,8 +96,8 @@ class BagItem extends React.Component {
 
     render() {
 
-        let {receiveStatus} = this.state;
-        let {item} = this.props;
+        let { receiveStatus } = this.state;
+        let { item } = this.props;
 
         let gift_left_section = (item) => {
             let gift_name;
@@ -151,7 +153,7 @@ class BagItem extends React.Component {
                 <div styleName="gift_right_starttime">
                     {`${m}:${s}`}
                 </div>
-                <div styleName="get_state_gray"> 领取</div>
+                <div styleName="get_state_gray">领取</div>
             </div>
         }
 
@@ -162,14 +164,14 @@ class BagItem extends React.Component {
                 (item.grapLimit == "0") ? this.getHandler(item) : this.jump()
             }}>
                 <SVGCircleProgress percent={100 - parseInt(item.restPercent)} weight={4}
-                                   radius={50} bgColor={'#FC655A'} progressColor={'#eee'}/>
+                    radius={50} bgColor={'#FC655A'} progressColor={'#eee'} />
                 {(item.grapLimit == "0") ?
                     <a styleName="content_state_red">领取</a> :
                     <a styleName="content_state_red">去投资</a>
                 }
                 <div styleName="gift_right_title_surplus"> 剩余</div>
                 <div styleName="gift_right_starttime_percent">
-                    {parseInt(item.restPercent) == 0 ? this.setState({receiveStatus: "03"}) : item.restPercent}
+                    {parseInt(item.restPercent) == 0 ? this.setState({ receiveStatus: "03" }) : item.restPercent}
                 </div>
             </div>
         }
@@ -179,7 +181,7 @@ class BagItem extends React.Component {
             return <div className={finished_style} onClick={() => {
                 item.isGet == "1" ? this.jump() : null
             }}>
-                <img src={require("../../../images/fa-xian/coupon-center/icon-get-gray.png")} styleName="gift-overImg"/>
+                <img src={require("../../../images/fa-xian/coupon-center/icon-get-gray.png")} styleName="gift-overImg" />
                 {item.isGet == "1" && <a styleName="get_state_red">去投资</a>}
             </div>
         }
@@ -197,7 +199,7 @@ class BagItem extends React.Component {
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class BagPopPanel extends React.Component {
     constructor(props) {
         super(props)
@@ -209,7 +211,7 @@ class BagPopPanel extends React.Component {
     componentDidMount() {
         this.props.faxian.giftPopHandler(this.props.code)
             .then(data => {
-                this.setState({detail_list: data.giftBagDetail})
+                this.setState({ detail_list: data.giftBagDetail })
             })
     }
 

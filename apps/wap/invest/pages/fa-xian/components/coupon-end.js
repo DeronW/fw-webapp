@@ -1,11 +1,12 @@
 import React from 'react'
-import {observer, inject} from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import CSSModules from 'react-css-modules'
 import styles from '../../../css/fa-xian/coupon-end.css'
+import { NativeBridge } from '../../../helpers'
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class CouponEnd extends React.Component {
     render() {
         let none_list = this.props.faxian.data.endList
@@ -30,10 +31,10 @@ class CouponEnd extends React.Component {
                 <div styleName="none_item_left">
                     <div styleName="detail_left">
                         <div styleName="list_amount">
-                                <span styleName="list_rmb">
-                                    {item.type == "1" && "￥"}
-                                    {item.type == "2" && "+"}
-                                </span>
+                            <span styleName="list_rmb">
+                                {item.type == "1" && "￥"}
+                                {item.type == "2" && "+"}
+                            </span>
                             {item.amount}<span styleName="end-gold-unit">{item.type == "5" && "克"}</span>
                         </div>
                         <div styleName="list_name">
@@ -56,7 +57,7 @@ class CouponEnd extends React.Component {
 
         let end_section = <div>
             <div styleName="none_box_title">
-                <img src={require("../../../images/fa-xian/coupon-center/icon-end.png")} styleName="icon_end"/>
+                <img src={require("../../../images/fa-xian/coupon-center/icon-end.png")} styleName="icon_end" />
                 <span styleName="end_title">已结束</span>
             </div>
             {none_list.map(none_list_func)}
