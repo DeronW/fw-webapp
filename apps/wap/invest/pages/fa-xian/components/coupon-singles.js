@@ -1,30 +1,30 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import * as FW from 'fw-javascripts'
 import styles from '../../../css/fa-xian/coupon-singles.css'
-import {NativeBridge} from '../../../helpers'
+import { NativeBridge } from '../../../helpers'
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class CouponSingles extends React.Component {
     render() {
         let limitList = this.props.faxian.data.limitList
         if (!limitList || limitList.length == 0) return null;
         return <div styleName="list_box">
             <div styleName="list_box_title">
-                <img styleName="icon_limit" src={require("../../../images/fa-xian/coupon-center/icon-limit.png")}/>
+                <img styleName="icon_limit" src={require("../../../images/fa-xian/coupon-center/icon-limit.png")} />
                 <span styleName="limit_title">限时抢购</span>
             </div>
-            {limitList.map((limit, index) => <SinglesList item={limit} key={index}/>)}
+            {limitList.map((limit, index) => <SinglesList item={limit} key={index} />)}
         </div>
     }
 }
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class SinglesList extends React.Component {
     constructor(props) {
         super(props)
@@ -38,14 +38,14 @@ class SinglesList extends React.Component {
     componentDidMount() {
         // start counting down
         if (this.props.item.receiveStatus == "01") {
-            this.setState({surplus_seconds: this.props.item.intervalMilli})
+            this.setState({ surplus_seconds: this.props.item.intervalMilli })
             this.timer = setInterval(() => {
                 if (this.state.surplus_seconds < 1) {
                     clearInterval(this.timer)
-                    this.setState({receiveStatus: '02'})
+                    this.setState({ receiveStatus: '02' })
                     this.props.faxian.requestGiftList()
                 } else {
-                    this.setState({surplus_seconds: this.state.surplus_seconds - 1})
+                    this.setState({ surplus_seconds: this.state.surplus_seconds - 1 })
                 }
             }, 1000)
         }
@@ -54,11 +54,11 @@ class SinglesList extends React.Component {
     getHandler = (item) => {
         // 请求处理中, 不能重复点击
         if (this.state.pending) return;
-        this.setState({pending: true})
+        this.setState({ pending: true })
         item.isGet = "1";
         this.props.faxian.limitGetHandler(item).then(data => {
             FW.Components.showAlert(data.remainNumber)
-            this.setState({pending: false})
+            this.setState({ pending: false })
             this.props.faxian.requestGiftList()//用户点击后重新请求，改变数据
         }, () => {
             this.props.faxian.requestGiftList()//用户点击后重新请求，改变数据
@@ -70,8 +70,8 @@ class SinglesList extends React.Component {
     }
 
     render() {
-        let {receiveStatus, surplus_seconds} = this.state;
-        let {item} = this.props;
+        let { receiveStatus, surplus_seconds } = this.state;
+        let { item } = this.props;
         let day_number = "期限：>=" + item.limitTerm + "天"
         let day = item.limitTerm == "0" ? "任意期限可用" : day_number
         let content;
@@ -99,7 +99,7 @@ class SinglesList extends React.Component {
                     item.grapLimit == "0" ? this.getHandler(item) : this.jump()
                 }}>
                     <SVGCircleProgress animate={true} bgColor={'#FC655A'} percent={100 - parseInt(item.restPercent)}
-                                       weight={4} radius={50} progressColor={"#eee"} padding={0}/>
+                        weight={4} radius={50} progressColor={"#eee"} padding={0} />
                     {item.grapLimit == "0" ? <a styleName="content_state_red">领取</a>
                         : <a styleName="content_state_red">去投资</a>
                     }
@@ -115,7 +115,7 @@ class SinglesList extends React.Component {
 
         }
         let list_type_style = (item.type == 2 ? styles['list-item-red-bg'] :
-                (item.type == 5 ? styles['list-item-gold'] : styles['list_item'])
+            (item.type == 5 ? styles['list-item-gold'] : styles['list_item'])
         )
         return <div className={list_type_style}>
             <div styleName="item_left">
