@@ -24,22 +24,6 @@ const USER_PAGES = [
     // 'user-evaluate-zx', //尊享投资风险承受能力评估
 ]
 
-const PROTOCOL_PAGES = [
-    // 协议页面
-    // 'protocol-trusteeship', // 资金托管协议
-    // 'protocol-counseling', // 咨询服务协议
-    // 'protocol-special-recharge', // 特殊用户充值协议
-    // 'protocol-special-cash', // 特殊提现协议
-    // 'protocol-special-bind', // 特殊绑定银行卡协议
-    // 'protocol-batch-invest', // 批量投资协议
-    // 'protocol-lender-promise', // 出借人承诺书
-    // 'protocol-entrust-transfer', // 委托划款授权书
-    // 'protocol-perform-duty', // 履行反洗钱义务的承诺书
-    // 'protocol-risk-prompt', // 网络借贷出借风险提示
-    // 'protocol-register', // 网络借贷出借风险提示
-    // 'protocol-user-service', //工场微金用户服务协议
-    // 'protocol-trade-service', //徽商银行网络交易资金账户服务三方协议
-]
 
 const NOTICE_PAGES = [
     // 内容展示页面
@@ -114,7 +98,6 @@ const P2P = [
 
 APP_NAMES.push(
     ...USER_PAGES,
-    // ...PROTOCOL_PAGES,
     // ...TOPIC_PAGES,
     // ...HUISHANG_PAGES,
     // ...NOTICE_PAGES,
