@@ -9,11 +9,6 @@ var url = "https://static.9888.cn/pdf/wap/pdf-html/"+link;
 // var url = 'images/one.pdf';
 PDFJS.workerSrc = 'javascripts/pdf.worker.js';
 
-// Asynchronous download of PDF
-// var loadingTask = PDFJS.getDocument(url);
-// loadingTask.promise.then(function (pdf) {
-//     console.log('PDF loaded');
-
 
 var currPage = 1; //Pages are 1-based not 0-based
 var numPages = 0;

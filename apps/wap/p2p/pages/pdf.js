@@ -4,7 +4,7 @@ import { Utils } from 'fw-javascripts'
 import { Header } from '../components'
 
 
-class PolicyPDF extends React.Component {
+class PDF extends React.Component {
 
     render() {
 
@@ -20,4 +20,4 @@ class PolicyPDF extends React.Component {
     }
 }
 
-export default PolicyPDF
+export default PDF
