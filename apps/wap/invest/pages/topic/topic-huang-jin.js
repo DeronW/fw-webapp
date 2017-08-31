@@ -1,6 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import styles from '../../css/features/topic-huang-jin.css'
+import styles from '../../css/topic/topic-huang-jin.css'
 
 @CSSModules(styles, {allowMultiple: true, errorWhenNotFound: false})
 class TopicGold extends React.Component {
@@ -63,7 +63,7 @@ class TopicGold extends React.Component {
         let {isTop} = this.state
         let top_style = isTop ? styles['gold-tab-top'] : styles['gold-tab']
         return <div styleName="gold-box">
-            <img src={require('../../images/features/topic-huang-jin/goldbanner.jpg')} styleName="gold-banner"/>
+            <img src={require('../../images/topic/topic-huang-jin/goldbanner.jpg')} styleName="gold-banner"/>
             <div styleName="gold-tab-top">
                 {["项目简介", "资金安全", "投资案例", "合作机构", "常见问题"].map((item, index) => {
                     let active_style = this.state.num == index && styles['item-active']
@@ -113,7 +113,7 @@ class TopicGold extends React.Component {
                     项目特点
                 </div>
                 <div styleName="features-box">
-                    <img src={require("../../images/features/topic-huang-jin/features.png")} styleName="features-pic"/>
+                    <img src={require("../../images/topic/topic-huang-jin/features.png")} styleName="features-pic"/>
                     <div styleName="features-text">
                         <div styleName="text-item">
                             <div styleName="item-up">操作便捷</div>
