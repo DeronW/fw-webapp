@@ -19,7 +19,7 @@ export default class FxhappDownload extends React.Component {
         NativeBridge.setTitle('关注微信');
     }
     copyHandler = () => {
-        NativeBridge.clipboard("fxhuaba")
+        NativeBridge.trigger("clipboard","fxhuaba")
     }
     saveHandler = () => {
         NativeBridge.trigger("save_fxh_qrcode")
