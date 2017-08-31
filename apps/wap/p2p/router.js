@@ -17,6 +17,7 @@ import InvestSchool from './pages/invest-school'
 import NoticeSafeguard from './pages/notice-safeguard'
 import VipPrerogative from './pages/vip-prerogative'
 import PolicyBox from './pages/policy'
+import PolicyPDF from './pages/pdf'
 import Evaluate from './pages/evaluate.js'
 import * as Protocol from './pages/protocol'
 
@@ -33,6 +34,7 @@ export default (stores) => {
                 <Route exact path='/notice-safeguard' component={NoticeSafeguard} />
                 <Route exact path='/vip-prerogative' component={VipPrerogative} />
                 <Route exact path='/policy' component={PolicyBox} />
+                <Route exact path='/policy/pdf' component={PolicyPDF} />
                 <Route exact path='/evaluate' component={Evaluate} />
 
                 {/* 微金协议 */}
