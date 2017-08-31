@@ -35,8 +35,11 @@ export default (stores) => {
                 <Route exact path='/features/app-download' component={Features.AppDownload}/>
                 <Route exact path='/features/cookbook' component={Features.Cookbook}/>
                 <Route exact path='/features/vip-prerogative' component={Features.VipPrerogative}/>
-                <Route exact path='/topic/topic-huang-jin' component={Topic.TopicGold}/>
 
+                {/*主题模块  */}
+                <Route exact path='/topic/huang-jin' component={Topic.TopicGold}/>
+
+                {/*发现模块  */}
                 <Route exact path='/fa-xian' component={Faxian.Home}/>
                 <Route exact path='/fa-xian/coupon' component={Faxian.Coupon}/>
 

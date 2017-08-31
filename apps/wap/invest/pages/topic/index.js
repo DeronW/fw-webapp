@@ -1,4 +1,4 @@
-import TopicGold from './topic-huang-jin.js'
+import TopicGold from './huang-jin.js'
 
 export {
     TopicGold
