@@ -27,7 +27,7 @@ export default class FxhappDownload extends React.Component {
     render() {
         let {history} = this.props;
         let goBack = () => {
-            $.browser.inApp
+            Browser.inApp
                 ? NativeBridge.close()
                 : history.goBack();
         }
