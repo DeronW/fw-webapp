@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import styles from '../../css/topic/topic-huang-jin.css'
 
 @CSSModules(styles, {allowMultiple: true, errorWhenNotFound: false})
-class TopicGold extends React.Component {
+class HuangJin extends React.Component {
     state = {
         num: 0,
         isTop: false
@@ -273,4 +273,4 @@ class TopicGold extends React.Component {
     }
 }
 
-export default TopicGold
+export default HuangJin

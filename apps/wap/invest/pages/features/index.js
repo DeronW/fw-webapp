@@ -1,9 +1,8 @@
-import { List, Page } from './faq.js'
+import {List, Page} from './faq.js'
 import AboutUs from './about-us.js'
 import AppDownload from './app-download.js'
 import Cookbook from './cookbook.js'
 import VipPrerogative from './vip-prerogative.js'
-import TopicGold from '../topic/huang-jin.js'
 
 export {
     List as FAQList,
@@ -11,6 +10,5 @@ export {
     AboutUs,
     AppDownload,
     Cookbook,
-    VipPrerogative,
-    TopicGold
+    VipPrerogative
 }

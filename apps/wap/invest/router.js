@@ -37,7 +37,7 @@ export default (stores) => {
                 <Route exact path='/features/vip-prerogative' component={Features.VipPrerogative}/>
 
                 {/*主题模块  */}
-                <Route exact path='/topic/huang-jin' component={Topic.TopicGold}/>
+                <Route exact path='/topic/huang-jin' component={Topic.HuangJin}/>
 
                 {/*发现模块  */}
                 <Route exact path='/fa-xian' component={Faxian.Home}/>

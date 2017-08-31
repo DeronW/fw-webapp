@@ -1,5 +1,5 @@
-import TopicGold from './huang-jin.js'
+import HuangJin from './huang-jin.js'
 
 export {
-    TopicGold
+    HuangJin
 }
