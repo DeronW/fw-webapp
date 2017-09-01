@@ -164,7 +164,7 @@ class MiddlePanel extends React.Component{
                 profile:'毕业于青岛理工大学，曾任人人(NYSE:RENN)高级技术经理，先锋支付技术基础架构负责人，去哪儿(NYSE: QUNR)国际机票(供应链)技术负责人。现任工场微金CTO，负责工场微金互联网产品与技术团队。对大规模复杂在线交易系统架构设计及互联网产品技术团队管理具备丰富经验。'
             },
             {
-                img:require("../images/notice-information-disclosure/men7.png"),
+                img:require("../images/notice-information-disclosure/men8.png"),
                 name:'段炼',
                 job:'CMO 首席营销官',
                 profile:'毕业于北京交通大学，曾就职于中信国安集团和北京锐安科技有限公司，从事综合管理及互联网信息安全监管等相关工作，具备多年跨行业跨职能相关管理工作经验。对于营销管理、成本管理、团队管理具有丰富的工作经验，现任工场微金CMO,负责工场微金用户运营营销工作。'
