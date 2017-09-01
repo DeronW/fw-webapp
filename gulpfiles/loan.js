@@ -82,7 +82,7 @@ const WEIXIN_PAGES = [
     'weixin-download',
     'weixin-invite',
     'weixin-attention',
-    'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
+    // 'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
 // const MARKET = [
