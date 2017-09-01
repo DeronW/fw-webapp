@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react'
 import { Utils } from 'fw-javascripts'
 
 import { Header } from '../../components'
-import { Get, Browser } from '../../helpers'
+import { Get, Browser,NativeBridge } from '../../helpers'
 import styles from '../../css/features/vip-prerogative.css'
 
 @inject("features")
@@ -14,11 +14,11 @@ class VipPrerogative extends React.Component {
 
     componentDidMount() {
         let { features } = this.props;
+        NativeBridge.trigger("hide_header")
         document.title = "升级攻略"
         features.getDataHandler()
     }
     render() {
-        let header_section = (!Browser.inApp) && <Header title='升级攻略' history={this.props.history} />
         let vip_section1 = () => {
             let { level_list } = this.props.features.data
 
@@ -180,6 +180,7 @@ class VipPrerogative extends React.Component {
             </div>
         }
         return <div>
+            <Header title='升级攻略' history={this.props.history} />
             <div styleName="vipContent">
                 {vip_section1()}
                 {vip_section2()}
