@@ -14,6 +14,7 @@ import AppDownload from './pages/app-download.js'
 import InterestRewords from './pages/interest-reward.js'
 import Invite from './pages/invite'
 import InvestSchool from './pages/invest-school'
+import NoticeInformationDisclosure from './pages/notice-information-disclosure'
 import NoticeSafeguard from './pages/notice-safeguard'
 import VipPrerogative from './pages/vip-prerogative'
 import PolicyBox from './pages/policy'
@@ -32,6 +33,7 @@ export default (stores) => {
                 <Route exact path='/invite' component={Invite} />
                 <Route exact path='/invest-school' component={InvestSchool} />
                 <Route exact path='/notice-safeguard' component={NoticeSafeguard} />
+                <Route exact path='/notice-information-disclosure' component={NoticeInformationDisclosure} />
                 <Route exact path='/vip-prerogative' component={VipPrerogative} />
                 <Route exact path='/policy' component={PolicyBox} />
                 <Route exact path='/pdf' component={PDF} />
