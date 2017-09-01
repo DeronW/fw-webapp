@@ -29,8 +29,8 @@ export default(stores) => {
                 <Route exact path='/not-found' component={NotFound}/>
                 <Route exact path='/download' component={Download}/>
                 <Route exact path='/invite-activity' component={InviteActivity}/>
-                <Route exact path='/fxhapp-download' component={FxhappDownload}/>
-                <Route exact path='/jrgcapp-download' component={JrgcappDownload}/>
+                <Route exact path='/follow-fxh' component={FxhappDownload}/>
+                <Route exact path='/follow-jrgc' component={JrgcappDownload}/>
             </Switch>
         </Provider>
     </Router>
