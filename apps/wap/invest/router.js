@@ -38,6 +38,7 @@ export default (stores) => {
 
                 {/*主题模块  */}
                 <Route exact path='/topic/huang-jin' component={Topic.HuangJin}/>
+                <Route exact path='/topic/zeng-jin-bao' component={Topic.ZengJinBao}/>
 
                 {/*发现模块  */}
                 <Route exact path='/fa-xian' component={Faxian.Home}/>
