@@ -1,24 +1,75 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
+import { Header } from '../../components'
 import styles from '../../css/topic/zeng-jin-bao.css'
 
+
+const TABS = [
+    {
+        text: '项目简介',
+        pos: 262,
+    }, {
+        text: '资金安全',
+        pos: 1920
+    }, {
+        text: '投资案例',
+        pos: 2662
+    }, {
+        text: '合作机构',
+        pos: 4256
+    }, {
+        text: '常见问题',
+        pos: 4706
+    },
+]
 
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class ZengJinBao extends React.Component {
 
+    state = {
+        currentTab: 0
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.scrollWatcher, false);
+    }
+
+    scrollWatcher = () => {
+        let scrolled = document.documentElement.scrollTop,
+            currentTab = 0;
+        for (var i = 0; i < TABS.length; i++) {
+            if (scrolled + 1 >= TABS[i].pos) {
+                currentTab = i;
+            } else {
+                break
+            }
+        }
+        this.setState({ currentTab: currentTab })
+
+    }
+
+    scrollToFragment = i => {
+        window.scroll(0, TABS[i].pos)
+    }
+
     render() {
+        let { currentTab } = this.state;
+        let genTabs = (t, i) => {
+            let className = currentTab === i ? styles['tab-item--active'] : styles['tab-item'];
+            return <div key={i} className={className}
+                onClick={() => { this.scrollToFragment(i)} }>{t.text}</div>
+        }
+
         return <div>
+            <Header noClose title="增金宝" history={this.props.history} />
+
             <div styleName="banner">
                 <img src={require('../../images/topic/zeng-jin-bao/banner.png')} />
             </div>
 
             <div styleName="tab-group">
-                <div styleName="tab-item tab-item--active">项目简介</div>
-                <div styleName="tab-item">资金安全</div>
-                <div styleName="tab-item">投资案例</div>
-                <div styleName="tab-item">合作机构</div>
-                <div styleName="tab-item">常见问题</div>
+                { TABS.map(genTabs) }
             </div>
 
             <div styleName="fragment product">
@@ -35,8 +86,8 @@ class ZengJinBao extends React.Component {
                     <div styleName="sub-title"><span styleName="text--gold">增金宝</span>的优势</div>
                     <ul styleName="advantages-list">
                         <li>期限灵活，<span styleName="text--red">提金or变现随时选</span></li>
-                        <li>起购点低，<span styleName="text--red">1g即可起购</span></li>
                         <li>按日结算，收益日日增长</li>
+                        <li>起购点低，<span styleName="text--red">1g即可起购</span></li>
                         <li>抵抗通胀，资产配置更优化</li>
                         <li>操作便捷，购金一键操作</li>
                     </ul>
