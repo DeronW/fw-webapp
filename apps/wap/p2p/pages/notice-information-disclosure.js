@@ -93,7 +93,7 @@ class LeftPanel extends React.Component {
             },
         ]
 
-        return <div styleName="infoPart">
+        return <div>
             <div styleName="infoCon">
                 {data && accumulate.map(infoFn)}
             </div>
