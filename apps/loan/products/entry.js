@@ -9,6 +9,7 @@ import { Post, StoreSpy } from '../lib/helpers'
 let stores = {
     mortgage: new Stores.Mortgage(Post),
     loopLoan: new Stores.LoopLoan(Post),
+    fxh: new Stores.Fxh(Post)
 }
 
 new StoreSpy(stores).wiretap()
