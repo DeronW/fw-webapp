@@ -1,16 +1,24 @@
-import { extendObservable, computed } from 'mobx'
-import { Components } from 'fw-javascripts'
-import { Storage } from '../../lib/helpers'
+import { extendObservable} from 'mobx'
+import { Utils } from 'fw-javascripts'
 
+export default class Fxh{
+    constructor(request,state={}){
+        this.request = request;
+        this.API_PATH = 'http://localhost/fake-api';
+        extendObservable(this,{
+            data:[]
+        },state)
+    }
 
-export default class Fxh {
-    constructor(Post) {
-        this.Post = Post
-
-        extendObservable(this, {
+    getBaseInfo(){
+        this.request(`${this.API_PATH}/api/loan/v1/baseinfo.json`,{
+            productId: Utils.urlQuery.pid || 1
+        }).then((data)=>{
+            this.data = data
         })
-
     }
 
 }
+
+
 
