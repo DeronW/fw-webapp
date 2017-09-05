@@ -2,13 +2,13 @@ import React from 'react'
 import {render} from 'react-dom'
 import { Redirect, Link } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
-import styles from '../css/fxh.css'
+import styles from '../css/loan-fxh-index.css'
 import { observer, inject } from 'mobx-react'
 import Slider from '../components/slider'
-import Header from '../components/header'
+import { Header } from '../../lib/components'
 
 @inject('fxh') @observer @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-export default class Fxh extends React.Component {
+export default class FxhIndex extends React.Component {
     constructor(props){
         super(props)
         this.state = {

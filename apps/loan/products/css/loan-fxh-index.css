@@ -198,7 +198,7 @@ img {
 }
 
 .start-point {
-    background: url(../images/fxh/progress_bar_starting.jpg) no-repeat;
+    background: url(../images/loan-fxh-index/progress_bar_starting.jpg) no-repeat;
     background-size: 100% 100%;
     top: 0;
     left: 0
@@ -211,7 +211,7 @@ img {
 }
 
 .end-point {
-    background: url(../images/fxh/progress_bar_ending.png) no-repeat;
+    background: url(../images/loan-fxh-index/progress_bar_ending.png) no-repeat;
     background-size: 100% 100%;
     top: -1px;
     right: 0
@@ -260,7 +260,7 @@ img {
 }
 
 .lineDiv .minDiv {
-    background: url(../images/fxh/progress_bar_current.png) no-repeat;
+    background: url(../images/loan-fxh-index/progress_bar_current.png) no-repeat;
     width: 65px;
     height: 65px;
     background-size: 100% 100%;
