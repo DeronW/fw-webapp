@@ -6,6 +6,7 @@ import styles from '../css/loan-fxh-index.css'
 import { observer, inject } from 'mobx-react'
 import Slider from '../components/slider'
 import { Header } from '../../lib/components'
+import { NativeBridge, Browser } from '../../lib/helpers'
 
 @inject('fxh') @observer @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class FxhIndex extends React.Component {
@@ -101,9 +102,12 @@ export default class FxhIndex extends React.Component {
     }
     render(){
         let { fxh } = this.props;
+        let goBack = () => {
+            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
+        }
         return (
             <div styleName="apply-loan">
-                <Header title="放心花" history={history}/>
+                <Header title="放心花" goBack={goBack} />
                 <div styleName="loan-num-wrap">
 
                 </div>

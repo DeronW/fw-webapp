@@ -49,11 +49,13 @@
     position:absolute;
     top:50px;
     left:5px;
+    font-size:28px;
 }
 .end-point-num{
     position:absolute;
     top:50px;
     right:-25px;
+    font-size:28px;
 }
 .loan-num{
     position:absolute;
