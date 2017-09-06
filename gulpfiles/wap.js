@@ -103,7 +103,7 @@ APP_NAMES.push(
     // ...NOTICE_PAGES,
     ...SHOUSHAN, // 这是给首山提现用的页面
     // ...OUTSIDE_PAGES,
-    ...P2P,
+    // ...P2P,
     {
         name: 'invest',
         compiler: 'webpack'
