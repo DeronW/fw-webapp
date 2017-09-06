@@ -1,4 +1,4 @@
-import { extendObservable } from 'mobx'
+import { extendObservable, computed } from 'mobx'
 
 
 const api_key = 'QxYlSme6cgSmNVYMTGfPdJ8IyHJ5txhy',
@@ -17,14 +17,31 @@ export default class IdcardOcr {
             race: '',
             address: '',
             issuedBy: '',
-            validDate: ''
+            validDate: '',
+            idcardPortraitImg: '',
+            idcardEmblemImg: '',
         })
+    }
+
+    @computed get ocrDone() {
+        return this.data.idcardPortraitImg && this.data.idcardEmblemImg
     }
 
     handleItemEdit = field => e => {
         this.data[field] = e.target.value;
     }
 
+    uploadIdcardImg = (type, data) => {
+        if (type === 'portrait') {
+            this.data.idcardPortraitImg = data;
+        } else if (type === 'emblem') {
+            this.data.idcardEmblemImg = data;
+        }
+    }
 
+    submit = () => {
+        if (!this.ocrDone) return
+        console.log('submit');
+    }
 
 }

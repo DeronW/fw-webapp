@@ -81,6 +81,11 @@
 .edit-btn {
     line-height: 72px;
     float: right;
+    color: #6aa4f0;
+}
+
+.edit-btn-disabled {
+    composes: edit-btn;
     color: #ccc;
 }
 
@@ -132,8 +137,13 @@
 .submit-btn {
     height: 84px;
     line-height: 84px;
-    background-color: #ccc;
+    background-color: #6aa4f0;
     color: #fff;
     font-size: 32px;
     text-align: center;
+}
+
+.submit-btn-disabled {
+    composes: submit-btn;
+    background-color: #ccc;
 }
