@@ -21,7 +21,7 @@ export default class FxhWant extends React.Component {
     state = {
         loanNum: Utils.hashQuery.sliderNum,
         creditLine: Utils.hashQuery.creditLine,
-        orioleOrderGid: Utils.hashQuery.orioleOrderGid,
+        // orioleOrderGid: Utils.hashQuery.orioleOrderGid,
         orderGid: null,
         loanGid: null,
         showToZH: false,
@@ -31,6 +31,7 @@ export default class FxhWant extends React.Component {
     componentDidMount() {
         document.title = "我要借款";
         let {fxh} = this.props;
+        fxh.getBaseInfo();
         fxh.get_info();
     }
 
@@ -79,7 +80,7 @@ export default class FxhWant extends React.Component {
         // let user = $FW.Store.getUserDict();
         Post(`/api/loan/v1/apply.json`, {
                 loanAmount: this.state.loanNum,
-                orioleOrderGid: fxh.orioleOrderGid,
+                orioleOrderGid: fxh.data.orioleOrderGid,
                 productId: 1,
                 withdrawCardGid: fxh.defaultCardGid
             }
