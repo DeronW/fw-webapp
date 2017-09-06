@@ -30,8 +30,8 @@ export default class FxhResult extends React.Component {
 
     componentDidMount() {
         document.title = "借款结果"
-        let {apply} = this.props;
-        apply.get_base_info();
+        let {fxh} = this.props;
+        fxh.get_base_info();
         this.countingDown();
     }
 
@@ -96,7 +96,7 @@ export default class FxhResult extends React.Component {
         location.href = '/static/loan/user-weixin-new-download/index.html';
     }
     render() {
-        let {apply} = this.props;
+        let {fxh} = this.props;
         return (
             <div styleName="loan-result">
                 {Browser.inAndroid && <div styleName="header">
@@ -115,7 +115,7 @@ export default class FxhResult extends React.Component {
                         ? "waiting-result-box"
                         : "waiting-result-box dis"}>
                         <div styleName="wrap-box">
-                            <div styleName="success-icon"><img src={require("../images/apply-result/success-icon.png")}/></div>
+                            <div styleName="success-icon"><img src={require("../images/loan-fxh-result/success-icon.png")}/></div>
                             <div styleName="loan-result1">
                                 <div styleName="icon1"></div>
                                 <div styleName="icon1-info">申请成功</div>
@@ -133,7 +133,7 @@ export default class FxhResult extends React.Component {
                         ? "check-result-box"
                         : "check-result-box dis"}>
                         <div styleName="wrap-box">
-                            <div styleName="success-icon"><img src={require("../images/apply-result/success-icon.png")}/></div>
+                            <div styleName="success-icon"><img src={require("../images/loan-fxh-result/success-icon.png")}/></div>
                             <div styleName="loan-result2">
                                 <div styleName="icon1"></div>
                                 <div styleName="icon1-info">申请成功</div>
@@ -155,7 +155,7 @@ export default class FxhResult extends React.Component {
                         ? "success-result-box"
                         : "success-result-box dis"}>
                         <div styleName="wrap-box">
-                            <div styleName="success-icon"><img src={require("../images/apply-result/success-icon.png")}/></div>
+                            <div styleName="success-icon"><img src={require("../images/loan-fxh-result/success-icon.png")}/></div>
                             <div styleName="loan-result3">
                                 <div styleName="icon1"></div>
                                 <div styleName="icon1-info">申请成功</div>
@@ -165,7 +165,7 @@ export default class FxhResult extends React.Component {
                                     <div styleName="icon3-info">
                                         <div styleName="icon3-info-top">已打款至</div>
                                         <div styleName="icon3-info-btm">
-                                            银行卡（{apply.bankName}{apply.bankNo}）
+                                            银行卡（{fxh.bankName}{fxh.bankNo}）
                                         </div>
                                     </div>
                                 </div>
@@ -179,7 +179,7 @@ export default class FxhResult extends React.Component {
                         ? "fail-result-box"
                         : "fail-result-box dis"}>
                         <div styleName="wrap-box">
-                            <div styleName="fail-icon"><img src={require("../images/apply-result/fail-icon.png")}/></div>
+                            <div styleName="fail-icon"><img src={require("../images/loan-fxh-result/fail-icon.png")}/></div>
                         <div styleName="loan-result4">
                                 <div styleName="icon4"></div>
                             <div styleName="icon4-info">
@@ -214,7 +214,7 @@ export default class FxhResult extends React.Component {
             <a styleName="attention-btn download-bg" onClick={this.clickHandler}>下载放心花APP</a>
                 </div>
                 <div styleName="customer-service">
-                    <div styleName="service-wrap"><img src={require("../images/apply-result/phone.png")}/>如有问题请致电：<a href="tel:400-102-0066">400-102-0066</a>
+                    <div styleName="service-wrap"><img src={require("../images/loan-fxh-result/phone.png")}/>如有问题请致电：<a href="tel:400-102-0066">400-102-0066</a>
                     </div>
                 </div>
             </div>

@@ -118,7 +118,7 @@ input{
   display:block;
   width:38px;
   height:38px;
-  background:url(../images/apply-confirm//checked.png) no-repeat;
+  background:url(../images/loan-fxh-confirm/checked.png) no-repeat;
   float:left;
   margin-top:5px;
 }
@@ -213,7 +213,7 @@ input{
   margin:25px auto 34px;
 }
 .close-icon{
-  background:url(../images/apply-confirm//close.jpg) no-repeat;
+  background:url(../images/loan-fxh-confirm/close.jpg) no-repeat;
   width:20px;
   height:20px;
   position:absolute;
@@ -272,7 +272,7 @@ input{
   margin-bottom:15px;
 }
 .verify-popup-close{
-  background:url(../images/apply-confirm//close.jpg)  no-repeat;
+  background:url(../images/loan-fxh-confirm/close.jpg)  no-repeat;
   width:20px;
   height:20px;
   background-size:100% 100%;
@@ -389,7 +389,7 @@ border:1px solid #ebeaea;
   position:relative;
 }
 .icon1{
-  background:url(../images/apply-confirm//icon-success.png) no-repeat;
+  background:url(../images/loan-fxh-confirm/icon-success.png) no-repeat;
   width:50px;
   height:50px;
   position:absolute;
@@ -453,7 +453,7 @@ border:1px solid #ebeaea;
   margin-right:20px;
 }
 .icon3{
-  background:url(../images/apply-confirm//icon-success.png) no-repeat;
+  background:url(../images/loan-fxh-confirm/icon-success.png) no-repeat;
   width:50px;
   height:50px;
   position:absolute;
@@ -484,7 +484,7 @@ border:1px solid #ebeaea;
   border-radius:6px;
   margin:37px auto 0;
 }
-.apply-btn{
+.loan-fxh-btn{
   width:654px;
   height:84px;
   line-height:84px;
@@ -500,7 +500,7 @@ border:1px solid #ebeaea;
 .success-icon{
 }
 .icon4{
-  background:url(../images/apply-confirm//icon-success.png) no-repeat;
+  background:url(../images/loan-fxh-confirm/icon-success.png) no-repeat;
   width:50px;
   height:50px;
   position:absolute;
@@ -523,7 +523,7 @@ border:1px solid #ebeaea;
 .icon5{
   width:50px;
   height:50px;
-  background:url(../images/apply-confirm//icon-fail.png) no-repeat;
+  background:url(../images/loan-fxh-confirm/icon-fail.png) no-repeat;
   position:absolute;
   top:124px;
   left:117px;
@@ -567,7 +567,7 @@ border:1px solid #ebeaea;
   color:#333;
 }
 .arrow-left{
-  background:url(../images/apply-confirm//arrow-left.jpg) no-repeat;
+  background:url(../images/loan-fxh-confirm/arrow-left.jpg) no-repeat;
   width:19px;
   height:34px;
   position:absolute;
