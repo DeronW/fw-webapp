@@ -96,10 +96,13 @@ export default class FxhResult extends React.Component {
         location.href = '/static/loan/user-weixin-new-download/index.html';
     }
     render() {
-        let {fxh} = this.props;
+        let {fxh,history} = this.props;
+        let goBack = () => {
+            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
+        }
         return (
             <div styleName="loan-result">
-                {Browser.inAndroid && <div styleName="header">
+                {/* {Browser.inAndroid && <div styleName="header">
                     <div styleName="arrow-left" onClick={() => {
                         Browser.inJRGCApp
                             ? NativeBridge.close()
@@ -107,7 +110,8 @@ export default class FxhResult extends React.Component {
                     }}></div>
                     <div styleName="title">借款结果</div>
                 </div>
-                }
+                } */}
+                {Browser.inAndroid && <Header title="借款结果" goBack = {goBack}/>}
                 <div styleName={Browser.inIOS
                     ? "result-box-ios"
                     : "result-box"}>

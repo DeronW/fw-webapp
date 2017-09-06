@@ -3,7 +3,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Link} from 'react-router-dom'
-
+import ProductDisplay from '../components/productDisplay'
 import {Header} from '../../lib/components'
 import {Browser, Post, NativeBridge, Storage} from '../../lib/helpers'
 
@@ -189,7 +189,7 @@ export default class FxhConfirm extends React.Component {
     }
 
     render() {
-      let {fxh} = this.props;
+      let {fxh,history} = this.props;
       let {accountInAmount,shouldRepaymentAmount,dueTimeStr,totalFeeAmount,feeExtList,latedescription} = fxh;
         let frequent_tip = this.state.show_warn &&
             <div styleName="wrong-tip">{this.state.show_text}</div>;
@@ -203,6 +203,7 @@ export default class FxhConfirm extends React.Component {
             };
     return (
         <div>
+            <Header title="确认信息" history={history}/>
             <div styleName="transfer-box">
                 <div styleName="money-get">
                     <div styleName="transfer-money">{accountInAmount}</div>

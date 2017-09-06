@@ -19,9 +19,9 @@ import styles from '../css/loan-fxh-want.css'
 export default class FxhWant extends React.Component {
 
     state = {
-        loanNum: Utils.hashQuery.slideNum,
+        loanNum: Utils.hashQuery.sliderNum,
         creditLine: Utils.hashQuery.creditLine,
-        orioleOrderGid: Utils.hashQuery.orioleOrderGid,
+        // orioleOrderGid: Utils.hashQuery.orioleOrderGid,
         orderGid: null,
         loanGid: null,
         showToZH: false,
@@ -31,6 +31,7 @@ export default class FxhWant extends React.Component {
     componentDidMount() {
         document.title = "我要借款";
         let {fxh} = this.props;
+        fxh.getBaseInfo();
         fxh.get_info();
     }
 
@@ -79,14 +80,14 @@ export default class FxhWant extends React.Component {
         // let user = $FW.Store.getUserDict();
         Post(`/api/loan/v1/apply.json`, {
                 loanAmount: this.state.loanNum,
-                orioleOrderGid: this.state.orioleOrderGid,
+                orioleOrderGid: fxh.data.orioleOrderGid,
                 productId: 1,
                 withdrawCardGid: fxh.defaultCardGid
             }
         ).then((data) => {
             this.setState({ loanGid: data.loanGid, orderGid: data.orderGid });
             if (!err) {
-                location.href = `/static/loan/products/index.html#/loan-fxh-confirm?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${apply.defaultCardGid}&orderGid=${this.state.orderGid}`;
+                location.href = `/static/loan/products/index.html#/loan-fxh-confirm?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${fxh.defaultCardGid}&orderGid=${this.state.orderGid}`;
             }
         },(err) => {
             if (err.code == 24003 || err.code == 24005) return this.setState({loanShow: true, failMsg: err.message})
@@ -99,7 +100,7 @@ export default class FxhWant extends React.Component {
     }
 
     render() {
-        let {fxh}= this.props;
+        let {fxh,history}= this.props;
         // const USER = $FW.Store.getUserDict();
         let interest = fxh.baseRateDay * 100;
         let cashBank = fxh.cashBankList;
@@ -111,6 +112,7 @@ export default class FxhWant extends React.Component {
 
         return (
             <div>
+                <Header title="我要借款" history = {history}/>
                 {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} errorMessage={this.state.failMsg} popTitle={"审核失败"}/>}
                 <div styleName="loan-box">
                     <div styleName="loan-box-title">借款金额(元)</div>
