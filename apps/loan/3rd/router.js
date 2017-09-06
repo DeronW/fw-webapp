@@ -14,6 +14,7 @@ import JRGCHome from "./pages/jrgc-home.js"
 import JRGCLogin from "./pages/jrgc-login.js"
 
 import IdcardOcr from './pages/idcard-ocr.js'
+import IdcardLiveMatch from './pages/idcard-live-match.js'
 
 export default (stores) => {
     return <Router>
@@ -31,6 +32,7 @@ export default (stores) => {
 
                 {/* 身份识别相关页面 */}
                 <Route exact path='/idcard-ocr' component={IdcardOcr} />
+                <Route exact path='/idcard-live-match' component={IdcardLiveMatch} />
             </Switch>
         </Provider>
     </Router>

@@ -58,9 +58,9 @@ class IdcardOcr extends React.Component {
 
     render() {
         const { onEdit } = this.state,
-            { idcard_ocr } = this.props;
+            { history, idcard_ocr } = this.props;
         return <div styleName="bg">
-            <Header title="身份证识别" />
+            <Header title="身份证识别" history={history} />
 
             <div styleName="capture-container">
                 <div styleName="capture-title">请分别拍摄身份证正反面，系统自动识别</div>
