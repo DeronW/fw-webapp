@@ -29,6 +29,10 @@ class PCHeader extends React.Component {
         location.href = 'http://passport.9888keji.com/passport/login?sourceSite=jrgc&service=' + location.href;
     }
 
+    downloadHandler = () => {
+        location.href = 'https://www.9888keji.com/static/keji-web/app-download/index.html'
+    }
+
     render() {
         let {isLogin, user} = this.state
 
@@ -74,7 +78,7 @@ class PCHeader extends React.Component {
                     {/*</a>*/}
 
                     {/*<a styleName="nav-link" href="http://bbs.9888.cn">*/}
-                        {/*<img src={require("../images/header/bbs.png")}/>*/}
+                    {/*<img src={require("../images/header/bbs.png")}/>*/}
                     {/*</a>*/}
 
                     {!isLogin &&
@@ -85,8 +89,7 @@ class PCHeader extends React.Component {
 
                     {logout}{user_panel()}
                     {isLogin && <div styleName="btn-link-sp"></div>}
-                    <a styleName="btn-link btn-download-app" target="_blank"
-                       href="https://www.9888keji.com/static/keji-web/app-download/index.html">APP下载
+                    <div styleName="btn-link btn-download-app" target="_blank" onClick={this.downloadHandler}>APP下载
                         <div styleName="download-app">
                             <img src={require('../images/header/app.jpg')}/>
                             <a styleName="d-download">立即下载App</a>
@@ -95,7 +98,7 @@ class PCHeader extends React.Component {
                             <a styleName="d-ios"
                                href="https://www.9888keji.com/static/keji-web/app-download/index.html">iOS版下载</a>
                         </div>
-                    </a>
+                    </div>
                     <div styleName="btn-link-sp"></div>
                     <a styleName="btn-link" target="_blank"
                        href="http://www.9888keji.com/static/web/guide-cookbook/index.html">玩赚攻略</a>
