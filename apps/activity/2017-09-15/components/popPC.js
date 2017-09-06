@@ -9,10 +9,7 @@ class PopGetPricePC extends React.Component {
         userName: null,
         userPhone: null,
         useradress: null,
-        btn: false,
-        nameTips: null,
-        phoneTips: null,
-        addressTips: null
+        btn: false
     }
 
     nameHandler = (e) => {
@@ -38,12 +35,12 @@ class PopGetPricePC extends React.Component {
 
     }
 
-    reviseHanler = () => {
+    reviseHandler = () => {
         this.setState({btn: false})
     }
 
     render() {
-        let {userName, userPhone, useradress, btn, nameTips, phoneTips, addressTips} = this.state;
+        let {userName, userPhone, useradress, btn} = this.state;
         let name_on = <div styleName="name-on">
             <span>姓名：</span>
             <input type="text" maxLength="4" onChange={this.nameHandler} value={userName}/>
@@ -74,7 +71,7 @@ class PopGetPricePC extends React.Component {
                 {btn ? name : name_on}
                 {btn ? phone : phone_on}
                 {btn ? adress : adress_on}
-                <div styleName="btn" onClick={btn ? this.reviseHanler : this.keepHandler}>
+                <div styleName="btn" onClick={btn ? this.reviseHandler : this.keepHandler}>
                     {btn ? "修改" : "保存"}
                 </div>
             </div>

@@ -13,6 +13,8 @@ import Interface from './pages/interface.js'
 import JRGCHome from "./pages/jrgc-home.js"
 import JRGCLogin from "./pages/jrgc-login.js"
 
+import IdcardOcr from './pages/idcard-ocr.js'
+
 export default (stores) => {
     return <Router>
         <Provider {...stores} >
@@ -26,6 +28,9 @@ export default (stores) => {
                 <Route exact path="/jrgc-login" component={JRGCLogin} />
 
                 {/* 微信相关页面 */}
+
+                {/* 身份识别相关页面 */}
+                <Route exact path='/idcard-ocr' component={IdcardOcr} />
             </Switch>
         </Provider>
     </Router>
