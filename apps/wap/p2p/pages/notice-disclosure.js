@@ -112,7 +112,7 @@ class LeftPanel extends React.Component {
                 </div>
             </div>
             <div styleName="reportTitle">经审计的年度报表</div>
-            <a styleName="reportBtn" href="https://static.9888.cn/pdf/2016report.pdf" target="_blank">立即查看</a>
+            <a styleName="reportBtn" href="https://static.9888.cn/pdf/web/2016report.pdf" target="_blank">立即查看</a>
         </div>
     }
 }
