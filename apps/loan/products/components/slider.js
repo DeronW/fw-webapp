@@ -1,8 +1,9 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from '../css/components/slider.css'
+import { observer, inject } from 'mobx-react'
 
-@CSSModules(styles)
+@inject('fxh') @observer @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Slider extends React.Component {
 
     constructor(props) {
@@ -71,7 +72,7 @@ class Slider extends React.Component {
             let canBorrowAmount = this.props.canBorrowAmount;
             let leftValue = parseInt(left);
             let loanNum = Math.round((lowestLoanNum + parseInt((canBorrowAmount - lowestLoanNum) * leftValue / 548)) / 100) * 100;
-            this.setState({loanNum:loanNum})
+            this.setState({loanNum:loanNum},this.props.fxh.watchSliderNum(this.state.loanNum))
             if (loanNum != canBorrowAmount) {
                 this.setState({ show_tip: false });
             } else {

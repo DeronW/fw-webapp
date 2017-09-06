@@ -6,6 +6,7 @@ export default class Fxh{
         this.Post = Post
         extendObservable(this, {
             data:[],
+            sliderNum:'',
             cashBankList:[],
             bankName:"",
             bankNo:"",
@@ -73,6 +74,11 @@ export default class Fxh{
         console.log(this.orderGid);
         return this.Post(`/api/loan/v1/sendSmsverifycode.json`,{orderGid: this.orioleOrderGid})
     }
+
+    watchSliderNum = (num) => {
+        this.sliderNum = num;
+    }
+
 
     getBaseInfo = () => {
         this.Post(`/api/loan/v1/baseinfo.json`,{

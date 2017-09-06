@@ -88,7 +88,7 @@ export default class FxhIndex extends React.Component {
                 <a styleName="credit-improvement-btn" href={Browser.inJRGCApp && st == 5 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`}>
                     我要提额
                 </a>
-                <a styleName="credit-apply-btn" href={`/static/loan/products/index.html#/loan-fxh-want`}>
+                <a styleName="credit-apply-btn" href={`/static/loan/products/index.html#/loan-fxh-want?sliderNum=${this.props.fxh.sliderNum}`}>
                     申请借款</a>
             </div>;
 
