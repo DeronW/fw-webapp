@@ -21,7 +21,7 @@ class IdcardLiveMatch extends React.Component {
     togglePop = () => this.setState({ showPop: !this.state.showPop })
 
     handleVideoInput = e => {
-
+        console.log(e.target.files[0]);
     }
 
     render() {
@@ -56,7 +56,8 @@ class IdcardLiveMatch extends React.Component {
                             <div styleName="tip">牢记这4位数字，录制时用普通话匀速念出。</div>
                             <div styleName="record-btn-container">
                                 <div styleName="record-btn">开始录制视频</div>
-                                <input type="file" accept="video/*" capture="camcorder" />
+                                <input type="file" accept="video/*" capture="camcorder"
+                                onChange={this.handleVideoInput} />
                             </div>
                         </div>
                         <i styleName="close" onClick={this.togglePop}></i>
