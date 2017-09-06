@@ -25,7 +25,7 @@
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
-    z-index: 999;
+    z-index: 9;
 }
 .start-point{
     background:url(../../images/loan-fxh-index/progress_bar_starting.jpg) no-repeat;

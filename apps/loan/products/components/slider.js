@@ -16,13 +16,13 @@ class Slider extends React.Component {
         this.touchMoveFn = null
         this.touchUpFn = null
         this.state={
-            loanNum:'',
+            loanNum:(this.props.fxh.data.borrowBtnStatus == 1 || this.props.fxh.data.borrowBtnStatus == 101) ? 10000 : this.props.fxh.data.canBorrowAmount,
             show_tip:true
         }
     }
-    componentWillReceiveProps(nextProps) {
-        this.setState({loanNum:nextProps.canBorrowAmount})
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     this.setState({loanNum:nextProps.canBorrowAmount})
+    // }
     componentDidMount() {
         const bar = this.refs.bar
         const selectedBar = this.refs.selectedBar

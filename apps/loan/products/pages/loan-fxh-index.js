@@ -6,7 +6,20 @@ import styles from '../css/loan-fxh-index.css'
 import { observer, inject } from 'mobx-react'
 import Slider from '../components/slider'
 import { Header } from '../../lib/components'
+import { Components } from 'fw-javascripts'
 import { NativeBridge, Browser, Storage } from '../../lib/helpers'
+
+function gotoHandler(link, toNative, need_login = false) {
+    if (Browser.inFXHApp && toNative)
+        return NativeBridge.toNative(toNative)
+
+    if (link.indexOf('://') < 0)
+        link = location.protocol + '//' + location.hostname + link;
+
+    Browser.inFXHApp ?
+        NativeBridge.goto(link, need_login) :
+        location.href = link
+}
 
 @inject('fxh') @observer @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class FxhIndex extends React.Component {
@@ -28,22 +41,43 @@ export default class FxhIndex extends React.Component {
 
     getBorrowBtn = () => {
         let { fxh } = this.props;
-        let btn = '--', st = fxh.borrowBtnStatus;
+        let btn = '--', st = fxh.data.borrowBtnStatus;
+
+
+        let credit_btn_handler = () => {
+            this.setState({popShow:true});
+        }
 
         let unavailable_loan =
             <div styleName="unavailable-loan">
                 <div styleName="max-loan-money money-empty">暂无额度</div>
                 <div styleName="max-loan-title">
-                    <img src={require("../images/fxh/warn.png")} />
-                    仅支持{fxh.data.lowestLoan}元以上借款，快去<a styleName="credit-improvement-tip">提额</a>吧！
+                    <img src={require("../images/loan-fxh-index/warn.png")} />
+                    仅支持{fxh.data.lowestLoan}元以上借款，快去<a styleName="credit-improvement-tip" onClick={()=>credit_btn_handler()}>提额</a>吧！
                 </div>
             </div>;
 
         btn = st === 2 || st === 3 ?
             unavailable_loan :
-            available_loan;
+            null
 
         return btn
+    }
+
+
+    getMoneySlider = () => {
+        let slider = '--', st = this.props.fxh.data.borrowBtnStatus;
+
+        let no_slider_bar =
+            <div className="no-slider-bar">
+                <img src={require("../images/loan-fxh-index/no-slider-bar.jpg")} />
+            </div>;
+
+        slider = st === 2 || st === 3 ?
+            no_slider_bar :
+            null;
+
+        return slider
     }
 
     getBtnStatus = () => {
@@ -61,15 +95,13 @@ export default class FxhIndex extends React.Component {
 
         let loanBtnClick = () => {
             st === 101 ?
-                $FW.Component.Toast('设置提现卡申请处理中，请稍等') :
+                Components.showToast('设置提现卡申请处理中，请稍等') :
                 gotoHandler(link)
         }
-        let loan_btn = <div styleName="loan-btn" onClick={loanBtnClick}>申请借款</div>;
+        let loan_btn = <div styleName="loan-btn" onClick={()=>loanBtnClick()}>申请借款</div>;
 
         let credit_btn_handler = () => {
-            if(st == 1){
-                this.setState({popShow:true});
-            }
+            this.setState({popShow:true});
         }
 
         // let credit_btn =
@@ -79,7 +111,7 @@ export default class FxhIndex extends React.Component {
 
 
         let credit_btn =
-            <a styleName="loan-btn" onClick={credit_btn_handler()}>
+            <a styleName="loan-btn" onClick={()=>credit_btn_handler()}>
                 我要提额
             </a>;
 
@@ -119,11 +151,13 @@ export default class FxhIndex extends React.Component {
             <div styleName="apply-loan">
                 <Header title="放心花" goBack={goBack} />
                 <div styleName="loan-num-wrap">
-
+                    {(fxh.data.borrowBtnStatus == 2 || fxh.data.borrowBtnStatus == 3) && this.getBorrowBtn()}
                 </div>
                 <div styleName="loan-info">
                     <div styleName="slider-wrap">
-                        <Slider canBorrowAmount={fxh.data.canBorrowAmount} lowestLoan={fxh.data.lowestLoan} start={this.state.start} end={this.state.end} defaultValue={this.state.defaultValue}/>
+                        {fxh.data.borrowBtnStatus == 5 && <Slider canBorrowAmount={fxh.data.canBorrowAmount} lowestLoan={fxh.data.lowestLoan} start={this.state.start} end={this.state.end} defaultValue={this.state.defaultValue}/>}
+                        {(fxh.data.borrowBtnStatus == 1 || fxh.data.borrowBtnStatus == 101) && <Slider canBorrowAmount={10000} lowestLoan={0} start={0} end={10000} defaultValue={10000}/>}
+                        {(fxh.data.borrowBtnStatus == 2 || fxh.data.borrowBtnStatus == 3) && this.getMoneySlider()}
                     </div>
                     <div styleName="loan-info-items">
                         <div styleName="credit-lines">
