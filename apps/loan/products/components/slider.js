@@ -36,7 +36,7 @@ class Slider extends React.Component {
         this.offsetLeft = this.getOffsetLeft(bar) + this.marginLeft
         slider.style.left = this.getTickValue(defaultValue) - parseInt(sliderStyle.width) / 2 + 'px'
         selectedBar.style.width = this.getTickValue(defaultValue) + 'px'
-
+        this.props.fxh.watchSliderNum(this.state.loanNum);
     }
 
     handletouchStart(event) {
