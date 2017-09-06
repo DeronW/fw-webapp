@@ -3,7 +3,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Link} from 'react-router-dom'
-import ProductDisplay from '../components/ProductDisplay'
+import ProductDisplay from '../components/productDisplay'
 import {Header} from '../../lib/components'
 import {Browser, Post, NativeBridge, Storage} from '../../lib/helpers'
 
