@@ -1,11 +1,13 @@
-.bg{
+.bg {
     width: 100%;
     height: 100%;
-    background: #ebebee;  
+    background: #ebebee;
 }
+
 .policy-box {
     background-color: #fff;
 }
+
 .line {
     width: 100%;
     height: 18px;
@@ -13,13 +15,14 @@
     border-bottom: 1px solid #d8d8d8;
     background-color: #ebebee;
 }
+
 .gap {
     width: 660px;
     margin: 0 30px;
     height: 18px;
     border-top: 1px solid #d8d8d8;
-
 }
+
 .policy-link {
     width: 690px;
     height: 90px;
@@ -29,6 +32,7 @@
     background-color: #fff;
     border-bottom: 1px solid #d8d8d8;
 }
+
 .link-detail {
     display: block;
     width: 640px;
@@ -40,7 +44,8 @@
     background: url("../images/policy/arrow.png") no-repeat right center;
     padding-right: 20px;
 }
-.lightbox{
+
+.lightbox {
     position: fixed;
     top: 0px;
     left: 0px;
@@ -51,10 +56,11 @@
     background-color: rgb(0, 0, 0);
     display: none;
 }
-.pop,iframe{
+
+.pop {
     position: absolute;
     left: 50%;
-    top:0;
+    top: 0;
     width: 620px;
     height: 100%;
     margin-left: -350px;

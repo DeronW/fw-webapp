@@ -87,7 +87,7 @@ const P2P = [
     // 'p2p-faq', //微金帮助中心页面
     // 'p2p-app-download', //微金app下载页面
     // 'p2p-notice-safeguard', //p2p资金安全保障
-    'p2p-notice-information-disclosure', //微金信息披露
+    // 'p2p-notice-information-disclosure', //微金信息披露
     // 'p2p-topic-invest-school', //微金投资学堂页面
 ]
 
@@ -103,7 +103,7 @@ APP_NAMES.push(
     // ...NOTICE_PAGES,
     ...SHOUSHAN, // 这是给首山提现用的页面
     // ...OUTSIDE_PAGES,
-    ...P2P,
+    // ...P2P,
     {
         name: 'invest',
         compiler: 'webpack'

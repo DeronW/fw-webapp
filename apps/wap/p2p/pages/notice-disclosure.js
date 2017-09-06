@@ -4,7 +4,7 @@ import { getJSONP, Utils } from 'fw-javascripts'
 
 import { Header } from '../components'
 import { NativeBridge } from '../helpers'
-import styles from '../css/notice-information-disclosure.css'
+import styles from '../css/notice-disclosure.css'
 
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class LeftPanel extends React.Component {
@@ -98,7 +98,13 @@ class LeftPanel extends React.Component {
                 {data && accumulate.map(infoFn)}
             </div>
             <div styleName="infoPromote"></div>
-            <div styleName="pieCon"></div>
+            <div styleName="pieCon">
+                <iframe style={{
+                    border: '0',
+                    width: '720px',
+                    height: '1200px'
+                }} src="https://static.9888.cn/pages/wap/chart-a/index.html"></iframe>
+            </div>
             <div styleName="enduranceMobile">
                 <div styleName="enduranceTitle">平台风险承受能力</div>
                 <div styleName="enduranceContent">
@@ -106,7 +112,7 @@ class LeftPanel extends React.Component {
                 </div>
             </div>
             <div styleName="reportTitle">经审计的年度报表</div>
-            <a styleName="reportBtn" href="https://static.9888.cn/pdf/2016report.pdf" target="_blank">立即查看</a>
+            <a styleName="reportBtn" href="https://static.9888.cn/pdf/web/2016report.pdf" target="_blank">立即查看</a>
         </div>
     }
 }
@@ -127,43 +133,43 @@ class MiddlePanel extends React.Component {
         }
         let chairman = [
             {
-                img: require("../images/notice-information-disclosure/men1.png"),
+                img: require("../images/notice-disclosure/men1.png"),
                 name: '康忠芹·法人',
                 job: '中國信貸科技副总裁',
                 profile: '康忠芹女士，毕业于东北财经大学投资经济专业。先后在大开信托投资、亿达企业集团负责人力资源及投融资项目前期开发工作，资深人力资源管理师，具备独特的管理风格。自2011年涉足普惠金融以来，带领团队从应用ipc技术发展小微金融起步，发挥团队互联网科技优势，先后参与创建了网信集团、众筹网、一房集团、网信征信，在中國信貸科技的互联网金融发展历程中做出突出业绩。'
             },
             {
-                img: require("../images/notice-information-disclosure/men2.png"),
+                img: require("../images/notice-disclosure/men2.png"),
                 name: '魏薇·董事长',
                 job: '',
                 profile: '毕业于中国人民大学。曾任北京联合开元投资担保有限公司副总经理和联合创业集团有限公司营运管理中心总经理。经过10余年金融行业管理岗位的历练，拥有丰富的P2P行业实战经验和全面而独到的行业视角及理念，是小微金融的领军人物，普惠金融体系的积极践行者。'
             },
             {
-                img: require("../images/notice-information-disclosure/men3.png"),
+                img: require("../images/notice-disclosure/men3.png"),
                 name: '崔海晨·监事',
                 job: '',
                 profile: '北京邮电大学软件工程硕士。2013年3月加入先锋金融集团，历任金融工场首席执行官、金融工场CTO、网信金融集团开发副总监等职。曾任宜信公司互联网技术总监，安博教育集团 （NYSE: AMBO）研发总监。'
             },
             {
-                img: require("../images/notice-information-disclosure/men6.png"),
+                img: require("../images/notice-disclosure/men6.png"),
                 name: '朱海涛',
                 job: 'COO 首席运营官',
                 profile: '毕业于天津大学，曾就职于IBM(NYSE:IBM)研发中心，并在Tom网，安博教育（NYSE:AMBO)有多年技术研发管理工作经验。对互联网技术与互联网产品相结合，实践经验丰富，同时对互联网技术与互联网运营高度紧密结合的相关工作有着丰富经验。现任工场微金COO，负责工场微金整体网站的运营管理。'
             },
             {
-                img: require("../images/notice-information-disclosure/men4.png"),
+                img: require("../images/notice-disclosure/men4.png"),
                 name: '邹晓东',
                 job: '首席风险官',
                 profile: '毕业于东北财经大学，中国注册会计师（CICPA），英国特许公认会计师 （FCCA），曾任普华永道中天会计师事务所审计经理，联合创业担保集团辽宁公司首席风险官，拥有多年的风险管理经验。'
             },
             {
-                img: require("../images/notice-information-disclosure/men7.png"),
+                img: require("../images/notice-disclosure/men7.png"),
                 name: '张锐',
                 job: 'CTO 首席技术官',
                 profile: '毕业于青岛理工大学，曾任人人(NYSE:RENN)高级技术经理，先锋支付技术基础架构负责人，去哪儿(NYSE: QUNR)国际机票(供应链)技术负责人。现任工场微金CTO，负责工场微金互联网产品与技术团队。对大规模复杂在线交易系统架构设计及互联网产品技术团队管理具备丰富经验。'
             },
             {
-                img: require("../images/notice-information-disclosure/men8.png"),
+                img: require("../images/notice-disclosure/men8.png"),
                 name: '段炼',
                 job: 'CMO 首席营销官',
                 profile: '毕业于北京交通大学，曾就职于中信国安集团和北京锐安科技有限公司，从事综合管理及互联网信息安全监管等相关工作，具备多年跨行业跨职能相关管理工作经验。对于营销管理、成本管理、团队管理具有丰富的工作经验，现任工场微金CMO,负责工场微金用户运营营销工作。'
@@ -229,10 +235,10 @@ class MiddlePanel extends React.Component {
             <div styleName="orgTitle">
                 组织架构
                 </div>
-            <img src={require("../images/notice-information-disclosure/org.jpg")} alt="" styleName="orgPic" />
+            <img src={require("../images/notice-disclosure/org.jpg")} alt="" styleName="orgPic" />
             <div styleName="shareTitle">实际控股人与持股5%以上的股东名单</div>
             <div styleName="shareContent">
-                <img src={require("../images/notice-information-disclosure/logo3.png")} alt="" styleName="sharePic" />
+                <img src={require("../images/notice-disclosure/logo3.png")} alt="" styleName="sharePic" />
                 <p styleName="des">中國信貸科技控股有限公司</p>
             </div>
             <div styleName="chairmanRight">
@@ -268,7 +274,7 @@ class RightPanel extends React.Component {
 
 
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
-class NoticeInformationDisclosure extends React.Component {
+class NoticeDisclosure extends React.Component {
     state = {
         tab: '平台运营信息'
     }
@@ -308,4 +314,5 @@ class NoticeInformationDisclosure extends React.Component {
         </div>
     }
 }
-export default NoticeInformationDisclosure
+
+export default NoticeDisclosure
