@@ -6,7 +6,7 @@ import styles from '../css/loan-fxh-index.css'
 import { observer, inject } from 'mobx-react'
 import Slider from '../components/slider'
 import { Header } from '../../lib/components'
-import { NativeBridge, Browser } from '../../lib/helpers'
+import { NativeBridge, Browser, Storage } from '../../lib/helpers'
 
 @inject('fxh') @observer @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class FxhIndex extends React.Component {
@@ -48,6 +48,11 @@ export default class FxhIndex extends React.Component {
 
     getBtnStatus = () => {
         let { fxh } = this.props;
+        let user = Storage.getUserDict();
+        let ua = window.navigator.userAgent,
+            inWX = ua.indexOf('MicroMessenger') > -1,
+            inApp = ua.indexOf('FinancialWorkshop') > -1,
+            SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
         let btn = '--', st = fxh.data.borrowBtnStatus;
 
         let link;
@@ -80,10 +85,10 @@ export default class FxhIndex extends React.Component {
 
         let btn_list =
             <div styleName="credit-btn">
-                <a styleName="credit-improvement-btn">
+                <a styleName="credit-improvement-btn" href={Browser.inJRGCApp && st == 5 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`}>
                     我要提额
                 </a>
-                <a styleName="credit-apply-btn">
+                <a styleName="credit-apply-btn" href={`/static/loan/products/index.html#/loan-fxh-want`}>
                     申请借款</a>
             </div>;
 
@@ -105,6 +110,11 @@ export default class FxhIndex extends React.Component {
         let goBack = () => {
             Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
         }
+        let user = Storage.getUserDict();
+        let ua = window.navigator.userAgent,
+            inWX = ua.indexOf('MicroMessenger') > -1,
+            inApp = ua.indexOf('FinancialWorkshop') > -1,
+            SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
         return (
             <div styleName="apply-loan">
                 <Header title="放心花" goBack={goBack} />
@@ -135,7 +145,7 @@ export default class FxhIndex extends React.Component {
                     <div styleName="pop-panel">
                         <div styleName="pop-title">提示</div>
                         <div styleName="pop-content">为方便您快速借到钱，推荐您尝试申请其他借款产品</div>
-                        <a styleName="pop-cancel" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>仍去提额</a>
+                        <a styleName="pop-cancel" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`}>仍去提额</a>
                         <a styleName="pop-confirm" href='/static/loan/dumiao/index.html'>尝试其他</a>
                     </div>
                 </div>}
