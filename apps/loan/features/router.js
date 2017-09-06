@@ -15,6 +15,7 @@ import Waiting from './pages/waiting.js'
 import FxhappDownload from './pages/fxhapp-download.js'
 import JrgcappDownload from './pages/jrgcapp-download.js'
 
+
 export default(stores) => {
     return <Router>
         <Provider {...stores}>
