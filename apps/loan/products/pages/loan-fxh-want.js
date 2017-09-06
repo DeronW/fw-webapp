@@ -19,7 +19,7 @@ import styles from '../css/loan-fxh-want.css'
 export default class FxhWant extends React.Component {
 
     state = {
-        loanNum: Utils.hashQuery.slideNum,
+        loanNum: Utils.hashQuery.sliderNum,
         creditLine: Utils.hashQuery.creditLine,
         orioleOrderGid: Utils.hashQuery.orioleOrderGid,
         orderGid: null,
@@ -99,7 +99,7 @@ export default class FxhWant extends React.Component {
     }
 
     render() {
-        let {fxh}= this.props;
+        let {fxh,history}= this.props;
         // const USER = $FW.Store.getUserDict();
         let interest = fxh.baseRateDay * 100;
         let cashBank = fxh.cashBankList;
@@ -111,6 +111,7 @@ export default class FxhWant extends React.Component {
 
         return (
             <div>
+                <Header title="我要借款" history = {history}/>
                 {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} errorMessage={this.state.failMsg} popTitle={"审核失败"}/>}
                 <div styleName="loan-box">
                     <div styleName="loan-box-title">借款金额(元)</div>
