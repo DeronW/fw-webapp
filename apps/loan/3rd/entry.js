@@ -9,7 +9,8 @@ import './css/index.css'
 
 let stores = {
     jrgc_home: new Stores.JRGCHome(Post),
-    jrgc_login: new Stores.JRGCLogin(Post)
+    jrgc_login: new Stores.JRGCLogin(Post),
+    idcard_ocr: new Stores.IdcardOcr(Post),
 }
 
 new StoreSpy(stores).wiretap()
