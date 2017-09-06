@@ -56,5 +56,6 @@ class Activity extends React.Component {
         </div>
     }
 }
+
 NativeBridge.setTitle("")
-render(<Activity />, document.getElementById('cnt'))
+render(<Activity/>, document.getElementById('cnt'))
