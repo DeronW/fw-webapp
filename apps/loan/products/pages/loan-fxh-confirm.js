@@ -41,23 +41,23 @@ export default class FxhConfirm extends React.Component {
   }
   componentDidMount() {
     document.title = "确认借款";
-    let {apply} = this.props;
-    apply.get_base_info();
+    let {fxh} = this.props;
+    fxh.get_base_info();
   }
   confirmHandler = () => {
         if (this.state.checked == false) {
             Components.showToast("请同意借款服务协议，借款确认书和代扣服务协议");
         } else {
             // let query = $FW.Format.urlQuery();
-            let {apply} = this.props;
+            let {fxh} = this.props;
             let orderGid = Utils.hashQuery.orderGid;
             let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
             let loanNum = Utils.hashQuery.loanNum;
-            apply.saveOrderGid(orderGid);
-            apply.saveOrioleOrderGid(orioleOrderGid);
-            apply.saveLoanNum(loanNum);
+            fxh.saveOrderGid(orderGid);
+            fxh.saveOrioleOrderGid(orioleOrderGid);
+            fxh.saveLoanNum(loanNum);
 
-            apply.getVerifyCode().then(() => {
+            fxh.getVerifyCode().then(() => {
                  this.setState({codePop:true});
                  this.countingDown();
                 //this.setState({orderGid: data.orderGid});
@@ -170,7 +170,7 @@ export default class FxhConfirm extends React.Component {
         }).then(() => {
                 this.setState({codePop:false});
                 if(Browser.inJRGCApp){
-                    this.gotoHandler(`/static/loan/apply-result/index.html?orderGid=${orderGid}`);
+                    this.gotoHandler(`/static/loan/products/index.html#/loan-fxh-result?orderGid=${orderGid}`);
                 }else{
                     this.resultShow;
                     this.getLoanResultCheck;
@@ -189,8 +189,8 @@ export default class FxhConfirm extends React.Component {
     }
 
     render() {
-      let {apply} = this.props;
-      let {accountInAmount,shouldRepaymentAmount,dueTimeStr,totalFeeAmount,feeExtList,latedescription} = apply;
+      let {fxh} = this.props;
+      let {accountInAmount,shouldRepaymentAmount,dueTimeStr,totalFeeAmount,feeExtList,latedescription} = fxh;
         let frequent_tip = this.state.show_warn &&
             <div styleName="wrong-tip">{this.state.show_text}</div>;
 

@@ -187,7 +187,3 @@ export default class FxhIndex extends React.Component {
         )
     }
 }
-
-
-
-
