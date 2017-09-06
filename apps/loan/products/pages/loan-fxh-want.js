@@ -79,7 +79,7 @@ export default class FxhWant extends React.Component {
         // let user = $FW.Store.getUserDict();
         Post(`/api/loan/v1/apply.json`, {
                 loanAmount: this.state.loanNum,
-                orioleOrderGid: this.state.orioleOrderGid,
+                orioleOrderGid: fxh.orioleOrderGid,
                 productId: 1,
                 withdrawCardGid: fxh.defaultCardGid
             }
