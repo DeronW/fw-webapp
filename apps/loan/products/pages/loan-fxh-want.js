@@ -90,7 +90,7 @@ export default class FxhWant extends React.Component {
                 location.href = `/static/loan/products/index.html#/loan-fxh-confirm?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${fxh.defaultCardGid}&orderGid=${this.state.orderGid}`;
             }
         },(err) => {
-            if (err.code == 24003 || err.code == 24005) return this.setState({loanShow: true, failMsg: err.message})
+            if (err.code == 24003 || err.code == 24005) return this.setState({loanShow: true, failMsg: err.message,loanNum:this.state.loanNum})
             Components.showToast(err.message);
         });
     }
