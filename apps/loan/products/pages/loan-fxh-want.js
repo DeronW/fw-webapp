@@ -41,13 +41,13 @@ export default class FxhWant extends React.Component {
     }
 
     loanHandler = () => {
-        let {fxh} = this.props;
-        fxh.saveLoanNum(this.state.loanNum);
+        // let {fxh} = this.props;
+        // fxh.saveLoanNum(this.state.loanNum);
         // let query = $FW.Format.urlQuery();
         // let loanNum = Utils.hashQuery.loanNum;
         // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
         let lowestLoan = Utils.hashQuery.lowestLoan;
-        let n = parseInt(fxh.loanNum) || 0, {creditLine} = this.state, err;
+        let n = parseInt(this.state.loanNum) || 0, {creditLine} = this.state, err;
 
 
 
@@ -70,9 +70,7 @@ export default class FxhWant extends React.Component {
         let format = x => Math.round(Math.max(lowestLoan, Math.min(x, creditLine)) / 100) * 100;
 
         //err && $FW.Component.Toast(err);
-        console.log(n);
-        this.setState({ loanNum: format(n) });
-        console.log(this.state.loanNum);
+        this.setState({ loanNum: n) });
 
 
         // let cashBank = this.props.userBankList.withdrawBankcard;
