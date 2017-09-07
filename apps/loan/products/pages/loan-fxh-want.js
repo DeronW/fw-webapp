@@ -48,7 +48,7 @@ export default class FxhWant extends React.Component {
         // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
         let lowestLoan = Utils.hashQuery.lowestLoan;
         let n = parseInt(fxh.loanNum) || 0, {creditLine} = this.state, err;
-        let {fxh} = this.props;
+
 
 
         if (n > creditLine){
