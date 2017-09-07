@@ -41,7 +41,7 @@ export default class FxhWant extends React.Component {
     }
 
     loanHandler = () => {
-        // let {fxh} = this.props;
+        let {fxh} = this.props;
         // fxh.saveLoanNum(this.state.loanNum);
         // let query = $FW.Format.urlQuery();
         // let loanNum = Utils.hashQuery.loanNum;
