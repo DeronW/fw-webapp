@@ -70,7 +70,7 @@ export default class FxhWant extends React.Component {
         let format = x => Math.round(Math.max(lowestLoan, Math.min(x, creditLine)) / 100) * 100;
 
         //err && $FW.Component.Toast(err);
-        this.setState({ loanNum: n) });
+        this.setState({ loanNum: n });
 
 
         // let cashBank = this.props.userBankList.withdrawBankcard;
