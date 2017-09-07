@@ -68,7 +68,10 @@ export default class FxhWant extends React.Component {
         let format = x => Math.round(Math.max(lowestLoan, Math.min(x, creditLine)) / 100) * 100;
 
         //err && $FW.Component.Toast(err);
+        console.log(n);
+        console.log(format(n));
         this.setState({ loanNum: format(n) });
+        console.log(this.state.loanNum);
 
 
         // let cashBank = this.props.userBankList.withdrawBankcard;
@@ -90,7 +93,7 @@ export default class FxhWant extends React.Component {
                 location.href = `/static/loan/products/index.html#/loan-fxh-confirm?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${fxh.defaultCardGid}&orderGid=${this.state.orderGid}`;
             }
         },(err) => {
-            if (err.code == 24003 || err.code == 24005) return this.setState({loanShow: true, failMsg: err.message,loanNum:this.state.loanNum})
+            if (err.code == 24003 || err.code == 24005) return this.setState({loanShow: true, failMsg: err.message})
             Components.showToast(err.message);
         });
     }
