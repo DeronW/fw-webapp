@@ -20,7 +20,7 @@ export default class FxhWant extends React.Component {
 
     state = {
         loanNum: Utils.hashQuery.sliderNum,
-        creditLine: Utils.hashQuery.creditLine,
+        creditLine: "",
         // orioleOrderGid: Utils.hashQuery.orioleOrderGid,
         orderGid: null,
         loanGid: null,
@@ -47,7 +47,8 @@ export default class FxhWant extends React.Component {
         // let loanNum = Utils.hashQuery.loanNum;
         // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
         let lowestLoan = fxh.data.lowestLoan;
-        let n = parseInt(this.state.loanNum) || 0, {creditLine} = this.state, err;
+        let creditLine = fxh.data.creditLine;
+        let n = parseInt(this.state.loanNum) || 0,  err;
 
 
 
