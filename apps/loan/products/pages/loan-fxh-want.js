@@ -69,7 +69,6 @@ export default class FxhWant extends React.Component {
 
         //err && $FW.Component.Toast(err);
         console.log(n);
-        console.log(format(n));
         this.setState({ loanNum: format(n) });
         console.log(this.state.loanNum);
 
