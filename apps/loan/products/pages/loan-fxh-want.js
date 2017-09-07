@@ -41,11 +41,13 @@ export default class FxhWant extends React.Component {
     }
 
     loanHandler = () => {
+        let {fxh} = this.props;
+        fxh.saveLoanNum(this.state.loanNum);
         // let query = $FW.Format.urlQuery();
         // let loanNum = Utils.hashQuery.loanNum;
         // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
         let lowestLoan = Utils.hashQuery.lowestLoan;
-        let n = parseInt(this.state.loanNum) || 0, {creditLine} = this.state, err;
+        let n = parseInt(fxh.loanNum) || 0, {creditLine} = this.state, err;
         let {fxh} = this.props;
 
 
