@@ -228,7 +228,7 @@ class MiddlePanel extends React.Component {
                     <p styleName="rline">2012年7月1日</p>
                     <p styleName="rline">京ICP备14029254号-1</p>
                     <p styleName="rline">京ICP证140736号</p>
-                    <p styleName="rline">金融工场</p>
+                    <p styleName="rline">工场微金</p>
                     <p styleName="rline">京公网安备11010502031615号</p>
                 </div>
             </div>
