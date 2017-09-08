@@ -9,15 +9,9 @@ import { Header } from '../../lib/components'
 import { Components } from 'fw-javascripts'
 import { NativeBridge, Browser, Storage } from '../../lib/helpers'
 
-function gotoHandler(link, toNative, need_login = false) {
-    if (Browser.inFXHApp && toNative)
-        return NativeBridge.toNative(toNative)
-
+function gotoHandler(link) {
     if (link.indexOf('://') < 0)
         link = location.protocol + '//' + location.hostname + link;
-
-    Browser.inFXHApp ?
-        NativeBridge.goto(link, need_login) :
         location.href = link
 }
 
