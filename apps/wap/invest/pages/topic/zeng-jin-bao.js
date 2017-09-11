@@ -173,7 +173,7 @@ class ZengJinBao extends React.Component {
                             计算公式<br />
                             <span>当日存管黄金克重×年化收益率÷360天×当日交易截止时刻金价</span>
                         </span><br />
-                        <span styleName="cal-formula text--blue">1* 2% / 365*285 = 0.02元</span>
+                        <span styleName="cal-formula text--blue">1* 2% / 360*285 = 0.02元</span>
                     </div>
                 </div>
 
