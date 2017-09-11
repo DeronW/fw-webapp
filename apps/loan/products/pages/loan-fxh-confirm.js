@@ -42,6 +42,9 @@ export default class FxhConfirm extends React.Component {
   componentDidMount() {
     document.title = "确认借款";
     let {fxh} = this.props;
+    let loanNum = Utils.hashQuery.loanNum;
+    fxh.saveLoanNum(loanNum);
+    fxh.saveOrderGid(orderGid);
     fxh.get_base_info();
   }
   confirmHandler = () => {
@@ -49,13 +52,13 @@ export default class FxhConfirm extends React.Component {
             Components.showToast("请同意借款服务协议，借款确认书和代扣服务协议");
         } else {
             // let query = $FW.Format.urlQuery();
-            let {fxh} = this.props;
-            let orderGid = Utils.hashQuery.orderGid;
-            // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
-            let loanNum = Utils.hashQuery.loanNum;
-            fxh.saveOrderGid(orderGid);
-            // fxh.saveOrioleOrderGid(orioleOrderGid);
-            fxh.saveLoanNum(loanNum);
+            // let {fxh} = this.props;
+            // let orderGid = Utils.hashQuery.orderGid;
+            // // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
+            // let loanNum = Utils.hashQuery.loanNum;
+            // fxh.saveOrderGid(orderGid);
+            // // fxh.saveOrioleOrderGid(orioleOrderGid);
+            // fxh.saveLoanNum(loanNum);
 
             fxh.getVerifyCode().then(() => {
                  this.setState({codePop:true});
