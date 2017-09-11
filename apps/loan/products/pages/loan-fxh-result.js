@@ -180,7 +180,7 @@ export default class FxhResult extends React.Component {
                         <div className="credit-btn" onClick={() => {$FW.Browser.inJRGCApp()? NativeBridge.close(): this.gotoHandler('/static/loan/products/index.html#/')}}>返回</div>
                     </div>*/}
                     {!Browser.inJRGCApp && <div styleName="credit-btn"
-                         onClick={() => this.gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`)}>
+                         onClick={() => this.gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=${USER.SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`)}>
                         去提额
                     </div>}
                     </div>
