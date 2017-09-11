@@ -157,25 +157,26 @@ export default class FxhConfirm extends React.Component {
     }
     getSMSCode = () => {
         // let query = $FW.Format.urlQuery();
-        let orderGid = Utils.hashQuery.orderGid;
+        let {fxh} = this.props;
         if (this.state.countdown <= 0) {
             this.countingDown();
-            Post(`/api/loan/v1/resendverifycode.json`,{orderGid: orderGid});
+            Post(`/api/loan/v1/resendverifycode.json`,{orderGid: fxh.orderGid});
         }
     }
     codeConfirmBtnHandler = () => {
         // let query = $FW.Format.urlQuery();
-        let orderGid = Utils.hashQuery.orderGid;
+        let {fxh} = this.props;
+        // let orderGid = Utils.hashQuery.orderGid;
         if (this.state.value == '')
             return Components.showToast("请输入短信验证码");
 
         Post(`/api/loan/v1/do.json`, {
-            orderGid: orderGid,
+            orderGid: fxh.orderGid,
             verifyCode: this.state.value
         }).then(() => {
                 this.setState({codePop:false});
                 if(Browser.inJRGCApp){
-                    this.gotoHandler(`/static/loan/products/index.html#/loan-fxh-result?orderGid=${orderGid}`);
+                    this.gotoHandler(`/static/loan/products/index.html#/loan-fxh-result?orderGid=${fxh.orderGid}`);
                 }else{
                     this.resultShow;
                     this.getLoanResultCheck;
