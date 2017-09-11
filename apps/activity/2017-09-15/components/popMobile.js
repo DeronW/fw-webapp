@@ -13,8 +13,9 @@ class PopPriceMobile extends React.Component {
     }
 
     componentDidMount() {
-
-
+        Get('')
+            .then(data => {
+            })
     }
 
     render() {

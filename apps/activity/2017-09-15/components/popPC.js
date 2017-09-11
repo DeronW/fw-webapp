@@ -1,6 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from '../css/popPC.css'
+import {Get, Post} from '../../lib/helpers'
 
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
@@ -13,7 +14,8 @@ class PopGetPricePC extends React.Component {
     }
 
     componentDidMount() {
-
+        Get('')
+            .then(data => {})
     }
 
     nameHandler = (e) => {
