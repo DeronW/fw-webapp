@@ -43,6 +43,7 @@ export default class FxhConfirm extends React.Component {
     document.title = "确认借款";
     let {fxh} = this.props;
     let loanNum = Utils.hashQuery.loanNum;
+    let orderGid = Utils.hashQuery.orderGid;
     fxh.saveLoanNum(loanNum);
     fxh.saveOrderGid(orderGid);
     fxh.get_base_info();
