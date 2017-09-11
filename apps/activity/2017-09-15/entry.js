@@ -29,6 +29,12 @@ class Activity extends React.Component {
                 this.setState({timestamp: data.timestamp})
             });
 
+        //获取用户累投年化总额
+        Get('')
+            .then(data => {
+            }, () => {
+            })
+
 
     }
 
@@ -57,5 +63,5 @@ class Activity extends React.Component {
     }
 }
 
-NativeBridge.setTitle("")
+NativeBridge.setTitle("寻宝大作战")
 render(<Activity/>, document.getElementById('cnt'))
