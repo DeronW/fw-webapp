@@ -51,10 +51,10 @@ export default class FxhConfirm extends React.Component {
             // let query = $FW.Format.urlQuery();
             let {fxh} = this.props;
             let orderGid = Utils.hashQuery.orderGid;
-            let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
+            // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
             let loanNum = Utils.hashQuery.loanNum;
             fxh.saveOrderGid(orderGid);
-            fxh.saveOrioleOrderGid(orioleOrderGid);
+            // fxh.saveOrioleOrderGid(orioleOrderGid);
             fxh.saveLoanNum(loanNum);
 
             fxh.getVerifyCode().then(() => {
