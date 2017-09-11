@@ -75,6 +75,10 @@ if(params.JENKINS_NODE != 'front-virtual') {
 if(params.JENKINS_NODE == 'front-virtual') {
     
     node("front-virtual") {
+        stage('check ENV'){
+            sh 'node -v'
+            sh 'npm -v'
+        }
 
         stage('Preparation') {
             if(params.INITIALIZE) {
