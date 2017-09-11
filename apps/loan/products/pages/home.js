@@ -66,7 +66,8 @@ class Home extends React.Component {
         let product = (props, index) => {
 
             let clichHandler = () => {
-                if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index');
+                // if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index');
+                if (props.productId == 11) gotoHandler('/static/loan/fxh/index.html');
                 if (props.productId == 1) gotoHandler('/static/loan/products/index.html#/loan-fxh-index', 'fxh_detail')
                 if (props.productId == 21) gotoHandler('/static/loan/dumiao/index.html?pid=21')
             }
