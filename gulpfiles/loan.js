@@ -53,9 +53,9 @@ const BILL_PAGES = [
 
 // 申请借款模块
 const APPLY_PAGES = [
-    'apply-want', //我要借款页面
-    'apply-confirm', //确认借款页面
-    'apply-result'
+    // 'apply-want', //我要借款页面
+    // 'apply-confirm', //确认借款页面
+    // 'apply-result'
 ]
 
 // 借款服务协议页面
@@ -68,8 +68,8 @@ const APPLY_PAGES = [
 // ]
 
 const FXH_PAGES = [
-    'fxh', // 掌众产品借款页面
-    'fxh-bill', //账单详情
+    // 'fxh', // 掌众产品借款页面
+    // 'fxh-bill', //账单详情
 ]
 
 const DU_MIAO_PAGES = [
