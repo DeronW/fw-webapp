@@ -13,7 +13,7 @@ class PC extends React.Component {
         userName: null,
         userPhone: null,
         userAdress: null,
-        userMoney: 1200
+        userMoney: 1500
     }
 
     componentDidMount() {
@@ -34,10 +34,34 @@ class PC extends React.Component {
         let gift1_on = <div styleName="wrapper-on">
             <div styleName="des">150元话费券</div>
             <div styleName="gift1_on"></div>
-            <div styleName="price1_tips"></div>
+            <div styleName="price_tips price1_tips">
+                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
+                再投¥49,800努力去开启木头宝箱吧！
+            </div>
         </div>
         let gift1_close = <div styleName="wrapper-close">
+            <div styleName="des">150元话费券</div>
             <div styleName="gift1_close"></div>
+            <div styleName="price_tips price1-close-tips">
+                您当前没有资格开启，当您的投资额到达1000时，便可获取150元话费券
+            </div>
+        </div>
+
+        let gift2_on = <div styleName="wrapper-on">
+            <div styleName="des">300元京东卡</div>
+            <div styleName="gift2_on"></div>
+            <div styleName="price_tips price2_tips">
+                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
+                再投¥49,800努力去开启木头宝箱吧！
+            </div>
+        </div>
+
+        let gift2_close = <div styleName="wrapper-close">
+            <div styleName="des">300元京东卡</div>
+            <div styleName="gift2_close"></div>
+            <div styleName="price_tips price2-close-tips">
+                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
+            </div>
         </div>
         return <div>
             <PCHeader bgColor="rgba(8,11,22,0.6)"/>
@@ -49,9 +73,12 @@ class PC extends React.Component {
                     <div styleName="gift1">
                         {userMoney > 1000 && gift1_on}
                         {userMoney <= 1000 && gift1_close}
+                        <div styleName="term">5万&gt;=累投年化投资额&lt;10万</div>
                     </div>
                     <div styleName="gift2">
-
+                        {userMoney > 2000 && gift2_on}
+                        {userMoney <= 2000 && gift2_close}
+                        <div styleName="term">10万&gt;=累投年化投资额&lt;25万</div>
                     </div>
                     <div styleName="gift34"></div>
                     <div styleName="gift5"></div>
