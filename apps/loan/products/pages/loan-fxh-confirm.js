@@ -120,7 +120,7 @@ export default class FxhConfirm extends React.Component {
         // let orderGid = Utils.hashQuery.orderGid;
         let {fxh} = this.props;
         Post(`/api/loan/v1/status.json`, {
-            orderGid: this.orderGid,
+            orderGid: fxh.orderGid,
             with_out_loading:true
         }).then((data) => {
             let finishFlag = true;
