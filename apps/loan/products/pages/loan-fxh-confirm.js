@@ -53,7 +53,7 @@ export default class FxhConfirm extends React.Component {
             Components.showToast("请同意借款服务协议，借款确认书和代扣服务协议");
         } else {
             // let query = $FW.Format.urlQuery();
-            // let {fxh} = this.props;
+            let {fxh} = this.props;
             // let orderGid = Utils.hashQuery.orderGid;
             // // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
             // let loanNum = Utils.hashQuery.loanNum;
