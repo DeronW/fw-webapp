@@ -72,7 +72,7 @@ export default class Fxh{
     }
     getVerifyCode = () => {
         console.log(this.orderGid);
-        return this.Post(`/api/loan/v1/sendSmsverifycode.json`,{orderGid: this.orioleOrderGid})
+        return this.Post(`/api/loan/v1/sendSmsverifycode.json`,{orderGid: this.orderGid})
     }
 
     watchSliderNum = (num) => {
