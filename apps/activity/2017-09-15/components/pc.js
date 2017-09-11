@@ -17,7 +17,7 @@ class PC extends React.Component {
 
     popPriceHandler = () => {
         console.log(111)
-        let {closePopHandler, isLogin} =this.props;
+        let {closePopHandler, isLogin} = this.props;
         ReactDOM.render(<PopGetPricePC isLogin={isLogin}
                                        closePopHandler={closePopHandler}/>, document.getElementById("pop"))
     }
@@ -25,6 +25,8 @@ class PC extends React.Component {
     render() {
         return <div>
             <PCHeader bgColor="rgba(8,11,22,0.6)"/>
+            <div styleName="bg">
+            </div>
             <div styleName="pop-price" onClick={this.popPriceHandler}>领取奖品</div>
         </div>
     }

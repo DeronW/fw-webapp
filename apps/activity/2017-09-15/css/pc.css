@@ -11,3 +11,10 @@
     cursor: pointer;
     background: #ccc;
 }
+
+.bg {
+    width: 100%;
+    height: 2406px;
+    background: url("../images/pc/banner.jpg") no-repeat center;
+    background-size: cover;
+}
