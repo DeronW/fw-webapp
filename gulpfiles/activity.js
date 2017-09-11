@@ -3,14 +3,6 @@ const eslint = require('gulp-eslint');
 const PROJ = 'activity'
 
 const APP_NAMES = [
-    // {
-    //     name: '2017-07-13',
-    //     compiler: 'webpack'
-    // },
-    {
-        name: '2017-08-16',
-        compiler: 'webpack'
-    },
     {
         name: '2017-09-15',
         compiler: 'webpack'
