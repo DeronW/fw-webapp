@@ -175,12 +175,13 @@ export default class FxhConfirm extends React.Component {
             verifyCode: this.state.value
         }).then(() => {
                 this.setState({codePop:false});
-                if(Browser.inJRGCApp){
+                // if(Browser.inJRGCApp){
                     this.gotoHandler(`/static/loan/products/index.html#/loan-fxh-result?orderGid=${fxh.orderGid}`);
-                }else{
-                    this.resultShow;
-                    this.getLoanResultCheck;
-                }
+                // }
+                // else{
+                //     this.resultShow;
+                //     this.getLoanResultCheck;
+                // }
             }, e => {
                 if(e.code == 603002){
                     this.setState({codePop:false, loanShow:true, failMsg:e.message});
