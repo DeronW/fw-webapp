@@ -174,7 +174,7 @@ export default class FxhIndex extends React.Component {
                         <div styleName="pop-title">提示</div>
                         <div styleName="pop-content">为方便您快速借到钱，推荐您尝试申请其他借款产品</div>
                         <a styleName="pop-cancel" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`}>仍去提额</a>
-                        <a styleName="pop-confirm" href='/static/loan/dumiao/index.html'>尝试其他</a>
+                        <a styleName="pop-confirm" href='/static/loan/products/index.html#/'>尝试其他</a>
                     </div>
                 </div>}
             </div>
