@@ -5,6 +5,10 @@
 
 if(params.JENKINS_NODE != 'front-virtual') {
     node("front") {
+        stage('check ENV'){
+            sh 'node -v'
+            sh 'npm -v'
+        }
 
         stage('Preparation') {
             if(params.INITIALIZE) {
@@ -33,12 +37,12 @@ if(params.JENKINS_NODE != 'front-virtual') {
         }
 
         stage('Clean workspace'){
-        sh 'npm run clean'
+            sh 'npm run clean'
         }
 
         stage('Differential check') {
             if(!params.FORCE) {
-            sh 'npm run pre-compile -- $PROJECT'
+                sh 'npm run pre-compile -- $PROJECT'
             }
         }
 
@@ -71,6 +75,10 @@ if(params.JENKINS_NODE != 'front-virtual') {
 if(params.JENKINS_NODE == 'front-virtual') {
     
     node("front-virtual") {
+        stage('check ENV'){
+            sh 'node -v'
+            sh 'npm -v'
+        }
 
         stage('Preparation') {
             if(params.INITIALIZE) {
