@@ -1,0 +1,375 @@
+.bg {
+    background: #00a8e5 url('../images/mobile/bg.png') no-repeat center 718px;
+}
+
+.banner {
+    position: relative;
+    height: 388px;
+    background: url('../images/mobile/banner.png');
+}
+
+.show-intro {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 164px;
+    height: 153px;
+    background: url('../images/mobile/intro-bg.png');
+}
+
+.show-intro span {
+    margin: 33px 0 0 66px;
+    color: #fff;
+    font-size: 24px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.invest-entry {
+    height: 233px;
+    border: 1px solid transparent;
+    background: url('../images/mobile/invest-entry-bg.png') no-repeat center;
+    text-align: center;
+}
+
+.invest-tip {
+    margin-top: 68px;
+    color: #555;
+    font-size: 24px;
+}
+
+.invest-entry-btn {
+    width: 241px;
+    height: 61px;
+    line-height: 61px;
+    margin: 30px auto 0;
+    background: url('../images/mobile/invest-entry-btn-bg.png') no-repeat center;
+    color: #fff;
+    font-size: 30px;
+}
+
+.treasure-info {
+    color: #fff;
+    font-size: 24px;
+}
+
+.treasure-requirement {
+    color: #3b7e04;
+    font-size: 20px;
+}
+
+.treasure-box-1 {
+    position: relative;
+    height: 269px;
+    margin-top: 84px;
+}
+
+.treasure-box-1 .treasure-info {
+    position: absolute;
+    top: 0;
+    left: 318px;
+}
+
+.treasure-box-1 .treasure-requirement {
+    position: absolute;
+    left: 222px;
+    bottom: 0;
+}
+
+.treasure-box-1 .treasure-box {
+    position: absolute;
+    width: 249px;
+    height: 174px;
+    left: 190px;
+    bottom: 48px;
+}
+
+.treasure-box-1-close {
+    composes: treasure-box-1;
+}
+
+.treasure-box-1-close .treasure-box {
+    background: url('../images/mobile/box-1-close.png');
+}
+
+.treasure-box-1-open {
+    composes: treasure-box-1;
+}
+
+.treasure-box-1-open .treasure-box {
+    background: url('../images/mobile/box-1-open.png');
+}
+
+.treasure-box-2 {
+    position: relative;
+    height: 300px;
+    margin-top: 90px;
+}
+
+.treasure-box-2 .treasure-info {
+    position: absolute;
+    top: 0;
+    right: 138px;
+}
+
+.treasure-box-2 .treasure-requirement {
+    position: absolute;
+    right: 88px;
+    bottom: 0;
+}
+
+.treasure-box-2 .treasure-box {
+    position: absolute;
+    width: 202px;
+    height: 191px;
+    right: 115px;
+    bottom: 54px;
+}
+
+.treasure-box-2-close {
+    composes: treasure-box-2;
+}
+
+.treasure-box-2-close .treasure-box {
+    background: url('../images/mobile/box-2-close.png');
+}
+
+.treasure-box-2-open {
+    composes: treasure-box-2;
+}
+
+.treasure-box-2-open .treasure-box {
+    background: url('../images/mobile/box-2-open.png');
+}
+
+.treasure-box-3 {
+    position: relative;
+    height: 313px;
+    margin-top: 113px;
+}
+
+.treasure-box-3 .treasure-info {
+    position: absolute;
+    top: 0;
+    left: 213px;
+}
+
+.treasure-box-3 .treasure-requirement {
+    position: absolute;
+    left: 118px;
+    bottom: 0;
+}
+
+.treasure-box-3 .treasure-box {
+    position: absolute;
+    width: 278px;
+    height: 202px;
+    left: 118px;
+    bottom: 48px;
+}
+
+.treasure-box-3-close {
+    composes: treasure-box-3;
+}
+
+.treasure-box-3-close .treasure-box {
+    background: url('../images/mobile/box-3-close.png');
+}
+
+.treasure-box-3-open {
+    composes: treasure-box-3;
+}
+
+.treasure-box-3-open .treasure-box {
+    background: url('../images/mobile/box-3-open.png');
+}
+
+.treasure-box-4 {
+    position: relative;
+    height: 352px;
+    margin-top: -30px;
+}
+
+.treasure-box-4 .treasure-info {
+    position: absolute;
+    top: 0;
+    right: 114px;
+}
+
+.treasure-box-4 .treasure-requirement {
+    position: absolute;
+    right: 94px;
+    bottom: 0;
+}
+
+.treasure-box-4 .treasure-box {
+    position: absolute;
+    width: 258px;
+    height: 217px;
+    right: 105px;
+    bottom: 54px;
+}
+
+.treasure-box-4-close {
+    composes: treasure-box-4;
+}
+
+.treasure-box-4-close .treasure-box {
+    background: url('../images/mobile/box-4-close.png');
+}
+
+.treasure-box-4-open {
+    composes: treasure-box-4;
+}
+
+.treasure-box-4-open .treasure-box {
+    background: url('../images/mobile/box-4-open.png');
+}
+
+.treasure-box-5 {
+    position: relative;
+    height: 364px;
+    margin-top: 130px;
+}
+
+.treasure-box-5 .treasure-info {
+    position: absolute;
+    top: 0;
+    right: 185px;
+}
+
+.treasure-box-5 .treasure-requirement {
+    position: absolute;
+    right: 128px;
+    bottom: 0;
+    color: #cd6f0a;
+}
+
+.treasure-box-5 .treasure-box {
+    position: absolute;
+    width: 312px;
+    height: 264px;
+    right: 75px;
+    bottom: 54px;
+}
+
+.treasure-box-5-close {
+    composes: treasure-box-5;
+}
+
+.treasure-box-5-close .treasure-box {
+    background: url('../images/mobile/box-5-close.png');
+}
+
+.treasure-box-5-open {
+    composes: treasure-box-5;
+}
+
+.treasure-box-5-open .treasure-box {
+    background: url('../images/mobile/box-5-open.png');
+}
+
+.treasure-box-6 {
+    position: relative;
+    height: 333px;
+    margin-top: 90px;
+}
+
+.treasure-box-6 .treasure-info {
+    position: absolute;
+    top: 0;
+    left: 241px;
+}
+
+.treasure-box-6 .treasure-requirement {
+    position: absolute;
+    left: 229px;
+    bottom: 0;
+    color: #cd6f0a;
+}
+
+.treasure-box-6 .treasure-box {
+    position: absolute;
+    width: 258px;
+    height: 213px;
+    left: 223px;
+    bottom: 54px;
+}
+
+.treasure-box-6-close {
+    composes: treasure-box-6;
+}
+
+.treasure-box-6-close .treasure-box {
+    background: url('../images/mobile/box-6-close.png');
+}
+
+.treasure-box-6-open {
+    composes: treasure-box-6;
+}
+
+.treasure-box-6-open .treasure-box {
+    background: url('../images/mobile/box-6-open.png');
+}
+
+.skeleton-bg {
+    position: absolute;
+    width: 197px;
+    height: 97px;
+    left: 119px;
+    bottom: 10px;
+    background: url('../images/mobile/skeleton.png');
+}
+
+.treasure-box-7 {
+    position: relative;
+    height: 372px;
+    margin-top: 84px;
+}
+
+.treasure-box-7 .treasure-info {
+    position: absolute;
+    top: 0;
+    right: 64px;
+}
+
+.treasure-box-7 .treasure-requirement {
+    position: absolute;
+    right: 149px;
+    bottom: 0;
+    color: #cd6f0a;
+}
+
+.treasure-box-7 .treasure-box {
+    position: absolute;
+    width: 286px;
+    height: 242px;
+    right: 75px;
+    bottom: 48px;
+}
+
+.treasure-box-7-close {
+    composes: treasure-box-7;
+}
+
+.treasure-box-7-close .treasure-box {
+    background: url('../images/mobile/box-7-close.png');
+}
+
+.treasure-box-7-open {
+    composes: treasure-box-7;
+}
+
+.treasure-box-7-open .treasure-box {
+    background: url('../images/mobile/box-7-open.png');
+}
+
+.foot {
+    margin-top: 139px;
+    height: 133px;
+    line-height: 153px;
+    background: url('../images/mobile/foot-bg.png');
+    color: #fff;
+    font-size: 26px;
+    text-align: center;
+}
