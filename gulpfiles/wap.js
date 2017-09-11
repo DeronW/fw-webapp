@@ -30,7 +30,6 @@ const NOTICE_PAGES = [
     // 'notice-corporate-structure', // 信息披露 公司结构
     'notice-safeguard', // 资金安全保障
     'notice-risk-prompt', // 风险揭示
-    // 'notice-information-disclosure', //测试 信息披露
 ]
 
 const TOPIC_PAGES = [

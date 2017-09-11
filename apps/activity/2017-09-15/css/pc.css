@@ -17,4 +17,251 @@
     height: 2406px;
     background: url("../images/pc/banner.jpg") no-repeat center;
     background-size: cover;
+    display: table;
+    font-family: 'microsoft yahei';
+    padding-bottom: 300px;
+}
+
+.goInvest {
+    width: 430px;
+    height: 170px;
+    background: url("../images/pc/investbg.png") no-repeat center;
+    background-size: 100%;
+    margin: 550px auto 0;
+}
+
+.btn_invest {
+
+}
+
+.roadbg {
+    width: 1110px;
+    height: 1845px;
+    margin: 0 auto;
+    background: url("../images/pc/roadbg.png") no-repeat center;
+    background-size: contain;
+    margin-top: 300px;
+    position: relative;
+}
+
+.gift1 {
+    width: 436px;
+    height: 330px;
+    background: url("../images/pc/seabg1.png") no-repeat center;
+    background-size: 100%;
+    position: absolute;
+    top: -282px;
+    left: 15px;
+}
+
+.gift1 .wrapper-close {
+    padding: 102px 0 0 150px;
+    position: relative;
+}
+
+.gift1 .wrapper-on {
+    padding: 65px 0 0 116px;
+    position: relative;
+}
+
+.gift1_on {
+    width: 204px;
+    height: 144px;
+    background: url("../images/pc/gift1_on.png") no-repeat center;
+    background-size: 100%;
+}
+
+.gift1 .des {
+    font-size: 14px;
+    padding-left: 108px;
+    color: #fff;
+}
+
+.gift1_close {
+    width: 172px;
+    height: 129px;
+    background: url("../images/pc/gift1_close.png") no-repeat center;
+    background-size: 100%;
+}
+
+.gift1 .wrapper-close:hover {
+    padding: 87px 0 0 116px;
+}
+
+.gift1 .wrapper-close:hover .gift1_close {
+    width: 204px;
+    height: 144px;
+    background: url("../images/pc/gift1_on.png") no-repeat center;
+    background-size: 100%;
+}
+
+.gift1 .wrapper-close:hover .price1-close-tips {
+    display: block;
+}
+
+.price_tips {
+    position: absolute;
+    width: 368px;
+    height: 115px;
+    background: url("../images/pc/tipsbg.png") no-repeat center;
+    background-size: 100%;
+    display: none;
+    opacity: 0;
+    font-size: 16px;
+    color: #555;
+    line-height: 30px;
+    padding-top: 25px;
+    padding-left: 50px;
+}
+
+.price1_tips, .price1-close-tips {
+    top: -20px;
+    left: 77px;
+    animation: Tips1MovePC 0.5s 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.price2_tips, .price2-close-tips {
+    top: -100px;
+    left: -120px;
+    animation: Tips2MovePC 0.5s 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.wrapper-on:hover .price_tips {
+    display: block;
+}
+
+.gift2 {
+    width: 418px;
+    height: 244px;
+    background: url("../images/pc/seabg2.png") no-repeat center;
+    background-size: 100%;
+    position: absolute;
+    top: 155px;
+    right: 237px;
+}
+
+.gift2 .wrapper-on {
+    margin: -61px 0 0 180px;
+    position: relative;
+}
+
+.gift2_on {
+    width: 166px;
+    height: 157px;
+    background: url("../images/pc/gift2_on.png") no-repeat center;
+    background-size: 100%;
+}
+
+.gift2 .des {
+    padding-left: 50px;
+    font-size: 14px;
+    color: #fff;
+    line-height: 42px;
+}
+
+.gift2_close {
+    width: 169px;
+    height: 146px;
+    background: url("../images/pc/gift2_close.png") no-repeat center;
+    background-size: 100%;
+}
+
+.gift2 .wrapper-close {
+    margin: -45px 0 0 176px;
+    position: relative;
+}
+
+.gift2 .wrapper-close:hover {
+    margin: -55px 0 0 176px;
+}
+
+.gift2 .wrapper-close:hover .gift2_close {
+    width: 166px;
+    height: 157px;
+    background: url("../images/pc/gift2_on.png") no-repeat center;
+    background-size: 100%;
+}
+
+.gift2 .wrapper-close:hover .price2-close-tips {
+    display: block;
+}
+
+.gift34 {
+    width: 950px;
+    height: 750px;
+    background: url("../images/pc/seabg34.png") no-repeat center;
+    background-size: 100%;
+    position: absolute;
+    top: 296px;
+    left: 45px;
+}
+
+.gift5 {
+    width: 740px;
+    height: 400px;
+    background: url("../images/pc/seabg5.png") no-repeat center;
+    background-size: 100%;
+    position: absolute;
+    bottom: 475px;
+    right: -139px;
+}
+
+.gift6 {
+    width: 516px;
+    height: 242px;
+    background: url("../images/pc/seabg6.png") no-repeat center;
+    background-size: 100%;
+    position: absolute;
+    bottom: 172px;
+    left: 50px;
+}
+
+.gift7 {
+    width: 558px;
+    height: 236px;
+    background: url("../images/pc/seabg7.png") no-repeat center;
+    background-size: 100%;
+    position: absolute;
+    bottom: -170px;
+    right: 174px;
+}
+
+.term {
+    padding: 15px 0 0 110px;
+    font-size: 14px;
+    color: #3b7e04;
+}
+
+.gift2 .term {
+    padding-left: 150px;
+    padding-top: 22px;
+}
+
+.color-red {
+    font-size: 16px;
+    color: #fd4d4c;
+}
+
+@keyframes Tips1MovePC {
+    0% {
+        top: 0%;
+        opacity: 0;
+    }
+    100% {
+        top: -40%;
+        opacity: 1;
+    }
+}
+
+@keyframes Tips2MovePC {
+    0% {
+        top: 0%;
+        opacity: 0;
+    }
+    100% {
+        top: -55%;
+        opacity: 1;
+    }
 }

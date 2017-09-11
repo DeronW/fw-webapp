@@ -142,7 +142,7 @@ class MiddlePanel extends React.Component {
                 img: require("../images/notice-disclosure/men2.png"),
                 name: '魏薇·董事长',
                 job: '',
-                profile: '毕业于中国人民大学。曾任北京联合开元投资担保有限公司副总经理和联合创业集团有限公司营运管理中心总经理。经过10余年金融行业管理岗位的历练，拥有丰富的P2P行业实战经验和全面而独到的行业视角及理念，是小微金融的领军人物，普惠金融体系的积极践行者。'
+                profile: '毕业于中国人民大学。曾任北京联合开元投资担保有限公司副总经理和联合创业集团有限公司营运管理中心总经理。经过10余年金融行业管理岗位的历练，拥有丰富的网贷行业实战经验和全面而独到的行业视角及理念，是小微金融的领军人物，普惠金融体系的积极践行者。'
             },
             {
                 img: require("../images/notice-disclosure/men3.png"),
@@ -182,36 +182,64 @@ class MiddlePanel extends React.Component {
             <div styleName="basicInfoContent clearfix">
                 <div styleName="basicInfoContentL fl">
                     <p styleName="site">公司全称及简称：</p>
+                    <p styleName="site">统一社会信用代码：</p>
                     <p styleName="line">注册资本：</p>
                     <p styleName="line">实缴资本：</p>
                     <p styleName="adress">注册地址：</p>
                     <p styleName="line">成立时间：</p>
+                    <p styleName="line">经营期限：</p>
                     <p styleName="line">法定代表人：</p>
                     <p styleName="range">经营范围：</p>
-                    <p styleName="line">联系方式：</p>
-                    <p styleName="site">经营场所：</p>
+                    <p styleName="line">经营状态：</p>
+                    <p styleName="line">收费标准：</p>
+                    <p styleName="site newLine">经营场所：</p>
                     <p styleName="case">资金存管情况：</p>
                     <p styleName="site siteLook">注册协议模板：</p>
+                    <p styleName="line">联系电话：</p>
+                    <p styleName="line">电子邮箱：</p>
                 </div>
                 <div styleName="basicInfoContentR fl">
                     <p styleName="rsite">北京凤凰信用管理有限公司（简称：凤凰信用）</p>
+                    <p styleName="rsite">91110000597734276G</p>
                     <p styleName="rline">5000万</p>
                     <p styleName="rline">5000万</p>
                     <p styleName="radress">北京市朝阳区朝阳门外大街18号11层1105内008号</p>
                     <p styleName="rline">2012年5月23日</p>
+                    <p styleName="rline">2012-05-23至2062-05-22</p>
                     <p styleName="rline">康忠芹</p>
                     <p styleName="rrange">
                         企业信用征集、评定；企业信用管理咨询；经济贸易咨询；投资咨询；企业管理咨询；市场调查；投资管理；资产管理；软件开发；设计、制作、代理、发布广告；技术咨询；技术服务；委托生产电子产品、照相器材、计算机、软件及辅助设备；航空机票票务代理；经营电信业务；互联网信息服务；销售化工产品。（企业依法自主选择经营项目，开展经营活动；销售化工产品、“经营电信业务”；“互联网信息服务”以及依法须经批准的项目，经相关部门批准后依批准的内容开展经营活动；不得从事本市产业政策禁止和限制类项目的经营活动。）</p>
-                    <p styleName="rline">400-0322-988</p>
-                    <p styleName="rsite">北京朝阳区朝阳门外大街18号11层1105内008号</p>
+                    <p styleName="rline">开业</p>
+                    <p styleName="rline">平台服务费，根据客户的借款本金、借款天数、年化收费利率计算。</p>
+                    <p styleName="rsite newLine">北京朝阳区朝阳门外大街18号11层1105内008号</p>
                     <p styleName="rcase">
                         工场微金与徽商银行建立合作，由徽商银行提供资金存管服务，为平台、出借人、借款人和其他业务参与方分别开立独立的银行电子账户，每个主体各自资金存管在各自名下的账户中。可最大限度的保障出借人、借款人的资金安全。</p>
                     <p styleName="rline"><a styleName="rlineLook" target="_blank">点击查看</a></p>
+                    <p styleName="rline rlineTop">400-0322-988</p>
+                    <p styleName="rline">kefu@9888.cn</p>
+                </div>
+            </div>
+            <div styleName="webInfoTitle">
+                风险管理信息
+            </div>
+            <div styleName="webInfoContent riskInfoContent">
+                <div styleName="webInfoContentL fl">
+                    <p styleName="line">网贷机构风险管理架构：</p>
+                    <p styleName="line riskLine">风险评估流程：</p>
+                    <p styleName="line">风险预警管理情况：</p>
+                    <p styleName="line riskWay">催收方式：</p>
+                </div>
+
+                <div styleName="webInfoContentR fl">
+                    <p styleName="rline">风险管理部：首席风险官1名；高级风险经理1名；风险经理3名</p>
+                    <img src={require("../images/notice-disclosure/flow.jpg")} alt=""/>
+                    <p styleName="rline riskRline">资产端业务部门进行贷后管理检查前要制定检查计划。贷后检查分日常检查和重点检查。对合作授信的资产端需要提供每月的资产质量报表（主要包括：平均贷款余额、期末贷款余额、新增账户数、新增贷款、审批通过率、首次逾期率、核销金额、迁移率等），平台严格按《北京凤凰信用管理有限公司网络借贷信息中介平台贷后管理办法》与《北京凤凰信用管理有限公司网络借贷信息中介平台业务档案管理办法》执行。</p>
+                    <p styleName="rline riskText">资产端推荐每个借款用户在平台借款时，到期未还采取的风险缓释措施：担保方连带责任保证担保。</p>
                 </div>
             </div>
             <div styleName="webInfoTitle">
                 公司网站平台信息
-                </div>
+            </div>
             <div styleName="webInfoContent">
                 <div styleName="webInfoContentL fl">
                     <p styleName="line">网站或互联网平台地址：</p>
