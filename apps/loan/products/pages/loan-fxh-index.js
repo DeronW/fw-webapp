@@ -36,10 +36,20 @@ export default class FxhIndex extends React.Component {
     getBorrowBtn = () => {
         let { fxh } = this.props;
         let btn = '--', st = fxh.data.borrowBtnStatus;
+        let user = Storage.getUserDict();
+        let ua = window.navigator.userAgent,
+            inWX = ua.indexOf('MicroMessenger') > -1,
+            inApp = ua.indexOf('FinancialWorkshop') > -1,
+            SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
 
+        let link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
 
         let credit_btn_handler = () => {
-            this.setState({popShow:true});
+            if(st == 3){
+                this.setState({popShow:true});
+            }else{
+                gotoHandler(link)
+            }
         }
 
         let unavailable_loan =
@@ -95,7 +105,11 @@ export default class FxhIndex extends React.Component {
         let loan_btn = <div styleName="loan-btn" onClick={()=>loanBtnClick()}>申请借款</div>;
 
         let credit_btn_handler = () => {
-            this.setState({popShow:true});
+            if(st == 3){
+                this.setState({popShow:true});
+            }else{
+                gotoHandler(link)
+            }
         }
 
         // let credit_btn =
