@@ -13,7 +13,7 @@ class PC extends React.Component {
         userName: null,
         userPhone: null,
         userAdress: null,
-        userMoney: 1500
+        userMoney: 8000
     }
 
     componentDidMount() {
@@ -63,6 +63,92 @@ class PC extends React.Component {
                 您当前没有资格开启，当您的投资额到达2000时，便可获取300元
             </div>
         </div>
+
+        let gift3_on = <div styleName="wrapper-on">
+            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="gift3_on"></div>
+            <div styleName="price_tips price3_tips">
+                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
+                再投¥49,800努力去开启木头宝箱吧！
+            </div>
+        </div>
+
+        let gift3_close = <div styleName="wrapper-close">
+            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="gift3_close"></div>
+            <div styleName="price_tips price3-close-tips">
+                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
+            </div>
+        </div>
+
+
+        let gift4_on = <div styleName="wrapper-on">
+            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="gift4_on"></div>
+            <div styleName="price_tips price4_tips">
+                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
+                再投¥49,800努力去开启木头宝箱吧！
+            </div>
+        </div>
+
+        let gift4_close = <div styleName="wrapper-close">
+            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="gift4_close"></div>
+            <div styleName="price_tips price4-close-tips">
+                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
+            </div>
+        </div>
+
+        let gift5_on = <div styleName="wrapper-on">
+            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="gift5_on"></div>
+            <div styleName="price_tips price5_tips">
+                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
+                再投¥49,800努力去开启木头宝箱吧！
+            </div>
+        </div>
+
+        let gift5_close = <div styleName="wrapper-close">
+            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="gift5_close"></div>
+            <div styleName="price_tips price5-close-tips">
+                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
+            </div>
+        </div>
+
+        let gift6_on = <div styleName="wrapper-on">
+            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="gift6_on"></div>
+            <div styleName="price_tips price6_tips">
+                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
+                再投¥49,800努力去开启木头宝箱吧！
+            </div>
+        </div>
+
+        let gift6_close = <div styleName="wrapper-close">
+            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="gift6_close"></div>
+            <div styleName="price_tips price6-close-tips">
+                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
+            </div>
+        </div>
+
+        let gift7_on = <div styleName="wrapper-on">
+            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="gift7_on"></div>
+            <div styleName="price_tips price7_tips">
+                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
+                再投¥49,800努力去开启木头宝箱吧！
+            </div>
+        </div>
+
+        let gift7_close = <div styleName="wrapper-close">
+            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="gift7_close"></div>
+            <div styleName="price_tips price7-close-tips">
+                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
+            </div>
+        </div>
         return <div>
             <PCHeader bgColor="rgba(8,11,22,0.6)"/>
             <div styleName="bg">
@@ -80,10 +166,33 @@ class PC extends React.Component {
                         {userMoney <= 2000 && gift2_close}
                         <div styleName="term">10万&gt;=累投年化投资额&lt;25万</div>
                     </div>
-                    <div styleName="gift34"></div>
-                    <div styleName="gift5"></div>
-                    <div styleName="gift6"></div>
-                    <div styleName="gift7"></div>
+                    <div styleName="gift34">
+                        <div styleName="gift3">
+                            {userMoney > 3000 && gift3_on}
+                            {userMoney <= 3000 && gift3_close}
+                            <div styleName="term">25万&gt;=累投年化投资额&lt;50万</div>
+                        </div>
+                        <div styleName="gift4">
+                            {userMoney > 4000 && gift4_on}
+                            {userMoney <= 4000 && gift4_close}
+                            <div styleName="term">50万&gt;=累投年化投资额&lt;80万</div>
+                        </div>
+                    </div>
+                    <div styleName="gift5">
+                        {userMoney > 5000 && gift5_on}
+                        {userMoney <= 5000 && gift5_close}
+                        <div styleName="term">80万&gt;=累投年化投资额&lt;100万</div>
+                    </div>
+                    <div styleName="gift6">
+                        {userMoney > 6000 && gift6_on}
+                        {userMoney <= 6000 && gift6_close}
+                        <div styleName="term">100万&gt;=累投年化投资额&lt;150万</div>
+                    </div>
+                    <div styleName="gift7">
+                        {userMoney > 7000 && gift7_on}
+                        {userMoney <= 7000 && gift7_close}
+                        <div styleName="term">累投年化投资额&gt;150万</div>
+                    </div>
                 </div>
             </div>
             <div styleName="pop-price" onClick={this.popPriceHandler}>领取奖品</div>
