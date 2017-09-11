@@ -101,6 +101,18 @@ export default class FxhResult extends React.Component {
         let goBack = () => {
             Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
         }
+        let sourceType;
+        let jrgc_ios = Browser.inIOSApp;
+        let jrgc_android = Browser.inAndroidApp;
+        let jrgc_weixin = Browser.inWeixin;
+        let jrgc_wap = Browser.inMobile;
+        let jrgc_web = !Browser.inMobile;
+
+        if (jrgc_ios) sourceType = 1;
+        if (jrgc_android) sourceType = 2;
+        if (jrgc_wap) sourceType = 3;
+        if (jrgc_weixin) sourceType = 4;
+        if (jrgc_web) sourceType = 5;
         return (
             <div styleName="loan-result">
                 {/* {Browser.inAndroid && <div styleName="header">
@@ -180,7 +192,7 @@ export default class FxhResult extends React.Component {
                         <div className="credit-btn" onClick={() => {$FW.Browser.inJRGCApp()? NativeBridge.close(): this.gotoHandler('/static/loan/products/index.html#/')}}>返回</div>
                     </div>*/}
                     {!Browser.inJRGCApp && <div styleName="credit-btn"
-                         onClick={() => this.gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=${USER.SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`)}>
+                         onClick={() => this.gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=${sourceType}&token=${USER.token}&uid=${USER.uid}`)}>
                         去提额
                     </div>}
                     </div>
