@@ -10,13 +10,100 @@
 }
 
 .text-wrapper {
-    width: 500px;
-    height: 400px;
-    border: 1px solid #ccc;
-    background: #fff;
+    width: 555px;
+    height: 399px;
     position: absolute;
     top: 50%;
     left: 50%;
     margin-top: -200px;
-    margin-left: -250px;
+    margin-left: -278px;
+    background: url("../images/pop/popbg.png") no-repeat center;
+    background-size: 100%;
+}
+
+.info {
+    width: 414px;
+    height: 310px;
+    margin: 40px auto 0;
+    font-size: 14px;
+    color: #d16c00;
+}
+
+.info-title {
+    font-size: 24px;
+    color: #fd4d4c;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.textline {
+    margin-bottom: 10px;
+}
+
+.text-left {
+    display: inline-block;
+    width: 127px;
+    height: 100%;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.name-write, .phone-write, .address-write {
+    width: 246px;
+    height: 30px;
+    border: 1px solid #ffe6b9;
+    padding-left: 10px;
+    font-size: 12px;
+    background: #fff;
+    display: inline-block;
+    color: #555;
+}
+
+.address-write {
+    width: 244px;
+    height: 50px;
+    vertical-align: top;
+    padding-left: 10px;
+    padding-top: 10px;
+
+}
+
+.saveline {
+    line-height: 30px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
+.close-btn {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 0px;
+    right: 4px;
+    cursor: pointer;
+}
+
+.btn {
+    width: 160px;
+    height: 42px;
+    margin: 15px auto;
+    background: url("../images/pop/buttonbg.png") no-repeat center;
+    background-size: 100%;
+    text-align: center;
+    line-height: 42px;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.info-tips {
+    width: 270px;
+    height: 35px;
+    font-size: 12px;
+    margin: 0 auto;
+    padding-left: 20px;
 }

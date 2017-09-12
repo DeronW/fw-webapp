@@ -23,11 +23,11 @@ export default class Fxh{
         })
     }
     saveOrderGid = orderGid => this.orderGid = orderGid;
-    saveOrioleOrderGid = orioleOrderGid => this.orioleOrderGid = orioleOrderGid;
+    // saveOrioleOrderGid = orioleOrderGid => this.orioleOrderGid = orioleOrderGid;
     saveLoanNum = loanNum => this.loanNum = loanNum;
 
     get_base_info = () => {
-        return this.Post(`/api/loan/v1/tryLoanBudget.json`,{orioleOrderGid: this.orioleOrderGid,loanAmount: this.loanNum})
+        return this.Post(`/api/loan/v1/tryLoanBudget.json`,{orioleOrderGid: this.data.orioleOrderGid,loanAmount: this.loanNum})
         .then(data => {
             this.accountInAmount = data.accountInAmount;
             this.shouldRepaymentAmount = data.shouldRepaymentAmount;
@@ -72,7 +72,7 @@ export default class Fxh{
     }
     getVerifyCode = () => {
         console.log(this.orderGid);
-        return this.Post(`/api/loan/v1/sendSmsverifycode.json`,{orderGid: this.orioleOrderGid})
+        return this.Post(`/api/loan/v1/sendSmsverifycode.json`,{orderGid: this.orderGid})
     }
 
     watchSliderNum = (num) => {

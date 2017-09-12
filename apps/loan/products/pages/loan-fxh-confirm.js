@@ -42,6 +42,10 @@ export default class FxhConfirm extends React.Component {
   componentDidMount() {
     document.title = "确认借款";
     let {fxh} = this.props;
+    let loanNum = Utils.hashQuery.loanNum;
+    let orderGid = Utils.hashQuery.orderGid;
+    fxh.saveLoanNum(loanNum);
+    fxh.saveOrderGid(orderGid);
     fxh.get_base_info();
   }
   confirmHandler = () => {
@@ -50,12 +54,12 @@ export default class FxhConfirm extends React.Component {
         } else {
             // let query = $FW.Format.urlQuery();
             let {fxh} = this.props;
-            let orderGid = Utils.hashQuery.orderGid;
-            let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
-            let loanNum = Utils.hashQuery.loanNum;
-            fxh.saveOrderGid(orderGid);
-            fxh.saveOrioleOrderGid(orioleOrderGid);
-            fxh.saveLoanNum(loanNum);
+            // let orderGid = Utils.hashQuery.orderGid;
+            // // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
+            // let loanNum = Utils.hashQuery.loanNum;
+            // fxh.saveOrderGid(orderGid);
+            // // fxh.saveOrioleOrderGid(orioleOrderGid);
+            // fxh.saveLoanNum(loanNum);
 
             fxh.getVerifyCode().then(() => {
                  this.setState({codePop:true});
@@ -113,9 +117,10 @@ export default class FxhConfirm extends React.Component {
     }
     checkAjax = () => {
         // let query = $FW.Format.urlQuery();
-        let orderGid = Utils.hashQuery.orderGid;
+        // let orderGid = Utils.hashQuery.orderGid;
+        let {fxh} = this.props;
         Post(`/api/loan/v1/status.json`, {
-            orderGid: orderGid,
+            orderGid: fxh.orderGid,
             with_out_loading:true
         }).then((data) => {
             let finishFlag = true;
@@ -152,29 +157,31 @@ export default class FxhConfirm extends React.Component {
     }
     getSMSCode = () => {
         // let query = $FW.Format.urlQuery();
-        let orderGid = Utils.hashQuery.orderGid;
+        let {fxh} = this.props;
         if (this.state.countdown <= 0) {
             this.countingDown();
-            Post(`/api/loan/v1/resendverifycode.json`,{orderGid: orderGid});
+            Post(`/api/loan/v1/resendverifycode.json`,{orderGid: fxh.orderGid});
         }
     }
     codeConfirmBtnHandler = () => {
         // let query = $FW.Format.urlQuery();
-        let orderGid = Utils.hashQuery.orderGid;
+        let {fxh} = this.props;
+        // let orderGid = Utils.hashQuery.orderGid;
         if (this.state.value == '')
             return Components.showToast("请输入短信验证码");
 
         Post(`/api/loan/v1/do.json`, {
-            orderGid: orderGid,
+            orderGid: fxh.orderGid,
             verifyCode: this.state.value
         }).then(() => {
                 this.setState({codePop:false});
-                if(Browser.inJRGCApp){
-                    this.gotoHandler(`/static/loan/products/index.html#/loan-fxh-result?orderGid=${orderGid}`);
-                }else{
-                    this.resultShow;
-                    this.getLoanResultCheck;
-                }
+                // if(Browser.inJRGCApp){
+                    this.gotoHandler(`/static/loan/products/index.html#/loan-fxh-result?orderGid=${fxh.orderGid}`);
+                // }
+                // else{
+                //     this.resultShow;
+                //     this.getLoanResultCheck;
+                // }
             }, e => {
                 if(e.code == 603002){
                     this.setState({codePop:false, loanShow:true, failMsg:e.message});

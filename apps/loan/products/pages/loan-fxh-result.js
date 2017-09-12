@@ -6,7 +6,7 @@ import {observer, inject} from 'mobx-react'
 import {Link} from 'react-router-dom'
 
 import {Header} from '../../lib/components'
-import {Browser, Post, NativeBridge} from '../../lib/helpers'
+import {Browser, Post, NativeBridge,Storage} from '../../lib/helpers'
 
 import {Utils, Components} from 'fw-javascripts'
 
@@ -97,9 +97,22 @@ export default class FxhResult extends React.Component {
     }
     render() {
         let {fxh,history} = this.props;
+        let USER = Storage.getUserDict();
         let goBack = () => {
             Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
         }
+        let sourceType;
+        let jrgc_ios = Browser.inIOSApp;
+        let jrgc_android = Browser.inAndroidApp;
+        let jrgc_weixin = Browser.inWeixin;
+        let jrgc_wap = Browser.inMobile;
+        let jrgc_web = !Browser.inMobile;
+
+        if (jrgc_ios) sourceType = 1;
+        if (jrgc_android) sourceType = 2;
+        if (jrgc_wap) sourceType = 3;
+        if (jrgc_weixin) sourceType = 4;
+        if (jrgc_web) sourceType = 5;
         return (
             <div styleName="loan-result">
                 {/* {Browser.inAndroid && <div styleName="header">
@@ -178,6 +191,10 @@ export default class FxhResult extends React.Component {
                         {/*<div className="btn-wrap">
                         <div className="credit-btn" onClick={() => {$FW.Browser.inJRGCApp()? NativeBridge.close(): this.gotoHandler('/static/loan/products/index.html#/')}}>返回</div>
                     </div>*/}
+                    {!Browser.inJRGCApp && <div styleName="credit-btn"
+                         onClick={() => this.gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=${sourceType}&token=${USER.token}&uid=${USER.uid}`)}>
+                        去提额
+                    </div>}
                     </div>
                     <div styleName={this.state.failResultShow
                         ? "fail-result-box"
@@ -212,11 +229,11 @@ export default class FxhResult extends React.Component {
                     </div>
                 </div>*/}
                 </div>
-                <div styleName="new-weixin-attention">
+                {Browser.inJRGCApp && <div styleName="new-weixin-attention">
                     <div styleName="attention-tip">关注放心花微信公众号或使用APP可获得更高借款额度，且随时查看还款计划。</div>
                 <a styleName="attention-btn copy-bg" onClick={this.copyHandler}>复制微信公众号</a>
             <a styleName="attention-btn download-bg" onClick={this.clickHandler}>下载放心花APP</a>
-                </div>
+    </div>}
                 <div styleName="customer-service">
                     <div styleName="service-wrap"><img src={require("../images/loan-fxh-result/phone.png")}/>如有问题请致电：<a href="tel:400-102-0066">400-102-0066</a>
                     </div>
