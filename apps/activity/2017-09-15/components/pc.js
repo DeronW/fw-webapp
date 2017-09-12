@@ -10,16 +10,11 @@ import PopGetPricePC from './popPC.js'
 class PC extends React.Component {
 
     state = {
-        userName: null,
-        userPhone: null,
-        userAdress: null,
-        userMoney: 8000
+        userMoney: 2000
     }
 
     componentDidMount() {
-        // if(this.state.userMoney <1000){
-        //
-        // }
+
     }
 
     popPriceHandler = () => {
@@ -40,7 +35,6 @@ class PC extends React.Component {
             </div>
         </div>
         let gift1_close = <div styleName="wrapper-close">
-            <div styleName="des">150元话费券</div>
             <div styleName="gift1_close"></div>
             <div styleName="price_tips price1-close-tips">
                 您当前没有资格开启，当您的投资额到达1000时，便可获取150元话费券
@@ -57,7 +51,6 @@ class PC extends React.Component {
         </div>
 
         let gift2_close = <div styleName="wrapper-close">
-            <div styleName="des">300元京东卡</div>
             <div styleName="gift2_close"></div>
             <div styleName="price_tips price2-close-tips">
                 您当前没有资格开启，当您的投资额到达2000时，便可获取300元
@@ -153,7 +146,8 @@ class PC extends React.Component {
             <PCHeader bgColor="rgba(8,11,22,0.6)"/>
             <div styleName="bg">
                 <div styleName="goInvest">
-                    <div styleName="btn_invest"></div>
+                    <div styleName="invest-text">累投年化达标，可开启宝箱奖励</div>
+                    <a styleName="btn_invest" href="">投资寻宝</a>
                 </div>
                 <div styleName="roadbg">
                     <div styleName="gift1">
@@ -210,7 +204,7 @@ class PC extends React.Component {
                     </div>
                 </div>
             </div>
-            <div styleName="pop-price" onClick={this.popPriceHandler}>领取奖品</div>
+            <div styleName="pop-price" onClick={this.popPriceHandler}></div>
         </div>
     }
 }

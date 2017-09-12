@@ -86,7 +86,7 @@ export default class FxhWant extends React.Component {
                 orioleOrderGid: fxh.data.orioleOrderGid,
                 productId: 1,
                 withdrawCardGid: fxh.defaultCardGid
-            }
+            }, 'silence'
         ).then((data) => {
             this.setState({ loanGid: data.loanGid, orderGid: data.orderGid });
             if (!err) {
@@ -94,7 +94,7 @@ export default class FxhWant extends React.Component {
             }
         },(err) => {
             if (err.code == 24003 || err.code == 24005) return this.setState({loanShow: true, failMsg: err.message})
-            //Components.showToast(err.message);
+            // Components.showToast(err.message);
         });
     }
 

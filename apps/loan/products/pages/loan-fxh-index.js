@@ -5,6 +5,7 @@ import CSSModules from 'react-css-modules'
 import styles from '../css/loan-fxh-index.css'
 import { observer, inject } from 'mobx-react'
 import Slider from '../components/slider'
+import ProductDisplay from '../components/productDisplay'
 import { Header } from '../../lib/components'
 import { Components } from 'fw-javascripts'
 import { NativeBridge, Browser, Storage } from '../../lib/helpers'
@@ -24,7 +25,9 @@ export default class FxhIndex extends React.Component {
             start:0,
             end:580,
             defaultValue:580,
-            loanNum:0
+            loanNum:0,
+            loanShow: false,
+            improveShow: false
         }
     }
     componentDidMount() {
@@ -45,9 +48,9 @@ export default class FxhIndex extends React.Component {
         let link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
 
         let credit_btn_handler = () => {
-            if(st == 3){
-                this.setState({popShow:true});
-            }else{
+            if (fxh.data.redirectType == 1) {
+                this.setState({ improveShow: true });
+            } else {
                 gotoHandler(link)
             }
         }
@@ -87,15 +90,14 @@ export default class FxhIndex extends React.Component {
     getBtnStatus = () => {
         let { fxh } = this.props;
         let user = Storage.getUserDict();
-        let ua = window.navigator.userAgent,
-            inWX = ua.indexOf('MicroMessenger') > -1,
+        let btn = '--', st = fxh.data.borrowBtnStatus;
+        let ua = window.navigator.userAgent;
+        let inWX = ua.indexOf('MicroMessenger') > -1,
             inApp = ua.indexOf('FinancialWorkshop') > -1,
             SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
-        let btn = '--', st = fxh.data.borrowBtnStatus;
-
         let link;
         if (st == 1) link = '/static/loan/user-card-set/index.html';
-        if (st == 2) link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
+        if (st == 2 || st == 3) link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
 
         let loanBtnClick = () => {
             st === 101 ?
@@ -105,9 +107,9 @@ export default class FxhIndex extends React.Component {
         let loan_btn = <div styleName="loan-btn" onClick={()=>loanBtnClick()}>申请借款</div>;
 
         let credit_btn_handler = () => {
-            if(st == 3){
-                this.setState({popShow:true});
-            }else{
+            if (fxh.data.redirectType == 1) {
+                this.setState({ improveShow: true });
+            } else {
                 gotoHandler(link)
             }
         }
@@ -116,7 +118,6 @@ export default class FxhIndex extends React.Component {
         //     <a styleName="loan-btn" href={$FW.Browser.inJRGCApp() && st == 3 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>
         //         我要提额
         //     </a>;
-
 
         let credit_btn =
             <a styleName="loan-btn" onClick={()=>credit_btn_handler()}>
@@ -145,6 +146,15 @@ export default class FxhIndex extends React.Component {
         if (st === 5) line = fxh.data.creditLine;
         return line
     }
+
+    popShowHandler = () => {
+        this.setState({ loanShow: true })
+    }
+
+    callbackHandler = () => {
+        this.setState({ loanShow: false, improveShow: false })
+    }
+
     render(){
         let { fxh } = this.props;
         let goBack = () => {
@@ -157,6 +167,8 @@ export default class FxhIndex extends React.Component {
             SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
         return (
             <div styleName="apply-loan">
+                {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} popTitle={"提示"} />}
+                {this.state.improveShow && <ProductDisplay callbackHandler={this.callbackHandler} improve={true} popTitle={"提示"} />}
                 <Header title="放心花" goBack={goBack} />
                 <div styleName="loan-num-wrap">
                     {(fxh.data.borrowBtnStatus == 2 || fxh.data.borrowBtnStatus == 3) && this.getBorrowBtn()}
@@ -182,7 +194,7 @@ export default class FxhIndex extends React.Component {
                     </div>
                 </div>
                 {this.getBtnStatus()}
-                {fxh.data.redirectType == 1 ? <div styleName="loan-tip">额度为0别灰心，试试其他<span>借款</span></div> : <div styleName="loan-tip">完善授权信息可减免手续费</div>}
+                {fxh.data.redirectType == 1 ? <div styleName="loan-tip">额度为0别灰心，试试其他<span styleName="loan-word-tip loan-word-tip-color" onClick={this.popShowHandler}>借款</span></div> : <div styleName="loan-tip">完善授权信息可减免手续费</div>}
                 {this.state.popShow && <div styleName="pop-bg">
                     <div styleName="pop-panel">
                         <div styleName="pop-title">提示</div>
