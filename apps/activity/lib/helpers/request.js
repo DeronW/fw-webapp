@@ -14,7 +14,7 @@ const Ajax = options => {
             message: ...
         }
         */
-        if (error.code == 40101) {
+        if (error.code == 40101 || error.code == 63001) {
             console.log('here ! should go to login')
 
             Browser.inApp ?
@@ -23,7 +23,7 @@ const Ajax = options => {
         } else {
             // 如果不弹出错误, 就直接reject
             if (silence)
-                return new Promise((reslove, reject) => reject(error))
+                return new Promise((resolve, reject) => reject(error))
 
             Components.showToast(error.message)
 
