@@ -34,8 +34,10 @@ class Login extends React.Component {
     }
 
     keydownHandler = event => {
-        if (event.keyCode == 13)
+        if (event.keyCode == 13) {
+            this.passwordInput && this.passwordInput.blur()
             this.submitHandler()
+        }
     }
 
     submitHandler = () => {
@@ -58,7 +60,9 @@ class Login extends React.Component {
                 <i className={plaintext ? 'icon-eye-open' : "icon-eye-close"}
                     styleName="icon-eye"
                     onClick={this.toggleEye}></i>
-                <input styleName="input" type={plaintext ? 'text' : 'password'}
+                <input styleName="input"
+                    ref={input => this.passwordInput = input}
+                    type={plaintext ? 'text' : 'password'}
                     value={password}
                     onChange={this.changeHandler}
                     onKeyDown={this.keydownHandler}
