@@ -97,7 +97,7 @@ export default class FxhIndex extends React.Component {
             SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
         let link;
         if (st == 1) link = '/static/loan/user-card-set/index.html';
-        if (st == 2) link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
+        if (st == 2 || st == 3) link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
 
         let loanBtnClick = () => {
             st === 101 ?
