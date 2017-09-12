@@ -2,6 +2,49 @@
     background: #00a8e5 url('../images/mobile/bg.png') no-repeat center 718px;
 }
 
+.intro {
+    box-sizing: border-box;
+    position: fixed;
+    top: 80px;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px 32px;
+    background-color: #00a8e5;
+    color: #fff;
+    z-index: 99;
+}
+
+.hide-intro {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 134px;
+    height: 134px;
+    background: url('../images/mobile/intro-back-bg.png');
+}
+
+.hide-intro span {
+    margin: 24px 0 0 69px;
+    color: #fff;
+    font-size: 24px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.intro-title {
+    margin-top: 14px;
+    font-size: 26px;
+    line-height: 91px;
+}
+
+.intro-list {
+    margin: 0;
+    padding: 0 0 0 24px;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
 .banner {
     position: relative;
     height: 388px;
@@ -12,13 +55,13 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 164px;
-    height: 153px;
+    width: 134px;
+    height: 134px;
     background: url('../images/mobile/intro-bg.png');
 }
 
 .show-intro span {
-    margin: 33px 0 0 66px;
+    margin: 27px 0 0 38px;
     color: #fff;
     font-size: 24px;
     -webkit-transform: rotate(45deg);

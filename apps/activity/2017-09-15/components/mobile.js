@@ -10,12 +10,40 @@ import { Browser, NativeBridge } from '../../lib/helpers'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Mobile extends React.Component {
 
+    state = {
+        showIntro: true
+    }
+
+    toggleIntro = () => {
+        this.setState({ showIntro: !this.state.showIntro })
+    }
+
     render() {
+        let { showIntro } = this.state;
+
         return <div styleName="bg">
             <MobileHeader bgColor="rgba(8,11,22,0.6)"/>
 
+            { showIntro &&
+                <div styleName="intro">
+                    <div styleName="hide-intro" onClick={this.toggleIntro}>
+                        <span>返回</span>
+                    </div>
+                    <div styleName="intro-title">活动说明</div>
+                    <ol styleName="intro-list">
+                        <li>活动期间投资债权转让产品，不能参与本次活动。企业用户不参与本次活动。</li>
+                        <li>活动结束后根据活动内累投年化发放宝箱对应实物奖品，每人仅可开启一个最高宝箱奖励。</li>
+                        <li>本次活动累投年化包含工场微金、工场尊享和工场黄金的尊享金产品的购买年化金额。</li>
+                        <li>投资等额标时，＞18个月的项目按18个月计算年化投资额。</li>
+                        <li>实物奖品于活动结束后15个工作日内联系确认安排发放方式，实物奖品图片仅供参考，最终采购奖品按产品本身颜色、型号随机发放。</li>
+                        <li>中奖用户在活动页面点击“领取奖品”填写最终实物奖品快递领取地址，所有实物奖品平台免费保留15个工作日，逾期不填地址视为奖品自动放弃。</li>
+                        <li>活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。</li>
+                    </ol>
+                </div>
+            }
+
             <div styleName="banner">
-                <div styleName="show-intro" onClick={this.showIntro}>
+                <div styleName="show-intro" onClick={this.toggleIntro}>
                     <span>活动说明</span>
                 </div>
             </div>
