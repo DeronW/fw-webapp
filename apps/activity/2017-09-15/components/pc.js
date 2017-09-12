@@ -4,30 +4,38 @@ import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
 import PCHeader from '../../lib/components/pc-header.js'
 import {PopGetPricePC, PopGroupPC} from './popPC.js'
-
+import {Get, Post} from '../lib/helpers'
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PC extends React.Component {
 
     state = {
-        userMoney: 300000
+        info: null
     }
 
     componentDidMount() {
-        // let {closePopHandler, isLogin} = this.props;
-        // ReactDOM.render(<PopGroupPC isLogin={isLogin}
-        //                             closePopHandler={closePopHandler}/>, document.getElementById("pop"))
+        let {closePopHandler, isLogin} = this.props;
+        Get('/api/octoberActivity/v1/getSelfInvestInfo.json')
+            .then(data => {
+                console.log(data)
+                data.data.isPerson == "1" &&
+                ReactDOM.render(<PopGroupPC isLogin={isLogin}
+                                            closePopHandler={closePopHandler}/>, document.getElementById("pop"))
+                this.setState({info: data.data})
+            })
+
+
     }
 
     popPriceHandler = () => {
-        console.log(111)
         let {closePopHandler, isLogin} = this.props;
-        ReactDOM.render(<PopGetPricePC isLogin={isLogin}
+        ReactDOM.render(<PopGetPricePC isLogin={isLogin} info={this.state.info}
                                        closePopHandler={closePopHandler}/>, document.getElementById("pop"))
     }
 
     render() {
-        let {userMoney} = this.state
+        let {info} = this.state
+        let userMoney = info && info.yearAmtSum
         let tips = () => {
             if (userMoney < 50000) {
                 return <div styleName="price_tips price1-close-tips">
