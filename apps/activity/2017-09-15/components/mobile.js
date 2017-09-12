@@ -17,7 +17,7 @@ const BOX_PROPS = [
     { name: '钻石宝箱', require: 1500000 }
 ]
 
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Mobile extends React.Component {
 
     state = {
@@ -26,8 +26,12 @@ class Mobile extends React.Component {
         investValue: 120000,
         biggestBox: 0,
         showCannotGetPop: false,
-        isCompanyUser: true,
+        isCompanyUser: false,
         showCompanyPop: false,
+        showAddressPop: true,
+        name: '',
+        phone: '',
+        address: ''
     }
 
     componentDidMount() {
@@ -75,8 +79,21 @@ class Mobile extends React.Component {
         this.setState({ openedBox: openedBox, showCompanyPop: false })
     }
 
+    toggleAddressPop = () => this.setState({ showAddressPop: !this.state.showAddressPop })
+
+    handleInput = type => e => {
+        let value = e.target.value;
+        if (type === 'name' && value.length > 10) {
+            value = value.slice(0, 10);
+        } else if (type === 'address' && value.length > 100) {
+            value = value.slice(0, 100);
+        }
+        this.setState({ [type]: value })
+    }
+
     render() {
-        const { showIntro, investValue, biggestBox, showCannotGetPop, showCompanyPop } = this.state;
+        const { showIntro, investValue, biggestBox, showCannotGetPop,
+            showCompanyPop, showAddressPop, name, phone, address } = this.state;
 
         const intro = <div styleName="intro">
             <div styleName="hide-intro" onClick={this.toggleIntro}>
@@ -110,16 +127,49 @@ class Mobile extends React.Component {
 
         const addressPop = <div styleName="pop-mask">
             <div styleName="address-pop">
+                <div styleName="address-pop-close-btn" onClick={this.toggleAddressPop}></div>
+                <div styleName="address-pop-title">收货地址</div>
+                <div styleName="input-item">
+                    <div styleName="item-name">收货人姓名：</div>
+                    <input styleName="item-value"
+                        placeholder="仅可输入汉字，不能输入数字，限10字以内"
+                        value={name}
+                        onChange={this.handleInput('name')} />
+                </div>
+                <div styleName="input-item">
+                    <div styleName="item-name">收货人联系电话：</div>
+                    <input styleName="item-value"
+                        type="number"
+                        maxLength="15"
+                        placeholder="仅可输入数字，且限制15个数字以内"
+                        value={phone}
+                        onChange={this.handleInput('phone')} />
+                </div>
+                <div styleName="input-item">
+                    <div styleName="item-name">详细地址：</div>
+                    <textarea styleName="address-item-value"
+                        placeholder="100个字以内"
+                        value={address}
+                        onChange={this.handleInput('address')} />
+                </div>
+                <div styleName="submit-btn">{name || phone || address ? '修  改' : '保  存'}</div>
+                <div styleName="tip">
+                    提示：请准确填写收货地址，以便您能收到奖品。<br />
+                    如有疑问，请联系客服：400-0322-988</div>
             </div>
         </div>
 
         return <div styleName="bg">
             <MobileHeader bgColor="rgba(8,11,22,0.6)"/>
 
+            <div styleName="get-treasure-btn" onClick={this.toggleAddressPop}></div>
+
             { showIntro && intro }
 
             { showCannotGetPop && cannotGetPop }
             { showCompanyPop && companyPop }
+
+            { showAddressPop && addressPop}
 
             <div styleName="banner">
                 <div styleName="show-intro" onClick={this.toggleIntro}>
