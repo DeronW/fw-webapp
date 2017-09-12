@@ -18,7 +18,7 @@ class PC extends React.Component {
         Get('/api/octoberActivity/v1/getSelfInvestInfo.json')
             .then(data => {
                 console.log(data)
-                data.data.isPerson == "1" &&
+                data.data.isPerson == "0" &&
                 ReactDOM.render(<PopGroupPC isLogin={isLogin}
                                             closePopHandler={closePopHandler}/>, document.getElementById("pop"))
                 this.setState({info: data.data})
