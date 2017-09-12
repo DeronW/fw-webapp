@@ -86,7 +86,7 @@ export default class FxhWant extends React.Component {
                 orioleOrderGid: fxh.data.orioleOrderGid,
                 productId: 1,
                 withdrawCardGid: fxh.defaultCardGid
-            }
+            },'silence'
         ).then((data) => {
             this.setState({ loanGid: data.loanGid, orderGid: data.orderGid });
             if (!err) {
