@@ -23,7 +23,7 @@ export default class Fxh{
         })
     }
     saveOrderGid = orderGid => this.orderGid = orderGid;
-    // saveOrioleOrderGid = orioleOrderGid => this.orioleOrderGid = orioleOrderGid;
+    saveOrioleOrderGid = orioleOrderGid => this.data.orioleOrderGid = orioleOrderGid;
     saveLoanNum = loanNum => this.data.loanNum = loanNum;
 
     get_base_info = () => {
@@ -93,7 +93,8 @@ export default class Fxh{
         this.Post(`/api/loan/v1/baseinfo.json`,{
             productId: Utils.urlQuery.pid || 1
         }).then((data)=>{
-            this.data = data
+            this.data = data;
+            this.saveOrioleOrderGid(this.data.orioleOrderGid);
         })
     }
 
