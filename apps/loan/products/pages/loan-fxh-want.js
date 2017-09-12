@@ -90,7 +90,7 @@ export default class FxhWant extends React.Component {
         ).then((data) => {
             this.setState({ loanGid: data.loanGid, orderGid: data.orderGid });
             if (!err) {
-                location.href = `/static/loan/products/index.html#/loan-fxh-confirm?loanNum=${this.state.loanNum}&orderGid=${this.state.orderGid}`;
+                location.href = `/static/loan/products/index.html#/loan-fxh-confirm?loanNum=${this.state.loanNum}&orderGid=${this.state.orderGid}&orioleOrderGid=${fxh.data.orioleOrderGid}`;
             }
         },(err) => {
             if (err.code == 24003 || err.code == 24005) return this.setState({loanShow: true, failMsg: err.message})
