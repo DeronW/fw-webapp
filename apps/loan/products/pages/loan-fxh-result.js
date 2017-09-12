@@ -120,7 +120,7 @@ export default class FxhResult extends React.Component {
             sourceType = 5;
         return (
             <div>
-                {!Browser.inJRGCApp && <header title = "借款结果" goBack = {goBack}/>}
+                {!Browser.inJRGCApp && <Header title = "借款结果" goBack = {goBack}/>}
                 <div styleName="loan-result">
                     {/* {Browser.inAndroid && <div styleName="header">
                         <div styleName="arrow-left" onClick={() => {
