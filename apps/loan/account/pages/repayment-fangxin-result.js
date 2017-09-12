@@ -20,7 +20,7 @@ class RepaymentFangXinResult extends React.Component {
         this.props.repayment_fangxin.fetchRepaymentResult(Utils.hashQuery.id).then(() => {
             if(repayment_fangxin.status == 1){
                 setTimeout(() => {
-                    Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/$/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
+                    Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
                     // location.href  = `/static/loan/features/index.html#/invite-activity`;
                     // location.href  = this.getRelativeUrl(`${activityRecomUrl}`);
                     // location.href  = this.getRelativeUrl(`https://m.easyloan.888.com/static/loan/features/index.html#/invite-activity`);

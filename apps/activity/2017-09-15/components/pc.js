@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
 import PCHeader from '../../lib/components/pc-header.js'
-import PopGetPricePC from './popPC.js'
+import {PopGetPricePC, PopGroupPC} from './popPC.js'
 
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PC extends React.Component {
 
     state = {
-        userMoney: 2000
+        userMoney: 1500
     }
 
     componentDidMount() {
-
+        let {closePopHandler, isLogin} = this.props;
+        ReactDOM.render(<PopGroupPC isLogin={isLogin}
+                                    closePopHandler={closePopHandler}/>, document.getElementById("pop"))
     }
 
     popPriceHandler = () => {
@@ -35,6 +37,7 @@ class PC extends React.Component {
             </div>
         </div>
         let gift1_close = <div styleName="wrapper-close">
+            <div styleName="des">150元话费券</div>
             <div styleName="gift1_close"></div>
             <div styleName="price_tips price1-close-tips">
                 您当前没有资格开启，当您的投资额到达1000时，便可获取150元话费券
@@ -51,6 +54,7 @@ class PC extends React.Component {
         </div>
 
         let gift2_close = <div styleName="wrapper-close">
+            <div styleName="des">300元京东卡</div>
             <div styleName="gift2_close"></div>
             <div styleName="price_tips price2-close-tips">
                 您当前没有资格开启，当您的投资额到达2000时，便可获取300元

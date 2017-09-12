@@ -93,7 +93,7 @@
 }
 
 .gift1 .wrapper-close:hover {
-    padding: 87px 0 0 116px;
+    padding: 68px 0 0 116px;
 }
 
 .gift1 .wrapper-close:hover .gift1_close {
@@ -184,7 +184,7 @@
 }
 
 .gift2 .wrapper-close {
-    margin: -45px 0 0 176px;
+    margin: -2px 0 0 176px;
     position: relative;
 }
 
@@ -261,12 +261,12 @@
 }
 
 .gift4 .wrapper-on {
-    margin: -24px 0 0 583px;
+    margin: -54px 0 0 578px;
     position: relative;
 }
 
 .gift4 .wrapper-close {
-    margin: -1px 0 0 583px;
+    margin: -47px 0 0 583px;
     position: relative;
 }
 
@@ -278,7 +278,7 @@
 }
 
 .gift4 .wrapper-close:hover {
-    margin: -15px 0 0 567px;
+    margin: -61px 0 0 574px;
 }
 
 .gift4 .wrapper-close:hover .gift4_close {
@@ -490,6 +490,14 @@
 .text .title {
     font-size: 26px;
     margin-bottom: 30px;
+}
+
+.wrapper-close .des {
+    display: none;
+}
+
+.wrapper-close:hover .des {
+    display: block;
 }
 
 @keyframes Tips1MovePC {
