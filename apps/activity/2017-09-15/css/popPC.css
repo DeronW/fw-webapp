@@ -1,5 +1,5 @@
 /*领取奖品弹窗*/
-.price-pc {
+.price-pc, .group-pc-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -9,7 +9,7 @@
     z-index: 99;
 }
 
-.text-wrapper {
+.text-wrapper, .group-pc {
     width: 555px;
     height: 399px;
     position: absolute;
@@ -106,4 +106,12 @@ input::-webkit-inner-spin-button {
     font-size: 12px;
     margin: 0 auto;
     padding-left: 20px;
+}
+
+.group-text {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    color: #fd4d4c;
+    line-height: 388px;
 }
