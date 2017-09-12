@@ -29,7 +29,7 @@ export default class FxhResult extends React.Component {
     componentDidMount() {
         document.title = "借款结果"
         let {fxh} = this.props;
-        fxh.get_base_info();
+        fxh.get_card_list();
         this.countingDown();
     }
 
@@ -64,7 +64,7 @@ export default class FxhResult extends React.Component {
                 setTimeout(() => {
                     Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
                     location.href  = `/static/loan/features/index.html#/invite-activity?yqm=F172001`;
-                }, 10000)
+                }, 2000)
             } else if (data.loanStatus == 5) {
                 this.setState({waitingResultShow: false, failResultShow: true, failReason: data.failReason});
             } else {
