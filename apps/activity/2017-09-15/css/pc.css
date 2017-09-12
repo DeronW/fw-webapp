@@ -93,7 +93,7 @@
 }
 
 .gift1 .wrapper-close:hover {
-    padding: 87px 0 0 116px;
+    padding: 68px 0 0 116px;
 }
 
 .gift1 .wrapper-close:hover .gift1_close {
@@ -103,7 +103,7 @@
     background-size: 100%;
 }
 
-.gift1 .wrapper-close:hover .price1-close-tips {
+.wrapper-close:hover .price1-close-tips {
     display: block;
 }
 
@@ -129,14 +129,14 @@
     animation-fill-mode: forwards;
 }
 
-.price2_tips, .price2-close-tips, .price7_tips, .price7-close-tips {
+.gift2 .price1-close-tips, .gift7 .price1-close-tips {
     top: -100px;
     left: -120px;
     animation: Tips2MovePC 0.5s 0.5s ease-in-out;
     animation-fill-mode: forwards;
 }
 
-.price3_tips, .price3-close-tips, .price4_tips, .price4-close-tips, .price5_tips, .price5-close-tips, .price6_tips, .price6-close-tips {
+.gift3 .price1-close-tips, .gift4 .price1-close-tips, .gift5 .price1-close-tips, .gift6 .price1-close-tips {
     top: -100px;
     left: -120px;
     animation: Tips3MovePC 0.5s 0.5s ease-in-out;
@@ -184,7 +184,7 @@
 }
 
 .gift2 .wrapper-close {
-    margin: -45px 0 0 176px;
+    margin: -2px 0 0 176px;
     position: relative;
 }
 
@@ -197,10 +197,6 @@
     height: 157px;
     background: url("../images/pc/gift2_on.png") no-repeat center;
     background-size: 100%;
-}
-
-.gift2 .wrapper-close:hover .price2-close-tips {
-    display: block;
 }
 
 .gift34 {
@@ -248,11 +244,6 @@
     background-size: 100%;
 }
 
-.gift3 .wrapper-close:hover .price3-close-tips {
-    display: block;
-}
-
-/*4444444444*/
 .gift4_on {
     width: 189px;
     height: 163px;
@@ -261,12 +252,12 @@
 }
 
 .gift4 .wrapper-on {
-    margin: -24px 0 0 583px;
+    margin: -54px 0 0 578px;
     position: relative;
 }
 
 .gift4 .wrapper-close {
-    margin: -1px 0 0 583px;
+    margin: -47px 0 0 583px;
     position: relative;
 }
 
@@ -278,7 +269,7 @@
 }
 
 .gift4 .wrapper-close:hover {
-    margin: -15px 0 0 567px;
+    margin: -61px 0 0 574px;
 }
 
 .gift4 .wrapper-close:hover .gift4_close {
@@ -286,10 +277,6 @@
     height: 163px;
     background: url("../images/pc/gift4_on.png") no-repeat center;
     background-size: 100%;
-}
-
-.gift4 .wrapper-close:hover .price4-close-tips {
-    display: block;
 }
 
 .gift4 .term {
@@ -341,10 +328,6 @@
     background-size: 100%;
 }
 
-.gift5 .wrapper-close:hover .price5-close-tips {
-    display: block;
-}
-
 .gift5 .term {
     padding-left: 374px;
 }
@@ -392,10 +375,6 @@
     height: 158px;
     background: url("../images/pc/gift6_on.png") no-repeat center;
     background-size: 100%;
-}
-
-.gift6 .wrapper-close:hover .price6-close-tips {
-    display: block;
 }
 
 .gift6 .term {
@@ -447,10 +426,6 @@
     background-size: 100%;
 }
 
-.gift7 .wrapper-close:hover .price7-close-tips {
-    display: block;
-}
-
 .gift7 .term {
     padding-left: 242px;
 }
@@ -490,6 +465,14 @@
 .text .title {
     font-size: 26px;
     margin-bottom: 30px;
+}
+
+.wrapper-close .des {
+    display: none;
+}
+
+.wrapper-close:hover .des {
+    display: block;
 }
 
 @keyframes Tips1MovePC {

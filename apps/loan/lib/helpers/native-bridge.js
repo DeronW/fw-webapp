@@ -35,4 +35,3 @@ NativeBridge.hide_header = function () {
 
 
 export default NativeBridge
-

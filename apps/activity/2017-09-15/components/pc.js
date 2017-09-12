@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
 import PCHeader from '../../lib/components/pc-header.js'
-import PopGetPricePC from './popPC.js'
+import {PopGetPricePC, PopGroupPC} from './popPC.js'
 
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PC extends React.Component {
 
     state = {
-        userMoney: 2000
+        userMoney: 4900
     }
 
     componentDidMount() {
-
+        // let {closePopHandler, isLogin} = this.props;
+        // ReactDOM.render(<PopGroupPC isLogin={isLogin}
+        //                             closePopHandler={closePopHandler}/>, document.getElementById("pop"))
     }
 
     popPriceHandler = () => {
@@ -26,121 +28,125 @@ class PC extends React.Component {
 
     render() {
         let {userMoney} = this.state
+        let tips = () => {
+            if (userMoney < 1000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
+                    再投¥49,800努力去开启木头宝箱吧！
+                </div>
+            } else if (userMoney < 2000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span>¥120,000</span>，暂可开启木头宝箱，<br/>
+                    再投¥130,000努力去开启铜宝箱吧！
+                </div>
+            } else if (userMoney < 3000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span>¥120,000</span>，暂可开启铜宝箱，<br/>
+                    再投¥130,000努力去开启银宝箱吧！
+                </div>
+            } else if (userMoney < 4000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span>¥120,000</span>，暂可开启银宝箱，<br/>
+                    再投¥130,000努力去开启金宝箱吧！
+                </div>
+            } else if (userMoney < 5000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span>¥120,000</span>，暂可开启金宝箱，<br/>
+                    再投¥130,000努力去开启铂金宝箱吧！
+                </div>
+            } else if (userMoney < 6000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span>¥120,000</span>，暂可开启铂金宝箱，<br/>
+                    再投¥130,000努力去开启钻石宝箱吧！
+                </div>
+            } else {
+                return <div>
+                    1111
+                </div>
+            }
+        }
         let gift1_on = <div styleName="wrapper-on">
             <div styleName="des">150元话费券</div>
             <div styleName="gift1_on"></div>
-            <div styleName="price_tips price1_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {tips()}
         </div>
         let gift1_close = <div styleName="wrapper-close">
+            <div styleName="des">150元话费券</div>
             <div styleName="gift1_close"></div>
-            <div styleName="price_tips price1-close-tips">
-                您当前没有资格开启，当您的投资额到达1000时，便可获取150元话费券
-            </div>
+            {tips()}
         </div>
 
         let gift2_on = <div styleName="wrapper-on">
             <div styleName="des">300元京东卡</div>
             <div styleName="gift2_on"></div>
-            <div styleName="price_tips price2_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {tips()}
         </div>
 
         let gift2_close = <div styleName="wrapper-close">
+            <div styleName="des">300元京东卡</div>
             <div styleName="gift2_close"></div>
-            <div styleName="price_tips price2-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
+            {tips()}
         </div>
 
         let gift3_on = <div styleName="wrapper-on">
             {/*<div styleName="des">300元京东卡</div>*/}
             <div styleName="gift3_on"></div>
-            <div styleName="price_tips price3_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {tips()}
         </div>
 
         let gift3_close = <div styleName="wrapper-close">
             {/*<div styleName="des">300元京东卡</div>*/}
             <div styleName="gift3_close"></div>
-            <div styleName="price_tips price3-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
+            {tips()}
         </div>
 
 
         let gift4_on = <div styleName="wrapper-on">
             {/*<div styleName="des">300元京东卡</div>*/}
             <div styleName="gift4_on"></div>
-            <div styleName="price_tips price4_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {tips()}
         </div>
 
         let gift4_close = <div styleName="wrapper-close">
             {/*<div styleName="des">300元京东卡</div>*/}
             <div styleName="gift4_close"></div>
-            <div styleName="price_tips price4-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
+            {tips()}
         </div>
 
         let gift5_on = <div styleName="wrapper-on">
             {/*<div styleName="des">300元京东卡</div>*/}
             <div styleName="gift5_on"></div>
-            <div styleName="price_tips price5_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {tips()}
         </div>
 
         let gift5_close = <div styleName="wrapper-close">
             {/*<div styleName="des">300元京东卡</div>*/}
             <div styleName="gift5_close"></div>
-            <div styleName="price_tips price5-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
+            {tips()}
         </div>
 
         let gift6_on = <div styleName="wrapper-on">
             {/*<div styleName="des">300元京东卡</div>*/}
             <div styleName="gift6_on"></div>
-            <div styleName="price_tips price6_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {tips()}
         </div>
 
         let gift6_close = <div styleName="wrapper-close">
             {/*<div styleName="des">300元京东卡</div>*/}
             <div styleName="gift6_close"></div>
-            <div styleName="price_tips price6-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
+            {tips()}
         </div>
 
         let gift7_on = <div styleName="wrapper-on">
             {/*<div styleName="des">300元京东卡</div>*/}
             <div styleName="gift7_on"></div>
-            <div styleName="price_tips price7_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {tips()}
         </div>
 
         let gift7_close = <div styleName="wrapper-close">
             {/*<div styleName="des">300元京东卡</div>*/}
             <div styleName="gift7_close"></div>
-            <div styleName="price_tips price7-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
+            {tips()}
         </div>
         return <div>
             <PCHeader bgColor="rgba(8,11,22,0.6)"/>
