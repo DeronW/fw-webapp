@@ -1,15 +1,13 @@
 /*领取奖品弹窗*/
 .pop-price {
-    width: 200px;
-    height: 200px;
+    width: 133px;
+    height: 142px;
     position: fixed;
-    bottom: 300px;
-    right: 100px;
-    font-size: 30px;
-    text-align: center;
-    line-height: 200px;
+    top: 550px;
+    right: 350px;
     cursor: pointer;
-    background: #ccc;
+    background: url("../images/pc/getprice.png") no-repeat center;
+    background-size: 100%;
 }
 
 .bg {
@@ -30,8 +28,18 @@
     margin: 550px auto 0;
 }
 
-.btn_invest {
+.invest-text {
+    font-size: 16px;
+    color: #555;
+    padding: 50px 0 30px 110px;
+}
 
+.btn_invest {
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
 }
 
 .roadbg {
@@ -475,13 +483,13 @@
 
 .intro .text {
     width: 1140px;
-    margin: 50px auto 0;
+    margin: 40px auto 0;
 
 }
 
 .text .title {
     font-size: 26px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 @keyframes Tips1MovePC {
