@@ -1,8 +1,9 @@
-import { Request, Components, BrowserFactory, NativeBridge } from 'fw-javascripts'
+import { Request, Components, NativeBridge } from 'fw-javascripts'
+
+import Browser from './browser.js'
+
 
 let API_PATH = document.getElementById('api-path').value;
-const app_stamp = navigator.userAgent.indexOf('FinancialWorkshop') > -1 ? 'FinancialWorkshop' : null,
-    Browser = new BrowserFactory(null, app_stamp);
 
 const Ajax = options => {
     // add default url prefix
