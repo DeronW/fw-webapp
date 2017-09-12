@@ -50,7 +50,15 @@ export default class Fxh{
         })
     }
 
-
+    get_card_list = () => {
+        return this.Post(`/api/bankcard/v1/bankcardlist.json`).then(data => {
+        this.cashBankList = data.userBankList.withdrawBankcard;
+        let filtered = this.cashBankList.filter(e => e.isRealNameBindCard === true);
+        if(filtered[0]){
+            this.bankName = filtered[0].bankShortName;
+            this.bankNo = filtered[0].cardNo.slice(-4);
+        }
+    }
     get_info = () => {
         return this.Post(`/api/loan/v1/baseinfo.json`,{productId:1}).then(data => {
             this.baseRateDay = data.baseRateDay;
