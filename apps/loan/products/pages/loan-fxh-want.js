@@ -94,7 +94,7 @@ export default class FxhWant extends React.Component {
             }
         },(err) => {
             if (err.code == 24003 || err.code == 24005) return this.setState({loanShow: true, failMsg: err.message})
-            //Components.showToast(err.message);
+            // Components.showToast(err.message);
         });
     }
 
