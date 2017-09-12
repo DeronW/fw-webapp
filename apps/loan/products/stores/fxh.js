@@ -4,11 +4,11 @@ import { Utils } from 'fw-javascripts'
 export default class Fxh{
     constructor(Post){
         this.Post = Post
-        this.data = {}
+        // this.data = {}
 
-        extendObservable(this.data, {
-            orioleOrderGid:""
-        })
+        // extendObservable(this.data, {
+        //     orioleOrderGid:""
+        // })
         extendObservable(this, {
             data:[],
             sliderNum:'',
@@ -99,7 +99,7 @@ export default class Fxh{
             productId: Utils.urlQuery.pid || 1
         }).then((data)=>{
             this.data = data;
-            this.saveOrioleOrderGid(this.data.orioleOrderGid);
+            // this.saveOrioleOrderGid(this.data.orioleOrderGid);
         })
     }
 
