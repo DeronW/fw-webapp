@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
 import PCHeader from '../../lib/components/pc-header.js'
 import {PopGetPricePC, PopGroupPC} from './popPC.js'
-import {Get, Post} from '../lib/helpers'
+import {Get, Post} from '../../lib/helpers'
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PC extends React.Component {
