@@ -48,7 +48,7 @@ export default class FxhIndex extends React.Component {
         let link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
 
         let credit_btn_handler = () => {
-            if (this.props.data.redirectType == 1) {
+            if (fxh.data.redirectType == 1) {
                 this.setState({ improveShow: true });
             } else {
                 gotoHandler(link)
@@ -108,7 +108,7 @@ export default class FxhIndex extends React.Component {
         let loan_btn = <div styleName="loan-btn" onClick={()=>loanBtnClick()}>申请借款</div>;
 
         let credit_btn_handler = () => {
-            if (this.props.data.redirectType == 1) {
+            if (fxh.data.redirectType == 1) {
                 this.setState({ improveShow: true });
             } else {
                 gotoHandler(link)
