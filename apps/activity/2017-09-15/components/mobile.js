@@ -80,10 +80,11 @@ class Mobile extends React.Component {
             this.setState({ openedBox: openedBox });
         }
         if (isCompanyUser) return this.setState({ showCompanyPop: true })
-        if (no > biggestBox) {
+        if (no !== biggestBox) {
             setTimeout(() => {
                 const openedBox = [...this.state.openedBox];
-                openedBox.pop();
+                const closeBoxIndex = openedBox.indexOf(no);
+                openedBox.splice(closeBoxIndex, 1);
                 this.setState({ openedBox: openedBox })
             }, 3000)
         }
