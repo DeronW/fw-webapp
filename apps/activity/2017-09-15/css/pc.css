@@ -103,7 +103,7 @@
     background-size: 100%;
 }
 
-.gift1 .wrapper-close:hover .price1-close-tips {
+.wrapper-close:hover .price1-close-tips {
     display: block;
 }
 
@@ -129,14 +129,14 @@
     animation-fill-mode: forwards;
 }
 
-.price2_tips, .price2-close-tips, .price7_tips, .price7-close-tips {
+.gift2 .price1-close-tips, .gift7 .price1-close-tips {
     top: -100px;
     left: -120px;
     animation: Tips2MovePC 0.5s 0.5s ease-in-out;
     animation-fill-mode: forwards;
 }
 
-.price3_tips, .price3-close-tips, .price4_tips, .price4-close-tips, .price5_tips, .price5-close-tips, .price6_tips, .price6-close-tips {
+.gift3 .price1-close-tips, .gift4 .price1-close-tips, .gift5 .price1-close-tips, .gift6 .price1-close-tips {
     top: -100px;
     left: -120px;
     animation: Tips3MovePC 0.5s 0.5s ease-in-out;
@@ -199,10 +199,6 @@
     background-size: 100%;
 }
 
-.gift2 .wrapper-close:hover .price2-close-tips {
-    display: block;
-}
-
 .gift34 {
     width: 950px;
     height: 750px;
@@ -248,11 +244,6 @@
     background-size: 100%;
 }
 
-.gift3 .wrapper-close:hover .price3-close-tips {
-    display: block;
-}
-
-/*4444444444*/
 .gift4_on {
     width: 189px;
     height: 163px;
@@ -286,10 +277,6 @@
     height: 163px;
     background: url("../images/pc/gift4_on.png") no-repeat center;
     background-size: 100%;
-}
-
-.gift4 .wrapper-close:hover .price4-close-tips {
-    display: block;
 }
 
 .gift4 .term {
@@ -341,10 +328,6 @@
     background-size: 100%;
 }
 
-.gift5 .wrapper-close:hover .price5-close-tips {
-    display: block;
-}
-
 .gift5 .term {
     padding-left: 374px;
 }
@@ -394,10 +377,6 @@
     background-size: 100%;
 }
 
-.gift6 .wrapper-close:hover .price6-close-tips {
-    display: block;
-}
-
 .gift6 .term {
     padding-left: 242px;
 }
@@ -445,10 +424,6 @@
     height: 200px;
     background: url("../images/pc/gift7_on.png") no-repeat center;
     background-size: 100%;
-}
-
-.gift7 .wrapper-close:hover .price7-close-tips {
-    display: block;
 }
 
 .gift7 .term {
