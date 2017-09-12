@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/mobile.css'
 
-import gotoPage from '../../lib/helpers/goto-page.js'
 import MobileHeader from '../../lib/components/mobile-header.js'
-import { Browser, NativeBridge } from '../../lib/helpers'
+import { NativeBridge, Get } from '../../lib/helpers'
 
 const BOX_PROPS = [
     { name: '木宝箱', require: 50000 },
@@ -35,7 +34,17 @@ class Mobile extends React.Component {
     }
 
     componentDidMount() {
-        const { investValue } = this.state;
+        Get('/api/octoberActivity/v1/getSelfInvestInfo.json')
+            .then(({ data }) => {
+                this.setState({
+                    investValue: Number(data.yearAmtSum),
+                    isCompanyUser: !data.isPerson,
+                    name: data.realName,
+                    phone: data.mobile,
+                    address: data.address
+                })
+            })
+        const investValue = Number(data.yearAmtSum);
         for (let i = 0; i < BOX_PROPS.length; i++) {
             if (investValue < BOX_PROPS[i].require) return this.setState({ biggestBox: i })
         }
