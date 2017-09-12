@@ -24,7 +24,6 @@ class Mobile extends React.Component {
         openedBox: [], // e.g. [1, 4, 7]
         investValue: 120000,
         biggestBox: 0,
-        showCannotGetPop: false,
         isCompanyUser: false,
         showCompanyPop: false,
         showAddressPop: false,
@@ -34,20 +33,29 @@ class Mobile extends React.Component {
     }
 
     componentDidMount() {
-        let investValue;
-        Get('/api/octoberActivity/v1/getSelfInvestInfo.json')
-            .then(({ data }) => {
-                investValue = Number(data.yearAmtSum);
-                this.setState({
-                    investValue: investValue,
-                    isCompanyUser: !data.isPerson,
-                    name: data.realName || '',
-                    phone: data.mobile || '',
-                    address: data.address || ''
-                })
-            })
+        let investValue = 80000;
+
+        // let investValue;
+        // Get('/api/octoberActivity/v1/getSelfInvestInfo.json')
+        //     .then(({ data }) => {
+        //         investValue = Number(data.yearAmtSum);
+        //         this.setState({
+        //             investValue: investValue,
+        //             isCompanyUser: !data.isPerson,
+        //             name: data.realName || '',
+        //             phone: data.mobile || '',
+        //             address: data.address || ''
+        //         })
+        //     })
         for (let i = 0; i < BOX_PROPS.length; i++) {
-            if (investValue < BOX_PROPS[i].require) return this.setState({ biggestBox: i })
+            if (investValue < BOX_PROPS[i].require) {
+                if (i > 0) {
+                    const openedBox = [...this.state.openedBox];
+                    openedBox.push(i);
+                    this.setState({ openedBox: openedBox })
+                }
+                return this.setState({ biggestBox: i })
+            }
         }
     }
 
@@ -73,14 +81,12 @@ class Mobile extends React.Component {
         }
         if (isCompanyUser) return this.setState({ showCompanyPop: true })
         if (no > biggestBox) {
-            this.setState({ showCannotGetPop: true })
+            setTimeout(() => {
+                const openedBox = [...this.state.openedBox];
+                openedBox.pop();
+                this.setState({ openedBox: openedBox })
+            }, 3000)
         }
-    }
-
-    hideCannotGetPop = () => {
-        const openedBox = [...this.state.openedBox];
-        openedBox.pop();
-        this.setState({ openedBox: openedBox, showCannotGetPop: false })
     }
 
     hideCompanyPop = () => {
@@ -121,15 +127,15 @@ class Mobile extends React.Component {
             </ol>
         </div>
 
-        const cannotGetPop = <div styleName="pop-mask" onClick={this.hideCannotGetPop}>
-            <div styleName="cannot-get-pop">
-                您当前累投年化<span>{`￥${investValue}`}</span>，
-                {`${biggestBox === 0 ? '暂无宝箱可开启' : `暂可开启${BOX_PROPS[biggestBox-1].name}`}，
-                再投￥${BOX_PROPS[biggestBox].require - investValue}努力去开启${BOX_PROPS[biggestBox].name}吧！`}
-            </div>
-        </div>
+        // const cannotGetPop = <div styleName="pop-mask" onClick={this.hideCannotGetPop}>
+        //     <div styleName="cannot-get-pop">
+        //         您当前累投年化<span>{`￥${investValue}`}</span>，
+        //         {`${biggestBox === 0 ? '暂无宝箱可开启' : `暂可开启${BOX_PROPS[biggestBox-1].name}`}，
+        //         再投￥${BOX_PROPS[biggestBox].require - investValue}努力去开启${BOX_PROPS[biggestBox].name}吧！`}
+        //     </div>
+        // </div>
 
-        const companyPop = <div styleName="pop-mask" onClick={this.hideCompanyPop}>
+        const companyPop = <div styleName="pop-mask">
             <div styleName="company-pop">
                 很遗憾，<br />企业用户不参与本次活动！
             </div>
@@ -176,7 +182,6 @@ class Mobile extends React.Component {
 
             { showIntro && intro }
 
-            { showCannotGetPop && cannotGetPop }
             { showCompanyPop && companyPop }
 
             { showAddressPop && addressPop}
