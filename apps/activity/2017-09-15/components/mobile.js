@@ -179,7 +179,7 @@ class Mobile extends React.Component {
 
             <div styleName="invest-entry">
                 <div styleName="invest-tip">累投年化达标，可开启宝箱奖励</div>
-                <div styleName="invest-entry-btn">投资寻宝</div>
+                <div styleName="invest-entry-btn" onClick={NativeBridge.close}>投资寻宝</div>
             </div>
 
             <div styleName={this.genBoxStyleName(1)}>
