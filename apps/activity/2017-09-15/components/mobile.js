@@ -27,24 +27,25 @@ class Mobile extends React.Component {
         showCannotGetPop: false,
         isCompanyUser: false,
         showCompanyPop: false,
-        showAddressPop: true,
+        showAddressPop: false,
         name: '',
         phone: '',
         address: ''
     }
 
     componentDidMount() {
+        let investValue;
         Get('/api/octoberActivity/v1/getSelfInvestInfo.json')
             .then(({ data }) => {
+                investValue = Number(data.yearAmtSum);
                 this.setState({
-                    investValue: Number(data.yearAmtSum),
+                    investValue: investValue,
                     isCompanyUser: !data.isPerson,
-                    name: data.realName,
-                    phone: data.mobile,
-                    address: data.address
+                    name: data.realName || '',
+                    phone: data.mobile || '',
+                    address: data.address || ''
                 })
             })
-        const investValue = Number(data.yearAmtSum);
         for (let i = 0; i < BOX_PROPS.length; i++) {
             if (investValue < BOX_PROPS[i].require) return this.setState({ biggestBox: i })
         }
