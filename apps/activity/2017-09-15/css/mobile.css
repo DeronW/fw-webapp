@@ -131,6 +131,10 @@
     composes: treasure-box-1;
 }
 
+.treasure-box-1-close .treasure-info {
+    display: none;
+}
+
 .treasure-box-1-close .treasure-box {
     background: url('../images/mobile/box-1-close.png');
 }
@@ -171,6 +175,10 @@
 
 .treasure-box-2-close {
     composes: treasure-box-2;
+}
+
+.treasure-box-2-close .treasure-info {
+    display: none;
 }
 
 .treasure-box-2-close .treasure-box {
@@ -215,6 +223,10 @@
     composes: treasure-box-3;
 }
 
+.treasure-box-3-close .treasure-info {
+    display: none;
+}
+
 .treasure-box-3-close .treasure-box {
     background: url('../images/mobile/box-3-close.png');
 }
@@ -255,6 +267,10 @@
 
 .treasure-box-4-close {
     composes: treasure-box-4;
+}
+
+.treasure-box-4-close .treasure-info {
+    display: none;
 }
 
 .treasure-box-4-close .treasure-box {
@@ -300,6 +316,10 @@
     composes: treasure-box-5;
 }
 
+.treasure-box-5-close .treasure-info {
+    display: none;
+}
+
 .treasure-box-5-close .treasure-box {
     background: url('../images/mobile/box-5-close.png');
 }
@@ -341,6 +361,10 @@
 
 .treasure-box-6-close {
     composes: treasure-box-6;
+}
+
+.treasure-box-6-close .treasure-info {
+    display: none;
 }
 
 .treasure-box-6-close .treasure-box {
@@ -395,6 +419,10 @@
     composes: treasure-box-7;
 }
 
+.treasure-box-7-close .treasure-info {
+    display: none;
+}
+
 .treasure-box-7-close .treasure-box {
     background: url('../images/mobile/box-7-close.png');
 }
@@ -415,4 +443,50 @@
     color: #fff;
     font-size: 26px;
     text-align: center;
+}
+
+.pop-mask {
+    position: fixed;
+    z-index: 999;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 80px);
+    background-color: rgba(9, 24, 61, .6);
+}
+
+.company-pop, .address-pop {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 657px;
+    height: 574px;
+    padding: 217px 112px;
+    background: url('../images/mobile/pop-bg.png');
+    color: #ff4b46;
+    font-size: 36px;
+    text-align: center;
+}
+
+.cannot-get-pop {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 588px;
+    height: 205px;
+    padding: 76px 48px;
+    background: url('../images/mobile/cannot-get-pop-bg.png');
+    color: #555;
+    font-size: 24px;
+    text-align: center;
+}
+
+.cannot-get-pop span {
+    color: #ff4b46;
 }

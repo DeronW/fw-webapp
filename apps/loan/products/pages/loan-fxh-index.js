@@ -90,15 +90,14 @@ export default class FxhIndex extends React.Component {
     getBtnStatus = () => {
         let { fxh } = this.props;
         let user = Storage.getUserDict();
-        let ua = window.navigator.userAgent,
-            inWX = ua.indexOf('MicroMessenger') > -1,
+        let btn = '--', st = fxh.data.borrowBtnStatus;
+        let ua = window.navigator.userAgent;
+        let inWX = ua.indexOf('MicroMessenger') > -1,
             inApp = ua.indexOf('FinancialWorkshop') > -1,
             SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
-        let btn = '--', st = fxh.data.borrowBtnStatus;
-
         let link;
         if (st == 1) link = '/static/loan/user-card-set/index.html';
-        if (st == 2) link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
+        if (st == 2 || st == 3) link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
 
         let loanBtnClick = () => {
             st === 101 ?
@@ -119,7 +118,6 @@ export default class FxhIndex extends React.Component {
         //     <a styleName="loan-btn" href={$FW.Browser.inJRGCApp() && st == 3 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>
         //         我要提额
         //     </a>;
-
 
         let credit_btn =
             <a styleName="loan-btn" onClick={()=>credit_btn_handler()}>
