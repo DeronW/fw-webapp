@@ -160,6 +160,10 @@ export default class ProductDisplay extends React.Component {
         }
 
         const USER = Storage.getUserDict();
+        let ua = window.navigator.userAgent;
+        let inWX = ua.indexOf('MicroMessenger') > -1;
+        let inApp = ua.indexOf('FinancialWorkshop') > -1;
+        let SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
 
         return (
                 <div>
