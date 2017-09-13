@@ -64,7 +64,7 @@ export default class FxhResult extends React.Component {
                 setTimeout(() => {
                     Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
                     location.href  = `/static/loan/features/index.html#/invite-activity?yqm=F172001`;
-                }, 2000)
+                }, 12000)
             } else if (data.loanStatus == 5) {
                 this.setState({waitingResultShow: false, failResultShow: true, failReason: data.failReason});
             } else {
