@@ -25,7 +25,7 @@ class RepaymentFangXinResult extends React.Component {
                     // location.href  = this.getRelativeUrl(`${activityRecomUrl}`);
                     // location.href  = this.getRelativeUrl(`https://m.easyloan.888.com/static/loan/features/index.html#/invite-activity`);
                     location.href  = `/static/loan/features/index.html#/invite-activity?yqm=F172001`;
-                },2000)
+                },12000)
             }
         });
 
