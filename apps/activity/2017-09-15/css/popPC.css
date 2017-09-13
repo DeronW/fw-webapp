@@ -112,6 +112,19 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
 }
 
+.btn-gray {
+    width: 160px;
+    height: 42px;
+    margin: 15px auto;
+    background: url("../images/pop/btn-invest-gray.png") no-repeat center;
+    background-size: 100%;
+    text-align: center;
+    line-height: 42px;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+}
+
 .info-tips {
     width: 270px;
     height: 35px;
