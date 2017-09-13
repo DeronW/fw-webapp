@@ -25,7 +25,7 @@ class Mobile extends React.Component {
     state = {
         showIntro: false,
         openedBox: [], // e.g. [1, 4, 7]
-        investValue: 300000,
+        investValue: 0,
         biggestBox: 0,
         isCompanyUser: false,
         showAddressPop: false,
@@ -35,8 +35,7 @@ class Mobile extends React.Component {
     }
 
     componentDidMount() {
-        // let {investValue} = this.state;
-
+        // let { investValue } = this.state;
         let investValue;
         Get('/api/octoberActivity/v1/getSelfInvestInfo.json')
             .then(({ data }) => {
@@ -49,6 +48,7 @@ class Mobile extends React.Component {
                     address: data.address || ''
                 })
             })
+
         for (let i = 0; i < BOX_PROPS.length; i++) {
             let biggestBoxNo;
             const openedBox = [...this.state.openedBox];
