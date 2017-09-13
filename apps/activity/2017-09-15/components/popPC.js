@@ -117,7 +117,6 @@ class PopGroupPC extends React.Component {
         return <div styleName="group-pc-wrapper">
             <div styleName="group-pc">
                 <div styleName="group-text">很遗憾，企业用户不参与本次活动！</div>
-                <div styleName="close-btn" onClick={this.closeHandler}></div>
             </div>
         </div>
     }
