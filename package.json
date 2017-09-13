@@ -14,10 +14,10 @@
     "babel-preset-stage-2": "6.24.1",
     "clipboard": "^1.7.1",
     "del": "2.2.2",
+    "echarts-for-react": "^2.0.0",
     "es6-promise": "^4.1.1",
-    "eslint": "3.19.0",
-    "eslint-plugin-promise": "3.5.0",
-    "eslint-plugin-react": "6.10.3",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.3.0",
     "fw-components": "^0.3.3",
     "fw-javascripts": "^0.5.1",
     "gulp": "github:gulpjs/gulp#4.0",
@@ -26,7 +26,7 @@
     "gulp-concat": "2.6.1",
     "gulp-cssnano": "2.1.2",
     "gulp-data": "1.2.1",
-    "gulp-eslint": "3.0.1",
+    "gulp-eslint": "^4.0.0",
     "gulp-htmlmin": "3.0.0",
     "gulp-less": "3.3.0",
     "gulp-load-plugins": "1.5.0",
@@ -37,8 +37,7 @@
     "gulp-uglify": "2.1.2",
     "gulp-util": "3.0.8",
     "proxy-polyfill": "^0.1.7",
-    "pump": "1.0.2",
-    "recharts": "^1.0.0-alpha.4"
+    "pump": "1.0.2"
   },
   "devDependencies": {
     "babel-loader": "^7.1.2",
