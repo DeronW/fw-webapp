@@ -76,9 +76,6 @@ const DEVELOPING_PAGES = [
     'user-footprint', // 用户足迹, 浏览过的商品页面
 ]
 
-const TRASH_PAGES = [
-    // 'game-red-rain', //2017过年红包雨
-]
 
 APP_NAMES.push(
     ...USER_PAGES,
@@ -121,16 +118,20 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
             include_components: INCLUDE_COMPONENTS,
             include_javascripts: INCLUDE_JAVASCRIPTS
-        });
+        })
+
+        gulp.task(`lint:${PROJ}:${i.name || i}`, gulp.series(() => {
+            return gulp.src([
+                `apps/${PROJ}/${i.name || i}/**/*.+(js|jsx)`,
+                '!node_modules/**',
+                '!**/jquery.*.js',
+                '!**.min.js'
+            ]).pipe(eslint()).pipe(eslint.format());
+        }))
     });
 
-    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
-    gulp.task(`lint:${PROJ}`, gulp.series(() => {
-        return gulp.src([
-            `apps/${PROJ}/**/*.+(js|jsx)`,
-            '!node_modules/**',
-            '!**/jquery.*.js',
-            '!**.min.js'
-        ]).pipe(eslint()).pipe(eslint.format());
-    }))
+    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map(i => `${PROJ}:pack:${i.name || i}:revision`)))
+
+    gulp.task(`lint:${PROJ}`, gulp.series(APP_NAMES.map(i => `lint:${PROJ}:${i.name || i}`)))
+
 };

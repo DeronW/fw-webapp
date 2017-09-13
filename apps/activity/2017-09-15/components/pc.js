@@ -168,34 +168,34 @@ class PC extends React.Component {
                     <div styleName="gift1">
                         {userMoney >= 50000 && gift1_on}
                         {userMoney < 50000 && gift1_close}
-                        <div styleName="term">5万&gt;=累投年化投资额&lt;10万</div>
+                        <div styleName="term">5万&lt;=累投年化投资额&lt;10万</div>
                     </div>
                     <div styleName="gift2">
                         {userMoney >= 100000 && gift2_on}
                         {userMoney < 100000 && gift2_close}
-                        <div styleName="term">10万&gt;=累投年化投资额&lt;25万</div>
+                        <div styleName="term">10万&lt;=累投年化投资额&lt;25万</div>
                     </div>
                     <div styleName="gift34">
                         <div styleName="gift3">
                             {userMoney >= 250000 && gift3_on}
                             {userMoney < 250000 && gift3_close}
-                            <div styleName="term">25万&gt;=累投年化投资额&lt;50万</div>
+                            <div styleName="term">25万&lt;=累投年化投资额&lt;50万</div>
                         </div>
                         <div styleName="gift4">
                             {userMoney >= 500000 && gift4_on}
                             {userMoney < 500000 && gift4_close}
-                            <div styleName="term">50万&gt;=累投年化投资额&lt;80万</div>
+                            <div styleName="term">50万&lt;=累投年化投资额&lt;80万</div>
                         </div>
                     </div>
                     <div styleName="gift5">
                         {userMoney >= 800000 && gift5_on}
                         {userMoney < 800000 && gift5_close}
-                        <div styleName="term">80万&gt;=累投年化投资额&lt;100万</div>
+                        <div styleName="term">80万&lt;=累投年化投资额&lt;100万</div>
                     </div>
                     <div styleName="gift6">
                         {userMoney >= 1000000 && gift6_on}
                         {userMoney < 1000000 && gift6_close}
-                        <div styleName="term">100万&gt;=累投年化投资额&lt;150万</div>
+                        <div styleName="term">100万&lt;=累投年化投资额&lt;150万</div>
                     </div>
                     <div styleName="gift7">
                         {userMoney >= 1500000 && gift7_on}
