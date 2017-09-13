@@ -67,13 +67,11 @@ class PopGetPricePC extends React.Component {
         let {userName, userPhone, userAddress, btn} = this.state;
         let name_on = <div styleName="textline name-on">
             <span styleName="text-left">收货人姓名：</span>
-            <input type="text" maxLength="10" onChange={this.nameHandler} value={userName} styleName="name-write"
-                   placeholder="仅可输入汉字，不能输入数字，限10字以内"/>
+            <input type="text" maxLength="10" onChange={this.nameHandler} value={userName} styleName="name-write"/>
         </div>
         let phone_on = <div styleName="textline phone-on">
             <span styleName="text-left">收货人联系电话：</span>
-            <input type="number" onChange={this.phoneHandler} value={userPhone} styleName="phone-write"
-                   placeholder="仅可输入数字，且限制15个数字以内"/>
+            <input type="number" onChange={this.phoneHandler} value={userPhone} styleName="phone-write"/>
         </div>
         let address_on = <div styleName="textline address-on">
             <span styleName="text-left">详细地址：</span>
