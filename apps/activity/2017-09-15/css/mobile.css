@@ -455,6 +455,24 @@
     text-align: center;
 }
 
+.invest-info-placeholder {
+    height: 140px;
+}
+
+.invest-info {
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 140px;
+    padding: 36px;
+    background-color: #265886;
+    color: #fff;
+    font-size: 26px;
+    text-align: center;
+}
+
 .pop-mask {
     position: fixed;
     z-index: 9999;
@@ -465,13 +483,17 @@
     background-color: rgba(9, 24, 61, .6);
 }
 
-.company-pop, .address-pop {
+.pop {
     box-sizing: border-box;
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+.address-pop {
+    composes: pop;
     width: 657px;
     height: 574px;
     padding: 217px 112px;
@@ -481,13 +503,19 @@
     text-align: center;
 }
 
+.company-pop {
+    composes: pop;
+    width: 656px;
+    height: 434px;
+    padding: 150px 112px;
+    background: url('../images/mobile/company-pop-bg.png');
+    color: #ff4b46;
+    font-size: 36px;
+    text-align: center;
+}
+
 .cannot-get-pop {
-    box-sizing: border-box;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    composes: pop;
     width: 588px;
     height: 205px;
     padding: 76px 48px;
