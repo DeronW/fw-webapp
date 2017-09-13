@@ -37,10 +37,17 @@ class PopGetPricePC extends React.Component {
 
     keepHandler = () => {
         let {userName, userPhone, userAddress} = this.state
+        if (userName && userPhone && userAddress) {
+            Post('/api/octoberActivity/v1/updateAddress.shtml', {
+                realName: userName,
+                mobile: userPhone,
+                address: userAddress
+            })
+        }
         if (userName || userPhone || userAddress) {
-            this.setState({btn: true})
-        } else {
             this.setState({btn: false})
+        } else {
+            this.setState({btn: true})
         }
 
     }
@@ -84,7 +91,7 @@ class PopGetPricePC extends React.Component {
         let address = <div styleName="textline">
             <span styleName="text-left">详细地址：</span><span styleName="address-write">{userAddress}</span>
         </div>
-
+        let btn_style = (userName && userPhone && userAddress) ? styles['btn'] : styles['btn-gray']
         return <div styleName="price-pc">
             <div styleName="text-wrapper">
                 <div styleName="info">
@@ -92,7 +99,7 @@ class PopGetPricePC extends React.Component {
                     {btn ? name : name_on}
                     {btn ? phone : phone_on}
                     {btn ? address : address_on}
-                    <div styleName="btn">
+                    <div className={btn_style}>
                         {btn ? <div styleName="change-btn" onClick={this.reviseHandler}>修改</div>
                             : <div styleName="save-btn" onClick={this.keepHandler}>保存</div>}
                     </div>
@@ -109,15 +116,10 @@ class PopGetPricePC extends React.Component {
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PopGroupPC extends React.Component {
-    closeHandler = () => {
-        this.props.closePopHandler()
-    }
-
     render() {
         return <div styleName="group-pc-wrapper">
             <div styleName="group-pc">
                 <div styleName="group-text">很遗憾，企业用户不参与本次活动！</div>
-                <div styleName="close-btn" onClick={this.closeHandler}></div>
             </div>
         </div>
     }
