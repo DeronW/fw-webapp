@@ -61,10 +61,16 @@ export default class FxhResult extends React.Component {
             let finishFlag = true;
             if (data.loanStatus == 6) {
                 this.setState({waitingResultShow: false, successResultShow: true});
-                setTimeout(() => {
-                    Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
-                    location.href  = `/static/loan/features/index.html#/invite-activity?yqm=F172001`;
-                }, 12000)
+                if(data.activityRecomUrl){
+                        setTimeout(() => {
+                            Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`,false,"放心花"):
+                            location.href  = `${data.activityRecomUrl}`;
+                        },2000)
+                    }
+                // setTimeout(() => {
+                //     Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
+                //     location.href  = `/static/loan/features/index.html#/invite-activity?yqm=F172001`;
+                // }, 12000)
             } else if (data.loanStatus == 5) {
                 this.setState({waitingResultShow: false, failResultShow: true, failReason: data.failReason});
             } else {
