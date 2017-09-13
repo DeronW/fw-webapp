@@ -514,21 +514,6 @@
     text-align: center;
 }
 
-.cannot-get-pop {
-    composes: pop;
-    width: 588px;
-    height: 205px;
-    padding: 76px 48px;
-    background: url('../images/mobile/cannot-get-pop-bg.png');
-    color: #555;
-    font-size: 24px;
-    text-align: center;
-}
-
-.cannot-get-pop span {
-    color: #ff4b46;
-}
-
 .address-pop {
     padding: 0;
 }
