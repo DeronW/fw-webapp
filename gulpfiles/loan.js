@@ -117,14 +117,14 @@ const REFACTORY_PAGES = [{
 
 APP_NAMES.push(
     ...USER_PAGES,
-    ...BILL_PAGES,
+    // ...BILL_PAGES,
     ...OUTSIDE_PAGES,
-    ...APPLY_PAGES,
-    ...APP_NAMES,
+    // ...APPLY_PAGES,
+    // ...APP_NAMES,
     // ...PROTOCOL_PAGES,
     // ...JRGC_PAGES,
     ...WEIXIN_PAGES,
-    ...FXH_PAGES,
+    // ...FXH_PAGES,
     ...DU_MIAO_PAGES,
     // ...CREDIT_CARD,
     // ...MORTGAGE,
