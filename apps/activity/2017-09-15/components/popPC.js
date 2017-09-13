@@ -19,7 +19,10 @@ class PopGetPricePC extends React.Component {
     }
 
     nameHandler = (e) => {
-        this.setState({userName: e.target.value})
+        let value = e.target.value
+        value = value.replace(/\d/g, '')
+        if (value.length > 10) value = value.slice(0, 10);
+        this.setState({userName: value})
 
     }
 
@@ -45,9 +48,9 @@ class PopGetPricePC extends React.Component {
             })
         }
         if (userName || userPhone || userAddress) {
-            this.setState({btn: false})
-        } else {
             this.setState({btn: true})
+        } else {
+            this.setState({btn: false})
         }
 
     }
