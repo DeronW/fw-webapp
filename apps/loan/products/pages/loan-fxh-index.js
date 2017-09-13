@@ -41,9 +41,9 @@ export default class FxhIndex extends React.Component {
         let btn = '--', st = fxh.data.borrowBtnStatus;
         let user = Storage.getUserDict();
         let ua = window.navigator.userAgent;
-        let inWX = ua.indexOf('MicroMessenger') > -1,
-            inApp = ua.indexOf('FinancialWorkshop') > -1,
-            SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
+        let inWX = ua.indexOf('MicroMessenger') > -1;
+        let inApp = ua.indexOf('FinancialWorkshop') > -1;
+        let SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
 
         let link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
 
@@ -92,9 +92,9 @@ export default class FxhIndex extends React.Component {
         let user = Storage.getUserDict();
         let btn = '--', st = fxh.data.borrowBtnStatus;
         let ua = window.navigator.userAgent;
-        let inWX = ua.indexOf('MicroMessenger') > -1,
-            inApp = ua.indexOf('FinancialWorkshop') > -1,
-            SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
+        let inWX = ua.indexOf('MicroMessenger') > -1;
+        let inApp = ua.indexOf('FinancialWorkshop') > -1;
+        let SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
         let link;
         if (st == 1) link = '/static/loan/user-card-set/index.html';
         if (st == 2 || st == 3) link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}`;
@@ -161,10 +161,10 @@ export default class FxhIndex extends React.Component {
             Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
         }
         let user = Storage.getUserDict();
-        let ua = window.navigator.userAgent,
-            inWX = ua.indexOf('MicroMessenger') > -1,
-            inApp = ua.indexOf('FinancialWorkshop') > -1,
-            SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
+        let ua = window.navigator.userAgent;
+        let inWX = ua.indexOf('MicroMessenger') > -1;
+        let inApp = ua.indexOf('FinancialWorkshop') > -1;
+        let SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
         return (
             <div styleName="apply-loan">
                 {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} popTitle={"提示"} />}
