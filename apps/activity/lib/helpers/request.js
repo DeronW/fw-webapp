@@ -1,4 +1,4 @@
-import { Request, Components, NativeBridge } from 'fw-javascripts'
+import {Request, Components, NativeBridge} from 'fw-javascripts'
 
 import Browser from './browser.js'
 
@@ -22,7 +22,7 @@ const Ajax = options => {
 
             Browser.inApp ?
                 NativeBridge.login() :
-                location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
+                location.href = 'https://passport.9888keji.com/passport/login'
         } else {
             // 如果不弹出错误, 就直接reject
             if (silence)

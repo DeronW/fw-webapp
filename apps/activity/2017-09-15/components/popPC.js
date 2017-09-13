@@ -19,7 +19,10 @@ class PopGetPricePC extends React.Component {
     }
 
     nameHandler = (e) => {
-        this.setState({userName: e.target.value})
+        let value = e.target.value
+        value = value.replace(/\d/g, '')
+        if (value.length > 10) value = value.slice(0, 10);
+        this.setState({userName: value})
 
     }
 
@@ -38,16 +41,16 @@ class PopGetPricePC extends React.Component {
     keepHandler = () => {
         let {userName, userPhone, userAddress} = this.state
         if (userName && userPhone && userAddress) {
+            this.setState({btn: true})
             Post('/api/octoberActivity/v1/updateAddress.shtml', {
                 realName: userName,
                 mobile: userPhone,
                 address: userAddress
             })
-        }
-        if (userName || userPhone || userAddress) {
-            this.setState({btn: false})
-        } else {
+        } else if (userName || userPhone || userAddress) {
             this.setState({btn: true})
+        } else {
+            this.setState({btn: false})
         }
 
     }
