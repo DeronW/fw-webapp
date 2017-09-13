@@ -158,7 +158,7 @@ class PC extends React.Component {
             <div styleName="bg">
                 <div styleName="goInvest">
                     <div styleName="invest-text">累投年化达标，可开启宝箱奖励</div>
-                    <a styleName="btn_invest" href="https:www.9888keji.com">投资寻宝</a>
+                    <a styleName="btn_invest" href="https://www.9888keji.com">投资寻宝</a>
                 </div>
                 {userMoney < 50000 &&
                 <div styleName="cantopen">您当前累投年化<span
