@@ -145,7 +145,7 @@ export default class ProductDisplay extends React.Component {
 
         let gotoHandler = (link, need_login, next_title) => {
             if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-            next_title = $FW.Browser.inAndroidApp() ? encodeURI(next_title) : next_title;
+            next_title = Browser.inAndroidApp ? encodeURI(next_title) : next_title;
             Browser.inApp ? NativeBridge.goto(link, need_login, next_title) : location.href = encodeURI(link);
         }
 
