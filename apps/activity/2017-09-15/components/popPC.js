@@ -45,9 +45,9 @@ class PopGetPricePC extends React.Component {
             })
         }
         if (userName || userPhone || userAddress) {
-            this.setState({btn: true})
-        } else {
             this.setState({btn: false})
+        } else {
+            this.setState({btn: true})
         }
 
     }
