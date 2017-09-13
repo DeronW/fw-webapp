@@ -170,7 +170,6 @@ class Mobile extends React.Component {
                 <div styleName="input-item">
                     <div styleName="item-name">收货人姓名：</div>
                     <input styleName="item-value"
-                        placeholder="仅可输入汉字，不能输入数字，限10字以内"
                         value={name}
                         onChange={this.handleInput('name')} />
                 </div>
@@ -179,7 +178,6 @@ class Mobile extends React.Component {
                     <input styleName="item-value"
                         type="number"
                         maxLength="15"
-                        placeholder="仅可输入数字，且限制15个数字以内"
                         value={phone}
                         onChange={this.handleInput('phone')} />
                 </div>
@@ -191,7 +189,7 @@ class Mobile extends React.Component {
                         onChange={this.handleInput('address')} />
                 </div>
                 <div styleName={name && phone && address ? "submit-btn" : "disabled-submit-btn"}
-                    onClick={this.handleAddressSubmit}>{'保  存'}</div>
+                    onClick={this.handleAddressSubmit}>{'修  改'}</div>
                 <div styleName="tip">
                     提示：请准确填写收货地址，以便您能收到奖品。<br />
                     如有疑问，请联系客服：400-0322-988</div>
