@@ -4,6 +4,11 @@ import { Utils } from 'fw-javascripts'
 export default class Fxh{
     constructor(Post){
         this.Post = Post
+        // this.data = {}
+        //
+        // extendObservable(this.data, {
+        //     orioleOrderGid:""
+        // })
         extendObservable(this, {
             data:[],
             sliderNum:'',
@@ -23,11 +28,11 @@ export default class Fxh{
         })
     }
     saveOrderGid = orderGid => this.orderGid = orderGid;
-    // saveOrioleOrderGid = orioleOrderGid => this.orioleOrderGid = orioleOrderGid;
-    saveLoanNum = loanNum => this.loanNum = loanNum;
+    saveOrioleOrderGid = orioleOrderGid => this.data.orioleOrderGid = orioleOrderGid;
+    saveLoanNum = loanNum => this.data.loanNum = loanNum;
 
     get_base_info = () => {
-        return this.Post(`/api/loan/v1/tryLoanBudget.json`,{orioleOrderGid: this.data.orioleOrderGid,loanAmount: this.loanNum})
+        return this.Post(`/api/loan/v1/tryLoanBudget.json`,{orioleOrderGid: this.data.orioleOrderGid,loanAmount: this.data.loanNum})
         .then(data => {
             this.accountInAmount = data.accountInAmount;
             this.shouldRepaymentAmount = data.shouldRepaymentAmount;
@@ -50,7 +55,16 @@ export default class Fxh{
         })
     }
 
-
+    get_card_list = () => {
+        return this.Post(`/api/bankcard/v1/bankcardlist.json`).then(data => {
+        this.cashBankList = data.userBankList.withdrawBankcard;
+        let filtered = this.cashBankList.filter(e => e.isRealNameBindCard === true);
+        if(filtered[0]){
+            this.bankName = filtered[0].bankShortName;
+            this.bankNo = filtered[0].cardNo.slice(-4);
+        }
+    })
+}
     get_info = () => {
         return this.Post(`/api/loan/v1/baseinfo.json`,{productId:1}).then(data => {
             this.baseRateDay = data.baseRateDay;
@@ -84,7 +98,8 @@ export default class Fxh{
         this.Post(`/api/loan/v1/baseinfo.json`,{
             productId: Utils.urlQuery.pid || 1
         }).then((data)=>{
-            this.data = data
+            this.data = data;
+            // this.saveOrioleOrderGid(data.orioleOrderGid);
         })
     }
 

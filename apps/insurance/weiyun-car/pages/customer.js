@@ -70,7 +70,7 @@ class Customer extends React.Component {
 
         let hold_input_text = (title, name) => {
             return <div styleName="field-text">{title}
-                <input placeholder="请输入" type="text" renderAsDisplay={renderAsDisplay}
+                <input placeholder="请输入" type="text" disabled={renderAsDisplay}
                     value={customer.holder[name]}
                     onChange={this.changeHandler('holder', name)} />
                 <div styleName="v-line"></div>
@@ -81,7 +81,7 @@ class Customer extends React.Component {
             if (customer.isSame) return null;
 
             return <div styleName="field-text">{title}
-                <input placeholder="请输入" type="text" renderAsDisplay={renderAsDisplay}
+                <input placeholder="请输入" type="text" disabled={renderAsDisplay}
                     value={customer.recognizee[name]}
                     onChange={this.changeHandler('recognizee', name)} />
             </div>

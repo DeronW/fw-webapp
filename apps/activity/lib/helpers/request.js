@@ -1,4 +1,7 @@
-import { Request, Components, Browser, NativeBridge } from 'fw-javascripts'
+import {Request, Components, NativeBridge} from 'fw-javascripts'
+
+import Browser from './browser.js'
+
 
 let API_PATH = document.getElementById('api-path').value;
 
@@ -14,16 +17,16 @@ const Ajax = options => {
             message: ...
         }
         */
-        if (error.code == 40101) {
+        if (error.code == 40101 || error.code == 63001) {
             console.log('here ! should go to login')
 
             Browser.inApp ?
                 NativeBridge.login() :
-                location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
+                location.href = 'https://passport.9888keji.com/passport/login'
         } else {
             // 如果不弹出错误, 就直接reject
             if (silence)
-                return new Promise((reslove, reject) => reject(error))
+                return new Promise((resolve, reject) => reject(error))
 
             Components.showToast(error.message)
 

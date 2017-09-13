@@ -21,17 +21,18 @@
 }
 
 .goInvest {
-    width: 430px;
+    width: 562px;
     height: 170px;
     background: url("../images/pc/investbg.png") no-repeat center;
     background-size: 100%;
     margin: 550px auto 0;
+    text-align: center;
 }
 
 .invest-text {
     font-size: 16px;
     color: #555;
-    padding: 50px 0 30px 110px;
+    padding: 50px 0 30px 0;
 }
 
 .btn_invest {
@@ -40,6 +41,13 @@
     font-size: 20px;
     color: #fff;
     cursor: pointer;
+    width: 200px;
+    height: 45px;
+    background: url("../images/pc/btn-invest.png") no-repeat center;
+    background-size: 100%;
+    margin: 0 auto;
+    line-height: 45px;
+    border-radius: 40px;
 }
 
 .roadbg {
@@ -63,7 +71,7 @@
 }
 
 .gift1 .wrapper-close {
-    padding: 102px 0 0 150px;
+    padding: 102px 0 0 152px;
     position: relative;
 }
 
@@ -79,10 +87,28 @@
     background-size: 100%;
 }
 
-.gift1 .des {
+.des {
     font-size: 14px;
-    padding-left: 108px;
     color: #fff;
+}
+
+.gift1 .des {
+    padding-left: 108px;
+}
+
+.gift2 .des, .gift3 .des, .gift6 .des {
+    padding-left: 50px;
+    line-height: 42px;
+}
+
+.gift4 .des, .gift7 .des {
+    padding-left: 20px;
+    line-height: 42px;
+}
+
+.gift5 .des {
+    padding-left: 76px;
+    line-height: 42px;
 }
 
 .gift1_close {
@@ -93,7 +119,7 @@
 }
 
 .gift1 .wrapper-close:hover {
-    padding: 87px 0 0 116px;
+    padding: 68px 0 0 116px;
 }
 
 .gift1 .wrapper-close:hover .gift1_close {
@@ -103,10 +129,6 @@
     background-size: 100%;
 }
 
-.gift1 .wrapper-close:hover .price1-close-tips {
-    display: block;
-}
-
 .price_tips {
     position: absolute;
     width: 368px;
@@ -114,37 +136,34 @@
     background: url("../images/pc/tipsbg.png") no-repeat center;
     background-size: 100%;
     display: none;
-    opacity: 0;
     font-size: 16px;
     color: #555;
     line-height: 30px;
-    padding-top: 25px;
-    padding-left: 50px;
+    padding: 25px 10px 0 30px;
+}
+
+.wrapper-on .price_tips {
+    display: block;
 }
 
 .price1_tips, .price1-close-tips {
-    top: -20px;
-    left: 77px;
-    animation: Tips1MovePC 0.5s 0.5s ease-in-out;
-    animation-fill-mode: forwards;
+    top: -72px;
+    left: 42px;
 }
 
-.price2_tips, .price2-close-tips, .price7_tips, .price7-close-tips {
-    top: -100px;
+.gift2 .price1-close-tips, .gift3 .price1-close-tips {
+    top: -118px;
     left: -120px;
-    animation: Tips2MovePC 0.5s 0.5s ease-in-out;
-    animation-fill-mode: forwards;
 }
 
-.price3_tips, .price3-close-tips, .price4_tips, .price4-close-tips, .price5_tips, .price5-close-tips, .price6_tips, .price6-close-tips {
-    top: -100px;
+.gift4 .price1-close-tips, .gift5 .price1-close-tips, .gift6 .price1-close-tips {
+    top: -128px;
     left: -120px;
-    animation: Tips3MovePC 0.5s 0.5s ease-in-out;
-    animation-fill-mode: forwards;
 }
 
-.wrapper-on:hover .price_tips {
-    display: block;
+.gift7 .price1-close-tips {
+    top: -132px;
+    left: -70px;
 }
 
 .gift2 {
@@ -169,13 +188,6 @@
     background-size: 100%;
 }
 
-.gift2 .des {
-    padding-left: 50px;
-    font-size: 14px;
-    color: #fff;
-    line-height: 42px;
-}
-
 .gift2_close {
     width: 169px;
     height: 146px;
@@ -184,7 +196,7 @@
 }
 
 .gift2 .wrapper-close {
-    margin: -45px 0 0 176px;
+    margin: -2px 0 0 173px;
     position: relative;
 }
 
@@ -197,10 +209,6 @@
     height: 157px;
     background: url("../images/pc/gift2_on.png") no-repeat center;
     background-size: 100%;
-}
-
-.gift2 .wrapper-close:hover .price2-close-tips {
-    display: block;
 }
 
 .gift34 {
@@ -221,13 +229,15 @@
 }
 
 .gift3 .wrapper-on {
-    margin: 184px 0 0 180px;
+    margin: 141px 0 0 180px;
     position: relative;
 }
 
 .gift3 .wrapper-close {
-    margin: 198px 0 0 192px;
+    margin: 193px 0 0 185px;
     position: relative;
+    width: 220px;
+    height: auto;
 }
 
 .gift3_close {
@@ -238,7 +248,7 @@
 }
 
 .gift3 .wrapper-close:hover {
-    margin: 190px 0 0 173px;
+    margin: 143px 0 0 163px;
 }
 
 .gift3 .wrapper-close:hover .gift3_close {
@@ -248,11 +258,6 @@
     background-size: 100%;
 }
 
-.gift3 .wrapper-close:hover .price3-close-tips {
-    display: block;
-}
-
-/*4444444444*/
 .gift4_on {
     width: 189px;
     height: 163px;
@@ -261,12 +266,12 @@
 }
 
 .gift4 .wrapper-on {
-    margin: -24px 0 0 583px;
+    margin: -96px 0 0 578px;
     position: relative;
 }
 
 .gift4 .wrapper-close {
-    margin: -1px 0 0 583px;
+    margin: -40px 0 0 590px;
     position: relative;
 }
 
@@ -278,7 +283,7 @@
 }
 
 .gift4 .wrapper-close:hover {
-    margin: -15px 0 0 567px;
+    margin: -96px 0 0 574px;
 }
 
 .gift4 .wrapper-close:hover .gift4_close {
@@ -286,10 +291,6 @@
     height: 163px;
     background: url("../images/pc/gift4_on.png") no-repeat center;
     background-size: 100%;
-}
-
-.gift4 .wrapper-close:hover .price4-close-tips {
-    display: block;
 }
 
 .gift4 .term {
@@ -314,12 +315,12 @@
 }
 
 .gift5 .wrapper-on {
-    margin: 82px 0 0 381px;
+    margin: 41px 0 0 381px;
     position: relative;
 }
 
 .gift5 .wrapper-close {
-    margin: 109px 0 0 381px;
+    margin: 109px 0 0 377px;
     position: relative;
 }
 
@@ -331,7 +332,7 @@
 }
 
 .gift5 .wrapper-close:hover {
-    margin: 83px 0 0 384px;
+    margin: 41px 0 0 384px;
 }
 
 .gift5 .wrapper-close:hover .gift5_close {
@@ -339,10 +340,6 @@
     height: 177px;
     background: url("../images/pc/gift5-on.png") no-repeat center;
     background-size: 100%;
-}
-
-.gift5 .wrapper-close:hover .price5-close-tips {
-    display: block;
 }
 
 .gift5 .term {
@@ -367,12 +364,12 @@
 }
 
 .gift6 .wrapper-on {
-    margin: -70px 0 0 207px;
+    margin: -117px 0 0 199px;
     position: relative;
 }
 
 .gift6 .wrapper-close {
-    margin: -61px 0 0 207px;
+    margin: -67px 0 0 212px;
     position: relative;
 }
 
@@ -384,7 +381,7 @@
 }
 
 .gift6 .wrapper-close:hover {
-    margin: -70px 0 0 207px;
+    margin: -118px 0 0 200px;
 }
 
 .gift6 .wrapper-close:hover .gift6_close {
@@ -392,10 +389,6 @@
     height: 158px;
     background: url("../images/pc/gift6_on.png") no-repeat center;
     background-size: 100%;
-}
-
-.gift6 .wrapper-close:hover .price6-close-tips {
-    display: block;
 }
 
 .gift6 .term {
@@ -420,12 +413,12 @@
 }
 
 .gift7 .wrapper-on {
-    margin: -81px 0 0 258px;
+    margin: -123px 0 0 258px;
     position: relative;
 }
 
 .gift7 .wrapper-close {
-    margin: -59px 0 0 250px;
+    margin: -60px 0 0 253px;
     position: relative;
 }
 
@@ -437,7 +430,7 @@
 }
 
 .gift7 .wrapper-close:hover {
-    margin: -81px 0 0 260px;
+    margin: -124px 0 0 260px;
 }
 
 .gift7 .wrapper-close:hover .gift7_close {
@@ -445,10 +438,6 @@
     height: 200px;
     background: url("../images/pc/gift7_on.png") no-repeat center;
     background-size: 100%;
-}
-
-.gift7 .wrapper-close:hover .price7-close-tips {
-    display: block;
 }
 
 .gift7 .term {
@@ -464,6 +453,10 @@
 .gift2 .term {
     padding-left: 150px;
     padding-top: 22px;
+}
+
+.gift3 .term {
+    padding: 15px 0 0 184px;
 }
 
 .color-red {
@@ -492,35 +485,22 @@
     margin-bottom: 30px;
 }
 
-@keyframes Tips1MovePC {
-    0% {
-        top: 0%;
-        opacity: 0;
-    }
-    100% {
-        top: -40%;
-        opacity: 1;
-    }
+.wrapper-close .des {
+    display: none;
 }
 
-@keyframes Tips2MovePC {
-    0% {
-        top: 0%;
-        opacity: 0;
-    }
-    100% {
-        top: -55%;
-        opacity: 1;
-    }
+.wrapper-close:hover .des {
+    display: block;
 }
 
-@keyframes Tips3MovePC {
-    0% {
-        top: -30%;
-        opacity: 0;
-    }
-    100% {
-        top: -85%;
-        opacity: 1;
-    }
+.color-yellow {
+    color: #ffff00;
+}
+
+.cantopen {
+    width: 100%;
+    text-align: center;
+    margin: 30px 0;
+    font-size: 14px;
+    color: #fff;
 }

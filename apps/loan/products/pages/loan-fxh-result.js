@@ -29,7 +29,7 @@ export default class FxhResult extends React.Component {
     componentDidMount() {
         document.title = "借款结果"
         let {fxh} = this.props;
-        fxh.get_base_info();
+        fxh.get_card_list();
         this.countingDown();
     }
 
@@ -61,6 +61,16 @@ export default class FxhResult extends React.Component {
             let finishFlag = true;
             if (data.loanStatus == 6) {
                 this.setState({waitingResultShow: false, successResultShow: true});
+                if(data.activityRecomUrl){
+                        setTimeout(() => {
+                            Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`,false,"放心花"):
+                            location.href  = `${data.activityRecomUrl}`;
+                        },2000)
+                    }
+                // setTimeout(() => {
+                //     Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
+                //     location.href  = `/static/loan/features/index.html#/invite-activity?yqm=F172001`;
+                // }, 12000)
             } else if (data.loanStatus == 5) {
                 this.setState({waitingResultShow: false, failResultShow: true, failReason: data.failReason});
             } else {
@@ -70,6 +80,7 @@ export default class FxhResult extends React.Component {
             if (this.state.countdown <= 0) {
                 if (data.loanStatus == 6) {
                     this.setState({waitingResultShow: false, successResultShow: true});
+
                 } else if (data.loanStatus == 5) {
                     this.setState({waitingResultShow: false, failResultShow: true, failReason: data.failReason});
                 } else if (data.loanStatus == 4) {
@@ -120,7 +131,7 @@ export default class FxhResult extends React.Component {
             sourceType = 5;
         return (
             <div>
-                {!Browser.inJRGCApp && <header title = "借款结果" goBack = {goBack}/>}
+                {!Browser.inJRGCApp && <Header title = "借款结果" goBack = {goBack}/>}
                 <div styleName="loan-result">
                     {/* {Browser.inAndroid && <div styleName="header">
                         <div styleName="arrow-left" onClick={() => {

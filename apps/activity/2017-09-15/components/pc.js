@@ -3,144 +3,155 @@ import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
 import PCHeader from '../../lib/components/pc-header.js'
-import PopGetPricePC from './popPC.js'
-
+import {PopGetPricePC, PopGroupPC} from './popPC.js'
+import {Get, Post} from '../../lib/helpers'
+import {Utils} from 'fw-javascripts'
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PC extends React.Component {
 
     state = {
-        userMoney: 2000
+        info: null
     }
 
     componentDidMount() {
-
+        let {closePopHandler, isLogin} = this.props;
+        Get('/api/octoberActivity/v1/getSelfInvestInfo.json')
+            .then(data => {
+                console.log(data)
+                data.data.isPerson == "0" &&
+                ReactDOM.render(<PopGroupPC isLogin={isLogin}
+                                            closePopHandler={closePopHandler}/>, document.getElementById("pop"))
+                this.setState({info: data.data})
+            })
     }
 
     popPriceHandler = () => {
-        console.log(111)
         let {closePopHandler, isLogin} = this.props;
-        ReactDOM.render(<PopGetPricePC isLogin={isLogin}
+        ReactDOM.render(<PopGetPricePC isLogin={isLogin} info={this.state.info}
                                        closePopHandler={closePopHandler}/>, document.getElementById("pop"))
     }
 
     render() {
-        let {userMoney} = this.state
+        let {info} = this.state
+        let userMoney = info && info.yearAmtSum
+        let tips = () => {
+            if (userMoney < 50000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span styleName="color-red">{`¥${Utils.format.price(userMoney)}`}</span>，暂无宝箱可开启，<br/>
+                    再投¥{Utils.format.price(50000 - userMoney)}努力去开启木头宝箱吧！
+                </div>
+            } else if (userMoney < 100000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启木头宝箱，<br/>
+                    再投¥{Utils.format.price(100000 - userMoney)}努力去开启铁宝箱吧！
+                </div>
+            } else if (userMoney < 250000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启铁宝箱，<br/>
+                    再投¥{Utils.format.price(250000 - userMoney)}努力去开启铜宝箱吧！
+                </div>
+            } else if (userMoney < 500000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启铜宝箱，<br/>
+                    再投¥{Utils.format.price(500000 - userMoney)}努力去开启银宝箱吧！
+                </div>
+            } else if (userMoney < 800000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启银宝箱，<br/>
+                    再投¥{Utils.format.price(800000 - userMoney)}努力去开启金宝箱吧！
+                </div>
+            } else if (userMoney < 1000000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启金宝箱，<br/>
+                    再投¥{Utils.format.price(1000000 - userMoney)}努力去开启铂金宝箱吧！
+                </div>
+            } else if (userMoney < 1500000) {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启铂金宝箱，<br/>
+                    再投¥{Utils.format.price(1500000 - userMoney)}努力去开启钻石宝箱吧！
+                </div>
+            } else {
+                return <div styleName="price_tips price1-close-tips">
+                    您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，太棒了，可开启终极钻石宝箱啦！
+                </div>
+            }
+        }
         let gift1_on = <div styleName="wrapper-on">
             <div styleName="des">150元话费券</div>
             <div styleName="gift1_on"></div>
-            <div styleName="price_tips price1_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {userMoney < 100000 && tips()}
         </div>
         let gift1_close = <div styleName="wrapper-close">
+            <div styleName="des">150元话费券</div>
             <div styleName="gift1_close"></div>
-            <div styleName="price_tips price1-close-tips">
-                您当前没有资格开启，当您的投资额到达1000时，便可获取150元话费券
-            </div>
         </div>
 
         let gift2_on = <div styleName="wrapper-on">
             <div styleName="des">300元京东卡</div>
             <div styleName="gift2_on"></div>
-            <div styleName="price_tips price2_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {userMoney < 250000 && tips()}
         </div>
 
         let gift2_close = <div styleName="wrapper-close">
+            <div styleName="des">300元京东卡</div>
             <div styleName="gift2_close"></div>
-            <div styleName="price_tips price2-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
         </div>
 
         let gift3_on = <div styleName="wrapper-on">
-            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="des">JBL蓝牙耳机</div>
             <div styleName="gift3_on"></div>
-            <div styleName="price_tips price3_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {userMoney < 500000 && tips()}
         </div>
 
         let gift3_close = <div styleName="wrapper-close">
-            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="des">JBL蓝牙耳机</div>
             <div styleName="gift3_close"></div>
-            <div styleName="price_tips price3-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
         </div>
 
 
         let gift4_on = <div styleName="wrapper-on">
-            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="des">飞利浦充电式声波电动牙刷</div>
             <div styleName="gift4_on"></div>
-            <div styleName="price_tips price4_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {userMoney < 800000 && tips()}
         </div>
 
         let gift4_close = <div styleName="wrapper-close">
-            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="des">飞利浦充电式声波电动牙刷</div>
             <div styleName="gift4_close"></div>
-            <div styleName="price_tips price4-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
         </div>
 
         let gift5_on = <div styleName="wrapper-on">
-            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="des">10g金条</div>
             <div styleName="gift5_on"></div>
-            <div styleName="price_tips price5_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {userMoney < 1000000 && tips()}
         </div>
 
         let gift5_close = <div styleName="wrapper-close">
-            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="des">10g金条</div>
             <div styleName="gift5_close"></div>
-            <div styleName="price_tips price5-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
         </div>
 
         let gift6_on = <div styleName="wrapper-on">
-            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="des">戴森吹风机</div>
             <div styleName="gift6_on"></div>
-            <div styleName="price_tips price6_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {userMoney < 1500000 && tips()}
         </div>
 
         let gift6_close = <div styleName="wrapper-close">
-            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="des">戴森吹风机</div>
             <div styleName="gift6_close"></div>
-            <div styleName="price_tips price6-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
         </div>
 
         let gift7_on = <div styleName="wrapper-on">
-            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="des">小米Air13.3英寸超薄笔记本8G 256G</div>
             <div styleName="gift7_on"></div>
-            <div styleName="price_tips price7_tips">
-                您当前累投年化<span styleName="color-red">¥200</span>，暂无宝箱可开启，<br/>
-                再投¥49,800努力去开启木头宝箱吧！
-            </div>
+            {tips()}
         </div>
 
         let gift7_close = <div styleName="wrapper-close">
-            {/*<div styleName="des">300元京东卡</div>*/}
+            <div styleName="des">小米Air13.3英寸超薄笔记本8G 256G</div>
             <div styleName="gift7_close"></div>
-            <div styleName="price_tips price7-close-tips">
-                您当前没有资格开启，当您的投资额到达2000时，便可获取300元
-            </div>
         </div>
         return <div>
             <PCHeader bgColor="rgba(8,11,22,0.6)"/>
@@ -149,42 +160,46 @@ class PC extends React.Component {
                     <div styleName="invest-text">累投年化达标，可开启宝箱奖励</div>
                     <a styleName="btn_invest" href="">投资寻宝</a>
                 </div>
+                {userMoney < 50000 &&
+                <div styleName="cantopen">您当前累投年化<span
+                    styleName="color-yellow">{`¥${Utils.format.price(userMoney)}`}</span>，暂无宝箱可开启，
+                    再投¥{Utils.format.price(50000 - userMoney)}努力去开启木头宝箱吧！</div>}
                 <div styleName="roadbg">
                     <div styleName="gift1">
-                        {userMoney > 1000 && gift1_on}
-                        {userMoney <= 1000 && gift1_close}
-                        <div styleName="term">5万&gt;=累投年化投资额&lt;10万</div>
+                        {userMoney >= 50000 && gift1_on}
+                        {userMoney < 50000 && gift1_close}
+                        <div styleName="term">5万&lt;=累投年化投资额&lt;10万</div>
                     </div>
                     <div styleName="gift2">
-                        {userMoney > 2000 && gift2_on}
-                        {userMoney <= 2000 && gift2_close}
-                        <div styleName="term">10万&gt;=累投年化投资额&lt;25万</div>
+                        {userMoney >= 100000 && gift2_on}
+                        {userMoney < 100000 && gift2_close}
+                        <div styleName="term">10万&lt;=累投年化投资额&lt;25万</div>
                     </div>
                     <div styleName="gift34">
                         <div styleName="gift3">
-                            {userMoney > 3000 && gift3_on}
-                            {userMoney <= 3000 && gift3_close}
-                            <div styleName="term">25万&gt;=累投年化投资额&lt;50万</div>
+                            {userMoney >= 250000 && gift3_on}
+                            {userMoney < 250000 && gift3_close}
+                            <div styleName="term">25万&lt;=累投年化投资额&lt;50万</div>
                         </div>
                         <div styleName="gift4">
-                            {userMoney > 4000 && gift4_on}
-                            {userMoney <= 4000 && gift4_close}
-                            <div styleName="term">50万&gt;=累投年化投资额&lt;80万</div>
+                            {userMoney >= 500000 && gift4_on}
+                            {userMoney < 500000 && gift4_close}
+                            <div styleName="term">50万&lt;=累投年化投资额&lt;80万</div>
                         </div>
                     </div>
                     <div styleName="gift5">
-                        {userMoney > 5000 && gift5_on}
-                        {userMoney <= 5000 && gift5_close}
-                        <div styleName="term">80万&gt;=累投年化投资额&lt;100万</div>
+                        {userMoney >= 800000 && gift5_on}
+                        {userMoney < 800000 && gift5_close}
+                        <div styleName="term">80万&lt;=累投年化投资额&lt;100万</div>
                     </div>
                     <div styleName="gift6">
-                        {userMoney > 6000 && gift6_on}
-                        {userMoney <= 6000 && gift6_close}
-                        <div styleName="term">100万&gt;=累投年化投资额&lt;150万</div>
+                        {userMoney >= 1000000 && gift6_on}
+                        {userMoney < 1000000 && gift6_close}
+                        <div styleName="term">100万&lt;=累投年化投资额&lt;150万</div>
                     </div>
                     <div styleName="gift7">
-                        {userMoney > 7000 && gift7_on}
-                        {userMoney <= 7000 && gift7_close}
+                        {userMoney >= 1500000 && gift7_on}
+                        {userMoney < 1500000 && gift7_close}
                         <div styleName="term">累投年化投资额&gt;150万</div>
                     </div>
                 </div>

@@ -14,13 +14,15 @@ class PopGetPricePC extends React.Component {
     }
 
     componentDidMount() {
-        Get('')
-            .then(data => {
-            })
+        let info = this.props.info
+        this.setState({userName: info.realName, userPhone: info.mobile, userAddress: info.address})
     }
 
     nameHandler = (e) => {
-        this.setState({userName: e.target.value})
+        let value = e.target.value
+        value = value.replace(/\d/g, '')
+        if (value.length > 10) value = value.slice(0, 10);
+        this.setState({userName: value})
 
     }
 
@@ -40,6 +42,15 @@ class PopGetPricePC extends React.Component {
         let {userName, userPhone, userAddress} = this.state
         if (userName && userPhone && userAddress) {
             this.setState({btn: true})
+            Post('/api/octoberActivity/v1/updateAddress.shtml', {
+                realName: userName,
+                mobile: userPhone,
+                address: userAddress
+            })
+        } else if (userName || userPhone || userAddress) {
+            this.setState({btn: true})
+        } else {
+            this.setState({btn: false})
         }
 
     }
@@ -56,13 +67,11 @@ class PopGetPricePC extends React.Component {
         let {userName, userPhone, userAddress, btn} = this.state;
         let name_on = <div styleName="textline name-on">
             <span styleName="text-left">收货人姓名：</span>
-            <input type="text" maxLength="10" onChange={this.nameHandler} value={userName} styleName="name-write"
-                   placeholder="仅可输入汉字，不能输入数字，限10字以内"/>
+            <input type="text" maxLength="10" onChange={this.nameHandler} value={userName} styleName="name-write"/>
         </div>
         let phone_on = <div styleName="textline phone-on">
             <span styleName="text-left">收货人联系电话：</span>
-            <input type="number" onChange={this.phoneHandler} value={userPhone} styleName="phone-write"
-                   placeholder="仅可输入数字，且限制15个数字以内"/>
+            <input type="number" onChange={this.phoneHandler} value={userPhone} styleName="phone-write"/>
         </div>
         let address_on = <div styleName="textline address-on">
             <span styleName="text-left">详细地址：</span>
@@ -83,7 +92,7 @@ class PopGetPricePC extends React.Component {
         let address = <div styleName="textline">
             <span styleName="text-left">详细地址：</span><span styleName="address-write">{userAddress}</span>
         </div>
-
+        let btn_style = (userName && userPhone && userAddress) ? styles['btn'] : styles['btn-gray']
         return <div styleName="price-pc">
             <div styleName="text-wrapper">
                 <div styleName="info">
@@ -91,7 +100,7 @@ class PopGetPricePC extends React.Component {
                     {btn ? name : name_on}
                     {btn ? phone : phone_on}
                     {btn ? address : address_on}
-                    <div styleName="btn">
+                    <div className={btn_style}>
                         {btn ? <div styleName="change-btn" onClick={this.reviseHandler}>修改</div>
                             : <div styleName="save-btn" onClick={this.keepHandler}>保存</div>}
                     </div>
@@ -106,4 +115,15 @@ class PopGetPricePC extends React.Component {
     }
 }
 
-export default PopGetPricePC
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+class PopGroupPC extends React.Component {
+    render() {
+        return <div styleName="group-pc-wrapper">
+            <div styleName="group-pc">
+                <div styleName="group-text">很遗憾，企业用户不参与本次活动！</div>
+            </div>
+        </div>
+    }
+}
+
+export {PopGetPricePC, PopGroupPC}
