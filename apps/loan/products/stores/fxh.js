@@ -5,7 +5,7 @@ export default class Fxh{
     constructor(Post){
         this.Post = Post
         // this.data = {}
-
+        //
         // extendObservable(this.data, {
         //     orioleOrderGid:""
         // })
@@ -99,7 +99,7 @@ export default class Fxh{
             productId: Utils.urlQuery.pid || 1
         }).then((data)=>{
             this.data = data;
-            // this.saveOrioleOrderGid(this.data.orioleOrderGid);
+            // this.saveOrioleOrderGid(data.orioleOrderGid);
         })
     }
 
