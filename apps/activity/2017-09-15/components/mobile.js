@@ -227,44 +227,44 @@ class Mobile extends React.Component {
             <div styleName={this.genBoxStyleName(1)}>
                 <div styleName="treasure-info">150元话费</div>
                 <div styleName="treasure-box" onClick={this.boxHandler(1)}></div>
-                <div styleName="treasure-requirement">5万≤累投年化投资额&lt;10万</div>
+                <div styleName="treasure-requirement">5万≤累投年化额&lt;10万</div>
             </div>
 
             <div styleName={this.genBoxStyleName(2)}>
                 <div styleName="treasure-info">300元京东卡</div>
                 <div styleName="treasure-box" onClick={this.boxHandler(2)}></div>
-                <div styleName="treasure-requirement">10万≤累投年化投资额&lt;25万</div>
+                <div styleName="treasure-requirement">10万≤累投年化额&lt;25万</div>
             </div>
 
             <div styleName={this.genBoxStyleName(3)}>
                 <div styleName="treasure-info">JBL蓝牙耳机</div>
                 <div styleName="treasure-box" onClick={this.boxHandler(3)}></div>
-                <div styleName="treasure-requirement">25万≤累投年化投资额&lt;50万</div>
+                <div styleName="treasure-requirement">25万≤累投年化额&lt;50万</div>
             </div>
 
             <div styleName={this.genBoxStyleName(4)}>
                 <div styleName="treasure-info">飞利浦充电式<br />声波电动牙刷</div>
                 <div styleName="treasure-box" onClick={this.boxHandler(4)}></div>
-                <div styleName="treasure-requirement">50万≤累投年化投资额&lt;80万</div>
+                <div styleName="treasure-requirement">50万≤累投年化额&lt;80万</div>
             </div>
 
             <div styleName={this.genBoxStyleName(5)}>
                 <div styleName="treasure-info">10g金条</div>
                 <div styleName="treasure-box" onClick={this.boxHandler(5)}></div>
-                <div styleName="treasure-requirement">80万≤累投年化投资额&lt;100万</div>
+                <div styleName="treasure-requirement">80万≤累投年化额&lt;100万</div>
             </div>
 
             <div styleName={this.genBoxStyleName(6)}>
                 <div styleName="treasure-info">戴森吹风机</div>
                 <div styleName="treasure-box" onClick={this.boxHandler(6)}></div>
                 <div styleName="skeleton-bg"></div>
-                <div styleName="treasure-requirement">80万≤累投年化投资额&lt;100万</div>
+                <div styleName="treasure-requirement">80万≤累投年化额&lt;100万</div>
             </div>
 
             <div styleName={this.genBoxStyleName(7)}>
                 <div styleName="treasure-info">小米Air13.3英寸<br />超薄笔记本8G 256G</div>
                 <div styleName="treasure-box" onClick={this.boxHandler(7)}></div>
-                <div styleName="treasure-requirement">累投年化投资额≥150万</div>
+                <div styleName="treasure-requirement">累投年化额≥150万</div>
             </div>
 
             <div styleName="foot">*以上活动由金融工场主办 与Apple Inc. 无关</div>
