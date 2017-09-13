@@ -40,8 +40,8 @@ export default class FxhIndex extends React.Component {
         let { fxh } = this.props;
         let btn = '--', st = fxh.data.borrowBtnStatus;
         let user = Storage.getUserDict();
-        let ua = window.navigator.userAgent,
-            inWX = ua.indexOf('MicroMessenger') > -1,
+        let ua = window.navigator.userAgent;
+        let inWX = ua.indexOf('MicroMessenger') > -1,
             inApp = ua.indexOf('FinancialWorkshop') > -1,
             SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
 
