@@ -43,7 +43,8 @@
     cursor: pointer;
     width: 200px;
     height: 45px;
-    background: red;
+    background: url("../images/pc/btn-invest.png") no-repeat center;
+    background-size: 100%;
     margin: 0 auto;
     line-height: 45px;
     border-radius: 40px;
