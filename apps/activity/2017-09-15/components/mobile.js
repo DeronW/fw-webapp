@@ -1,10 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
-import styles from '../css/mobile.css'
+
+import { NativeBridge, Get, Post } from '../../lib/helpers'
 
 import MobileHeader from '../../lib/components/mobile-header.js'
-import { NativeBridge, Get } from '../../lib/helpers'
+
+import styles from '../css/mobile.css'
+
 
 const BOX_PROPS = [
     { name: '木宝箱', require: 50000 },
@@ -91,7 +94,7 @@ class Mobile extends React.Component {
 
     boxHandler = no => () => {
         const openedBox = [...this.state.openedBox],
-            { biggestBox, isCompanyUser } = this.state;
+            { biggestBox } = this.state;
         if (openedBox.indexOf(no) < 0) {
             openedBox.push(no);
             this.setState({ openedBox: openedBox });
@@ -110,12 +113,28 @@ class Mobile extends React.Component {
 
     handleInput = type => e => {
         let value = e.target.value;
-        if (type === 'name' && value.length > 10) {
-            value = value.slice(0, 10);
+        if (type === 'name') {
+            value = value.replace(/\d/g, '')
+            if (value.length > 10) value = value.slice(0, 10);
+        } else if (type === 'phone') {
+            value = value.replace(/\D/g, '')
+            if (value.length > 15) value = value.slice(0, 15);
         } else if (type === 'address' && value.length > 100) {
             value = value.slice(0, 100);
         }
         this.setState({ [type]: value })
+    }
+
+    handleAddressSubmit = () => {
+        const { name, phone, address } = this.state;
+        if (!(name && phone && address)) return
+        Post('/api/octoberActivity/v1/updateAddress.shtml', {
+            realName: name,
+            mobile: phone,
+            address: address
+        }).then(data => {
+            this.toggleAddressPop();
+        })
     }
 
     render() {
@@ -171,7 +190,8 @@ class Mobile extends React.Component {
                         value={address}
                         onChange={this.handleInput('address')} />
                 </div>
-                <div styleName="submit-btn">{name || phone || address ? '修  改' : '保  存'}</div>
+                <div styleName={name && phone && address ? "submit-btn" : "disabled-submit-btn"}
+                    onClick={this.handleAddressSubmit}>{'保  存'}</div>
                 <div styleName="tip">
                     提示：请准确填写收货地址，以便您能收到奖品。<br />
                     如有疑问，请联系客服：400-0322-988</div>

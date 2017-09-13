@@ -580,6 +580,11 @@
     text-align: center;
 }
 
+.disabled-submit-btn {
+    composes: submit-btn;
+    background: url('../images/mobile/disabled-submit-btn-bg.png');
+}
+
 .address-pop .tip {
     color: #d36c00;
     font-size: 18px;
