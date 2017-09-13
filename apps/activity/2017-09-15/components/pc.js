@@ -37,7 +37,7 @@ class PC extends React.Component {
         let userMoney = info && info.yearAmtSum
         let tips = () => {
             if (userMoney < 50000) {
-                return <div styleName="c price1-close-tips">
+                return <div styleName="price_tips price1-close-tips">
                     您当前累投年化<span styleName="color-red">{`¥${Utils.format.price(userMoney)}`}</span>，暂无宝箱可开启，<br/>
                     再投¥{Utils.format.price(50000 - userMoney)}努力去开启木头宝箱吧！
                 </div>
