@@ -24,13 +24,12 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         });
     });
 
-    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
+    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)))
+
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
             `apps/${PROJ}/**/*.+(js|jsx)`,
-            '!node_modules/**',
-            '!**/jquery.*.js',
-            '!**.min.js'
+            '!node_modules/**'
         ]).pipe(eslint()).pipe(eslint.format());
     }))
 
