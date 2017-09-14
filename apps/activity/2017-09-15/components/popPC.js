@@ -10,16 +10,12 @@ class PopGetPricePC extends React.Component {
         userName: '',
         userPhone: '',
         userAddress: '',
-        btn: false
+        btn: true
     }
 
     componentDidMount() {
         let info = this.props.info
         this.setState({userName: info.realName, userPhone: info.mobile, userAddress: info.address})
-        let {userName, userPhone, userAddress} = this.state
-        if (userName || userPhone || userAddress) {
-            this.setState({btn: true})
-        }
     }
 
     nameHandler = (e) => {
@@ -72,16 +68,16 @@ class PopGetPricePC extends React.Component {
         let {userName, userPhone, userAddress, btn} = this.state;
         let name_on = <div styleName="textline name-on">
             <span styleName="text-left">收货人姓名：</span>
-            <input type="text" maxLength="10" onChange={this.nameHandler} value={userName} styleName="name-write"/>
+            <input type="text" maxLength="10" onChange={this.nameHandler} value={userName} styleName="name-write-on"/>
         </div>
         let phone_on = <div styleName="textline phone-on">
             <span styleName="text-left">收货人联系电话：</span>
-            <input type="number" onChange={this.phoneHandler} value={userPhone} styleName="phone-write"/>
+            <input type="number" onChange={this.phoneHandler} value={userPhone} styleName="phone-write-on"/>
         </div>
         let address_on = <div styleName="textline address-on">
             <span styleName="text-left">详细地址：</span>
             <textarea onChange={this.adressHandler} value={userAddress} placeholder="100字以内" maxLength="100"
-                      styleName="address-write">
+                      styleName="address-write-on">
 
             </textarea>
         </div>

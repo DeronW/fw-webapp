@@ -60,13 +60,22 @@
     padding-right: 10px;
 }
 
-.name-write, .phone-write, .address-write {
+.name-write-on, .phone-write-on, .address-write-on {
     width: 246px;
     height: 30px;
     border: 1px solid #ffe6b9;
     padding-left: 10px;
     font-size: 12px;
     background: #fff;
+    display: inline-block;
+    color: #555;
+}
+
+.name-write, .phone-write, .address-write {
+    width: 246px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 12px;
     display: inline-block;
     color: #555;
 }
