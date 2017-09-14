@@ -15,6 +15,7 @@ class Activity extends React.Component {
     }
 
     componentDidMount() {
+
         UserReady((isLogin, user) => {
             this.setState({isLogin: isLogin, username: user.userName})
             isLogin && Get('/api/augSepActivity/v1/getSelfInvestInfo.json')
@@ -36,6 +37,7 @@ class Activity extends React.Component {
             })
 
 
+        NativeBridge.trigger('hide_header')
     }
 
     closePopHandler = () => {
