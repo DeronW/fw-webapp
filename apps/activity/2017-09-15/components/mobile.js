@@ -82,8 +82,8 @@ class Mobile extends React.Component {
         let text;
         if (biggestBox === 0) {
             text = <div>
-                您当前累投年化<span>{investValue}</span>，
-                暂无宝箱可开启，再投年化<span>{BOX_PROPS[biggestBox].require - investValue}</span>
+                您当前累投年化￥<span>{investValue}</span>，
+                暂无宝箱可开启，再投年化￥<span>{BOX_PROPS[biggestBox].require - investValue}</span>
                 努力去开启{BOX_PROPS[biggestBox].name}吧！
             </div>
         } else if (biggestBox === 7) {

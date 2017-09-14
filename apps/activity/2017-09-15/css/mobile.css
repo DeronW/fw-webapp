@@ -5,7 +5,7 @@
 .get-treasure-btn {
     position: fixed;
     z-index: 999;
-    top: 750px;
+    top: 320px;
     right: 40px;
     width: 140px;
     height: 152px;
@@ -22,7 +22,7 @@
     padding: 10px 32px;
     background-color: #00a8e5;
     color: #fff;
-    z-index: 99;
+    z-index: 99999;
 }
 
 .hide-intro {
@@ -125,7 +125,7 @@
 
 .treasure-box-1 .treasure-requirement {
     position: absolute;
-    left: 222px;
+    left: 232px;
     bottom: 0;
 }
 
@@ -171,7 +171,7 @@
 
 .treasure-box-2 .treasure-requirement {
     position: absolute;
-    right: 88px;
+    right: 108px;
     bottom: 0;
 }
 
@@ -217,7 +217,7 @@
 
 .treasure-box-3 .treasure-requirement {
     position: absolute;
-    left: 118px;
+    left: 158px;
     bottom: 0;
 }
 
@@ -309,7 +309,7 @@
 
 .treasure-box-5 .treasure-requirement {
     position: absolute;
-    right: 128px;
+    right: 148px;
     bottom: 0;
     color: #cd6f0a;
 }
@@ -412,7 +412,7 @@
 
 .treasure-box-7 .treasure-requirement {
     position: absolute;
-    right: 149px;
+    right: 172px;
     bottom: 0;
     color: #cd6f0a;
 }
@@ -474,7 +474,7 @@
 }
 
 .invest-info span {
-    color: #ff4b46;
+    color: #ffff00;
 }
 
 .pop-mask {
