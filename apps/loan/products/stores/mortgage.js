@@ -67,7 +67,7 @@ export default class Mortgage {
             city: this.city,
             realName: this.realName
         }).then(data => history.push('/mortgage-success'),
-        e => Components.showToast(e.message) )
+            e => Components.showToast(e.message))
     }
 
 }

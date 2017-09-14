@@ -1,30 +1,32 @@
-import { extendObservable} from 'mobx'
+import { extendObservable } from 'mobx'
 import { Utils } from 'fw-javascripts'
 
-export default class Fxh{
-    constructor(Post){
+export default class Fxh {
+    constructor(Post) {
         this.Post = Post
+
         // this.data = {}
         //
         // extendObservable(this.data, {
         //     orioleOrderGid:""
         // })
+
         extendObservable(this, {
-            data:[],
-            sliderNum:'',
-            cashBankList:[],
-            bankName:"",
-            bankNo:"",
-            baseRateDay:"",
-            baseRateDayStr:"",
-            productPeriod:"",
-            orderGid:"",
-            accountInAmount:"",
-            shouldRepaymentAmount:"",
-            dueTimeStr:"",
-            totalFeeAmount:"",
-            feeExtList:[],
-            latedescription:""
+            data: [],
+            sliderNum: '',
+            cashBankList: [],
+            bankName: "",
+            bankNo: "",
+            baseRateDay: "",
+            baseRateDayStr: "",
+            productPeriod: "",
+            orderGid: "",
+            accountInAmount: "",
+            shouldRepaymentAmount: "",
+            dueTimeStr: "",
+            totalFeeAmount: "",
+            feeExtList: [],
+            latedescription: ""
         })
     }
     saveOrderGid = orderGid => this.orderGid = orderGid;
@@ -32,41 +34,41 @@ export default class Fxh{
     saveLoanNum = loanNum => this.data.loanNum = loanNum;
 
     get_base_info = () => {
-        return this.Post(`/api/loan/v1/tryLoanBudget.json`,{orioleOrderGid: this.data.orioleOrderGid,loanAmount: this.data.loanNum})
-        .then(data => {
-            this.accountInAmount = data.accountInAmount;
-            this.shouldRepaymentAmount = data.shouldRepaymentAmount;
-            this.dueTimeStr = data.dueTimeStr;
-            this.totalFeeAmount = data.totalFeeAmount;
-            this.feeExtList = data.feeExtList;
-        }).then(() => {
+        return this.Post(`/api/loan/v1/tryLoanBudget.json`, { orioleOrderGid: this.data.orioleOrderGid, loanAmount: this.data.loanNum })
+            .then(data => {
+                this.accountInAmount = data.accountInAmount;
+                this.shouldRepaymentAmount = data.shouldRepaymentAmount;
+                this.dueTimeStr = data.dueTimeStr;
+                this.totalFeeAmount = data.totalFeeAmount;
+                this.feeExtList = data.feeExtList;
+            }).then(() => {
                 this.Post(`/api/bankcard/v1/bankcardlist.json`).then(data => {
-                this.cashBankList = data.userBankList.withdrawBankcard;
-                let filtered = this.cashBankList.filter(e => e.isRealNameBindCard === true);
-                if(filtered[0]){
-                    this.bankName = filtered[0].bankShortName;
-                    this.bankNo = filtered[0].cardNo.slice(-4);
-                }
-            })
-        }).then(() => {
+                    this.cashBankList = data.userBankList.withdrawBankcard;
+                    let filtered = this.cashBankList.filter(e => e.isRealNameBindCard === true);
+                    if (filtered[0]) {
+                        this.bankName = filtered[0].bankShortName;
+                        this.bankNo = filtered[0].cardNo.slice(-4);
+                    }
+                })
+            }).then(() => {
                 this.Post(`/api/repayment/v1/latedescription.json`).then(data => {
                     this.latedescription = data.latedescription;
                 })
-        })
+            })
     }
 
     get_card_list = () => {
         return this.Post(`/api/bankcard/v1/bankcardlist.json`).then(data => {
-        this.cashBankList = data.userBankList.withdrawBankcard;
-        let filtered = this.cashBankList.filter(e => e.isRealNameBindCard === true);
-        if(filtered[0]){
-            this.bankName = filtered[0].bankShortName;
-            this.bankNo = filtered[0].cardNo.slice(-4);
-        }
-    })
-}
+            this.cashBankList = data.userBankList.withdrawBankcard;
+            let filtered = this.cashBankList.filter(e => e.isRealNameBindCard === true);
+            if (filtered[0]) {
+                this.bankName = filtered[0].bankShortName;
+                this.bankNo = filtered[0].cardNo.slice(-4);
+            }
+        })
+    }
     get_info = () => {
-        return this.Post(`/api/loan/v1/baseinfo.json`,{productId:1}).then(data => {
+        return this.Post(`/api/loan/v1/baseinfo.json`, { productId: 1 }).then(data => {
             this.baseRateDay = data.baseRateDay;
             this.baseRateDayStr = data.baseRateDayStr;
             this.productPeriod = data.productPeriod;
@@ -76,7 +78,7 @@ export default class Fxh{
                 let filtered = this.cashBankList.filter((item, index) => {
                     return item.isRealNameBindCard == true
                 });
-                if(filtered[0]){
+                if (filtered[0]) {
                     this.bankName = filtered[0].bankShortName;
                     this.bankNo = filtered[0].cardNo.slice(-4);
                     this.defaultCardGid = filtered[0].cardGid;
@@ -85,8 +87,7 @@ export default class Fxh{
         })
     }
     getVerifyCode = () => {
-        console.log(this.orderGid);
-        return this.Post(`/api/loan/v1/sendSmsverifycode.json`,{orderGid: this.orderGid})
+        return this.Post(`/api/loan/v1/sendSmsverifycode.json`, { orderGid: this.orderGid })
     }
 
     watchSliderNum = (num) => {
@@ -95,17 +96,11 @@ export default class Fxh{
 
 
     getBaseInfo = () => {
-        this.Post(`/api/loan/v1/baseinfo.json`,{
+        this.Post(`/api/loan/v1/baseinfo.json`, {
             productId: Utils.urlQuery.pid || 1
-        }).then((data)=>{
+        }).then((data) => {
             this.data = data;
             // this.saveOrioleOrderGid(data.orioleOrderGid);
         })
     }
-
-
-
-
-
-
 }

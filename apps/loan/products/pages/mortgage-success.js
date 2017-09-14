@@ -12,11 +12,11 @@ function gotoHandler(link) {
     location.href = encodeURI(link);
 }
 
-const MortgageSuccess = CSSModules((props) => (
+const MortgageSuccess = CSSModules(props => (
     <div>
         <Header title="房产抵押贷款" history={props.history} />
         <div styleName="success-mask">
-            { !Browser.inWeixin && !Browser.inApp &&
+            {!Browser.inWeixin && !Browser.inApp &&
                 <div styleName="close-icon" onClick={() => { gotoHandler('/static/loan/products/index.html#/') }}></div>
             }
             <div styleName="success-container">
