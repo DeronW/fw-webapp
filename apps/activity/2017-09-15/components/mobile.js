@@ -27,7 +27,7 @@ class Mobile extends React.Component {
         showAddressPop: false,
         biggestBox: 0,
         openedBox: [], // e.g. [1, 4, 7]
-        investValue: 0,
+        investValue: 1605555.55,
         isCompanyUser: false,
         name: '',
         phone: '',
@@ -51,23 +51,22 @@ class Mobile extends React.Component {
                     address: data.address || ''
                 }, () => {
                     const { name, phone, address } = this.state;
-                    if (name && phone && address) this.setState({ enableEdit: false })
+                    if (name && phone && address) this.setState({ enableEdit: false });
+                    for (let i = 0; i < BOX_PROPS.length; i++) {
+                        let biggestBoxNo;
+                        const openedBox = [...this.state.openedBox];
+                        if (investValue < BOX_PROPS[i].require) {
+                            biggestBoxNo = i;
+                            openedBox.push(biggestBoxNo);
+                            return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo});
+                        } else if (investValue > BOX_PROPS[i].require && i === BOX_PROPS.length - 1) {
+                            biggestBoxNo = BOX_PROPS.length;
+                            openedBox.push(biggestBoxNo);
+                            return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo});
+                        }
+                    }
                 })
             })
-
-        for (let i = 0; i < BOX_PROPS.length; i++) {
-            let biggestBoxNo;
-            const openedBox = [...this.state.openedBox];
-            if (investValue < BOX_PROPS[i].require) {
-                biggestBoxNo = i;
-                openedBox.push(biggestBoxNo);
-                return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo});
-            } else if (investValue > BOX_PROPS[i].require && i === BOX_PROPS.length - 1) {
-                biggestBoxNo = BOX_PROPS.length;
-                openedBox.push(biggestBoxNo);
-                return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo});
-            }
-        }
     }
 
     toggleIntro = () => this.setState({ showIntro: !this.state.showIntro })
@@ -146,7 +145,6 @@ class Mobile extends React.Component {
                 mobile: phone,
                 address: address
             }).then(data => {
-                // this.toggleAddressPop();
                 this.setState({ enableEdit: false })
             })
         }
