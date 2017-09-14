@@ -27,7 +27,8 @@ class PC extends React.Component {
 
     popPriceHandler = () => {
         let {closePopHandler, isLogin} = this.props;
-        ReactDOM.render(<PopGetPricePC isLogin={isLogin} closePopHandler={closePopHandler}/>, document.getElementById("pop"))
+        ReactDOM.render(<PopGetPricePC isLogin={isLogin}
+                                       closePopHandler={closePopHandler}/>, document.getElementById("pop"))
     }
 
     render() {
@@ -37,41 +38,41 @@ class PC extends React.Component {
             if (userMoney < 50000) {
                 return <div styleName="price_tips price1-close-tips">
                     您当前累投年化<span styleName="color-red">{`¥${Utils.format.price(userMoney)}`}</span>，暂无宝箱可开启，<br/>
-                    再投年化¥{Utils.format.price(50000 - userMoney)}努力去开启木头宝箱吧！
+                    再投年化¥{Utils.format.price(Math.round((50000 - userMoney) * 100) / 100)}努力去开启木头宝箱吧！
                 </div>
             } else if (userMoney < 100000) {
                 return <div styleName="price_tips price1-close-tips">
                     您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启木头宝箱，<br/>
-                    再投年化¥{Utils.format.price(100000 - userMoney)}努力去开启铁宝箱吧！
+                    再投年化¥{Utils.format.price(Math.round((100000 - userMoney) * 100) / 100)}努力去开启铁宝箱吧！
                 </div>
             } else if (userMoney < 250000) {
                 return <div styleName="price_tips price1-close-tips">
                     您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启铁宝箱，<br/>
-                    再投年化¥{Utils.format.price(250000 - userMoney)}努力去开启铜宝箱吧！
+                    再投年化¥{Utils.format.price(Math.round((250000 - userMoney) * 100) / 100)}努力去开启铜宝箱吧！
                 </div>
             } else if (userMoney < 500000) {
                 return <div styleName="price_tips price1-close-tips">
                     您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启铜宝箱，<br/>
-                    再投年化¥{Utils.format.price(500000 - userMoney)}努力去开启银宝箱吧！
+                    再投年化¥{Utils.format.price(Math.round((500000 - userMoney) * 100) / 100)}努力去开启银宝箱吧！
                 </div>
             } else if (userMoney < 800000) {
                 return <div styleName="price_tips price1-close-tips">
                     您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启银宝箱，<br/>
-                    再投年化¥{Utils.format.price(800000 - userMoney)}努力去开启金宝箱吧！
+                    再投年化¥{Utils.format.price(Math.round((800000 - userMoney) * 100) / 100)}努力去开启金宝箱吧！
                 </div>
             } else if (userMoney < 1000000) {
                 return <div styleName="price_tips price1-close-tips">
                     您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启金宝箱，<br/>
-                    再投年化¥{Utils.format.price(1000000 - userMoney)}努力去开启铂金宝箱吧！
+                    再投年化¥{Utils.format.price(Math.round((1000000 - userMoney) * 100) / 100)}努力去开启铂金宝箱吧！
                 </div>
             } else if (userMoney < 1500000) {
                 return <div styleName="price_tips price1-close-tips">
                     您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，暂可开启铂金宝箱，<br/>
-                    再投年化¥{Utils.format.price(1500000 - userMoney)}努力去开启钻石宝箱吧！
+                    再投年化¥{Utils.format.price(Math.round((15000000 - userMoney) * 100) / 100)}努力去开启钻石宝箱吧！
                 </div>
             } else {
                 return <div styleName="price_tips price1-close-tips">
-                    您当前累投年化<span styleName="color-red">¥{Utils.format.price(userMoney)}</span>，太棒了，可开启终极钻石宝箱啦！
+                    您当前累投年化<span styleName="color-red">¥{Utils.format.price(Math.round((userMoney) * 100) / 100)}</span>，太棒了，可开启终极钻石宝箱啦！
                 </div>
             }
         }
