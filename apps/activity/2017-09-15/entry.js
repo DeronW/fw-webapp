@@ -30,13 +30,6 @@ class Activity extends React.Component {
                 this.setState({timestamp: data.timestamp})
             });
 
-        //获取用户累投年化总额
-        Get('')
-            .then(data => {
-            }, () => {
-            })
-
-
         NativeBridge.trigger('hide_header')
     }
 
