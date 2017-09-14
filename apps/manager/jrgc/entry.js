@@ -4,6 +4,8 @@ import { render } from 'react-dom'
 
 import { Get, Post,StoreSpy } from './helpers'
 
+import './css/index.css'
+
 import AppRouter from './router.js'
 import * as Stores from './stores'
 
