@@ -587,6 +587,7 @@
     color: #fff;
     font-size: 32px;
     text-align: center;
+    white-space: pre-wrap;
 }
 
 .disabled-submit-btn {

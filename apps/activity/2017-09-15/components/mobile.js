@@ -70,9 +70,7 @@ class Mobile extends React.Component {
         }
     }
 
-    toggleIntro = () => {
-        this.setState({ showIntro: !this.state.showIntro })
-    }
+    toggleIntro = () => this.setState({ showIntro: !this.state.showIntro })
 
     genBoxStyleName = no => {
         const { openedBox } = this.state;
@@ -122,8 +120,6 @@ class Mobile extends React.Component {
         if (type === 'name') {
             value = value.replace(/\d/g, '')
             if (value.length > 10) value = value.slice(0, 10);
-        } else if (type === 'address' && value.length > 100) {
-            value = value.slice(0, 100);
         }
         this.setState({ [type]: value })
     }
@@ -199,20 +195,15 @@ class Mobile extends React.Component {
                     <textarea styleName="address-item-value"
                         disabled={!enableEdit}
                         placeholder="100个字以内"
+                        maxLength="100"
                         value={address}
                         onChange={this.handleInput('address')} />
                 </div>
                 <div styleName={name && phone && address ? "submit-btn" : "disabled-submit-btn"}
-                    onClick={this.toggleEditOrSubmit}>{enableEdit ? "保  存" : "修  改"}</div>
+                    onClick={this.toggleEditOrSubmit}>{enableEdit ? "保   存" : "修   改"}</div>
                 <div styleName="tip">
                     提示：请准确填写收货地址，以便您能收到奖品。<br />
                     如有疑问，请联系客服：400-0322-988</div>
-            </div>
-        </div>
-
-        const investInfo = <div styleName="invest-info-placeholder">
-            <div styleName="invest-info">
-                您当前累投年化<span>{`￥${investValue}`}</span>，{ this.genInvestInfoText() }
             </div>
         </div>
 
@@ -283,7 +274,11 @@ class Mobile extends React.Component {
 
             <div styleName="foot">*以上活动由金融工场主办 与Apple Inc. 无关</div>
 
-            { investInfo }
+            <div styleName="invest-info-placeholder">
+                <div styleName="invest-info">
+                    您当前累投年化<span>{`￥${investValue}`}</span>，{ this.genInvestInfoText() }
+                </div>
+            </div>
         </div>
     }
 
