@@ -518,6 +518,10 @@
     padding: 0;
 }
 
+.address-pop-disabled {
+    composes: address-pop;
+}
+
 .address-pop-close-btn {
     position: absolute;
     top: 0;
@@ -561,6 +565,11 @@
     border-radius: 4px;
     color: #555;
     font-size: 20px;
+}
+
+.address-pop-disabled .item-value {
+    background-color: transparent;
+    border: none;
 }
 
 .address-item-value {

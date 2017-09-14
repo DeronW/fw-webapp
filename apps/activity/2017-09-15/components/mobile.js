@@ -24,18 +24,21 @@ class Mobile extends React.Component {
 
     state = {
         showIntro: false,
+        showAddressPop: false,
+        biggestBox: 0,
         openedBox: [], // e.g. [1, 4, 7]
         investValue: 0,
-        biggestBox: 0,
         isCompanyUser: false,
-        showAddressPop: false,
         name: '',
         phone: '',
-        address: ''
+        address: '',
+        enableEdit: true
     }
 
     componentDidMount() {
         // let { investValue } = this.state;
+        // if (name && phone && address) this.setState({ enableEdit: false })
+
         let investValue;
         Get('/api/octoberActivity/v1/getSelfInvestInfo.json')
             .then(({ data }) => {
@@ -46,6 +49,9 @@ class Mobile extends React.Component {
                     name: data.realName || '',
                     phone: data.mobile || '',
                     address: data.address || ''
+                }, () => {
+                    const { name, phone, address } = this.state;
+                    if (name && phone && address) this.setState({ enableEdit: false })
                 })
             })
 
@@ -116,29 +122,34 @@ class Mobile extends React.Component {
         if (type === 'name') {
             value = value.replace(/\d/g, '')
             if (value.length > 10) value = value.slice(0, 10);
-        } else if (type === 'phone') {
-            value = value.replace(/\D/g, '')
-            if (value.length > 15) value = value.slice(0, 15);
         } else if (type === 'address' && value.length > 100) {
             value = value.slice(0, 100);
         }
         this.setState({ [type]: value })
     }
 
-    handleAddressSubmit = () => {
-        const { name, phone, address } = this.state;
-        if (!(name && phone && address)) return
-        Post('/api/octoberActivity/v1/updateAddress.shtml', {
-            realName: name,
-            mobile: phone,
-            address: address
-        }).then(data => {
-            this.toggleAddressPop();
-        })
+    toggleEditOrSubmit = () => {
+        const { name, phone, address, enableEdit } = this.state;
+        if (!enableEdit) {
+            this.setState({ enableEdit: true })
+        } else {
+            if (!(name && phone && address)) return
+
+            // this.setState({ enableEdit: false })
+
+            Post('/api/octoberActivity/v1/updateAddress.shtml', {
+                realName: name,
+                mobile: phone,
+                address: address
+            }).then(data => {
+                // this.toggleAddressPop();
+                this.setState({ enableEdit: false })
+            })
+        }
     }
 
     render() {
-        const { showIntro, investValue, biggestBox, showCannotGetPop,
+        const { showIntro, investValue, biggestBox, enableEdit,
             isCompanyUser, showAddressPop, name, phone, address } = this.state;
 
         const intro = <div styleName="intro">
@@ -164,19 +175,21 @@ class Mobile extends React.Component {
         </div>
 
         const addressPop = <div styleName="pop-mask">
-            <div styleName="address-pop">
+            <div styleName={enableEdit ? "address-pop" : "address-pop-disabled"}>
                 <div styleName="address-pop-close-btn" onClick={this.toggleAddressPop}></div>
                 <div styleName="address-pop-title">收货地址</div>
                 <div styleName="input-item">
                     <div styleName="item-name">收货人姓名：</div>
                     <input styleName="item-value"
+                        disabled={!enableEdit}
                         value={name}
                         onChange={this.handleInput('name')} />
                 </div>
                 <div styleName="input-item">
                     <div styleName="item-name">收货人联系电话：</div>
                     <input styleName="item-value"
-                        type="number"
+                        disabled={!enableEdit}
+                        type="tel"
                         maxLength="15"
                         value={phone}
                         onChange={this.handleInput('phone')} />
@@ -184,12 +197,13 @@ class Mobile extends React.Component {
                 <div styleName="input-item">
                     <div styleName="item-name">详细地址：</div>
                     <textarea styleName="address-item-value"
+                        disabled={!enableEdit}
                         placeholder="100个字以内"
                         value={address}
                         onChange={this.handleInput('address')} />
                 </div>
                 <div styleName={name && phone && address ? "submit-btn" : "disabled-submit-btn"}
-                    onClick={this.handleAddressSubmit}>{'修  改'}</div>
+                    onClick={this.toggleEditOrSubmit}>{enableEdit ? "保  存" : "修  改"}</div>
                 <div styleName="tip">
                     提示：请准确填写收货地址，以便您能收到奖品。<br />
                     如有疑问，请联系客服：400-0322-988</div>
