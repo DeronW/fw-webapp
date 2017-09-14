@@ -24,18 +24,17 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             environment: 'production',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`
         })
+
+        gulp.task(`lint:${PROJ}:${i.name || i}`, gulp.series(() => {
+            return gulp.src([
+                `apps/${PROJ}/${i.name || i}/**/*.+(js|jsx)`
+            ]).pipe(eslint()).pipe(eslint.format());
+        }))
     })
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)))
 
-    gulp.task(`lint:${PROJ}`, gulp.series(() => {
-        return gulp.src([
-            `apps/${PROJ}/**/*.+(js|jsx)`,
-            '!node_modules/**',
-            '!**/jquery.*.js',
-            '!**.min.js'
-        ]).pipe(eslint()).pipe(eslint.format());
-    }))
+    gulp.task(`lint:${PROJ}`, gulp.series(APP_NAMES.map((i) => `lint:${PROJ}:${i.name || i}`)))
 
     // define a empty activity:common_js function for compiler holder
     gulp.task(`${PROJ}:common_js`, gulp.series(() => {
