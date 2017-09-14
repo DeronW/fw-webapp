@@ -40,19 +40,20 @@ class PopGetPricePC extends React.Component {
 
     keepHandler = () => {
         let {userName, userPhone, userAddress} = this.state
-        if (userName && userPhone && userAddress) {
+        if (userName || userPhone || userAddress) {
             this.setState({btn: true})
-            Post('/api/octoberActivity/v1/updateAddress.shtml', {
-                realName: userName,
-                mobile: userPhone,
-                address: userAddress
-            })
-        } else if (userName || userPhone || userAddress) {
-            this.setState({btn: true})
+            if (userName && userPhone && userAddress) {
+                Post('/api/octoberActivity/v1/updateAddress.shtml', {
+                    realName: userName,
+                    mobile: userPhone,
+                    address: userAddress
+                })
+            } else {
+                this.setState({btn: false})
+            }
         } else {
             this.setState({btn: false})
         }
-
     }
 
     reviseHandler = () => {
