@@ -85,19 +85,21 @@ class Mobile extends React.Component {
         let text;
         if (biggestBox === 0) {
             text = <div>
-                您当前累投年化<span>{`￥${investValue}`}</span>，
-                {'暂无宝箱可开启，再投年化'}<span>{`￥${BOX_PROPS[biggestBox].require - investValue}`}</span>{`努力去开启${BOX_PROPS[biggestBox].name}吧！`}
+                您当前累投年化<span>{investValue}</span>，
+                暂无宝箱可开启，再投年化<span>{BOX_PROPS[biggestBox].require - investValue}</span>
+                努力去开启{BOX_PROPS[biggestBox].name}吧！
             </div>
         } else if (biggestBox === 7) {
             text = <div>
-                您当前累投年化<span>{`￥${investValue}`}</span>，
+                您当前累投年化<span>￥{investValue}</span>，
                 太棒了，可开启终极钻石宝箱啦！
             </div>
         } else {
+            const investMoreValue = Math.round((BOX_PROPS[biggestBox].require - investValue)*100)/100;
             text = <div>
-                您当前累投年化<span>{`￥${investValue}`}</span>，
-                暂可开启${BOX_PROPS[biggestBox-1].name}，
-                再投年化￥${BOX_PROPS[biggestBox].require - investValue}努力去开启${BOX_PROPS[biggestBox].name}吧！
+                您当前累投年化<span>￥{investValue}</span>，
+                暂可开启{BOX_PROPS[biggestBox-1].name}，
+                再投年化￥{investMoreValue}努力去开启{BOX_PROPS[biggestBox].name}吧！
             </div>
         }
         return text
