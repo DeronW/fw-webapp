@@ -16,6 +16,10 @@ class PopGetPricePC extends React.Component {
     componentDidMount() {
         let info = this.props.info
         this.setState({userName: info.realName, userPhone: info.mobile, userAddress: info.address})
+        let {userName, userPhone, userAddress} = this.state
+        if (userName || userPhone || userAddress) {
+            this.setState({btn: true})
+        }
     }
 
     nameHandler = (e) => {
