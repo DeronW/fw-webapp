@@ -25,9 +25,9 @@ class Mobile extends React.Component {
     state = {
         showIntro: false,
         showAddressPop: false,
-        biggestBox: 0,
+        biggestBox: 0, // start from 1
         openedBox: [], // e.g. [1, 4, 7]
-        investValue: 1605555.55,
+        investValue: 0,
         isCompanyUser: false,
         name: '',
         phone: '',
@@ -36,9 +36,6 @@ class Mobile extends React.Component {
     }
 
     componentDidMount() {
-        // let { investValue } = this.state;
-        // if (name && phone && address) this.setState({ enableEdit: false })
-
         let investValue;
         Get('/api/octoberActivity/v1/getSelfInvestInfo.json')
             .then(({ data }) => {
@@ -139,8 +136,6 @@ class Mobile extends React.Component {
             this.setState({ enableEdit: true })
         } else {
             if (!(name && phone && address)) return
-
-            // this.setState({ enableEdit: false })
 
             Post('/api/octoberActivity/v1/updateAddress.shtml', {
                 realName: name,
