@@ -262,7 +262,7 @@ class Mobile extends React.Component {
                 <div styleName="treasure-info">戴森吹风机</div>
                 <div styleName="treasure-box" onClick={this.boxHandler(6)}></div>
                 <div styleName="skeleton-bg"></div>
-                <div styleName="treasure-requirement">80万≤累投年化额&lt;100万</div>
+                <div styleName="treasure-requirement">100万≤累投年化额&lt;150万</div>
             </div>
 
             <div styleName={this.genBoxStyleName(7)}>
