@@ -3,7 +3,7 @@
     width: 133px;
     height: 142px;
     position: fixed;
-    top: 550px;
+    top: 450px;
     right: 190px;
     cursor: pointer;
     background: url("../images/pc/getprice.png") no-repeat center;
@@ -19,6 +19,7 @@
     font-family: 'microsoft yahei';
     padding-bottom: 300px;
     position: relative;
+    overflow: hidden;
 }
 
 .goInvest {
