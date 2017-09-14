@@ -15,9 +15,9 @@ class Slider extends React.Component {
         this.sliderWidth = 0
         this.touchMoveFn = null
         this.touchUpFn = null
-        this.state={
-            loanNum:(this.props.fxh.data.borrowBtnStatus == 1 || this.props.fxh.data.borrowBtnStatus == 101) ? 10000 : this.props.fxh.data.canBorrowAmount,
-            show_tip:true
+        this.state = {
+            loanNum: (this.props.fxh.data.borrowBtnStatus == 1 || this.props.fxh.data.borrowBtnStatus == 101) ? 10000 : this.props.fxh.data.canBorrowAmount,
+            show_tip: true
         }
     }
     // componentWillReceiveProps(nextProps) {
@@ -72,11 +72,11 @@ class Slider extends React.Component {
             let canBorrowAmount = this.props.canBorrowAmount;
             let leftValue = parseInt(left);
             let loanNum = Math.round((lowestLoanNum + parseInt((canBorrowAmount - lowestLoanNum) * leftValue / 548)) / 100) * 100;
-            this.setState({loanNum:loanNum},this.props.fxh.watchSliderNum(this.state.loanNum))
+            this.setState({ loanNum: loanNum }, this.props.fxh.watchSliderNum(this.state.loanNum))
             if (loanNum != canBorrowAmount) {
                 this.setState({ show_tip: false });
             } else {
-                this.setState({ show_tip: true});
+                this.setState({ show_tip: true });
             }
         }
     }
@@ -121,7 +121,7 @@ class Slider extends React.Component {
         const v = Math.abs(end) - Math.abs(start)
         v == 0 ? 1 : v
         const width = this.width
-        return width / v * (value-start)
+        return width / v * (value - start)
     }
 
     render() {
@@ -132,7 +132,7 @@ class Slider extends React.Component {
                     <div ref="selectedBar" styleName="bfd-slider__bar--selected"></div>
                 </div>
                 <div styleName="loan-num">{this.state.loanNum}</div>
-                <div styleName="max-loan-title">{this.state.show_tip?"最高借款额度(元)":"借款额度(元)"}</div>
+                <div styleName="max-loan-title">{this.state.show_tip ? "最高借款额度(元)" : "借款额度(元)"}</div>
                 <div styleName="start-point"></div>
                 <div styleName="end-point"></div>
                 <div styleName="start-point-num">{this.props.lowestLoan}</div>

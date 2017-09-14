@@ -1,12 +1,12 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
-import {Link} from 'react-router-dom'
+import { observer, inject } from 'mobx-react'
+import { Link } from 'react-router-dom'
 
-import {Header} from '../../lib/components'
-import {Browser, Post, NativeBridge, Storage} from '../../lib/helpers'
+import { Header } from '../../lib/components'
+import { Browser, Post, NativeBridge, Storage } from '../../lib/helpers'
 
-import {Utils, Components} from 'fw-javascripts'
+import { Utils, Components } from 'fw-javascripts'
 
 import styles from '../css/loan-fxh-result.css'
 @inject("fxh")
@@ -28,7 +28,7 @@ export default class FxhResult extends React.Component {
 
     componentDidMount() {
         document.title = "借款结果"
-        let {fxh} = this.props;
+        let { fxh } = this.props;
         fxh.get_card_list();
         this.countingDown();
     }
@@ -40,7 +40,7 @@ export default class FxhResult extends React.Component {
         location.href = encodeURI(link);
     }
     countingDown = () => {
-        this.setState({countdown: 56});
+        this.setState({ countdown: 56 });
         this.checkAjax();
 
         this.timer = setInterval(() => {
@@ -52,49 +52,49 @@ export default class FxhResult extends React.Component {
             });
             if (c <= 0)
                 clearInterval(this.timer);
-            }
-        , 1000);
+        }
+            , 1000);
     }
     checkAjax = () => {
         let orderGid = Utils.hashQuery.orderGid;
-        Post(`/api/loan/v1/status.json`, {orderGid: orderGid}).then((data) => {
+        Post(`/api/loan/v1/status.json`, { orderGid: orderGid }).then((data) => {
             let finishFlag = true;
             if (data.loanStatus == 6) {
-                this.setState({waitingResultShow: false, successResultShow: true});
-                if(data.activityRecomUrl){
-                        setTimeout(() => {
-                            Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`,false,"放心花"):
-                            location.href  = `${data.activityRecomUrl}`;
-                        },2000)
-                    }
+                this.setState({ waitingResultShow: false, successResultShow: true });
+                if (data.activityRecomUrl) {
+                    setTimeout(() => {
+                        Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`, false, "放心花") :
+                            location.href = `${data.activityRecomUrl}`;
+                    }, 2000)
+                }
                 // setTimeout(() => {
                 //     Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
                 //     location.href  = `/static/loan/features/index.html#/invite-activity?yqm=F172001`;
                 // }, 12000)
             } else if (data.loanStatus == 5) {
-                this.setState({waitingResultShow: false, failResultShow: true, failReason: data.failReason});
+                this.setState({ waitingResultShow: false, failResultShow: true, failReason: data.failReason });
             } else {
                 finishFlag = false
             }
 
             if (this.state.countdown <= 0) {
                 if (data.loanStatus == 6) {
-                    this.setState({waitingResultShow: false, successResultShow: true});
+                    this.setState({ waitingResultShow: false, successResultShow: true });
 
                 } else if (data.loanStatus == 5) {
-                    this.setState({waitingResultShow: false, failResultShow: true, failReason: data.failReason});
+                    this.setState({ waitingResultShow: false, failResultShow: true, failReason: data.failReason });
                 } else if (data.loanStatus == 4) {
-                    this.setState({waitingResultShow: false, checkingResult: true});
+                    this.setState({ waitingResultShow: false, checkingResult: true });
                 } else {
                     finishFlag = false
                 }
             }
             if (finishFlag)
                 clearInterval(this.timer);
-            }
-        , (err) => {
-            Components.showToast(err.message)
-        });
+        }
+            , (err) => {
+                Components.showToast(err.message)
+            });
 
     }
 
@@ -105,7 +105,7 @@ export default class FxhResult extends React.Component {
         location.href = '/static/loan/user-weixin-new-download/index.html';
     }
     render() {
-        let {fxh, history} = this.props;
+        let { fxh, history } = this.props;
         let USER = Storage.getUserDict();
         let goBack = () => {
             Browser.inFXHApp
@@ -131,7 +131,7 @@ export default class FxhResult extends React.Component {
             sourceType = 5;
         return (
             <div>
-                {!Browser.inJRGCApp && <Header title = "借款结果" goBack = {goBack}/>}
+                {!Browser.inJRGCApp && <Header title="借款结果" goBack={goBack} />}
                 <div styleName="loan-result">
                     {/* {Browser.inAndroid && <div styleName="header">
                         <div styleName="arrow-left" onClick={() => {
@@ -150,7 +150,7 @@ export default class FxhResult extends React.Component {
                             ? "waiting-result-box"
                             : "waiting-result-box dis"}>
                             <div styleName="wrap-box">
-                                <div styleName="success-icon"><img src={require("../images/loan-fxh-result/success-icon.png")}/></div>
+                                <div styleName="success-icon"><img src={require("../images/loan-fxh-result/success-icon.png")} /></div>
                                 <div styleName="loan-result1">
                                     <div styleName="icon1"></div>
                                     <div styleName="icon1-info">申请成功</div>
@@ -158,8 +158,8 @@ export default class FxhResult extends React.Component {
                                     <div styleName="waiting-result">
                                         <div styleName="icon2"></div>
                                         <div styleName="icon2-info">预计{this.state.countdown > 0
-                                                ? `${this.state.countdown}s`
-                                                : '1s'}之后给您处理结果</div>
+                                            ? `${this.state.countdown}s`
+                                            : '1s'}之后给您处理结果</div>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@ export default class FxhResult extends React.Component {
                             ? "check-result-box"
                             : "check-result-box dis"}>
                             <div styleName="wrap-box">
-                                <div styleName="success-icon"><img src={require("../images/loan-fxh-result/success-icon.png")}/></div>
+                                <div styleName="success-icon"><img src={require("../images/loan-fxh-result/success-icon.png")} /></div>
                                 <div styleName="loan-result2">
                                     <div styleName="icon1"></div>
                                     <div styleName="icon1-info">申请成功</div>
@@ -190,7 +190,7 @@ export default class FxhResult extends React.Component {
                             ? "success-result-box"
                             : "success-result-box dis"}>
                             <div styleName="wrap-box">
-                                <div styleName="success-icon"><img src={require("../images/loan-fxh-result/success-icon.png")}/></div>
+                                <div styleName="success-icon"><img src={require("../images/loan-fxh-result/success-icon.png")} /></div>
                                 <div styleName="loan-result3">
                                     <div styleName="icon1"></div>
                                     <div styleName="icon1-info">申请成功</div>
@@ -217,7 +217,7 @@ export default class FxhResult extends React.Component {
                             ? "fail-result-box"
                             : "fail-result-box dis"}>
                             <div styleName="wrap-box">
-                                <div styleName="fail-icon"><img src={require("../images/loan-fxh-result/fail-icon.png")}/></div>
+                                <div styleName="fail-icon"><img src={require("../images/loan-fxh-result/fail-icon.png")} /></div>
                                 <div styleName="loan-result4">
                                     <div styleName="icon4"></div>
                                     <div styleName="icon4-info">
@@ -252,7 +252,7 @@ export default class FxhResult extends React.Component {
                         <a styleName="attention-btn download-bg" onClick={this.clickHandler}>下载放心花APP</a>
                     </div>}
                     <div styleName="customer-service">
-                        <div styleName="service-wrap"><img src={require("../images/loan-fxh-result/phone.png")}/>如有问题请致电：<a href="tel:400-102-0066">400-102-0066</a>
+                        <div styleName="service-wrap"><img src={require("../images/loan-fxh-result/phone.png")} />如有问题请致电：<a href="tel:400-102-0066">400-102-0066</a>
                         </div>
                     </div>
                 </div>

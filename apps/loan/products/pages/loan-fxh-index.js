@@ -1,5 +1,5 @@
 import React from 'react'
-import {render} from 'react-dom'
+import { render } from 'react-dom'
 import { Redirect, Link } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/loan-fxh-index.css'
@@ -13,19 +13,19 @@ import { NativeBridge, Browser, Storage } from '../../lib/helpers'
 function gotoHandler(link) {
     if (link.indexOf('://') < 0)
         link = location.protocol + '//' + location.hostname + link;
-        location.href = link
+    location.href = link
 }
 
 @inject('fxh') @observer @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class FxhIndex extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            popShow:false,
-            start:0,
-            end:580,
-            defaultValue:580,
-            loanNum:0,
+            popShow: false,
+            start: 0,
+            end: 580,
+            defaultValue: 580,
+            loanNum: 0,
             loanShow: false,
             improveShow: false
         }
@@ -60,7 +60,7 @@ export default class FxhIndex extends React.Component {
                 <div styleName="max-loan-money money-empty">暂无额度</div>
                 <div styleName="max-loan-title">
                     <img src={require("../images/loan-fxh-index/warn.png")} />
-                    仅支持{fxh.data.lowestLoan}元以上借款，快去<a styleName="credit-improvement-tip" onClick={()=>credit_btn_handler()}>提额</a>吧！
+                    仅支持{fxh.data.lowestLoan}元以上借款，快去<a styleName="credit-improvement-tip" onClick={() => credit_btn_handler()}>提额</a>吧！
                 </div>
             </div>;
 
@@ -104,7 +104,7 @@ export default class FxhIndex extends React.Component {
                 Components.showToast('设置提现卡申请处理中，请稍等') :
                 gotoHandler(link)
         }
-        let loan_btn = <div styleName="loan-btn" onClick={()=>loanBtnClick()}>申请借款</div>;
+        let loan_btn = <div styleName="loan-btn" onClick={() => loanBtnClick()}>申请借款</div>;
 
         let credit_btn_handler = () => {
             if (fxh.data.redirectType == 1) {
@@ -120,7 +120,7 @@ export default class FxhIndex extends React.Component {
         //     </a>;
 
         let credit_btn =
-            <a styleName="loan-btn" onClick={()=>credit_btn_handler()}>
+            <a styleName="loan-btn" onClick={() => credit_btn_handler()}>
                 我要提额
             </a>;
 
@@ -155,7 +155,7 @@ export default class FxhIndex extends React.Component {
         this.setState({ loanShow: false, improveShow: false })
     }
 
-    render(){
+    render() {
         let { fxh } = this.props;
         let goBack = () => {
             Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
@@ -175,8 +175,8 @@ export default class FxhIndex extends React.Component {
                 </div>
                 <div styleName="loan-info">
                     <div styleName="slider-wrap">
-                        {fxh.data.borrowBtnStatus == 5 && <Slider canBorrowAmount={fxh.data.canBorrowAmount} lowestLoan={fxh.data.lowestLoan} start={this.state.start} end={this.state.end} defaultValue={this.state.defaultValue}/>}
-                        {(fxh.data.borrowBtnStatus == 1 || fxh.data.borrowBtnStatus == 101) && <Slider canBorrowAmount={10000} lowestLoan={0} start={0} end={10000} defaultValue={10000}/>}
+                        {fxh.data.borrowBtnStatus == 5 && <Slider canBorrowAmount={fxh.data.canBorrowAmount} lowestLoan={fxh.data.lowestLoan} start={this.state.start} end={this.state.end} defaultValue={this.state.defaultValue} />}
+                        {(fxh.data.borrowBtnStatus == 1 || fxh.data.borrowBtnStatus == 101) && <Slider canBorrowAmount={10000} lowestLoan={0} start={0} end={10000} defaultValue={10000} />}
                         {(fxh.data.borrowBtnStatus == 2 || fxh.data.borrowBtnStatus == 3) && this.getMoneySlider()}
                     </div>
                     <div styleName="loan-info-items">
