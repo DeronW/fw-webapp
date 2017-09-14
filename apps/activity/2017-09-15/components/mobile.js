@@ -85,13 +85,21 @@ class Mobile extends React.Component {
         const { biggestBox, investValue } = this.state;
         let text;
         if (biggestBox === 0) {
-            text = `暂无宝箱可开启，
-            再投年化￥${BOX_PROPS[biggestBox].require - investValue}努力去开启${BOX_PROPS[biggestBox].name}吧！`
+            text = <div>
+                您当前累投年化<span>{`￥${investValue}`}</span>，
+                {'暂无宝箱可开启，再投年化'}<span>{`￥${BOX_PROPS[biggestBox].require - investValue}`}</span>{`努力去开启${BOX_PROPS[biggestBox].name}吧！`}
+            </div>
         } else if (biggestBox === 7) {
-            text = '太棒了，可开启终极钻石宝箱啦！';
+            text = <div>
+                您当前累投年化<span>{`￥${investValue}`}</span>，
+                太棒了，可开启终极钻石宝箱啦！
+            </div>
         } else {
-            text = `暂可开启${BOX_PROPS[biggestBox-1].name}，
-            再投年化￥${BOX_PROPS[biggestBox].require - investValue}努力去开启${BOX_PROPS[biggestBox].name}吧！`
+            text = <div>
+                您当前累投年化<span>{`￥${investValue}`}</span>，
+                暂可开启${BOX_PROPS[biggestBox-1].name}，
+                再投年化￥${BOX_PROPS[biggestBox].require - investValue}努力去开启${BOX_PROPS[biggestBox].name}吧！
+            </div>
         }
         return text
     }
@@ -275,7 +283,7 @@ class Mobile extends React.Component {
 
             <div styleName="invest-info-placeholder">
                 <div styleName="invest-info">
-                    您当前累投年化<span>{`￥${investValue}`}</span>，{ this.genInvestInfoText() }
+                    { this.genInvestInfoText() }
                 </div>
             </div>
         </div>
