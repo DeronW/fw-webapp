@@ -14,11 +14,14 @@ class PopGetPricePC extends React.Component {
     }
 
     componentDidMount() {
-        let info = this.props.info
-        this.setState({userName: info.realName, userPhone: info.mobile, userAddress: info.address})
-        if (!(info.realName && info.mobile && info.address)) {
-            this.setState({btn: false})
-        }
+        Get('/api/octoberActivity/v1/getSelfInvestInfo.json').then(data => {
+            let info = data.data
+            this.setState({userName: info.realName, userPhone: info.mobile, userAddress: info.address})
+            if (!(info.realName && info.mobile && info.address)) {
+                this.setState({btn: false})
+            }
+        })
+
     }
 
     nameHandler = (e) => {
@@ -50,6 +53,8 @@ class PopGetPricePC extends React.Component {
                     realName: userName,
                     mobile: userPhone,
                     address: userAddress
+                }).then(data => {
+                    this.setState({userName: userName, userPhone: userPhone, userAddress: userAddress})
                 })
             } else {
                 this.setState({btn: false})

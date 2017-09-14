@@ -27,8 +27,7 @@ class PC extends React.Component {
 
     popPriceHandler = () => {
         let {closePopHandler, isLogin} = this.props;
-        ReactDOM.render(<PopGetPricePC isLogin={isLogin} info={this.state.info}
-                                       closePopHandler={closePopHandler}/>, document.getElementById("pop"))
+        ReactDOM.render(<PopGetPricePC isLogin={isLogin} closePopHandler={closePopHandler}/>, document.getElementById("pop"))
     }
 
     render() {
