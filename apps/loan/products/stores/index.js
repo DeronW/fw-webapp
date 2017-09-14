@@ -2,7 +2,7 @@ import Mortgage from './mortgage.js'
 import LoopLoan from './loop.js'
 import Fxh from './fxh.js'
 
-export default {
+export {
     Mortgage,
     LoopLoan,
     Fxh
