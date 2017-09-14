@@ -202,6 +202,7 @@ class PC extends React.Component {
                         <div styleName="term"> 累投年化额≥150万</div>
                     </div>
                 </div>
+                <div styleName="pop-price" onClick={this.popPriceHandler}></div>
             </div>
             <div styleName="intro">
                 <div styleName="text">
@@ -218,7 +219,6 @@ class PC extends React.Component {
                     </div>
                 </div>
             </div>
-            <div styleName="pop-price" onClick={this.popPriceHandler}></div>
         </div>
     }
 }
