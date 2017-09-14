@@ -202,8 +202,7 @@ class Mobile extends React.Component {
                 <div styleName={name && phone && address ? "submit-btn" : "disabled-submit-btn"}
                     onClick={this.toggleEditOrSubmit}>{enableEdit ? "保   存" : "修   改"}</div>
                 <div styleName="tip">
-                    提示：请准确填写收货地址，以便您能收到奖品。<br />
-                    如有疑问，请联系客服：400-0322-988</div>
+                    提示：请准确填写收货地址，以便您能收到奖品。<br />如有疑问，请联系客服：400-0322-988</div>
             </div>
         </div>
 
