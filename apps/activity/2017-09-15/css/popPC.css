@@ -80,13 +80,11 @@
     color: #555;
 }
 
-.address-write {
+.address-write-on, .address-write {
     width: 244px;
     height: 50px;
     vertical-align: top;
     padding-left: 10px;
-    padding-top: 10px;
-
 }
 
 .saveline {
