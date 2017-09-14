@@ -473,6 +473,10 @@
     text-align: center;
 }
 
+.invest-info span {
+    color: #ff4b46;
+}
+
 .pop-mask {
     position: fixed;
     z-index: 9999;

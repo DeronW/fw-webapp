@@ -27,7 +27,7 @@ class Mobile extends React.Component {
         showAddressPop: false,
         biggestBox: 0,
         openedBox: [], // e.g. [1, 4, 7]
-        investValue: 0,
+        investValue: 1605555.55,
         isCompanyUser: false,
         name: '',
         phone: '',
@@ -51,23 +51,22 @@ class Mobile extends React.Component {
                     address: data.address || ''
                 }, () => {
                     const { name, phone, address } = this.state;
-                    if (name && phone && address) this.setState({ enableEdit: false })
+                    if (name && phone && address) this.setState({ enableEdit: false });
+                    for (let i = 0; i < BOX_PROPS.length; i++) {
+                        let biggestBoxNo;
+                        const openedBox = [...this.state.openedBox];
+                        if (investValue < BOX_PROPS[i].require) {
+                            biggestBoxNo = i;
+                            openedBox.push(biggestBoxNo);
+                            return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo});
+                        } else if (investValue > BOX_PROPS[i].require && i === BOX_PROPS.length - 1) {
+                            biggestBoxNo = BOX_PROPS.length;
+                            openedBox.push(biggestBoxNo);
+                            return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo});
+                        }
+                    }
                 })
             })
-
-        for (let i = 0; i < BOX_PROPS.length; i++) {
-            let biggestBoxNo;
-            const openedBox = [...this.state.openedBox];
-            if (investValue < BOX_PROPS[i].require) {
-                biggestBoxNo = i;
-                openedBox.push(biggestBoxNo);
-                return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo});
-            } else if (investValue > BOX_PROPS[i].require && i === BOX_PROPS.length - 1) {
-                biggestBoxNo = BOX_PROPS.length;
-                openedBox.push(biggestBoxNo);
-                return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo});
-            }
-        }
     }
 
     toggleIntro = () => this.setState({ showIntro: !this.state.showIntro })
@@ -85,13 +84,21 @@ class Mobile extends React.Component {
         const { biggestBox, investValue } = this.state;
         let text;
         if (biggestBox === 0) {
-            text = `暂无宝箱可开启，
-            再投年化￥${BOX_PROPS[biggestBox].require - investValue}努力去开启${BOX_PROPS[biggestBox].name}吧！`
+            text = <div>
+                您当前累投年化<span>{`￥${investValue}`}</span>，
+                {'暂无宝箱可开启，再投年化'}<span>{`￥${BOX_PROPS[biggestBox].require - investValue}`}</span>{`努力去开启${BOX_PROPS[biggestBox].name}吧！`}
+            </div>
         } else if (biggestBox === 7) {
-            text = '太棒了，可开启终极钻石宝箱啦！';
+            text = <div>
+                您当前累投年化<span>{`￥${investValue}`}</span>，
+                太棒了，可开启终极钻石宝箱啦！
+            </div>
         } else {
-            text = `暂可开启${BOX_PROPS[biggestBox-1].name}，
-            再投年化￥${BOX_PROPS[biggestBox].require - investValue}努力去开启${BOX_PROPS[biggestBox].name}吧！`
+            text = <div>
+                您当前累投年化<span>{`￥${investValue}`}</span>，
+                暂可开启${BOX_PROPS[biggestBox-1].name}，
+                再投年化￥${BOX_PROPS[biggestBox].require - investValue}努力去开启${BOX_PROPS[biggestBox].name}吧！
+            </div>
         }
         return text
     }
@@ -138,7 +145,6 @@ class Mobile extends React.Component {
                 mobile: phone,
                 address: address
             }).then(data => {
-                // this.toggleAddressPop();
                 this.setState({ enableEdit: false })
             })
         }
@@ -262,7 +268,7 @@ class Mobile extends React.Component {
                 <div styleName="treasure-info">戴森吹风机</div>
                 <div styleName="treasure-box" onClick={this.boxHandler(6)}></div>
                 <div styleName="skeleton-bg"></div>
-                <div styleName="treasure-requirement">80万≤累投年化额&lt;100万</div>
+                <div styleName="treasure-requirement">100万≤累投年化额&lt;150万</div>
             </div>
 
             <div styleName={this.genBoxStyleName(7)}>
@@ -275,7 +281,7 @@ class Mobile extends React.Component {
 
             <div styleName="invest-info-placeholder">
                 <div styleName="invest-info">
-                    您当前累投年化<span>{`￥${investValue}`}</span>，{ this.genInvestInfoText() }
+                    { this.genInvestInfoText() }
                 </div>
             </div>
         </div>
