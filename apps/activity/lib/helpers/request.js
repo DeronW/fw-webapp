@@ -1,6 +1,6 @@
 import { Request, Components } from 'fw-javascripts'
 
-import { NativeBridge } from './native-bridge.js'
+import NativeBridge from './native-bridge.js'
 import Browser from './browser.js'
 
 
