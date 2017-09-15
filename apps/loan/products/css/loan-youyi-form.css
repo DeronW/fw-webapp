@@ -57,13 +57,13 @@ body {
     font-size: 54px;
     color: #556bb8;
     margin-top: 12px;
+    margin-right: 30px;
 }
 
 .loan-num-wrap {
     font-size: 30px;
     color: #000;
     float: right;
-    margin-right:30px;
 }
 
 .loan-info-item {
