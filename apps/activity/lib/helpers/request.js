@@ -1,5 +1,6 @@
-import { Request, Components, NativeBridge } from 'fw-javascripts'
+import { Request, Components } from 'fw-javascripts'
 
+import { NativeBridge } from './native-bridge.js'
 import Browser from './browser.js'
 
 
@@ -21,9 +22,8 @@ const Ajax = options => {
             // 'here ! should go to login'
             if (Browser.inApp) {
                 NativeBridge.login()
-            // } else if (Browser.inMobile) {
-            //     location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
             } else {
+                // Mac电脑上不能自动跳回来, Safari不支持非法字符回跳地址
                 if (navigator.userAgent.match(/Macintosh/i)) {
                     location.href = 'https://passport.9888keji.com/passport/login'
                 } else {
