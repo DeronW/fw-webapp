@@ -230,6 +230,8 @@ class Mobile extends React.Component {
                 <div styleName="invest-entry-btn" onClick={NativeBridge.close}>投资寻宝</div>
             </div>
 
+            <div style={{ height: "80px" }}></div>
+
             <div styleName={this.genBoxStyleName(1)}>
                 <div styleName="treasure-info">150元话费</div>
                 <div styleName="treasure-box" onClick={this.boxHandler(1)}></div>
