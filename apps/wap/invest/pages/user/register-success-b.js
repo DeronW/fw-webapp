@@ -42,7 +42,8 @@ class RegisterSuccess extends React.Component {
             'A': '元返现券礼包 + 新手专享特权',
             'B': '返息券已经转入您的账户中',
             'C': '工分已经转入您的账户中',
-            '1': '工豆已经转入您的账户中'
+            '1': '工豆已经转入您的账户中',
+            'G': 'g 黄金券已转入您的账户中'
         }
 
         return <div styleName="bg">
