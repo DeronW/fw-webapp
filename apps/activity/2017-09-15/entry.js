@@ -1,11 +1,11 @@
 import "babel-polyfill";
 import React from 'react'
-import {render} from 'react-dom'
+import { render } from 'react-dom'
 import ReactDOM from 'react-dom'
 import '../lib/css/common.css'
 import Mobile from './components/mobile.js'
 import PC from './components/pc.js'
-import {Get, UserReady, gotoPage, NativeBridge} from '../lib/helpers'
+import { Get, UserReady, gotoPage, NativeBridge } from '../lib/helpers'
 
 class Activity extends React.Component {
     state = {
@@ -17,20 +17,19 @@ class Activity extends React.Component {
     componentDidMount() {
 
         UserReady((isLogin, user) => {
-            this.setState({isLogin: isLogin, username: user.userName})
+            this.setState({ isLogin: isLogin, username: user.userName })
             isLogin && Get('/api/augSepActivity/v1/getSelfInvestInfo.json')
                 .then(data => {
-                    this.setState({personData: data.data})
+                    this.setState({ personData: data.data })
                 })
 
         });
 
         Get('/api/userState/v1/timestamp.json')
             .then(data => {
-                this.setState({timestamp: data.timestamp})
+                this.setState({ timestamp: data.timestamp })
             });
 
-        NativeBridge.trigger('hide_header')
     }
 
     closePopHandler = () => {
@@ -42,7 +41,7 @@ class Activity extends React.Component {
     }
 
     render() {
-        let {isLogin, total} = this.state;
+        let { isLogin, total } = this.state;
         let props = {
             isLogin: isLogin,
             closePopHandler: this.closePopHandler,
@@ -59,4 +58,4 @@ class Activity extends React.Component {
 }
 
 NativeBridge.setTitle("寻宝大作战")
-render(<Activity/>, document.getElementById('cnt'))
+render(<Activity />, document.getElementById('cnt'))

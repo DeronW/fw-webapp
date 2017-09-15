@@ -55,11 +55,11 @@ class Mobile extends React.Component {
                         if (investValue < BOX_PROPS[i].require) {
                             biggestBoxNo = i;
                             openedBox.push(biggestBoxNo);
-                            return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo});
+                            return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo });
                         } else if (investValue > BOX_PROPS[i].require && i === BOX_PROPS.length - 1) {
                             biggestBoxNo = BOX_PROPS.length;
                             openedBox.push(biggestBoxNo);
-                            return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo});
+                            return this.setState({ openedBox: openedBox, biggestBox: biggestBoxNo });
                         }
                     }
                 })
@@ -92,10 +92,10 @@ class Mobile extends React.Component {
                 太棒了，可开启终极钻石宝箱啦！
             </div>
         } else {
-            const investMoreValue = Math.round((BOX_PROPS[biggestBox].require - investValue)*100)/100;
+            const investMoreValue = Math.round((BOX_PROPS[biggestBox].require - investValue) * 100) / 100;
             text = <div>
                 您当前累投年化<span>￥{investValue}</span>，
-                暂可开启{BOX_PROPS[biggestBox-1].name}，
+                暂可开启{BOX_PROPS[biggestBox - 1].name}，
                 再投年化￥{investMoreValue}努力去开启{BOX_PROPS[biggestBox].name}吧！
             </div>
         }
@@ -210,15 +210,14 @@ class Mobile extends React.Component {
         </div>
 
         return <div styleName="bg">
-            <MobileHeader bgColor="rgba(8,11,22,0.6)"/>
 
             <div styleName="get-treasure-btn" onClick={this.toggleAddressPop}></div>
 
-            { showIntro && intro }
+            {showIntro && intro}
 
-            { isCompanyUser && companyPop }
+            {isCompanyUser && companyPop}
 
-            { showAddressPop && addressPop}
+            {showAddressPop && addressPop}
 
             <div styleName="banner">
                 <div styleName="show-intro" onClick={this.toggleIntro}>
@@ -278,7 +277,7 @@ class Mobile extends React.Component {
 
             <div styleName="invest-info-placeholder">
                 <div styleName="invest-info">
-                    { this.genInvestInfoText() }
+                    {this.genInvestInfoText()}
                 </div>
             </div>
         </div>

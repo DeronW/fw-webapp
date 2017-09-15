@@ -1,4 +1,4 @@
-import {Request, Components, NativeBridge} from 'fw-javascripts'
+import { Request, Components, NativeBridge } from 'fw-javascripts'
 
 import Browser from './browser.js'
 
@@ -18,11 +18,15 @@ const Ajax = options => {
         }
         */
         if (error.code == 40101 || error.code == 63001) {
-            console.log('here ! should go to login')
+            // 'here ! should go to login'
+            if (Browser.inApp) {
+                NativeBridge.login()
+            } else if (Browser.inMobile) {
+                location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
+            } else {
+                location.href = 'https://passport.9888keji.com/passport/login?sourceSite=jrgc&service=' + location.href
+            }
 
-            Browser.inApp ?
-                NativeBridge.login() :
-                location.href = 'https://passport.9888keji.com/passport/login?sourceSite=jrgc&service=https://www.gongchangp2p.com/api/activityPullNew/ActivityControl.shtml?code=JSTZHD'
         } else {
             // 如果不弹出错误, 就直接reject
             if (silence)
