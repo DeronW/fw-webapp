@@ -63,6 +63,7 @@ body {
     font-size: 30px;
     color: #000;
     float: right;
+    margin-right:30px;
 }
 
 .loan-info-item {
