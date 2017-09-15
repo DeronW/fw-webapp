@@ -27,13 +27,13 @@ if(params.JENKINS_NODE != 'front-virtual') {
         }
 
         stage('Update nodejs lib'){
-        if(params.FORCE) {
-            sh 'npm install'
-        }
-        if(!params.FORCE) {
-            // 忽略掉 npm 的更新
-            echo 'ignore npm update'
-        }
+            if(params.FORCE) {
+                sh 'npm install'
+            }
+            if(!params.FORCE && !params.INITIALIZE) {
+                // 忽略掉 npm 的更新
+                echo 'ignore npm update'
+            }
         }
 
         stage('Clean workspace'){
@@ -97,17 +97,17 @@ if(params.JENKINS_NODE == 'front-virtual') {
         }
 
         stage('Update nodejs lib'){
-        if(params.FORCE) {
-            sh 'npm install'
-        }
-        if(!params.FORCE) {
-            // 忽略掉 npm 的更新
-            echo 'ignore npm update'
-        }
+            if(params.FORCE) {
+                sh 'npm install'
+            }
+            if(!params.FORCE && !params.INITIALIZE) {
+                // 忽略掉 npm 的更新
+                echo 'ignore npm update'
+            }
         }
 
         stage('Clean workspace'){
-        sh 'npm run clean'
+            sh 'npm run clean'
         }
 
         stage('Differential check') {
