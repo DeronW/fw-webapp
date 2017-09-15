@@ -24,7 +24,11 @@ const Ajax = options => {
             } else if (Browser.inMobile) {
                 location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
             } else {
-                location.href = 'https://passport.9888keji.com/passport/login?sourceSite=jrgc&service=' + location.href
+                if (Browser.inIOS) {
+                    location.href = 'https://passport.9888keji.com/passport/login'
+                } else {
+                    location.href = 'https://passport.9888keji.com/passport/login?sourceSite=jrgc&service=' + location.href
+                }
             }
 
         } else {
