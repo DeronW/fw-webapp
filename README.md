@@ -151,7 +151,6 @@ wap站：npm run gulp wap是扥:[文件名]:watch
 - .eslintrc
 - .gitignore
 - gulpfile.js
-- gulpfile.settings.js
 - Jenkinsfile
 - package.json
 - README.md // 项目说明
