@@ -133,22 +133,10 @@ class MiddlePanel extends React.Component {
         }
         let chairman = [
             {
-                img: require("../images/notice-disclosure/men1.png"),
-                name: '康忠芹·法人',
-                job: '中國信貸科技副总裁',
-                profile: '康忠芹女士，毕业于东北财经大学投资经济专业。先后在大开信托投资、亿达企业集团负责人力资源及投融资项目前期开发工作，资深人力资源管理师，具备独特的管理风格。自2011年涉足普惠金融以来，带领团队从应用ipc技术发展小微金融起步，发挥团队互联网科技优势，先后参与创建了网信集团、众筹网、一房集团、网信征信，在中國信貸科技的互联网金融发展历程中做出突出业绩。'
-            },
-            {
                 img: require("../images/notice-disclosure/men2.png"),
                 name: '魏薇·董事长',
                 job: '',
                 profile: '毕业于中国人民大学。曾任北京联合开元投资担保有限公司副总经理和联合创业集团有限公司营运管理中心总经理。经过10余年金融行业管理岗位的历练，拥有丰富的网贷行业实战经验和全面而独到的行业视角及理念，是小微金融的领军人物，普惠金融体系的积极践行者。'
-            },
-            {
-                img: require("../images/notice-disclosure/men3.png"),
-                name: '崔海晨·监事',
-                job: '',
-                profile: '北京邮电大学软件工程硕士。2013年3月加入先锋金融集团，历任金融工场首席执行官、金融工场CTO、网信金融集团开发副总监等职。曾任宜信公司互联网技术总监，安博教育集团 （NYSE: AMBO）研发总监。'
             },
             {
                 img: require("../images/notice-disclosure/men6.png"),
@@ -266,8 +254,8 @@ class MiddlePanel extends React.Component {
             <img src={require("../images/notice-disclosure/org.jpg")} alt="" styleName="orgPic" />
             <div styleName="shareTitle">实际控股人与持股5%以上的股东名单</div>
             <div styleName="shareContent">
-                <img src={require("../images/notice-disclosure/logo3.png")} alt="" styleName="sharePic" />
-                <p styleName="des">中國信貸科技控股有限公司</p>
+                {/*<img src={require("../images/notice-disclosure/logo3.png")} alt="" styleName="sharePic" />*/}
+                <p styleName="des">Decade Elite Global Limited</p>
             </div>
             <div styleName="chairmanRight">
                 <div styleName="chairmanRightTitle">
