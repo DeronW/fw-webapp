@@ -44,19 +44,19 @@ const OUTSIDE_PAGES = [
 ]
 
 // 账单模块
-const BILL_PAGES = [
+// const BILL_PAGES = [
     // 'bill', //账单首页 // should removed
     // 'bill-history', //历史账单 // depracated
     // 'bill-payback', //还款页面
     // 'repayment-record' //还款列表页面
-]
+// ]
 
 // 申请借款模块
-const APPLY_PAGES = [
+// const APPLY_PAGES = [
     // 'apply-want', //我要借款页面
     // 'apply-confirm', //确认借款页面
     // 'apply-result'
-]
+// ]
 
 // 借款服务协议页面
 // const PROTOCOL_PAGES = [
@@ -67,10 +67,10 @@ const APPLY_PAGES = [
 //     'protocol-dumiao-openaccount', //读秒开户授权书
 // ]
 
-const FXH_PAGES = [
+// const FXH_PAGES = [
     // 'fxh', // 掌众产品借款页面
     // 'fxh-bill', //账单详情
-]
+// ]
 
 const DU_MIAO_PAGES = [
     'dumiao', // 读秒产品借款页面
