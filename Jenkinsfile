@@ -2,7 +2,11 @@
 // major node is : front
 // backup node is : front-virtual
 
-def node_name = params.JENKINS_NODE == 'front-virtual' ? 'front-virtual' : 'front'
+def node_name = 'front'
+
+if(params.JENKINS_NODE == 'front-virtual') {
+    node_name = 'front-virtual'
+}
 
 node(node_name) {
     stage('check ENV'){
@@ -28,12 +32,11 @@ node(node_name) {
     }
 
     stage('Update nodejs lib'){
-        if(params.FORCE) {
+        if(params.FORCE || params.INITIALIZE) {
             sh 'npm install'
-        }
-        if(!params.FORCE && !params.INITIALIZE) {
+        } else {
             // 忽略掉 npm 的更新
-            echo 'ignore npm update'
+            echo 'no need force update npm'
         }
     }
 
