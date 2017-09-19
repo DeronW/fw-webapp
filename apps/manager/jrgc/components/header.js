@@ -18,20 +18,9 @@ const Header = CSSModules(styles, {
             {props.show_back &&
                 <a styleName="btn btn-back" onClick={props.history.goBack}> </a>
             }
-            {props.show_close &&
-                <a onClick={NativeBridge.close} styleName="btn btn-close"> </a>
-            }
             {props.title}
-            {props.sub_title &&
-                <Link to={props.sub_link} styleName="sub-title">{props.sub_title}</Link>
-            }
         </div>
     </div>
 ))
-
-Header.defaultProps = {
-    show_back: true,
-    show_close: true
-};
 
 export default Header

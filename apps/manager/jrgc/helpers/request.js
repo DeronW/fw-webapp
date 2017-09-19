@@ -13,8 +13,9 @@ const Ajax = options => {
             data: ...
             message: ...
         }
+
         */
-        if (error.code == 40101) {
+        /*if (error.code == 40101) {
             console.log('here ! should go to login')
 
             location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
@@ -28,7 +29,7 @@ const Ajax = options => {
             return new Promise((resolve, reject) => {
                 setTimeout(() => reject(error), 1700)
             })
-        }
+        }*/
     })
 }
 
