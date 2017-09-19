@@ -25,7 +25,13 @@ fs.readFile(sourceF, (err, data) => {
             if (line.trim().startsWith(i)) r.lib = true
         });
         let m = line.match(reg_page);
-        if (m) r.pages[m[1]] = true;
+        if (m) {
+            if (m[1] == 'lib') {
+                r.lib = true
+            } else {
+                r.pages[m[1]] = true;
+            }
+        }
 
         if (line.match('package.json')) r.npm = true;
     })
@@ -45,7 +51,7 @@ fs.readFile(sourceF, (err, data) => {
 
     fs.writeFile(targetF, sh_script.join('\n'), (err) => {
         if (err) throw err;
-        let t = r.lib ?
+        let t = r.lib || r.npm ?
             '需要完全编译' :
             sh_script.length ?
                 '可以差量编译' :

@@ -1,0 +1,49 @@
+.result {
+    box-sizing: border-box;
+    margin-top: 20px;
+    padding: 48px 34px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.tip {
+    height: 80px;
+    line-height: 80px;
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 40px;
+}
+
+.tip i {
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+.id-img {
+    display: inline-block;
+    margin: 0 auto 56px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.exit-btn {
+    margin: 34px;
+    height: 84px;
+    line-height: 84px;
+    background-color: #6aa4f0;
+    color: #fff;
+    font-size: 32px;
+    text-align: center;
+}
+
+.success .tip i {
+    background: url('../images/identification-result/success-icon.png') no-repeat center;
+}
+
+.fail .tip i {
+    background: url('../images/identification-result/fail-icon.png') no-repeat center;
+}

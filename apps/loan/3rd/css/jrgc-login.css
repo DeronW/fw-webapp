@@ -1,0 +1,44 @@
+.delayPanel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.tip {
+    width: 100%;
+    font-size: 38px;
+    color: #333;
+    text-align: center;
+}
+
+.tip-img {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.tip-info {
+    font-size: 26px;
+    color: #666;
+    line-height: 45px;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.tip-info a {
+    color: #6aa4f0;
+}
+
+.relogin {
+    display: block;
+    width: 578px;
+    height: 72px;
+    line-height: 72px;
+    border: 1px solid #6aa4f0;
+    border-radius: 4px;
+    color: #6aa4f0;
+    font-size: 30px;
+    text-align: center;
+    margin: 30px auto;
+}

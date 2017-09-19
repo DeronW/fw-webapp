@@ -45,6 +45,11 @@ const Header = React.createClass({
             }
         }
 
+        // 目前, 在金融工场的App里, 不要使用系统自带的头部
+        if($FW.Browser.inJRGCApp()) {
+            NativeBridge.hideHeader()
+        }
+
         let fontSize = title && title.length > 7 ? '36px' : '32px';
 
         let _style_header_fixed = {

@@ -3,10 +3,10 @@ function verificationNum(val) {
     return reg.test(val)
 }
 
-class VerifyPhone extends React.Component{
-    constructor(props){
+class VerifyPhone extends React.Component {
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             countdown: 0,
             countdownShow: false,
             codeVal: '',
@@ -22,7 +22,6 @@ class VerifyPhone extends React.Component{
         this.getCode = this.getCode.bind(this);
         this.changeCode = this.changeCode.bind(this);
         this.handleGetCode = this.handleGetCode.bind(this);
-        this.submitHandler = this.submitHandler.bind(this);
         this.checkAjax = this.checkAjax.bind(this);
         this.getResult = this.getResult.bind(this);
         this.confirmHandler = this.confirmHandler.bind(this);
@@ -37,17 +36,17 @@ class VerifyPhone extends React.Component{
         });
 
         this.time = setInterval(() => {
-            this.setState({countdown: this.state.countdown - 1});
+            this.setState({ countdown: this.state.countdown - 1 });
             if (this.state.countdown == 0) {
                 clearInterval(this.time);
-                this.setState({countdownShow: false});
+                this.setState({ countdownShow: false });
             }
         }, 1000)
     }
     changeCode(e) {
         if (verificationNum(e.target.value)) {
             if ($FW.Format.trim(e.target.value).length < 5) {
-                this.setState({codeVal: $FW.Format.trim(e.target.value)});
+                this.setState({ codeVal: $FW.Format.trim(e.target.value) });
             }
         }
     }
@@ -59,11 +58,12 @@ class VerifyPhone extends React.Component{
         }).then(null, (e) => {
             $FW.Component.Toast(e.message);
             clearInterval(this.time);
-            this.setState({countdownShow: false});
+            this.setState({ countdownShow: false });
         });
     }
-    submitHandler() {
-        if (this.state.codeVal.length < 4) return $FW.Component.Toast("验证码不能小于4位");
+    submitHandler = () => {
+        if (this.state.codeVal.length < 4)
+            return $FW.Component.Toast("验证码不能小于4位");
 
         $FXH.Post(`${API_PATH}/api/bankcard/v1/commitverifycode.json`, {
             operatorBankcardGid: BANK_GID,
@@ -72,26 +72,24 @@ class VerifyPhone extends React.Component{
             () => {
                 $FW.Component.showAjaxLoading()
                 return new Promise(resolve => setTimeout(() => {
-                    $FW.Component.hideAjaxLoading()
                     resolve()
-                }, 5000))
+                }, 4000))
             }
-        ).then(() => {
-            $FW.Component.showAjaxLoading();
-            this.setState({result: null});
-            setTimeout(this.checkAjax, 3000);
-            setTimeout(this.checkAjax, 6000);
-            setTimeout(this.checkAjax, 9000);
-            setTimeout(() => this.checkAjax('finalTry'), 12000);
-        }, e => $FW.Component.Toast(e.message));
+            ).then(() => {
+                this.setState({ result: null });
+                setTimeout(this.checkAjax, 3000);
+                setTimeout(this.checkAjax, 6000);
+                setTimeout(this.checkAjax, 9000);
+                setTimeout(() => this.checkAjax('finalTry'), 12000);
+            }, e => $FW.Component.Toast(e.message));
     }
+
     checkAjax(finalTry) {
         if (this.state.result === 'wrong_code') return;
-        $FW.Component.showAjaxLoading();
         $FXH.Post(`${API_PATH}/api/bankcard/v1/status.json`, {
             operatorBankcardGid: BANK_GID
         }).then(data => {
-            $FW.Component.showAjaxLoading();
+            $FW.Component.showAjaxLoading()
             let d = data.bindStatus;
             this.setState({
                 result: d.status,
@@ -100,19 +98,27 @@ class VerifyPhone extends React.Component{
             this.getResult(d.status, d.transCode, finalTry);
         }, e => $FW.Component.Toast(e.message));
     }
+
     getResult(result, transCode, finalTry) {
+        let not_stop_loading = true;
+
         if (result == 0) {
-            if (finalTry) this.setState({show: true});
+            if (finalTry) this.setState({ show: true });
             if (transCode == 1001) {
-                this.setState({show: false, result: 'wrong_code'});
+                this.setState({ show: false, result: 'wrong_code' });
                 $FW.Component.Toast("验证码不正确");
             }
         } else if (result == 1) {
-            $FW.Browser.inApp()? NativeBridge.close() : window.location.href = '/static/loan/home/index.html';
+            $FW.Browser.inJRGCApp() ? NativeBridge.close() : window.location.href = '/static/loan/products/index.html#/';
         } else if (result == 2) {
-            this.setState({show: true});
+            this.setState({ show: true });
+        } else {
+            not_stop_loading = false
         }
+
+        not_stop_loading && $FW.Component.hideAjaxLoading()
     }
+
     confirmHandler() {
         if (this.state.result == 0) {
             window.history.go(-2);
@@ -141,7 +147,7 @@ class VerifyPhone extends React.Component{
                             <span className="text">验证码</span>
                             <div className="input">
                                 <input type="number" onChange={this.changeCode}
-                                       value={this.state.codeVal} placeholder="请输入验证码"/>
+                                    value={this.state.codeVal} placeholder="请输入验证码" />
                             </div>
                             {btnSMSCode}
                         </div>
@@ -151,7 +157,7 @@ class VerifyPhone extends React.Component{
                         <div className="ui-btn" onClick={this.submitHandler}>确定</div>
                     </div>
                 </div>
-                {this.state.show && <div className="mask" style={{zIndex: 100}}>
+                {this.state.show && <div className="mask" style={{ zIndex: 100 }}>
                     <div className="popup">
                         {this.state.result == 2 && <div className="popup-title">设置提现卡失败</div>}
                         {this.state.result == 2 && <div className="popup-reason">{this.state.failReason}</div>}
@@ -171,6 +177,6 @@ const PHONE = $FW.Format.urlQuery().phone || '';
 
 $FW.DOMReady(() => {
     NativeBridge.setTitle('验证手机号');
-    ReactDOM.render(<Header title={"验证手机号"}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"验证手机号"} />, HEADER_NODE);
     ReactDOM.render(<VerifyPhone />, CONTENT_NODE);
 })

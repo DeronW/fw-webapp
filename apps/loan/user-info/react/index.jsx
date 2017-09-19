@@ -16,8 +16,8 @@ class UserInfoTab extends React.Component {
         let generate_tabs = (t, index) => {
             let border = "3px solid " + (t.tabName === selectedTab ? "#649cfe" : "transparent");
             return (
-                <li key={t.tabName} className="info-tab-item" id={t.tabName} style={{borderBottom: border}}>
-                    {t.tabNameCN}
+                <li key={t.tabName} className="info-tab-item">
+                    <span style={{borderBottom: border}} id={t.tabName}>{t.tabNameCN}</span>
                 </li>
             )}
         return (
@@ -200,8 +200,8 @@ class InfoItemInputWrap extends React.Component {
                 <div className="input-wrap" id={this.props.infoID}>
                     <span className="info-name">{infoNameCN}</span>
                     <div className="item-display right-align-container">
-                        { itemDisplayField }
                         { this.isSelectItem && expandBtn }
+                        { itemDisplayField }
                     </div>
                 </div>
                 { this.state.expandOpts && selectOptionsWrap }
@@ -713,7 +713,7 @@ const CITYLIST = {
   ]
 };
 
-const HOT_CITIES_LIST = ["北京市", "上海市", "广州市", "深圳市"];
+const HOT_CITIES_LIST = ["北京市", "上海市", "广州市", "深圳市", "杭州市"];
 
 var id_mask = n => String(n).replace(/(\d{4})\d{10}(\d{4})/, "$1**********$2");
 var isPhoneNum = str => /^1[3|4|5|7|8]\d{9}$/.test(String(str));

@@ -89,24 +89,27 @@ class MajorUserInfo extends React.Component {
         this.state = {
             link_a: null,
             link_b: null,
+            link_c: '/static/loan/bill/index.html#2',
+            link_d: null,
             tips: null
         }
     }
     componentDidMount() {
-        let link_a, link_b
+        let link_a, link_b, link_d;
         $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
             productId: 1
         }).then(data => {
             let st = data.borrowBtnStatus,
-                link_a = '/static/loan/user-info/index.html',
-                link_b = '/static/loan/user-card-management/index.html';
-
+                link_a = '/static/loan/user-info/index.html'
+                link_b = '/static/loan/account/index.html#/bank-card'
+                link_d = '/static/loan/account/index.html#/redbag'
             if (st === 1) { // 未实名
-                link_a = link_b = '/static/loan/user-card-set/index.html'
+                link_a = link_b = link_d = '/static/loan/user-card-set/index.html'
             }
             this.setState({
                 link_a: link_a,
                 link_b: link_b,
+                link_d: link_d,
                 tips: st === 101 ? '设置提现卡处理中，请稍等' : false, // 实名中
             })
         })
@@ -116,7 +119,7 @@ class MajorUserInfo extends React.Component {
         tips && $FW.Component.Toast(tips)
     }
     render() {
-        let {link_a, link_b} = this.state
+        let { link_a, link_b, link_c, link_d } = this.state
         return <div className="info-display-block">
             <a className="user-info-display-wrap" onClick={this.clickHandler}
                 href={link_a}>
@@ -131,11 +134,46 @@ class MajorUserInfo extends React.Component {
                 </div>
             </a>
             <a className="user-info-display-wrap" onClick={this.clickHandler}
+               href={link_c}>
+                <div className="info-icon-container">
+                    <img src="images/more_repayment.png"></img>
+                </div>
+                <span className="info-name">借款订单</span>
+                <div className="right-align-container">
+                    <div className="right-arrow-container">
+                        <div className="fake-arrow"></div>
+                    </div>
+                </div>
+            </a>
+            <a className="user-info-display-wrap" onClick={this.clickHandler}
                 href={link_b}>
                 <div className="info-icon-container">
                     <img src="images/bank_icon.png"></img>
                 </div>
                 <span className="info-name">银行卡</span>
+                <div className="right-align-container">
+                    <div className="right-arrow-container">
+                        <div className="fake-arrow"></div>
+                    </div>
+                </div>
+            </a>
+            <a className="user-info-display-wrap" onClick={this.clickHandler}
+               href={link_d}>
+                <div className="info-icon-container">
+                    <img src="images/packet_icon.png"></img>
+                </div>
+                <span className="info-name">红包</span>
+                <div className="right-align-container">
+                    <div className="right-arrow-container">
+                        <div className="fake-arrow"></div>
+                    </div>
+                </div>
+            </a>
+            <a className="user-info-display-wrap" href="/static/loan/features/#/more" >
+                <div className="info-icon-container">
+                    <img src="images/more_icon.png"></img>
+                </div>
+                <span className="info-name">更多</span>
                 <div className="right-align-container">
                     <div className="right-arrow-container">
                         <div className="fake-arrow"></div>
@@ -155,7 +193,7 @@ class ExitBtn extends React.Component {
 
     logoutHandler() {
         $FW.Store.clear();
-        location.href = '/static/loan/user-entry/index.html';
+        location.href = '/static/loan/account/index.html#/entry';
     }
 
     render() {
@@ -190,20 +228,19 @@ class UserInfoWrap extends React.Component {
         };
     }
 
-    componentDidMount = () => {
+    componentDidMount(){
         $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
             this.setState({ phoneNum: data.mobile });
-        }, e => { $FW.Component.Toast(e.message) });
+        });
     }
 
     render() {
         return (
             <div className="user-info-wrap">
                 <AvatarCard phoneNum={this.state.phoneNum} />
-                {$FW.Browser.inApp() && <FollowWXEntry />}
-                <BillEntry />
+                {$FW.Browser.inJRGCApp() && <FollowWXEntry />}
                 <MajorUserInfo />
-                <ExitBtn />
+                {/* <ExitBtn /> */}
             </div>
         )
     }

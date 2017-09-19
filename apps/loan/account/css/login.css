@@ -1,0 +1,129 @@
+.input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #3a4a79 inset !important;
+    color:#fff;
+    outline:none;
+}
+.bg {
+    background: #3a4a79 url('../images/login-bg.jpg') no-repeat;
+    background-position: bottom;
+    background-size: 100% auto;
+    min-height: 100%;
+    padding-top: 1px;
+}
+
+.btn-back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80px;
+    height: 80px;
+    display: block;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgBAMAAAD6cKULAAAAKlBMVEUAAAD///////////////////////////////////////////////////+Gu8ovAAAADnRSTlMA/hhT19YMQ+vF1cyNFBn6VWUAAABFSURBVBjTY4ABtjIGBNCSRLCZAiUQHFVBYSQJQYMBk2BzRJJgF5RhQMhsRJJhuALUgzDNEVlKZeCkJBiQghQe1ohYQAAAZ78Ngl9fXWsAAAAASUVORK5CYII=') no-repeat center;
+}
+
+.title {
+    font-size: 36px;
+    line-height: 80px;
+    color: #fff;
+    text-align: center;
+}
+
+.logo {
+    margin: 40px auto;
+    display: block;
+    width: 222px;
+    height: 222px;
+}
+
+.welcome {
+    padding: 30px 0;
+    line-height: 30px;
+    font-size: 28px;
+    color: #fff;
+    text-align: center;
+}
+
+.welcome span {
+    padding: 0 10px 0 0;
+    color: #fce87c;
+}
+
+.form {
+    position: relative;
+    margin: 10px auto 20px;
+    height: 80px;
+    width: 600px;
+}
+
+.form input {
+    width: 430px;
+    height: 48px;
+    padding: 20px 0;
+    font-size: 28px;
+    line-height: 48px;
+    border: none;
+    color: #fff;
+    background: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-appearance: none;
+    /*// -webkit-user-select: none; 不能添加这个属性, 会导致输入框无法输入*/
+    -webkit-text-size-adjust: none;
+    -webkit-touch-callout: none;
+    background: transparent;
+    outline: none;
+    border: none;
+    position: relative;
+    top: -3px;
+}
+
+.form input:focus {
+    border: 0;
+}
+
+.form input::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #6195a4;
+}
+
+.underline {
+    position: relative;
+    top: -20px;
+    height: 15px;
+    border: 1px solid #83d3c3;
+    border-top: 0;
+}
+
+.icon-lock {
+    display: block;
+    height: 80px;
+    width: 60px;
+    float: left;
+}
+
+.icon-eye {
+    display: block;
+    height: 80px;
+    width: 60px;
+    float: right;
+}
+
+.btn-submit {
+    display: block;
+    height: 74px;
+    line-height: 74px;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    background-color: #6ba4f0;
+    border-radius: 5px;
+    width: 600px;
+    margin: 50px auto 0;
+}
+
+.btn-forgot {
+    float: right;
+    margin: 20px 60px 0 0;
+    line-height: 30px;
+    font-size: 26px;
+    color: #6ba4f0;
+}

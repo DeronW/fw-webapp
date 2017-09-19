@@ -26,7 +26,7 @@ const GameGuess = React.createClass({
             //     url: `${API_PATH}/mall/api/v1/activity/guessCost.json`,//一上来获取
             url: "http://10.10.100.112/mockjs/4/mall/api/v1/activity/guessCost.json",
             method: 'POST',
-            data: {activityId: ActivityId, level: this.state.level},
+            data: { activityId: ActivityId, level: this.state.level },
             success: (data) => {
                 data.list = data.list || [];
                 // let mydata={
@@ -41,15 +41,15 @@ const GameGuess = React.createClass({
         });
     },
     changeInfHandler: function () {
-        this.setState({show_inf: !this.state.show_inf});
+        this.setState({ show_inf: !this.state.show_inf });
     },
     checkHandler: function (value) {
-        if (!this.state.can_click)return false;
-        this.setState({can_click: false});
+        if (!this.state.can_click) return false;
+        this.setState({ can_click: false });
         $FW.Ajax({
             //     url: `${API_PATH}/mall/api/v1/activity/guessDraw.json,//获奖结果
             url: "http://10.10.100.112/mockjs/4/mall/api/v1/activity/guessDraw.json",
-            data: {activityId: ActivityId, level: this.state.level},
+            data: { activityId: ActivityId, level: this.state.level },
             success: (data) => {
                 // var data={
                 //     getPrize:"20工分",
@@ -104,29 +104,29 @@ const GameGuess = React.createClass({
                 this.stopUpRoll(upValue, data.remainScore);
                 this.stopDownRoll(value);
             },
-            error: ()=> {
-                this.setState({can_click: true});
+            error: () => {
+                this.setState({ can_click: true });
             }
 
         });
     },
     initDownRoll: function (value) {
-        this.setState({checked: -1});
-        this.myDowntime = setInterval(()=> {
-            this.setState({down_mark: (this.state.down_mark + 1) % 3})
+        this.setState({ checked: -1 });
+        this.myDowntime = setInterval(() => {
+            this.setState({ down_mark: (this.state.down_mark + 1) % 3 })
         }, 150)
     },
     initUpRoll: function (value) {
-        this.myUptime = setInterval(()=> {
-            this.setState({up_mark: (this.state.up_mark + 1) % 3})
+        this.myUptime = setInterval(() => {
+            this.setState({ up_mark: (this.state.up_mark + 1) % 3 })
         }, 150)
     },
     stopUpRoll: function (value, newScore) {
         clearInterval(this.myUptime);
         this.initUpRoll();
-        setTimeout(()=> {
+        setTimeout(() => {
             clearInterval(this.myUptime);
-            setTimeout(()=> {
+            setTimeout(() => {
                 this.setState({
                     show_pop: true,
                     can_click: true
@@ -154,7 +154,7 @@ const GameGuess = React.createClass({
             //     url: `${API_PATH}/mall/api/v1/activity/guessCost.json`,//一上来获取
             url: "http://10.10.100.112/mockjs/4/mall/api/v1/activity/guessCost.json",
             method: 'POST',
-            data: {activityId: ActivityId, level: level % 3},
+            data: { activityId: ActivityId, level: level % 3 },
             success: (data) => {
                 //     	data.list=data.list||[];
                 // let mydata={
@@ -179,19 +179,17 @@ const GameGuess = React.createClass({
         this.initDownRoll();
     },
     render: function () {
-        let cost_tip = (level, cost)=> {
-            return
-            <div className="cost">第<span className="pass-num">{level % 3 + 1}</span>关仅<span
+        let cost_tip = (level, cost) => {
+            return <div className="cost">第<span className="pass-num">{level % 3 + 1}</span>关仅<span
                 className="cost-score">{cost}</span>工分，选手势赢翻倍积分! </div>
         };
-        let check_img = [0, 1, 2].map((value, index)=> {
+        let check_img = [0, 1, 2].map((value, index) => {
             let check_state = value == this.state.checked ? "smallimg-on" : "smallimg";
-            return
-            <div key={index} className={"check check"+value} onClick={()=>{this.checkHandler.bind(this,value)}}><img
-                src={"images/"+check_state+value+".png"}/></div>
+            return <div key={index} className={"check check" + value} onClick={() => { this.checkHandler.bind(this, value) }}><img
+                src={"images/" + check_state + value + ".png"} /></div>
         });
         return (
-            <div className={"game-guess bg"+this.state.level}>
+            <div className={"game-guess bg" + this.state.level}>
                 <div className="game-guess-head">
                     <a href="#" className="game-guess-back">&nbsp;</a>
                     <div className="total-score">{this.state.total_score}</div>
@@ -200,39 +198,29 @@ const GameGuess = React.createClass({
                 <a href="#" className="inf" onClick={this.changeInfHandler}>&nbsp;</a>
                 {cost_tip(this.state.level, this.state.cost_score)}
                 <div className="guess-cont">
-                    <div className="guess-up"><img src={"images/bigimg"+this.state.up_mark+".png"}/></div>
-                    <div className="guess-down"><img src={"images/bigimg"+this.state.down_mark+".png"}/></div>
+                    <div className="guess-up"><img src={"images/bigimg" + this.state.up_mark + ".png"} /></div>
+                    <div className="guess-down"><img src={"images/bigimg" + this.state.down_mark + ".png"} /></div>
                 </div>
                 <div className="guess-check">
                     {check_img}
                 </div>
-                {this.state.show_inf ? <GameGuess_inf changeInfHandler={this.changeInfHandler}/> : null}
+                {this.state.show_inf ? <GameGuess_inf changeInfHandler={this.changeInfHandler} /> : null}
                 {this.state.show_pop ? <GameGuess_popResult data={
                     {
-                        result:this.state.result,
-                        level:this.state.level,
-                        get_prize:this.state.get_prize,
-                        hideResultHandLer:this.hideResultHandLer,
-                        nextHandler:this.nextHandler,
-                        next_get_prize:this.state.next_get_prize,
-                        next_cost_score:this.state.next_cost_score
+                        result: this.state.result,
+                        level: this.state.level,
+                        get_prize: this.state.get_prize,
+                        hideResultHandLer: this.hideResultHandLer,
+                        nextHandler: this.nextHandler,
+                        next_get_prize: this.state.next_get_prize,
+                        next_cost_score: this.state.next_cost_score
                     }
-                }/> : null}
+                } /> : null}
             </div>
         )
     }
 });
 $FW.DOMReady(function () {
-    // var title='和豆哥猜拳'
-    // NativeBridge.setTitle(title);
-    // if ($FW.Utils.shouldShowHeader()) {
-    //     ReactDOM.render(<Header title={title} back_handler={backward}/>, HEADER_NODE);
-    // }
-    //
-    // $FW.Ajax({
-    //     url: API_PATH + 'mall/api/magic/v1/user.json', //用户信息
-    //     success: (data) => {
-
     let data = {
         "isLogin": true,
         "sex": "1",
@@ -242,7 +230,7 @@ $FW.DOMReady(function () {
         "realName": "李建光",
         "avatar": "http://mall.9888.cn/img//boy.jpg"
     };
-    ReactDOM.render(<GameGuess user={data}/>, CONTENT_NODE);
+    ReactDOM.render(<GameGuess user={data} />, CONTENT_NODE);
     //     }
     // })
 });

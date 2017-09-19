@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     {% block viewport %}
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
-    {% include 'partial/fix-viewport.html' %}
     {% endblock %}
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="screen-orientation" content="portrait">
@@ -47,7 +46,11 @@
 {% endif %}
 
 {% if ENV == 'production' %}
-{% include 'partial/growing-io.swig.html' with {key: '8560a41923a914be'} %}
+{% include 'partial/growing-io.swig.html' with {
+    key: '8560a41923a914be',
+    cs1_key: 'user_id',
+    cs1_value: '$FW.Store.getUserID()'
+} %}
 {% endif %}
 </body>
 </html>

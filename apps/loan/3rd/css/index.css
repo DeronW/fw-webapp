@@ -1,0 +1,21 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: #f0f0f0;
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    outline: 0;
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}

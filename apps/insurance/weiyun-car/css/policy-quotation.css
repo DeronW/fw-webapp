@@ -1,0 +1,88 @@
+/* quotation-item height: 141px */
+
+.quotation-container {
+    margin: 51px 0 33px;
+    background-color: #fff;
+}
+
+.quotation-item {
+    display: table;
+    width: 100%;
+    height: 140px;
+    padding-right: 30px;
+}
+
+.check-box {
+    float: left;
+    width: 60px;
+    padding-left: 20px;
+    box-sizing: border-box;
+    height: 141px;
+    line-height: 141px;
+}
+
+.quotation-entry {
+    box-sizing: border-box;
+    display: table;
+    float: right;
+    width: 90%;
+    padding-right: 24px;
+    border-bottom: 1px solid #e3e5ea;
+}
+
+.firm-name {
+    height: 141px;
+    line-height: 141px;
+    float: left;
+    padding-left: 84px;
+    color: #666;
+    font-size: 30px;
+}
+
+.firm-name-2 {
+    composes: firm-name;
+    background: url('../images/policy-quotation/renbao.png') #fff no-repeat left;
+}
+
+.firm-name-1 {
+    composes: firm-name;
+    background: url('../images/policy-quotation/taipingyang.png') #fff no-repeat left;
+}
+
+.firm-name-0 {
+    composes: firm-name;
+    background: url('../images/policy-quotation/pingan.png') #fff no-repeat left;
+}
+
+.price-container {
+    float: right;
+    height: 141px;
+    padding-right: 51px;
+    background: url('../images/policy-quotation/to-detail.png') #fff no-repeat right;
+}
+
+.discount-price {
+    padding-top: 36px;
+    color: #fd4d4c;
+    font-size: 39px;
+    text-align: right;
+}
+
+.origin-price {
+    color: #999;
+    font-size: 24px;
+    text-align: right;
+}
+
+.next-btn {
+    display: block;
+    width: 654px;
+    height: 78px;
+    line-height: 78px;
+    margin: auto;
+    background-color: #fd4d4c;
+    color: #fff;
+    font-size: 32px;
+    text-align: center;
+    border-radius: 5px;
+}

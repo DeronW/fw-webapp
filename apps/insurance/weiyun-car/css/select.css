@@ -1,0 +1,35 @@
+/* height of select-widget: 88px */
+
+.select-widget {
+  float: right;
+  position: relative;
+  height: 88px;
+}
+
+.select-mask {
+  height: 88px;
+  line-height: 88px;
+  padding-right: 39px;
+  background: url('../images/select/expand.png') #fff no-repeat right;
+  font-size: 28px;
+  text-align: right;
+}
+
+.native-select {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 88px;
+  padding-right: 24px;
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  outline: none;
+  text-align: right;
+  font-size: 28px;
+}
+
+.native-option {
+  color: #333;
+  font-size: 28px;
+}

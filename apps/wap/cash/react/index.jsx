@@ -1,4 +1,4 @@
-function fmOpt(sessionId) {
+ function fmOpt(sessionId) {
     window._fmOpt = {
         bd: true,
         partner: 'jrgc',

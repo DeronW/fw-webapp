@@ -1,0 +1,75 @@
+.bfd-slider {
+    width:580px;
+    height: 20px;
+    position: relative;
+}
+.bfd-slider__bar {
+    user-select: none;
+    position: relative;
+    height: 20px;
+    background-color: #eee;
+    border-radius: 8px;
+}
+.bfd-slider__bar--selected {
+    position: absolute;
+    width: 580px;
+    height: 100%;
+    background-color: #f5b774;
+    border-radius: 8px 0px 0px 8px;
+}
+.bfd-slider__slider {
+    width: 64px;
+    height: 64px;
+    background:url(../../images/loan-fxh-index/progress_bar_current.png) no-repeat;
+    background-size:100% 100%;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 9;
+}
+.start-point{
+    background:url(../../images/loan-fxh-index/progress_bar_starting.jpg) no-repeat;
+    background-size:100% 100%;
+    width:64px;
+    height:64px;
+    position:absolute;
+    top:-22px;
+    left:0px;
+}
+.end-point{
+    background:url(../../images/loan-fxh-index/progress_bar_ending.png) no-repeat;
+    background-size:100% 100%;
+    width:64px;
+    height:64px;
+    position:absolute;
+    top:-22px;
+    right:-32px;
+}
+.start-point-num{
+    position:absolute;
+    top:50px;
+    left:5px;
+    font-size:28px;
+}
+.end-point-num{
+    position:absolute;
+    top:50px;
+    right:-25px;
+    font-size:28px;
+}
+.loan-num{
+    position:absolute;
+    top:-320px;
+    font-size:100px;
+    color:#fff;
+    left:50%;
+    transform:translateX(-50%);
+}
+.max-loan-title{
+    position:absolute;
+    top:-200px;
+    font-size:26px;
+    color:#fff;
+    left:50%;
+    transform:translateX(-50%);
+}

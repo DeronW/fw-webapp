@@ -1,0 +1,62 @@
+.bg {
+    background-color: #f0f0f0;
+    font-size: 28px;
+    min-height: 100%;
+}
+
+.banner {
+    padding-top: 64px;
+    box-sizing: border-box;
+    height: 338px;
+    width: 100%;
+    background-color: #44adf0;
+    text-align: center;
+}
+
+.avatar {
+    display: block;
+    margin: 0 auto;
+    width: 156px;
+    height: 156px;
+}
+
+.mask-phone {
+    color: #fff;
+    font-size: 32px;
+    margin-top: 18px;
+}
+
+.links {
+    width: 100%;
+    margin: 21px 0;
+    background-color: #fff;
+}
+
+.link-item {
+    display: block;
+    position: relative;
+    margin-left: 35px;
+    width: calc(100% - 35px);
+    height: 100px;
+    background-color: #fff;
+    border-bottom: 1px solid #ebeaea;
+    color: #666;
+    line-height: 100px;
+    background: transparent url("../images/user-panel/right-arrow.png") no-repeat 637px center;
+}
+
+.link-item:last-child{
+    border-bottom:none;
+}
+
+.link-item img {
+    position: relative;
+    margin-right: 18px;
+    width:38px;
+    height:38px;
+    vertical-align:middle;
+}
+
+.link-item img.bank-card-icon{
+    margin-top:-8px;
+}

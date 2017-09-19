@@ -1,0 +1,167 @@
+html,body {
+  background-color: #f0f0f0;
+}
+*{
+  margin:0;
+  padding:0;
+}
+a{
+  text-decoration: none;
+}
+img{
+  vertical-align: middle;
+}
+input{
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-appearance: none;
+  -webkit-text-size-adjust: none;
+  -webkit-touch-callout:none;
+  background:transparent;
+  outline:none;
+  border:none;
+}
+.loan-box{
+  width:100%;
+  height:327px;
+  padding-top:123px;
+  background:#44adf0;
+}
+.loan-box-title{
+  font-size:25px;
+  color:#fff;
+  margin-left:32px;
+  margin-bottom:10px;
+}
+.loan-num{
+  font-size:102px;
+  color:#fff;
+  margin-left:32px;
+  width:654px;
+}
+.horizonal-line{
+  position:relative;
+  width:654px;
+  height:12px;
+  left:32px;
+  border-bottom: 1px solid #7fcdff;
+  border-left: 1px solid #7fcdff;
+  border-right: 1px solid #7fcdff;
+}
+.loan-charge{
+  font-size:30px;
+  color:#fff;
+  margin-left:34px;
+  margin-top:25px;
+  line-height:40px;
+}
+.loan-charge span{
+  color:#fce87c;
+  font-weight:bold;
+}
+.icon{
+  margin-top:-10px;
+  margin-right:10px;
+}
+.withdraw-card{
+  width:100%;
+  height:100px;
+  line-height:100px;
+  background:#fff;
+  font-size:32px;
+  overflow:hidden;
+}
+.withdraw-card-title{
+  color:#333;
+  margin-left:32px;
+  float:left;
+}
+.withdraw-card-branch{
+  color:#666;
+  float:right;
+  margin-right:32px;
+}
+.loan-btn-wrap{
+  width:720px;
+  height:106px;
+  padding-top:22px;
+  background:#fff;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  box-shadow: 0 -5px 10px 0 rgba(50,50,50,.1);
+}
+.loan-btn{
+  width:660px;
+  height:83px;
+  line-height:83px;
+  background:#649cfe;
+  text-align:center;
+  font-size:30px;
+  color:#fff;
+  border-radius:4px;
+  margin:0 auto;
+}
+.withdraw-tip{
+  font-size:27px;
+  line-height:50px;
+  color:#999;
+  padding:0 34px;
+  margin-top:15px;
+}
+
+.mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .7);
+}
+  .pop {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      width: 594px;
+      padding: 0 30px;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      text-align: center;
+  }
+    .tip-1 {
+      display: block;
+      margin: 30px auto;
+      color: #6aa4f0;
+      font-size: 36px;
+    }
+
+    .tip-2 {
+      display: block;
+      margin: 30px auto;
+      color: #666;
+      font-size: 30px;
+    }
+
+    .to-zhangzhong {
+        display:block;
+        margin:30px 0;
+      font-size: 30px;
+      background: #6aa4f0;
+      color:#fff;
+      width:100%;
+        height: 78px;
+        line-height: 78px;
+        text-align: center;
+        border-radius: 6px;
+    }
+
+    .close-icon {
+      z-index: 9999;
+      position: absolute;
+      top: 34px;
+      right: 34px;
+    }

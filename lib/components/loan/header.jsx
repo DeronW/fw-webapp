@@ -26,15 +26,15 @@ class Header extends React.Component {
         this.props.back_handler
             ? this.props.back_handler()
             : window.history.back();
-        // : window.history.go(-1);
     }
 
-    componentDidMount() {
-        NativeBridge.setTitle(this.props.title);
-    }
+    // componentDidMount() {
+    //
+    //     NativeBridge.setTitle(this.props.title);
+    // }
 
     render() {
-        let fontSize = '40px';
+        let fontSize = '36px';
         if (this.props.title && this.props.title.length > 7)
             fontSize = '32px';
         let _style_header_fixed = {
@@ -53,21 +53,17 @@ class Header extends React.Component {
             color: "#333"
         };
 
+
         let _style_header_arrow = {
             display: "block",
+            width: "24px",
+            height: "42px",
             position: "absolute",
-            width: this.state.height + "px",
-            height: this.state.height + "px",
-            lineHeight: this.state.height + "px",
-            fontFamily: "serif",
-            fontSize: fontSize,
-            fontWeight: 'bold',
-            color: "#6aa4f0",
-            overflow: "hidden",
-            borderRadius: '50%',
-            left: "0px",
-            top: "0px"
-        };
+            background:"url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAABACAMAAACnZz6fAAAAilBMVEUAAABqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPCO4MWrAAAALXRSTlMABOz05vv4Dz4o8N8ZC9WEdlMU2s/Kxb+ilpCKfm1lWUxGMiIep5s2LrlgXa00eCvYAAABKElEQVRIx4XWWZKCQBBFUSzAARBFHFFBBRW12f/2un0dwR838/sEQVblUB7HqPBdxWT+6rrOMdl1fxERmWy7byyIbETuo2GyWovsgSSpyANIk4sc4F/qWOQIZBZjRiKByBJIa5ObEzkDeUZfEZZApr7IB8hVZJwBuYxFLkAyEf8KpApFpkDeIhGRUsfinkDO/+QGZCkSzICcbHIUiWsghUjeADmIpAn0615kvQJyF9kQ+RHZTsyMdkQ8Vd1r7lE4fYbNov8dOy0h83gQPfpjNu8iF7KuveHsBmoDaoxrtQVi17yiDLl3FB/sQe5lngn2bLFnlD3rKkaR0BtIP3tLRO3AgIZdwOiEqLYXT7/jCkRJCosQFiouZl7wys5+KASe9eCQYVT4LvsFjlpBPth8nNUAAAAASUVORK5CYII=') no-repeat center",
+            backgroundSize:"100% 100%",
+            top: "29px",
+            left: "34px"
+        }
 
         let _style_header_arm_up = {
             position: "absolute",
@@ -114,7 +110,7 @@ class Header extends React.Component {
 
         var ua = navigator.userAgent;
         // 如果页面在app中打开, 则不显示网页的头部导航
-        if (ua.indexOf('EasyLoan888') >= 0)
+        if (ua.indexOf('EasyLoan888') >= 0 && this.props.enable !== 'force')
             return null;
 
         // 如果在微信中打开, 除了个别页面外, 也不显示头部导航
@@ -128,8 +124,6 @@ class Header extends React.Component {
 
         let back_arrow = <Nav className="_style_header_arrow" style={_style_header_arrow}
             onClick={this.backClickHandler}>
-            <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
-            <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
         </Nav>
 
         return <div style={{ height: this.state.height + 'px' }}>

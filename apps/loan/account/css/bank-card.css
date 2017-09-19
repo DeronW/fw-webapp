@@ -1,0 +1,126 @@
+.cnt-container {
+    min-height: 100%;
+    background-color: #eee;
+}
+
+.tips {
+    line-height: 1.5;
+    margin: 36px 34px 0;
+    color: #999;
+    font-size: 24px;
+}
+
+.list-container {
+    margin: 27px 34px 178px;
+}
+
+.card {
+    box-sizing: border-box;
+    width: 100%;
+    height: 154px;
+    padding: 25px 30px 30px 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+}
+
+.card:nth-child(3n+1) {
+    background-color: #dc4b58;
+    color: #dc4b58;
+}
+
+.card:nth-child(3n+2) {
+    background-color: #5066ab;
+    color: #5066ab;
+}
+
+.card:nth-child(3n) {
+    background-color: #3b9b6e;
+    color: #3b9b6e;
+}
+
+.bank-info {
+    height: 48px;
+    line-height: 48px;
+    color: #fff;
+    font-size: 30px;
+}
+
+.bank-logo {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: 11px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.bank-logo img {
+    display: block;
+    width: 36px;
+    height: 36px;
+    margin: 7px;
+}
+
+.bank-name {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+}
+
+.card-info {
+    display: table;
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    margin-top: 9px;
+}
+
+.card-no {
+    float: left;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 58px;
+    color: #fff;
+    font-size: 36px;
+}
+
+.card-label {
+    float: right;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 9px;
+    margin: 2px 0 0 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    -webkit-transform: skew(-10deg);
+    transform: skew(-10deg);
+}
+
+.card-label span {
+    display: block;
+    font-size: 24px;
+    -webkit-transform: skew(10deg);
+    transform: skew(10deg);
+}
+
+.submit-btn-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 128px;
+    background-color: #fff;
+    box-shadow: 0 0 24px rgba(0, 0, 0, .2);
+}
+
+.submit-btn {
+    display: block;
+    height: 82px;
+    line-height: 82px;
+    margin: 22px 20px;
+    background-color: #639afb;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+}

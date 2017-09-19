@@ -1,0 +1,41 @@
+.bg {
+    background: #00d3f6 url(../images/download/bg.jpg) no-repeat center 88px;
+    height: 100%;
+    position: relative;
+    padding-top: 1px;
+}
+
+.qr-img {
+    display: block;
+    margin: 255px auto 230px;
+}
+
+.tip {
+    width: 530px;
+    margin: 10px auto 0;
+    font-size: 30px;
+    color: #c3f3ff;
+}
+
+.download-btn {
+    display: block;
+    margin: 30px auto 0;
+    width: 530px;
+    height: 74px;
+    font-size: 28px;
+    color: #fff;
+    line-height: 74px;
+    background: #4889e6;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.download-btn img {
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+#ios-download,
+#android-download {
+    margin-top: 30px;
+}

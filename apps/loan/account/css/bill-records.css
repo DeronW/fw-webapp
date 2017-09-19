@@ -1,0 +1,322 @@
+.bg {
+    min-height: 100%;
+    background-color: #f0f0f0;
+    padding-bottom: 20px;
+}
+
+.bill-header {
+    width: 100%;
+    display: table;
+    background: white;
+}
+
+.ui-tab-li {
+    width: 25%;
+    float: left;
+    display: block;
+}
+
+.text {
+    display: block;
+    width: 88px;
+    height: 72px;
+    margin: 0 auto;
+    line-height: 72px;
+    text-align: center;
+    font-size: 27px;
+    color: #999;
+    border-bottom: 2px solid #fff;
+}
+
+.ui-select-li .text {
+    color: #649cfe;
+    border-bottom: 2px solid #649cfe;
+}
+
+.billContainer {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.billContainer-weixin {
+    padding-top: 94px;
+    margin-bottom: 150px;
+}
+
+.list_li {
+    display: block;
+    height: 156px;
+    background: #fff;
+    margin-left: 30px;
+    border-bottom: 1px solid #ebeaea;
+    overflow: hidden;
+}
+
+.list_li:last-child {
+    border-bottom: 1px solid transparent;
+}
+
+.list-img {
+    width: 113px;
+    height: 113px;
+    float: left;
+    margin-right: 10px;
+    margin-top: 24px;
+}
+
+.list-img img {
+    width: 113px;
+    height: 113px;
+}
+
+.list-content {
+    float: left;
+    margin-top: 38px;
+}
+
+.apply-num {
+    font-size: 32px;
+    line-height: 100%;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.apply-duration {
+    font-size: 26px;
+    line-height: 100%;
+    color: #999;
+}
+
+.apply-status-wrap {
+    float: right;
+    margin-right: 30px;
+    margin-top: 46px;
+}
+
+.apply-status {
+    font-size: 24px;
+    line-height: 100%;
+    text-align: right;
+    margin-bottom: 19px;
+    margin-top: -2px;
+}
+
+.bill-1-color {
+    color: #649cfe;
+}
+
+.bill-2-color {
+    color: #fc816f;
+}
+
+.bill-3-color {
+    color: #f5313f;
+}
+
+.bill-4-color {
+    color: #999;
+}
+
+.apply-time {
+    font-size: 22px;
+    line-height: 100%;
+    color: #ccc;
+}
+
+.no-data {
+    display: block;
+    width: 362px;
+    height: 296px;
+    background: url(../images/no-data.png) no-repeat;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.right-arrow {
+    float: right;
+    margin-right: 30px;
+    margin-top: 60px;
+}
+
+.payback-item {
+    height: 220px;
+    margin-top: 20px;
+    position: relative;
+    background: white;
+    font-size: 28px;
+    text-align: center;
+}
+
+
+/*.pi-title {
+    font-size: 35px;
+    color: black;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.pi-overdate {
+    color: white;
+    background: #ff6f79;
+    border-radius: 4px;
+    position: absolute;
+    top: 35px;
+    left: 150px;
+    font-size: 24px;
+    padding: 5px 9px;
+}
+
+.pi-money {
+    position: absolute;
+    top: 32px;
+    right: 200px;
+    width: 150px;
+    color: #6aa4f0;
+    font-size: 36px;
+}*/
+
+.pi-date-limit {
+    position: absolute;
+    top: 126px;
+    width: 100px;
+    left: 30px;
+    text-align: center;
+}
+
+.pi-date-release {
+    position: absolute;
+    top: 126px;
+    width: 200px;
+    left: 220px;
+    text-align: center;
+}
+
+.pi-date-payback {
+    position: absolute;
+    top: 126px;
+    width: 200px;
+    right: 30px;
+    text-align: center;
+}
+
+.pi-txt-limit {
+    position: absolute;
+    top: 168px;
+    width: 100px;
+    left: 30px;
+    color: #999999;
+}
+
+.pi-txt-release {
+    position: absolute;
+    top: 168px;
+    width: 200px;
+    left: 220px;
+    color: #999999;
+}
+
+.pi-txt-payback {
+    position: absolute;
+    top: 168px;
+    width: 200px;
+    right: 30px;
+    color: #999999;
+}
+
+.pi-payback {
+    width: 150px;
+    height: 60px;
+    position: absolute;
+    display: block;
+    top: 22px;
+    right: 35px;
+    border: 1px solid #6aa4f0;
+    border-radius: 4px;
+    color: #6aa4f0;
+    text-align: center;
+    line-height: 60px;
+    font-size: 30px;
+}
+
+.pi-line-a {
+    position: absolute;
+    top: 110px;
+    right: 0;
+    left: 30px;
+    height: 1px;
+    background: #f4f4f4;
+}
+
+.pi-line-b {
+    position: absolute;
+    top: 154px;
+    right: 265px;
+    width: 1px;
+    height: 44px;
+    background: #f4f4f4;
+}
+
+.pi-line-c {
+    position: absolute;
+    top: 154px;
+    left: 180px;
+    width: 1px;
+    height: 44px;
+    background: #f4f4f4;
+}
+
+.top {
+    height: 110px;
+    line-height: 110px;
+    padding: 0 24px;
+    overflow: hidden;
+}
+
+.top-left {
+    float: left;
+    /*margin-top: 6px;*/
+}
+
+.top-right {
+    float: right;
+    font-size: 36px;
+    color: #6aa4f0;
+}
+
+.logo-text {
+    font-size: 34px;
+}
+
+.status {
+    display: inline-block;
+    font-size: 22px;
+    color: #fff;
+    width: 90px;
+    height: 34px;
+    background: #ff6f79;
+    border-radius: 3px;
+    line-height: 34px;
+    text-align: center;
+    margin-left: 12px;
+    vertical-align: text-bottom;
+    /*为了对齐*/
+    position: absolute;
+    top: 38px;
+}
+
+.repay-btn {
+    display: inline-block;
+    width: 150px;
+    height: 60px;
+    border: 1px solid #6aa4f0;
+    border-radius: 3px;
+    line-height: 60px;
+    text-align: center;
+    margin-left: 20px;
+    font-size: 30px;
+}

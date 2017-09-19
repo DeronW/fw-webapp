@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    font-family: 'San Francisco', 'PingFang SC', 'Microsoft YaHei', "Helvetica Neue";
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+}
+
+.container {
+    width: 1140px;
+    display: table;
+    margin: 0 auto;
+}

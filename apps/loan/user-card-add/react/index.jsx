@@ -39,9 +39,9 @@ class SetCashCard extends React.Component{
         this.handlerClause = this.handlerClause.bind(this);
         this.handlerNext = this.handlerNext.bind(this);
     }
-    componentDidUpdate() {
-        this.refs.cardNumberInput.setSelectionRange(99, 99)
-    }
+    // componentDidUpdate() {
+    //     this.refs.cardNumberInput.setSelectionRange(99, 99)
+    // }
     changeBankNum(e) {
         let input = e.target, v = input.value;
         // 把银行卡号, 每隔4个数字添加一个空格

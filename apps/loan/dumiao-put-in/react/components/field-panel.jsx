@@ -29,8 +29,23 @@ class FieldPanel extends React.Component {
     selectChangeHandler = (v) => {
         this.setState({ value: v }, this.confirmHandler)
     }
+
+    focusHandler = () => {
+        ReactDOM.findDOMNode(this.refs['field-edit-panel']).style.top = document.documentElement.scrollTop || document.body.scrollTop;
+        ReactDOM.findDOMNode(this.refs['field-edit-panel']).style.position = "absolute";
+    }
+
     render() {
         let { value } = this.state, { field, field_key } = this.props;
+
+        let field_edit_panel_style = {
+            position: "fixed",
+            top: $FW.Browser.inWeixin() || $FW.Browser.inApp() ? '0px' : '100px',
+            width: "100%",
+            height: "100%",
+            paddingTop: "20px",
+            background: "#f0f0f0"
+        }
 
         let input_type = () => {
             return <div className="field-item">
@@ -39,7 +54,9 @@ class FieldPanel extends React.Component {
                     <div className="text">
                         <input placeholder={field.placeholder}
                             onChange={this.textChangeHandler}
-                            value={value} />
+                            value={value}
+                            onFocus={this.focusHandler}
+                        />
                     </div>
                 </div>
             </div>
@@ -56,9 +73,7 @@ class FieldPanel extends React.Component {
             return <div> {field.options.map(option)} </div>
         }
 
-        return <div className="field-edit-panel" style={{
-            top: $FW.Browser.inWeixin() || $FW.Browser.inApp() ? '0px' : '100px'
-        }}>
+        return <div className="field-edit-panel" ref="field-edit-panel" style={field_edit_panel_style}>
             {field.describe &&
                 <div className="section-title">{field.describe}</div>}
             {field.options ?
@@ -109,6 +124,7 @@ class CityPanel extends React.Component {
             event.currentTarget.offsetHeight)
     }
     render() {
+        let HOT_CITY_LIST = ["北京市", "上海市", "广州市", "深圳市", "杭州市"];
         let alphabet = [];
         for (let i = 65; i < 91; i++)
             alphabet.push(String.fromCharCode(i));
@@ -116,6 +132,13 @@ class CityPanel extends React.Component {
         let city_option = name => {
             let cn = `option-item ${name == this.props.value && 'active'}`
             return <div key={name} className={cn} onClick={
+                () => this.props.select_handler(name)}>
+                {name}
+            </div>
+        }
+
+        let hot_city_option = name => {
+            return <div key={name} className="hot-city-item" onClick={
                 () => this.props.select_handler(name)}>
                 {name}
             </div>
@@ -129,15 +152,24 @@ class CityPanel extends React.Component {
             </div>
         }
 
-        return <div className="scroll-panel" ref="scroll">
-            <div className="city-list">
-                {alphabet.map(city_section)}
-                <div className="quick-select"
-                    onTouchStart={this.touchStartHandler}
-                    onTouchMove={this.touchMoveHandler}>
-                    {alphabet.map(char => <div key={char}>{char}</div>)}
+        return (
+                <div>
+                    <div className="scroll-panel" ref="scroll">
+                        <div className="hot-city-title">热门城市</div>
+                        <div className="hot-cities">
+                            {HOT_CITY_LIST.map(hot_city_option)}
+                        </div>
+                        <div className="city-list">
+                            {alphabet.map(city_section)}
+                            <div className="quick-select"
+                                 onTouchStart={this.touchStartHandler}
+                                 onTouchMove={this.touchMoveHandler}>
+                                {alphabet.map(char => <div key={char}>{char}</div>)}
+                            </div>
+                        </div >
+                    </div>
                 </div>
-            </div >
-        </div>
+            )
+
     }
 }

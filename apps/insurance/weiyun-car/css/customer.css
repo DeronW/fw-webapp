@@ -1,0 +1,136 @@
+.panel-title {
+    margin-top: 20px;
+    height: 90px;
+    line-height: 90px;
+    padding-left: 24px;
+    background-color: #f9f9f9;
+    color: #333;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #e3e5ea;
+    font-size: 32px;
+}
+
+.field-text {
+    position: relative;
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+    height: 90px;
+    padding: 0 24px;
+    background: white;
+    line-height: 90px;
+    color: #666;
+    font-size: 30px;
+}
+
+.field-text .v-line {
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 24px;
+    background: #e3e5ea;
+}
+
+.field-text input[type=text] {
+    float: right;
+    width: 510px;
+    height: 90px;
+    line-height: 90px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    color: #666;
+    font-size: 30px;
+    text-align: right;
+}
+
+.picture-panel {
+    display: table;
+    width: 100%;
+    background: white;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.picture-panel-title {
+    margin-top: 20px;
+    padding-left: 24px;
+    color: #333;
+    font-size: 32px;
+}
+
+.picture-panel-desc {
+    color: #999;
+    margin-bottom: 18px;
+    padding-left: 24px;
+    font-size: 22px;
+}
+
+.field-image {
+    position: relative;
+    display: block;
+    float: left;
+    width: 324px;
+    margin-left: 24px;
+    text-align: center;
+    color: #666;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 22px;
+    height: 198px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: url('../images/customer/img-placeholder.png') #fff no-repeat center;
+    background-size: 100%;
+}
+
+.field-image input {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.field-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.field-check {
+    background: white;
+    padding: 24px;
+    color: #666;
+    font-size: 30px;
+}
+.field-check span{
+    display: inline-block;
+    margin-top: -4px;
+    vertical-align: middle;
+}
+.panel-text{
+    float: right;
+    width: 510px;
+    height: 90px;
+    line-height: 90px;
+    color: #666;
+    font-size: 30px;
+    text-align: right;
+    display: inline-block;
+}
+.input-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+

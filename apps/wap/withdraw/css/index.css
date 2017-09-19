@@ -1,0 +1,670 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    background: #ebebee;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+/*提现页面*/
+
+.cash-wrapper,
+.cash-records-wrapper,
+.reset-deal-password-wrapper,
+.cash-search-wrapper {
+    width: 100%;
+    height: auto;
+}
+
+
+/*头部*/
+
+.head {
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    position: fixed;
+    background: #fff;
+    z-index: 100;
+    top: 0;
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+.return-btn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 80px;
+    height: 100px;
+}
+
+.back-icon {
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.title {
+    line-height: 100px;
+    text-align: center;
+    font-size: 40px;
+    color: #333;
+}
+
+.to-cash-records {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    min-width: 80px;
+    color: #999;
+    font-size: 28px;
+    line-height: 100px;
+    text-align: center;
+}
+
+
+/*内容*/
+
+.content {
+    padding-top: 120px;
+}
+
+
+/*银行卡号信息*/
+
+.bank-info {
+    height: 114px;
+    position: relative;
+    margin: 0 auto;
+    /*margin-top: 130px;*/
+    box-sizing: border-box;
+    background: #fff;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.bank-logo {
+    float: left;
+    margin-left: 40px;
+}
+
+.logo {
+    margin-top: 20px;
+    width: 80px;
+    height: 80px;
+}
+
+.bank-detail {
+    float: left;
+    margin-left: 26px;
+    margin-top: 22px;
+}
+
+.bank-name {
+    font-size: 31px;
+}
+
+.bank-num {
+    font-size: 26px;
+    margin-top: 8px;
+}
+
+.fast-payment {
+    float: right;
+    margin-right: 40px;
+    margin-top: 35px;
+}
+
+
+/*绑定卡温馨小提示*/
+
+.notice {
+    width: 92%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.text {
+    font-size: 30px;
+    color: #999;
+}
+
+.call-num {
+    color: #4aa1f9;
+}
+
+
+/*可提现金金额*/
+
+.aviliable-money {
+    font-size: 32px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.plain-text {
+    font-size: 36px;
+    color: #999;
+}
+
+.amount {
+    font-size: 38px;
+    color: rgb(253, 77, 76);
+}
+
+
+/*提现输入框*/
+
+.money-cover {
+    background: #fff;
+    margin-top: 5px;
+}
+
+
+/*全提*/
+
+.sub-cover {
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+}
+
+.input-side {
+    float: left;
+    width: 400px;
+    margin-left: 30px;
+    color: #555;
+    height: 90px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.input-money {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    font-size: 36px;
+    border: none;
+    /*为了输入框居中，待优化*/
+    margin-top: 20px;
+}
+
+.input-money:focus {
+    outline: none;
+}
+
+.click-side,
+.open-account-side {
+    float: right;
+    font-size: 32px;
+    margin-right: 30px;
+}
+
+.draw-money {
+    color: #4aa1f9;
+}
+
+
+/*请选择开户支行*/
+
+.modify {
+    height: 98px;
+    line-height: 98px;
+    margin-top: -2px;
+    background: #fff;
+}
+
+.wire {
+    width: 96%;
+    height: 1px;
+    border-top: 1px solid #d8d8d8;
+    float: right;
+}
+
+.jump-side {
+    float: left;
+    width: 400px;
+    font-size: 32px;
+    margin-left: 30px;
+    color: #555;
+    height: 90px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/*.open-account-side {
+    float: right;
+    font-size: 32px;
+    margin-right: 30px;
+}*/
+
+.account-text {
+    color: rgb(85, 85, 85);
+}
+
+
+/*提现方式*/
+
+.draw-money-method {
+    margin: 20px 0 0;
+}
+
+.draw-title {
+    padding: 0 0 5px 30px;
+    line-height: 40px;
+    font-size: 28px;
+}
+
+.draw-info {
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+    background-color: #fff;
+}
+
+.info-list {
+    height: 150px;
+}
+
+.info-select-btn {
+    float: left;
+    width: 98px;
+}
+
+.select-icon {
+    float: left;
+    width: 38px;
+    height: 38px;
+    margin: 44px 0 0 29px;
+    background-color: #fff;
+    border: 1px solid #d8d8d8;
+    border-radius: 50%;
+}
+
+.select-btn {
+    display: inline-block;
+    margin: 44px 0 0 29px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: #6892cd url(../images/select-icon.png) no-repeat center;
+}
+
+.info-text {
+    height: 128px;
+    margin: 0 0 0 98px;
+    padding: 30px 0 0;
+    line-height: 30px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.subhead-text {
+    line-height: 40px;
+    font-size: 28px;
+    color: #555;
+}
+
+.detail-text {
+    font-size: 24px;
+    color: #999;
+}
+
+
+/*下一步*/
+
+.next {
+    width: 90%;
+    height: 83px;
+    margin: 0 auto;
+    background: #fd4d4c;
+    color: #fff;
+    font-size: 36px;
+    line-height: 83px;
+    border: 1px solid #f2acad;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 54px;
+}
+
+
+/*提现说明*/
+
+.instruction-title {
+    font-size: 30px;
+    color: #999;
+    margin-left: 40px;
+    margin-top: 28px;
+}
+
+.instruction-detail {
+    width: 94%;
+    margin: 0 auto;
+}
+
+.card-d {
+    float: left;
+    margin-top: 19px;
+    margin-left: 25px;
+    margin-right: 12px;
+}
+
+.text-line {
+    width: 611px;
+    line-height: 43px;
+    display: inline-block;
+    font-size: 28px;
+    color: #999;
+}
+
+
+/*提现记录页面*/
+
+.month-title {
+    height: 60px;
+    line-height: 60px;
+    font-size: 24px;
+    padding-left: 30px;
+    background: #f9f9f9;
+    border-top: 1px solid #d8d8d8;
+    margin-top: 20px;
+}
+
+.records-content {
+    padding-top: 100px;
+}
+
+.loading-info img {
+    display: none;
+}
+
+.record {
+    margin-top: 20px;
+    min-height: 182px;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+    background: white;
+}
+
+.first-line {
+    height: 75px;
+    line-height: 75px;
+    background: #f9f9f9;
+    padding: 0 30px;
+    font-size: 28px;
+}
+
+.first-line>div {
+    float: left;
+}
+
+.first-line .order-id {
+    font-size: 24px;
+    color: #999999;
+    padding-left: 20px;
+}
+
+.first-line .state {
+    float: right;
+}
+
+.first-line .state.state-9 {
+    color: #4aa1f9;
+}
+
+.first-line .state.state-11 {
+    color: #fd4d4c;
+}
+
+.second-line {
+    height: 54px;
+    line-height: 54px;
+    padding: 0 30px;
+    font-size: 24px;
+}
+
+.second-line .money {
+    float: right;
+    font-weight: bold;
+}
+
+.third-line {
+    height: 54px;
+    line-height: 54px;
+    padding: 0 30px;
+    font-size: 24px;
+}
+
+.third-line .time {
+    float: right;
+}
+
+.sep-line {
+    background: #eff0f3;
+    height: 1px;
+    margin: 0 30px;
+}
+
+.title-fixed {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+}
+
+.empty-records {
+    color: #999;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 400px;
+    padding-top: 200px;
+    background: transparent url(../images/empty.png) no-repeat top center;
+}
+
+.all-shown {
+    color: #999;
+    text-align: center;
+    padding: 30px;
+    font-size: 30px;
+}
+
+
+/*重设交易密码-身份验证*/
+
+.identity-cover {
+    padding-top: 100px;
+}
+
+.identity {
+    margin: 0 0 20px;
+    padding: 0 0 0 34px;
+    border-bottom: 1px solid #d8d8d8;
+    background-color: #fff;
+}
+
+.input-block {
+    height: 96px;
+    border-bottom: 1px solid #d8d8d8;
+    font-size: 32px;
+}
+
+.icon {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin: 23px 0 0;
+    background: url(../images/icon.png) no-repeat;
+}
+
+.name-icon {
+    background-position: -10px -10px;
+}
+
+.id-icon {
+    background-position: -160px -7px;
+}
+
+.id-input,
+.code-input {
+    float: left;
+    width: 100%;
+    height: 40px;
+    margin-top: -4px;
+    font-size: 32px;
+    line-height: 40px;
+    border: none;
+    outline: none;
+}
+
+.phone-icon {
+    background-position: -13px -83px;
+}
+
+.code-block {
+    border-bottom: none;
+}
+
+.text-block {
+    height: 40px;
+    padding: 33px 20px 0 60px;
+}
+
+.code-block {
+    border-bottom: none;
+}
+
+.code {
+    float: left;
+    width: 384px;
+    padding: 28px 0 0;
+}
+
+.btn-code {
+    float: right;
+    padding: 0 30px 0 0;
+    line-height: 96px;
+    color: #4aa1f9;
+}
+
+.timing-text {
+    color: #d4d4d4;
+}
+
+.phone-code-prompt {
+    height: 130px;
+}
+
+.btn-area {
+    margin: 0 30px;
+}
+
+.ui-btn {
+    height: 84px;
+    line-height: 84px;
+    text-align: center;
+    color: #fff;
+    font-size: 36px;
+    border-radius: 5px;
+}
+
+.ui-red-btn {
+    background-color: #fd4d4c;
+}
+
+
+/*选择开户支行*/
+
+
+/*请选择开户支行的关键词*/
+
+.select-bank {
+    width: 100%;
+    margin: 120px 0 0;
+    background: #ebebee;
+}
+
+.search {
+    width: 90%;
+    height: 81px;
+    margin: 10px auto 0;
+    line-height: 81px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    z-index: 10;
+}
+
+.select-bank img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.list {
+    width: 100%;
+    margin-top: 40px;
+    background: #fff;
+}
+
+.list li {
+    width: 96%;
+    height: 98px;
+    line-height: 98px;
+    border-bottom: 1px solid #e3e5ea;
+    margin-left: 4%;
+    color: #555;
+    font-size: 32px;
+}
+
+.list img {
+    float: right;
+    margin-top: 36px;
+    margin-right: 35px;
+}
+
+.search-logo {
+    margin-left: 26px;
+}
+
+.search-text {
+    width: 80%;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 32px;
+    color: #ccc;
+    text-indent: 30px;
+    border: none;
+}
+
+.search-text:focus {
+    outline: none;
+}
+
+.close {
+    float: right;
+    margin: 19px 10px 0 0;
+}
+
+.open-bank {
+    background: #ebebee;
+    height: 100%;
+    z-index: 1000000;
+}
+
+.open-bank,
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}

@@ -1,14 +1,15 @@
 WebAPP
 =========
-# 金融工场 移动端项目代码库
+
+## 金融工场 移动端项目代码库
 
 **包含项目**:
 
 * 豆哥商城
 * 金融工场移动端
 * 放心花
-
-###
+* 微云汽车保险
+* 专题活动
 
 ### API说明
 
@@ -135,22 +136,21 @@ wap站：npm run gulp wap是扥:[文件名]:watch
 
 ## 项目目录结果说明
 - apps
-- lib
 - public
 - scripts
     - clean.js 清除上次编译结果文件
     - gen-differential-compile-cmd.js 检查当前分支与git仓库远程分支的文件差异, 并生成差量编译脚本
     - webpack.config.js
 - tasks
+- gulpfiles
+    - loan.js
+    - mall.js
+    - wap.js
+    - settings.default.js
 - .editorconfig
 - .eslintrc
 - .gitignore
 - gulpfile.js
-- gulpfile.loan.js
-- gulpfile.mall.js
-- gulpfile.wap.js
-- gulpfile.settings.default.js
-- gulpfile.settings.js
 - Jenkinsfile
 - package.json
 - README.md // 项目说明

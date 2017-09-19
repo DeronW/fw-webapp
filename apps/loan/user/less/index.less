@@ -101,7 +101,7 @@ body {
 
   .bill-label {
     height: 66px;
-    line-height: 75px;
+    line-height: 66px;
     padding-left: 35px;
     background-color: #f9f9f9;
     color: #333;
@@ -140,27 +140,36 @@ body {
   background-color: #fff;
 
   .user-info-display-wrap {
-    display: inline-flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
     position: relative;
     margin-left: 35px;
     width: calc(~"100% - 35px");
     height: @user-info-display-wrap--height;
     background-color: #fff;
     border-bottom: 1px solid #ebeaea;
-    vertical-align: middle;
 
     &:last-child {
       border: none;
     }
 
+    &:visited .fake-arrow {
+      border-top: 3px solid #ccc;
+      border-left: 3px solid #ccc;
+    }
+
     .info-icon-container {
-      display: inline-block;
+      display: inline-flex;
       position: relative;
       width: 40px;
       height: 100%;
       margin-right: 18px;
 
       img {
+        width:100%;
         .center-element;
       }
     }
@@ -197,6 +206,7 @@ body {
           margin: auto;
           border-top: 3px solid #ccc;
           border-left: 3px solid #ccc;
+          -webkit-transform: rotate(135deg);
           transform: rotate(135deg);
         }
       }

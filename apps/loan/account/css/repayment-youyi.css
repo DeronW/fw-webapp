@@ -1,0 +1,250 @@
+.cnt-container {
+    min-height: 100%;
+    padding-bottom: 178px;
+    background-color: #eee;
+}
+
+.banner {
+    box-sizing: border-box;
+    height: 303px;
+    padding-top: 48px;
+    background: #556bb8;
+    color: #fff;
+    font-size: 34px;
+    text-align: center;
+}
+
+.banner img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 6px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 50%;
+}
+
+.amount-overview {
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+    height: 123px;
+    padding: 27px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.amount-payable, .amount-overdue {
+    float: left;
+    box-sizing: border-box;
+    width: 50%;
+}
+
+.amount-payable {
+    border-right: 1px solid #eee;
+}
+
+.amount-num {
+    color: #556bb8;
+    font-size: 38px;
+}
+
+.amount-overdue .amount-num {
+    color: #ff6f79;
+}
+
+.amount-name {
+    color: #999;
+    font-size: 24px;
+}
+
+.repayment-info {
+    box-sizing: border-box;
+    padding-left: 33px;
+    margin: 20px 0;
+    background-color: #fff;
+}
+
+.info-item, .repayment-input-item {
+    display: table;
+    box-sizing: border-box;
+    width: 100%;
+    height: 99px;
+    padding-right: 33px;
+    border-bottom: 1px solid #eee;
+    font-size: 30px;
+}
+
+.info-item:last-child, .repayment-input-item {
+    border-bottom: none;
+}
+
+.item-name {
+    box-sizing: border-box;
+    float: left;
+    height: 99px;
+    line-height: 103px;
+    color: #666;
+}
+
+.item-value {
+    float: right;
+    height: 99px;
+    line-height: 99px;
+    color: #333;
+}
+
+.info-item a {
+    padding-right: 36px;
+    background: url('../images/repayment-youyi/entry.png') no-repeat right;
+}
+
+.repayment-input {
+    composes: item-name;
+    width: 342px;
+    padding: 36px 0;
+    color: #333;
+    font-size: 30px;
+    line-height: 30px;
+}
+
+.repayment-input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #999;
+    line-height: 35px;
+}
+
+.pay-off-btn {
+    composes: item-value;
+    color: #6aa4f0;
+}
+
+.submit-btn-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 128px;
+    background-color: #fff;
+    box-shadow: 0 0 24px rgba(0, 0, 0, .2);
+}
+
+.submit-btn {
+    display: block;
+    height: 82px;
+    line-height: 82px;
+    margin: 22px 20px;
+    background-color: #556bb8;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+}
+
+.protocol {
+    box-sizing: border-box;
+    margin: 20px 33px 178px;
+    padding-left: 48px;
+    color: #999;
+    font-size: 27px;
+    line-height: 1.5;
+}
+
+.protocol a {
+    color: #6aa4f0;
+}
+
+.unchecked-protocol {
+    composes: protocol;
+    background: url('../images/repayment-youyi/unchecked.png') no-repeat left top;
+}
+
+.checked-protocol {
+    composes: protocol;
+    background: url('../images/repayment-youyi/checked.png') no-repeat left top;
+}
+
+.pop-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .7);
+    z-index: 99;
+}
+
+.pop {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 594px;
+    padding: 34px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.pop-close {
+    position: absolute;
+    top: 34px;
+    right: 34px;
+    width: 34px;
+    height: 34px;
+    background: url('../images/repayment-youyi/close.jpg') no-repeat center;
+}
+
+.pop-title {
+    margin-bottom: 15px;
+    color: #6aa4f0;
+    font-size: 32px;
+    text-align: center;
+}
+
+.pop-info {
+    line-height: 38px;
+    margin-bottom: 25px;
+    color: #666;
+    font-size: 24px;
+}
+
+.sms-input {
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+    height: 66px;
+    padding: 0 20px 0 10px;
+    margin-bottom: 25px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    font-size: 26px;
+}
+
+.sms-input input {
+    box-sizing: border-box;
+    float: left;
+    width: 300px;
+    height: 64px;
+    padding: 15px 0;
+    font-size: 26px;
+}
+
+.sms-btn {
+    float: right;
+    height: 64px;
+    line-height: 64px;
+    color: #6aa4f0;
+    font-size: 26px;
+}
+
+.pop-submit {
+    height: 78px;
+    line-height: 78px;
+    background: #6aa4f0;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 32px;
+    text-align: center;
+}

@@ -1,0 +1,67 @@
+.popStartPC{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+.popStartPanelPC{
+    width: 647px;
+    height: 505px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    background: url('../images/pop-start/startBg.png') no-repeat;
+}
+.titlePC{
+    font-size: 30px;
+    color: #913e30;
+    margin: 140px 0 30px 0;
+}
+.popStartPanelPC .text{
+    font-size: 18px;
+    color: #913e30;
+    width: 350px;
+    text-align: left;
+    margin: auto;
+    line-height: 30px;
+}
+.popStartMobile{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .3);
+    z-index: 1000;
+}
+.popStartPanelMobile{
+    width: 647px;
+    height: 505px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    background: url("../images/pop-start/startBg.png") no-repeat;
+    color: #884332;
+}
+.titleMobile{
+    font-size: 36px;
+    margin: 130px 0 30px 0;
+}
+.popStartPanelMobile .text{
+    font-size: 22px;
+    width: 420px;
+    text-align: left;
+    margin: auto;
+    line-height: 36px;
+}

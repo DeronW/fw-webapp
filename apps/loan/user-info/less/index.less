@@ -31,8 +31,7 @@ body {
 }
 
 .info-tab {
-  display: inline-flex;
-  justify-content: space-around;
+  display: table;
   width: 100%;
   height: @info-tab--height;
   padding: 0;
@@ -42,12 +41,23 @@ body {
   font-size: 27px;
 
   .info-tab-item {
-    display: inline-block;
+    position: relative;
+    display: table-cell;
+    float: left;
+    width: 33.33%;
     height: 100%;
-    line-height: @info-tab--height;
-    borderBottom: 3px solid transparent;
-    borderTop: 3px solid transparent;
-    listStyle: none;
+    list-style: none;
+
+    span {
+      display: block;
+      width: 135px;
+      height: 100%;
+      margin: auto;
+      line-height: @info-tab--height;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid transparent;
+      text-align: center;
+    }
   }
 }
 
@@ -69,7 +79,11 @@ body {
     }
 
     .input-wrap {
-      display: inline-flex;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
       position: relative;
       margin-left: @input-wrap--margin-left;
       width: ~"calc(100% - @{input-wrap--margin-left})";
@@ -85,7 +99,6 @@ body {
       }
 
       .right-align-container {
-        display: inline-flex;
 
         .info-text-input {
           display: inline-block;
@@ -115,7 +128,7 @@ body {
         }
 
         .select-label {
-          display: inline-block;
+          float: right;
           width: 420px;
           height: 100%;
           background-color: transparent;
@@ -125,7 +138,7 @@ body {
         }
 
         .right-arrow-container {
-          display: inline-block;
+          float: right;
           position: relative;
           width: 36px;
           height: 100%;
@@ -140,6 +153,7 @@ body {
             margin: auto;
             border-top: 3px solid #ccc;
             border-left: 3px solid #ccc;
+            -webkit-transform: rotate(135deg);
             transform: rotate(135deg);
           }
         }
@@ -220,14 +234,12 @@ body {
 
 .hot-cities-wrap {
   .hot-cities {
-    display: flex;
-    // justify-content: space-around;
-    // align-content: space-around;
-    flex-wrap: wrap;
+    height: 220px;
     padding: 20px 0 0 24px;
     background-color: #fff;
 
     .hot-city {
+      float: left;
       width: 210px;
       height: 80px;
       line-height: 80px;
@@ -242,9 +254,7 @@ body {
 }
 
 .city-division, .hot-cities-label {
-  height: 40px;
-  line-height: 40px;
-  padding-left: 24px;
+  padding: 30px 0 20px 24px;
   font-size: 27px;
   background-color: #f9f9f9;
   color: #999;
@@ -252,9 +262,9 @@ body {
 
 .city-option {
   position: relative;
-  height: 80px;
-  line-height: 80px;
-  margin-left: 24px;
+  height: 88px;
+  line-height: 88px;
+  margin: 0 24px;
   font-size: 30px;
   border-bottom: 1px solid #e6e6e6;
   color: #333;
@@ -280,8 +290,8 @@ body {
     line-height: 33px;
     list-style: none;
     padding: 0;
-    color: #333;
-    font-size: 27px;
+    color: #649cfe;
+    font-size: 24px;
     text-align: center;
   }
 }

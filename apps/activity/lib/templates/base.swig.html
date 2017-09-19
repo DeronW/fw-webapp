@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--[if lt IE 9 ]>
+<html lang="zh-cn" class="not-support-ie8">
+<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    {% block viewport %}
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
+    {% endblock %}
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    {% block disable_telephone %}
+    <meta name="format-detection" content="telephone=no"/>
+    {% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+    {% if ENV == 'production' %}{% block base_tag %}{% endblock %}{% endif %}
+    {% block head_javascripts %}{% endblock %}
+</head>
+
+<body>
+<!-- 接口地址前缀 -->
+<input type="hidden" id="api-path" value="{{ API_PATH }}"/>
+<!-- ENV -->
+<input type="hidden" id="env" value="{{ ENV }}"/> {% block content %}
+<div id="cnt"></div>
+<div id="pop"></div>
+{% endblock %}
+
+{% if ENV == 'production' %}
+{% include 'exception-handler.swig.html' with {SENTRY_DSN:
+'https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3'} %}
+{% endif %}
+
+{% if ENV == 'production' %}
+{% include 'growing-io.swig.html' with { ACCOUNT_ID: '99b8ecbb093eec0e' } %}
+{% endif %}
+
+<script>
+    // 如果是IE8及以下版本的浏览器, 弹出浏览器升级提示框
+    var tag = document.getElementsByTagName('html')[0];
+    if (tag && tag.className === 'not-support-ie8') {
+        // 看来是不支持IE8了
+        var iframe = document.createElement('iframe');
+        iframe.src = 'http://www.9888keji.com/static/keji-web/update-browser/index.html'
+        iframe.frameborder = 0
+        iframe.width = '100%'
+        iframe.height = '100%'
+        document.body.appendChild(iframe)
+        iframe.setAttribute('style', 'display: block; position: absolute; z-index: 99; top: 0; left: 0; right: 0; bottom: 0; border: 0;')
+    }
+</script>
+
+{% block javascripts %}{% endblock %}
+
+</body>
+
+</html>

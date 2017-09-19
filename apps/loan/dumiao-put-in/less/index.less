@@ -13,7 +13,11 @@ textarea {
     /* Chrome/Opera/Safari */
     color: #ccc;
 }
-
+.main-panel-wrap{
+    position:absolute;
+    left:0;
+    right:0;
+}
 .main-panel {
     position: relative;
 }
@@ -22,7 +26,7 @@ textarea {
     height: 86px;
     border-bottom: 1px solid #ebeaea;
     background: white;
-    padding: 0 0 0 30px;
+    padding: 0 30px 0 30px;
     .name-text {
         float: left;
         font-size: 28px;
@@ -36,16 +40,21 @@ textarea {
             line-height: 86px;
             font-size: 28px;
             color: #333;
+            width: 470px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align:right;
         }
         .arrow-icon {
             float: right;
             width: 50px;
             height: 86px;
-            margin: 0 10px 0 0;
+            margin: 0 -20px 0 0;
             background: url(../images/arrow-icon.png) no-repeat center;
         }
         input {
-            width: 500px;
+            width: 470px;
             margin: 0 30px 0 0;
             height: 30px;
             padding: 28px 0;
@@ -145,7 +154,9 @@ textarea {
         }
         .quick-select {
             position: fixed;
-            top: 200px;
+            top: 50%;
+            -wekbit-transform:translateY(-50%);
+            transform:translateY(-50%);
             right: 0;
             padding: 10px 0;
             width: 60px;
@@ -158,4 +169,27 @@ textarea {
             }
         }
     }
+}
+.hot-city-title{
+  font-size:28px;
+  color:#999;
+  padding-left:30px;
+  margin:10px 0;
+}
+.hot-cities{
+  padding: 20px 0 0 24px;
+  background-color: #fff;
+}
+.hot-city-item{
+  display:inline-block;
+  width: 210px;
+  height: 80px;
+  line-height: 80px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #649cfe;
+  border-radius: 4px;
+  color: #649cfe;
+  text-align: center;
+  font-size:28px;
 }

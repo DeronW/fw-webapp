@@ -1,46 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     {% block viewport %}
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
-    {% include 'partial/fix-viewport.html' %}
     {% endblock %}
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="screen-orientation" content="portrait">
-    <meta name="x5-orientation" content="portrait">
-    {% block disable_telephone %}
-    <meta name="format-detection" content="telephone=no"/>
-    {% endblock %}
+    <meta name="x5-orientation" content="portrait"> {% block disable_telephone %}
+    <meta name="format-detection" content="telephone=no" /> {% endblock %}
     <title>{% block title %}{% endblock %}</title>
     {% block css %}
-    <link type="text/css" rel="stylesheet" href="stylesheets/all.less.css"/>
-    {% endblock %}
-    {% block head_javascripts %}{% endblock %}
+    <link type="text/css" rel="stylesheet" href="stylesheets/all.less.css" /> {% endblock %} {% block head_javascripts %}{% endblock %}
 </head>
+
 <body>
 
-<!--接口地址前缀,结尾需要添加斜线-->
-<input type="hidden" id="api-path" value="{{ API_PATH }}"/>
-
-{% block content %}
-<div id="header"></div>
-<div id="cnt"></div>
-{% endblock %}
-
-{% block javascripts %}
-<script src="javascripts/lib.js"></script>
-{% if ENV == 'production' %}
-{% include 'partial/expection-handler.swig.html' with
-    {SENTRY_DSN: 'https://6598d6b107674705be86433412e78c3b@sentry.dougemall.com/4'} %}
-{% endif %}
-<script src="javascripts/bundle.js"></script>
-{% block extra_javascripts %}{% endblock %}
-{% endblock %}
-
-{% if ENV == 'production' %}
-{% include 'partial/growing-io.swig.html' with {key: 'af530885d23e3d7a'} %}
-{% endif %}
+    <!--接口地址前缀,结尾需要添加斜线-->
+    <input type="hidden" id="api-path" value="{{ API_PATH }}" /> {% block content %}
+    <div id="header"></div>
+    <div id="cnt"></div>
+    {% endblock %} {% block javascripts %}
+    <script src="javascripts/lib.js"></script>
+    {% if ENV == 'production' %} {% include 'partial/expection-handler.swig.html' with {SENTRY_DSN: 'https://6598d6b107674705be86433412e78c3b@sentry.dougemall.com/4'} %} {% endif %}
+    <script src="javascripts/bundle.js"></script>
+    {% block extra_javascripts %}{% endblock %} {% endblock %} {% if ENV == 'production' %} {% include 'partial/growing-io.swig.html' with {key: 'af530885d23e3d7a'} %} {% endif %}
 
 </body>
+
 </html>

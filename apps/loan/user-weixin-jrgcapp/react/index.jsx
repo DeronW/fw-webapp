@@ -3,7 +3,15 @@ class WeixinCon extends React.Component {
         NativeBridge.clipboard("fxhuaba")
     }
     saveHandler = () => {
-        NativeBridge.clipboard("save_fxh_qrcode")
+        NativeBridge.trigger("save_fxh_qrcode")
+    }
+    clickHandler = () => {
+        if($FW.Browser.inIOS()){
+            window.location.href = 'https://itunes.apple.com/cn/app/%E6%94%BE%E5%BF%83%E8%8A%B1-%E6%8E%8C%E4%B8%8A%E5%B0%8F%E9%A2%9D%E7%8E%B0%E9%87%91%E5%80%9F%E6%AC%BE/id1208062782?mt=8'
+        }
+        if($FW.Browser.inAndroid()){
+            window.location.href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ucf.jrgc.cfinance'
+        }
     }
     render() {
         return (
@@ -21,7 +29,7 @@ class WeixinCon extends React.Component {
                     <img src="images/qr.jpg" className="qr" onClick={this.saveHandler} />
                     <div className="p2">2、或您可直接打开微信>添加朋友</div>
                     <div className="p3">搜索“fxhuaba”公众号<span className="copy-qr" onClick={this.copyHandler}>点击复制公众号</span></div>
-                    <div className="p2 p4">3、点击此处<a href="/static/loan/weixin-download/index.html">下载APP</a></div>
+                    <div className="p2 p4">3、点击此处<a onClick={this.clickHandler}>下载APP</a></div>
                 </div>
             </div>
         )

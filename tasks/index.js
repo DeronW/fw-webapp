@@ -20,7 +20,6 @@ let COMMON_JAVASCRIPTS_TASK = {};
 function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
         `${lib_path}/javascripts/use-strict.js`,
-        `${lib_path}/javascripts/jsencrypt-2.3.1.js`,
         `${lib_path}/javascripts/request-animation-frame-0.0.23.js`,
         `${lib_path}/javascripts/promise-2.0.2.min.js`,
         `${lib_path}/javascripts/object-assign-4.1.1.js`,
@@ -66,15 +65,23 @@ function generate_webpack_task(site_name, page_name, CONFIG) {
 
     function revision2cdn() {
         return revision([`${build_path}/**`], cdn_path, {
-            dontRenameFile: ['index.html']
+            dontRenameFile: ['index.html'],
+            transformPath: function (rev, source, path) {
+                return CONFIG.cdn_prefix + rev
+            }
         })
     }
 
-    gulp.task(`${site_name}:${page_name}`, gulp.series(compile_webpack))
-    gulp.task(`${site_name}:${page_name}:watch`, gulp.series(watch_webpack))
-    gulp.task(`${site_name}:pack:${page_name}:revision`,
-        gulp.series(`${site_name}:${page_name}`, copy2cdn, revision2cdn)
-    )
+    if (CONFIG.environment === 'development') {
+        gulp.task(`${site_name}:${page_name}`, gulp.series(compile_webpack))
+        gulp.task(`${site_name}:${page_name}:watch`, gulp.series(watch_webpack))
+    }
+    if (CONFIG.environment === 'production') {
+        let pack_task = `${site_name}:${CONFIG.cmd_prefix}:${page_name}`
+        gulp.task(pack_task, gulp.series(compile_webpack))
+        gulp.task(`${pack_task}:revision`,
+            gulp.series(pack_task, copy2cdn, revision2cdn))
+    }
 }
 
 let generate_task = function (site_name, page_name, configs) {

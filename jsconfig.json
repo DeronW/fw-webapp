@@ -1,13 +1,15 @@
 {
     "compilerOptions": {
+        "noLib": true,
         "target": "es6",
         "experimentalDecorators": true
     },
     "exclude": [
         "node_modules",
-        "bower_components",
-        "jspm_packages",
-        "tmp",
-        "temp"
+        "build",
+        "cdn",
+        "lib",
+        ".vscode",
+        ".git"
     ]
 }

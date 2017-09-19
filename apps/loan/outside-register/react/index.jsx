@@ -86,15 +86,15 @@ class VerificationCodeInput extends React.Component {
                     }, 10);
                 }} />
                 <div className="veri-code-info">
+                    <div onClick={this.props.handleClick} className="clear-btn-info">
+                        {this.props.verificationCodeInfo}
+                    </div>
                     {this.state.enableClear && <div className="clear-btn" onClick={() => {
                         this.props.handleClear('verificationCode');
                     }}>
                         <img src="images/clear.png" alt="clear button"></img>
                     </div>
                     }
-                    <div onClick={this.props.handleClick}>
-                        {this.props.verificationCodeInfo}
-                    </div>
                 </div>
             </div>
         )
@@ -134,22 +134,72 @@ class PasswordInput extends React.Component {
                     }, 10);
                 }} />
                 <div className="password-opts-wrap">
+                    <div className="toggle-password-display" onClick={this.props.handleClick}>
+                        <img src={this.props.togglePasswordDisplay
+                            ? "images/show-password.png"
+                            : "images/hide-password.png"} />
+                    </div>
                     {this.state.enableClear && <div className="clear-btn" onClick={() => {
                         this.props.handleClear('password');
                     }}>
                         <img src="images/clear.png" alt="clear button"></img>
                     </div>
                     }
-                    <div className="toggle-password-display" onClick={this.props.handleClick}>
-                        <img src={this.props.togglePasswordDisplay
-                            ? "images/show-password.png"
-                            : "images/hide-password.png"} />
-                    </div>
                 </div>
             </div>
         )
     }
 }
+
+class Captcha extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            enableClear: false
+        };
+    }
+
+    render() {
+        return (
+            <div className="input-wrap">
+                <div className="input-type-icon">
+                    <img src="images/veri-code.png" />
+                </div>
+                <input type="text" placeholder="请输入图片验证码" maxLength="4" value={this.props.value} onChange={(e) => {
+                    this.setState({
+                        enableClear: e.target.value
+                            ? true
+                            : false
+                    });
+                    this.props.handleChange(e, 'captcha');
+                }} onFocus={(e) => {
+                    this.setState({
+                        enableClear: e.target.value
+                            ? true
+                            : false
+                    });
+                }} onBlur={() => {
+                    setTimeout(() => {
+                        this.setState({ enableClear: false });
+                    }, 10);
+                }} />
+                <div className="password-opts-wrap">
+                    {this.state.enableClear && <div className="clear-btn" onClick={() => {
+                        this.props.handleClear('captcha');
+                    }}>
+                        <img src="images/clear.png" alt="clear button"></img>
+                    </div>
+                    }
+                </div>
+                <img src={this.props.url} onClick={this.props.reGetCaptcha} className="captcha"/>
+            </div>
+        )
+    }
+}
+
+
+
+
 
 class InvitationCodeInput extends React.Component {
     constructor() {
@@ -209,11 +259,14 @@ class InteractWrap extends React.Component {
             phoneNum: '',
             password: '',
             verificationCode: '',
+            captcha:'',
             invitationCode: $FW.Format.urlQuery().invitationCode || '',
             timeRemainForNewCode: 60,
             codeToken: '',
             showPassword: false,
-            showRegisteredMask: false
+            showRegisteredMask: false,
+            url:'',
+            verifyToken:''
         }
     }
 
@@ -222,12 +275,16 @@ class InteractWrap extends React.Component {
     }
 
     getVerificationCode = () => {
-        if (this.state.timeRemainForNewCode === 60) { // time for test
+        if(!this.state.captcha){
+            alert('请输入图片验证码');
+        }else if (this.state.timeRemainForNewCode === 60) { // time for test
             if (isPhoneNum(this.state.phoneNum)) {
                 $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
                     mobile: this.state.phoneNum,
                     userOperationType: 3,
-                    sourceType: SOURCE_TYPE
+                    sourceType: SOURCE_TYPE,
+                    verifyToken:this.state.verifyToken,
+                    verifyCode:this.state.captcha
                 }).then((data) => {
                     this.setState({ codeToken: data.codeToken });
                     var countdown = setInterval(() => {
@@ -240,6 +297,9 @@ class InteractWrap extends React.Component {
                         }
                     }, 1000);
                 }, (e) => {
+                    if(e.code == 20020){
+                        this.getCaptcha();
+                    }
                     if (e.code === 201003) return this.setState({showRegisteredMask: true}) // 手机号已注册
                     let msg = e.message;
                     alert(msg || "验证码获取失败");
@@ -250,6 +310,8 @@ class InteractWrap extends React.Component {
                 this.setState({ phoneNum: '' });
             }
         }
+
+
     }
 
     togglePasswordDisplay = () => {
@@ -265,6 +327,7 @@ class InteractWrap extends React.Component {
     ifEssentialsExist = () => {
         var essentialTypeNames = {
             'phoneNum': '手机号',
+            'captcha':'图形验证码',
             'verificationCode': '验证码',
             'password': '密码'
         };
@@ -273,6 +336,10 @@ class InteractWrap extends React.Component {
                 if (!this.state[typeName]) {
                     if (typeName === 'password') {
                         alert('密码为空，输入8-16位的字母和数字组合密码');
+                        return;
+                    }
+                    if (typeName === 'captcha') {
+                        alert('请输入图片验证码');
                         return;
                     }
                     alert(essentialTypeNames[typeName] + "为空，请重新输入");
@@ -286,9 +353,10 @@ class InteractWrap extends React.Component {
     handleJump = (data) => {
         let dict = data.userLogin;
         let jt = $FW.Format.urlQuery().jumpType;
-        let app_url = '/static/loan/outside-register-success-app/index.html',
+        let app_url = `/static/loan/outside-register-success-app/index.html`,
             wx_url = '/static/loan/outside-register-success-wx/index.html',
             other_apps_url = '/static/loan/outside-register-success-other-apps/index.html';
+        //app_url += window.location.search
         switch (jt) {
             case 'app':
                 window.location.href = app_url;
@@ -311,7 +379,7 @@ class InteractWrap extends React.Component {
                     invitCode:dict.invitationCode,
                     uid:dict.uid
                 });
-                window.location.href = '/static/loan/home/index.html';
+                window.location.href = '/static/loan/products/index.html#/';
                 break;
             default:
                 $FW.Store.setUserDict({
@@ -322,8 +390,21 @@ class InteractWrap extends React.Component {
                     invitCode:dict.invitationCode,
                     uid:dict.uid
                 });
-                window.location.href = '/static/loan/home/index.html';
+                window.location.href = '/static/loan/products/index.html#/';
         }
+    }
+
+    getCaptcha = () => {
+        $FW.Post(`${API_PATH}/api/userBase/v1/verifyNum.json`,{sourceType: SOURCE_TYPE}).then((data)=>{
+             this.setState({
+                 url:data.url,
+                 verifyToken:data.verifyToken
+             })
+        }, e => alert(e.message));
+    }
+
+    componentDidMount(){
+        this.getCaptcha();
     }
 
     handleSubmit = () => {
@@ -335,7 +416,6 @@ class InteractWrap extends React.Component {
                 if (!isPasswordValid(this.state.password)) {
                     this.setState({ password: '' });
                 } else {
-                    let encPassword = $FW.Enc(this.state.password);
                     $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
                         channelCode: $FW.Format.urlQuery().channelCode,
                         extInvCode: $FW.Format.urlQuery().extInvCode || '',
@@ -343,7 +423,6 @@ class InteractWrap extends React.Component {
                         invitationCode: this.state.invitationCode,
                         mobile: this.state.phoneNum,
                         password: this.state.password,
-                        encryptedPassword: encPassword,
                         verifyCode: this.state.verificationCode,
                         sourceType: SOURCE_TYPE
                     }).then((data) => {
@@ -369,6 +448,9 @@ class InteractWrap extends React.Component {
         return (
             <div className="interact-wrap">
                 <PhoneNumInput handleChange={this.handleInput} value={this.state.phoneNum} handleClear={this.clearInput} />
+                <Captcha value={this.state.captcha} handleChange={this.handleInput} handleClear={this.clearInput} url={this.state.url}
+                         reGetCaptcha={this.getCaptcha}
+                />
                 <VerificationCodeInput value={this.state.verificationCode} verificationCodeInfo={this.state.timeRemainForNewCode === 60
                     ? "获取验证码"
                     : this.state.timeRemainForNewCode + "s"} handleChange={this.handleInput} handleClick={this.getVerificationCode} handleClear={this.clearInput} />
@@ -379,7 +461,7 @@ class InteractWrap extends React.Component {
                 <button className="register-button" onClick={this.handleSubmit}>
                     立即领钱
                 </button>
-                <Nav className='jump-login' href='/static/loan/user-entry/index.html'>已有账号？立即登录 >></Nav>
+                <Nav className='jump-login' href='/static/loan/account/index.html#/entry'>已有账号？立即登录 >></Nav>
                 { this.state.showRegisteredMask &&
                     <div className="mask">
                         <div className="pop-wrap">
@@ -387,7 +469,7 @@ class InteractWrap extends React.Component {
                             <img className="close-icon" src="images/close-icon.jpg" onClick={() => {this.setState({showRegisteredMask: false})}}></img>
                             <div className="mask-opts">
                                 <div className="close-mask" onClick={() => {this.setState({showRegisteredMask: false})}}>关闭</div>
-                                <Nav className="to-next" href="/static/loan/user-entry/index.html">立即登录</Nav>
+                                <Nav className="to-next" href="/static/loan/account/index.html#/entry">立即登录</Nav>
                             </div>
                         </div>
                     </div>

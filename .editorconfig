@@ -13,7 +13,7 @@ charset = utf-8
 [*.{html,js,jsx,css,less}]
 indent_style = space
 trim_trailing_whitespace = true
-insert_final_newline = true
+insert_final_newline = false
 max_line_length = 200
 spaces_around_operators = true
 spaces_around_brackets = both
@@ -23,7 +23,7 @@ indent_brace_style = K&R
 indent_size = 4
 
 [*.{css,less}]
-indent_size = 2
+indent_size = 4
 
 # Matches the exact files either package.json or .travis.yml
 [{package.json}]

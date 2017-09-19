@@ -1,0 +1,69 @@
+.bg {
+    background: #534ea1;
+    height: 100%;
+}
+
+.download-wrap {
+    background: url(../images/mortgage-download/bg.jpg) no-repeat center top;
+    width: 720px;
+    padding-top: 200px;
+}
+
+.qr-img {
+    margin-top: 138px;
+    margin-left: -8px;
+}
+
+.qr-img img {
+    display: block;
+    width: 265px;
+    margin: 0 auto;
+}
+
+.text-area {
+    text-align: center;
+    color: #928dd1;
+    font-size: 24px;
+}
+
+.download-area {
+    margin: 158px 0 0 0;
+}
+
+.download-area .text {
+    color: #fff;
+    font-size: 30px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.download-area .btn {
+    width: 530px;
+    height: 74px;
+    margin: 40px auto 0;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 74px;
+    font-size: 28px;
+}
+
+.download-area .btn a {
+    display: block;
+    width: 530px;
+    height: 74px;
+    color: #45408a;
+}
+
+.download-area .btn img {
+    width: 36px;
+    position: relative;
+    top: 10px;
+    margin: 0 15px 0 0;
+}
+
+.download-area .android-btn {
+    img {
+        top: 14px;
+    }
+}

@@ -1,0 +1,221 @@
+.infoPanel {
+    height: 100%;
+    background-color: #ebebee;
+    font-family: 'PingFangSC-Regular, sans-serif';
+    color: #555;
+}
+
+.topInfo {
+    width: 100%;
+    height: 187px;
+    background: #5b6993;
+    display: table;
+    font-size: 22px;
+    color: #fff;
+}
+
+.infoRate {
+    width: 359px;
+    float: left;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.rateUp, .dateUp {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.rateUp .percent {
+    font-size: 24px;
+    padding-left: 5px;
+}
+
+.dateUp .percent {
+    font-size: 24px;
+    padding-left: 5px;
+}
+
+.garyGap {
+    width: 2px;
+    height: 65px;
+    float: left;
+    background-color: #8690ae;
+    margin-top: 61px;
+}
+
+.infoDate {
+    width: 359px;
+    float: right;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.tipsBox {
+    width: 690px;
+    height: 28px;
+    border-bottom: 1px solid #d8d8d8;
+    padding: 20px 0 20px 30px;
+    background-color: #ebebee;
+}
+
+.tipsBox .tipsItem {
+    font-size: 22px;
+    color: #5b7aa4;
+    background-color: #fff;
+    border: 1px solid #5b7aa4;
+    padding: 5px;
+    margin-right: 20px;
+    border-radius: 4px;
+}
+
+.flowBox {
+    width: 100%;
+    height: 243px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.flowHeader {
+    width: 690px;
+    height: 90px;
+    padding-left: 30px;
+    border-bottom: 1px solid #d8d8d8;
+    background-color: #f9f9f9;
+    font-size: 32px;
+    color: #333;
+    line-height: 90px;
+}
+
+.flowContent {
+    width: 674px;
+    height: 101px;
+    padding: 26px 21px 25px 25px;
+    background-color: #ffffff;
+    display: table;
+    position: relative;
+}
+
+.tab-item {
+    width: 25%;
+    height: 100%;
+    float: left;
+    font-size: 26px;
+    color: #555555;
+    text-align: center;
+    padding-top: 70px;
+}
+
+.tab-book {
+    background: url("../../images/reserve/info/flow1.png") no-repeat center 0;
+}
+
+.tab-froze {
+    background: url("../../images/reserve/info/flow2.png") no-repeat center 0;
+}
+
+.tab-bid {
+    background: url("../../images/reserve/info/flow3.png") no-repeat center 0;
+}
+
+.tab-interest {
+    background: url("../../images/reserve/info/flow4.png") no-repeat center 0;
+}
+
+.icon-arrow {
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    background: url("../../images/reserve/info/arrow.png") no-repeat center;
+}
+
+.icon-arrow1 {
+    top: 45px;
+    left: 180px;
+}
+
+.icon-arrow2 {
+    top: 45px;
+    left: 340px;
+}
+
+.icon-arrow3 {
+    top: 45px;
+    right: 160px;
+}
+
+.introduceBox {
+    background-color: #fff;
+    width: 100%;
+    height: 770px;
+    line-height: 36px;
+}
+
+.introduceTitle {
+    width: 690px;
+    height: 90px;
+    padding-left: 30px;
+    border-bottom: 1px solid #d8d8d8;
+    border-top: 1px solid #d8d8d8;
+    background-color: #f9f9f9;
+    font-size: 32px;
+    color: #333;
+    line-height: 90px;
+    margin-top: 20px;
+}
+
+.introduceText {
+    width: 650px;
+    padding: 30px 40px 140px 30px;
+    font-size: 24px;
+    color: #999;
+}
+
+.textTitle {
+    font-size: 26px;
+    color: #555;
+    margin-bottom: 18px;
+    font-family: PingFangSC-Regular, sans-serif;
+}
+
+.sectionOne {
+    margin-bottom: 50px;
+    font-family: PingFangSC-Regular, sans-serif;
+}
+
+.bottomBox {
+    width: 690px;
+    height: 78px;
+    padding: 20px 0 20px 30px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 10px #ccc;
+    display: table;
+}
+
+.recordBtn {
+    width: 316px;
+    height: 74px;
+    line-height: 74px;
+    background-color: #7c9dc7;
+    font-size: 32px;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    margin-right: 30px;
+    float: left;
+}
+
+.reserveBtn {
+    width: 316px;
+    height: 74px;
+    line-height: 74px;
+    background-color: #fd4d4c;
+    font-size: 32px;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    float: left;
+}
+

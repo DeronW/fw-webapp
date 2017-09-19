@@ -1,0 +1,187 @@
+.header-placeholder {
+    height: 50px;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    height: 50px;
+    z-index: 1000;
+}
+
+.header-panel {
+    width: 1140px;
+    margin: 0 auto;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+}
+
+.nav-link {
+    margin-right: 20px;
+    height: 100%;
+    display: inline-block;
+}
+
+.nav-link img {
+    margin-top: 13px;
+}
+
+.btn-link {
+    float: right;
+    padding: 0 10px;
+    color: #fff;
+    font-size: 14px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-link-sp {
+    margin: 18px 5px 0;
+    width: 1px;
+    background: #fff;
+    float: right;
+    height: 14px;
+}
+
+.btn-download-app {
+    position: relative;
+}
+
+.btn-download-app:hover .download-app {
+    display: block;
+}
+
+.download-app {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: -36px;
+    width: 150px;
+    background: whitesmoke;
+    text-align: center;
+    border: 1px solid #ededed;
+    border-radius: 8px;
+}
+
+.download-app img {
+    margin: 10px auto;
+    display: block;
+}
+
+.download-app a {
+    margin: 10px auto;
+    display: block;
+    line-height: 30px;
+}
+
+a.d-download {
+    line-height: 10px;
+    margin: 0 auto;
+    font-size: 13px;
+    color: #555;
+}
+
+.d-android,
+.d-ios {
+    height: 30px;
+    line-height: 30px;
+    width: 120px;
+    display: block;
+    margin: 10px auto 0;
+    color: white;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.d-android {
+    background: #fb6455;
+}
+
+.d-ios {
+    background: #8fbfff;
+}
+
+.header-user {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0 8px;
+    position: relative;
+    cursor: pointer;
+    height: 50px;
+    line-height: 24px;
+    border: 1px solid transparent;
+    border-top: 0;
+}
+
+.header-user:hover {
+    background: #fff;
+    color: #333;
+    border: 1px solid #aaa;
+    border-bottom: 1px solid #fff;
+}
+
+.header-username {
+    color: #333;
+}
+
+.header-user:hover .header-user-panel {
+    display: block;
+}
+
+.header-user-panel {
+    display: none;
+    position: absolute;
+    width: 240px;
+    height: 98px;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid #aaa;
+    border-top: 0;
+    line-height: 20px;
+    top: 36px;
+    left: -1px;
+    font-size: 12px;
+    background: #fff;
+    color: #333;
+    z-index: 999;
+}
+
+.arrow {
+    margin-left: 5px;
+}
+
+.realname {
+    height: 20px;
+}
+
+.user-link {
+    width: 65px;
+    height: 65px;
+    float: left;
+    display: block;
+}
+
+.user-link img {
+    width: 65px;
+    height: 65px;
+}
+
+.header-user-links {
+    margin-left: 72px;
+}
+
+.btn-recharge {
+    display: inline-block;
+    width: 113px;
+    height: 24px;
+    background: #f9655a;
+    line-height: 24px;
+    text-align: center;
+    color: #fff!important;
+    border-radius: 2px;
+    margin-top: 20px;
+}

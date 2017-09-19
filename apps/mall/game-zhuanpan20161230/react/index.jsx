@@ -78,9 +78,7 @@ const NineActivity = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('大转盘');
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"大转盘"} back_handler={backward}/>, HEADER_NODE);
-    }
+    ReactDOM.render(<Header title={"大转盘"} back_handler={backward}/>, HEADER_NODE);
 
     $FW.Ajax({
         url: `${API_PATH}/mall/api/magic/v1/user.json`, //用户信息
@@ -90,8 +88,8 @@ $FW.DOMReady(function () {
     })
 });
 function backward() {
-    // $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/game/index.html?mallHead=true' 
-    // $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html' 
+    // $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/game/index.html?mallHead=true'
+    // $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html'
     history.go(-1);
 }
 function getBrowserType() {
