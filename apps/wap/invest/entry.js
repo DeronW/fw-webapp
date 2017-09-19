@@ -1,4 +1,3 @@
-import "babel-polyfill";
 
 import { render } from 'react-dom'
 import { Post, Get, Ajax, StoreSpy } from './helpers'
