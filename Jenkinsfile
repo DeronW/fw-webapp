@@ -28,7 +28,7 @@ node(node_name) {
     }
 
     stage('Update nodejs lib'){
-        if(params.FORCE) {
+        if(params.FORCE || params.INITIALIZE) {
             sh 'npm install'
         }
         if(!params.FORCE && !params.INITIALIZE) {
