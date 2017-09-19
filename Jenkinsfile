@@ -2,7 +2,11 @@
 // major node is : front
 // backup node is : front-virtual
 
-def node_name = params.JENKINS_NODE == 'front-virtual' ? 'front-virtual' : 'front'
+def node_name = 'front'
+
+if(params.JENKINS_NODE == 'front-virtual') {
+    node_name = 'front-virtual'
+}
 
 node(node_name) {
     stage('check ENV'){
