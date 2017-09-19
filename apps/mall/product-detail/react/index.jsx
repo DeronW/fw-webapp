@@ -314,7 +314,7 @@ const PlusMinus = React.createClass({
                 </div>
                 <a className="btn-buy btn-buy-card" onClick={this.toggleOverlay}>加入购物车</a>
                 <a onClick={this.buyHandler} className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>
-                    {this.props.stock < 1 ? '售罄' : '立即购买'}
+                    {this.props.stock < 1 ? '售罄' : '立即兑换'}
                 </a>
             </div>
         )
