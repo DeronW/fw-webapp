@@ -8,7 +8,8 @@ import Stores from './stores'
 import { Post, StoreSpy } from '../lib/helpers'
 
 let stores = {
-    invite_activity: new Stores.InviteActivity(Post)
+    invite_activity: new Stores.InviteActivity(Post),
+    weixin_invite: new Stores.WeixinInvite(Post)
 }
 
 new StoreSpy(stores).wiretap()
