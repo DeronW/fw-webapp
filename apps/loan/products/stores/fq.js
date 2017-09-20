@@ -29,7 +29,7 @@ export default class Fq {
     }
 
     get_base_info = () => {
-        return this.Post(`/api/product/v1/productDetail.json`,{pid:this.pid})
+        return this.Post(`/api/product/v1/productDetail.json`,{productId:this.pid})
         .then(data=>{
             this.productLogo = data.productLogo;
             this.productName = data.productName;
