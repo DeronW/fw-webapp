@@ -42,7 +42,7 @@ export default class Fq {
             this.serviceRateStr = data.serviceRateStr;
             this.commRateStr = data.commRateStr;
         }).then(()=>{
-            return this.Post(`/api/loan/v1/baseinfo.json`)
+            return this.Post(`/api/loan/v1/baseinfo.json`,{productId:this.pid})
         }).then(data=>{
             this.borrowStatus = data.borrowStatus
         }).then(()=>{
