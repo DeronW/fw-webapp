@@ -39,11 +39,11 @@ class RegisterSuccess extends React.Component {
     render() {
 
         const TYPE_TEXT = {
-            'A': '元返现券礼包 + 新手专享特权',
+            'A': '元返现券礼包',
             'B': '返息券已经转入您的账户中',
             'C': '工分已经转入您的账户中',
             '1': '工豆已经转入您的账户中',
-            'G': 'g 黄金券已转入您的账户中'
+            'G': '克 返金券礼包已转入您的账户中'
         }
 
         return <div styleName="bg">
