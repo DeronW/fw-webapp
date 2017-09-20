@@ -42,7 +42,11 @@ class Cookbook extends React.Component {
                 </div>
                 <a styleName="link"
                     href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y">完整新手秘笈 &gt; </a>
+                <div styleName="text-1-1">
+                    注册即送200元返现券和2.6克返金券礼包
+                </div>
                 <img src={require("../../images/features/cookbook/3.png")} />
+
                 <img onClick={this.registerHandler}
                     src={require("../../images/features/cookbook/4.png")} />
 

@@ -72,8 +72,15 @@
     color: #769cf6;
 }
 
-.section {}
 
 .bg a {
     color: #769cf6;
+}
+
+.text-1-1 {
+    position: absolute;
+    font-size: 24px;
+    color: #777;
+    left: 190px;
+    top: 145px;
 }
