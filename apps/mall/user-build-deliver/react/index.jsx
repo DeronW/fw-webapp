@@ -188,7 +188,7 @@ const Address = React.createClass({
     render: function () {
         return (
             <div>
-                {$FW.Browser.appVersion() >= $FW.AppVersion.show_header ? <Header title={'新建收货地址'}/> : null}
+                <Header title={'新建收货地址'}/>
                 <div className="new-deliver-address">
                     <div className="deliver-info">收货人信息：</div>
                     <div className="deliver input-div">
