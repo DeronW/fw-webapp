@@ -93,7 +93,7 @@ export default class WeixinInvite extends React.Component {
                         <div styleName="top-tip">长按复制链接分享给好友</div>
                     <div styleName="btm-tip"><input type="text" value={weixin_invite.shareLink+ `&jumpType=${Browser.inWeixin ? 'to_home' : 'app'}`}/></div>
                     </div>}
-                    {Broswer.inApp && <div styleName="invite-btn" onClick = {this.nativeShare}></div>}
+                    {Browser.inApp && <div styleName="invite-btn" onClick = {this.nativeShare}></div>}
                 </div>}
                 {!Browser.inApp && this.state.recordsShow && <div styleName="tab-content-item">
                     <div styleName="tab-content-item-wrap2">
