@@ -21,7 +21,10 @@ import LoopLoanCard from './pages/loan-youyi-card.js'
 import FxhIndex from './pages/loan-fxh-index.js'
 import FxhWant from './pages/loan-fxh-want.js'
 import FxhConfirm from './pages/loan-fxh-confirm.js'
-import FxhResult from './pages/loan-fxh-result'
+import FxhResult from './pages/loan-fxh-result.js'
+
+import FqIndex from '/pages/loan-fq-index.js'
+import FqForm from './pages/loan-fq-form.js'
 
 import * as Protocols from './pages/protocols/'
 
@@ -40,6 +43,9 @@ export default (stores) => {
                 <Route exact path='/loan-fxh-want' component={FxhWant} />
                 <Route exact path='/loan-fxh-confirm' component={FxhConfirm} />
                 <Route exact path='/loan-fxh-result' component={FxhResult} />
+
+                <Route exact path='/loan-fq-index' component={FqIndex} />
+                <Route exact path='/loan-fq-form' component={FqForm} />
 
                 {/* 房屋抵押贷款  */}
                 <Route exact path='/mortgage-download' component={MortgageDownload} />
