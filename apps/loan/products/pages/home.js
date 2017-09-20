@@ -69,7 +69,7 @@ class Home extends React.Component {
                 if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index');
                 if (props.productId == 1) gotoHandler('/static/loan/products/index.html#/loan-fxh-index', 'fxh_detail')
                 // if (props.productId == 1) gotoHandler('/static/loan/fxh/index.html', 'fxh_detail')
-                if (props.productId == 21) gotoHandler('/static/loan/products/index.html#/loan-fq-index?pid=21')
+                if (props.productId == 21) gotoHandler('/static/loan/dumiao/index.html?pid=21')
             }
 
             return <a styleName="product" key={index} onClick={clichHandler}>
