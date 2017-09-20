@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { observer, inject } from 'mobx-react'
-import { Header } from '../components'
+import {observer, inject} from 'mobx-react'
+import {Header} from '../components'
 import styles from '../css/faq.css'
 import {Browser} from '../helpers'
 
@@ -118,10 +118,10 @@ const QUESTIONS = [
                 a: '特殊用户是指大陆境外的港澳台用户，以及因户口动迁等原因导致无法线上进行身份验证开户的用户。徽商银行资金存管上线前已注册并有资金记录行为的特殊用户可以正常进行充值、出借、提现，未注册的新特殊用户，抱歉暂不能为您提供服务。'
             }, {
                 q: '用户提现条件是什么? 有什么限制?',
-                a: '已注册、已开户（已绑卡）、已设置交易密码的用户，可以进行提现。个人用户提现和机构提现，单日最高提现次数为10次，总提现金额最高不超过1000万，单笔最高提现金额最高不超过1000万元。单月笔数和总金额不做限制。'
+                a: '已注册、已开户（已绑卡）、已设置交易密码的个人和机构用户，均可以进行提现。同一个用户单日总提现次数不能超过10次，单日提现限额为2000万元（含）。单月笔数和总金额不做限制。'
             }, {
                 q: '用户提现方式有哪些？',
-                a: '根据提现金额和到账时间，提现分为实时提现和大额提现两种方式。实时提现：10万及以下的提现，工作日及节假日7*24小时实时到账。大额提现：10万及以上的大额提现，在工作日5*8小时（9:00-17:00）到账，最快30分钟内到账，实际到账时间以发卡行为准。大额提现需填写开户支行。'
+                a: '提现分为实时提现和大额提现两种方式。1.实时提现：中行、农行、工行、建行、交行、上海银行、平安银行单笔限额5.00万（含）以下，单日总限额50万（含）以下；其它银行单笔限额5.00万（含）以下，单日总限额20万（含）以下，工作日及节假日7*24小时实时到账。各银行实际提现限额以页面提示的额度为准。2.大额提现：单笔/单日额度不限，工作日9:00-16:30可用，预计2小时内到账，实际到帐时间以发卡行为准。大额提现需填写联行号（开户支行）。'
             }, {
                 q: '提现收手续费吗？怎么收取？',
                 a: '（1）用户在工场微金有过一笔出借后，提现免收手续费；<br>（2）充值后无出借的提现，收取0.4%的手续费；<br>（3）手续费在进行提现交易时实时收取。'
@@ -216,18 +216,18 @@ const QUESTIONS = [
                 q: '什么是违约金？',
                 a: '违约金是正常还款下，除应还本息之外，补充分配给出借人的金额。'
             },
-            {
-                q: '违约金分类',
-                a: '违约金分为逾期违约金和提前还款违约金'
-            },
-            {
-                q: '何时分配逾期违约金？',
-                a: '由第三方担保机构提供本金利息保证的项目，逾期时首先由担保机构及时代偿，担保机构代偿失效时，将会产生逾期违约金。'
-            },
-            {
-                q: '何时分配提前还款违约金？',
-                a: '提前还款是每个借款人可享的权利，为保障出借人利益，借款人提前还款后，需缴纳提前还款违约金，由工场微金分配给出借人作为出借损失补偿。'
-            }]
+                {
+                    q: '违约金分类',
+                    a: '违约金分为逾期违约金和提前还款违约金'
+                },
+                {
+                    q: '何时分配逾期违约金？',
+                    a: '由第三方担保机构提供本金利息保证的项目，逾期时首先由担保机构及时代偿，担保机构代偿失效时，将会产生逾期违约金。'
+                },
+                {
+                    q: '何时分配提前还款违约金？',
+                    a: '提前还款是每个借款人可享的权利，为保障出借人利益，借款人提前还款后，需缴纳提前还款违约金，由工场微金分配给出借人作为出借损失补偿。'
+                }]
         }]
     }, {
         group_title: '了解项目',
@@ -278,7 +278,7 @@ class List extends React.Component {
         }
 
         return <div styleName="bg">
-            {(!Browser.inApp) && <Header title="帮助中心" history={this.props.history} />}
+            {(!Browser.inApp) && <Header title="帮助中心" history={this.props.history}/>}
             {QUESTIONS.map(group)}
         </div>
     }
@@ -312,7 +312,7 @@ class Page extends React.Component {
     toggleHandler = (index) => {
         let opened = this.state.opened.slice();
         opened[index] = opened[index] == 'show' ? 'hide' : 'show';
-        this.setState({ opened: opened });
+        this.setState({opened: opened});
     }
 
     render() {
@@ -324,12 +324,12 @@ class Page extends React.Component {
                     <div styleName="icon-down-arrow"></div>
                     {i.q}
                 </div>
-                <div styleName="a" dangerouslySetInnerHTML={{ __html: i.a }}></div>
+                <div styleName="a" dangerouslySetInnerHTML={{__html: i.a}}></div>
             </div>
         }
 
         return <div styleName="bg">
-            {(!Browser.inApp) && <Header title="帮助中心" history={this.props.history} />}
+            {(!Browser.inApp) && <Header title="帮助中心" history={this.props.history}/>}
             <div styleName="topic-title">{this.state.topic.topic_title}</div>
             <div styleName="topic-content">
                 {this.state.topic.topic_items.map(qa)}

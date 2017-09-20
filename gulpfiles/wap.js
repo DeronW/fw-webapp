@@ -43,7 +43,7 @@ const TOPIC_PAGES = [
     'topic-invite', //邀请返利, 邀请人,
     'topic-gong-you-hui', //工友会专题页面,
     'topic-invite-strategy', //邀请攻略页面
-    'topic-novice-strategy', //新手策略页面
+    // 'topic-novice-strategy', //新手策略页面
     'topic-invest-school', // 投资学堂
 ]
 
@@ -76,7 +76,7 @@ const OUTSIDE_PAGES = [
     'outside-register-aisidi' //爱施德注册页面
 ]
 
-const P2P = [
+// const P2P = [
     // 'p2p-invite', //P2P邀请返利, 邀请人
     // 'p2p-interest-reward', //P2P年化加息奖励
     // 'p2p-vip-prerogative',
@@ -88,7 +88,7 @@ const P2P = [
     // 'p2p-notice-safeguard', //p2p资金安全保障
     // 'p2p-notice-information-disclosure', //微金信息披露
     // 'p2p-topic-invest-school', //微金投资学堂页面
-]
+// ]
 
 // const REFACTOR_PAGES = [{
 //     name: 'invest',

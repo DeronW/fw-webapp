@@ -38,7 +38,7 @@ class Novice extends React.Component {
             <div styleName="novice-title"> 新手策略 </div>
             <div styleName="model model-new">
                 <div styleName="text new-text">
-                    成功注册即获<span styleName="yellow">新手大礼包</span>。分为20元、40元、60元、80元的返现券和0.1g、0.5g、2g的反金券，如何正确的首投赚更多呢？
+                    成功注册即获<span styleName="yellow">新手大礼包</span>。分为20元、40元、60元、80元的返现券和0.1克、0.5克、2克的返金券，如何正确的首投赚更多呢？
         </div>
             </div>
             <div styleName="model model-primary">

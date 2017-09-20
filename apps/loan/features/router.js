@@ -14,6 +14,7 @@ import Download from './pages/download.js'
 import Waiting from './pages/waiting.js'
 import FxhappDownload from './pages/fxhapp-download.js'
 import JrgcappDownload from './pages/jrgcapp-download.js'
+import WeixinInvite from './pages/weixin-invite.js'
 
 
 export default(stores) => {
@@ -32,6 +33,7 @@ export default(stores) => {
                 <Route exact path='/invite-activity' component={InviteActivity}/>
                 <Route exact path='/follow-fxh' component={FxhappDownload}/>
                 <Route exact path='/follow-jrgc' component={JrgcappDownload}/>
+            <Route exact path='/weixin-invite' component={WeixinInvite}/>
             </Switch>
         </Provider>
     </Router>
