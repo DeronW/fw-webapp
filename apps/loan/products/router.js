@@ -23,7 +23,7 @@ import FxhWant from './pages/loan-fxh-want.js'
 import FxhConfirm from './pages/loan-fxh-confirm.js'
 import FxhResult from './pages/loan-fxh-result.js'
 
-import FqIndex from '/pages/loan-fq-index.js'
+import FqIndex from './pages/loan-fq-index.js'
 import FqForm from './pages/loan-fq-form.js'
 
 import * as Protocols from './pages/protocols/'
