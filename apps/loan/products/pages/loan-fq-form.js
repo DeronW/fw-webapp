@@ -13,13 +13,7 @@ export default class FqForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            popShow: false,
-            start: 0,
-            end: 580,
-            defaultValue: 580,
-            loanNum: 0,
-            loanShow: false,
-            improveShow: false
+
         }
     }
     render(){
