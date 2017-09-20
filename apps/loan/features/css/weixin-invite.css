@@ -247,3 +247,11 @@ input{
     height:500px;
     overflow:scroll;
 }
+.invite-btn{
+    background:url(../images/weixin-invite/invite-btn.jpg) no-repeat;
+    background-size:100% 100%;
+    width:658px;
+    height:151px;
+    position:fixed;
+    bottom:0;
+}

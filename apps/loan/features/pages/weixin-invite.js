@@ -48,6 +48,17 @@ export default class WeixinInvite extends React.Component {
     getCode = link => {
         return (String(String(link.split("?")[1]).split("&")[1]).split("="))[1];
     }
+    nativeShare = () => {
+        let inviteCode = Utils.hashQuery.yqm;
+        NativeBridge.command.share({
+            title: '掌上钱包，随用随取',
+            image: 'https://static.9888.cn/images/loan/invitation.jpg',
+            link: `https://m.easyloan888.com/static/loan/outside-register/index.html?channelCode=OFFICIAL&invitationCode=${inviteCode}&jumpType=wx`,
+            desc: '缺钱不用愁，注册放心花，借款神器，急速到账'
+
+
+        })
+    }
     render() {
         let {weixin_invite} = this.props;
         let {hasData,invitationRecord} = weixin_invite;
@@ -78,12 +89,13 @@ export default class WeixinInvite extends React.Component {
                         <div styleName="rule-item">放心花，有钱赚，快来邀友来借款，有！福！同！享！</div>
                         {/* <!--<div styleName="rule-item">放心花是由深圳市众利财富管理有限公司推出的基于移动端线上贷款信息聚合平台，满足您的各类贷款需求。</div>--> */}
                     </div>
-                    <div styleName="copy-link">
+                    {!Browser.inApp && <div styleName="copy-link">
                         <div styleName="top-tip">长按复制链接分享给好友</div>
                     <div styleName="btm-tip"><input type="text" value={weixin_invite.shareLink+ `&jumpType=${Browser.inWeixin ? 'to_home' : 'app'}`}/></div>
-                    </div>
+                    </div>}
+                    {Broswer.inApp && <div styleName="invite-btn" onClick = {this.nativeShare}></div>}
                 </div>}
-                {this.state.recordsShow && <div styleName="tab-content-item">
+                {!Browser.inApp && this.state.recordsShow && <div styleName="tab-content-item">
                     <div styleName="tab-content-item-wrap2">
                         {invitationRecord.length > 0 && invitationRecord.map(record_item)}
                         {invitationRecord.length == 0 && <div styleName="more">暂无数据</div>}
