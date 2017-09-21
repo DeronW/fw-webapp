@@ -82,7 +82,7 @@ export default class Account {
         if (err) return Components.showToast(err)
 
         this.Post('/api/userBase/v1/login.json', {
-            mobile: this.data.phone,
+            mobile: this.data.phone || Storage.getUserDict().phone,
             password: password
         }).then(data => {
             let dict = data.userLogin
