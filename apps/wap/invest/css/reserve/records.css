@@ -128,7 +128,7 @@
 
 .tabWrapperIos {
     composes: tabWrapper;
-    top: 127px;
+    top: 126px;
     left: 0;
 }
 
