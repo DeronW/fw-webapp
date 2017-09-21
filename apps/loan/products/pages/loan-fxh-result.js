@@ -29,6 +29,8 @@ export default class FxhResult extends React.Component {
     componentDidMount() {
         document.title = "借款结果"
         let { fxh } = this.props;
+        let orderGid = Utils.hashQuery.orderGid;
+        fxh.saveOrderGid();
         fxh.get_card_list();
         this.countingDown();
     }
@@ -56,8 +58,9 @@ export default class FxhResult extends React.Component {
             , 1000);
     }
     checkAjax = () => {
-        let orderGid = Utils.hashQuery.orderGid;
-        Post(`/api/loan/v1/status.json`, { orderGid: orderGid }).then((data) => {
+        // let orderGid = Utils.hashQuery.orderGid;
+        let { fxh } = this.props;
+        Post(`/api/loan/v1/status.json`, { orderGid: fxh.orderGid }).then((data) => {
             let finishFlag = true;
             if (data.loanStatus == 6) {
                 this.setState({ waitingResultShow: false, successResultShow: true });
