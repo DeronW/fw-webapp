@@ -30,19 +30,20 @@ export default class InviteActivity extends React.Component {
             link: `https://m.easyloan888.com/static/loan/outside-register/index.html?channelCode=OFFICIAL&invitationCode=${inviteCode}&jumpType=wx`,
             desc: '缺钱不用愁，注册放心花，借款神器，急速到账'
 
-            
+
         })
     }
     componentDidMount(){
         let {invite_activity} = this.props;
         invite_activity.getShareLink();
         NativeBridge.setTitle("放心花");
-        
+
     }
     render(){
         let {invite_activity,history} = this.props;
         let goBack = () => {
-            Browser.inApp ? NativeBridge.close() : history.goBack()
+            // Browser.inApp ? NativeBridge.close() : history.goBack()
+            Browser.inApp ? NativeBridge.close() : window.close()
         }
         return <div styleName="bg">
             {!Browser.inApp && !Browser.inWeixin && <Header title="放心花" goBack={goBack}/>}

@@ -124,9 +124,13 @@ export default class FxhResult extends React.Component {
             sourceType = 4;
         if (jrgc_web)
             sourceType = 5;
+
+        let goBack = () => {
+            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
+        }
         return (
             <div>
-                <Header title="借款结果" />
+                <Header title="借款结果" goBack = {goBack}/>
                 <div styleName="loan-result">
                     <div styleName={Browser.inIOS
                         ? "result-box-ios"
