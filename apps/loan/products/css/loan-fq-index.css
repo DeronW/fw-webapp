@@ -94,7 +94,6 @@ body {
 .datail-list {
     margin-bottom: 20px;
     background-color: #fff;
-    overflow:hidden;
 }
 
 .datail-list .title {
@@ -116,11 +115,11 @@ body {
 }
 
 .datail-list .info-block {
-    padding:0 30px 20px;
+    padding:20px 30px;
     font-size: 22px;
     line-height: 40px;
     color: #666;
-    float:left;
+    text-align:left;
 }
 
 .datail-list:last-child {
