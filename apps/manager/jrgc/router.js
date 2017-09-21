@@ -13,6 +13,7 @@ export default (stores) => {
         <Provider {...stores}>
             <Switch>
                 <Route exact path="/" component={Home.Mine}/>
+                <Route exact path="/home-rebate" component={Home.Rebate}/>
             </Switch>
         </Provider>
     </Router>
