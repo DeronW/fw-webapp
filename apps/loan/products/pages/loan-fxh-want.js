@@ -21,7 +21,6 @@ export default class FxhWant extends React.Component {
     state = {
         loanNum: Utils.hashQuery.sliderNum,
         creditLine: "",
-        // orioleOrderGid: Utils.hashQuery.orioleOrderGid,
         orderGid: null,
         loanGid: null,
         showToZH: false,
@@ -42,10 +41,6 @@ export default class FxhWant extends React.Component {
 
     loanHandler = () => {
         let { fxh } = this.props;
-        // fxh.saveLoanNum(this.state.loanNum);
-        // let query = $FW.Format.urlQuery();
-        // let loanNum = Utils.hashQuery.loanNum;
-        // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
         let lowestLoan = fxh.data.lowestLoan;
         let creditLine = fxh.data.creditLine;
         let n = parseInt(this.state.loanNum) || 0, err;
@@ -70,17 +65,10 @@ export default class FxhWant extends React.Component {
 
         let format = x => Math.round(Math.max(lowestLoan, Math.min(x, creditLine)) / 100) * 100;
 
-        //err && $FW.Component.Toast(err);
         this.setState({ loanNum: format(n) });
 
 
-        // let cashBank = this.props.userBankList.withdrawBankcard;
-        //
-        // function isRealNameBindCard(ele) {
-        //     return ele.isRealNameBindCard == true;
-        // }
-        // let filtered = cashBank.filter(isRealNameBindCard);
-        // let user = $FW.Store.getUserDict();
+
         Post(`/api/loan/v1/apply.json`, {
             loanAmount: this.state.loanNum,
             orioleOrderGid: fxh.data.orioleOrderGid,
@@ -94,7 +82,6 @@ export default class FxhWant extends React.Component {
             }
         }, (err) => {
             if (err.code == 24003 || err.code == 24005) return this.setState({ loanShow: true, failMsg: err.message })
-            // Components.showToast(err.message);
         });
     }
 
@@ -104,14 +91,10 @@ export default class FxhWant extends React.Component {
 
     render() {
         let { fxh, history } = this.props;
-        // const USER = $FW.Store.getUserDict();
         let interest = fxh.baseRateDay * 100;
         let cashBank = fxh.cashBankList;
 
-        // function isRealNameBindCard(ele) {
-        //     return ele.isRealNameBindCard == true;
-        // }
-        // let filtered = cashBank.filter(isRealNameBindCard);
+
 
         return (
             <div>
