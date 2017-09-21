@@ -6,14 +6,17 @@ import {
     Switch
 } from 'react-router-dom'
 
-import { Home } from './pages'
+
+import * as Home from './pages/home'
 import * as Performance from './pages/performance'
 
 export default (stores) => {
     return <Router>
         <Provider {...stores}>
             <Switch>
-                <Route exact path="/" component={Home}/>
+                <Route exact path="/" component={Home.Mine}/>
+                <Route exact path="/home-rebate" component={Home.Rebate}/>
+                {/* 业绩 相关页面 */}
                 <Route exact path="/performance" component={Performance.Performance}/>
             </Switch>
         </Provider>

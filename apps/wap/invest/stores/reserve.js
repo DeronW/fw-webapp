@@ -51,12 +51,12 @@ export default class Reserve {
             return {
                 isRisk: this.isRisk,
                 batchMaxmum: this.batchMaxmum,
-                isCompany:this.isCompany
+                isCompany: this.isCompany
             }
         })
     }
 
-    getReserveList = (done, reset) => {
+    getReserveList = (done, reset, status) => {
         if (reset) {
             this.records_page_no = 1
             this.records = []
@@ -67,7 +67,8 @@ export default class Reserve {
 
         this.Post('/api/v1/appointRecordList.shtml', {
             page: this.records_page_no,
-            pageSize: PAGE_SIZE
+            pageSize: PAGE_SIZE,
+            status: status
         }).then(data => {
             this.records.push(...data.pageData.result)
             this.records_page_no++
