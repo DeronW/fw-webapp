@@ -178,5 +178,8 @@
     font-size: 30px;
     color: #4aa1f9;
     margin-left: 16px;
-    font-weight: 700;
+}
+
+.rightRed {
+    color: #fd4d4c;
 }

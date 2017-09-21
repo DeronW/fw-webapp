@@ -98,12 +98,12 @@ class ReserveApply extends React.Component {
             <div styleName="submitInfo">
                 <div styleName="infoContent">
                     <div styleName="infoItem">
-                        <div styleName="itemLeft">期限</div>
-                        <div styleName="itemRight">{reserve.context.repayPeriod}天</div>
+                        <div styleName="itemLeft">预期年化</div>
+                        <div styleName="itemRight rightRed">{reserve.context.loadRate}%</div>
                     </div>
                     <div styleName="infoItem">
-                        <div styleName="itemLeft">预期年化</div>
-                        <div styleName="itemRight">{reserve.context.loadRate}%</div>
+                        <div styleName="itemLeft">期限</div>
+                        <div styleName="itemRight">{reserve.context.repayPeriod}天</div>
                     </div>
                     <div styleName="infoItem">
                         <div styleName="itemLeft">预约有效期</div>
