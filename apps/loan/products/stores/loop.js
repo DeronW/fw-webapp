@@ -104,8 +104,6 @@ export default class LoopLoan {
             sign: sign
         }).then((data) => {
             this.zmScore = data.zmScore;
-        }, () => {
-            //this.authFail = true
         });
     }
 
