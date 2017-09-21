@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { inject, observer } from 'mobx-react'
 
-import styles from '../../css/performance/performance.css'
+import styles from '../../css/stats/stats.css'
 
 
 const TABS = ["当天", "7 天", "30 天", "半年"];
@@ -28,7 +28,7 @@ const TabHeader = CSSModules(styles, { allowMultiple: true, errorWhenNotFound: f
 
 
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
-class Performance extends React.Component {
+class Stats extends React.Component {
 
     state = { currentTabNo: 0 }
 
@@ -78,4 +78,4 @@ class Performance extends React.Component {
 
 }
 
-export default Performance
+export default Stats
