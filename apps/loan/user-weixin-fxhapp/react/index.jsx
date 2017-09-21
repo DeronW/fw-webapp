@@ -34,7 +34,7 @@ $FW.DOMReady(() => {
     NativeBridge.setTitle('关注微信');
     let ua = navigator.userAgent;
     // 如果页面在app中打开, 则不显示网页的头部导航
-    if(ua.indexOf('EasyLoan888') < 0){
+    if(ua.indexOf('EasyLoan888') < -1 ){
        ReactDOM.render(<Header title={"关注微信"} />, HEADER_NODE);
     }
     ReactDOM.render(<WeixinCon />, CONTENT_NODE);
