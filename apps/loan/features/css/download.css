@@ -10,6 +10,11 @@
     margin: 255px auto 230px;
 }
 
+.qr-weixin-img{
+    display: block;
+    margin: 355px auto 230px;
+}
+
 .tip {
     width: 530px;
     margin: 10px auto 0;

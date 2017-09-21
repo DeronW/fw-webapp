@@ -40,7 +40,7 @@ class Download extends React.Component {
         return <div styleName="bg">
             {!Browser.inFXHApp && <Header title="关注下载" goBack={goBack} />}
 
-            <img styleName="qr-img" src={require("../images/download/qr.jpg")} />
+            <img styleName={Browser.inWeixin ? "qr-weixin-img" : "qr-img"} src={require("../images/download/qr.jpg")} />
 
             <div styleName="tip">关注放心花微信公众号或使用APP可获得更高借款额度，且随时查看还款计划</div>
 
