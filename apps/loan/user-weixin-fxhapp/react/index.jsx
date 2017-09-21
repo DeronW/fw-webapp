@@ -32,10 +32,15 @@ class WeixinCon extends React.Component {
 
 $FW.DOMReady(() => {
     NativeBridge.setTitle('关注微信');
-    let ua = navigator.userAgent;
-        // 如果页面在app中打开, 则不显示网页的头部导航
-    if(ua.indexOf('EasyLoan888') < 0){
-        ReactDOM.render(<Header title={"关注微信"} />, HEADER_NODE);
-    }
+    ReactDOM.render(<Header title={"关注微信"} />, HEADER_NODE);
+    // var clipboard = new Clipboard('.copy-qr');
+    // //alert(Clipboard.isSupported());
+    // clipboard.on('success', function (e) {
+    //     $FW.Component.Toast('已复制fxhuaba到剪切板');
+    //     e.clearSelection();
+    // });
+    // clipboard.on('error', function (e) {
+    //     $FW.Component.Toast('请选择“拷贝”进行复制!');
+    // });
     ReactDOM.render(<WeixinCon />, CONTENT_NODE);
 })
