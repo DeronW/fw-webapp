@@ -122,13 +122,13 @@
     display: table;
     z-index: 99;
     position: fixed;
-    top: 88px;
+    top: 87px;
     left: 0;
 }
 
 .tabWrapperIos {
     composes: tabWrapper;
-    top: 128px;
+    top: 127px;
     left: 0;
 }
 
