@@ -54,19 +54,10 @@ export default class FxhConfirm extends React.Component {
         if (this.state.checked == false) {
             Components.showToast("请同意借款服务协议，借款确认书和代扣服务协议");
         } else {
-            // let query = $FW.Format.urlQuery();
             let { fxh } = this.props;
-            // let orderGid = Utils.hashQuery.orderGid;
-            // // let orioleOrderGid = Utils.hashQuery.orioleOrderGid;
-            // let loanNum = Utils.hashQuery.loanNum;
-            // fxh.saveOrderGid(orderGid);
-            // // fxh.saveOrioleOrderGid(orioleOrderGid);
-            // fxh.saveLoanNum(loanNum);
-
             fxh.getVerifyCode().then(() => {
                 this.setState({ codePop: true });
                 this.countingDown();
-                //this.setState({orderGid: data.orderGid});
             }, (err) => Components.showToast(err.message));
         }
     }
@@ -99,7 +90,6 @@ export default class FxhConfirm extends React.Component {
         this.setState({
             countdown: 60
         });
-        // this.checkAjax();
         this.timer = setInterval(() => {
             let c = this.state.countdown;
             if (c % 5 === 0 && this.state.loanStatus <= 1);
@@ -118,8 +108,6 @@ export default class FxhConfirm extends React.Component {
         this.setState({ checkResult: true });
     }
     checkAjax = () => {
-        // let query = $FW.Format.urlQuery();
-        // let orderGid = Utils.hashQuery.orderGid;
         let { fxh } = this.props;
         Post(`/api/loan/v1/status.json`, {
             orderGid: fxh.orderGid,
@@ -158,7 +146,6 @@ export default class FxhConfirm extends React.Component {
         clearInterval(this.timer);
     }
     getSMSCode = () => {
-        // let query = $FW.Format.urlQuery();
         let { fxh } = this.props;
         if (this.state.countdown <= 0) {
             this.countingDown();
@@ -166,9 +153,7 @@ export default class FxhConfirm extends React.Component {
         }
     }
     codeConfirmBtnHandler = () => {
-        // let query = $FW.Format.urlQuery();
         let { fxh } = this.props;
-        // let orderGid = Utils.hashQuery.orderGid;
         if (this.state.value == '')
             return Components.showToast("请输入短信验证码");
         this.checkAjax();
@@ -177,13 +162,8 @@ export default class FxhConfirm extends React.Component {
             verifyCode: this.state.value
         }).then(() => {
             this.setState({ codePop: false });
-            // if(Browser.inJRGCApp){
             this.gotoHandler(`/static/loan/products/index.html#/loan-fxh-result?orderGid=${fxh.orderGid}`);
-            // }
-            // else{
-            //     this.resultShow;
-            //     this.getLoanResultCheck;
-            // }
+
         }, e => {
             if (e.code == 603002) {
                 this.setState({ codePop: false, loanShow: true, failMsg: e.message });
