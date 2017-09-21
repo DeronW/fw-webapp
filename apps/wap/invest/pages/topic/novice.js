@@ -21,15 +21,23 @@ class Novice extends React.Component {
             <div styleName="pop-text">
                 <div styleName="p-text ruler">
                     <div styleName="p-title">活动规则：</div>
-                    1：新工友注册送200元返现券礼包<br />
+                    1：新工友注册送200元返现券和2.6克返金券礼包<br />
                     2：首投满额100元起即获得一张0.6%的返息券
-        </div>
+                </div>
                 <div styleName="p-text des">
                     <div styleName="p-title">活动说明：</div>
-                    <div styleName="des-text">1、每张返现券都有对应使用条件：最短投资标的期限、最低投资金额、有效期。可在“我的工场 - 优惠券”中查看返现券明细；</div>
-                    <div styleName="des-text">2、返现券不可抵现金，不可转让，不能用于投资债权转让项目；</div>
-                    <div styleName="des-text">3、除特殊说明外，每次投标可使用多张返现券。投资时请务必勾选“使用返现券”，投资成功即返对应现金至金融工场账户，返还的现金可用于继续投资或提现；</div>
-                    <div styleName="des-text">4、本活动最终解释权归金融工场所有，详情可致电客服热线咨询：<a href="tel:400-0322-988">400-0322-988</a>。</div>
+                    <div styleName="des-text">
+                        1、每张返现券/返金券都有其对应使用条件，可在“我的工场-优惠券”中查看返现/返金明细；
+                        </div>
+                    <div styleName="des-text">
+                        2、返现券/返金券不可直接抵现金/黄金，不可转让，不可用于投资转让项目；
+                    </div>
+                    <div styleName="des-text">
+                        3、除特殊说明外，每次投标可使用多张返现券/返金券。投资时请务必勾选“使用优惠券”，投资成功即返对应现金/黄金，现金返至对应微金or尊享账户，黄金返至工场黄金账户，返还的现金可用于继续投资或提现，返还的黄金可变现；
+                    </div>
+                    <div styleName="des-text">
+                        4、本活动最终解释权归金融工场所有，详细可致电客服热线咨询：
+                        <a href="tel:400-0322-988">400-0322-988</a>。</div>
                 </div>
             </div>
         </div>
