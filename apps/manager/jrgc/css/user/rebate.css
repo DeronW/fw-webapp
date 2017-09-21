@@ -1,8 +1,10 @@
-.header{
+.header {
     width: 100%;
     display: table;
+    height: 88px;
 }
-.btnBack{
+
+.btnBack {
     display: block;
     float: left;
     width: 80px;
@@ -12,9 +14,10 @@
     background-repeat: no-repeat;
     top: 0;
     left: 0;
-    background-image:url('../../images/user/rebate/arrow.png')
+    background-image: url('../../images/user/rebate/arrow.png')
 }
-.tabs{
+
+.tabs {
     height: 56px;
     border: 1px solid #9b5b54;
     float: left;
@@ -25,7 +28,8 @@
     display: table;
     overflow: hidden;
 }
-.tab{
+
+.tab {
     width: 149px;
     height: 56px;
     border-right: 1px solid #9b5b54;
@@ -35,10 +39,12 @@
     font-size: 28px;
     color: #9b5b54;
 }
-.tabActive{
+
+.tabActive {
     color: #fff;
     background: #9b5b54;
 }
-.tab:last-child{
+
+.tab:last-child {
     border: transparent;
 }
