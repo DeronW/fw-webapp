@@ -76,7 +76,7 @@ class RepaymentFangXin extends React.Component {
     }
 
     closePopHandler = () => {
-        this.setState({ show: false, remain: 0 })
+        this.setState({ show: false, remain: 0, code:'' })
         clearInterval(this._timer)
     }
     chooseBank = () => {

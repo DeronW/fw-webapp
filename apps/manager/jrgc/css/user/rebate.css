@@ -1,0 +1,50 @@
+.header {
+    width: 100%;
+    display: table;
+    height: 88px;
+}
+
+.btnBack {
+    display: block;
+    float: left;
+    width: 80px;
+    height: 88px;
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    top: 0;
+    left: 0;
+    background-image: url('../../images/user/rebate/arrow.png')
+}
+
+.tabs {
+    height: 56px;
+    border: 1px solid #9b5b54;
+    float: left;
+    position: absolute;
+    top: 15px;
+    left: 80px;
+    border-radius: 8px;
+    display: table;
+    overflow: hidden;
+}
+
+.tab {
+    width: 149px;
+    height: 56px;
+    border-right: 1px solid #9b5b54;
+    float: left;
+    text-align: center;
+    line-height: 56px;
+    font-size: 28px;
+    color: #9b5b54;
+}
+
+.tabActive {
+    color: #fff;
+    background: #9b5b54;
+}
+
+.tab:last-child {
+    border: transparent;
+}

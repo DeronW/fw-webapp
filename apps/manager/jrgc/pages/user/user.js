@@ -3,10 +3,10 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 
 import { Header,BottomNavBar } from '../../components';
-import styles from '../../css/home/home.css'
+import styles from '../../css/user/user.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class Mine extends React.Component {
+class User extends React.Component {
 
     render() {
         let history = this.props
@@ -17,4 +17,4 @@ class Mine extends React.Component {
         </div>
     }
 }
-export default Mine
+export default User
