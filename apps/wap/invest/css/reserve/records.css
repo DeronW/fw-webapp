@@ -89,13 +89,13 @@
 .cancelBtn {
     width: 143px;
     height: 54px;
-    background-color: #fd4d4c;
-    border-radius: 4px;
     line-height: 54px;
     text-align: center;
-    color: #fff;
-    font-size: 30px;
+    color: #7c9dc7;
+    font-size: 24px;
     margin-top: 18px;
+    border: 1px solid #7c9dc7;
+    border-radius: 36px;
 }
 
 .protocolLook {
@@ -173,6 +173,10 @@
     margin-left: 10px;
     padding-top: 10px;
     vertical-align: middle;
+}
+
+.headerOn {
+    color: #4aa1f9;
 }
 
 /*刷新按钮*/
