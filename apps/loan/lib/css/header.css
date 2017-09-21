@@ -51,7 +51,7 @@
     position: absolute;
     width: 4px;
     height: 30px;
-    -wekit-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
     top: 40px;
     left: 40px;
