@@ -30,7 +30,7 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-
+        document.title = '借钱';
         Post(`/api/product/v1/productList.json`)
             .then(data => this.setState({ products: data.resultList }))
             .then(() => Post(`/api/product/v1/recommendedList.json`))
