@@ -72,6 +72,7 @@ class ReserveApply extends React.Component {
 
     rechargeHandler = () => {
         //跳到充值页面
+        NativeBridge.toNative('app_recharge')
     }
 
     render() {
