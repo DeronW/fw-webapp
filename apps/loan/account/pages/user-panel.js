@@ -29,6 +29,7 @@ class UserPanel extends React.Component {
                 tips: st === 101 ? '设置提现卡处理中，请稍等' : false // 实名中
             })
         })
+        this.props.account.get_mobile_num();
     }
 
     clickHandler = type => {
