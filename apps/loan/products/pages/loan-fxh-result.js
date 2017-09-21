@@ -107,11 +107,6 @@ export default class FxhResult extends React.Component {
     render() {
         let { fxh, history } = this.props;
         let USER = Storage.getUserDict();
-        let goBack = () => {
-            Browser.inFXHApp
-                ? NativeBridge.close()
-                : location.href = '/static/loan/products/index.html#/'
-        }
         let sourceType;
         let jrgc_ios = Browser.inIOSApp;
         let jrgc_android = Browser.inAndroidApp;
@@ -131,18 +126,8 @@ export default class FxhResult extends React.Component {
             sourceType = 5;
         return (
             <div>
-                {!Browser.inJRGCApp && <Header title="借款结果" goBack={goBack} />}
+                <Header title="借款结果" />
                 <div styleName="loan-result">
-                    {/* {Browser.inAndroid && <div styleName="header">
-                        <div styleName="arrow-left" onClick={() => {
-                            Browser.inJRGCApp
-                                ? NativeBridge.close()
-                                : this.gotoHandler("/static/loan/products/index.html#/")
-                        }}></div>
-                        <div styleName="title">借款结果</div>
-                    </div>
-                    } */}
-                    {/* {Browser.inAndroid && <Header title="借款结果" goBack={goBack}/>} */}
                     <div styleName={Browser.inIOS
                         ? "result-box-ios"
                         : "result-box"}>
