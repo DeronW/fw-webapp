@@ -51,7 +51,7 @@ export default class Reserve {
             return {
                 isRisk: this.isRisk,
                 batchMaxmum: this.batchMaxmum,
-                isCompany:this.isCompany
+                isCompany: this.isCompany
             }
         })
     }
