@@ -56,8 +56,9 @@ export default class FxhResult extends React.Component {
             , 1000);
     }
     checkAjax = () => {
-        let orderGid = Utils.hashQuery.orderGid;
-        Post(`/api/loan/v1/status.json`, { orderGid: orderGid }).then((data) => {
+        // let orderGid = Utils.hashQuery.orderGid;
+        let {fxh} = this.props;
+        Post(`/api/loan/v1/status.json`, { orderGid: fxh.orderGid }).then((data) => {
             let finishFlag = true;
             if (data.loanStatus == 6) {
                 this.setState({ waitingResultShow: false, successResultShow: true });
@@ -124,9 +125,13 @@ export default class FxhResult extends React.Component {
             sourceType = 4;
         if (jrgc_web)
             sourceType = 5;
+
+        let goBack = () => {
+            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
+        }
         return (
             <div>
-                <Header title="借款结果" />
+                <Header title="借款结果" goBack = {goBack}/>
                 <div styleName="loan-result">
                     <div styleName={Browser.inIOS
                         ? "result-box-ios"

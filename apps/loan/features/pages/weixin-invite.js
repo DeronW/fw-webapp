@@ -104,7 +104,8 @@ export default class WeixinInvite extends React.Component {
                     </div>
                 </div>}
                 </div>
-                <BottomNavBar/> {this.state.maskShow && <div styleName="mask">
+                <BottomNavBar/>
+            {this.state.maskShow && <div styleName="mask">
                     <div styleName="pop-content">
                         <div styleName="close-btn" onClick={this.maskClose}></div>
                         <div styleName="pop-title">活动时间</div>
