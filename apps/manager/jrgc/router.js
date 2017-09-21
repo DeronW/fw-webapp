@@ -7,17 +7,17 @@ import {
 } from 'react-router-dom'
 
 
-import * as Home from './pages/home'
 import * as Stats from './pages/stats'
+import * as User from './pages/user'
 
 export default (stores) => {
     return <Router>
         <Provider {...stores}>
             <Switch>
-                <Route exact path="/" component={Home.Mine}/>
-                <Route exact path="/home-rebate" component={Home.Rebate}/>
                 {/* 业绩 相关页面 */}
                 <Route exact path="/stats" component={Stats.Stats}/>
+                <Route exact path="/" component={User.User}/>
+                <Route exact path="/user-rebate" component={User.Rebate}/>
             </Switch>
         </Provider>
     </Router>

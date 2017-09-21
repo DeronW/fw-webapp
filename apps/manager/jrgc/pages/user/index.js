@@ -1,7 +1,7 @@
-import Mine from './mine.js'
+import User from './user.js'
 import Rebate from './rebate.js'
 
 export {
-    Mine,
+    User,
     Rebate
 }
