@@ -33,7 +33,7 @@ export default class FxhappDownload extends React.Component {
         }
         return (
             <div>
-                <Header title={"关注微信"} goBack={goBack}/>
+                {Browser.inFXHApp ? null : <Header title={"关注微信"} goBack={goBack}/>}
                 <div styleName="content-wrap">
                     <div styleName="p1"><img src={require("../images/fxhapp-download/icon1.jpg")}/>关注了微信之后有什么好处</div>
                     <div styleName="p2-wrap">
