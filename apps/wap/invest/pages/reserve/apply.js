@@ -16,7 +16,9 @@ class ReserveApply extends React.Component {
 
     componentDidMount() {
         NativeBridge.trigger('hide_header')
+        this.props.reserve.getApplyInvestClaimId()
         this.props.reserve.fetchProduct()
+        alert(this.props.reserve.applyInvestClaimId)
     }
 
     inputChangeHandler = name => e => {
