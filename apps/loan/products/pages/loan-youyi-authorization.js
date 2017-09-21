@@ -33,19 +33,19 @@ export default class LoopLoanAuthorization extends React.Component {
             <div styleName="cnt-container">
                 {!Browser.inFXHApp && <Header title="芝麻信用授权" history={history} />}
                 <div styleName="result">
-                    {loopLoan.zmScore && <div styleName="success">
+                    {loopLoan.zmScore && <div><div styleName="success">
                         <div styleName="title">授权成功</div>
                         <div styleName="img"><img styleName="auth-img" src={require("../images/loan-youyi-authorization/success.png")}/></div>
+                    </div>
+                    <div styleName="btn" onClick={this.confirmHandler}>确定</div>
                     </div>}
                     {loopLoan.authFail && <div styleName="fail">
                         <div styleName="title">授权失败</div>
                         <div styleName="img"><img styleName="auth-img" src={require("../images/loan-youyi-authorization/fail.png")}/></div>
                     </div>}
                 </div>
-                <div styleName="btn" onClick={this.confirmHandler}>确定</div>
             </div>
         )
-
     }
 }
 
