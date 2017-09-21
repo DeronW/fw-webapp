@@ -8,7 +8,7 @@ import {
 
 
 import * as Home from './pages/home'
-import * as Performance from './pages/performance'
+import * as Stats from './pages/stats'
 
 export default (stores) => {
     return <Router>
@@ -17,7 +17,7 @@ export default (stores) => {
                 <Route exact path="/" component={Home.Mine}/>
                 <Route exact path="/home-rebate" component={Home.Rebate}/>
                 {/* 业绩 相关页面 */}
-                <Route exact path="/performance" component={Performance.Performance}/>
+                <Route exact path="/stats" component={Stats.Stats}/>
             </Switch>
         </Provider>
     </Router>
