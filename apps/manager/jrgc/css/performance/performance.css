@@ -1,0 +1,134 @@
+.tab-placeholder {
+    position: relative;
+    height: 88px;
+}
+
+.tab-cnt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 88px;
+    background-color: #fff;
+}
+
+.back-btn {
+    position: absolute;
+    left: 12px;
+    bottom: 0;
+    width: 60px;
+    height: 88px;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAvCAMAAADKIyriAAAANlBMVEUAAAChZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV4laCSdAAAAEXRSTlMANVOWEcuHY/JDHq2sk24qBSwN9qcAAABOSURBVDjL7dQ5EoAwDMXQHyDOwur7XxaG2uoZJmpfL4V1yyWW5E8FxTOKG4p3lDTkk3KiaEdRRdH60rwE1JxtGvYLu9gOoWWhwb/aVk03h7wUJoaUshAAAAAASUVORK5CYII=') no-repeat center;
+}
+
+.tab-group {
+    box-sizing: border-box;
+    margin: 14px auto;
+    width: 600px;
+    height: 60px;
+    border: 1px solid #9b5b54;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.tab-item {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 25%;
+    height: 58px;
+    line-height: 58px;
+    border-right: 1px solid #9b5b54;
+    color: #9b5b54;
+    font-size: 28px;
+    text-align: center;
+}
+
+.tab-item:last-child {
+    border: none;
+}
+
+.tab-item-active {
+    composes: tab-item;
+    background-color: #9b5b54;
+    color: #fff;
+}
+
+.graph {
+    width: 100%;
+    height: 500px;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.client-stats-grp {
+    box-sizing: border-box;
+    padding-left: 30px;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+.client-stats {
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+    height: 88px;
+    padding-right: 66px;
+    border-bottom: 1px solid #eee;
+    background: url('../../images/performance/entry-btn.png') no-repeat 650px center;
+    font-size: 28px;
+}
+
+.client-stats:last-child {
+    border: none;
+}
+
+.client-stats-name {
+    line-height: 88px;
+    float: left;
+    color: #555;
+}
+
+.client-stats-value {
+    line-height: 88px;
+    float: right;
+    color: #fd4d4c;
+}
+
+.invest-stats-grp {
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+    height: 121px;
+    border-top: 1px solid #eee;
+    background-color: #fff;
+}
+
+.invest-stats {
+    float: left;
+    width: 329px;
+    height: 120px;
+    margin-left: 30px;
+}
+
+.invest-stats-name {
+    margin-top: 27px;
+    color: #999;
+    font-size: 24px;
+}
+
+.invest-stats-value {
+    color: #555;
+    font-size: 32px;
+}
+
+.invest-stats-value::before {
+    content: '￥';
+}
+
+.vertical-line {
+    float: left;
+    width: 1px;
+    height: 62px;
+    margin: 29px 0;
+    background-color: #eee;
+}
