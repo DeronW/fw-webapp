@@ -99,13 +99,13 @@ export default class LoopLoan {
     }
 
     zima_callback = (params, sign) => {
-        this.Post('/api/zhima/v1/credit/callback.json', {
+        return this.Post('/api/zhima/v1/credit/callback.json', {
             params: params,
             sign: sign
         }).then((data) => {
             this.zmScore = data.zmScore;
         }, () => {
-            this.authFail = true
+            //this.authFail = true
         });
     }
 
