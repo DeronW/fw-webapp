@@ -43,7 +43,7 @@ export default class InviteActivity extends React.Component {
         let {invite_activity,history} = this.props;
         let goBack = () => {
             // Browser.inApp ? NativeBridge.close() : history.goBack()
-            Browser.inApp ? NativeBridge.close() : window.close()
+            Browser.inApp ? NativeBridge.close() : history.replace(`/loan-fxh-result`)
         }
         return <div styleName="bg">
             {!Browser.inApp && !Browser.inWeixin && <Header title="放心花" goBack={goBack}/>}
