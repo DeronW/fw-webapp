@@ -186,10 +186,11 @@ class ReserveRecords extends React.Component {
                 3333
             </div>
         }
+        let tab_style = Browser.inIOSApp ? 'tabWrapperIos' : 'tabWrapper'
         return <div styleName="recordsPanel">
             {/*<Header title="我的预约" history={history} noClose={false}/>*/}
             <Header title="我的预约" history={history}/>
-            <div styleName="tabWrapper">
+            <div styleName={tab_style}>
                 {['预约中', '预约结束', '已取消'].map(tab_func)}
             </div>
             <div styleName="textWrapper">

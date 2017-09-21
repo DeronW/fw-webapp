@@ -72,6 +72,7 @@ class ReserveApply extends React.Component {
 
     rechargeHandler = () => {
         //跳到充值页面
+        NativeBridge.toNative('app_recharge')
     }
 
     render() {
@@ -98,12 +99,12 @@ class ReserveApply extends React.Component {
             <div styleName="submitInfo">
                 <div styleName="infoContent">
                     <div styleName="infoItem">
-                        <div styleName="itemLeft">期限</div>
-                        <div styleName="itemRight">{reserve.context.repayPeriod}天</div>
+                        <div styleName="itemLeft">预期年化</div>
+                        <div styleName="itemRight rightRed">{reserve.context.loadRate}%</div>
                     </div>
                     <div styleName="infoItem">
-                        <div styleName="itemLeft">预期年化</div>
-                        <div styleName="itemRight">{reserve.context.loadRate}%</div>
+                        <div styleName="itemLeft">期限</div>
+                        <div styleName="itemRight">{reserve.context.repayPeriod}天</div>
                     </div>
                     <div styleName="infoItem">
                         <div styleName="itemLeft">预约有效期</div>
@@ -116,7 +117,7 @@ class ReserveApply extends React.Component {
                 </div>
             </div>
             <div styleName="submitProtocol">
-                <span styleName="protocolText">本人已阅读并同意签署
+                <span styleName="protocolText">本人已阅读并签署
                     <span styleName="applyProtocol" onClick={this.jumpToProtocol}>
                         《预约协议》
                     </span>
