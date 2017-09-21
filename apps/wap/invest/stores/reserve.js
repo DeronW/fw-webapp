@@ -25,21 +25,19 @@ export default class Reserve {
             batchMaxmum: 0,//批量投资限额
             reserveMoney: '',//用户输入的预约金额
             isChecked: true,
-            applyInvestClaimId: '',
             contractMsg: '',
             isCompany: null
         })
     }
 
-    getApplyInvestClaimId = () => {
-        let id = Utils.hashQuery.applyInvestClaimId
-        if (id) this.applyInvestClaimId = id
-        return this.applyInvestClaimId
+    @computed
+    get applyInvestClaimId() {
+        return Utils.hashQuery.applyInvestClaimId
     }
 
     fetchProduct = () => {
         return this.Post('/api/v1/intoAppointPage.shtml', {
-            applyInvestClaimId: this.getApplyInvestClaimId()
+            applyInvestClaimId: this.applyInvestClaimId
         }).then(data => {
             this.context = data.appointClaim;
             this.accountAmount = data.accountAmount;
