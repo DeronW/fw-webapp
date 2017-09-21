@@ -2,11 +2,11 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 
-import { Header,BottomNavBar } from '../components';
-import styles from '../css/home.css'
+import { Header,BottomNavBar } from '../../components';
+import styles from '../../css/home/home.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class Home extends React.Component {
+class Mine extends React.Component {
 
     render() {
         let history = this.props
@@ -17,4 +17,4 @@ class Home extends React.Component {
         </div>
     }
 }
-export default Home
+export default Mine

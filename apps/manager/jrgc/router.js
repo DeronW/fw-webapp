@@ -6,13 +6,13 @@ import {
     Switch
 } from 'react-router-dom'
 
-import { Home } from './pages'
+import * as Home from './pages/home'
 
 export default (stores) => {
     return <Router>
         <Provider {...stores}>
             <Switch>
-                <Route exact path="/" component={Home}/>
+                <Route exact path="/" component={Home.Mine}/>
             </Switch>
         </Provider>
     </Router>
