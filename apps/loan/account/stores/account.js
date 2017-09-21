@@ -18,7 +18,8 @@ export default class Account {
             userCode: '',
             captcha_img_url: '',
             captcha_token: '',
-            codeToken: ''
+            codeToken: '',
+            mobile:''
         })
 
     }
@@ -26,6 +27,12 @@ export default class Account {
     @computed get mask_phone() {
         let phone = this.data.phone || Storage.getUserDict().phone
         return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+    }
+
+    get_mobile_num = () => {
+        this.Post('/api/userBase/v1/userCenter.json').then((data)=>{
+           this.mobile = data.mobile
+        })
     }
 
     get_captcha = () => {

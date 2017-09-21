@@ -59,7 +59,7 @@ class UserPanel extends React.Component {
         return <div styleName="bg">
             <div styleName="banner">
                 <img styleName="avatar" src={require("../images/user-panel/avatar.png")} />
-                <div styleName="mask-phone">{account.mask_phone || '****'}</div>
+                <div styleName="mask-phone">{account.mobile}</div>
             </div>
 
             <div styleName="links">
