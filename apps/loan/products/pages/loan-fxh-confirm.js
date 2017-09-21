@@ -102,7 +102,7 @@ export default class FxhConfirm extends React.Component {
         // this.checkAjax();
         this.timer = setInterval(() => {
             let c = this.state.countdown;
-            if (c % 5 === 0 && this.state.loanStatus <= 1) this.checkAjax();
+            if (c % 5 === 0 && this.state.loanStatus <= 1);
             this.setState({
                 countdown: c - 1
             });
