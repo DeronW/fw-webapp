@@ -186,6 +186,7 @@ class ReserveRecords extends React.Component {
                 3333
             </div>
         }
+        let tab_style = Browser.inIOSApp ? 'tabWrapperIos' : 'tabWrapper'
         return <div styleName="recordsPanel">
             {/*<Header title="我的预约" history={history} noClose={false}/>*/}
             <Header title="我的预约" history={history}/>
