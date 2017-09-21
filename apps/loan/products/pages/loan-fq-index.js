@@ -86,6 +86,7 @@ export default class FqIndex extends React.Component {
 
     clickHandler = () => {
         let { fq } = this.props;
+        console.log(fq.canStatus)
         // 初始化数据没有完成, 稍后再试
         if (fq.canStatus === null && fq.errCode != 20013 && fq.errCode !=1001003 && fq.errCode !=10001) return;
         if (fq.borrowStatus == 1 || fq.borrowStatus == 101) {
@@ -93,7 +94,7 @@ export default class FqIndex extends React.Component {
         } else if (fq.canStatus == 2) {
             let link = `/static/loan/dumiao-put-in/index.html?pid=${fq.pid}`;
             gotoHandler(link);
-        } else if (fq.canStatus === 0) {
+        } else if (fq.canStatus == 0) {
             this.setState({ dumiaoEnterPopShow: true });
         } else if (fq.canStatus == 1) {
             this.setState({loanShow:true, failMsg:"您无法申请分期借款", title:"提示"});
