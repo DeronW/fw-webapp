@@ -99,7 +99,7 @@ export default class FxhConfirm extends React.Component {
         this.setState({
             countdown: 60
         });
-        this.checkAjax();
+        // this.checkAjax();
         this.timer = setInterval(() => {
             let c = this.state.countdown;
             if (c % 5 === 0 && this.state.loanStatus <= 1) this.checkAjax();
@@ -171,7 +171,7 @@ export default class FxhConfirm extends React.Component {
         // let orderGid = Utils.hashQuery.orderGid;
         if (this.state.value == '')
             return Components.showToast("请输入短信验证码");
-
+        this.checkAjax();
         Post(`/api/loan/v1/do.json`, {
             orderGid: fxh.orderGid,
             verifyCode: this.state.value
