@@ -79,9 +79,9 @@ const DU_MIAO_PAGES = [
 ]
 
 const WEIXIN_PAGES = [
-    'weixin-download',
+    // 'weixin-download',
     'weixin-invite',
-    'weixin-attention',
+    // 'weixin-attention',
     // 'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
