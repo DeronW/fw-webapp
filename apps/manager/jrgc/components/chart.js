@@ -24,6 +24,13 @@ class Chart extends React.Component {
                 },
                 bottom: 0
             },
+            tooltip: {
+                trigger: 'axis',
+                padding: 10,
+                textStyle: {
+                    fontSize: 20
+                }
+            },
             xAxis: {
                 axisLabel: {
                     fontSize: 16
