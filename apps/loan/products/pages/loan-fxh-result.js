@@ -31,10 +31,16 @@ export default class FxhResult extends React.Component {
         let { fxh } = this.props;
         fxh.get_card_list();
         this.countingDown();
+        // this.judgeUrl();
     }
-
+    // judgeUrl = () => {
+    //     if(document.referrer == `https://m.easyloan888.com/static/loan/features/index.html#/invite_activity`){
+    //         location.href="";
+    //     }
+    // }
     componentWillUnmount() {
         clearInterval(this.timer);
+        clearTimeout(this.timeoutTimer);
     }
     gotoHandler = link => {
         location.href = encodeURI(link);
@@ -56,16 +62,16 @@ export default class FxhResult extends React.Component {
             , 1000);
     }
     checkAjax = () => {
-        // let orderGid = Utils.hashQuery.orderGid;
-        let {fxh} = this.props;
-        Post(`/api/loan/v1/status.json`, { orderGid: fxh.orderGid }).then((data) => {
+        let orderGid = Utils.hashQuery.orderGid;
+        // let {fxh} = this.props;
+        Post(`/api/loan/v1/status.json`, { orderGid: orderGid }).then((data) => {
             let finishFlag = true;
             if (data.loanStatus == 6) {
                 this.setState({ waitingResultShow: false, successResultShow: true });
                 if (data.activityRecomUrl) {
-                    setTimeout(() => {
+                    let timeoutTimer = setTimeout(() => {
                         Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`, false, "放心花") :
-                            location.href = `${data.activityRecomUrl}`;
+                                location.href = `${data.activityRecomUrl}`;
                     }, 2000)
                 }
                 // setTimeout(() => {
