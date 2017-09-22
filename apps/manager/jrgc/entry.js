@@ -9,7 +9,8 @@ import AppRouter from './router.js'
 import * as Stores from './stores'
 
 let stores = {
-    home:new Stores.Home()
+    home: new Stores.Home(),
+    stats: new Stores.Stats()
 }
 
 new StoreSpy(stores).wiretap()
