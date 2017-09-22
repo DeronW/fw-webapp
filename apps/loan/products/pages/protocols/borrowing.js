@@ -2,10 +2,10 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Header } from '../../../lib/components'
 
-import styles from '../../css/protocols/partner.css'
+import styles from '../../css/protocols/borrowing.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-export default class Partner extends React.Component {
+export default class Borrowing extends React.Component {
 
     componentDidMount() {
         document.title = '借款服务协议'

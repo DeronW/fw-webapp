@@ -7,9 +7,8 @@ import styles from '../../css/protocols/youyi.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class YouyiRegister extends React.Component {
 
-    render() {
-
-        let txt = `
+        render() {
+                let txt = `
         注册服务协议
         欢迎您注册成为“放心花”用户（下称为“您”或“用户”，即您本人），在注册前请您仔细阅读如下服务条款：
         本协议由您与“放心花”平台运营公司深圳市众利财富管理有限公司（以下简称为“放心花”）之间就“放心花”平台（网址：www.easyloan888.com，以下简称“平台”）服务等相关事宜所订立的契约，请您仔细阅读本注册协议， 如果同意本协议的条款，请按照页面上的提示完成全部的注册程序。如您终止并退出申请，则视为不接受本协议全部条款。
@@ -100,14 +99,18 @@ class YouyiRegister extends React.Component {
         13.9 本协议在您提交的注册为“放心花”用户的申请获得本公司审核通过时生效。自您注销您的用户账户的申请被本公司审核通过之日，或者本公司依据本协议及本协议所纳入或被提及的文件、条款和条件终止您的用户资格之日终止。
         `
 
-        return <div styleName="bg">
-            <Header title="注册服务协议" history={this.props.history} />
+                return <div styleName = "bg" >
+                    <
+                    Header title = "注册服务协议"
+                history = { this.props.history }
+                />
 
-            <div styleName="protocol">
-                {txt.split('\n').map((t, index) => <div key={index}>{t}</div>)}
-            </div>
-        </div>
-    }
-}
+                <
+                div styleName = "protocol" > {
+                    txt.split('\n').map((t, index) => < div key = { index } > { t } < /div>)} <
+                        /div> <
+                        /div>
+                    }
+                }
 
-export default YouyiRegister
+                export default YouyiRegister
