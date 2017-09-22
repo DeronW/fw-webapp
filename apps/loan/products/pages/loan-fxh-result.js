@@ -35,7 +35,7 @@ export default class FxhResult extends React.Component {
     }
     judgeUrl = () => {
         if(document.referrer == `https://m.easyloan888.com/static/loan/features/index.html#/invite_activity`){
-            return false;
+            location.href="";
         }
     }
     componentWillUnmount() {
