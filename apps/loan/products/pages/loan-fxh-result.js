@@ -40,6 +40,7 @@ export default class FxhResult extends React.Component {
     // }
     componentWillUnmount() {
         clearInterval(this.timer);
+        clearTimeout(this.timeoutTimer);
     }
     gotoHandler = link => {
         location.href = encodeURI(link);
@@ -68,10 +69,9 @@ export default class FxhResult extends React.Component {
             if (data.loanStatus == 6) {
                 this.setState({ waitingResultShow: false, successResultShow: true });
                 if (data.activityRecomUrl) {
-                    console.log(document.referrer);
-                    setTimeout(() => {
+                    let timeoutTimer = setTimeout(() => {
                         Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`, false, "放心花") :
-                            document.referrer == `https://m.easyloan888.com/static/loan/products/index.html` ? history.go(-1) : location.href = `${data.activityRecomUrl}`;
+                                location.href = `${data.activityRecomUrl}`;
                     }, 2000)
                 }
                 // setTimeout(() => {
