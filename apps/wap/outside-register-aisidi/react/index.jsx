@@ -11,13 +11,11 @@ class RegisterContent extends React.Component{
     }
     componentDidMount(){
         $FW.getJSONP("https://fore.9888.cn/cms/api/dealstatis.php",(data)=>{
-            console.log(data)
         })
         window.addEventListener('scroll', this.handleScroll.bind(this));
     }
     handleScroll(){
         if(document.body.scrollTop>400){
-            console.log(document.body.scrollTop)
             this.setState({isShow:"block"})
         }else{
             this.setState({isShow:"none"})
@@ -25,7 +23,6 @@ class RegisterContent extends React.Component{
     }
     phonenumberHandler(e){
         this.setState({phonenumber: e.target.value});
-        console.log( e.target.value);
     }
     registerHandler(){
         let phoneReg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;

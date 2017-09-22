@@ -2,6 +2,8 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { inject, observer } from 'mobx-react'
 
+import ReactEcharts from 'echarts-for-react'
+
 import styles from '../../css/stats/stats.css'
 
 
@@ -36,13 +38,85 @@ class Stats extends React.Component {
         this.setState({ currentTabNo: no })
     }
 
+    getOption = () => ({
+        title: {},
+        tooltip: {},
+        legend: {
+            textStyle: {
+                fontSize: 18
+            },
+            bottom: 3,
+            data: ['年化投资额', '投资额']
+        },
+        xAxis: {
+            axisLabel: {
+                fontSize: 16
+            },
+            name: '日期',
+            data: ['9.21', '9.22']
+        },
+        yAxis: {
+            axisLabel: {
+                fontSize: 16
+            },
+            nameTextStyle: {
+                padding: [6, 0]
+            },
+            name: '金额(万元)',
+            max: function(value) {
+                return Math.round(value.max + 0.1*(value.max - value.min));
+            }
+        },
+        series: [{
+            symbolSize: 8,
+            lineStyle: {
+                normal: {
+                    color: '#d75063'
+                }
+            },
+            name: '年化投资额',
+            type: 'line',
+            data: [5, 20]
+        }, {
+            symbolSize: 8,
+            lineStyle: {
+                normal: {
+                    color: '#20629f'
+                }
+            },
+            name: '投资额',
+            type: 'line',
+            data: [15, 25]
+        }],
+        dataZoom: [{
+            type: 'inside',
+            xAxisIndex: [0],
+            filterMode: 'none',
+            start: 0,
+            end: 100
+        }, {
+            type: 'inside',
+            yAxisIndex: [0],
+            filterMode: 'none',
+            start: 0,
+            end: 100
+        }],
+        textStyle: {
+            fontSize: 16
+        }
+    })
+
     render() {
         const { currentTabNo } = this.state;
 
         return <div>
             <TabHeader tabs={TABS} current={currentTabNo} switchHandler={this.switchTab} />
 
-            <div styleName="graph"></div>
+            <div styleName="graph">
+                <ReactEcharts styleName="chart"
+                    style={{ height: "100%", width: "100%" }}
+                    option={this.getOption()} />
+            </div>
 
             <div styleName="client-stats-grp">
                 <div styleName="client-stats">

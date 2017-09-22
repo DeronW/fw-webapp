@@ -23,7 +23,8 @@ export default class FxhResult extends React.Component {
         checkingResult: false,
         countdown: 0,
         loanStatus: null,
-        failReason: null
+        failReason: null,
+        timeoutTimer:""
     }
 
     componentDidMount() {
@@ -31,16 +32,11 @@ export default class FxhResult extends React.Component {
         let { fxh } = this.props;
         fxh.get_card_list();
         this.countingDown();
-        // this.judgeUrl();
     }
-    // judgeUrl = () => {
-    //     if(document.referrer == `https://m.easyloan888.com/static/loan/features/index.html#/invite_activity`){
-    //         location.href="";
-    //     }
-    // }
+
     componentWillUnmount() {
         clearInterval(this.timer);
-        clearTimeout(this.timeoutTimer);
+        clearTimeout(this.state.timeoutTimer);
     }
     gotoHandler = link => {
         location.href = encodeURI(link);
@@ -63,21 +59,18 @@ export default class FxhResult extends React.Component {
     }
     checkAjax = () => {
         let orderGid = Utils.hashQuery.orderGid;
-        // let {fxh} = this.props;
         Post(`/api/loan/v1/status.json`, { orderGid: orderGid }).then((data) => {
             let finishFlag = true;
             if (data.loanStatus == 6) {
                 this.setState({ waitingResultShow: false, successResultShow: true });
                 if (data.activityRecomUrl) {
-                    let timeoutTimer = setTimeout(() => {
+                        let onceTimer = setTimeout(() => {
                         Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`, false, "放心花") :
                                 location.href = `${data.activityRecomUrl}`;
                     }, 2000)
+                    this.setState({timeoutTimer:onceTimer})
                 }
-                // setTimeout(() => {
-                //     Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
-                //     location.href  = `/static/loan/features/index.html#/invite-activity?yqm=F172001`;
-                // }, 12000)
+
             } else if (data.loanStatus == 5) {
                 this.setState({ waitingResultShow: false, failResultShow: true, failReason: data.failReason });
             } else {

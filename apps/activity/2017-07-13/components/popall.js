@@ -115,7 +115,6 @@ class PopInvitePC extends React.Component {
     }
 
     clipboardHandler = () => {
-        console.log(11)
         let clipboard = new Clipboard('#copy-value-pc');//复制功能
         clipboard.on('success', function (e) {
             alert('复制成功');
@@ -123,7 +122,6 @@ class PopInvitePC extends React.Component {
         clipboard.on('error', function (e) {
             alert('复制失败');
         });
-        console.log(22)
     }
 
     login = () => {

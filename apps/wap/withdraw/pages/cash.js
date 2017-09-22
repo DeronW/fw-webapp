@@ -40,7 +40,6 @@ export default class Cash extends React.Component {
     }
     takeAll(){
         this.setState({inputVal:this.state.accountAmount});
-        // console.log(this.state.accountAmount);
     }
     chooseBank(){
         document.body.scrollTop = 0;
@@ -80,7 +79,7 @@ export default class Cash extends React.Component {
     }
     // 点击下一步的时候做的一些验证以及toast提示
     handlerPost(){
-        console.log(this.state.data);
+        (this.state.data);
         if(this.state.inputVal<this.state.minAmt){
             $FWC.showToast("提现金额不能低于10元");
             return false;
@@ -98,13 +97,12 @@ export default class Cash extends React.Component {
                 return false;
             }
         }
-       
-        
+
+
     }
 
     componentDidMount(){
         let {cash} = this.props;
-        console.log(cash);
         cash.takData().then(() => {
             this.setState({
                 accountAmount:cash.accountAmount,
@@ -115,11 +113,9 @@ export default class Cash extends React.Component {
                 perDayRealTimeAmountLimit:cash.perDayRealTimeAmountLimit,
                 doTime:cash.doTime,
             })
-            // console.log(this.state.accountAmount);
-            // console.log(this.state.data);
         })
     }
-    
+
     render(){
 
         let immediatelyCashMethodEml = (b) => {
@@ -174,7 +170,7 @@ export default class Cash extends React.Component {
         //         return <div>{immediatelyCashMethodEml(true)}</div>;
         //     }
         // }
- 
+
 
 
 
@@ -238,7 +234,7 @@ export default class Cash extends React.Component {
                                 <div styleName="account-text">请选择开户支行</div>
                             </div>
                         </div>:null}
-                        
+
                     </div>
                     {/*提现方式*/}
                     <div styleName="draw-money-method">

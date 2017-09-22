@@ -53,13 +53,12 @@ class RepaymentBankCard extends React.Component {
             <Header title="银行卡管理" history={history} />
 
             <div styleName="list-container">
-                { bank_card.all.map(bank_item) }
+                {bank_card.all.map(bank_item)}
             </div>
 
-            { bank_card.all.length < 10 && // *4
+            {bank_card.all.length < 10 && // *4
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn" href="/static/loan/user-card-add/index.html">
-                    {/*<a styleName="submit-btn" href="/static/loan/account/index.html#/bank-card-add">*/}
                         添加银行卡
                     </a>
                 </div>

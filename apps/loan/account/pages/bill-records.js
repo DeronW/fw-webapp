@@ -60,7 +60,7 @@ class BillRecords extends React.Component {
     render() {
         let { current_type, tab } = this.state;
         let { history } = this.props;
-        
+
 
         let btn_tab = (type, index) => {
             let cn = `ui-tab-li ${type === current_type && 'ui-select-li'}`
@@ -73,11 +73,6 @@ class BillRecords extends React.Component {
         let order_item = (order, index) => {
 
             let clickHandler = () => {
-
-                console.log(1)
-
-                console.log(order.productId)
-                console.log(order.productId == '11')
 
                 if (order.productId == '11') {
                     history.push(`/bill-youyi-detail?id=${order.uuid}`)
