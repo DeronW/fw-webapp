@@ -18,6 +18,7 @@ class ReserveInfo extends React.Component {
 
     reserveHandler = () => {
         let { history, reserve } = this.props
+        alert(reserve.applyInvestClaimId)
         reserve.fetchProduct().then(data => {
             if (data.isRisk == 0) {
                 history.push('/user/evaluate?next_url=/reserve/info')
@@ -25,7 +26,7 @@ class ReserveInfo extends React.Component {
                 //调到自动投资页面
                 NativeBridge.toNative('auto_bid_auth')
             } else {
-                history.push(`/reserve/apply?applyInvestClaimId=${this.props.reserve.applyInvestClaimId}`)
+                history.push(`/reserve/apply?applyInvestClaimId=${reserve.applyInvestClaimId}`)
             }
         })
 
@@ -58,7 +59,6 @@ class ReserveInfo extends React.Component {
                 </div>
             </div>
             <div styleName="tipsBox">
-                {/* <span styleName="tipsItem">预计今日起息</span> */}
                 <span styleName="tipsItem">{context.minAmt}元起预约</span>
             </div>
             <div styleName="flowBox">
