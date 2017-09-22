@@ -28,7 +28,7 @@ export default class BankCard {
 
         this.Post('/api/bankcard/v1/supportbank.json').then(data => {
             this.supported_list = data.pageData.result
-        })
+        }, { loading: false })
     }
 
     @computed get default_card_number() {
@@ -43,7 +43,7 @@ export default class BankCard {
             cardType: card_type,
             mobile: phone,
             operatorType: user_status < 2 ? 1 : 2
-        }).then(data => {
+        }, { loading: false }).then(data => {
             this.new_card = {
                 operatorBankcardGid: data.bindBankInfo.operatorBankcardGid,
                 phone: phone
