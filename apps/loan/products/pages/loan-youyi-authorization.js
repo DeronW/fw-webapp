@@ -23,9 +23,10 @@ export default class LoopLoanAuthorization extends React.Component {
     componentDidMount() {
         document.title = '芝麻信用授权';
         this.props.loopLoan.zima_callback(this.state.params, this.state.sign).catch((e) => {
-            this.setState({authFail:true},()=>{
-               Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/loan-youyi-index'
-            })
+            this.setState({authFail:true})
+            return new Promise((resolve,reject) => setTimeout(resolve,2000))
+        }).then(()=>{
+            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/loan-youyi-index'
         });
     }
 

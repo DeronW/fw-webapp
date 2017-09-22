@@ -211,9 +211,6 @@ class Rebate extends React.Component {
             {tab_num == 1 && p2p_section()}
             {tab_num == 2 && zx_section()}
             {tab_num == 3 && gold_section()}
-            {/*<div styleName="bonus">*/}
-            {/*<div styleName=""></div>*/}
-            {/*</div>*/}
         </div>
     }
 }

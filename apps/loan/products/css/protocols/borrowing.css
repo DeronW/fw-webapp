@@ -1,12 +1,11 @@
+
+
 .bg {
     background: #f0f0f0;
 }
 
-.protocol-article {
+.protocol {
     padding: 34px;
-}
-
-.protocol-article div {
     max-height: 9999999px;
     text-indent: 2em;
     font-size: 30px;
