@@ -28,18 +28,21 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
         inApp = ua.indexOf('FinancialWorkshop') > -1,
         SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
 
-    return (url, data = {}, silence = false) => {
+    return (url, data = {}, options = {}) => {
 
-        let merged_data = Object.assign({}, { sourceType: SOURCE_TYPE },
+        let merged_data = Object.assign(
+            {}, { sourceType: SOURCE_TYPE },
             data, { token: token, uid: uid })
 
-        return Request({
+        let merged_options = Object.assign({}, {
             url: API_PATH + url,
             method: 'POST',
             data: merged_data,
             timeout: 30,
             silence: true
-        }).catch(error => {
+        }, options)
+
+        return Request(opt).catch(error => {
 
             const LOGIN_CODE = 100008
 
