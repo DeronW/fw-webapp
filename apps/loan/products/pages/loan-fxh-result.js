@@ -71,7 +71,7 @@ export default class FxhResult extends React.Component {
                     console.log(document.referrer);
                     setTimeout(() => {
                         Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`, false, "放心花") :
-                            document.referrer == `https://m.easyloan888.com/static/loan/products/index.html` ? location.reload(true) : location.href = `${data.activityRecomUrl}`;
+                            document.referrer == `https://m.easyloan888.com/static/loan/products/index.html` ? llocation.replace(`https://m.easyloan888.com/static/loan/products/index.html#loan-fxh-result`) : location.href = `${data.activityRecomUrl}`;
                     }, 2000)
                 }
                 // setTimeout(() => {
