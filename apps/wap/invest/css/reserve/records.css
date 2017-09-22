@@ -118,7 +118,7 @@
     width: 520px;
     padding: 0 100px;
     height: 84px;
-    background: url("../../images/reserve/records/records_tab_bg.png") no-repeat center;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAABUAgMAAADWh+joAAAADFBMVEX////r6+7Y2Njw8PKbCcP3AAAAUElEQVRo3u3UsQ0AIRADwZO+gK+OJqmC0qgBAnSWZmIHG7kAAAAAAJr668q3DsaigSYi3yMyGmgg8j0io4EGIt8jMhoAAAAAeGUEEv1KzUAbvsYxdKbypygAAAAASUVORK5CYII=") no-repeat center;
     display: table;
     z-index: 99;
     position: fixed;
