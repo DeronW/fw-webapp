@@ -33,6 +33,7 @@
 }
 
 .tab-item {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     box-sizing: border-box;
     display: inline-block;
     width: 25%;
