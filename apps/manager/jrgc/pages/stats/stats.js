@@ -65,10 +65,12 @@ class Stats extends React.Component {
     })
 
     render() {
-        const { currentTabNo } = this.state;
+        const { history } = this.props,
+            { currentTabNo } = this.state;
 
         return <div>
-            <TabHeader tabs={TABS} current={currentTabNo} switchHandler={this.switchTab} />
+            <TabHeader history={history}
+                tabs={TABS} current={currentTabNo} switchHandler={this.switchTab} />
 
             <div styleName="graph">
                 <Chart option={this.getOption()} />
