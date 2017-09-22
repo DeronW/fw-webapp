@@ -26,7 +26,7 @@ export default class LoopLoanAuthorization extends React.Component {
             this.setState({authFail:true})
             return new Promise((resolve,reject)=>setTimeout(reslove,2000))
         }).then(()=>{
-            this.confirmHandler()
+            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/loan-youyi-index'
         });
     }
 
