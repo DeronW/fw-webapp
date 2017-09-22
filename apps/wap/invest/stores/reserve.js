@@ -7,7 +7,14 @@ export default class Reserve {
 
         this.data = {}
 
-        extendObservable(this.data, {})
+        extendObservable(this.data, {
+            current_status:'0',
+            tab:{
+                '0':{name:'预约中',records_page_no:1,records:[]},
+                '1':{name:'预约结束',records_page_no:1,records:[]},
+                '2':{name:'已取消',records_page_no:1,records:[]},
+            }
+        })
 
         extendObservable(this, {
             context: {
@@ -18,8 +25,6 @@ export default class Reserve {
                 minAmt: '',//最小预约额
                 repayPeriod: '',//期限
             },
-            records: [],//记录的列表
-            records_page_no: 1,
             accountAmount: null,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
             batchMaxmum: 0,//批量投资限额
@@ -30,8 +35,7 @@ export default class Reserve {
         })
     }
 
-    @computed
-    get applyInvestClaimId() {
+    @computed get applyInvestClaimId() {
         return Utils.hashQuery.applyInvestClaimId
     }
 
@@ -53,34 +57,34 @@ export default class Reserve {
             }
         })
     }
-
-    getReserveList = (done, reset, status) => {
-        if (reset) {
-            this.records_page_no = 1
-            this.records = []
-        }
-        if (this.records_page_no === 0) return done && done();
-
+    setCurrentStatus = status => {
+        this.data.current_status = status;
+        this.getReserveList()
+    }
+    getReserveList = (done) => {
+        let { tab,current_status } = this.data,current_tab = tab[current_status]
+        if (current_tab.records_page_no === 0) return done && done();
         const PAGE_SIZE = 10
 
         this.Post('/api/v1/appointRecordList.shtml', {
-            page: this.records_page_no,
+            page: current_tab.records_page_no,
             pageSize: PAGE_SIZE,
-            status: status
+            status: current_status
         }).then(data => {
-            this.records.push(...data.pageData.result)
-            this.records_page_no++
+            current_tab.records.push(...data.pageData.result)
 
-            if (this.records.length >= data.pageData.pagination.totalCount)
-                this.records_page_no = 0
+            current_tab.records_page_no < data.pageData.pagination.totalCount ?
+            current_tab.records_page_no++ :
+            current_tab.records_page_no = 0;
 
             done && done();
         })
+
     }
 
     submitReserveHandler = () => {
         return this.Post('/api/v1/intoAppointPage.shtml', {
-            applyInvestClaimId: this.getApplyInvestClaimId()
+            applyInvestClaimId: this.applyInvestClaimId
         }).then((data) => {
             return this.Post('/api/v1/investAppoint.shtml', {
                 applyAmt: this.reserveMoney,

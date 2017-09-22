@@ -26,6 +26,7 @@
     color: #555;
     font-size: 24px;
     background: #fafafa;
+    max-height:999999px;
 }
 
 .icon-a {

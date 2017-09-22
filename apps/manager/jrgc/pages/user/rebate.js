@@ -7,11 +7,90 @@ import styles from '../../css/user/rebate.css'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Rebate extends React.Component {
     state = {
-        tab_num: 0
+        tab_num: 0,
+        chart_num: 0
     }
     switchTabHandler = (index) => {
         this.setState({tab_num: index})
     }
+
+    chartTabHandler = (index) => {
+        this.setState({chart_num: index})
+    }
+    getOption = () => ({
+        title: {text: '当前数据更新于:'},
+        tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
+        legend: {
+            textStyle: {
+                fontSize: 18
+            },
+            bottom: 3,
+            data: ['返利额']
+        },
+        xAxis: {
+            axisLabel: {
+                fontSize: 16
+            },
+            name: '日期',
+            data: ['9.16', '9.17', '9,18', '9.19', '9.20', '9.21', '9.22'],
+            axisTick: {
+                alignWithLabel: true
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                fontSize: 16
+            },
+            nameTextStyle: {
+                padding: [6, 0]
+            },
+            name: '金额(万元)',
+            max: function (value) {
+                return Math.round(value.max + 0.1 * (value.max - value.min));
+            },
+            splitLine: {show: false}  //改设置不显示坐标区域内的y轴分割线
+        },
+        series: [{
+            symbolSize: 8,
+            emphasis: {
+                barBorderRadius: 30
+            },
+            itemStyle: {
+                normal: {
+                    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+                    color: function (params) {
+                        let colorList = ['#9b5b54', '#ab827e', '#a7928f', '#a34b41', '#e16557', '#ad281a', '#e1c8c6'];
+                        return colorList[params.dataIndex];
+                    },
+                    //柱形图圆角，初始化效果
+                    barBorderRadius: [10, 10, 0, 0],
+                    label: {
+                        show: true,//是否展示
+                        textStyle: {
+                            fontWeight: 'bolder',
+                            fontSize: '12',
+                            fontFamily: '微软雅黑',
+                        }
+                    }
+                },
+            },
+            name: '返利额',
+            type: 'bar',
+            barWidth: '30%',
+            data: [5, 20, 12, 9, 2, 14, 9]
+        }],
+        dataZoom: [{
+            type: 'inside',
+            xAxisIndex: [0],
+            filterMode: 'none',
+            start: 0,
+            end: 100
+        }],
+        textStyle: {
+            fontSize: 16
+        }
+    })
 
     render() {
         let {history} = this.props;
@@ -26,15 +105,24 @@ class Rebate extends React.Component {
         }
 
         let all_section = () => {
+            let {chart_num} = this.state
+            let chart_func = (item, index) => {
+                return <div styleName={chart_num == index ? "chartTabItem chartTabActive" : "chartTabItem"} key={index}
+                            onClick={() => this.chartTabHandler(index)}>
+                    {item}
+                </div>
+            }
             return <div>
                 <div styleName="allChart">
-                    {/*<ReactEcharts*/}
-                        {/*option={this.getOption()}*/}
-                        {/*notMerge={true}*/}
-                        {/*lazyUpdate={true}*/}
-                        {/*theme={"theme_name"}*/}
-                        {/*onChartReady={this.onChartReadyCallback}*/}
-                        {/*onEvents={EventsDict}/>*/}
+                    <div styleName="chartWrapper">
+                        {chart_num == 0 && <ReactEcharts option={this.getOption()}
+                                                         style={{height: '100%', width: '100%'}}
+                                                         styleName='echarts'/>}
+                    </div>
+
+                    <div styleName="chartTab">
+                        {['7天', '30天', '90天', '年度'].map(chart_func)}
+                    </div>
                 </div>
                 <div styleName="allData">
                     <div styleName="dataLine">
