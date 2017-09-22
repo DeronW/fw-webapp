@@ -49,9 +49,11 @@ class Chart extends React.Component {
             },
             series: [{
                 symbolSize: 9,
+                smooth: true,
                 lineStyle: { normal: { color: '#d75063' } }
             }, {
                 symbolSize: 9,
+                smooth: true,
                 lineStyle: { normal: { color: '#20629f' } }
             }],
             dataZoom: [{
