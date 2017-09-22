@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Header } from '../../../lib/components'
 import { NativeBridge, Browser } from '../../../lib/helpers'
-import styles from '../../css/protocols/youyi-loan.css'
+import styles from '../../css/protocols/youyi.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class YouyiRepaymentService extends React.Component {
