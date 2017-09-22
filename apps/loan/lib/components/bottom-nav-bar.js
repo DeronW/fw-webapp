@@ -23,7 +23,7 @@ let isActiveTab = (tab) => {
 
     if (tab === 'c' &&
         (pt == '/static/loan/weixin-invite/index.html' ||
-            pt == '/static/loan/weixin-invite/'))
+            pt == '/static/loan/weixin-invite/' || hash === '#/invite'))
         cnd = true;
 
     if (tab === 'd' && hash == "#/user-panel" &&
@@ -49,7 +49,8 @@ function get_styles(type) {
         display: "block",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        margin: "10px 0",
+        backgroundSize: "contain",
+        margin: "10px 0"
     }
 
     if (type == 'fixed_panel')
