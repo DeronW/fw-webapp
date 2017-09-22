@@ -62,10 +62,12 @@ export default (stores) => {
                 <Route exact path='/protocols/partner' component={Protocols.Partner} />
                 <Route exact path='/protocols/info-collect' component={Protocols.InfoCollect} />
 
+                {/* 优易借相关协议 */}
                 <Route exact path='/protocols/youyi-loan' component={Protocols.YouyiLoan} />
                 <Route exact path='/protocols/youyi-loan-service' component={Protocols.YouyiLoanService} />
                 <Route exact path='/protocols/youyi-repayment' component={Protocols.YouyiRepayment} />
                 <Route exact path='/protocols/youyi-repayment-service' component={Protocols.YouyiRepaymentService} />
+                <Route exact path='/protocols/youyi-register' component={Protocols.YouyiRegister} />
 
             </Switch>
         </Provider>
