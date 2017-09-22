@@ -2,6 +2,7 @@
     width: 100%;
     display: table;
     height: 88px;
+    background: #fff;
 }
 
 .btnBack {
@@ -51,7 +52,8 @@
 
 .allChart {
     width: 100%;
-    height: 394px;
+    height: 400px;
+    background: #fff;
 }
 
 .allData {
