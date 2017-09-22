@@ -1,4 +1,4 @@
-html,body {
+/*html,body {
   background-color: #f0f0f0;
 }
 *{
@@ -19,7 +19,7 @@ input{
   background:transparent;
   outline:none;
   border:none;
-}
+}*/
 .transfer-box{
   width:100%;
 }
@@ -633,4 +633,3 @@ border:1px solid #ebeaea;
     top: 34px;
     right: 34px;
 }
-

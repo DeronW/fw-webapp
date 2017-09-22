@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
+import ReactEcharts from 'echarts-for-react'
 import {observer, inject} from 'mobx-react'
-
 import styles from '../../css/user/rebate.css'
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
@@ -27,7 +27,15 @@ class Rebate extends React.Component {
 
         let all_section = () => {
             return <div>
-                <div styleName="allChart"></div>
+                <div styleName="allChart">
+                    {/*<ReactEcharts*/}
+                        {/*option={this.getOption()}*/}
+                        {/*notMerge={true}*/}
+                        {/*lazyUpdate={true}*/}
+                        {/*theme={"theme_name"}*/}
+                        {/*onChartReady={this.onChartReadyCallback}*/}
+                        {/*onEvents={EventsDict}/>*/}
+                </div>
                 <div styleName="allData">
                     <div styleName="dataLine">
                         <div styleName="lineItem">
