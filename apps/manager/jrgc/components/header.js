@@ -17,8 +17,10 @@ const Header = CSSModules(styles, {
         <div styleName="header">
             <a styleName="btn" onClick={props.history.goBack}> </a>
             {props.title}
+            {props.sub_title &&
+                <Link to={props.sub_link} styleName="sub-title">{props.sub_title}</Link>
+            }
         </div>
     </div>
 ))
-
 export default Header

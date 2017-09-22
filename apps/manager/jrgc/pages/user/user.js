@@ -11,7 +11,7 @@ class User extends React.Component {
     render() {
         let history = this.props
         return <div>
-            <Header title="我的" history={history} />
+            <Header title="我的1" history={history} sub_title="转增记录" sub_link="/user-rebate" />
             <div>Home</div>
             <BottomNavBar history={history}/>
         </div>
