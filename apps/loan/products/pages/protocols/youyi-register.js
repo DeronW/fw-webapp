@@ -99,18 +99,14 @@ class YouyiRegister extends React.Component {
         13.9 本协议在您提交的注册为“放心花”用户的申请获得本公司审核通过时生效。自您注销您的用户账户的申请被本公司审核通过之日，或者本公司依据本协议及本协议所纳入或被提及的文件、条款和条件终止您的用户资格之日终止。
         `
 
-                return <div styleName = "bg" >
-                    <
-                    Header title = "注册服务协议"
-                history = { this.props.history }
-                />
+        return <div styleName="bg">
+            <Header title="注册服务协议" history={this.props.history} />
 
-                <
-                div styleName = "protocol" > {
-                    txt.split('\n').map((t, index) => < div key = { index } > { t } < /div>)} <
-                        /div> <
-                        /div>
-                    }
-                }
+            <div styleName="protocol">
+                {txt.split('\n').map((t, index) => <div key={index}>{t}</div>)}
+            </div>
+        </div>
+        }
+    }
 
-                export default YouyiRegister
+export default YouyiRegister
