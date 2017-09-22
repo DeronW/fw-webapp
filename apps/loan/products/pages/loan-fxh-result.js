@@ -64,11 +64,11 @@ export default class FxhResult extends React.Component {
             if (data.loanStatus == 6) {
                 this.setState({ waitingResultShow: false, successResultShow: true });
                 if (data.activityRecomUrl) {
-                        timeoutTimer = setTimeout(() => {
+                        let onceTimer = setTimeout(() => {
                         Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`, false, "放心花") :
                                 location.href = `${data.activityRecomUrl}`;
                     }, 2000)
-                    this.setState({timeoutTimer:timeoutTimer})
+                    this.setState({timeoutTimer:onceTimer})
                 }
 
             } else if (data.loanStatus == 5) {
