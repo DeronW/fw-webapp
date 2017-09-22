@@ -67,7 +67,6 @@ export default (stores) => {
                 <Route exact path='/protocols/youyi-loan-service' component={Protocols.YouyiLoanService} />
                 <Route exact path='/protocols/youyi-repayment' component={Protocols.YouyiRepayment} />
                 <Route exact path='/protocols/youyi-repayment-service' component={Protocols.YouyiRepaymentService} />
-                <Route exact path='/protocols/youyi-register' component={Protocols.YouyiRegister} />
 
             </Switch>
         </Provider>
