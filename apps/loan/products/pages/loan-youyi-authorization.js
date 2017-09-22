@@ -16,14 +16,17 @@ export default class LoopLoanAuthorization extends React.Component {
         let q = Utils.hashQuery;
         this.state = {
             params: encodeURIComponent(q.params),
-            sign: encodeURIComponent(q.sign)
+            sign: encodeURIComponent(q.sign),
+            authFail:false
         }
     }
     componentDidMount() {
         document.title = '芝麻信用授权';
 
         this.props.loopLoan.zima_callback(this.state.params, this.state.sign).catch((e) => {
-            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/loan-youyi-index'
+            this.setState({authFail:true},()=>{
+               Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/loan-youyi-index'
+            })
         });
     }
 
@@ -43,9 +46,9 @@ export default class LoopLoanAuthorization extends React.Component {
                     </div>
                         <div styleName="btn" onClick={this.confirmHandler}>确定</div>
                     </div>}
-                    {loopLoan.authFail && <div styleName="fail">
-                        <div styleName="title">授权失败</div>
-                        <div styleName="img"><img styleName="auth-img" src={require("../images/loan-youyi-authorization/fail.png")} /></div>
+                    {this.state.authFail && <div styleName="fail">
+                        <div styleName="transition-title">页面正在跳转，请稍等</div>
+                        <div styleName="img"><img styleName="auth-img" src={require("../images/loan-youyi-authorization/transition.png")} /></div>
                     </div>}
                 </div>
             </div>
