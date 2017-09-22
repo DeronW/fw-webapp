@@ -31,13 +31,13 @@ export default class FxhResult extends React.Component {
         let { fxh } = this.props;
         fxh.get_card_list();
         this.countingDown();
-        this.judgeUrl();
+        // this.judgeUrl();
     }
-    judgeUrl = () => {
-        if(document.referrer == `https://m.easyloan888.com/static/loan/features/index.html#/invite_activity`){
-            location.href="";
-        }
-    }
+    // judgeUrl = () => {
+    //     if(document.referrer == `https://m.easyloan888.com/static/loan/features/index.html#/invite_activity`){
+    //         location.href="";
+    //     }
+    // }
     componentWillUnmount() {
         clearInterval(this.timer);
     }
@@ -70,7 +70,7 @@ export default class FxhResult extends React.Component {
                 if (data.activityRecomUrl) {
                     setTimeout(() => {
                         Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`, false, "放心花") :
-                            location.href = `${data.activityRecomUrl}`;
+                            document.referrer == `https://m.easyloan888.com/static/loan/features/index.html#/invite_activity` ? return false : location.href = `${data.activityRecomUrl}`;
                     }, 2000)
                 }
                 // setTimeout(() => {
