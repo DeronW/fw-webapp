@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Header } from '../../../lib/components'
 
-import styles from '../../css/protocols/youyi-loan.css'
+import styles from '../../css/protocols/youyi.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Register extends React.Component {
