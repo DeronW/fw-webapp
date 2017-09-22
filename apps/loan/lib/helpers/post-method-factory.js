@@ -42,7 +42,7 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
             silence: true
         }, options)
 
-        return Request(opt).catch(error => {
+        return Request(merged_options).catch(error => {
 
             const LOGIN_CODE = 100008
 
