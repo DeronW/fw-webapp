@@ -15,10 +15,8 @@ class ReserveInfo extends React.Component {
         NativeBridge.trigger('hide_header')
         this.props.reserve.fetchProduct()
     }
-
     reserveHandler = () => {
         let { history, reserve } = this.props
-        alert(reserve.applyInvestClaimId)
         reserve.fetchProduct().then(data => {
             if (data.isRisk == 0) {
                 history.push('/user/evaluate?next_url=/reserve/info')
@@ -29,12 +27,14 @@ class ReserveInfo extends React.Component {
                 history.push(`/reserve/apply?applyInvestClaimId=${reserve.applyInvestClaimId}`)
             }
         })
-
     }
-
     render() {
         let { reserve, history } = this.props
         let { context } = reserve
+
+        let tabItem = (tab) => {
+            return <div styleName="tab-item">{tab}</div>
+        }
         return <div styleName='infoPanel'>
             <Header noClose title="详情" history={history} />
             <div styleName="topInfo">
@@ -64,18 +64,10 @@ class ReserveInfo extends React.Component {
             <div styleName="flowBox">
                 <div styleName="flowHeader">预约流程</div>
                 <div styleName="flowContent">
-                    <div styleName="tab-item tab-book">
-                        预约出借
-                    </div>
-                    <div styleName="tab-item tab-froze">
-                        冻结资金
-                    </div>
-                    <div styleName="tab-item tab-bid">
-                        投标(自动)
-                    </div>
-                    <div styleName="tab-item tab-interest">
-                        起息
-                    </div>
+                    {tabItem('预约出借')}
+                    {tabItem('冻结资金')}
+                    {tabItem('投标(自动)')}
+                    {tabItem('起息')}
                     <div styleName="icon-arrow icon-arrow1"></div>
                     <div styleName="icon-arrow icon-arrow2"></div>
                     <div styleName="icon-arrow icon-arrow3"></div>

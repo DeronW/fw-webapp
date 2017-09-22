@@ -12,17 +12,10 @@ import {Browser} from '../../helpers'
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveRecords extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
-    state = {
-        on_number: 0
-    }
 
     componentDidMount() {
         NativeBridge.trigger('hide_header')
-        this.props.reserve.getReserveList(null, true, '0')
+        this.props.reserve.getReserveList()
         Event.touchBottom(this.props.reserve.getReserveList);
     }
 
@@ -38,42 +31,38 @@ class ReserveRecords extends React.Component {
 
                 } else if (data.cancelResult == '0') {
                     Components.showToast("取消成功")
-                    reserve.getReserveList(null, true)
+                    reserve.getReserveList()
                 }
             })
         };
         showConfirm('确定取消？', cb)
     }
 
-
     lookProtocolHandler = () => {
         let {history} = this.props
         history.push(`/reserve/protocol`)
     }
 
-    // reloadHandler = () => {
-    //     this.props.reserve.getReserveList(null, true)
-    // }
-
-    tabHandler = (index) => {
-        this.setState({on_number: index})
-        this.props.reserve.getReserveList(null, true, String(index))
+    tabHandler = (status) => {
+        let { current_status } = this.props.reserve.data
+        let { setCurrentStatus,getReserveList } =this.props.reserve
+        if(status == current_status) return
+        setCurrentStatus(status)
     }
 
     render() {
         let {reserve, history} = this.props
-        let {records} = reserve
+        let { current_status,tab } = this.props.reserve.data
+        let { records } = reserve.data.tab[current_status]
+
         let no_records = <div styleName="emptyPanel">
             <img src={require('../../images/reserve/records/norecords.png')}/>
             <div styleName="norecords-text">暂无预约</div>
         </div>
-        // let reload_style = Browser.inIOS ? styles['reloadBtnIos'] : styles['reloadBtn']
-        // let reload_btn = <div className={reload_style} onClick={this.reloadHandler}></div>
         let tab_func = (item, index) => {
-            let {on_number} = this.state
-            let tab_item_style = index == on_number ? `tab_item tab_item_${index} tab_on` : `tab_item tab_item_${index}`
-            return <div styleName={tab_item_style} key={index} onClick={() => this.tabHandler(index)}>
-                {item}
+            let tab_item_style = item == current_status ? `tab_item tab_item_${index} tab_on` : `tab_item tab_item_${index}`
+            return <div styleName={tab_item_style} key={index} onClick={() => this.tabHandler(item)}>
+                {tab[item].name}
             </div>
         }
 
@@ -88,7 +77,7 @@ class ReserveRecords extends React.Component {
             }
             let cancelstyle = item.status == 2 ? styles['cancelstyle'] : styles['reserveItem']
             return <div className={cancelstyle} key={index}>
-                {item.status == '0' &&
+                {item.status == 0 &&
                 <div styleName="itemHeader headerOn">
                     {status}
                     <div styleName="itemHeaderRight cancelBtn"
@@ -96,8 +85,8 @@ class ReserveRecords extends React.Component {
                         取消预约
                     </div>
                 </div>}
-                {item.status == '1' && <div styleName="itemHeader headerOver">{status}</div>}
-                {item.status == '2' && <div styleName="itemHeader headerCancel">{status}</div>}
+                {item.status == 1 && <div styleName="itemHeader headerOver">{status}</div>}
+                {item.status == 2 && <div styleName="itemHeader headerCancel">{status}</div>}
                 <div styleName="infoContainer">
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">实际投资金额</div>
@@ -117,7 +106,7 @@ class ReserveRecords extends React.Component {
                             {new Date(parseInt(item.bookTime)).toLocaleDateString().replace(/\//g, "-") + " " + new Date(parseInt(item.bookTime)).toTimeString().substr(0, 8)}
                         </div>
                     </div>
-                    {(item.status == '0' || item.status == '1') && <div styleName="infoItem">
+                    {(item.status == 0 || item.status == 1) && <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约协议</div>
                         <div styleName="itemHeaderRight" onClick={this.lookProtocolHandler}>
                             已签署<span styleName="arrow"></span>
@@ -145,17 +134,15 @@ class ReserveRecords extends React.Component {
         }
         let tab_style = Browser.inIOSApp ? 'tabWrapperIos' : 'tabWrapper'
         return <div styleName="recordsPanel">
-            {/*<Header title="我的预约" history={history} noClose={false}/>*/}
             <Header title="我的预约" history={history}/>
             <div styleName={tab_style}>
-                {['预约中', '预约结束', '已取消'].map(tab_func)}
+                {['0', '1', '2'].map(tab_func)}
             </div>
             <div styleName="textWrapper">
-                {this.state.on_number == 0 && reserve_on()}
-                {this.state.on_number == 1 && reserve_over()}
-                {this.state.on_number == 2 && reserve_cancel()}
+                {current_status == '0' && reserve_on()}
+                {current_status == '1' && reserve_over()}
+                {current_status == '2' && reserve_cancel()}
             </div>
-            {/*{reload_btn}*/}
         </div>
     }
 }

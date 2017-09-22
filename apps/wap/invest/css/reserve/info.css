@@ -105,19 +105,18 @@
     padding-top: 70px;
 }
 
-.tab-book {
+.tab-item:first-child {
     background: url("../../images/reserve/info/flow1.png") no-repeat center 0;
 }
-
-.tab-froze {
+.tab-item:nth-child(2){
     background: url("../../images/reserve/info/flow2.png") no-repeat center 0;
 }
 
-.tab-bid {
+.tab-item:nth-child(3){
     background: url("../../images/reserve/info/flow3.png") no-repeat center 0;
 }
 
-.tab-interest {
+.tab-item:nth-child(4){
     background: url("../../images/reserve/info/flow4.png") no-repeat center 0;
 }
 
@@ -127,7 +126,6 @@
     position: absolute;
     background: url("../../images/reserve/info/arrow.png") no-repeat center;
 }
-
 .icon-arrow1 {
     top: 45px;
     left: 180px;
