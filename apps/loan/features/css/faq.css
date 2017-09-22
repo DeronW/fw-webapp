@@ -12,12 +12,12 @@
 .item {
     position: relative;
     border-bottom: 1px solid #ebeaea;
-    font-size: 28px;
 }
 
 .item .q {
     background: white;
     padding: 20px 30px;
+    font-size: 28px;
 }
 
 .item .a {
