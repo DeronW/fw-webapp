@@ -47,15 +47,6 @@ class Chart extends React.Component {
                     return Math.round(value.max + 0.1*(value.max - value.min));
                 }
             },
-            series: [{
-                symbolSize: 9,
-                smooth: true,
-                lineStyle: { normal: { color: '#d75063' } }
-            }, {
-                symbolSize: 9,
-                smooth: true,
-                lineStyle: { normal: { color: '#20629f' } }
-            }],
             dataZoom: [{
                 type: 'inside',
                 xAxisIndex: [0],

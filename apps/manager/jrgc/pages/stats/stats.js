@@ -59,12 +59,14 @@ class Stats extends React.Component {
         },
         series: [{
             symbolSize: 9,
+            smooth: true,
             lineStyle: { normal: { color: '#d75063' } },
             name: '年化投资额',
             type: 'line',
             data: value.slice() || []
         }, {
             symbolSize: 9,
+            smooth: true,
             lineStyle: { normal: { color: '#20629f' } },
             name: '投资额',
             type: 'line',
