@@ -18,7 +18,14 @@ class Rebate extends React.Component {
         this.setState({chart_num: index})
     }
     getOption = () => ({
-        title: {text: '当前数据更新于:'},
+        title: {
+            text: '当前数据更新于:',
+            textStyle: {
+                color: '#555',
+                fontSize: 16,
+                padding: [0, 0, 10, 0]
+            }
+        },
         tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
         legend: {
             textStyle: {
