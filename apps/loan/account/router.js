@@ -10,6 +10,7 @@ import Entry from './pages/entry.js'
 import Login from './pages/login.js'
 import SetPassword from './pages/set-password.js'
 import UserPanel from './pages/user-panel.js'
+import Invite from './pages/invite.js'
 
 import Redbag from './pages/redbag.js'
 import RedbagRecords from './pages/redbag-records.js'
@@ -40,6 +41,7 @@ export default (stores) => {
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/set-password' component={SetPassword} />
                 <Route exact path='/user-panel' component={UserPanel} />
+                <Route exact path='/invite' component={Invite} />
                 {/*注册用户领取红包*/}
                 <Route exact path='/redbag' component={Redbag} />
                 <Route exact path='/redbag-records' component={RedbagRecords} />
@@ -48,6 +50,7 @@ export default (stores) => {
                 <Route exact path='/bank-card' component={BankCard} />
                 <Route exact path='/bank-card-add' component={BankCardAdd} />
                 <Route exact path='/bank-card-verify' component={BankCardVerify} />
+
                 {/*还款相关页面*/}
                 <Route exact path='/repayment-records' component={RepaymentRecords} />
                 <Route exact path='/repayment-youyi' component={RepaymentYouyi} />
