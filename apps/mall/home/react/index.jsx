@@ -1,5 +1,5 @@
 // import LazyLoad from 'react-lazyload';
- 
+
 
 
 function gotoHandler(link) {
@@ -16,28 +16,6 @@ function gotoHandler(link) {
 function productLink(bizNo) {
     return `/static/mall/product-detail/index.html?bizNo=${bizNo}`
 }
-
-// function isVisible($node){
-//     var winH = $(window).height(),
-//         scrollTop = $(window).scrollTop(),
-//         offSetTop = $(window).offSet().top;
-//     if (offSetTop < winH + scrollTop) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
-
-// var hasShowed = false;
-// $(window).on("sroll",function{
-//     if (hasShowed) {
-//         return;
-//     } else {
-//         if (isVisible($node)) {
-//             console.log(true);
-//         }
-//     }
-// })
 
 
 const Mall = React.createClass({
@@ -117,7 +95,7 @@ const Mall = React.createClass({
                     </div>
                 </div>
                 {banner}
-                
+
                 <div className="head-nav">
                     <a href="/static/mall/product-vip-zone/index.html">
                         <img src="images/vip.png" /><span>VIP专区</span></a>

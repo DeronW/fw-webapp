@@ -86,7 +86,6 @@ export default class FqIndex extends React.Component {
 
     clickHandler = () => {
         let { fq } = this.props;
-        console.log(fq.canStatus)
         // 初始化数据没有完成, 稍后再试
         if (fq.canStatus === null && fq.errCode != 20013 && fq.errCode !=1001003 && fq.errCode !=10001) return;
         if (fq.borrowStatus == 1 || fq.borrowStatus == 101) {

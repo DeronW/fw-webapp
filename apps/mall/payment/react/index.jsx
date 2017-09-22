@@ -97,7 +97,6 @@ const Payment = React.createClass({
         }
         else if (index == 'z') {
             var queryNew = $FW.Format.urlQuery();
-            // console.log(queryNew);
              //申请支付
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/payment/v1/alipay_topay.json`,
@@ -111,7 +110,6 @@ const Payment = React.createClass({
                     UserId:""
                 },
             }).then(data=> {
-                console.log(111);
             $FW.Component.showAjaxLoading('mini');
 
                     document.write(data.form);

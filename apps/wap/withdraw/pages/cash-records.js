@@ -32,17 +32,14 @@ export default class CashRecords extends React.Component {
 
     componentDidMount(){
         this.loadRecordHandler();
-        // console.log($FWC.Event.touchBottom());
         $FWC.Event.touchBottom(this.loadRecordHandler);
     }
     loadRecordHandler(){
         let {cash_records} = this.props;
-        console.log(cash_records);
         if (this.state.totalPage && this.state.page >= this.state.totalPage) return;
         // 首山的接口不能添加 API_PATH 参数, 它的域名是独立的: assets-api.9888.cn
         cash_records.getData().then(() => {
             this.setState({data:cash_records.pageData})
-            console.log(this.state.data);
             this.state.data.result.forEach((i) => this.insertRecord(this.state.month, this.format_record(i)));
 
                 this.setState({
@@ -101,7 +98,7 @@ export default class CashRecords extends React.Component {
         if (n == 10) return '提现失败';
         if (n == 11) return '处理中';
     }
-  
+
     render() {
         let record = (data, index) => {
             return (

@@ -42,9 +42,6 @@ class RepaymentFangXinResult extends React.Component {
 　　　　    url = url.toString();
         }
 　　　　var arr = url.split("//");
-console.log(url);
-console.log(arr);
-console.log(arr[1]);
 　　　　return arr[1].substring(arr[1].indexOf("/"));
 　　}
     render() {

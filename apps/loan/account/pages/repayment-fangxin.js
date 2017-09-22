@@ -126,7 +126,6 @@ class RepaymentFangXin extends React.Component {
     }
     render() {
         let { history, repayment_fangxin } = this.props;
-        console.log(repayment_fangxin)
         let { inputAmount } = this.props.repayment_fangxin.data;
         let { remain, show, code } = this.state;
 

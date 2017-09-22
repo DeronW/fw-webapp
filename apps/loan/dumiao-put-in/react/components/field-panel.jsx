@@ -101,7 +101,6 @@ class CityPanel extends React.Component {
     setQuickPosition = (clientY, offsetTop, offsetHeight) => {
         let p;
         p = 1 - (offsetTop + offsetHeight - clientY) / offsetHeight;
-        // console.log(offsetTop, offsetHeight, clientY, p)
         p = Math.max(p, 0)
         p = Math.min(p, 1)
         if (p < 0.05) p = 0;

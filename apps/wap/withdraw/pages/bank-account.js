@@ -49,23 +49,9 @@ export default class BankAccount extends React.Component {
     }
 
  refreshBankList = (value) => {
-    //  console.log(this);
         let fn = () => {
-            // console.log(this);
-            // console.log(this.request);
-            // 首山的接口不能添加 API_PATH 参数, 它的域名是独立的: assets-api.9888.cn
-            // this.props.bank_account.request({
-            //     url: "/fake-api/api/sspay/withdraw/v1/getBankList.shtml",
-            //     method:"GET",
-            //     data: {
-            //         index: "0",
-            //         keyword: value,
-            //         size: "10000"
-            //     },
-            // })
             this.props.bank_account.getBankList(this.state.value)
             .then(() => {
-                console.log(this.props.bank_account);
                     this.setState({ bankList: this.props.bank_account.bankList })
 
                     if (this.props.bank_account.bankList.length === 0) {

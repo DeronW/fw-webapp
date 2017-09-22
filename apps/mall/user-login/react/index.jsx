@@ -73,7 +73,6 @@ const Login = React.createClass({
             method: 'post',
             data: FormData,
             success: function(data) {
-                // console.log(data);
                 // $FW.Component.Alert("验证码：" + data.code)
                 this.setState({ value: 60, reSend: false });
                 this.tick()

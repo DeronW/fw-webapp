@@ -41,7 +41,6 @@ export default class IdcardOcr {
 
     submit = () => {
         if (!this.ocrDone) return
-        console.log('submit');
     }
 
 }

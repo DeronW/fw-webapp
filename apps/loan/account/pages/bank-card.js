@@ -39,8 +39,6 @@ class BankCard extends React.Component {
 
                 };
 
-                console.log(cardLabelArray);
-
             return <div styleName="card" key={item.cardNo}>
                 <div styleName="bank-info">
                     <div styleName="bank-logo">
