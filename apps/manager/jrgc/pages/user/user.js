@@ -10,9 +10,23 @@ class User extends React.Component {
 
     render() {
         let history = this.props
+
         return <div>
-            <Header title="我的1" history={history} sub_title="转增记录" sub_link="/user-rebate" />
-            <div>Home</div>
+            <div styleName="bar">
+                <img  styleName="portrait" src={require('../../images/user/user/man.png')}/>
+                <div styleName="barItem info">
+                    <div styleName="name">张三</div>
+                    <div styleName="des">A12345T</div>
+                </div>
+                <div styleName="barItem all">
+                    <div styleName="des">全部客户(人)</div>
+                    <div styleName="num">190</div>
+                </div>
+                <div styleName="barItem part">
+                    <div styleName="des">在投客户(人)</div>
+                    <div styleName="num">100</div>
+                </div>
+            </div>
             <BottomNavBar history={history}/>
         </div>
     }
