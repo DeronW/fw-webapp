@@ -5,6 +5,7 @@
 
 .tab-cnt {
     position: fixed;
+    z-index: 99;
     top: 0;
     left: 0;
     width: 100%;
@@ -50,6 +51,7 @@
 .tab-item-active {
     composes: tab-item;
     background-color: #9b5b54;
+    border: none;
     color: #fff;
 }
 
