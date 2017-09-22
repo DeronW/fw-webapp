@@ -70,7 +70,7 @@ export default class FxhResult extends React.Component {
                 if (data.activityRecomUrl) {
                     setTimeout(() => {
                         Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`, false, "放心花") :
-                            document.referrer == `https://m.easyloan888.com/static/loan/features/index.html#/invite_activity` ? return false : location.href = `${data.activityRecomUrl}`;
+                            document.referrer == `https://m.easyloan888.com/static/loan/features/index.html#/invite_activity` ? location.href="" : location.href = `${data.activityRecomUrl}`;
                     }, 2000)
                 }
                 // setTimeout(() => {
