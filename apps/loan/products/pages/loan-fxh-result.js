@@ -68,6 +68,7 @@ export default class FxhResult extends React.Component {
             if (data.loanStatus == 6) {
                 this.setState({ waitingResultShow: false, successResultShow: true });
                 if (data.activityRecomUrl) {
+                    console.log(document.referrer);
                     setTimeout(() => {
                         Browser.inApp ? NativeBridge.goto(`${data.activityRecomUrl}`, false, "放心花") :
                             document.referrer == `https://m.easyloan888.com/static/loan/features/index.html#/invite_activity` ? location.reload(false) : location.href = `${data.activityRecomUrl}`;
