@@ -1,0 +1,12 @@
+.bg {
+    background: #f0f0f0;
+}
+
+.protocol {
+    padding: 34px;
+    max-height: 9999999px;
+    text-indent: 2em;
+    font-size: 30px;
+    line-height: 45px;
+    text-align: justify;
+}
