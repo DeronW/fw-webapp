@@ -9,7 +9,6 @@ class YouyiRegister extends React.Component {
 
     render() {
 
-
         let txt = `
         注册服务协议
         欢迎您注册成为“放心花”用户（下称为“您”或“用户”，即您本人），在注册前请您仔细阅读如下服务条款：
@@ -102,7 +101,7 @@ class YouyiRegister extends React.Component {
         `
 
         return <div styleName="bg">
-            <Header title="借款合同" history={this.props.history} />
+            <Header title="注册服务协议" history={this.props.history} />
 
             <div styleName="protocol">
                 {txt.split('\n').map((t, index) => <div key={index}>{t}</div>)}
