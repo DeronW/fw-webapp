@@ -105,7 +105,6 @@ class Register extends React.Component {
         `
         return <div styleName="bg">
             <Header title="“放心花”用户注册协议" history={this.props.history} />
-
             <div styleName="protocol">
                 {txt.split('\n').map((t, index) => <div key={index}>{t}</div>)}
             </div>

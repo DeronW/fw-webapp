@@ -10,7 +10,7 @@ export default class YouyiLoan extends React.Component {
     render() {
         let txt = `
         借款合同
-                                                  合同编号：【】
+                                                      合同编号：【】
 
         甲方：
         身份证号码：

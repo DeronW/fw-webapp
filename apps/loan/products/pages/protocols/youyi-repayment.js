@@ -9,7 +9,7 @@ export default class YouyiRepayment extends React.Component {
     render() {
         let txt =`
         委托扣款授权书
-                                         编号：【】
+                                             编号：【】
 
         委托人：【】
         身份证号码：【】
@@ -28,8 +28,8 @@ export default class YouyiRepayment extends React.Component {
         本授权书项下的委托期限自本授权书生效之日起至委托人在《借款服务协议》及《借款合同》下全部义务履行完毕之日止。委托人在此特别声明：委托人对于受托人及其合作的第三方支付机构在本授权书项下对委托人指定银行账户中款项的划扣，不提出任何异议。
         委托人知悉并同意，本授权书由委托人通过放心花平台系统以电子签章的方式进行签署，自签署之日起生效，委托人对此签约方式不持任何异议，认可该签约方式的法律效力。
 
-                                                        委托人（签章）：
-                                                        日期：
+                                                            委托人（签章）：
+                                                            日期：
         `
         return <div styleName="bg">
             <Header title="委托扣款授权书" history={this.props.history} />
