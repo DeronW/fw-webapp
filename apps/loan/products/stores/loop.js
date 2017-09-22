@@ -102,7 +102,7 @@ export default class LoopLoan {
         return this.Post('/api/zhima/v1/credit/callback.json', {
             params: params,
             sign: sign
-        }).then((data) => {
+        },'silence').then((data) => {
             this.zmScore = data.zmScore;
         });
     }
