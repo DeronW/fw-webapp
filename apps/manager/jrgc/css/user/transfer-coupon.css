@@ -50,3 +50,21 @@
 .totalNum {
     font-size: 48px;
 }
+
+.contentItem {
+    width: 660px;
+    height: 164px;
+    margin: 20px auto 0;
+}
+
+.contentBlue {
+    background: url("../../images/user/transfer-coupon/couponbg-blue.png") no-repeat center;
+}
+
+.contentRed {
+    background: url("../../images/user/transfer-coupon/couponbg-red.png") no-repeat center;
+}
+
+.contentYellow {
+    background: url("../../images/user/transfer-coupon/coupon-yellow.png") no-repeat center;
+}

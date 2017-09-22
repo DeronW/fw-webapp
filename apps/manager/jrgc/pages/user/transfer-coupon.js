@@ -27,8 +27,9 @@ class TransferCoupon extends React.Component {
             </div>
         }
         let coupon_detail = (item, index) => {
-            return <div styleName="contentItem" key={index}>
-                
+            let coutent_style = coupon_num == 0 ? "contentItem contentBlue" : coupon_num == 1 ? "contentItem contentRed" : coupon_num == 2 ? "contentItem contentYellow" : null
+            return <div styleName={coutent_style} key={index}>
+
             </div>
         }
         let count_type = () => {
