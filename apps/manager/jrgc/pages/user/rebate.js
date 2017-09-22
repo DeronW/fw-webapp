@@ -7,12 +7,16 @@ import styles from '../../css/user/rebate.css'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Rebate extends React.Component {
     state = {
-        tab_num: 0
+        tab_num: 0,
+        chart_num: 0
     }
     switchTabHandler = (index) => {
         this.setState({tab_num: index})
     }
 
+    chartTabHandler = (index) => {
+        this.setState({chart_num: index})
+    }
     getOption = () => ({
         title: {text: '当前数据更新于:'},
         tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
@@ -101,11 +105,24 @@ class Rebate extends React.Component {
         }
 
         let all_section = () => {
+            let {chart_num} = this.state
+            let chart_func = (item, index) => {
+                return <div styleName={chart_num == index ? "chartTabItem chartTabActive" : "chartTabItem"} key={index}
+                            onClick={() => this.chartTabHandler(index)}>
+                    {item}
+                </div>
+            }
             return <div>
                 <div styleName="allChart">
-                    <ReactEcharts option={this.getOption()}
-                                  style={{height: '100%', width: '100%'}}
-                                  styleName='echarts'/>
+                    <div styleName="chartWrapper">
+                        {chart_num == 0 && <ReactEcharts option={this.getOption()}
+                                                         style={{height: '100%', width: '100%'}}
+                                                         styleName='echarts'/>}
+                    </div>
+
+                    <div styleName="chartTab">
+                        {['7天', '30天', '90天', '年度'].map(chart_func)}
+                    </div>
                 </div>
                 <div styleName="allData">
                     <div styleName="dataLine">
