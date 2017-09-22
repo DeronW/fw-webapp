@@ -1,5 +1,5 @@
 import React from 'react'
-import { Provider } from 'mobx-react'
+import {Provider} from 'mobx-react'
 import {
     HashRouter as Router,
     Route,
@@ -18,6 +18,8 @@ export default (stores) => {
                 <Route exact path="/stats" component={Stats.Stats}/>
                 <Route exact path="/" component={User.User}/>
                 <Route exact path="/user-rebate" component={User.Rebate}/>
+                <Route exact path="/user-transfer-coupon" component={User.TransferCoupon}/>
+                <Route exact path="/user-transfer-records" component={User.TransferRecords}/>
             </Switch>
         </Provider>
     </Router>
