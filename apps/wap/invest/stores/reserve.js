@@ -8,12 +8,12 @@ export default class Reserve {
         this.data = {}
 
         extendObservable(this.data, {
+            current_status:'0',
             tab:{
                 '0':{name:'预约中',records_page_no:1,records:[]},
                 '1':{name:'预约结束',records_page_no:1,records:[]},
                 '2':{name:'已取消',records_page_no:1,records:[]},
-            },
-            current_status:'0'
+            }
         })
 
         extendObservable(this, {
@@ -35,8 +35,7 @@ export default class Reserve {
         })
     }
 
-    @computed
-    get applyInvestClaimId() {
+    @computed get applyInvestClaimId() {
         return Utils.hashQuery.applyInvestClaimId
     }
 
@@ -85,7 +84,7 @@ export default class Reserve {
 
     submitReserveHandler = () => {
         return this.Post('/api/v1/intoAppointPage.shtml', {
-            applyInvestClaimId: this.getApplyInvestClaimId()
+            applyInvestClaimId: this.applyInvestClaimId
         }).then((data) => {
             return this.Post('/api/v1/investAppoint.shtml', {
                 applyAmt: this.reserveMoney,
