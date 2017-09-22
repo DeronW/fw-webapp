@@ -44,23 +44,23 @@ class ReserveRecords extends React.Component {
     }
 
     tabHandler = (status) => {
-        let { current_status } = this.props.reserve.data
+        let { type } = this.props.reserve.data.records
         let { setCurrentStatus,getReserveList } =this.props.reserve
-        if(status == current_status) return
+        if(status == type) return
         setCurrentStatus(status)
     }
 
     render() {
         let {reserve, history} = this.props
-        let { current_status,tab } = this.props.reserve.data
-        let { records } = reserve.data.tab[current_status]
+        let { type,tab } = this.props.reserve.data.records
+        let { list } = reserve.data.records.tab[type]
 
         let no_records = <div styleName="emptyPanel">
             <img src={require('../../images/reserve/records/norecords.png')}/>
             <div styleName="norecords-text">暂无预约</div>
         </div>
         let tab_func = (item, index) => {
-            let tab_item_style = item == current_status ? `tab_item tab_item_${index} tab_on` : `tab_item tab_item_${index}`
+            let tab_item_style = item == type ? `tab_item tab_item_${index} tab_on` : `tab_item tab_item_${index}`
             return <div styleName={tab_item_style} key={index} onClick={() => this.tabHandler(item)}>
                 {tab[item].name}
             </div>
@@ -115,23 +115,12 @@ class ReserveRecords extends React.Component {
                 </div>
             </div>
         }
-        let reserve_on = () => {
+        let reserve_page = () => {
             return <div>
-                {records.length == 0 ? no_records : records.map(records_func)}
+                {list.length > 0 ? list.map(records_func):no_records}
             </div>
         }
 
-        let reserve_over = () => {
-            return <div>
-                {records.length == 0 ? no_records : records.map(records_func)}
-            </div>
-        }
-
-        let reserve_cancel = () => {
-            return <div>
-                {records.length == 0 ? no_records : records.map(records_func)}
-            </div>
-        }
         let tab_style = Browser.inIOSApp ? 'tabWrapperIos' : 'tabWrapper'
         return <div styleName="recordsPanel">
             <Header title="我的预约" history={history}/>
@@ -139,9 +128,9 @@ class ReserveRecords extends React.Component {
                 {['0', '1', '2'].map(tab_func)}
             </div>
             <div styleName="textWrapper">
-                {current_status == '0' && reserve_on()}
-                {current_status == '1' && reserve_over()}
-                {current_status == '2' && reserve_cancel()}
+                {type == '0' && reserve_page()}
+                {type == '1' && reserve_page()}
+                {type == '2' && reserve_page()}
             </div>
         </div>
     }
