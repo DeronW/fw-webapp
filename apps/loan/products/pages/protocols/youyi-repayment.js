@@ -6,11 +6,6 @@ import styles from '../../css/protocols/youyi-loan-service.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class YouyiRepayment extends React.Component {
-
-    componentDidMount() {
-        document.title = '委托扣款授权书'
-    }
-
     render() {
         let { history } = this.props;
         return <div styleName="bg">
