@@ -8,12 +8,15 @@ export default class Reserve {
         this.data = {}
 
         extendObservable(this.data, {
-            current_status:'0',
-            tab:{
-                '0':{name:'预约中',records_page_no:1,records:[]},
-                '1':{name:'预约结束',records_page_no:1,records:[]},
-                '2':{name:'已取消',records_page_no:1,records:[]},
+            records: {
+                type:'0',
+                tab:{
+                    '0':{name:'预约中',page_no:1,list:[]},
+                    '1':{name:'预约结束',page_no:1,list:[]},
+                    '2':{name:'已取消',page_no:1,list:[]},
+                }
             }
+
         })
 
         extendObservable(this, {
@@ -58,24 +61,24 @@ export default class Reserve {
         })
     }
     setCurrentStatus = status => {
-        this.data.current_status = status;
+        this.data.records.type = status;
         this.getReserveList()
     }
     getReserveList = (done) => {
-        let { tab,current_status } = this.data,current_tab = tab[current_status]
-        if (current_tab.records_page_no === 0) return done && done();
+        let { tab,type } = this.data.records,current_tab = tab[type]
+        if (current_tab.page_no === 0) return done && done();
         const PAGE_SIZE = 10
 
         this.Post('/api/v1/appointRecordList.shtml', {
-            page: current_tab.records_page_no,
+            page: current_tab.page_no,
             pageSize: PAGE_SIZE,
-            status: current_status
+            status: type
         }).then(data => {
-            current_tab.records.push(...data.pageData.result)
+            current_tab.list.push(...data.pageData.result)
 
-            current_tab.records_page_no < data.pageData.pagination.totalCount ?
-            current_tab.records_page_no++ :
-            current_tab.records_page_no = 0;
+            current_tab.page_no < data.pageData.pagination.totalCount ?
+            current_tab.page_no++ :
+            current_tab.page_no = 0;
 
             done && done();
         })
