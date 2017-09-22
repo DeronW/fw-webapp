@@ -30,5 +30,15 @@
     left: 0;
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAvCAMAAADKIyriAAAAM1BMVEUAAAChZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV7B5ggfAAAAEHRSTlMA7YN+MrGy5cT3T9CbmWoPcssl5gAAAE1JREFUOMvt1DkSgDAMxdBvNidh8/1PS4ba6hkmal8vpTWPkssUvULSY3GUaCjzkE/KhSJDEYvqS7YkdATb9gNbh9nNtotNZPSvs4brARpAE40+QvpDAAAAAElFTkSuQmCC');
 }
+.sub-title {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    font-size: 26px;
+    right: 40px;
+    height: 88px;
+    color: #333;
+}
 
 
