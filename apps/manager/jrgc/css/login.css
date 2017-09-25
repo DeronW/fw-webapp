@@ -1,0 +1,61 @@
+.bg{
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+}
+.username{
+    position: relative;
+    width: 656px;
+    height: 72px;
+    margin: 52px auto 32px;
+    border: 1px solid #d8d8d8;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.username i{
+    display: inline-block;
+    width: 31px;
+    height: 37px;
+    background: url('../images/login/username.png') no-repeat;
+    position: absolute;
+    left: 30px;
+    top: 18px;
+}
+.username input,.password input{
+    width: 100%;
+    height: 100%;
+    border:transparent;
+    outline: none;
+    padding-left: 80px;
+    font-size: 28px;
+    box-sizing: border-box;
+}
+.password{
+    position: relative;
+    width: 656px;
+    height: 72px;
+    margin: auto;
+    border: 1px solid #d8d8d8;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.password i{
+    display: inline-block;
+    width: 31px;
+    height: 37px;
+    background: url('../images/login/pwd.png') no-repeat;
+    position: absolute;
+    left: 30px;
+    top: 18px;
+}
+.submit{
+    width: 660px;
+    height: 76px;
+    margin: 32px auto 0;
+    border-radius: 8px;
+    line-height: 76px;
+    text-align: center;
+    background: #c6815f;
+    color: #fff;
+    font-size: 32px;
+}

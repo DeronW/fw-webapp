@@ -7,4 +7,9 @@ export default class Login {
 
         })
     }
+    login = (username,password) => {
+        //登录接口
+        if(!username || !password) return
+        console.log(username,password)
+    }
 }
