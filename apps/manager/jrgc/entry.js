@@ -9,7 +9,8 @@ import AppRouter from './router.js'
 import * as Stores from './stores'
 
 let stores = {
-    home: new Stores.Home(),
+    login: new Stores.Login(),
+    user: new Stores.User(),
     stats: new Stores.Stats()
 }
 
