@@ -1,5 +1,5 @@
-import {extendObservable, computed} from 'mobx'
-import {Components, Utils, Event} from 'fw-javascripts'
+import { extendObservable, computed } from 'mobx'
+import { Components, Utils, Event } from 'fw-javascripts'
 
 export default class Reserve {
     constructor(Post) {
@@ -9,11 +9,11 @@ export default class Reserve {
 
         extendObservable(this.data, {
             records: {
-                type:'0',
-                tab:{
-                    '0':{name:'预约中',page_no:1,list:[]},
-                    '1':{name:'预约结束',page_no:1,list:[]},
-                    '2':{name:'已取消',page_no:1,list:[]},
+                type: '0',
+                tab: {
+                    '0': { name: '预约中', page_no: 1, list: [] },
+                    '1': { name: '预约结束', page_no: 1, list: [] },
+                    '2': { name: '已取消', page_no: 1, list: [] },
                 }
             }
 
@@ -65,7 +65,7 @@ export default class Reserve {
         this.getReserveList()
     }
     getReserveList = (done) => {
-        let { tab,type } = this.data.records,current_tab = tab[type]
+        let { tab, type } = this.data.records, current_tab = tab[type]
         if (current_tab.page_no === 0) return done && done();
         const PAGE_SIZE = 10
 
@@ -77,8 +77,8 @@ export default class Reserve {
             current_tab.list.push(...data.pageData.result)
 
             current_tab.page_no < data.pageData.pagination.totalCount ?
-            current_tab.page_no++ :
-            current_tab.page_no = 0;
+                current_tab.page_no++ :
+                current_tab.page_no = 0;
 
             done && done();
         })
