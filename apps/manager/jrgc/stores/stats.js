@@ -54,7 +54,9 @@ const fakeGraphAPI = no => {
 
 export default class Stats {
 
-    constructor() {
+    constructor(Get) {
+        this.get = Get;
+
         this.data = { };
         extendObservable(this.data, {
             investor: [{
@@ -74,7 +76,20 @@ export default class Stats {
 
     fetchTabData = tabNo => {
         this.data.investor[tabNo] = fakeInvestorAPI(tabNo);
-        this.data.graph[tabNo] = fakeGraphAPI(tabNo);
+        this.fetchGraphData(tabNo);
+    }
+
+    fetchGraphData = tabNo => {
+        const type = String(tabNo + 1);
+        this.get('/api/finManager/achievement/v2/stat.json', {
+            type: type,
+            userId: '543'
+        }).then(({ result }) => {
+            const graphItem = this.data.graph[tabNo];
+            graphItem.date = [...result.timeDimension];
+            graphItem.value = [...result.accInvestAmtList];
+            graphItem.valueAnnual = [...result.annualInvestAmtList];
+        })
     }
 
 }

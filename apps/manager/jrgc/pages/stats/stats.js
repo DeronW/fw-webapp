@@ -42,8 +42,7 @@ class Stats extends React.Component {
 
     switchTab = no => () => {
         const { stats } = this.props;
-        stats.fetchTabData(no);
-        this.setState({ currentTabNo: no })
+        stats.fetchTabData(no).then(() => this.setState({ currentTabNo: no }));
     }
 
     getOption = (date, value, valueAnnual) => ({
