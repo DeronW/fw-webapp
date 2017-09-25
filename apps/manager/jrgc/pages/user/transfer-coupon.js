@@ -10,7 +10,7 @@ const couponData = [{count: 100, data: '2017-09-22', des: '返现券'}, {count: 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class TransferCoupon extends React.Component {
     state = {
-        coupon_num: 1
+        coupon_num: 0
     }
 
     tabHanlder = (index) => {
@@ -42,6 +42,7 @@ class TransferCoupon extends React.Component {
                     <div styleName="lineLeft desLeft">投资 ¥18,000 可用</div>
                     <div styleName="lineRight desRight">投资期限 ≥90天 可用</div>
                 </div>
+                <div styleName="labelOverdate"></div>
             </div>
         }
         let count_type = () => {
@@ -54,7 +55,7 @@ class TransferCoupon extends React.Component {
             }
         }
         return <div styleName="coupons">
-            <Header title="转赠优惠券" history={history} sub_title="转赠记录" sub_link="/user-transfer-records"/>
+            <Header title="转赠优惠券" history={history} sub_title="转赠记录" sub_link="/user-transfer-record"/>
             <div styleName="couponTab">
                 {['返现券', '返息券', '返金券'].map(coupon_func)}
             </div>
