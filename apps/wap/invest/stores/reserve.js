@@ -16,7 +16,6 @@ export default class Reserve {
                     '2': { name: '已取消', page_no: 1, list: [] },
                 }
             }
-
         })
 
         extendObservable(this, {
@@ -60,10 +59,12 @@ export default class Reserve {
             }
         })
     }
-    setCurrentStatus = status => {
+
+    setRecordsCurrentStatus = status => {
         this.data.records.type = status;
         this.getReserveList()
     }
+
     getReserveList = (done) => {
         let { tab, type } = this.data.records, current_tab = tab[type]
         if (current_tab.page_no === 0) return done && done();
@@ -73,7 +74,7 @@ export default class Reserve {
             page: current_tab.page_no,
             pageSize: PAGE_SIZE,
             status: type
-        }).then(data => {
+        }, { loading: false }).then(data => {
             current_tab.list.push(...data.pageData.result)
 
             current_tab.page_no < data.pageData.pagination.totalCount ?

@@ -1,22 +1,22 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
-import {Event, Components} from 'fw-javascripts'
+import { observer, inject } from 'mobx-react'
+import { Event, Components } from 'fw-javascripts'
 import styles from '../../css/reserve/records.css'
 import Header from '../../components/header'
 import showConfirm from '../../components/confirm'
-import {NativeBridge} from '../../helpers'
-import {Browser} from '../../helpers'
+import { NativeBridge } from '../../helpers'
+import { Browser } from '../../helpers'
 
 @inject('reserve')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class ReserveRecords extends React.Component {
 
     componentDidMount() {
         NativeBridge.trigger('hide_header')
         this.props.reserve.getReserveList()
-        Event.touchBottom(this.props.reserve.getReserveList);
+        Event.touchBottom(this.props.reserve.getReserveList)
     }
 
     componentWillUnmount() {
@@ -24,7 +24,7 @@ class ReserveRecords extends React.Component {
     }
 
     cancelReserveHandler = (bookTime, id) => {
-        let {reserve, history} = this.props;
+        let { reserve, history } = this.props;
         let cb = () => {
             reserve.cancelHandler(id).then((data) => {
                 if (data.cancelResult == '1') {
@@ -39,26 +39,27 @@ class ReserveRecords extends React.Component {
     }
 
     lookProtocolHandler = () => {
-        let {history} = this.props
+        let { history } = this.props
         history.push(`/reserve/protocol`)
     }
 
     tabHandler = (status) => {
         let { type } = this.props.reserve.data.records
-        let { setCurrentStatus,getReserveList } =this.props.reserve
-        if(status == type) return
-        setCurrentStatus(status)
+        let { setRecordsCurrentStatus, getReserveList } = this.props.reserve
+        if (status == type) return
+        setRecordsCurrentStatus(status)
     }
 
     render() {
-        let {reserve, history} = this.props
-        let { type,tab } = this.props.reserve.data.records
+        let { reserve, history } = this.props
+        let { type, tab } = this.props.reserve.data.records
         let { list } = reserve.data.records.tab[type]
 
         let no_records = <div styleName="emptyPanel">
-            <img src={require('../../images/reserve/records/norecords.png')}/>
+            <img src={require('../../images/reserve/records/norecords.png')} />
             <div styleName="norecords-text">暂无预约</div>
         </div>
+
         let tab_func = (item, index) => {
             let tab_item_style = item == type ? `tab_item tab_item_${index} tab_on` : `tab_item tab_item_${index}`
             return <div styleName={tab_item_style} key={index} onClick={() => this.tabHandler(item)}>
@@ -75,16 +76,18 @@ class ReserveRecords extends React.Component {
             } else if (item.status == 2) {
                 status = '已取消'
             }
+
             let cancelstyle = item.status == 2 ? styles['cancelstyle'] : styles['reserveItem']
+
             return <div className={cancelstyle} key={index}>
                 {item.status == 0 &&
-                <div styleName="itemHeader headerOn">
-                    {status}
-                    <div styleName="itemHeaderRight cancelBtn"
-                         onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
-                        取消预约
+                    <div styleName="itemHeader headerOn">
+                        {status}
+                        <div styleName="itemHeaderRight cancelBtn"
+                            onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
+                            取消预约
                     </div>
-                </div>}
+                    </div>}
                 {item.status == 1 && <div styleName="itemHeader headerOver">{status}</div>}
                 {item.status == 2 && <div styleName="itemHeader headerCancel">{status}</div>}
                 <div styleName="infoContainer">
@@ -115,22 +118,17 @@ class ReserveRecords extends React.Component {
                 </div>
             </div>
         }
-        let reserve_page = () => {
-            return <div>
-                {list.length > 0 ? list.map(records_func):no_records}
-            </div>
-        }
 
         let tab_style = Browser.inIOSApp ? 'tabWrapperIos' : 'tabWrapper'
+
         return <div styleName="recordsPanel">
-            <Header title="我的预约" history={history}/>
+            <Header title="我的预约" history={history} />
             <div styleName={tab_style}>
                 {['0', '1', '2'].map(tab_func)}
             </div>
             <div styleName="textWrapper">
-                {type == '0' && reserve_page()}
-                {type == '1' && reserve_page()}
-                {type == '2' && reserve_page()}
+                {list.map(records_func)}
+                {list.length == 0 && tab[type].page_no == 0 && no_records}
             </div>
         </div>
     }
