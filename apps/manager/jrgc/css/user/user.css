@@ -28,3 +28,9 @@
     color: #fde143;
     font-size: 48px;
 }
+.line{
+    float: left;
+    height: 60px;
+    width: 1px;
+    background: #bd816d;
+}

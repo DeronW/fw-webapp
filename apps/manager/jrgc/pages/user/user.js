@@ -18,11 +18,12 @@ class User extends React.Component {
                     <div styleName="name">张三</div>
                     <div styleName="des">A12345T</div>
                 </div>
-                <div styleName="barItem all">
+                <div styleName="barItem">
                     <div styleName="des">全部客户(人)</div>
                     <div styleName="num">190</div>
                 </div>
-                <div styleName="barItem part">
+                <div styleName="line"></div>
+                <div styleName="barItem">
                     <div styleName="des">在投客户(人)</div>
                     <div styleName="num">100</div>
                 </div>
