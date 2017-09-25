@@ -1,0 +1,104 @@
+.bg {
+    height: 100%;
+}
+
+.couponWrapper {
+    width: 660px;
+    height: 164px;
+    padding: 20px 30px;
+    display: table;
+}
+
+.searchWrapper {
+    width: 660px;
+    padding: 17px 30px;
+    height: 70px;
+    border-bottom: 1px solid #e3e5ea;
+    background: #f9f9f9;
+}
+
+.couponItem {
+    width: 620px;
+    height: 164px;
+    display: table;
+    padding: 30px 20px 0 20px;
+}
+
+.typeBlue {
+    background: url("../../images/user/transfer-friends/couponbg-blue.png") no-repeat center;
+}
+
+.typeRed {
+    background: url("../../images/user/transfer-friends/couponbg-red.png") no-repeat center;
+}
+
+.typeYellow {
+    background: url("../../images/user/transfer-friends/coupon-yellow.png") no-repeat center;
+}
+
+.couponValue {
+    font-size: 60px;
+    color: #fff;
+}
+
+.rmb {
+    font-size: 36px;
+}
+
+.couponDes {
+    width: 100%;
+    display: table;
+    font-size: 20px;
+    color: #fff;
+    margin: 10px 0;
+}
+
+.lineLeft {
+    float: left;
+}
+
+.lineRight {
+    float: right;
+}
+
+.couponAddtion {
+    width: 100%;
+    display: table;
+    font-size: 20px;
+    color: #999999;
+    margin-top: 15px;
+}
+
+.inputBox {
+    width: 428px;
+    height: 28px;
+    border: 1px solid #d8d8d8;
+    border-radius: 8px;
+    margin-right: 20px;
+    padding: 20px;
+    padding-left: 60px;
+    font-size: 26px;
+    vertical-align: middle;
+    color: #555;
+    background: url("../../images/user/transfer-friends/search-icon.png") no-repeat 20px center;
+    position: relative;
+}
+
+.searchBtn {
+    width: 130px;
+    height: 70px;
+    background: #c6815f;
+    line-height: 70px;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    display: inline-block;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+.emptyWrapper {
+    width: 100%;
+    height: 600px;
+    background: #fff;
+}
