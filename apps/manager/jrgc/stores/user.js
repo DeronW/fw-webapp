@@ -11,9 +11,9 @@ export default class User {
     }
     fetchNotice = () => {
         this.data.user.notice = [{
-            des: '1234'
+            des: '第三方发'
         }, {
-            des: '5678'
+            des: '电话号给的图'
         }, {
             des: '阿森松岛'
         }]

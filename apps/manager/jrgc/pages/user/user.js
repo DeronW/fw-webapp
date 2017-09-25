@@ -20,7 +20,7 @@ class User extends React.Component {
         this.startMoveNotice()
     }
     startMoveNotice = () => {
-        let delay = 30, duration = 3000, step = 2, singleH = 36, p, position_index;
+        let delay = 30, duration = 3000, step = 2, singleH = 40, p, position_index;
         let { notice } = this.props.user.data.user;
         this._time_gap = 0;
 
