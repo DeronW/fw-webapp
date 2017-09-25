@@ -57,6 +57,7 @@ export default class YouyiRepaymentService extends React.Component {
         第十九条 甲乙双方约定，甲方通过在放心花网站（网址：HYPERLINK "http://www.easyloan888.com"www.easyloan888.com）上通过包括但不限于点击、勾选等方式之一确认本协议即视为甲方与乙方达成协议并同意接受本协议的全部约定内容，协议即生效。
         第二十条 因本协议产生的争议，不论争议金额大小，均提交杭州仲裁委员会适用杭州仲裁委员会仲裁规则项下的简易程序进行仲裁。仲裁裁决为终局的，对各方均有拘束力。
         `
+
         return <div styleName="bg">
             <Header title="数字证书服务协议" history={this.props.history} />
 
