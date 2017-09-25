@@ -59,10 +59,12 @@ export default class Reserve {
             }
         })
     }
-    setCurrentStatus = status => {
+
+    setRecordsCurrentStatus = status => {
         this.data.records.type = status;
         this.getReserveList()
     }
+
     getReserveList = (done) => {
         let { tab, type } = this.data.records, current_tab = tab[type]
         if (current_tab.page_no === 0) return done && done();

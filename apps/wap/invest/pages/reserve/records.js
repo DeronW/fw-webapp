@@ -45,9 +45,9 @@ class ReserveRecords extends React.Component {
 
     tabHandler = (status) => {
         let { type } = this.props.reserve.data.records
-        let { setCurrentStatus, getReserveList } = this.props.reserve
+        let { setRecordsCurrentStatus, getReserveList } = this.props.reserve
         if (status == type) return
-        setCurrentStatus(status)
+        setRecordsCurrentStatus(status)
     }
 
     render() {
