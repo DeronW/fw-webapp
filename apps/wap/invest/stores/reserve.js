@@ -16,7 +16,6 @@ export default class Reserve {
                     '2': { name: '已取消', page_no: 1, list: [] },
                 }
             }
-
         })
 
         extendObservable(this, {
@@ -73,7 +72,7 @@ export default class Reserve {
             page: current_tab.page_no,
             pageSize: PAGE_SIZE,
             status: type
-        }).then(data => {
+        }, { loading: false }).then(data => {
             current_tab.list.push(...data.pageData.result)
 
             current_tab.page_no < data.pageData.pagination.totalCount ?
