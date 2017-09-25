@@ -96,39 +96,4 @@ export default class Stats {
         })
     }
 
-    getGraphData = tabNo => {
-        const { graph } = this.data,
-            graphData = {
-                date: [],
-                value: [],
-                valueAnnual: []
-            };
-        if (graph[tabNo] !== undefined) {
-            console.log(graph[tabNo]);
-            graphData.date = graph[tabNo].date.slice();
-            graphData.value = graph[tabNo].value.slice();
-            graphData.valueAnnual = graph[tabNo].valueAnnual.slice();
-        }
-        return graphData
-    }
-
-    getInvestorData = tabNo => {
-        const { investor } = this.data,
-            investorData = {
-                invested: null,
-                registered: null,
-                investedFirstTime: null,
-                investAmount: '',
-                investAmountAnnual: '',
-            };
-        if (investor[tabNo] !== undefined) {
-            investorData.invested = investor[tabNo].invested;
-            investorData.registered = investor[tabNo].registered;
-            investorData.investedFirstTime = investor[tabNo].investedFirstTime;
-            investorData.investAmount = investor[tabNo].investAmount;
-            investorData.investAmountAnnual = investor[tabNo].investAmountAnnual;
-        }
-        return investorData
-    }
-
 }
