@@ -18,7 +18,6 @@ class RepaymentFangXinResult extends React.Component {
         { repaymentAmountNow, leftAmount, repaymentResult ,activityRecomUrl } = repayment_fangxin;
         document.title = '还款结果';
         this.props.repayment_fangxin.fetchRepaymentResult(Utils.hashQuery.id).then(() => {
-            console.log(000);
             if(repayment_fangxin.status == 1){
                 console.log(111);
                 if(activityRecomUrl){
