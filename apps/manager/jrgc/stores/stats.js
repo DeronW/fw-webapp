@@ -1,56 +1,5 @@
-import { extendObservable } from 'mobx'
+import { extendObservable, computed } from 'mobx'
 
-// fake APIs
-const fakeInvestorAPI = no => {
-    const investor = [{
-        invested: 12,
-        registered: 10,
-        investedFirstTime: 3,
-        investAmount: '12000',
-        investAmountAnnual: '15000',
-    }, {
-        invested: 120,
-        registered: 100,
-        investedFirstTime: 30,
-        investAmount: '120000',
-        investAmountAnnual: '150000',
-    }, {
-        invested: 1200,
-        registered: 1000,
-        investedFirstTime: 300,
-        investAmount: '1200000',
-        investAmountAnnual: '1500000',
-    }, {
-        invested: 12000,
-        registered: 10000,
-        investedFirstTime: 3000,
-        investAmount: '12000000',
-        investAmountAnnual: '15000000',
-    }]
-    return investor[no]
-}
-
-const fakeGraphAPI = no => {
-    const graph = [{
-        date: ['9.21', '9.22'],
-        value: ['20', '25'],
-        valueAnnual: ['22', '27']
-    }, {
-        date: ['9.16', '9.17', '9.18', '9.19', '9.20', '9.21', '9.22'],
-        value: ['20', '25', '10', '35', '10', '25', '40'],
-        valueAnnual: ['20', '25', '40', '55', '30', '25', '10']
-    }, {
-        date: ['9.1', '9.8', '9.15', '9.22'],
-        value: ['10', '35', '10', '25'],
-        valueAnnual: ['30', '25', '10', '35']
-    }, {
-        date: ['4.22', '5.22', '6.22', '7.22', '8.22', '9.22'],
-        value: ['25', '40', '55', '30', '25', '10'],
-        valueAnnual: ['20', '25', '10', '35', '10', '25']
-    }]
-    return graph[no]
-}
-// delete after test
 
 export default class Stats {
 
@@ -59,36 +8,78 @@ export default class Stats {
 
         this.data = { };
         extendObservable(this.data, {
-            investor: [{
-                invested: null,
-                registered: null,
-                investedFirstTime: null,
-                investAmount: '',
-                investAmountAnnual: '',
-            }],
-            graph: [{
-                date: [],
-                value: [],
-                valueAnnual: []
-            }]
+            currentTab: '1',
+            graph: {
+                '1': { },
+                '2': { },
+                '3': { },
+                '4': { }
+            },
+            investor: {
+                '1': { },
+                '2': { },
+                '3': { },
+                '4': { }
+            }
         })
     }
 
+    @computed get graphFormatted() {
+        const { currentTab, graph } = this.data,
+            raw = graph[currentTab];
+        const formatted = {
+            date: raw.date === undefined ? [] : raw.date.slice(),
+            value: raw.value === undefined ? [] : raw.value.slice(),
+            valueAnnual: raw.valueAnnual === undefined ? [] : raw.valueAnnual.slice()
+        };
+        return formatted
+    }
+
+    @computed get investorFormatted() {
+        const { currentTab, investor } = this.data,
+            raw = investor[currentTab];
+        const formatted = {
+            invested: raw.invested === undefined ? '' : raw.invested,
+            registered: raw.registered === undefined ? '' : raw.registered,
+            investedFirstTime: raw.investedFirstTime === undefined ? '' : raw.investedFirstTime,
+            investAmount: raw.investAmount === undefined ? '' : raw.investAmount,
+            investAmountAnnual: raw.investAmountAnnual === undefined ? '' : raw.investAmountAnnual,
+        }
+        return formatted
+    }
+
+    setCurrentTab = tabNo => this.data.currentTab = tabNo
+
     fetchTabData = tabNo => {
-        this.data.investor[tabNo] = fakeInvestorAPI(tabNo);
         this.fetchGraphData(tabNo);
+        this.fetchInvestorData(tabNo);
     }
 
     fetchGraphData = tabNo => {
-        const type = String(tabNo + 1);
         this.get('/api/finManager/achievement/v2/stat.json', {
-            type: type,
+            type: tabNo,
             userId: '543'
         }).then(({ result }) => {
-            const graphItem = this.data.graph[tabNo];
-            graphItem.date = [...result.timeDimension];
-            graphItem.value = [...result.accInvestAmtList];
-            graphItem.valueAnnual = [...result.annualInvestAmtList];
+            this.data.graph[tabNo] = {
+                date: result.timeDimension,
+                value: result.accInvestAmtList,
+                valueAnnual: result.annualInvestAmtList
+            };
+        })
+    }
+
+    fetchInvestorData = tabNo => {
+        this.get('/api/finManager/achievement/v2/investInfo.json', {
+            type: tabNo,
+            userId: '543'
+        }).then(({ result }) => {
+            this.data.investor[tabNo] = {
+                invested: result.investCustCount,
+                registered: result.regCustCount,
+                investedFirstTime: result.firstInvestCustCount,
+                investAmount: result.totalInvestAmt,
+                investAmountAnnual: result.totalYearAmt
+            };
         })
     }
 

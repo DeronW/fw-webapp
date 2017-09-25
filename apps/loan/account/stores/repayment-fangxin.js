@@ -31,6 +31,9 @@ export default class RepaymentFangXin {
             repaymentResult: '', // 'fail', 'success', 'waiting'
             leftAmount: '', // 还款成功后仍剩余金额
             repaymentAmountNow: 0,
+            status:"",
+            activityRecomUrl:""
+
         })
     }
 

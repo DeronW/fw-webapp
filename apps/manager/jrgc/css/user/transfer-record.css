@@ -1,0 +1,123 @@
+.tabWrapper {
+    width: 100%;
+    height: 88px;
+    display: table;
+    font-size: 28px;
+    color: #555;
+    line-height: 48px;
+    text-align: center;
+    background: url("../../images/user/transfer-record/tabbg.png") no-repeat center;
+}
+
+.tabItem {
+    width: 16%;
+    float: left;
+    height: 88px;
+    line-height: 88px;
+    margin: 0 62px;
+    text-align: center;
+}
+
+.tabItemOn {
+    color: #fd4d4c;
+    border-bottom: 3px solid #fd4d4c;
+}
+
+.recordCount {
+    width: 660px;
+    height: 80px;
+    padding: 30px;
+    background: #c6815f;
+    color: #fff;
+}
+
+.recordLeft {
+    float: left;
+    font-size: 30px;
+}
+
+.totalNumber {
+    font-size: 48px;
+}
+
+.recordItem {
+    width: 100%;
+    height: 160px;
+    margin: 0 auto;
+    background: #fff;
+    display: table;
+    margin-top: 20px;
+    position: relative;
+}
+
+.itemLineUp {
+    width: 660px;
+    height: 39px;
+    border-bottom: 1px solid #e3e5ea;
+    display: table;
+    font-size: 20px;
+    color: #999;
+    padding: 30px;
+    line-height: 36px;
+}
+
+.itemLineDown {
+    width: 660px;
+    height: 60px;
+    background: #f9f9f9;
+    display: table;
+    padding: 0 30px;
+    color: #555;
+    line-height: 60px;
+    font-size: 20px;
+}
+
+.upLineLeft {
+    float: left;
+}
+
+.money {
+    width: 180px;
+    font-size: 50px;
+    color: #ff4d4d;
+    padding-top: 18px;
+}
+
+.reason {
+    width: 295px;
+}
+
+.date {
+    text-align: right;
+}
+
+.rmb {
+    font-size: 36px;
+}
+
+.downLeft {
+    float: left;
+}
+
+.downRight {
+    float: right;
+}
+
+.itemUsed .itemLineUp, .itemUsed .itemLineDown, .itemUsed .money {
+    color: #ccc;
+}
+
+.labelUsed {
+    width: 138px;
+    height: 71px;
+    background: url("../../images/user/transfer-record/used.png") no-repeat center;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    margin-left: -69px;
+    background-size: 100%;
+    transform: rotate(30deg);
+}
+
+
+
