@@ -15,17 +15,17 @@ class RepaymentFangXinResult extends React.Component {
 
     componentDidMount() {
         let { history, repayment_fangxin } = this.props,
-        { repaymentAmountNow, leftAmount, repaymentResult ,activityRecomUrl } = repayment_fangxin;
+        { repaymentAmountNow, leftAmount, repaymentResult } = repayment_fangxin;
         document.title = '还款结果';
         this.props.repayment_fangxin.fetchRepaymentResult(Utils.hashQuery.id).then(() => {
             if(repayment_fangxin.status == 1){
                 console.log(111);
-                if(activityRecomUrl != "" && activityRecomUrl != null){
+                if(repayment_fangxin.activityRecomUrl){
                     console.log(222);
                         setTimeout(() => {
                             console.log(444);
-                            Browser.inApp ? NativeBridge.goto(`${activityRecomUrl}`,false,"放心花"):
-                            location.href  = `${activityRecomUrl}`;
+                            Browser.inApp ? NativeBridge.goto(`${repayment_fangxin.activityRecomUrl}`,false,"放心花"):
+                            location.href  = `${repayment_fangxin.activityRecomUrl}`;
                         },12000)
                     }
                 // setTimeout(() => {
