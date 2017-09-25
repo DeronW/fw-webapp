@@ -55,6 +55,8 @@
     width: 660px;
     height: 164px;
     margin: 20px auto 0;
+    display: table;
+    position: relative;
 }
 
 .contentBlue {
@@ -67,4 +69,70 @@
 
 .contentYellow {
     background: url("../../images/user/transfer-coupon/coupon-yellow.png") no-repeat center;
+}
+
+.itemLine {
+    display: table;
+    width: 620px;
+    margin: 20px auto 0;
+    color: #fff;
+}
+
+.itemDown {
+    margin-top: 2px;
+}
+
+.lineLeft {
+    float: left;
+    font-size: 60px;
+}
+
+.lineRight {
+    float: right;
+}
+
+.rmb {
+    font-size: 36px;
+}
+
+.itemDown .lineLeft, .itemDown .lineRight {
+    font-size: 20px;
+}
+
+.giveBtn {
+    width: 120px;
+    height: 36px;
+    background: #fff;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 36px;
+    float: right;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.giveBtnBlue {
+    color: #6ccaf6;
+}
+
+.giveBtnRed {
+    color: #fd4d4c;
+}
+
+.giveBtnYellow {
+    color: #ffc027;
+}
+
+.itemDes .desLeft, .itemDes .desRight {
+    font-size: 20px;
+    color: #999;
+}
+
+.labelOverdate {
+    width: 128px;
+    height: 36px;
+    background: url("../../images/user/transfer-coupon/label-overdate.png") no-repeat center;
+    position: absolute;
+    top: -8px;
+    right: 14px;
 }

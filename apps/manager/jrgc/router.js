@@ -23,7 +23,7 @@ export default (stores) => {
                 <Route exact path="/" component={User.User}/>
                 <Route exact path="/user-rebate" component={User.Rebate}/>
                 <Route exact path="/user-transfer-coupon" component={User.TransferCoupon}/>
-                <Route exact path="/user-transfer-records" component={User.TransferRecords}/>
+                <Route exact path="/user-transfer-record" component={User.TransferRecord}/>
             </Switch>
         </Provider>
     </Router>

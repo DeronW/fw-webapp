@@ -24,3 +24,5 @@ gulpfile.settings.js
 *.diff
 tmp.*
 *.compile.sh
+.tags
+.tags1

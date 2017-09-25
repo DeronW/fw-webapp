@@ -70,7 +70,7 @@ class Chart extends React.Component {
     }
 
     render() {
-        return <ReactEcharts style={{ width: "100%", height: "100%" }}
+        return <ReactEcharts style={{ width: "720px", height: "100%" }}
             option={this._genOptions()} />
     }
 
