@@ -10,7 +10,7 @@ const couponData = [{count: 100, data: '2017-09-22', des: '返现券'}, {count: 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class TransferCoupon extends React.Component {
     state = {
-        coupon_num: 0
+        coupon_num: 1
     }
 
     tabHanlder = (index) => {
@@ -28,8 +28,20 @@ class TransferCoupon extends React.Component {
         }
         let coupon_detail = (item, index) => {
             let coutent_style = coupon_num == 0 ? "contentItem contentBlue" : coupon_num == 1 ? "contentItem contentRed" : coupon_num == 2 ? "contentItem contentYellow" : null
+            let btn_style = coupon_num == 0 ? "giveBtn giveBtnBlue" : coupon_num == 1 ? "giveBtn giveBtnRed" : coupon_num == 2 ? "giveBtn giveBtnYellow" : null
             return <div styleName={coutent_style} key={index}>
-
+                <div styleName="itemLine itemUp">
+                    <div styleName="lineLeft"><span styleName="rmb">￥</span>10</div>
+                    <div styleName={btn_style}>满赠</div>
+                </div>
+                <div styleName="itemLine itemDown">
+                    <div styleName="lineLeft">满福金秋</div>
+                    <div styleName="lineRight">有效期 2017-09-18</div>
+                </div>
+                <div styleName="itemLine itemDes">
+                    <div styleName="lineLeft desLeft">投资 ¥18,000 可用</div>
+                    <div styleName="lineRight desRight">投资期限 ≥90天 可用</div>
+                </div>
             </div>
         }
         let count_type = () => {
@@ -57,8 +69,8 @@ class TransferCoupon extends React.Component {
             </div>
             <div styleName="tabContent">
                 {coupon_num == 0 && couponData.map(coupon_detail)}
-                {/*{coupon_num == 1 && coupon_detail()}*/}
-                {/*{coupon_num == 2 && coupon_detail()}*/}
+                {coupon_num == 1 && couponData.map(coupon_detail)}
+                {coupon_num == 2 && couponData.map(coupon_detail)}
             </div>
         </div>
     }
