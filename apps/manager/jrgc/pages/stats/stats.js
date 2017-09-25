@@ -81,8 +81,7 @@ class Stats extends React.Component {
             { currentTabNo } = this.state,
             currentTabName = TABS[currentTabNo];
 
-        const graph = stats.data.graph,
-            investor = stats.data.investor,
+        const { graph, investor } = stats.data.graph,
             { date, value, valueAnnual } = graph[currentTabNo],
             { invested, investAmount, investAmountAnnual, registered, investedFirstTime } = investor[currentTabNo];
 
