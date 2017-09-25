@@ -23,7 +23,7 @@ class RepaymentFangXinResult extends React.Component {
                         setTimeout(() => {
                             Browser.inApp ? NativeBridge.goto(`${activityRecomUrl}`,false,"放心花"):
                             location.href  = `${activityRecomUrl}`;
-                        },2000)
+                        },12000)
                     }
                 // setTimeout(() => {
                 //     Browser.inApp ? NativeBridge.goto(`https://m.easyloan888.com/static/loan/features/index.html#/invite-activity?yqm=F172001`,false,"放心花"):
