@@ -54,7 +54,7 @@ class Stats extends React.Component {
         },
         xAxis: {
             name: '日期',
-            data: date.slice()
+            data: date
         },
         yAxis: {
             name: '金额(万元)'
@@ -65,14 +65,14 @@ class Stats extends React.Component {
             lineStyle: { normal: { color: '#d75063' } },
             name: '年化投资额',
             type: 'line',
-            data: value.slice()
+            data: value
         }, {
             symbolSize: 9,
             smooth: true,
             lineStyle: { normal: { color: '#20629f' } },
             name: '投资额',
             type: 'line',
-            data: valueAnnual.slice()
+            data: valueAnnual
         }]
     })
 
@@ -89,7 +89,7 @@ class Stats extends React.Component {
             <TabHeader history={history} current={currentTabNo} switchHandler={this.switchTab} />
 
             <div styleName="graph">
-                <Chart option={this.getOption(date, value, valueAnnual)} />
+                <Chart option={this.getOption(date.slice(), value.slice(), valueAnnual.slice())} />
             </div>
 
             <div styleName="client-stats-grp">
