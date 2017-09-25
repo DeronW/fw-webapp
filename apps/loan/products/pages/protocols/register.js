@@ -102,10 +102,12 @@ class Register extends React.Component {
         13.7 您同意，本协议不得仅由于系本公司制订而以对本公司不利的方式予以解释。
         13.8 本协议和本协议所含条款和条件载明我们双方之间就本协议标注的全部予以理解和协议。
         13.9 本协议在您提交的注册为“放心花”用户的申请获得本公司审核通过时生效。自您注销您的用户账户的申请被本公司审核通过之日，或者本公司依据本协议及本协议所纳入或被提及的文件、条款和条件终止您的用户资格之日终止。
+
+
+
         `
         return <div styleName="bg">
             <Header title="“放心花”用户注册协议" history={this.props.history} />
-
             <div styleName="protocol">
                 {txt.split('\n').map((t, index) => <div key={index}>{t}</div>)}
             </div>

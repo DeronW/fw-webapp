@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import ReactDom  from 'react-dom'
-import {unmountComponentAtNode} from 'react-dom'
+import React, { Component } from 'react'
+import ReactDom from 'react-dom'
+import { unmountComponentAtNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
 let createTemporaryDOMNode = function (id) {
@@ -94,9 +94,9 @@ class Confirm extends Component {
         return <div style={styles.root_panel}>
             <div style={styles.alert_panel}>
                 <div className="_style_alert_text"
-                     style={styles.text}>{this.props.text}</div>
+                    style={styles.text}>{this.props.text}</div>
                 <a style={styles.confirm_btn}
-                   onClick={() => this.hideHandler(this.props.cb)}>{this.props.confirmBtnText}</a>
+                    onClick={() => this.hideHandler(this.props.cb)}>{this.props.confirmBtnText}</a>
                 <a style={styles.negative_btn} onClick={() => {
                     this.hideHandler()
                 }}>{this.props.negaticeBtnText}</a>
@@ -108,7 +108,7 @@ let showConfirm = function (text, cb) {
     var id = 'pop',
         node = createTemporaryDOMNode(id);
     ReactDom.render(<Confirm mountedNode={node} unMountToast={() => node.parentNode.removeChild(node)} text={text}
-                             cb={cb}/>, node)
+        cb={cb} />, node)
 }
 
 Confirm.propTypes = {

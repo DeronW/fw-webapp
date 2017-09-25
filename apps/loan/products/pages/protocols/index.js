@@ -9,7 +9,6 @@ import YouyiLoan from './youyi-loan'
 import YouyiLoanService from './youyi-loan-service'
 import YouyiRepayment from './youyi-repayment'
 import YouyiRepaymentService from './youyi-repayment-service'
-import YouyiRegister from './youyi-register.js'
 
 export {
     Register,
@@ -21,6 +20,5 @@ export {
     YouyiLoan,
     YouyiLoanService,
     YouyiRepayment,
-    YouyiRepaymentService,
-    YouyiRegister
+    YouyiRepaymentService
 }
