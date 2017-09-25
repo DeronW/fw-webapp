@@ -23,7 +23,7 @@ class RepaymentFangXinResult extends React.Component {
                 if(activityRecomUrl){
                     console.log(222);
                         setTimeout(() => {
-                            console.log()444;
+                            console.log(444);
                             Browser.inApp ? NativeBridge.goto(`${activityRecomUrl}`,false,"放心花"):
                             location.href  = `${activityRecomUrl}`;
                         },12000)
