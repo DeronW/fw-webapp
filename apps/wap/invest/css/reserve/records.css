@@ -58,9 +58,6 @@
     float: right;
 }
 
-.infoContainer {
-
-}
 
 .infoItem {
     width: 670px;
@@ -163,6 +160,7 @@
     width: 100%;
     min-height: 500px;
     margin-top: 104px;
+    padding-bottom: 30px;
 }
 
 .arrow {
@@ -178,24 +176,3 @@
 .headerOn {
     color: #4aa1f9;
 }
-
-/*刷新按钮*/
-/*.reloadBtn{*/
-/*width: 48px;*/
-/*height: 48px;*/
-/*position: fixed;*/
-/*top:20px;*/
-/*right: 20px;*/
-/*background: url("../../images/reserve/records/gold_reload.png") no-repeat center;*/
-/*z-index: 99;*/
-/*}*/
-
-/*.reloadBtnIos{*/
-/*width: 48px;*/
-/*height: 48px;*/
-/*position: fixed;*/
-/*top: 60px;*/
-/*right: 20px;*/
-/*background: url('../../images/reserve/records/gold_reload.png') no-repeat center;*/
-/*z-index: 99;*/
-/*}*/
