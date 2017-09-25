@@ -1,7 +1,9 @@
-import Home from './home.js'
+import Login from './login.js'
+import User from './user.js'
 import Stats from './stats.js'
 
 export {
-    Home,
+    Login,
+    User,
     Stats
 }
