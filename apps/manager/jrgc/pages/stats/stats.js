@@ -91,7 +91,7 @@ class Stats extends React.Component {
             <TabHeader history={history} current={currentTab} switchHandler={this.switchTab} />
 
             <div styleName="graph">
-                <Chart option={this.getOption(date.slice(), value.slice(), valueAnnual.slice())} />
+                <Chart option={this.getOption(date, value, valueAnnual)} />
             </div>
 
             <div styleName="client-stats-grp">
