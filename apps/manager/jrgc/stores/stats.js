@@ -1,4 +1,4 @@
-import { extendObservable } from 'mobx'
+import { extendObservable, computed } from 'mobx'
 
 
 export default class Stats {
@@ -8,60 +8,51 @@ export default class Stats {
 
         this.data = { };
         extendObservable(this.data, {
-            investor: {
-                '1': {
-                    invested: null,
-                    registered: null,
-                    investedFirstTime: null,
-                    investAmount: '',
-                    investAmountAnnual: '',
-                },
-                '2': {
-                    invested: null,
-                    registered: null,
-                    investedFirstTime: null,
-                    investAmount: '',
-                    investAmountAnnual: '',
-                },
-                '3': {
-                    invested: null,
-                    registered: null,
-                    investedFirstTime: null,
-                    investAmount: '',
-                    investAmountAnnual: '',
-                },
-                '4': {
-                    invested: null,
-                    registered: null,
-                    investedFirstTime: null,
-                    investAmount: '',
-                    investAmountAnnual: '',
-                }
-            },
+            currentTab: '1',
             graph: {
-                '1': {
-                    date: [],
-                    value: [],
-                    valueAnnual: []
-                },
-                '2': {
-                    date: [],
-                    value: [],
-                    valueAnnual: []
-                },
-                '3': {
-                    date: [],
-                    value: [],
-                    valueAnnual: []
-                },
-                '4': {
-                    date: [],
-                    value: [],
-                    valueAnnual: []
-                }
+                '1': { },
+                '2': { },
+                '3': { },
+                '4': { }
+            },
+            investor: {
+                '1': { },
+                '2': { },
+                '3': { },
+                '4': { }
             }
         })
     }
+
+    @computed get graphFormatted() {
+        const { currentTab, graph } = this.data;
+        let graphData = graph[currentTab];
+        if (Object.keys(graphData) < 1) {
+            graphData = {
+                date: [],
+                value: [],
+                valueAnnual: []
+            }
+        }
+        return graphData
+    }
+
+    @computed get investorFormatted() {
+        const { currentTab, investor } = this.data;
+        let investorData = investor[currentTab];
+        if (Object.keys(investorData) < 1) {
+            investorData = {
+                invested: '',
+                registered: '',
+                investedFirstTime: '',
+                investAmount: '',
+                investAmountAnnual: ''
+            }
+        }
+        return investorData
+    }
+
+    setCurrentTab = tabNo => this.data.currentTab = tabNo
 
     fetchTabData = tabNo => {
         this.fetchGraphData(tabNo);

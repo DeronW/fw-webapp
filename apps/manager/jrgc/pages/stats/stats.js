@@ -35,16 +35,18 @@ const TabHeader = CSSModules(styles, { allowMultiple: true, errorWhenNotFound: f
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class Stats extends React.Component {
 
-    state = { currentTabNo: '1' }
-
     componentDidMount() {
         const { stats } = this.props;
+        stats.setCurrentTab('1');
         stats.fetchTabData('1');
+        stats.fetchTabData('2');
+        stats.fetchTabData('3');
+        stats.fetchTabData('4');
     }
 
     switchTab = no => () => {
         const { stats } = this.props;
-        this.setState({ currentTabNo: no })
+        stats.setCurrentTab(no);
         stats.fetchTabData(no);
     }
 
@@ -78,15 +80,15 @@ class Stats extends React.Component {
 
     render() {
         const { history, stats } = this.props,
-            { currentTabNo } = this.state,
-            currentTabName = TABS[currentTabNo];
+            { currentTab } = stats.data,
+            { graphFormatted, investorFormatted } = stats;
 
-        const { graph, investor } = stats.data,
-            { date, value, valueAnnual } = graph[currentTabNo],
-            { invested, investAmount, investAmountAnnual, registered, investedFirstTime } = investor[currentTabNo];
+        const currentTabName = TABS[currentTab],
+            { date, value, valueAnnual } = graphFormatted,
+            { invested, investAmount, investAmountAnnual, registered, investedFirstTime } = investorFormatted;
 
         return <div>
-            <TabHeader history={history} current={currentTabNo} switchHandler={this.switchTab} />
+            <TabHeader history={history} current={currentTab} switchHandler={this.switchTab} />
 
             <div styleName="graph">
                 <Chart option={this.getOption(date.slice(), value.slice(), valueAnnual.slice())} />
