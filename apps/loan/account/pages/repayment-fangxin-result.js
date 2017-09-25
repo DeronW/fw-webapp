@@ -20,7 +20,7 @@ class RepaymentFangXinResult extends React.Component {
         this.props.repayment_fangxin.fetchRepaymentResult(Utils.hashQuery.id).then(() => {
             if(repayment_fangxin.status == 1){
                 console.log(111);
-                if(activityRecomUrl){
+                if(activityRecomUrl != "" && activityRecomUrl != null){
                     console.log(222);
                         setTimeout(() => {
                             console.log(444);
