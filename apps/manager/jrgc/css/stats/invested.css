@@ -75,11 +75,21 @@
     background: url('../../images/stats/sort-icon.png') no-repeat center bottom;
 }
 
+.sort-asc-active {
+    composes: sort-asc;
+    background: url('../../images/stats/sort-icon-active.png') no-repeat center bottom;
+}
+
 .sort-des {
     display: block;
     height: 43px;
-    background: url('../../images/stats/sort-icon-active.png') no-repeat center bottom;
+    background: url('../../images/stats/sort-icon.png') no-repeat center bottom;
     transform: rotate(0.5turn);
+}
+
+.sort-des-active {
+    composes: sort-des;
+    background: url('../../images/stats/sort-icon-active.png') no-repeat center bottom;
 }
 
 .investor-list {

@@ -56,7 +56,7 @@ export default class StatsOverview {
     }
 
     fetchGraphData = tabNo => {
-        this.get('/api/finManager/achievement/v2/stat.json', {
+        this.get('/api/finManager/achievement/v2/stat.shtml', {
             type: tabNo,
             userId: '543'
         }).then(({ result }) => {
@@ -69,7 +69,7 @@ export default class StatsOverview {
     }
 
     fetchInvestorData = tabNo => {
-        this.get('/api/finManager/achievement/v2/investInfo.json', {
+        this.get('/api/finManager/achievement/v2/investInfo.shtml', {
             type: tabNo,
             userId: '543'
         }).then(({ result }) => {
