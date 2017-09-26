@@ -1,6 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
+import { Utils } from 'fw-javascripts'
 
 import { Header } from '../../components'
 import styles from '../../css/features/app-download.css'
@@ -11,6 +12,18 @@ import styles from '../../css/features/app-download.css'
     errorWhenNotFound: false
 })
 class AppDownload extends React.Component {
+
+    componentDidMount() {
+        let q = Utils.hashQuery
+        if (q.view) {
+            try {
+                let link = 'jrgc://jrgc.com/openApp?view=' + q.view;
+                if (q.id) link += '&id=' + q.id
+                if (q.url) link += '&url=' + q.url
+                location.href = link
+            } catch (e) { }
+        }
+    }
 
     render() {
         return <div styleName="bg">
@@ -58,7 +71,7 @@ class AppDownload extends React.Component {
             <a href="https://itunes.apple.com/cn/app/jin-rong-gong-chang/id939125881?mt=8">
                 <img src={require("../../images/features/app-download/btn_ios.png")} /></a>
 
-            <div styleName="copyright">©2016 金融工场版权所有</div>
+            <div styleName="copyright">©2017 金融工场版权所有</div>
         </div>
     }
 }

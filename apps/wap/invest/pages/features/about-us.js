@@ -51,7 +51,7 @@ class AboutUs extends React.Component {
                         </tr>
                     </tbody>
                 </table>
-                <div styleName="copyright">©2016 金融工场版权所有</div>
+                <div styleName="copyright">©2017 金融工场版权所有</div>
                 <div styleName="copyright">北京凤凰信用管理有限公司</div>
             </div>
 
