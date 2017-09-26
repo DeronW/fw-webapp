@@ -73,7 +73,6 @@ export default class Reserve {
     getReserveList = (done) => {
         let { tab, type } = this.data.records, current_tab = tab[type]
         if (current_tab.page_no === 0) return done && done();
-        alert(current_tab.page_no)
         const PAGE_SIZE = 10
 
         this.Post('/api/v1/appointRecordList.shtml', {
