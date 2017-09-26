@@ -24,6 +24,7 @@ export default (stores) => {
                 <Route exact path="/user-rebate" component={User.Rebate}/>
                 <Route exact path="/user-transfer-coupon" component={User.TransferCoupon}/>
                 <Route exact path="/user-transfer-record" component={User.TransferRecord}/>
+                <Route exact path="/user-transfer-friends" component={User.TransferFriends}/>
             </Switch>
         </Provider>
     </Router>
