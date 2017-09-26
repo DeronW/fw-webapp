@@ -54,9 +54,15 @@
 .sort-type-name {
     box-sizing: border-box;
     display: inline-block;
+    height: 90px;
     line-height: 90px;
     padding: 0 12px;
     border-bottom: 3px solid transparent;
+}
+
+.sort-type-name-active {
+    composes: sort-type-name;
+    border-bottom: 3px solid #fd4d4c;
 }
 
 .sort-btn {
@@ -75,11 +81,21 @@
     background: url('../../images/stats/sort-icon.png') no-repeat center bottom;
 }
 
+.sort-asc-active {
+    composes: sort-asc;
+    background: url('../../images/stats/sort-icon-active.png') no-repeat center bottom;
+}
+
 .sort-des {
     display: block;
     height: 43px;
-    background: url('../../images/stats/sort-icon-active.png') no-repeat center bottom;
+    background: url('../../images/stats/sort-icon.png') no-repeat center bottom;
     transform: rotate(0.5turn);
+}
+
+.sort-des-active {
+    composes: sort-des;
+    background: url('../../images/stats/sort-icon-active.png') no-repeat center bottom;
 }
 
 .investor-list {
