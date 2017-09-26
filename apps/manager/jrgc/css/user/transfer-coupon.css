@@ -86,6 +86,7 @@
 
 .itemUp {
     height: 69px;
+    margin:0 auto;
 }
 
 .itemDown {
@@ -123,7 +124,7 @@
     line-height: 36px;
     float: right;
     font-size: 24px;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .giveBtnBlue {
