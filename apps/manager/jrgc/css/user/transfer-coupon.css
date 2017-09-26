@@ -80,7 +80,8 @@
 }
 
 .itemDown {
-    margin-top: 2px;
+    padding-top: 4px;
+    padding-bottom: 10px;
 }
 
 .lineLeft {
