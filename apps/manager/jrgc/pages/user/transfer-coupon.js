@@ -17,6 +17,11 @@ class TransferCoupon extends React.Component {
         this.setState({coupon_num: index})
     }
 
+    transferHandler = (index) => {
+        let {history} = this.props
+        history.push(`/user-transfer-friends?index=${index}`)
+    }
+
     render() {
         let {history} = this.props
         let {coupon_num} = this.state
@@ -29,7 +34,7 @@ class TransferCoupon extends React.Component {
         let coupon_detail = (item, index) => {
             let coutent_style = coupon_num == 0 ? "contentItem contentBlue" : coupon_num == 1 ? "contentItem contentRed" : coupon_num == 2 ? "contentItem contentYellow" : null
             let btn_style = coupon_num == 0 ? "giveBtn giveBtnBlue" : coupon_num == 1 ? "giveBtn giveBtnRed" : coupon_num == 2 ? "giveBtn giveBtnYellow" : null
-            return <div styleName={coutent_style} key={index}>
+            return <div styleName={coutent_style} key={index} onClick={() => this.transferHandler(index)}>
                 <div styleName="itemLine itemUp">
                     <div styleName="lineLeft"><span styleName="rmb">￥</span>10</div>
                     <div styleName={btn_style}>满赠</div>
