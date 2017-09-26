@@ -54,9 +54,15 @@
 .sort-type-name {
     box-sizing: border-box;
     display: inline-block;
+    height: 90px;
     line-height: 90px;
     padding: 0 12px;
     border-bottom: 3px solid transparent;
+}
+
+.sort-type-name-active {
+    composes: sort-type-name;
+    border-bottom: 3px solid #fd4d4c;
 }
 
 .sort-btn {

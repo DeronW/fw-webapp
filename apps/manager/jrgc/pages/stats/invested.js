@@ -89,9 +89,9 @@ class Invested extends React.Component {
 
             if (sortBy === type) isSortIconActive = { asc: !sortDescending, des: sortDescending }
 
-            return <div key={type} styleName="sort-type">
-                <div styleName="sort-type-name"
-                    onClick={() => { this.handleSort(type) }}>{SORT_TABS[type]}</div>
+            return <div key={type} styleName="sort-type"
+                onClick={() => { this.handleSort(type) }}>
+                <div styleName={sortBy === type ? "sort-type-name-active" : "sort-type-name"}>{SORT_TABS[type]}</div>
                 <div styleName="sort-btn">
                     <i styleName={isSortIconActive.asc ? "sort-asc-active" : "sort-asc"}></i>
                     <i styleName={isSortIconActive.des ? "sort-des-active" : "sort-des"}></i>
