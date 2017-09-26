@@ -139,7 +139,7 @@ class BottomNavBar extends React.Component {
                 }
             }
             if (tab == 'd') {
-                if (!isActiveTab('a') && history) {
+                if (!isActiveTab('a') && history) {templateType
                     history.push('/user-panel')
                 } else {
                     location.href = '/static/loan/account/index.html#/user-panel'
