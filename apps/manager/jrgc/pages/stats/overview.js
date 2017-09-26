@@ -1,6 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { inject, observer } from 'mobx-react'
+import { Link } from 'react-router-dom'
 
 import { Chart } from '../../components'
 
@@ -95,10 +96,10 @@ class StatsOverview extends React.Component {
             </div>
 
             <div styleName="client-stats-grp">
-                <div styleName="client-stats">
+                <Link styleName="client-stats" to='/stats-invested'>
                     <div styleName="client-stats-name">{`${currentTabName}投资客户`}</div>
                     <div styleName="client-stats-value">{invested}</div>
-                </div>
+                </Link>
             </div>
 
             <div styleName="invest-stats-grp">
@@ -114,14 +115,14 @@ class StatsOverview extends React.Component {
             </div>
 
             <div styleName="client-stats-grp">
-                <div styleName="client-stats">
+                <Link styleName="client-stats" to='/stats-registered'>
                     <div styleName="client-stats-name">{`${currentTabName}注册客户`}</div>
                     <div styleName="client-stats-value">{registered}</div>
-                </div>
-                <div styleName="client-stats">
+                </Link>
+                <Link styleName="client-stats" to='/stats-invested-first-time'>
                     <div styleName="client-stats-name">{`${currentTabName}首投客户`}</div>
                     <div styleName="client-stats-value">{investedFirstTime}</div>
-                </div>
+                </Link>
             </div>
         </div>
     }
