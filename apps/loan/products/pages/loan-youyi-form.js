@@ -67,7 +67,7 @@ export default class LoopLoanLoan extends React.Component {
     changeHandler = (e) => {
         let v = e.target.value.replace(/\D/g,"");
         if (v.length > 5) return;
-        this.setState({ value: v }, this.validate);
+        this.setState({ value: parseInt(v) || "" }, this.validate);
     }
 
     smsValueHandler = (e) => {
