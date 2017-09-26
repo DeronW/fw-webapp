@@ -1,0 +1,95 @@
+.total {
+    width: 690px;
+    height: 90px;
+    color: #fff;
+    background: #c6815f;
+    font-size: 28px;
+    padding: 40px 0 40px 30px;
+}
+
+.title {
+    margin-bottom: 10px;
+}
+
+.totalNumber {
+    font-size: 60px;
+}
+
+.info {
+    width: 660px;
+    height: 67px;
+    padding: 23px 30px;
+    background: #a7604c;
+    color: #fff;
+    display: table;
+}
+
+.infoLeft {
+    width: 49%;
+    border-right: 1px solid #b86d57;
+    height: 100%;
+    float: left;
+}
+
+.infoRight {
+    float: right;
+    width: 46%;
+    height: 100%;
+    padding-left: 30px;
+}
+
+.lineUp {
+    font-size: 27px;
+    color: #f3baa9;
+    margin-bottom: 10px;
+}
+
+.lineDown {
+    font-size: 32px;
+    color: #fff;
+}
+
+.scoreItem {
+    width: 100%;
+    height: 134px;
+    background: #fff;
+    display: table;
+    margin-top: 20px;
+}
+
+.itemUp {
+    width: 660px;
+    padding: 26px 30px 0 30px;
+    border-bottom: 1px solid #eff0f3;
+    height: 57px;
+    display: table;
+}
+
+.upLeft {
+    float: left;
+    font-size: 38px;
+}
+
+.upRight {
+    float: right;
+    font-size: 27px;
+    color: #999;
+}
+
+.itemDown {
+    width: 660px;
+    height: 50px;
+    padding-left: 30px;
+    line-height: 50px;
+    font-size: 22px;
+    color: #999;
+    background: #f9f9f9;
+}
+
+.leftRed {
+    color: #fd4d4c;
+}
+
+.leftGreen {
+    color: #4db94f;
+}
