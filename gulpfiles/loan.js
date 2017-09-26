@@ -45,17 +45,17 @@ const OUTSIDE_PAGES = [
 
 // 账单模块
 // const BILL_PAGES = [
-    // 'bill', //账单首页 // should removed
-    // 'bill-history', //历史账单 // depracated
-    // 'bill-payback', //还款页面
-    // 'repayment-record' //还款列表页面
+// 'bill', //账单首页 // should removed
+// 'bill-history', //历史账单 // depracated
+// 'bill-payback', //还款页面
+// 'repayment-record' //还款列表页面
 // ]
 
 // 申请借款模块
 // const APPLY_PAGES = [
-    // 'apply-want', //我要借款页面
-    // 'apply-confirm', //确认借款页面
-    // 'apply-result'
+// 'apply-want', //我要借款页面
+// 'apply-confirm', //确认借款页面
+// 'apply-result'
 // ]
 
 // 借款服务协议页面
@@ -68,8 +68,8 @@ const OUTSIDE_PAGES = [
 // ]
 
 // const FXH_PAGES = [
-    // 'fxh', // 掌众产品借款页面
-    // 'fxh-bill', //账单详情
+// 'fxh', // 掌众产品借款页面
+// 'fxh-bill', //账单详情
 // ]
 
 const DU_MIAO_PAGES = [
@@ -78,12 +78,12 @@ const DU_MIAO_PAGES = [
     'dumiao-bill', //读秒账单详情页
 ]
 
-const WEIXIN_PAGES = [
-    // 'weixin-download',
-    'weixin-invite',
-    // 'weixin-attention',
-    // 'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
-]
+// const WEIXIN_PAGES = [
+// 'weixin-download',
+// 'weixin-invite',
+// 'weixin-attention',
+// 'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
+// ]
 
 // const MARKET = [
 //     'market',
@@ -123,7 +123,7 @@ APP_NAMES.push(
     // ...APP_NAMES,
     // ...PROTOCOL_PAGES,
     // ...JRGC_PAGES,
-    ...WEIXIN_PAGES,
+    // ...WEIXIN_PAGES,
     // ...FXH_PAGES,
     ...DU_MIAO_PAGES,
     // ...CREDIT_CARD,
