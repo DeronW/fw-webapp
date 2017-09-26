@@ -88,6 +88,7 @@
 }
 
 .date {
+    float: right;
     text-align: right;
 }
 
@@ -118,6 +119,3 @@
     background-size: 100%;
     transform: rotate(30deg);
 }
-
-
-
