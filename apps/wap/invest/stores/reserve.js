@@ -60,6 +60,10 @@ export default class Reserve {
         })
     }
 
+    resetPageNo = () => {
+        let { tab, type } = this.data.records, current_tab = tab[type]
+        current_tab.page_no = 1
+    }
     setRecordsCurrentStatus = status => {
         this.data.records.type = status;
         this.getReserveList()
@@ -68,6 +72,7 @@ export default class Reserve {
     getReserveList = (done) => {
         let { tab, type } = this.data.records, current_tab = tab[type]
         if (current_tab.page_no === 0) return done && done();
+        alert(current_tab.page_no)
         const PAGE_SIZE = 10
 
         this.Post('/api/v1/appointRecordList.shtml', {
@@ -77,7 +82,7 @@ export default class Reserve {
         }, { loading: false }).then(data => {
             current_tab.list.push(...data.pageData.result)
 
-            current_tab.page_no < data.pageData.pagination.totalCount ?
+            current_tab.page_no < data.pageData.pagination.totalPage ?
                 current_tab.page_no++ :
                 current_tab.page_no = 0;
 
