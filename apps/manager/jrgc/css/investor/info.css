@@ -1,0 +1,79 @@
+.bg{
+    width: 100%;
+    height: 100%;
+    background: #e9eaee;
+}
+.bar{
+    width: 100%;
+    height: 262px;
+    background: url('../../images/investor/info/barBg.jpg') no-repeat;
+    display: table;
+    padding-top:54px;
+    margin-bottom: 20px;
+}
+.leftBar{
+    float: left;
+    margin: 0 30px 42px 48px;
+    position: relative;
+}
+.level{
+    width: 80px;
+    height: 30px;
+    background: #fde143;
+    color: #91453a;
+    font-size: 22px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: -16px;
+    left: 14px;
+    z-index: 2;
+}
+.rightBar{
+    float: left;
+    width: 388px;
+    text-align: left;
+    margin-top: 10px;
+    font-size: 24px;
+    color: #fff;
+    line-height: 36px;
+}
+.name{
+    font-size: 36px;
+}
+.name span{
+    font-size: 24px;
+    color: #57210f;
+}
+.amount span{
+    color: #fde143;
+}
+.time{
+    font-size: 22px;
+    color: #f3baa9;
+}
+.bottomBar{
+    width: 100%;
+    display: table;
+    height: 60px;
+    background: #904438;
+    padding: 20px 0;
+}
+.itemBar{
+    float: left;
+    width: 33%;
+    border-right: 1px solid #a3635a;
+    text-align: center;
+}
+.itemBar:nth-child(3){
+    border-right: transparent;
+}
+.itemBarNum{
+    font-size: 32px;
+    color: #fff;
+}
+.itemBarText{
+    font-size: 22px;
+    color: #f3baa9;
+}

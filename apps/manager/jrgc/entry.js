@@ -10,7 +10,8 @@ import * as Stores from './stores'
 
 let stores = {
     login: new Stores.Login(Post),
-    user: new Stores.User(),
+    user: new Stores.User(Get),
+    investor: new Stores.User(Get),
     stats_overview: new Stores.StatsOverview(Get),
     stats_investor: new Stores.StatsInvestor(Get)
 }
