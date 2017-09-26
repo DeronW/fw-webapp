@@ -65,9 +65,8 @@ export default class LoopLoanLoan extends React.Component {
     }
 
     changeHandler = (e) => {
-        let v = e.target.value;
-        v = v.replace(/[^\d|\.]/g, '');
-        // if (v.length > 5)  return;
+        let v = e.target.value.replace(/[^\d|\.]/g, '');
+        if (v.length > 5)  return;
         this.setState({ value: v }, this.validate);
     }
 
