@@ -77,7 +77,7 @@ export default class Reserve {
         }, { loading: false }).then(data => {
             current_tab.list.push(...data.pageData.result)
 
-            current_tab.page_no < data.pageData.pagination.totalCount ?
+            current_tab.page_no < data.pageData.pagination.totalPage ?
                 current_tab.page_no++ :
                 current_tab.page_no = 0;
 
