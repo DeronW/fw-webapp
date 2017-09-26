@@ -84,8 +84,14 @@
     color: #fff;
 }
 
+.itemUp {
+    height: 69px;
+}
+
 .itemDown {
-    margin-top: 8px;
+    height: 24px;
+    margin: 6px auto;
+    line-height: 24px;
 }
 
 .lineLeft {
@@ -134,6 +140,8 @@
 
 .itemDes {
     margin-top: 18px;
+    height: 24px;
+    line-height: 24px;
 }
 
 .itemDes .desLeft, .itemDes .desRight {
