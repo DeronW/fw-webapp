@@ -12,11 +12,23 @@ import styles from '../css/download.css'
     "errorWhenNotFound": false
 })
 class Download extends React.Component {
+
     state = {
         android: ''
     }
 
     componentDidMount() {
+
+        let q = Utils.hashQuery
+        if (q.view) {
+            try {
+                let link = 'easyloan://easyloan.com/openApp?view=' + q.view;
+                if (q.id) link += '&id=' + q.id
+                if (q.url) link += '&url=' + q.url
+                location.href = link
+            } catch (e) { }
+        }
+
         if (Browser.inWeixin) {
             this.setState({
                 android: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ucf.jrgc.cfinance'

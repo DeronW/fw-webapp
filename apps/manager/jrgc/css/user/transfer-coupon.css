@@ -74,7 +74,11 @@
 .itemLine {
     display: table;
     width: 620px;
+<<<<<<< HEAD
     margin: 12px auto 0;
+=======
+    margin: 16px auto 0;
+>>>>>>> 877d7844f7e242df3020414d3748aad6dc7f0e2e
     color: #fff;
 }
 
