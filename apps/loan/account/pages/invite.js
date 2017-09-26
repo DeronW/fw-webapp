@@ -16,6 +16,7 @@ class Invite extends React.Component {
         tab: 'fxh',
         link: '',
         records: [],
+        page: 1,
         show_info: false
     }
 
@@ -24,11 +25,23 @@ class Invite extends React.Component {
             this.setState({ link: data.shareTemplate.templateUrl })
         })
 
-        Post('/api/userBase/v1/invitationRecord.json', {
-            pageIndex: 1,
-            pageSize: 100
-        }).then(data => {
-            this.setState({ records: data.invitationRecord })
+        this._timer = setInterval(() => {
+            this.loadRecords().then(has_more => {
+                if (!has_more) clearInterval(this._timer)
+            })
+        }, 3000)
+    }
+
+    loadRecords = () => {
+        return Post('/api/userBase/v1/invitationRecord.json', {
+            pageIndex: this.state.page,
+            pageSize: 20
+        }, { loading: false }).then(data => {
+            let r = this.state.records;
+            r.push(...data.invitationRecord)
+            this.setState({ records: r })
+
+            return data.invitationRecord.length > 0
         })
     }
 
