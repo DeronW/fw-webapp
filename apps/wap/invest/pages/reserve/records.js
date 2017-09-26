@@ -16,7 +16,7 @@ class ReserveRecords extends React.Component {
     componentDidMount() {
         NativeBridge.trigger('hide_header')
         this.props.reserve.resetPageNo();
-        // this.props.reserve.getReserveList()
+        this.props.reserve.getReserveList()
         Event.touchBottom(this.props.reserve.getReserveList)
     }
 
