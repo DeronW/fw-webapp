@@ -73,25 +73,121 @@
 }
 .noticeArrow{
     float: right;
-    margin:25px 30px;
+    margin:28px 30px;
 }
 .bean{
     padding-top: 50px;
     width: 100%;
     background: #fff;
+    margin-bottom: 24px;
 }
-.beanTitle{
+
+.beanNum{
+    font-size: 24px;
+    color: #555555;
+    margin: 0 0 18px 30px;
+}
+.beanNum span{
+    font-size: 60px;
+    color: #fd4d4c;
+}
+.beanText{
     font-size: 28px;
     color: #555;
     margin-left: 32px;
-}
-.beanNum{
-    font-size: 48px;
-    color: #fd4d4c;
-    margin: 24px 0 40px 25px;
+    margin-bottom: 30px;
 }
 .rebate{
     width: 100%;
     padding: 30px 0;
     border-top: 1px solid #e3e5ea;
+    display: table;
+}
+.rebateNum{
+    float: left;
+    width: 326px;
+    padding-left: 32px;
+}
+.rebateBorder{
+    border-left: 1px solid #e3e5eb;
+    width: 234px;
+}
+.rebateText{
+    font-size: 24px;
+    color: #999;
+}
+.rebateMoney{
+    font-size: 32px;
+    color: #555;
+}
+.rebateArrow{
+    float: right;
+    margin: 20px 30px;
+}
+.banner{
+    width: 100%;
+    min-height: 222px;
+    margin-bottom: 24px;
+}
+.bannerItem{
+    height: 222px;
+}
+.rate{
+    height: 69px;
+    border-bottom: 1px solid #e3e5ea;
+    width: 100%;
+    background: #f9f9f9;
+    color: #333;
+    font-size: 28px;
+    box-sizing: border-box;
+    padding-left: 28px;
+    line-height: 70px;
+}
+.rate span{
+    color: #fd4d4c
+}
+.rule{
+    width: 720px;
+    height: 380px;
+    background: #fff;
+    font-size: 24px;
+    color: #999;
+    padding: 40px 30px 35px;
+    box-sizing: border-box;
+    box-shadow: 0 5px 2px #f3f2f2,0 10px 5px #ecebeb;
+    margin-bottom: 100px;
+    position: relative;
+}
+.invest{
+    width: 322px;
+    height: 68px;
+    text-align: center;
+    margin: 40px auto 0;
+    line-height: 68px;
+    background: #fd4d4c;
+    color: #fff;
+    font-size: 30px;
+    border-radius: 68px;
+}
+.couponBtn{
+    width: 121px;
+    height: 131px;
+    background: url('../../images/user/user/coupon-icon.png') no-repeat;
+    position: absolute;
+    right: 20px;
+    top:130px;
+}
+.couponBtn span{
+    display: block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: transparent;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 24px;
+    color: #fff;
 }
