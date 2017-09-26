@@ -26,10 +26,13 @@ class Login extends React.Component {
     }
     submitHandler = () => {
         let { username, password } = this.state
+        let { history } = this.props
         if(!username) showToast("用户名不能为空")
         if(!password) showToast("密码不能为空")
 
-        this.props.login.login(username,password)
+        this.props.login.login(username,password).then(()=>{
+            history.push('/')
+        })
     }
     render() {
         let { history, login } = this.props
