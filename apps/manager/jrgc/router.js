@@ -17,7 +17,11 @@ export default (stores) => {
             <Switch>
 
                 {/* 业绩 相关页面 */}
-                <Route exact path="/stats" component={Stats.Stats}/>
+                <Route exact path="/stats" component={Stats.Overview}/>
+                <Route exact path="/stats-invested" component={Stats.Invested}/>
+                <Route exact path="/stats-registered" component={Stats.Registered}/>
+                <Route exact path="/stats-invested-first-time" component={Stats.InvestedFirstTime}/>
+
                 <Route exact path="/login" component={Login}/>
                 {/*我的 相关页面*/}
                 <Route exact path="/" component={User.User}/>

@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react'
 
 import { Chart } from '../../components'
 
-import styles from '../../css/stats/stats.css'
+import styles from '../../css/stats/overview.css'
 
 
 const TABS = { '1': '当天', '2': '7 天', '3': '30 天', '4': '半年' };
@@ -30,24 +30,24 @@ const TabHeader = CSSModules(styles, { allowMultiple: true, errorWhenNotFound: f
 })
 
 
-@inject('stats')
+@inject('stats_overview')
 @observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
-class Stats extends React.Component {
+class StatsOverview extends React.Component {
 
     componentDidMount() {
-        const { stats } = this.props;
-        stats.setCurrentTab('1');
-        stats.fetchTabData('1');
-        stats.fetchTabData('2');
-        stats.fetchTabData('3');
-        stats.fetchTabData('4');
+        const { stats_overview } = this.props;
+        stats_overview.setCurrentTab('1');
+        stats_overview.fetchTabData('1');
+        stats_overview.fetchTabData('2');
+        stats_overview.fetchTabData('3');
+        stats_overview.fetchTabData('4');
     }
 
     switchTab = no => () => {
-        const { stats } = this.props;
-        stats.setCurrentTab(no);
-        stats.fetchTabData(no);
+        const { stats_overview } = this.props;
+        stats_overview.setCurrentTab(no);
+        stats_overview.fetchTabData(no);
     }
 
     getOption = (date, value, valueAnnual) => ({
@@ -79,9 +79,9 @@ class Stats extends React.Component {
     })
 
     render() {
-        const { history, stats } = this.props,
-            { currentTab } = stats.data,
-            { graphFormatted, investorFormatted } = stats;
+        const { history, stats_overview } = this.props,
+            { currentTab } = stats_overview.data,
+            { graphFormatted, investorFormatted } = stats_overview;
 
         const currentTabName = TABS[currentTab],
             { date, value, valueAnnual } = graphFormatted,
@@ -128,4 +128,4 @@ class Stats extends React.Component {
 
 }
 
-export default Stats
+export default StatsOverview

@@ -1,7 +1,7 @@
 import { extendObservable, computed } from 'mobx'
 
 
-export default class Stats {
+export default class StatsOverview {
 
     constructor(Get) {
         this.get = Get;

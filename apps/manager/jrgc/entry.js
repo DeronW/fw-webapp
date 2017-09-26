@@ -11,7 +11,8 @@ import * as Stores from './stores'
 let stores = {
     login: new Stores.Login(),
     user: new Stores.User(),
-    stats: new Stores.Stats(Get)
+    stats_overview: new Stores.StatsOverview(Get),
+    stats_investor: new Stores.StatsInvestor(Get)
 }
 
 new StoreSpy(stores).wiretap()
