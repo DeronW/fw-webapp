@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Header, BottomNavBar} from '../../components'
-import styles from '../../css/vistor/score.css'
+import styles from '../../css/investor/score.css'
 
 const score_data = [{money: 1000}, {money: 200}]
 

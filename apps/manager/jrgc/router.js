@@ -9,7 +9,7 @@ import {
 
 import * as Stats from './pages/stats'
 import * as User from './pages/user'
-import * as Vistor from './pages/vistor'
+import * as Investor from './pages/investor'
 import Login from './pages/login.js';
 
 export default (stores) => {
@@ -32,7 +32,8 @@ export default (stores) => {
                 <Route exact path="/user-transfer-friends" component={User.TransferFriends}/>
 
                 {/*客户相关页面*/}
-                <Route exact path="/vistor-score" component={Vistor.Score}/>
+                <Route exact path="/investor-score" component={Investor.Score}/>
+                <Route exact path="/investor-bean" component={Investor.Bean}/>
             </Switch>
         </Provider>
     </Router>
