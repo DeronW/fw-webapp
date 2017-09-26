@@ -124,6 +124,10 @@
     color: #ffc027;
 }
 
+.itemDes {
+    padding-top: 5px;
+}
+
 .itemDes .desLeft, .itemDes .desRight {
     font-size: 20px;
     color: #999;
