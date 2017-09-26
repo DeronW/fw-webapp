@@ -51,6 +51,12 @@
     font-size: 48px;
 }
 
+.tabContent {
+    display: table;
+    margin: 0 auto;
+    height: 100%;
+}
+
 .contentItem {
     width: 660px;
     height: 164px;
@@ -74,23 +80,30 @@
 .itemLine {
     display: table;
     width: 620px;
-    /*margin: 12px auto 0;*/
+    margin: 12px auto 0;
     color: #fff;
-    padding: 12px 20px 0 20px;
+}
+
+.itemUp {
+    height: 69px;
 }
 
 .itemDown {
-    padding-top: 5px;
-    padding-bottom: 3px;
+    height: 24px;
+    margin: 6px auto;
+    line-height: 24px;
 }
 
 .lineLeft {
     float: left;
     font-size: 60px;
+    width: 40%;
 }
 
 .lineRight {
     float: right;
+    width: 40%;
+    text-align: right;
 }
 
 .rmb {
@@ -123,6 +136,12 @@
 
 .giveBtnYellow {
     color: #ffc027;
+}
+
+.itemDes {
+    margin-top: 18px;
+    height: 24px;
+    line-height: 24px;
 }
 
 .itemDes .desLeft, .itemDes .desRight {

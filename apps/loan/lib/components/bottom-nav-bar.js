@@ -125,17 +125,21 @@ class BottomNavBar extends React.Component {
                 location.href = '/static/loan/products/index.html#/'
             }
             if (tab == 'b') {
-                if (isActiveTab('d') && history) {
+                if (!isActiveTab('a') && history) {
                     history.push('/repayment-records')
                 } else {
                     location.href = '/static/loan/account/index.html#/repayment-records'
                 }
             }
             if (tab == 'c') {
-                location.href = '/static/loan/weixin-invite/index.html'
+                if (!isActiveTab('a') && history) {
+                    history.push('/invite')
+                } else {
+                    location.href = '/static/loan/account/index.html#/invite'
+                }
             }
             if (tab == 'd') {
-                if (isActiveTab('d') && history) {
+                if (!isActiveTab('a') && history) {templateType
                     history.push('/user-panel')
                 } else {
                     location.href = '/static/loan/account/index.html#/user-panel'

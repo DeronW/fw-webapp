@@ -10,6 +10,8 @@ class Bean extends React.Component {
         let {history} = this.props
         return <div>
             <Header title="他的工豆" history={history}/>
+            <div styleName="">
+            </div>
         </div>
     }
 }
