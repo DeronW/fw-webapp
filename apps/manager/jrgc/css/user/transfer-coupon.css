@@ -74,8 +74,9 @@
 .itemLine {
     display: table;
     width: 620px;
-    margin: 12px auto 0;
+    /*margin: 12px auto 0;*/
     color: #fff;
+    padding: 12px 20px 0 20px;
 }
 
 .itemDown {
