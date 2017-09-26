@@ -4,7 +4,7 @@ let API_PATH = document.getElementById('api-path').value;
 
 const Ajax = options => {
     // add default url prefix
-    options.url = `${API_PATH}${options.url}`
+    options.url = `${API_PATH}/mpwap${options.url}`
 
     return Request(options).catch(error => {
         /*
