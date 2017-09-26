@@ -25,11 +25,15 @@ class Invite extends React.Component {
             this.setState({ link: data.shareTemplate.templateUrl })
         })
 
-        this._timer = setInterval(() => {
-            this.loadRecords().then(has_more => {
-                if (!has_more) clearInterval(this._timer)
-            })
-        }, 3000)
+        this.loadRecords().then(has_more => {
+            if (has_more) {
+                this._timer = setInterval(() => {
+                    this.loadRecords().then(has_more => {
+                        if (!has_more) clearInterval(this._timer)
+                    })
+                }, 3000)
+            }
+        })
     }
 
     loadRecords = () => {
