@@ -21,7 +21,10 @@ class Invite extends React.Component {
     }
 
     componentDidMount() {
-        Post('/api/shareTemplate/v1/getContent.json').then(data => {
+        Post('/api/shareTemplate/v1/getContent.json', {
+            channelCode: "OFFICIAL",
+            templateType: 1
+        }).then(data => {
             this.setState({ link: data.shareTemplate.templateUrl })
         })
 
