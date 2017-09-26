@@ -56,7 +56,7 @@ class User extends React.Component {
         let noticeFn = (item, index) => {
             return <div styleName="noticeItem" key={index}>{item.des}</div>
         }
-        return <div>
+        return <div styleName="bg">
             <div styleName="bar">
                 <img styleName="portrait" src={require('../../images/user/user/man.png')} />
                 <div styleName="barItem info">
@@ -82,6 +82,13 @@ class User extends React.Component {
                     </div>
                 </div>
                 <img styleName="noticeArrow" src={require('../../images/user/user/arrow.png')} />
+            </div>
+            <div styleName="bean">
+                <div styleName="beanTitle">可用返利（工豆）</div>
+                <div styleName="beanNum">￥100000</div>
+                <div styleName="rebate">
+
+                </div>
             </div>
             <BottomNavBar history={history} />
         </div>

@@ -1,9 +1,11 @@
 import Login from './login.js'
 import User from './user.js'
-import Stats from './stats.js'
+import StatsOverview from './stats-overview.js'
+import StatsInvestor from './stats-investor.js'
 
 export {
     Login,
     User,
-    Stats
+    StatsOverview,
+    StatsInvestor
 }
