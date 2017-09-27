@@ -54,9 +54,9 @@ class Download extends React.Component {
             if (q.url) params += '&url=' + q.url
 
             try {
-                appendIframe('jrgc://jrgc.com/openApp' + params)
+                appendIframe('easyloan://easyloan.com/openApp' + params)
                 setTimeout(function () {
-                    location.href = 'jrgc://jrgc.com/openApp' + params
+                    location.href = 'easyloan://easyloan.com/openApp' + params
                 }, 300)
             } catch (e) { }
         }
