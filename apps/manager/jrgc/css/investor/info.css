@@ -264,6 +264,7 @@
     width: 100%;
     display: table;
     background: #fff;
+    padding-top: 5px;
     box-shadow: 0px -5px 0px 0px #eae9e9,0px -5px 0px 0px #edecec,0px -5px 0px 0px #eeeded,
 }
 .tabBarItem{
