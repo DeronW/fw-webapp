@@ -96,6 +96,8 @@ export default class Account {
             })
 
             location.href = '/static/loan/products/index.html#/'
+        }, e => {
+            Components.showToast(e.message)
         })
     }
 
