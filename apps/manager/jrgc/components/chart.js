@@ -53,12 +53,6 @@ class Chart extends React.Component {
                 filterMode: 'none',
                 start: 0,
                 end: 100
-            }, {
-                type: 'inside',
-                yAxisIndex: [0],
-                filterMode: 'none',
-                start: 0,
-                end: 100
             }],
             textStyle: {
                 fontSize: 18

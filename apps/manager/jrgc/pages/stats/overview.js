@@ -62,14 +62,17 @@ class StatsOverview extends React.Component {
             name: '金额(元)'
         },
         series: [{
-            symbolSize: 9,
+            symbol: 'diamond',
+            symbolSize: 8,
+            showAllSymbol: true,
             smooth: true,
             lineStyle: { normal: { color: '#d75063' } },
             name: '年化投资额',
             type: 'line',
             data: value
         }, {
-            symbolSize: 9,
+            symbolSize: 6,
+            showAllSymbol: true,
             smooth: true,
             lineStyle: { normal: { color: '#20629f' } },
             name: '投资额',
