@@ -2,6 +2,8 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { inject, observer } from 'mobx-react'
 
+import { Event } from 'fw-javascripts'
+
 import { Header } from '../../components'
 
 import styles from '../../css/stats/invested.css'
@@ -41,22 +43,37 @@ class Invested extends React.Component {
 
         stats_investor.initStats('invested', currentTab);
 
-        stats_investor.fetchInvestorInfo(sortBy, sortDescending, pageNo);
+        this.loadMore(null)
+            .then(() => Event.touchBottom(this.loadMore))
+    }
+
+    loadMore = (done) => {
+        const { stats_investor } = this.props,
+            { sortBy, sortDescending, pageNo } = this.state;
+
+        if (pageNo === 0) return done && done();
+
+        return stats_investor.fetchInvestorInfo(sortBy, sortDescending, pageNo)
+            .then(pageNo => {
+                this.setState({ pageNo: pageNo });
+                done && done();
+            });
     }
 
     handleSort = sortBy => {
         const { stats_investor } = this.props;
 
         if (this.state.sortBy === sortBy) {
-            this.setState({ sortDescending: !this.state.sortDescending }, () => {
-                const { sortBy, sortDescending, pageNo } = this.state;
-                stats_investor.fetchInvestorInfo(sortBy, sortDescending, pageNo);
-            })
+            this.setState({
+                pageNo: 1,
+                sortDescending: !this.state.sortDescending
+            }, () => this.loadMore(null))
         } else {
-            this.setState({ sortBy: sortBy, sortDescending: true }, () => {
-                const { sortBy, sortDescending, pageNo } = this.state;
-                stats_investor.fetchInvestorInfo(sortBy, sortDescending, pageNo);
-            })
+            this.setState({
+                pageNo: 1,
+                sortBy: sortBy,
+                sortDescending: true
+            }, () => this.loadMore(null))
         }
     }
 
