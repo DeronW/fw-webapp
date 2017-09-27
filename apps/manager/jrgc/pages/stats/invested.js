@@ -153,8 +153,12 @@ class Invested extends React.Component {
                 { investorRawData.map(genInvestorItem) }
             </div>
 
-            { pageNo === 0 && investorRawData > 0
+            { pageNo === 0 && investorRawData.length > 0 &&
                 <div styleName="end-of-item-info">已全部加载完毕</div>
+            }
+
+            { investorRawData.length === 0 &&
+                <div styleName="empty-info"></div>
             }
         </div>
     }
