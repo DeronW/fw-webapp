@@ -133,6 +133,11 @@
     font-size: 32px;
 }
 
+.left-top-info:last-child {
+    height: 60px;
+    line-height: 127px;
+}
+
 .left-bottom-info {
     line-height: 2.2;
     color: #999;
