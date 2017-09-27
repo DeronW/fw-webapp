@@ -61,6 +61,7 @@
     display: table;
     font-size: 20px;
     color: #fff;
+    margin-top:-12px;
     /*margin: 5px 0;*/
 }
 
@@ -77,6 +78,7 @@
     display: table;
     font-size: 20px;
     color: #999999;
+    margin-top:15px;
     /*margin-top: 10px;*/
 }
 
