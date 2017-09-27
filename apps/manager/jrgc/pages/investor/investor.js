@@ -32,9 +32,10 @@ class Investor extends React.Component {
                         onClick={()=>this.switchTab(item)}>{item}</div>
         }
         let selectFn = (item,index) => {
-            return <div styleName={item==select?'selectActive':'selectItem'}
+            let s = tab == "未投资" ? (item==select?'selectActive':'noSelect'):(item==select?'selectActive':'selectItem')
+            return <div styleName={s}
                         key={item+index}
-                        onClick={()=>this.switchSelect(item)}>{item}</div>
+                        onClick={tab != "未投资" ? ()=>this.switchSelect(item):''}>{item}</div>
         }
 
         return <div styleName="bg">
@@ -72,8 +73,8 @@ class Investor extends React.Component {
                     <div styleName="time">注册时间：2017-08-13 00:00:00</div>
                     <div styleName="balance">可用余额</div>
                 </div>
-
             </div>
+            <BottomNavBar/>
         </div>
     }
 }
