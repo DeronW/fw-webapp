@@ -19,8 +19,38 @@ class AccountHj extends React.Component {
                 </div>
                 <div styleName="infoLine line2">
                     <div styleName="lineLeft">1,000.000克(当前市值约¥1280)</div>
-                    <div styleName="lineRight">800,00.000克</div>
+                    <div styleName="lineRight">
+                        <span styleName="number">800,00.000克</span>
+                        <span styleName="icon-question-up"></span>
+                    </div>
                 </div>
+            </div>
+            <div styleName="hjPrice">
+                <div styleName="priceItem">
+                    <div styleName="itemLineUp"><span styleName="itemName">浮动盈亏</span><span styleName="icon-question"></span></div>
+                    <div styleName="itemLineDown colorRed">+¥3.14</div>
+                </div>
+                <div styleName="priceItem">
+                    <div styleName="itemLineUp"><span styleName="itemName">实时金价(每克)</span><span styleName="icon-refresh"></span></div>
+                    <div styleName="itemLineDown">¥280.14</div>
+                </div>
+                <div styleName="priceItem itemLast">
+                    <div styleName="itemLineUp"><span>成交金价(每克)</span></div>
+                    <div styleName="itemLineDown">¥279.50</div>
+                </div>
+            </div>
+
+            <div styleName="zxGold">
+                <div styleName="goldLeft">Ta的尊享金</div>
+                <div styleName="goldRight"></div>
+            </div>
+
+            <div styleName="accont">
+                <span>支付账户</span><span styleName="tips">（可用余额仅限在黄金账户使用）</span>
+            </div>
+
+            <div styleName="remain">
+                可用余额<span>¥50.00</span>
             </div>
         </div>
     }
