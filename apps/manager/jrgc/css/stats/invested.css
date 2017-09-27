@@ -38,6 +38,8 @@
 }
 
 .sort-tab {
+    position: sticky;
+    top: 88px;
     border-bottom: 1px solid #eee;
     background-color: #fff;
 }
