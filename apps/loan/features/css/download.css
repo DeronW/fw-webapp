@@ -1,6 +1,6 @@
 .bg {
     background: #00d3f6 url(../images/download/bg.jpg) no-repeat center 88px;
-    height: 100%;
+    min-height: 100%;
     position: relative;
     padding-top: 1px;
 }

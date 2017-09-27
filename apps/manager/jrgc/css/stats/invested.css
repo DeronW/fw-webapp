@@ -38,6 +38,8 @@
 }
 
 .sort-tab {
+    position: sticky;
+    top: 88px;
     border-bottom: 1px solid #eee;
     background-color: #fff;
 }
@@ -160,6 +162,6 @@
 .empty-info {
     position: fixed;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 338px);
     background: url('../../images/stats/empty-bg.png') no-repeat center;
 }
