@@ -134,7 +134,9 @@ class Invested extends React.Component {
             return <div key={`${Date.now()}${i}`} styleName="investor-item">
                 <div styleName="left-info">
                     <div styleName="left-top-info">{name}</div>
-                    <div styleName="left-bottom-info">{bid} | {interest} | {duration}</div>
+                    { sortBy !== '余额' &&
+                        <div styleName="left-bottom-info">{bid} | {interest} | {duration}</div>
+                    }
                 </div>
                 <div styleName="right-info">
                     <div styleName="right-top-info">{sortValue}</div>
@@ -149,12 +151,12 @@ class Invested extends React.Component {
             <div styleName="invest-stats-grp">
                 <div styleName="invest-stats">
                     <div styleName="invest-stats-name">{`${currentTabName}投资额`}</div>
-                    <div styleName="invest-stats-value">{investAmount}</div>
+                    <div styleName="invest-stats-value">{investAmount}元</div>
                 </div>
                 <div styleName="vertical-line"></div>
                 <div styleName="invest-stats">
                     <div styleName="invest-stats-name">{`${currentTabName}年化投资额`}</div>
-                    <div styleName="invest-stats-value">{investAmountAnnual}</div>
+                    <div styleName="invest-stats-value">{investAmountAnnual}元</div>
                 </div>
             </div>
 

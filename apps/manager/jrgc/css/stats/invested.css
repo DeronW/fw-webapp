@@ -38,6 +38,7 @@
 }
 
 .sort-tab {
+    position: -webkit-sticky;
     position: sticky;
     top: 88px;
     border-bottom: 1px solid #eee;
@@ -45,6 +46,7 @@
 }
 
 .sort-type {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     display: inline-block;
     width: 33.3%;
     height: 90px;
@@ -64,6 +66,7 @@
 
 .sort-type-name-active {
     composes: sort-type-name;
+    color: #fd4d4c;
     border-bottom: 3px solid #fd4d4c;
 }
 
@@ -130,6 +133,11 @@
     line-height: 96px;
     color: #555;
     font-size: 32px;
+}
+
+.left-top-info:last-child {
+    height: 60px;
+    line-height: 127px;
 }
 
 .left-bottom-info {
