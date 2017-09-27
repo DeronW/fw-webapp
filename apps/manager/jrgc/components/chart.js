@@ -18,10 +18,14 @@ class Chart extends React.Component {
 
     _genOptions = () => {
         const defaultOpts = {
+            grid: {
+                show: true
+            },
             legend: {
                 textStyle: {
                     fontSize: 18
                 },
+                padding: 0,
                 bottom: 0
             },
             tooltip: {
@@ -43,9 +47,7 @@ class Chart extends React.Component {
                 nameTextStyle: {
                     padding: [6, 0]
                 },
-                max: function(value) {
-                    return Math.round(value.max + 0.1*(value.max - value.min));
-                }
+                max: 'dataMax'
             },
             dataZoom: [{
                 type: 'inside',
