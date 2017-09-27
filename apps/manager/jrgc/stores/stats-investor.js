@@ -1,4 +1,4 @@
-import { extendObservable, computed } from 'mobx'
+import { observable, extendObservable, computed } from 'mobx'
 
 
 export default class StatsInvestor {
@@ -44,16 +44,25 @@ export default class StatsInvestor {
     }
 
     fetchInvestorInfo = (sortBy, sortDescending, pageNo) => {
-        const { durationType } = this.data,
+        let { durationType, investorRawData } = this.data,
             sortNo = this._getSortNo(sortBy, sortDescending);
-        this.get('/api/finManager/achievement/v2/custList.shtml', {
+
+        if (pageNo === 1) investorRawData.splice(0, investorRawData.length);
+
+        return this.get('/api/finManager/achievement/v2/custList.shtml', {
             orderType: sortNo,
             timeType: durationType,
             pageNo: pageNo,
             pageSize: 10,
             userId: 543
         }).then(({ pageData }) => {
-            this.data.investorRawData.push(...pageData.result);
+            const investData = pageData.result,
+                totalPage = pageData.pagination.totalPage;
+
+            investorRawData.push(...investData);
+
+            pageNo = totalPage === pageNo ? 0 : (pageNo + 1);
+            return pageNo;
         })
     }
 
