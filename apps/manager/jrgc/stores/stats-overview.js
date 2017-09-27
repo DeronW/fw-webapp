@@ -8,7 +8,7 @@ export default class StatsOverview {
 
         this.data = { };
         extendObservable(this.data, {
-            currentTab: '1',
+            statsDurationType: '1',
             graph: {
                 '1': { },
                 '2': { },
@@ -25,8 +25,8 @@ export default class StatsOverview {
     }
 
     @computed get graphFormatted() {
-        const { currentTab, graph } = this.data,
-            raw = graph[currentTab];
+        const { statsDurationType, graph } = this.data,
+            raw = graph[statsDurationType];
         const formatted = {
             date: raw.date === undefined ? [] : raw.date.slice(),
             value: raw.value === undefined ? [] : raw.value.slice(),
@@ -36,8 +36,8 @@ export default class StatsOverview {
     }
 
     @computed get investorFormatted() {
-        const { currentTab, investor } = this.data,
-            raw = investor[currentTab];
+        const { statsDurationType, investor } = this.data,
+            raw = investor[statsDurationType];
         const formatted = {
             invested: raw.invested === undefined ? '' : raw.invested,
             registered: raw.registered === undefined ? '' : raw.registered,
@@ -48,7 +48,7 @@ export default class StatsOverview {
         return formatted
     }
 
-    setCurrentTab = tabNo => this.data.currentTab = tabNo
+    setStatsDuration = tabNo => this.data.statsDurationType = tabNo
 
     fetchTabData = tabNo => {
         this.fetchGraphData(tabNo);
