@@ -53,8 +53,7 @@ export default class StatsInvestor {
             orderType: sortNo,
             timeType: durationType,
             pageNo: pageNo,
-            pageSize: 10,
-            userId: 543
+            pageSize: 10
         }).then(({ pageData }) => {
             const investData = pageData.result,
                 totalPage = pageData.pagination.totalPage;

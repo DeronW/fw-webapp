@@ -57,8 +57,7 @@ export default class StatsOverview {
 
     fetchGraphData = tabNo => {
         this.get('/api/finManager/achievement/v2/stat.shtml', {
-            type: tabNo,
-            userId: '543'
+            type: tabNo
         }).then(({ result }) => {
             this.data.graph[tabNo] = {
                 date: result.timeDimension,
@@ -70,8 +69,7 @@ export default class StatsOverview {
 
     fetchInvestorData = tabNo => {
         this.get('/api/finManager/achievement/v2/investInfo.shtml', {
-            type: tabNo,
-            userId: '543'
+            type: tabNo
         }).then(({ result }) => {
             this.data.investor[tabNo] = {
                 invested: result.investCustCount,
