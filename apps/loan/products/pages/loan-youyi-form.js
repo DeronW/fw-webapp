@@ -59,15 +59,17 @@ export default class LoopLoanLoan extends React.Component {
             this.resetValidateTimer();
         } else if (this.state.value == "") {
             this.resetValidateTimer();
-        } else if (this.state.value <= loopLoan.canBorrowAmt && this.state.value >= loopLoan.minLoanAmt && this.state.value % 100 == 0) {
+        } else if (this.state.value <= loopLoan.canBorrowAmt &&
+            this.state.value >= loopLoan.minLoanAmt &&
+            this.state.value % 100 == 0) {
             this.resetCalculateTimer();
         }
     }
 
-    changeHandler = (e) => {
-        // let v = e.target.value.replace(/[^\d|\.]/g, '').substring(0,5);
-        // if (v.length > 5)  return;
-        this.setState({ value: parseInt(e.target.value) }, this.validate);
+    valueChangeHandler = (e) => {
+        let v = parseInt(e.target.value)
+        v = Math.min(v, 99900)
+        this.setState({ value: v }, this.validate);
     }
 
     smsValueHandler = (e) => {
@@ -179,7 +181,10 @@ export default class LoopLoanLoan extends React.Component {
                         <div styleName="loan-num-wrap">
                             <input styleName={Browser.inIOS ? "input-num-ios" : "input-num-android"} type="number"
                                 value={this.state.value}
-                                placeholder={"最多可借" + loopLoan.canBorrowAmt + "元"} onChange={this.changeHandler} />
+                                placeholder={"最多可借" + loopLoan.canBorrowAmt + "元"}
+                                onBlur={this.valueChangeHandler}
+                                onChange={this.valueChangeHandler}
+                            />
                         </div>
 
                     </div>
