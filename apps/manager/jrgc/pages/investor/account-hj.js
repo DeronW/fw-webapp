@@ -6,10 +6,15 @@ import styles from '../../css/investor/account-hj.css'
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class AccountHj extends React.Component {
+    jumpToList = () => {
+        let {history} = this.props
+        history.push('investor-hj-list')
+    }
+
     render() {
         let {history} = this.props
         return <div>
-            <Header title="他的黄金账户" history={history}/>
+            <Header title="TA的黄金账户" history={history}/>
             <div styleName="hjInfo">
                 <div styleName="infoName">持有黄金</div>
                 <div styleName="infoCount">1,000.000 <span styleName="unit-hj">克</span></div>
@@ -27,11 +32,13 @@ class AccountHj extends React.Component {
             </div>
             <div styleName="hjPrice">
                 <div styleName="priceItem">
-                    <div styleName="itemLineUp"><span styleName="itemName">浮动盈亏</span><span styleName="icon-question"></span></div>
+                    <div styleName="itemLineUp"><span styleName="itemName">浮动盈亏</span><span
+                        styleName="icon-question"></span></div>
                     <div styleName="itemLineDown colorRed">+¥3.14</div>
                 </div>
                 <div styleName="priceItem">
-                    <div styleName="itemLineUp"><span styleName="itemName">实时金价(每克)</span><span styleName="icon-refresh"></span></div>
+                    <div styleName="itemLineUp"><span styleName="itemName">实时金价(每克)</span><span
+                        styleName="icon-refresh"></span></div>
                     <div styleName="itemLineDown">¥280.14</div>
                 </div>
                 <div styleName="priceItem itemLast">
@@ -40,7 +47,7 @@ class AccountHj extends React.Component {
                 </div>
             </div>
 
-            <div styleName="zxGold">
+            <div styleName="zxGold" onClick={this.jumpToList}>
                 <div styleName="goldLeft">Ta的尊享金</div>
                 <div styleName="goldRight"></div>
             </div>

@@ -3,6 +3,7 @@
     min-height: 100%;
     position: relative;
     padding-top: 1px;
+    padding-bottom: 30px;
 }
 
 .qr-img {
