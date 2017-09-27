@@ -38,7 +38,6 @@ class StatsOverview extends React.Component {
 
     componentDidMount() {
         const { stats_overview } = this.props;
-        stats_overview.setStatsDuration('1');
         stats_overview.fetchTabData('1');
         stats_overview.fetchTabData('2');
         stats_overview.fetchTabData('3');
