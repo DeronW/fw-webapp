@@ -20,22 +20,25 @@ const SORT_TABS = { 'amount': '投资额', 'amountAnnual': '年化投资额', 'b
 class Invested extends React.Component {
 
     state = {
-        sortBy: 'amountAnnual',
-        sortDescending: true,
-        pageNo: 1,
         statsDurationType: '',
         investorCnt: '',
         investAmount: '',
-        investAmountAnnual: ''
+        investAmountAnnual: '',
+        sortBy: 'amountAnnual',
+        sortDescending: true,
+        pageNo: 1,
     }
 
     componentDidMount() {
-        window.scroll(0,0);
+        window.scroll(0, 0);
 
-        const { stats_overview, stats_investor } = this.props,
+        const investorType = 'invested',
+            { stats_overview, stats_investor } = this.props,
             { statsDurationType } = stats_overview.data,
             { invested, investAmount, investAmountAnnual } = stats_overview.investorFormatted,
             { sortBy, sortDescending, pageNo } = this.state;
+
+        stats_investor.initStats(investorType, statsDurationType);
 
         this.setState({
             statsDurationType: statsDurationType,
@@ -43,8 +46,6 @@ class Invested extends React.Component {
             investAmount: investAmount,
             investAmountAnnual: investAmountAnnual
         });
-
-        stats_investor.initStats('invested', statsDurationType);
 
         this.loadMore(null)
             .then(() => Event.touchBottom(this.loadMore))
