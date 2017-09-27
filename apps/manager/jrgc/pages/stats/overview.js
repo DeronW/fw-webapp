@@ -8,7 +8,7 @@ import { Chart } from '../../components'
 import styles from '../../css/stats/overview.css'
 
 
-const TABS = { '1': '当天', '2': '7 天', '3': '30 天', '4': '半年' };
+const STATS_DURATION = { '1': '当天', '2': '7 天', '3': '30 天', '4': '半年' };
 
 
 const TabHeader = CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })(props => {
@@ -17,7 +17,7 @@ const TabHeader = CSSModules(styles, { allowMultiple: true, errorWhenNotFound: f
     const genTabItems = no => <div key={no}
         styleName={current == no ? "tab-item-active" : "tab-item"}
         onClick={switchHandler(no)}>
-        { TABS[no] }
+        { STATS_DURATION[no] }
     </div>
 
     return <div styleName="tab-placeholder">
@@ -38,7 +38,6 @@ class StatsOverview extends React.Component {
 
     componentDidMount() {
         const { stats_overview } = this.props;
-        stats_overview.setCurrentTab('1');
         stats_overview.fetchTabData('1');
         stats_overview.fetchTabData('2');
         stats_overview.fetchTabData('3');
@@ -47,7 +46,7 @@ class StatsOverview extends React.Component {
 
     switchTab = no => () => {
         const { stats_overview } = this.props;
-        stats_overview.setCurrentTab(no);
+        stats_overview.setStatsDuration(no);
         stats_overview.fetchTabData(no);
     }
 
@@ -81,10 +80,10 @@ class StatsOverview extends React.Component {
 
     render() {
         const { history, stats_overview } = this.props,
-            { currentTab } = stats_overview.data,
+            currentTab = stats_overview.data.statsDurationType,
             { graphFormatted, investorFormatted } = stats_overview;
 
-        const currentTabName = TABS[currentTab],
+        const currentTabName = STATS_DURATION[currentTab],
             { date, value, valueAnnual } = graphFormatted,
             { invested, investAmount, investAmountAnnual, registered, investedFirstTime } = investorFormatted;
 

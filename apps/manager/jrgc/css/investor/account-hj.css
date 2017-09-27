@@ -22,7 +22,7 @@
     width: 100%;
     font-size: 24px;
     display: table;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .line1 {
@@ -38,5 +38,123 @@
 }
 
 .line2 {
-    margin-top: 10px;
+    margin-top: 5px;
+}
+
+.hjPrice {
+    width: 660px;
+    height: 65px;
+    padding: 30px;
+    background: #fff;
+    display: table;
+    font-size: 24px;
+    color: #999;
+}
+
+.priceItem {
+    width: 33.3%;
+    height: 100%;
+    float: left;
+}
+
+.itemLast {
+    float: right;
+    width: 25%;
+}
+
+.itemLineUp {
+    margin-bottom: 10px;
+}
+
+.itemLineDown {
+    font-size: 26px;
+    color: #555;
+}
+
+.icon-question {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url("../../images/investor/account-hj/icon-wh-gray.png") no-repeat center;
+    vertical-align: middle;
+}
+
+.icon-refresh {
+    display: inline-block;
+    width: 27px;
+    height: 25px;
+    background: url("../../images/investor/account-hj/icon-refresh.png") no-repeat center;
+    vertical-align: middle;
+}
+
+.itemName {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.colorRed {
+    color: #fd4d4c;
+}
+
+.zxGold {
+    width: 660px;
+    height: 28px;
+    padding: 30px;
+    background: #fff;
+    margin-top: 20px;
+    display: table;
+    font-size: 30px;
+    color: #555;
+}
+
+.goldLeft {
+    float: left;
+    vertical-align: middle;
+}
+
+.goldRight {
+    float: right;
+    width: 17px;
+    height: 40px;
+    vertical-align: middle;
+    background: url("../../images/investor/account-hj/arrow.png") no-repeat center;
+}
+
+.accont {
+    width: 660px;
+    height: 84px;
+    padding: 0 30px;
+    background: #f9f9f9;
+    margin-top: 20px;
+    font-size: 28px;
+    color: #333;
+    line-height: 84px;
+}
+
+.tips {
+    font-size: 18px;
+    color: #999;
+}
+
+.remain {
+    width: 660px;
+    height: 90px;
+    padding: 0 30px;
+    background: #fff;
+    font-size: 30px;
+    color: #555;
+    line-height: 90px;
+}
+
+.number {
+    vertical-align: middle;
+}
+
+.icon-question-up {
+    width: 24px;
+    height: 24px;
+    background: url("../../images/investor/account-hj/icon-wh-yellow.png") no-repeat center;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
 }
