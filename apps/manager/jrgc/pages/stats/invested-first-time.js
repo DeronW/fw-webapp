@@ -130,7 +130,9 @@ class InvestedFirstTime extends React.Component {
             return <div key={`${Date.now()}${i}`} styleName="investor-item">
                 <div styleName="left-info">
                     <div styleName="left-top-info">{name}</div>
-                    <div styleName="left-bottom-info">{bid} | {interest} | {duration}</div>
+                    { sortBy !== '余额' &&
+                        <div styleName="left-bottom-info">{bid} | {interest} | {duration}</div>
+                    }
                 </div>
                 <div styleName="right-info">
                     <div styleName="right-top-info">{sortValue}</div>
