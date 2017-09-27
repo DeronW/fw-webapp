@@ -14,6 +14,10 @@ class Info extends React.Component {
     showMore = () => {
         this.setState({hidden:!this.state.hidden})
     }
+    gotoCoupon = () => {
+        let { history } = this.props
+        history.push("/user-transfer-coupon")
+    }
     getOption = () => ({
         title: {
             text: '客户整体投资期限分析',
@@ -200,14 +204,14 @@ class Info extends React.Component {
                 </div>
             </div>
             <div styleName="tabBar">
-                <div styleName="tabBarItem">
+                <div styleName="tabBarItem" onClick={this.gotoCoupon}>
                     <img src={require('../../images/investor/info/coupon.png')}/>
                     <div>送优惠券</div>
                 </div>
-                <div styleName="tabBarItem">
+                <a styleName="tabBarItem" href="tel:10086">
                     <img src={require('../../images/investor/info/contact.png')}/>
                     <div>联系客户</div>
-                </div>
+                </a>
             </div>
         </div>
     }
