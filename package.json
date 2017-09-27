@@ -16,6 +16,8 @@
     "babel-preset-stage-2": "6.24.1",
     "clipboard": "^1.7.1",
     "del": "2.2.2",
+    "echarts": "^3.7.1",
+    "echarts-for-react": "^2.0.0",
     "es6-promise": "^4.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.3.0",
