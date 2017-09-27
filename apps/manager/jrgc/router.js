@@ -32,9 +32,12 @@ export default (stores) => {
                 <Route exact path="/user-transfer-friends" component={User.TransferFriends}/>
 
                 {/*客户相关页面*/}
-                <Route exact path="/investor" component={Investor.Info}/>
+                <Route exact path="/investor" component={Investor.Investor}/>
+                <Route exact path="/investor-search" component={Investor.Search}/>
+                <Route exact path="/investor-info" component={Investor.Info}/>
                 <Route exact path="/investor-score" component={Investor.Score}/>
                 <Route exact path="/investor-bean" component={Investor.Bean}/>
+                <Route exact path="/investor-account-hj" component={Investor.AccountHj}/>
             </Switch>
         </Provider>
     </Router>

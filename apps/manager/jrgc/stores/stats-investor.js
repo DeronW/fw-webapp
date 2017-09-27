@@ -61,7 +61,7 @@ export default class StatsInvestor {
 
             investorRawData.push(...investData);
 
-            pageNo = totalPage === pageNo ? 0 : (pageNo + 1);
+            pageNo = (totalPage === 0 || totalPage === pageNo) ? 0 : (pageNo + 1);
             return pageNo;
         })
     }

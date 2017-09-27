@@ -1,0 +1,42 @@
+.hjInfo {
+    width: 660px;
+    height: 192px;
+    padding: 40px 30px;
+    background: #c6815f;
+    color: #fff;
+}
+
+.infoName {
+    font-size: 28px;
+}
+
+.infoCount {
+    font-size: 60px;
+}
+
+.unit-hj {
+    font-size: 32px;
+}
+
+.infoLine {
+    width: 100%;
+    font-size: 24px;
+    display: table;
+    margin-top: 20px;
+}
+
+.line1 {
+    color: #f3baa9;
+}
+
+.lineLeft {
+    float: left;
+}
+
+.lineRight {
+    float: right;
+}
+
+.line2 {
+    margin-top: 10px;
+}

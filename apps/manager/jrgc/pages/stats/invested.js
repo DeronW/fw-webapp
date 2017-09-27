@@ -29,6 +29,8 @@ class Invested extends React.Component {
     }
 
     componentDidMount() {
+        window.scroll(0,0);
+
         const { stats_overview, stats_investor } = this.props,
             { currentTab } = stats_overview.data,
             { invested, investAmount, investAmountAnnual } = stats_overview.investorFormatted,
@@ -61,19 +63,24 @@ class Invested extends React.Component {
     }
 
     handleSort = sortBy => {
+        Event.cancelTouchBottom();
+        document.documentElement.scrollTop = 0;
+
         const { stats_investor } = this.props;
 
         if (this.state.sortBy === sortBy) {
             this.setState({
                 pageNo: 1,
                 sortDescending: !this.state.sortDescending
-            }, () => this.loadMore(null))
+            }, () => this.loadMore(null)
+                .then(() => Event.touchBottom(this.loadMore)))
         } else {
             this.setState({
                 pageNo: 1,
                 sortBy: sortBy,
                 sortDescending: true
-            }, () => this.loadMore(null))
+            }, () => this.loadMore(null)
+                .then(() => Event.touchBottom(this.loadMore)))
         }
     }
 
