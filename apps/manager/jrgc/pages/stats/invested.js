@@ -9,7 +9,8 @@ import { Header } from '../../components'
 import styles from '../../css/stats/invested.css'
 
 
-const TABS = { '1': '当天', '2': '7 天', '3': '30 天', '4': '半年' };
+const STATS_DURATION = { '1': '当天', '2': '7 天', '3': '30 天', '4': '半年' };
+
 const SORT_TABS = { 'amount': '投资额', 'amountAnnual': '年化投资额', 'balance': '余额'};
 
 
@@ -22,7 +23,7 @@ class Invested extends React.Component {
         sortBy: 'amountAnnual',
         sortDescending: true,
         pageNo: 1,
-        currentTab: '',
+        statsDurationType: '',
         investorCnt: '',
         investAmount: '',
         investAmountAnnual: ''
@@ -32,21 +33,25 @@ class Invested extends React.Component {
         window.scroll(0,0);
 
         const { stats_overview, stats_investor } = this.props,
-            { currentTab } = stats_overview.data,
+            { statsDurationType } = stats_overview.data,
             { invested, investAmount, investAmountAnnual } = stats_overview.investorFormatted,
             { sortBy, sortDescending, pageNo } = this.state;
 
         this.setState({
-            currentTab: currentTab,
+            statsDurationType: statsDurationType,
             investorCnt: invested,
             investAmount: investAmount,
             investAmountAnnual: investAmountAnnual
         });
 
-        stats_investor.initStats('invested', currentTab);
+        stats_investor.initStats('invested', statsDurationType);
 
         this.loadMore(null)
             .then(() => Event.touchBottom(this.loadMore))
+    }
+
+    componentWillUnmount() {
+        Event.cancelTouchBottom();
     }
 
     loadMore = (done) => {
@@ -104,8 +109,8 @@ class Invested extends React.Component {
     render() {
         const { history, stats_investor } = this.props,
             { investorRawData } = stats_investor.data,
-            { currentTab, investorCnt, investAmount, investAmountAnnual, pageNo } = this.state,
-            currentTabName = TABS[currentTab];
+            { statsDurationType, investorCnt, investAmount, investAmountAnnual, pageNo } = this.state,
+            currentTabName = STATS_DURATION[statsDurationType];
 
         const genSortTabItems = type => {
             const { sortBy, sortDescending } = this.state;
