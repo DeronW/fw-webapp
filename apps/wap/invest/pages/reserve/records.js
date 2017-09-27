@@ -2,6 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Event, Components } from 'fw-javascripts'
+
 import styles from '../../css/reserve/records.css'
 import Header from '../../components/header'
 import showConfirm from '../../components/confirm'
@@ -39,9 +40,8 @@ class ReserveRecords extends React.Component {
         showConfirm('确定取消？', cb)
     }
 
-    lookProtocolHandler = () => {
-        let { history } = this.props
-        history.push(`/reserve/protocol`)
+    lookProtocolHandler = (id) => {
+        NativeBridge.trigger('reserve_protocol', id)
     }
 
     tabHandler = (status) => {
@@ -112,7 +112,8 @@ class ReserveRecords extends React.Component {
                     </div>
                     {(item.status == 0 || item.status == 1) && <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约协议</div>
-                        <div styleName="itemHeaderRight" onClick={this.lookProtocolHandler}>
+                        <div styleName="itemHeaderRight"
+                            onClick={() => this.lookProtocolHandler(item.id)}>
                             已签署<span styleName="arrow"></span>
                         </div>
                     </div>}
