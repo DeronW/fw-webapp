@@ -97,7 +97,7 @@ class Invested extends React.Component {
     render() {
         const { history, stats_investor } = this.props,
             { investorRawData } = stats_investor.data,
-            { currentTab, investorCnt, investAmount, investAmountAnnual } = this.state,
+            { currentTab, investorCnt, investAmount, investAmountAnnual, pageNo } = this.state,
             currentTabName = TABS[currentTab];
 
         const genSortTabItems = type => {
@@ -153,7 +153,9 @@ class Invested extends React.Component {
                 { investorRawData.map(genInvestorItem) }
             </div>
 
-            <div styleName="end-of-item-info">已全部加载完毕</div>
+            { pageNo === 0 && investorRawData > 0
+                <div styleName="end-of-item-info">已全部加载完毕</div>
+            }
         </div>
     }
 }
