@@ -18,16 +18,7 @@ class Download extends React.Component {
     }
 
     componentDidMount() {
-
-        let q = Utils.hashQuery
-        if (q.view) {
-            try {
-                let link = 'easyloan://easyloan.com/openApp?view=' + q.view;
-                if (q.id) link += '&id=' + q.id
-                if (q.url) link += '&url=' + q.url
-                location.href = link
-            } catch (e) { }
-        }
+        this.try_to_open_app_directly()
 
         if (Browser.inWeixin) {
             this.setState({
@@ -42,6 +33,35 @@ class Download extends React.Component {
                 })
         }
     }
+
+
+    try_to_open_app_directly() {
+
+        let appendIframe = src => {
+            let iframe;
+            iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = src;
+            document.body.appendChild(iframe)
+        }
+
+        let q = Utils.hashQuery
+
+        if (q.view) {
+
+            let params = '?view=' + q.view
+            if (q.id) params += '&id=' + q.id
+            if (q.url) params += '&url=' + q.url
+
+            try {
+                appendIframe('easyloan://easyloan.com/openApp' + params)
+                setTimeout(function () {
+                    location.href = 'easyloan://easyloan.com/openApp' + params
+                }, 300)
+            } catch (e) { }
+        }
+    }
+
     render() {
 
         let { history } = this.props

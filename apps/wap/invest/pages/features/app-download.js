@@ -14,13 +14,32 @@ import styles from '../../css/features/app-download.css'
 class AppDownload extends React.Component {
 
     componentDidMount() {
+        this.try_to_open_app_directly()
+    }
+
+    try_to_open_app_directly() {
+
+        let appendIframe = src => {
+            let iframe;
+            iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = src;
+            document.body.appendChild(iframe)
+        }
+
         let q = Utils.hashQuery
+
         if (q.view) {
+
+            let params = '?view=' + q.view
+            if (q.id) params += '&id=' + q.id
+            if (q.url) params += '&url=' + q.url
+
             try {
-                let link = 'jrgc://jrgc.com/openApp?view=' + q.view;
-                if (q.id) link += '&id=' + q.id
-                if (q.url) link += '&url=' + q.url
-                location.href = link
+                appendIframe('jrgc://jrgc.com/openApp' + params)
+                setTimeout(function () {
+                    location.href = 'jrgc://jrgc.com/openApp' + params
+                }, 300)
             } catch (e) { }
         }
     }
