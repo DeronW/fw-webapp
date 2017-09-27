@@ -33,6 +33,7 @@ export default (stores) => {
 
                 {/*客户相关页面*/}
                 <Route exact path="/investor" component={Investor.Investor}/>
+                <Route exact path="/investor-search" component={Investor.Search}/>
                 <Route exact path="/investor-info" component={Investor.Info}/>
                 <Route exact path="/investor-score" component={Investor.Score}/>
                 <Route exact path="/investor-bean" component={Investor.Bean}/>
