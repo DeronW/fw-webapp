@@ -38,6 +38,7 @@ export default (stores) => {
                 <Route exact path="/investor-score" component={Investor.Score}/>
                 <Route exact path="/investor-bean" component={Investor.Bean}/>
                 <Route exact path="/investor-account-hj" component={Investor.AccountHj}/>
+                <Route exact path="/investor-hj-list" component={Investor.HjList}/>
             </Switch>
         </Provider>
     </Router>
