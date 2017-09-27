@@ -40,8 +40,8 @@ class ReserveRecords extends React.Component {
         showConfirm('确定取消？', cb)
     }
 
-    lookProtocolHandler = (id) => {
-        NativeBridge.trigger('reserve_protocol', id)
+    lookProtocolHandler = (type, id) => {
+        NativeBridge.trigger('reserve_contract', `${type},${id}`)
     }
 
     tabHandler = (status) => {
@@ -113,7 +113,7 @@ class ReserveRecords extends React.Component {
                     {(item.status == 0 || item.status == 1) && <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约协议</div>
                         <div styleName="itemHeaderRight"
-                            onClick={() => this.lookProtocolHandler(item.id)}>
+                            onClick={() => this.lookProtocolHandler(item.contractType, item.id)}>
                             已签署<span styleName="arrow"></span>
                         </div>
                     </div>}
