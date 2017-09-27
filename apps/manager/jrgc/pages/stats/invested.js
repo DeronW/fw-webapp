@@ -151,12 +151,12 @@ class Invested extends React.Component {
             <div styleName="invest-stats-grp">
                 <div styleName="invest-stats">
                     <div styleName="invest-stats-name">{`${currentTabName}投资额`}</div>
-                    <div styleName="invest-stats-value">{investAmount}</div>
+                    <div styleName="invest-stats-value">{investAmount}元</div>
                 </div>
                 <div styleName="vertical-line"></div>
                 <div styleName="invest-stats">
                     <div styleName="invest-stats-name">{`${currentTabName}年化投资额`}</div>
-                    <div styleName="invest-stats-value">{investAmountAnnual}</div>
+                    <div styleName="invest-stats-value">{investAmountAnnual}元</div>
                 </div>
             </div>
 
