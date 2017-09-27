@@ -112,7 +112,12 @@
     width: 100%;
     height: 128px;
     padding-right: 64px;
+    border-bottom: 1px solid #eee;
     background: url('../../images/stats/entry-btn.png') no-repeat 645px;
+}
+
+.investor-item:last-child {
+    border-bottom: none;
 }
 
 .left-info {
