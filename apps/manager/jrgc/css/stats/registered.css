@@ -25,6 +25,7 @@
 
 .sort-type-name-active {
     composes: sort-type-name;
+    color: #fd4d4c;
     border-bottom: 3px solid #fd4d4c;
 }
 
