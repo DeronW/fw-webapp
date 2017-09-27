@@ -32,8 +32,8 @@ class AppDownload extends React.Component {
         if (q.view) {
 
             let params = '?view=' + q.view
-            if (q.id) params += '&id=' + id
-            if (q.url) params += '&url=' + url
+            if (q.id) params += '&id=' + q.id
+            if (q.url) params += '&url=' + q.url
 
             try {
                 appendIframe('jrgc://jrgc.com/openApp' + params)
