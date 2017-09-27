@@ -11,7 +11,7 @@ import NotFound from './pages/not-found.js'
 import CreditCards from './pages/credit-cards.js'
 import Download from './pages/download.js'
 import Waiting from './pages/waiting.js'
-import FollowFXH from './pages/fxhapp-download.js'
+import FollowFXH from './pages/follow-fxh.js'
 import FollowJRGC from './pages/follow-jrgc.js'
 
 
