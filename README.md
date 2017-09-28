@@ -128,10 +128,10 @@ wap站：npm run gulp wap是扥:[文件名]:watch
 5. 在发布Jenkins上编译release分支的代码。
 
 ### 应急流程
+
 1. 请在各个项目的release分支中进行开发，推送到远程仓库之前记得拉取线上最新代码。
 2. 在测试Jenkins上编译release分支代码，在测试环境测试相关功能。
 3. 测试通过以后在发布Jenkins上编译release分支的代码。
-
 
 
 ## 项目目录结果说明
