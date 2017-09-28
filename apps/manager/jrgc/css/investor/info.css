@@ -256,7 +256,7 @@
     vertical-align: middle;
 }
 .tabBar{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     z-index: 2;
@@ -264,8 +264,11 @@
     width: 100%;
     display: table;
     background: #fff;
+    padding-top: 5px;
+    box-shadow: 0px -5px 0px 0px #eae9e9,0px -5px 0px 0px #edecec,0px -5px 0px 0px #eeeded,
 }
 .tabBarItem{
+    display: block;
     width: 50%;
     float: left;
     text-align: center;

@@ -14,6 +14,18 @@ class Info extends React.Component {
     showMore = () => {
         this.setState({hidden:!this.state.hidden})
     }
+    gotoBean = () => {
+        let { history } = this.props
+        history.push("/investor-bean")
+    }
+    gotoCoupon = () => {
+        let { history } = this.props
+        history.push("/investor-coupon")
+    }
+    gotoScore = () => {
+        let { history } = this.props
+        history.push("/investor-score")
+    }
     getOption = () => ({
         title: {
             text: '客户整体投资期限分析',
@@ -104,15 +116,15 @@ class Info extends React.Component {
                     <div styleName="time">注册时间  2014.01.21 16:56:35</div>
                 </div>
                 <div styleName="bottomBar">
-                    <div styleName="itemBar">
+                    <div styleName="itemBar" onClick={this.gotoBean}>
                         <div styleName="itemBarNum">450.00</div>
                         <div styleName="itemBarText">工豆(元)</div>
                     </div>
-                    <div styleName="itemBar">
+                    <div styleName="itemBar" onClick={this.gotoCoupon}>
                         <div styleName="itemBarNum">5</div>
                         <div styleName="itemBarText">优惠券(张)</div>
                     </div>
-                    <div styleName="itemBar">
+                    <div styleName="itemBar" onClick={this.gotoScore}>
                         <div styleName="itemBarNum">0.5万</div>
                         <div styleName="itemBarText">工分</div>
                     </div>
@@ -200,14 +212,14 @@ class Info extends React.Component {
                 </div>
             </div>
             <div styleName="tabBar">
-                <div styleName="tabBarItem">
+                <div styleName="tabBarItem" onClick={this.gotoCoupon}>
                     <img src={require('../../images/investor/info/coupon.png')}/>
                     <div>送优惠券</div>
                 </div>
-                <div styleName="tabBarItem">
+                <a styleName="tabBarItem" href="tel:10086">
                     <img src={require('../../images/investor/info/contact.png')}/>
                     <div>联系客户</div>
-                </div>
+                </a>
             </div>
         </div>
     }
