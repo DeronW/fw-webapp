@@ -16,6 +16,10 @@ class Coupon extends React.Component {
     componentDidMount(){
         this.props.investor.fetchCouponList()
     }
+    gotoCoupon = () => {
+        let {history} = this.props
+        history.push("/user-transfer-coupon")
+    }
     switchTab = tab => {
         if (tab == this.state.tab) return
         this.setState({ tab: tab,type:'返现券' })
@@ -83,7 +87,7 @@ class Coupon extends React.Component {
             <div styleName="coupons">
                 {coupons.map(typeFn)}
             </div>
-            <div styleName="couponBox">
+            <div styleName="couponBox" onClick={this.gotoCoupon}>
                 <div styleName="title">{`可用${type}`}</div>
                 <div styleName="num"><span>1</span>张</div>
                 <div styleName="text"><span>送TA优惠券</span><img src={require('../../images/investor/coupon/right.png')}/></div>

@@ -14,9 +14,17 @@ class Info extends React.Component {
     showMore = () => {
         this.setState({hidden:!this.state.hidden})
     }
+    gotoBean = () => {
+        let { history } = this.props
+        history.push("/investor-bean")
+    }
     gotoCoupon = () => {
         let { history } = this.props
-        history.push("/user-transfer-coupon")
+        history.push("/investor-coupon")
+    }
+    gotoScore = () => {
+        let { history } = this.props
+        history.push("/investor-score")
     }
     getOption = () => ({
         title: {
@@ -108,15 +116,15 @@ class Info extends React.Component {
                     <div styleName="time">注册时间  2014.01.21 16:56:35</div>
                 </div>
                 <div styleName="bottomBar">
-                    <div styleName="itemBar">
+                    <div styleName="itemBar" onClick={this.gotoBean}>
                         <div styleName="itemBarNum">450.00</div>
                         <div styleName="itemBarText">工豆(元)</div>
                     </div>
-                    <div styleName="itemBar">
+                    <div styleName="itemBar" onClick={this.gotoCoupon}>
                         <div styleName="itemBarNum">5</div>
                         <div styleName="itemBarText">优惠券(张)</div>
                     </div>
-                    <div styleName="itemBar">
+                    <div styleName="itemBar" onClick={this.gotoScore}>
                         <div styleName="itemBarNum">0.5万</div>
                         <div styleName="itemBarText">工分</div>
                     </div>
