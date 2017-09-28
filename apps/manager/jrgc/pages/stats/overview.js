@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import { inject, observer } from 'mobx-react'
 import { Link } from 'react-router-dom'
 
-import { Chart } from '../../components'
+import { BottomNavBar, Chart } from '../../components'
 
 import styles from '../../css/stats/overview.css'
 
@@ -126,6 +126,8 @@ class StatsOverview extends React.Component {
                     <div styleName="client-stats-value">{investedFirstTime}</div>
                 </Link>
             </div>
+
+            <BottomNavBar />
         </div>
     }
 
