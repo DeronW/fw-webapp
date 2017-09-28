@@ -14,17 +14,9 @@ class Info extends React.Component {
     showMore = () => {
         this.setState({hidden:!this.state.hidden})
     }
-    gotoBean = () => {
-        let { history } = this.props
-        history.push("/investor-bean")
-    }
-    gotoCoupon = () => {
-        let { history } = this.props
-        history.push("/investor-coupon")
-    }
-    gotoScore = () => {
-        let { history } = this.props
-        history.push("/investor-score")
+    gotoHandler = (link) => {
+        let {history} = this.props
+        history.push(link)
     }
     getOption = () => ({
         title: {
@@ -116,15 +108,15 @@ class Info extends React.Component {
                     <div styleName="time">注册时间  2014.01.21 16:56:35</div>
                 </div>
                 <div styleName="bottomBar">
-                    <div styleName="itemBar" onClick={this.gotoBean}>
+                    <div styleName="itemBar" onClick={()=>this.gotoHandler('/investor-bean')}>
                         <div styleName="itemBarNum">450.00</div>
                         <div styleName="itemBarText">工豆(元)</div>
                     </div>
-                    <div styleName="itemBar" onClick={this.gotoCoupon}>
+                    <div styleName="itemBar" onClick={()=>this.gotoHandler('/investor-coupon')}>
                         <div styleName="itemBarNum">5</div>
                         <div styleName="itemBarText">优惠券(张)</div>
                     </div>
-                    <div styleName="itemBar" onClick={this.gotoScore}>
+                    <div styleName="itemBar" onClick={()=>this.gotoHandler('/investor-score')}>
                         <div styleName="itemBarNum">0.5万</div>
                         <div styleName="itemBarText">工分</div>
                     </div>
@@ -212,7 +204,7 @@ class Info extends React.Component {
                 </div>
             </div>
             <div styleName="tabBar">
-                <div styleName="tabBarItem" onClick={this.gotoCoupon}>
+                <div styleName="tabBarItem" onClick={() => this.gotoHandler('/user-transfer-coupon')}>
                     <img src={require('../../images/investor/info/coupon.png')}/>
                     <div>送优惠券</div>
                 </div>

@@ -1,6 +1,7 @@
 import Investor from './investor'
 import Remark from './remark'
 import Search from './search'
+import Birthday from './birthday'
 import Info from './info'
 import Coupon from './coupon'
 import Score from './score'
@@ -12,6 +13,7 @@ export {
     Investor,
     Remark,
     Search,
+    Birthday,
     Info,
     Coupon,
     Score,

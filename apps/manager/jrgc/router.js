@@ -35,6 +35,7 @@ export default (stores) => {
                 <Route exact path="/investor" component={Investor.Investor}/>
                 <Route exact path="/investor-remark" component={Investor.Remark}/>
                 <Route exact path="/investor-search" component={Investor.Search}/>
+                <Route exact path="/investor-birthday" component={Investor.Birthday}/>
                 <Route exact path="/investor-info" component={Investor.Info}/>
                 <Route exact path="/investor-coupon" component={Investor.Coupon}/>
                 <Route exact path="/investor-score" component={Investor.Score}/>
