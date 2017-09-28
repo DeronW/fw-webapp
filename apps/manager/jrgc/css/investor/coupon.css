@@ -94,13 +94,28 @@
     display: inline-block;
     vertical-align: middle;
 }
-.couponMoney{
+.couponBg{
     width: 659px;
     height: 164px;
     background: url('../../images/investor/coupon/moneyBg.png') no-repeat;
     color: #fff;
     margin: 20px auto 0;
     position: relative;
+}
+.couponMoney{
+    background: url('../../images/investor/coupon/moneyBg.png') no-repeat;
+}
+.couponInterest{
+    background: url('../../images/investor/coupon/interestBg.png') no-repeat;
+}
+.couponGold{
+    background: url('../../images/investor/coupon/goldBg.png') no-repeat;
+}
+.couponUsed{
+    background: url('../../images/investor/coupon/usedBg.png') no-repeat;
+}
+.couponOut{
+    background: url('../../images/investor/coupon/outBg.png') no-repeat;
 }
 .money{
     font-size: 36px;
@@ -110,8 +125,6 @@
 }
 .money span{
     font-size: 60px;
-    display: inline-block;
-    margin-left: -8px;
 }
 .explain{
     position: absolute;
@@ -124,18 +137,37 @@
     top: 85px;
     right: 20px;
     font-size: 20px;
+    width: 220px;
+    text-align: right;
 }
 .limit{
     color: #999;
     font-size: 20px;
     position: absolute;
     left: 20px;
-    bottom: 10px;
+    bottom: 8px;
 }
 .day{
     color: #999;
     font-size: 20px;
     position: absolute;
     right: 20px;
-    bottom: 10px;
+    bottom: 8px;
+    width: 220px;
+    text-align: right;
+}
+.expire{
+    width: 125px;
+    height: 34px;
+    background: url('../../images/investor/coupon/expire.png') no-repeat;
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+.load{
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    color: #999;
+    margin: 20px 0;
 }
