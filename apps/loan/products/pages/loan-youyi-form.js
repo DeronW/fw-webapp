@@ -184,6 +184,7 @@ export default class LoopLoanLoan extends React.Component {
                                 placeholder={"最多可借" + loopLoan.canBorrowAmt + "元"}
                                 onBlur={this.valueChangeHandler}
                                 onChange={this.valueChangeHandler}
+                                onFocus={this.valueChangeHandler}
                             />
                         </div>
 

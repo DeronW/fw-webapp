@@ -23,7 +23,7 @@ function getStyle(tab){
         display: "block",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        margin: "10px 0",
+        margin: "14px 0 2px"
     }
 
     if (tab == 'fixed_panel'){
@@ -36,7 +36,8 @@ function getStyle(tab){
             bottom: "-1px",
             background: "#fff",
             zIndex: "100",
-            paddingBottom:'6px'
+            paddingBottom: "6px",
+            boxShadow: "0 0 25px 5px rgba(0, 0, 0, 0.06)"
         }
     }
 
@@ -90,7 +91,7 @@ class BottomNavBar extends React.Component{
             fontSize: "22px",
             color:"#9b5b54"
         }
-        return <div>
+        return <div style={{ height: "100px" }}>
             <div style={getStyle('fixed_panel')}>
                 <a style={STYLE_TAB_BASE} onClick={() => link_handler('user')}>
                     <i style={getStyle('icon_user')}></i>我的
