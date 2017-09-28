@@ -5,6 +5,8 @@ import Score from './score'
 import Bean from './bean'
 import AccountHj from './account-hj'
 import HjList from './hj-list'
+import AccountZx from './account-zx'
+import Overview from './overview'
 
 export {
     Investor,
@@ -13,5 +15,7 @@ export {
     Score,
     Bean,
     AccountHj,
-    HjList
+    HjList,
+    AccountZx,
+    Overview
 }
