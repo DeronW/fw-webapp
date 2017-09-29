@@ -11,7 +11,7 @@ class AppDownload extends React.Component {
             <Header title='下载APP' history={this.props.history}/>
             <img src={require("../images/app-download/img_thumb.jpg")}/>
             <br/>
-            <a href="http://app.9888.cn/download/apk">
+            <a href="https://app.9888.cn/download/apk">
                 <img src={require("../images/app-download/btn_android.png")}/></a>
             <br/>
             <a href="https://itunes.apple.com/cn/app/jin-rong-gong-chang/id939125881?mt=8">
@@ -38,7 +38,7 @@ class AppDownload extends React.Component {
                 实名认证、动态口令、手势密码、安全证书等<br/>多种安全手段，确保资金和隐私安全
             </div>
             <div styleName="hr"></div>
-            <a href="http://app.9888.cn/download/apk">
+            <a href="https://app.9888.cn/download/apk">
                 <img src={require("../images/app-download/btn_android.png")}/>
             </a>
             <a href="https://itunes.apple.com/cn/app/jin-rong-gong-chang/id939125881?mt=8">

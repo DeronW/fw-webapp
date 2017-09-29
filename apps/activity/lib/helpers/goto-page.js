@@ -11,12 +11,12 @@ const LINKS = {
         app: '投资'
     },
     '登录': {
-        web: 'http://passport.9888keji.com/passport/login',
+        web: 'https://passport.9888keji.com/passport/login',
         mobile: PROTOCOL + '//m.9888.cn/mpwap/orderuser/toLogin.shtml',
         app: '登录'
     },
     '注册': {
-        web: 'http://www.9888keji.com/depository/regist/toRegist.shtml?sourceSite=jrgc',
+        web: 'https://www.9888keji.com/depository/regist/toRegist.shtml?sourceSite=jrgc',
         mobile: PROTOCOL + '//m.9888.cn/mpwap/orderuser/toRegister.shtml?source=0',
         app: '注册'
     },

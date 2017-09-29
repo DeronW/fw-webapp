@@ -136,7 +136,7 @@ class Home extends React.Component {
                 <a onClick={() => this.gotoHandler("https://m.9888.cn/static/wap/faq/index.html")}>
                     <i styleName="icon icon-help"></i>帮助中心</a>
 
-                <a onClick={() => this.gotoHandler("http://m.9888.cn/static/wap/topic-invest-school/index.html")}>
+                <a onClick={() => this.gotoHandler("https://m.9888.cn/static/wap/topic-invest-school/index.html")}>
                     <i styleName="icon icon-xt"></i>网贷学堂</a>
 
                 <a onClick={() => this.gotoHandler("http://p-javashop-statics.oss-cn-beijing.aliyuncs.com/weixin/index.html#/home/products")}>

@@ -12,17 +12,17 @@ const WorkerBox = React.createClass({
         this.ajaxEastImg();
     },
     ajaxWealthImg: function () {
-        $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=24', function (data) {
+        $FW.getJSONP('https://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=24', function (data) {
             this.setState({ wealthImg: data });
         }.bind(this))
     },
     ajaxNorthImg: function () {
-        $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=29', function (data) {
+        $FW.getJSONP('https://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=29', function (data) {
             this.setState({ northImg: data });
         }.bind(this))
     },
     ajaxEastImg: function () {
-        $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=26', function (data) {
+        $FW.getJSONP('https://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=26', function (data) {
             this.setState({ eastImg: data });
         }.bind(this))
     },
@@ -102,7 +102,7 @@ const WorkerBox = React.createClass({
                             })
                         }
                     </div>
-                    <a onClick={() => { this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615", true) }} className="moreBtn">了解更多现场情况</a>
+                    <a onClick={() => { this.gotoHandle("https://bbs.9888.cn/forum.php?mod=viewthread&tid=5615", true) }} className="moreBtn">了解更多现场情况</a>
                 </div>
                 <div className="northEast">
                     <div className="northEastTitle">大连站、哈尔滨站——走进东北</div>
@@ -115,7 +115,7 @@ const WorkerBox = React.createClass({
                         }
                     </div>
                     <a onClick={() => {
-                        this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5923&extra=", true)
+                        this.gotoHandle("https://bbs.9888.cn/forum.php?mod=viewthread&tid=5923&extra=", true)
                     }} className="moreBtn">了解更多现场情况
                     </a>
                     <div className="northTitle">12月10日，工友汇”第三站走进童话的冰雪之城——哈尔滨。</div>
@@ -127,7 +127,7 @@ const WorkerBox = React.createClass({
                         }
                     </div>
                     <a onClick={() => {
-                        this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5930&extra=", true)
+                        this.gotoHandle("https://bbs.9888.cn/forum.php?mod=viewthread&tid=5930&extra=", true)
                     }} className="moreBtn">了解更多现场情况
                     </a>
                 </div>

@@ -46,7 +46,7 @@ const GameGuess_popResult = React.createClass({
                         <div className="win-on" onClick={()=>{data.nextHandler((data.level+1)%3)}}><span></span>&nbsp;
                             再来一轮
                         </div>
-                        <div className="win-int" href="http://mmall.9888.cn/">去购物</div>
+                        <div className="win-int" href="https://mmall.9888.cn/">去购物</div>
                     </div>
                 </div>
             </div>;
@@ -58,7 +58,7 @@ const GameGuess_popResult = React.createClass({
                 <div className="pop-lose-title2">别灰心，坚持就会有收获</div>
                 <div className="pop-lose-btn">
                     <div className="lose-int" onClick={()=>{data.nextHandler(0)}}>开启第一关</div>
-                    <a href="http://mmall.9888.cn/" className="lose-go-buy">购物去</a>
+                    <a href="https://mmall.9888.cn/" className="lose-go-buy">购物去</a>
                 </div>
             </div>
         </div>;
