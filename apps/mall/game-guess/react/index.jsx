@@ -228,7 +228,7 @@ $FW.DOMReady(function () {
         "userLevel": 2,
         "userName": "13**62",
         "realName": "李建光",
-        "avatar": "http://mall.9888.cn/img//boy.jpg"
+        "avatar": "https://mall.9888.cn/img//boy.jpg"
     };
     ReactDOM.render(<GameGuess user={data} />, CONTENT_NODE);
     //     }

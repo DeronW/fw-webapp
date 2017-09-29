@@ -25,7 +25,8 @@ export default class RepaymentYouyi {
             protocolChecked: true, // 是否同意协议,
             records: [], // 还款记录
             repaymentResult: '', // 'fail', 'success', 'waiting'
-            leftAmount: '' // 还款成功后仍剩余金额
+            leftAmount: '', // 还款成功后仍剩余金额
+            errMessage:''
         })
     }
 
@@ -109,6 +110,8 @@ export default class RepaymentYouyi {
             } else if (status == 2) {
                 this.repaymentResult = 'fail'
             }
+        }, e => {
+            this.errMessage = e.message;
         })
     }
 

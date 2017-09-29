@@ -11,7 +11,22 @@ module.exports = react = function (src_path, build_path, name, debug) {
     return gulp.src(src_path)
         .pipe(changed(build_path))
         .pipe(plumber())
-        .pipe(babel({ presets: ['es2015', 'react', 'stage-2'] }))
+        // .pipe(babel({ presets: ['es2015', 'react', 'stage-2'] }))
+
+        .pipe(babel({
+            presets: [['env', {
+                targets: {
+                    browsers: [
+                        "last 2 major versions"
+                    ],
+                    useBuiltIns: true,
+                    uglify: false,
+                    include: ['transform-es2015-arrow-functions'],
+                    debug: !!debug
+                }
+            }], 'react', 'stage-2']
+        }))
+
         .pipe(debug ?
             plugins.util.noop() :
             js_uglify({ mangle: true, compress: { unused: false } }))

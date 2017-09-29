@@ -34,7 +34,7 @@ class Repayment extends React.Component {
             if (repayment_youyi.unpaidAmount < 200)
                 this.setState({ amountEditDisabled: true })
         })
-        repayment_youyi.fetchRepaymentResult();
+
     }
 
     componentWillUnmount() {
@@ -55,7 +55,7 @@ class Repayment extends React.Component {
             repaymentAmount = repayment_youyi.repaymentAmount,
             unpaidAmount = repayment_youyi.unpaidAmount;
         if (repaymentAmount === '') return Components.showToast('请输入还款金额')
-        // if (repaymentAmount < 100) return Components.showToast('还款金额不能小于100')
+        if (repaymentAmount < 100) return Components.showToast('还款金额不能小于100')
         if (unpaidAmount - repaymentAmount < 100 && unpaidAmount - repaymentAmount > 0) return Components.showToast('剩余金额不能小于100')
 
         repayment_youyi.submitRepayment().then(repaymentUuid => {
@@ -188,11 +188,11 @@ class Repayment extends React.Component {
                 </div>
 
                 <div styleName="submit-btn-container">
-                    <a styleName="submit-btn"
+                    {repayment_youyi.unpaidAmount != 0  && <a styleName="submit-btn"
                         onClick={this.handleSubmit}>
                         立即还款
-                    </a>
-                    {repayment_youyi.unpaidAmount == 0 && repayment_youyi.repaymentResult == 'waiting' && <a styleName="waiting-btn">
+                    </a>}
+                    {repayment_youyi.unpaidAmount == 0  && <a styleName="waiting-btn">
                         还款中
                     </a>}
                 </div>
