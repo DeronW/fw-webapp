@@ -44,6 +44,7 @@ export default (stores) => {
                 <Route exact path="/investor-hj-list" component={Investor.HjList}/>
                 <Route exact path="/investor-account-zx" component={Investor.AccountZx}/>
                 <Route exact path="/investor-overview" component={Investor.Overview}/>
+                <Route exact path="/investor-zx-item" component={Investor.zxItem}/>
             </Switch>
         </Provider>
     </Router>
