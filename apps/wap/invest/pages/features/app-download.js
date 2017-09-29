@@ -51,7 +51,7 @@ class AppDownload extends React.Component {
             <img src={require("../../images/features/app-download/img_thumb.jpg")} />
 
             <br />
-            <a href="http://app.9888.cn/download/apk">
+            <a href="https://app.9888.cn/download/apk">
                 <img src={require("../../images/features/app-download/btn_android.png")} /></a>
             <br />
             <a href="https://itunes.apple.com/cn/app/jin-rong-gong-chang/id939125881?mt=8">
@@ -84,7 +84,7 @@ class AppDownload extends React.Component {
 
             <div styleName="hr"></div>
 
-            <a href="http://app.9888.cn/download/apk">
+            <a href="https://app.9888.cn/download/apk">
                 <img src={require("../../images/features/app-download/btn_android.png")} /></a>
 
             <a href="https://itunes.apple.com/cn/app/jin-rong-gong-chang/id939125881?mt=8">

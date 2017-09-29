@@ -64,7 +64,7 @@ class PopInviteMobile extends React.Component {
     }
 
     login = () => {
-        gotoPage('登录', 'http://www.gongchangp2p.com/api/activityPullNew/ActivityControl.do?code=WZNHD')
+        gotoPage('登录', 'https://www.gongchangp2p.com/api/activityPullNew/ActivityControl.do?code=WZNHD')
     }
 
     render() {
@@ -125,7 +125,7 @@ class PopInvitePC extends React.Component {
     }
 
     login = () => {
-        gotoPage('登录', 'http://www.gongchangp2p.com/api/activityPullNew/ActivityControl.do?code=WZNHD')
+        gotoPage('登录', 'https://www.gongchangp2p.com/api/activityPullNew/ActivityControl.do?code=WZNHD')
     }
 
     render() {
@@ -151,11 +151,11 @@ class PopInvitePC extends React.Component {
                     复制以下链接，发送工场码给好友邀请TA来注册&投资吧！
                 </div>
                 <button styleName="copy-link"
-                        data-clipboard-text={`http://www.9888keji.com/depository/regist/toRegist.shtml?sourceSite=jrgc&gcm= ${gcm}`}
+                        data-clipboard-text={`https://www.9888keji.com/depository/regist/toRegist.shtml?sourceSite=jrgc&gcm= ${gcm}`}
                         id="copy-value-pc">复制链接
                 </button>
                 <div styleName="copy-text">
-                    http://www.9888keji.com/depository/regist/toRegist.shtml?sourceSite=jrgc&gcm={gcm}
+                    https://www.9888keji.com/depository/regist/toRegist.shtml?sourceSite=jrgc&gcm={gcm}
                 </div>
             </div>
             <div styleName="logged-tips">新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span>，邀请好友升级最高再送<span
