@@ -26,9 +26,19 @@ module.exports = function (site_name, page_name, CONFIG) {
                     loader: 'babel-loader',
                     options: {
                         presets: [
-                            'es2015',
+                            ['env', {
+                                targets: {
+                                    browsers: [
+                                        "last 2 major versions"
+                                    ],
+                                    useBuiltIns: true,
+                                    uglify: false,
+                                    include: ['transform-es2015-arrow-functions'],
+                                    debug: !!CONFIG.debug
+                                }
+                            }],
                             'react',
-                            'stage-2',
+                            'stage-2'
                         ],
                         plugins: [
                             'transform-decorators-legacy'

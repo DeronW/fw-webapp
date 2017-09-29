@@ -22,7 +22,7 @@ module.exports = react = function (src_path, build_path, name, debug) {
                     useBuiltIns: true,
                     uglify: false,
                     include: ['transform-es2015-arrow-functions'],
-                    debug: debug
+                    debug: !!debug
                 }
             }], 'react', 'stage-2']
         }))
