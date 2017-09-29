@@ -33,7 +33,7 @@ class RepaymentYouyiResult extends React.Component {
         }
 
         let knowBtnHandler = () => {
-            history.push('/');
+            location.href='/static/loan/products/index.html#/'
         }
 
         let paidOff = <div>
