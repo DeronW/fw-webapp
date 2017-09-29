@@ -129,16 +129,22 @@
     box-shadow: 0 0 24px rgba(0, 0, 0, .2);
 }
 
-.submit-btn {
+.submit-btn,.waiting-btn {
     display: block;
     height: 82px;
     line-height: 82px;
     margin: 22px 20px;
-    background-color: #556bb8;
+
     border-radius: 5px;
     color: #fff;
     font-size: 30px;
     text-align: center;
+}
+.submit-btn{
+    background-color: #556bb8;
+}
+.waiting-btn{
+    background-color: #999;
 }
 
 .protocol {

@@ -9,22 +9,14 @@ import styles from '../../css/investor/info.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Info extends React.Component {
     state = {
-        hidden:false
+        hidden: false
     }
     showMore = () => {
-        this.setState({hidden:!this.state.hidden})
+        this.setState({ hidden: !this.state.hidden })
     }
-    gotoBean = () => {
+    gotoHandler = (link) => {
         let { history } = this.props
-        history.push("/investor-bean")
-    }
-    gotoCoupon = () => {
-        let { history } = this.props
-        history.push("/investor-coupon")
-    }
-    gotoScore = () => {
-        let { history } = this.props
-        history.push("/investor-score")
+        history.push(link)
     }
     getOption = () => ({
         title: {
@@ -100,8 +92,8 @@ class Info extends React.Component {
         let { hidden } = this.state;
 
         let desStyle = {
-            height:hidden?'100%':'100px',
-            overflow:hidden?'visible':'hidden'
+            height: hidden ? '100%' : '100px',
+            overflow: hidden ? 'visible' : 'hidden'
         }
         return <div styleName="bg">
             <Header title="客户详情" history={history} />
@@ -116,15 +108,15 @@ class Info extends React.Component {
                     <div styleName="time">注册时间  2014.01.21 16:56:35</div>
                 </div>
                 <div styleName="bottomBar">
-                    <div styleName="itemBar" onClick={this.gotoBean}>
+                    <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-bean')}>
                         <div styleName="itemBarNum">450.00</div>
                         <div styleName="itemBarText">工豆(元)</div>
                     </div>
-                    <div styleName="itemBar" onClick={this.gotoCoupon}>
+                    <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-coupon')}>
                         <div styleName="itemBarNum">5</div>
                         <div styleName="itemBarText">优惠券(张)</div>
                     </div>
-                    <div styleName="itemBar" onClick={this.gotoScore}>
+                    <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-score')}>
                         <div styleName="itemBarNum">0.5万</div>
                         <div styleName="itemBarText">工分</div>
                     </div>
@@ -172,17 +164,17 @@ class Info extends React.Component {
             </div>
             <div styleName="remark" onClick="">
                 <div styleName="remarkTitle">备注</div>
-                <img src={require('../../images/investor/info/arrow.png')}/>
+                <img src={require('../../images/investor/info/arrow.png')} />
                 <div styleName="remarkAmend">修改</div>
             </div>
             <div styleName="remarkText">
                 <div styleName="remarkDes" style={desStyle}>
-                客户喜欢短期，回款会及时投资，<br/>很少提现 家为湖北 <br/>比较喜欢奖励和优惠<br/>
-                客户喜欢短期，回款会及时投资，<br/>很少提现 家为湖北 <br/>比较喜欢奖励和优惠
+                    客户喜欢短期，回款会及时投资，<br />很少提现 家为湖北 <br />比较喜欢奖励和优惠<br />
+                    客户喜欢短期，回款会及时投资，<br />很少提现 家为湖北 <br />比较喜欢奖励和优惠
                 </div>
                 <div styleName="more" onClick={this.showMore}>
-                    <span>{hidden?'收起':'更多'}</span>
-                    <img style={{transform:hidden?'rotate(180deg)':'rotate(0deg)'}} src={require('../../images/investor/info/down.png')}/>
+                    <span>{hidden ? '收起' : '更多'}</span>
+                    <img style={{ transform: hidden ? 'rotate(180deg)' : 'rotate(0deg)' }} src={require('../../images/investor/info/down.png')} />
                 </div>
             </div>
             <div styleName="account">
@@ -191,7 +183,7 @@ class Info extends React.Component {
                     <div styleName="accountText">
                         可用余额
                         <span>10,000.00元</span>
-                        <img src={require('../../images/investor/info/arrow.png')}/>
+                        <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
                 <div styleName="accountItem">
@@ -199,25 +191,25 @@ class Info extends React.Component {
                     <div styleName="accountText">
                         可用余额
                         <span>10,000.00元</span>
-                        <img src={require('../../images/investor/info/arrow.png')}/>
+                        <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
                 <div styleName="accountItem">
                     <div styleName="accountName">TA的黄金账户</div>
                     <div styleName="accountText">
-                    持有黄金
+                        持有黄金
                         <span>0.000克</span>
-                        <img src={require('../../images/investor/info/arrow.png')}/>
+                        <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
             </div>
             <div styleName="tabBar">
-                <div styleName="tabBarItem" onClick={this.gotoCoupon}>
-                    <img src={require('../../images/investor/info/coupon.png')}/>
+                <div styleName="tabBarItem" onClick={() => this.gotoHandler('/user-transfer-coupon')}>
+                    <img src={require('../../images/investor/info/coupon.png')} />
                     <div>送优惠券</div>
                 </div>
                 <a styleName="tabBarItem" href="tel:10086">
-                    <img src={require('../../images/investor/info/contact.png')}/>
+                    <img src={require('../../images/investor/info/contact.png')} />
                     <div>联系客户</div>
                 </a>
             </div>

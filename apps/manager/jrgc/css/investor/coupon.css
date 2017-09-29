@@ -24,7 +24,7 @@
     background-repeat: no-repeat;
     top: 0;
     left: 0;
-    background-image: url('../../images/investor/coupon/arrow.png')
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAvCAMAAADKIyriAAAANlBMVEUAAAChZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV6hZV4laCSdAAAAEXRSTlMANVOWEcuHY/JDHq2sk24qBSwN9qcAAABOSURBVDjL7dQ5EoAwDMXQHyDOwur7XxaG2uoZJmpfL4V1yyWW5E8FxTOKG4p3lDTkk3KiaEdRRdH60rwE1JxtGvYLu9gOoWWhwb/aVk03h7wUJoaUshAAAAAASUVORK5CYII=') no-repeat center;
 }
 .tabs {
     height: 56px;
@@ -173,5 +173,5 @@
     text-align: center;
     font-size: 28px;
     color: #999;
-    margin: 20px 0;
+    padding: 20px 0;
 }

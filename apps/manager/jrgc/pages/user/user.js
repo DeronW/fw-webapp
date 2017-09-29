@@ -130,9 +130,9 @@ class User extends React.Component {
                         <div styleName="rebateText">今日返利</div>
                         <div styleName="rebateMoney">¥20,000.00</div>
                     </div>
-                    <div styleName="rebateNum rebateBorder">
-                        <div styleName="rebateText">今日返利</div>
-                        <div styleName="rebateMoney">¥20,000.00</div>
+                    <div styleName="rebateNum rebateBorder"  onClick={this.gotoRebate}>
+                        <div styleName="rebateText">待发返利</div>
+                        <div styleName="rebateMoney">¥10,000.00</div>
                     </div>
                     <img styleName="rebateArrow" src={require('../../images/user/user/arrow.png')} onClick={this.gotoRebate} />
                 </div>

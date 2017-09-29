@@ -34,6 +34,8 @@ class Repayment extends React.Component {
             if (repayment_youyi.unpaidAmount < 200)
                 this.setState({ amountEditDisabled: true })
         })
+        // repayment_youyi.setRepaymentId(Utils.hashQuery.id);
+        // repayment_youyi.fetchRepaymentResult();
     }
 
     componentWillUnmount() {
@@ -187,11 +189,15 @@ class Repayment extends React.Component {
                 </div>
 
                 <div styleName="submit-btn-container">
-                    <a styleName="submit-btn"
+                    {repayment_youyi.unpaidAmount != 0  && <a styleName="submit-btn"
                         onClick={this.handleSubmit}>
                         立即还款
-                    </a>
+                    </a>}
+                    {repayment_youyi.unpaidAmount == 0  && <a styleName="waiting-btn">
+                        还款中
+                    </a>}
                 </div>
+
 
                 {showSMSPop && SMSPop}
             </div>

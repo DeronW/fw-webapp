@@ -23,13 +23,9 @@ class Investor extends React.Component {
     switchShow = () => {
         this.setState({show:!this.state.show})
     }
-    gotoSearch = () => {
+    gotoHandler = (link) => {
         let {history} = this.props
-        history.push('/investor-search')
-    }
-    gotoInfo = () => {
-        let {history} = this.props
-        history.push('/investor-info')
+        history.push(link)
     }
     render(){
         let {tab,select,show} = this.state
@@ -48,7 +44,7 @@ class Investor extends React.Component {
 
         return <div styleName="bg">
             <div styleName="header">
-                我的客户<div styleName="searchBtn" onClick={this.gotoSearch}></div>
+                我的客户<div styleName="searchBtn" onClick={()=>this.gotoHandler('/investor-search')}></div>
             </div>
             <div styleName="investor">
                 <div styleName="investItem">
@@ -56,7 +52,7 @@ class Investor extends React.Component {
                     <div>回款日历</div>
                 </div>
                 <div styleName="line"></div>
-                <div styleName="investItem">
+                <div styleName="investItem" onClick={()=>this.gotoHandler('/investor-birthday')}>
                     <img src={require("../../images/investor/investor/clock.png")}/>
                     <div>生日提醒</div>
                 </div>
@@ -76,7 +72,7 @@ class Investor extends React.Component {
             </div>
             <div styleName="list">
                 {/*只是简单实现，等有真正数据需要传递客户的ID到客户详情页，并且采用数组map形式显示数据*/}
-                <div styleName="listItem" onClick={()=>this.gotoInfo()}>
+                <div styleName="listItem" onClick={()=>this.gotoHandler('/investor-info')}>
                     <div styleName="name">钱程</div>
                     <div styleName="money">¥7000.00</div>
                     <div styleName="time">注册时间：2017-08-13 00:00:00</div>

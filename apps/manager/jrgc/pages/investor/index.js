@@ -1,6 +1,7 @@
 import Investor from './investor'
 import Remark from './remark'
 import Search from './search'
+import Birthday from './birthday'
 import Info from './info'
 import Coupon from './coupon'
 import Score from './score'
@@ -9,11 +10,13 @@ import AccountHj from './account-hj'
 import HjList from './hj-list'
 import AccountZx from './account-zx'
 import Overview from './overview'
+import zxItem from './zx-item'
 
 export {
     Investor,
     Remark,
     Search,
+    Birthday,
     Info,
     Coupon,
     Score,
@@ -21,5 +24,6 @@ export {
     AccountHj,
     HjList,
     AccountZx,
-    Overview
+    Overview,
+    zxItem
 }

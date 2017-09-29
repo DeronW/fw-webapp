@@ -10,6 +10,10 @@ class Rebate extends React.Component {
         tab_num: 0,
         chart_num: 0
     }
+    gotoHandler = (params) => {
+        let {history} = this.props
+        history.push('/investor-info')
+    }
     switchTabHandler = (index) => {
         this.setState({tab_num: index})
     }
@@ -154,8 +158,8 @@ class Rebate extends React.Component {
                     </div>
                 </div>
                 <div styleName="users">
-                    <div styleName="userItem">
-                        <div styleName="itemDetail">
+                    <div styleName="userItem" >
+                        <div styleName="itemDetail" onClick={()=>this.gotoHandler()}>
                             <div styleName="detailLine">
                                 <div styleName="detailLeft">李丽华</div>
                                 <div styleName="detailRight">¥7000.00</div>
@@ -165,9 +169,7 @@ class Rebate extends React.Component {
                                 <div styleName="detailRight userDate">2017-08-13 00:00:00</div>
                             </div>
                         </div>
-                    </div>
-                    <div styleName="userItem">
-                        <div styleName="itemDetail">
+                        <div styleName="itemDetail" onClick={()=>this.gotoHandler()}>
                             <div styleName="detailLine">
                                 <div styleName="detailLeft">李丽华</div>
                                 <div styleName="detailRight">¥7000.00</div>
