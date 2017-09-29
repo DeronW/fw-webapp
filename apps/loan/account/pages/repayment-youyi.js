@@ -188,10 +188,10 @@ class Repayment extends React.Component {
                 </div>
 
                 <div styleName="submit-btn-container">
-                    <a styleName="submit-btn"
+                    {repayment_youyi.unpaidAmount != 0 && repayment_youyi.repaymentResult != 'waiting' && <a styleName="submit-btn"
                         onClick={this.handleSubmit}>
                         立即还款
-                    </a>
+                    </a>}
                     {repayment_youyi.unpaidAmount == 0 && repayment_youyi.repaymentResult == 'waiting' && <a styleName="waiting-btn">
                         还款中
                     </a>}
