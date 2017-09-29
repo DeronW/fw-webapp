@@ -63,7 +63,7 @@ class RepaymentYouyiResult extends React.Component {
 
         let waiting = <div>
             <div styleName="result-container waiting">
-                <div styleName="title">还款成功</div>
+                <div styleName="title">还款中</div>
                 <div styleName="info">稍后可在还款详情页查看还款记录
                     <br />
                     如果还款失败我们稍后会发送短信通知您
