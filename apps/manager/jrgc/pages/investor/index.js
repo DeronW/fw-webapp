@@ -12,6 +12,7 @@ import AccountZx from './account-zx'
 import Overview from './overview'
 import zxItem from './zx-item'
 import zxDetial from './zx-detial'
+import wjItem from './wj-item'
 
 export {
     Investor,
@@ -27,5 +28,6 @@ export {
     AccountZx,
     Overview,
     zxItem,
-    zxDetial
+    zxDetial,
+    wjItem
 }

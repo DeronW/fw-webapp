@@ -10,6 +10,10 @@ class zxItem extends React.Component {
         tab: 'Ta的项目',
         type:'未起息',
     }
+    gotoHandler = (params) => {
+        let { history } = this.props
+        history.push('/investor-zx-detial')
+    }
     switchTab = tab => {
         if (tab == this.state.tab) return
         let t = tab == 'Ta的项目' ? '未起息':'全部'
@@ -46,7 +50,7 @@ class zxItem extends React.Component {
                 <div styleName="text">累计收益</div>
                 <div styleName="money">¥9,888.12</div>
                 <div styleName="capital">待收本金：¥1,028,000.00</div>
-                <div styleName="detail">
+                <div styleName="detail" onClick={()=>this.gotoHandler()}>
                     <span>查看回款明细</span>
                     <img  src={require('../../images/investor/zx-item/arrow.png')} />
                 </div>
