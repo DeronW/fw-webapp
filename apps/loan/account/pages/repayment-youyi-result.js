@@ -32,6 +32,10 @@ class RepaymentYouyiResult extends React.Component {
             history.push(`/repayment-youyi?id=${loanId}`)
         }
 
+        let knowBtnHandler = () => {
+            location.href='/static/loan/products/index.html#/'
+        }
+
         let paidOff = <div>
             <div styleName="result-container success">
                 <div styleName="title">还款成功</div>
@@ -69,7 +73,7 @@ class RepaymentYouyiResult extends React.Component {
                     如果还款失败我们稍后会发送短信通知您
                 </div>
             </div>
-            <a styleName="btn" onClick={to_repayment_page}>查看订单</a>
+            <a styleName="btn" onClick={knowBtnHandler}>知道了</a>
         </div>
 
         return <div styleName="cnt-container">
