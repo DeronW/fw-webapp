@@ -34,8 +34,7 @@ class Repayment extends React.Component {
             if (repayment_youyi.unpaidAmount < 200)
                 this.setState({ amountEditDisabled: true })
         })
-        // repayment_youyi.setRepaymentId(Utils.hashQuery.id);
-        // repayment_youyi.fetchRepaymentResult();
+
     }
 
     componentWillUnmount() {
@@ -56,7 +55,7 @@ class Repayment extends React.Component {
             repaymentAmount = repayment_youyi.repaymentAmount,
             unpaidAmount = repayment_youyi.unpaidAmount;
         if (repaymentAmount === '') return Components.showToast('请输入还款金额')
-        // if (repaymentAmount < 100) return Components.showToast('还款金额不能小于100')
+        if (repaymentAmount < 100) return Components.showToast('还款金额不能小于100')
         if (unpaidAmount - repaymentAmount < 100 && unpaidAmount - repaymentAmount > 0) return Components.showToast('剩余金额不能小于100')
 
         repayment_youyi.submitRepayment().then(repaymentUuid => {
