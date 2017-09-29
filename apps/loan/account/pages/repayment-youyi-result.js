@@ -55,7 +55,7 @@ class RepaymentYouyiResult extends React.Component {
 
         let fail = <div>
             <div styleName="result-container fail">
-                <div styleName="title">还款成功</div>
+                <div styleName="title">还款失败</div>
                 <div styleName="info">请检查网络原因，本次还款失败</div>
             </div>
             <a styleName="btn" onClick={to_repayment_page}>查看订单</a>
