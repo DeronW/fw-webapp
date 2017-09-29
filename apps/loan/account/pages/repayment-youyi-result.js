@@ -25,7 +25,7 @@ class RepaymentYouyiResult extends React.Component {
 
     render() {
         let { history, repayment_youyi } = this.props,
-            { repaymentAmount, leftAmount, repaymentResult } = repayment_youyi,
+            { repaymentAmount, leftAmount, repaymentResult, errMessage } = repayment_youyi,
             { loanId } = repayment_youyi.data;
 
         let to_repayment_page = () => {
