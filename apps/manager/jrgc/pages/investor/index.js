@@ -11,8 +11,10 @@ import HjList from './hj-list'
 import AccountZx from './account-zx'
 import Overview from './overview'
 import zxItem from './zx-item'
-import zxDetial from './zx-detial'
-import wjItem from './wj-item'
+import itemDetial from './item-detial'
+import itemCollection from './item-collection'
+import AccountP2p from './account-p2p'
+import p2pItem from './p2p-item'
 
 export {
     Investor,
@@ -28,6 +30,8 @@ export {
     AccountZx,
     Overview,
     zxItem,
-    zxDetial,
-    wjItem
+    itemDetial,
+    itemCollection,
+    AccountP2p,
+    p2pItem
 }

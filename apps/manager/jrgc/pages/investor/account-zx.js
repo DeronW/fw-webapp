@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
-import {Header, BottomNavBar} from '../../components'
+import {Header} from '../../components'
 import styles from '../../css/investor/account-zx.css'
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})

@@ -2,10 +2,10 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 
-import styles from '../../css/investor/wj-item.css'
+import styles from '../../css/investor/p2p-item.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class wjItem extends React.Component {
+class p2pItem extends React.Component {
     state = {
         tab: 'Ta的项目'
     }
@@ -54,7 +54,7 @@ class wjItem extends React.Component {
             } else {
                 return <div styleName="record">
                     <div styleName="title">
-                        <span>尊享计划-T00010006</span>
+                        <span>微金计划-T00010006</span>
                         <div styleName="end">已回款</div>
                     </div>
                     <div styleName="item">
@@ -109,7 +109,7 @@ class wjItem extends React.Component {
                 {[1].map(recordFn)}
                 {/*<div styleName="record">
                     <div styleName="title">
-                        <span>尊享计划-T00010006</span>
+                        <span>微金计划-T00010006</span>
                         <div styleName="end">已回款</div>
                     </div>
                     <div styleName="item">
@@ -167,4 +167,4 @@ class wjItem extends React.Component {
         </div>
     }
 }
-export default wjItem
+export default p2pItem

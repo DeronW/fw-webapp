@@ -3,10 +3,10 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import {Header} from '../../components'
 
-import styles from '../../css/investor/zx-detial.css'
+import styles from '../../css/investor/item-detial.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class zxDetial extends React.Component {
+class itemDetial extends React.Component {
     state = {
         type:'未回',
     }
@@ -78,4 +78,4 @@ class zxDetial extends React.Component {
         </div>
     }
 }
-export default zxDetial
+export default itemDetial
