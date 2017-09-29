@@ -11,6 +11,7 @@ import HjList from './hj-list'
 import AccountZx from './account-zx'
 import Overview from './overview'
 import zxItem from './zx-item'
+import zxDetial from './zx-detial'
 
 export {
     Investor,
@@ -25,5 +26,6 @@ export {
     HjList,
     AccountZx,
     Overview,
-    zxItem
+    zxItem,
+    zxDetial
 }
