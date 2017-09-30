@@ -44,7 +44,7 @@ class AccountP2p extends React.Component {
                 </div>
             </div>
             <div styleName="incomeItem">
-                <div styleName="itemDes">
+            <div styleName="itemDes" onClick={()=>this.gotoHandler('/investor-p2p-item')}>
                     <div styleName="desLeft">Ta的投资</div>
                     <div styleName="desRight">
                         <span styleName="rightText">3笔</span>

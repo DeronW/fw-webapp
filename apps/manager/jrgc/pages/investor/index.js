@@ -15,6 +15,7 @@ import itemDetial from './item-detial'
 import itemCollection from './item-collection'
 import AccountP2p from './account-p2p'
 import p2pItem from './p2p-item'
+import Calendar from './calendar'
 
 export {
     Investor,
@@ -33,5 +34,6 @@ export {
     itemDetial,
     itemCollection,
     AccountP2p,
-    p2pItem
+    p2pItem,
+    Calendar
 }

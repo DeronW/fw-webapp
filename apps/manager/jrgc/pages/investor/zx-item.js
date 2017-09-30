@@ -12,7 +12,7 @@ class zxItem extends React.Component {
     }
     gotoHandler = (params) => {
         let { history } = this.props
-        history.push('/investor-zx-detial')
+        history.push('/investor-item-detial')
     }
     switchTab = tab => {
         if (tab == this.state.tab) return

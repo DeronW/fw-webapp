@@ -9,9 +9,9 @@ class p2pItem extends React.Component {
     state = {
         tab: 'Ta的项目'
     }
-    gotoHandler = (params) => {
+    gotoHandler = (link) => {
         let { history } = this.props
-        history.push('/investor-zx-detial')
+        history.push(link)
     }
     switchTab = tab => {
         if (tab == this.state.tab) return
@@ -29,7 +29,7 @@ class p2pItem extends React.Component {
         }
         let t = () => {
             if (tab == '批量项目') {
-                return <div styleName="collection">
+                return <div styleName="collection" onClick={()=>this.gotoHandler('/investor-item-collection')}>
                     <div styleName="title">
                         <span>闪信贷28天项目集001</span>
                         <div styleName="end">已回款</div>
@@ -98,7 +98,7 @@ class p2pItem extends React.Component {
                 <div styleName="text">累计收益</div>
                 <div styleName="money">¥9,888.12</div>
                 <div styleName="capital">待收本金：¥1,028,000.00</div>
-                <div styleName="detail" onClick={() => this.gotoHandler()}>
+                <div styleName="detail" onClick={() => this.gotoHandler('/investor-item-detial')}>
                     <span>查看回款明细</span>
                     <img src={require('../../images/investor/zx-item/arrow.png')} />
                 </div>

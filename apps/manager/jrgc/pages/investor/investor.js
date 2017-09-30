@@ -47,7 +47,7 @@ class Investor extends React.Component {
                 我的客户<div styleName="searchBtn" onClick={()=>this.gotoHandler('/investor-search')}></div>
             </div>
             <div styleName="investor">
-                <div styleName="investItem">
+                <div styleName="investItem" onClick={()=>this.gotoHandler("/investor-calendar")}>
                     <img src={require("../../images/investor/investor/calendar.png")}/>
                     <div>回款日历</div>
                 </div>
