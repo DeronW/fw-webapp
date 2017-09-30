@@ -35,7 +35,7 @@ class Home extends React.Component {
             .then(data => this.setState({ products: data.resultList }))
             .then(() => Post(`/api/product/v1/recommendedList.json`))
             .then(data => this.setState({ sub_products: data.resultList }))
-            .then(() => Post(`/api/product/v1/noticeList.json`, null, { slience: true }))
+            .then(() => Post(`/api/product/v1/noticeList.json`, null, { silence: true }))
             .then(data => {
                 // 强类型公告, 只要返回, 一定弹出提示
                 if (data.gradeType == 1) return showBulletin(data.noticeContent)
