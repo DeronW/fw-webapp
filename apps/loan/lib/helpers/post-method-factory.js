@@ -39,7 +39,7 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
             method: 'POST',
             data: merged_data,
             timeout: 30,
-            silence: true
+            loading: false
         }, options)
 
         let silence = merged_options.silence;
