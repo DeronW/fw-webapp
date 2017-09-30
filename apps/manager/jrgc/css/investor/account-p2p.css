@@ -14,12 +14,7 @@
 
 .incomeRight {
     float: right;
-}
-
-.incomeRight {
-    width: 48px;
-    height: 92px;
-    background: url("../../images/investor/account-zx/icon-eyes.png") no-repeat center;
+    margin-top: 24px;
 }
 
 .incomeCount {

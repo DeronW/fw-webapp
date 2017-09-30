@@ -78,7 +78,7 @@ class Investor extends React.Component {
                     <div styleName="time">注册时间：2017-08-13 00:00:00</div>
                     <div styleName="balance">可用余额</div>
                 </div>
-                <div styleName="listItem">
+                <div styleName="listItem" onClick={()=>this.gotoHandler('/investor-info')}>
                     <div styleName="name">钱程</div>
                     <div styleName="money">¥7000.00</div>
                     <div styleName="time">注册时间：2017-08-13 00:00:00</div>

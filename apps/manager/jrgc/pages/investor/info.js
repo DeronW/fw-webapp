@@ -178,7 +178,7 @@ class Info extends React.Component {
                 </div>
             </div>
             <div styleName="account">
-                <div styleName="accountItem">
+                <div styleName="accountItem" onClick={()=>this.gotoHandler('/investor-account-zx')}>
                     <div styleName="accountName">TA的尊享账户</div>
                     <div styleName="accountText">
                         可用余额
@@ -186,7 +186,7 @@ class Info extends React.Component {
                         <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
-                <div styleName="accountItem">
+                <div styleName="accountItem" onClick={()=>this.gotoHandler('/investor-account-p2p')}>
                     <div styleName="accountName">TA的微金账户</div>
                     <div styleName="accountText">
                         可用余额
@@ -194,7 +194,7 @@ class Info extends React.Component {
                         <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
-                <div styleName="accountItem">
+                <div styleName="accountItem" onClick={()=>this.gotoHandler('/investor-account-hj')}>
                     <div styleName="accountName">TA的黄金账户</div>
                     <div styleName="accountText">
                         持有黄金
