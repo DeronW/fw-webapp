@@ -35,7 +35,7 @@ class Home extends React.Component {
             .then(data => this.setState({ products: data.resultList }))
             .then(() => Post(`/api/product/v1/recommendedList.json`))
             .then(data => this.setState({ sub_products: data.resultList }))
-            .then(() => Post(`/api/product/v1/noticeList.json`, null, true))
+            .then(() => Post(`/api/product/v1/noticeList.json`, null, { slience: true }))
             .then(data => {
                 // 强类型公告, 只要返回, 一定弹出提示
                 if (data.gradeType == 1) return showBulletin(data.noticeContent)
@@ -128,7 +128,7 @@ class Home extends React.Component {
                 <div styleName="text-a">恭喜您被选中</div>
                 <div styleName="text-b">
                     我们邀请您使用放心花新推出的借款产<br />
-                品优易借。借款期限21天，综合费率8.5%，<br />
+                    品优易借。借款期限21天，综合费率8.5%，<br />
                     还款方式灵活，快去试试吧~<br />
                 </div>
                 <a styleName="btn-close" onClick={
