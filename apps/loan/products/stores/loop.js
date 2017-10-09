@@ -122,7 +122,7 @@ export default class LoopLoan {
         return this.Post('/api/looploan/loan/v1/apply.json', {
             loanAmt: value,
             productUuid: this.productUuid
-        },'silence').then((data) => {
+        },{silence:true}).then((data) => {
             this.loanUuid = data.loanUuid
         })
     }
