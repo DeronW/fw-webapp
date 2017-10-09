@@ -37,9 +37,7 @@ export default class LoopLoan extends React.Component {
             //     Components.showToast(loopLoan.errMsg)
             // }
             if ([20005, 20009, 20013].indexOf(e.code) > -1) {
-                showBlueAlert(e.message).then(() => {
-                    Browser.inFXHApp ? NativeBridge.close() : history.push('/')
-                })
+                this.setState({ show: true })
             } else {
                 Components.showToast(e.message)
             }
