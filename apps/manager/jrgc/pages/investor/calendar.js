@@ -11,7 +11,8 @@ class Calendar extends React.Component {
         month: 8,
         selectedIndex: 0,
         monthArrow:true,
-        tab:'即将到期'
+        tab:'即将到期',
+        arrow:[]
     }
 
     addMonthHandler = () => {
@@ -155,7 +156,34 @@ class Calendar extends React.Component {
                         <div></div>
                     </div>
                     <div styleName="investorList">
-                        <div styleName="investor"></div>
+                        <div styleName="investor">
+                            <div styleName="investorName">李丽华</div>
+                            <div styleName="investorAmount">10.000克</div>
+                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
+                        </div>
+                        <div styleName="investor">
+                            <div styleName="investorName">李丽华</div>
+                            <div styleName="investorAmountRed">￥90.00万</div>
+                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
+                        </div>
+                    </div>
+                </div>
+                <div styleName="dueItem">
+                    <div styleName="dueDate">
+                        <div>2017年8月14日</div>
+                        <div></div>
+                    </div>
+                    <div styleName="investorList">
+                        <div styleName="investor">
+                            <div styleName="investorName">李丽华</div>
+                            <div styleName="investorAmount">10.000克</div>
+                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
+                        </div>
+                        <div styleName="investor">
+                            <div styleName="investorName">李丽华</div>
+                            <div styleName="investorAmountRed">￥90.00万</div>
+                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
+                        </div>
                     </div>
                 </div>
             </div>

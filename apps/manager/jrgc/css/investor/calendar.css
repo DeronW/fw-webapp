@@ -264,3 +264,44 @@
     background: url('../../images/investor/calendar/arrow.png') no-repeat;
     margin-top: 30px;
 }
+.investorList{
+    border-top: 1px solid #eff0f3;
+    width: 100%;
+    height: auto;
+    background: #f9f9f9;
+    position: relative;
+}
+.investor{
+    margin-left: 30px;
+    border-bottom: 1px solid #eff0f3;
+    position: relative;
+    height: 130px;
+}
+.investorName{
+    font-size: 32px;
+    color: #555;
+    position: absolute;
+    left: 0;
+    top: 20px;
+}
+.investorAmount{
+    font-size: 28px;
+    color: #fc8f0e;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
+.investorAmountRed{
+    font-size: 28px;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    color: #fd4d4c;
+}
+.investorText{
+    font-size: 24px;
+    color: #999;
+    position: absolute;
+    left: 0;
+    top: 80px;
+}
