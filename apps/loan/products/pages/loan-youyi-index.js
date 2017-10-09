@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Components } from 'fw-javascripts'
-import { Header } from '../../lib/components'
+import { Header, showBlueAlert} from '../../lib/components'
 import styles from '../css/loan-youyi-index.css'
 import { NativeBridge, Browser } from '../../lib/helpers'
 
@@ -21,20 +21,19 @@ function gotoHandler(link, need_login, next_title, special_webview) {
 export default class LoopLoan extends React.Component {
     state = {
         show: false,
-        questionShow: false
+        questionShow: false,
+        message:null
     }
 
     componentDidMount() {
         let { loopLoan } = this.props;
         document.title = '优易借';
         NativeBridge.hide_header();
-        loopLoan.get_baseinfo().then(() => {
-            if (loopLoan.errCode == 20005 ||
-                loopLoan.errCode == 20009 ||
-                loopLoan.errCode == 20013) {
-                this.setState({ show: true })
-            } else if (loopLoan.errCode) {
-                Components.showToast(loopLoan.errMsg)
+        loopLoan.get_baseinfo().catch((e) => {
+            if ([20005, 20009, 20013].indexOf(e.code) > -1) {
+                this.setState({ show: true, message:e.message })
+            } else {
+                Components.showToast(e.message)
             }
         });
     }
@@ -117,7 +116,7 @@ export default class LoopLoan extends React.Component {
                 </div>
                 {this.state.show && <div styleName="mask">
                     <div styleName="popup">
-                        <div styleName="popup-tip">{loopLoan.errMsg}</div>
+                        <div styleName="popup-tip">{this.state.message}</div>
                         <div styleName="popup-btn" onClick={this.closeHandler}>知道了</div>
                     </div>
                 </div>}

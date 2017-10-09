@@ -13,7 +13,7 @@ export default class Fq {
             canMessage:null,
             loanUuid:null,
             failMsg:null,
-            pid:Utils.hashQuery.pid,
+            pid:21,
             productLogo:null,
             productName:null,
             amountStr:null,
