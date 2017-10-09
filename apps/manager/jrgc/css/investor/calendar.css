@@ -3,3 +3,212 @@
     height: 100%;
     background: #eaebec;
 }
+.capital{
+    width: 100%;
+    padding: 80px 32px 36px;
+    background: #c6815f;
+    color: #fff;
+    box-sizing: border-box;
+}
+.capitalAmount{
+    font-size: 60px;
+}
+.capitalText{
+    font-size: 28px;
+}
+.collect{
+    width: 100%;
+    padding: 24px 0;
+    display: table;
+    background: #a7604c;
+}
+.collectItem{
+    float: left;
+    width: 326px;
+    padding-left: 32px;
+    color: #fff;
+    border-right: 1px solid #b86d57;
+}
+.collectText{
+    font-size: 28px;
+    color: #f3baa9;
+}
+.collectAmount{
+    font-size: 28px;
+}
+.collectItem:last-child{
+    border-right: transparent;
+}
+.monthBox{
+    width:100%;
+    height: 90px;
+    background: #fff;
+    font-size: 34px;
+    color: #333;
+    display: table;
+    position: relative;
+}
+.leftBtn{
+    width: 13px;
+    height: 16px;
+    background: url('../../images/investor/calendar/left.png') no-repeat;
+    position: absolute;
+    left: 240px;
+    top: 40px;
+}
+.month{
+    position: absolute;
+    left: 254px;
+    top: 24px;
+    width: 218px;
+    text-align: center;
+}
+.rightBtn{
+    width: 13px;
+    height: 16px;
+    background: url('../../images/investor/calendar/right.png') no-repeat;
+    position: absolute;
+    left: 468px;
+    top: 40px;
+}
+.monthArrow{
+    width: 26px;
+    height: 16px;
+    background: url('../../images/investor/calendar/arrow.png') no-repeat;
+    position: absolute;
+    right: 30px;
+    top: 40px;
+    transform: rotate(180deg)
+}
+.days{
+    width: 100%;
+    height: 265px;
+    overflow: hidden;
+}
+.dayBox{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+.day{
+    width: 100%;
+    height: 72px;
+    line-height: 72px;
+    /* border-bottom: 1px solid #f4f1f1; */
+    display: table;
+    position: relative;
+}
+.week{
+    float: left;
+    font-size: 24px;
+    color: #555;
+    width: 154px;
+    text-align: left;
+    margin-left: 30px;
+}
+.circle{
+    float: left;
+    width: 17px;
+    height: 72px;
+    background: url('../../images/investor/calendar/circle.png');
+    margin:0 28px 0 18px;
+    position: relative;
+    z-index: 2;
+}
+.receivable{
+    width: 138px;
+    height: 40px;
+    border: 2px solid #ff6463;
+    border-radius: 8px;
+    font-size: 22px;
+    text-align: center;
+    line-height: 40px;
+    color: #fd4d4c;
+    margin-top: 16px;
+    float: left;
+    margin-right: 12px;
+}
+.actual{
+    color: #a7604c;
+    border: 2px solid #a7604c;
+}
+.daySelected{
+    background: #f7eeee;
+}
+.daySelected .week{
+    color: #fd4d4c;
+}
+.daySelected .circle{
+    width: 21px;
+    height: 74px;
+    background: url('../../images/investor/calendar/selected.png') no-repeat;
+    margin:0 24px 0 16px;
+}
+.daySelected .receivable{
+    font-size: 24px;
+    border: 3px solid #ff6463;
+}
+.daySelected .actual{
+    color: #a7604c;
+    border: 3px solid #a7604c;
+}
+.date{
+    width: 100%;
+    height: 230px;
+    padding-top: 34px;
+    background: #fff;
+}
+.dateType{
+    padding-left: 356px;
+    background: #e9eaee;
+    height: 54px;
+    line-height: 54px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 24px;
+    color: #555;
+    display: table;
+}
+.radius{
+    float: left;
+    width: 18px;
+    height: 18px;
+    background: #fd4d4c;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: 17px;
+}
+.brown{
+    background: #a7604c;
+}
+.dateText{
+    float: left;
+    margin-right: 32px;
+}
+.dateItem{
+    margin-left: 30px;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 28px;
+    color: #555;
+    padding: 20px 0;
+    height: 50px;
+    padding-right: 30px;
+}
+.dateItem:last-child{
+    border-bottom:transparent;
+}
+.dateDemind{
+    float: left;
+}
+.dateAmountBox{
+    float: right;
+}
+.dateAmount{
+    float: left;
+    padding: 0 10px;
+    border-right: 1px solid #e3e5ea;
+}
+.dateAmount:last-child{
+    float: right;
+    border-right: transparent;
+}
