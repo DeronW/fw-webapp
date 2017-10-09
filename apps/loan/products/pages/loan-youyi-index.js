@@ -21,7 +21,8 @@ function gotoHandler(link, need_login, next_title, special_webview) {
 export default class LoopLoan extends React.Component {
     state = {
         show: false,
-        questionShow: false
+        questionShow: false,
+        message:null
     }
 
     componentDidMount() {
@@ -37,7 +38,7 @@ export default class LoopLoan extends React.Component {
             //     Components.showToast(loopLoan.errMsg)
             // }
             if ([20005, 20009, 20013].indexOf(e.code) > -1) {
-                this.setState({ show: true })
+                this.setState({ show: true, message:e.message })
             } else {
                 Components.showToast(e.message)
             }
@@ -122,7 +123,7 @@ export default class LoopLoan extends React.Component {
                 </div>
                 {this.state.show && <div styleName="mask">
                     <div styleName="popup">
-                        <div styleName="popup-tip">{loopLoan.errMsg}</div>
+                        <div styleName="popup-tip">{this.state.message}</div>
                         <div styleName="popup-btn" onClick={this.closeHandler}>知道了</div>
                     </div>
                 </div>}
