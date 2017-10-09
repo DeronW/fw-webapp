@@ -33,7 +33,7 @@ export default class LoopLoan extends React.Component {
                 loopLoan.errCode == 20009 ||
                 loopLoan.errCode == 20013) {
                 this.setState({ show: true })
-            } else if (loopLoan.errCode) {
+            } else {
                 Components.showToast(loopLoan.errMsg)
             }
         });
