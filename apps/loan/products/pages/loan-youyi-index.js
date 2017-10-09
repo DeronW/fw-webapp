@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Components } from 'fw-javascripts'
-import { Header } from '../../lib/components'
+import { Header, showBlueAlert} from '../../lib/components'
 import styles from '../css/loan-youyi-index.css'
 import { NativeBridge, Browser } from '../../lib/helpers'
 
@@ -28,13 +28,20 @@ export default class LoopLoan extends React.Component {
         let { loopLoan } = this.props;
         document.title = '优易借';
         NativeBridge.hide_header();
-        loopLoan.get_baseinfo().catch(() => {
-            if (loopLoan.errCode == 20005 ||
-                loopLoan.errCode == 20009 ||
-                loopLoan.errCode == 20013) {
-                this.setState({ show: true })
+        loopLoan.get_baseinfo().catch((e) => {
+            // if (loopLoan.errCode == 20005 ||
+            //     loopLoan.errCode == 20009 ||
+            //     loopLoan.errCode == 20013) {
+            //     this.setState({ show: true })
+            // } else {
+            //     Components.showToast(loopLoan.errMsg)
+            // }
+            if ([20005, 20009, 20013].indexOf(e.code) > -1) {
+                showBlueAlert(e.message).then(() => {
+                    Browser.inFXHApp ? NativeBridge.close() : history.push('/')
+                })
             } else {
-                Components.showToast(loopLoan.errMsg)
+                Components.showToast(e.message)
             }
         });
     }
