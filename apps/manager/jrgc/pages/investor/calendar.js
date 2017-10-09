@@ -9,7 +9,9 @@ import styles from '../../css/investor/calendar.css'
 class Calendar extends React.Component {
     state = {
         month: 8,
-        selectedIndex: 0
+        selectedIndex: 0,
+        monthArrow:true,
+        tab:'即将到期'
     }
 
     addMonthHandler = () => {
@@ -32,13 +34,25 @@ class Calendar extends React.Component {
         }
         this.setState({ month: n })
     }
+    switchMonthArrowHandler = () => {
+        this.setState({monthArrow:!this.state.monthArrow})
+    }
     selectedHandler = (index) => {
         this.setState({ selectedIndex: index })
     }
+    switchTabHandler = (tab) => {
+        if(tab==this.state.tab) return
+        this.setState({tab:tab})
+    }
     render() {
         let { history } = this.props
-        let { month, selectedIndex } = this.state
+        let { month, selectedIndex,monthArrow,tab } = this.state
 
+        let tabFn = (item,index) => {
+            return <div styleName="dueTab" key={index} onClick={()=>this.switchTabHandler(item)}>
+                <div styleName={tab==item?"tab tabActive":"tab"}>{item}</div>
+            </div>
+        }
         return <div styleName="bg">
             <Header title="回款日历" history={history} />
             <div styleName="capital">
@@ -59,12 +73,12 @@ class Calendar extends React.Component {
                 <div styleName="leftBtn" onClick={this.reduceMonthHandler}></div>
                 <div styleName="month">2017年{month}月</div>
                 <div styleName="rightBtn" onClick={this.addMonthHandler}></div>
-                <div styleName="monthArrow"></div>
+                <div styleName={monthArrow?"monthArrow monthArrowUp":"monthArrow"} onClick={this.switchMonthArrowHandler}></div>
             </div>
-            <div styleName="days">
+            <div styleName="days" style={{display:monthArrow?'block':'none'}}>
                 <div styleName="dayBox">
                     {/*
-                        <div styleName={selectedIndex==index?'day daySelected':'day'} onClick={()=>{this.selectedIndex()}}>
+                        <div styleName={selectedIndex==index?'day daySelected':'day'} onClick={()=>{this.selectedIndex(index)}}>
                             <div styleName="week">06日 星期日</div>
                             <div styleName="circle"></div>
                             <div styleName="receivable">6笔回款</div>
@@ -128,6 +142,20 @@ class Calendar extends React.Component {
                     <div styleName="dateAmountBox">
                         <div styleName="dateAmount">￥600.00万</div>
                         <div styleName="dateAmount">1,000.000克</div>
+                    </div>
+                </div>
+            </div>
+            <div styleName="due">
+                {['即将到期','已到期'].map(tabFn)}
+            </div>
+            <div styleName="dueList">
+                <div styleName="dueItem">
+                    <div styleName="dueDate">
+                        <div>2017年8月13日</div>
+                        <div></div>
+                    </div>
+                    <div styleName="investorList">
+                        <div styleName="investor"></div>
                     </div>
                 </div>
             </div>
