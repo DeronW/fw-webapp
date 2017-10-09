@@ -28,7 +28,7 @@ export default class LoopLoan extends React.Component {
         let { loopLoan } = this.props;
         document.title = '优易借';
         NativeBridge.hide_header();
-        loopLoan.get_baseinfo().then(() => {
+        loopLoan.get_baseinfo().catch(() => {
             if (loopLoan.errCode == 20005 ||
                 loopLoan.errCode == 20009 ||
                 loopLoan.errCode == 20013) {
