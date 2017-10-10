@@ -9,8 +9,10 @@ import {
 import Entry from './pages/entry.js'
 import Login from './pages/login.js'
 import SetPassword from './pages/set-password.js'
-import UserPanel from './pages/user-panel.js'
 import Invite from './pages/invite.js'
+
+import UserPanel from './pages/user-panel.js'
+import UserInfo from './pages/user-info.js'
 
 import Redbag from './pages/redbag.js'
 import RedbagRecords from './pages/redbag-records.js'
@@ -40,8 +42,11 @@ export default (stores) => {
                 <Route exact path='/entry' component={Entry} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/set-password' component={SetPassword} />
-                <Route exact path='/user-panel' component={UserPanel} />
                 <Route exact path='/invite' component={Invite} />
+
+                <Route exact path='/user-panel' component={UserPanel} />
+                <Route exact path='/user-info' component={UserInfo} />
+
                 {/*注册用户领取红包*/}
                 <Route exact path='/redbag' component={Redbag} />
                 <Route exact path='/redbag-records' component={RedbagRecords} />
