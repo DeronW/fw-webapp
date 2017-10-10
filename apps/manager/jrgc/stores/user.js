@@ -1,13 +1,15 @@
 import {extendObservable} from 'mobx'
 
 export default class User {
-    constructor(Post) {
+    constructor(Get, Post) {
+        this.Get = Get
         this.Post = Post
         this.data = {}
         extendObservable(this.data, {
             user: {
                 notice: [],
-                banners: []
+                banners: [],
+                info: {}
             },
             coupon: {
                 totalCount: null,
@@ -33,6 +35,12 @@ export default class User {
                 img: ''
             }
         ]
+    }
+
+    fetchInfo = () => {
+        this.Get('/api/finManager/user/v2/home.shtml').then(data => {
+            this.data.user.info = data.result
+        })
     }
 
     fetchCouponList = (couponStatus, couponType) => {
