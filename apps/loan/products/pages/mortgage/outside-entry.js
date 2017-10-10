@@ -122,7 +122,7 @@ class OutsideEntry extends React.Component {
                         <input maxLength="11" type="tel"
                             value={phone}
                             placeholder="请输入手机号"
-                            onChange={this.handleInput('phone')}/>
+                            onChange={this.handleInput('phone')} />
                     </div>
 
                     <div styleName="input-item captcha-input">
@@ -130,7 +130,7 @@ class OutsideEntry extends React.Component {
                         <input maxLength="4"
                             value={captchaInput}
                             placeholder="请输入图形验证码"
-                            onChange={this.handleInput('captchaInput')}/>
+                            onChange={this.handleInput('captchaInput')} />
                         <div styleName="captcha-img-container" onClick={this.getCaptcha}>
                             <img src={captchaImgUrl} />
                         </div>
@@ -143,12 +143,15 @@ class OutsideEntry extends React.Component {
                             placeholder="请输入短信验证码"
                             onChange={this.handleInput('SMSInput')} />
                         <div styleName="sms-btn" onClick={this.getSMS}>
-                            {getSMSTimer === 60 ? "获取验证码": `${getSMSTimer}s`}
+                            {getSMSTimer === 60 ? "获取验证码" : `${getSMSTimer}s`}
                         </div>
                     </div>
 
                     <a styleName="register-btn"
-                        style={{ 'background': allFieldsFilled ? '#f26052' : '#1e8570', 'color': allFieldsFilled ? '#fff' : '#0d5c4c'}}
+                        style={{
+                            'background': allFieldsFilled ? '#f26052' : '#1e8570',
+                            'color': allFieldsFilled ? '#fff' : '#0d5c4c'
+                        }}
                         onClick={this.register}>申请千万贷款</a>
                 </div>
             </div>

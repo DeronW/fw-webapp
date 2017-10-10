@@ -7,11 +7,6 @@ import {
 } from 'react-router-dom'
 
 import Home from './pages/home.js'
-import MortgageDownload from './pages/mortgage-download.js'
-import MortgageOutsideEntry from './pages/mortgage-outside-entry.js'
-import MortgageOutsideApply from './pages/mortgage-outside-apply.js'
-import MortgageApply from './pages/mortgage-apply.js'
-import MortgageSuccess from './pages/mortgage-success.js'
 import LoopLoan from './pages/loan-youyi-index.js'
 import LoopLoanLoan from './pages/loan-youyi-form.js'
 import LoopLoanResult from './pages/loan-youyi-result.js'
@@ -49,18 +44,11 @@ export default (stores) => {
                 <Route exact path='/loan-fq-form' component={FqForm} />
 
                 {/* 房屋抵押贷款  */}
-                <Route exact path='/mortgage-download' component={MortgageDownload} />
-                <Route exact path='/mortgage-outside-entry' component={MortgageOutsideEntry} />
-                <Route exact path='/mortgage-outside-apply' component={MortgageOutsideApply} />
-                <Route exact path='/mortgage-apply' component={MortgageApply} />
-                <Route exact path='/mortgage-success' component={MortgageSuccess} />
-
                 <Route exact path='/mortgage/apply' component={Mortgage.Apply} />
                 <Route exact path='/mortgage/download' component={Mortgage.Download} />
                 <Route exact path='/mortgage/success' component={Mortgage.Success} />
                 <Route exact path='/mortgage/outside-entry' component={Mortgage.OutsideEntry} />
                 <Route exact path='/mortgage/outside-apply' component={Mortgage.OutsideApply} />
-
 
                 {/* 所有产品协议  */}
                 <Route exact path='/protocols/register' component={Protocols.Register} />

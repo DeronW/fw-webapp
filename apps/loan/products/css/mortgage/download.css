@@ -58,12 +58,6 @@
 .download-area .btn img {
     width: 36px;
     position: relative;
-    top: 10px;
+    top: -3px;
     margin: 0 15px 0 0;
-}
-
-.download-area .android-btn {
-    img {
-        top: 14px;
-    }
 }
