@@ -66,6 +66,7 @@ export default class Reserve {
     }
     setRecordsCurrentStatus = status => {
         this.data.records.type = status;
+        this.resetPageNo()
         this.getReserveList()
     }
 

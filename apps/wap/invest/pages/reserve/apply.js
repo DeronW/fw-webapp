@@ -20,7 +20,15 @@ class ReserveApply extends React.Component {
     }
 
     inputChangeHandler = name => e => {
-        this.props.reserve.setFormData(name, e.target.value)
+        let v = e.target.value.toString().split(".")
+
+        if (v[1]&&v[1].length > 2) {
+            v[1] = v[1].substr(0,2)
+            this.props.reserve.setFormData(name, `${v[0]}.${v[1]}`)
+        }else{
+            this.props.reserve.setFormData(name, e.target.value)
+        }
+
     }
 
     allMadeHandler = () => {

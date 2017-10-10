@@ -16,6 +16,7 @@ import itemCollection from './item-collection'
 import AccountP2p from './account-p2p'
 import p2pItem from './p2p-item'
 import Calendar from './calendar'
+import calendarDay from './calendar-day'
 
 export {
     Investor,
@@ -35,5 +36,6 @@ export {
     itemCollection,
     AccountP2p,
     p2pItem,
-    Calendar
+    Calendar,
+    calendarDay
 }
