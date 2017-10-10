@@ -12,7 +12,7 @@ class Calendar extends React.Component {
         selectedIndex: 0,
         monthArrow:true,
         tab:'即将到期',
-        arrow:[]
+        toggleList:[]
     }
 
     addMonthHandler = () => {
@@ -171,7 +171,6 @@ class Calendar extends React.Component {
                 <div styleName="dueItem">
                     <div styleName="dueDate">
                         <div>2017年8月14日</div>
-                        <div></div>
                     </div>
                     <div styleName="investorList">
                         <div styleName="investor">

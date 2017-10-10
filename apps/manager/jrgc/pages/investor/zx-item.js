@@ -32,8 +32,7 @@ class zxItem extends React.Component {
         let tabFn = (item, index) => {
             return <div key={index} styleName={item == tab ? "tab tabActive" : "tab"}
                         onClick={() => this.switchTab(item)}>{item}
-            </div>
-        }
+            </div>}
         let typeFn = (item,index) => {
             return <div key={index} styleName={item == type ? "type typeActive" : "type"}
                         onClick={() => this.switchType(item)}>{item}

@@ -50,6 +50,7 @@ export default (stores) => {
                 <Route exact path="/investor-account-p2p" component={Investor.AccountP2p}/>
                 <Route exact path="/investor-p2p-item" component={Investor.p2pItem}/>
                 <Route exact path="/investor-calendar" component={Investor.Calendar}/>
+                <Route exact path="/investor-calendar-day" component={Investor.calendarDay}/>
             </Switch>
         </Provider>
     </Router>
