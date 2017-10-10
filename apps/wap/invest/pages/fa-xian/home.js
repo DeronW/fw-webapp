@@ -9,10 +9,7 @@ import { BannerGroup } from 'fw-components'
 
 @inject('faxian')
 @observer
-@CSSModules(styles, {
-    allowMultiple: true,
-    errorWhenNotFound: false
-})
+@CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class Home extends React.Component {
 
     state = {
@@ -27,7 +24,10 @@ class Home extends React.Component {
         faxian.getNoticeHandler().then(() => {
             this.startMovingNotice()
         })
+    }
 
+    componentWillUnmount() {
+        clearInterval(this._time_gap)
     }
 
     gotoHandler = (link, need_login) => {
@@ -142,7 +142,14 @@ class Home extends React.Component {
                 <a onClick={() => this.gotoHandler("http://p-javashop-statics.oss-cn-beijing.aliyuncs.com/weixin/index.html#/home/products")}>
                     <i styleName="icon icon-bao"></i>工场保险</a>
 
-                <a onClick={() => this.gotoHandler('https://m.easyloan888.com/static/loan/3rd/index.html#/jrgc-login')}><i styleName="icon icon-waiting"></i>放心花</a>
+                {!Browser.inIOS &&
+                    <a onClick={() => this.gotoHandler('https://m.easyloan888.com/static/loan/3rd/index.html#/jrgc-login')}><i styleName="icon icon-waiting"></i>放心花</a>
+                }
+
+                {Browser.inIOS &&
+                    <a><i styleName="icon icon-waiting"></i>敬请期待</a>
+                }
+
             </div>
 
             <div styleName="title-recommended" onClick={this.bdHandler}>内容推荐</div>
