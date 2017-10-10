@@ -26,7 +26,8 @@ import FxhResult from './pages/loan-fxh-result.js'
 import FqIndex from './pages/loan-fq-index.js'
 import FqForm from './pages/loan-fq-form.js'
 
-import * as Protocols from './pages/protocols/'
+import * as Protocols from './pages/protocols'
+import * as Mortgage from './pages/mortgage'
 
 export default (stores) => {
     return <Router>
@@ -53,6 +54,13 @@ export default (stores) => {
                 <Route exact path='/mortgage-outside-apply' component={MortgageOutsideApply} />
                 <Route exact path='/mortgage-apply' component={MortgageApply} />
                 <Route exact path='/mortgage-success' component={MortgageSuccess} />
+
+                <Route exact path='/mortgage/apply' component={Mortgage.Apply} />
+                <Route exact path='/mortgage/download' component={Mortgage.Download} />
+                <Route exact path='/mortgage/success' component={Mortgage.Success} />
+                <Route exact path='/mortgage/outside-entry' component={Mortgage.OutsideEntry} />
+                <Route exact path='/mortgage/outside-apply' component={Mortgage.OutsideApply} />
+
 
                 {/* 所有产品协议  */}
                 <Route exact path='/protocols/register' component={Protocols.Register} />
