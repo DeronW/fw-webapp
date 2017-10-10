@@ -16,12 +16,12 @@ export default class RiskPrompt extends React.Component {
         let { history } = this.props
 
         return <div styleName="bg">
-            <Header title="网络借贷出借风险提示" history={history} />
+            {(!Browser.inApp) && <Header title="网络借贷出借风险提示" history={history} />}
 
             <div styleName="content">
-            
+
             网络借贷出借风险提示
-            
+
             <br /><br />出借人应认真阅读本平台《注册服务协议》以及资金出借相关协议（《借款合同》、《出借人咨询服务协议》、《债权转让协议》等），本提示内容及本平台关于资金出借、资费介绍、标的说明等操作规则，充分了解在本平台上出借资金的法律意义及相关风险，并根据自身的出借经验、出借目的、出借期限、自身资产状况等判断所选择的借款标的是否与自身的风险承受能力相当。
             <br /><br />出借人的资金在出借过程中可能面临各种风险，包括但不限于市场风险、信用风险、利率风险、流动性风险以及战争、自然灾害等不可抗力导致的出借资金损失。
             <br /><br />主要风险说明如下：

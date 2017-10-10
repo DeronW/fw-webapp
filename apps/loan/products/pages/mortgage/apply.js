@@ -1,23 +1,21 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-
 import { Components } from 'fw-javascripts'
 
-import { Header } from '../../lib/components'
-
-import styles from '../css/mortgage-apply.css'
+import { Header } from '../../../lib/components'
+import styles from '../../css/mortgage/apply.css'
 
 const Model = {
     'phone': { name: '手机号' },
     'realName': { name: '姓名' },
     'amount': {
         name: '抵押金额',
-        options: [ '100万-200万', '200万-300万', '300万-400万', '400万-500万', '500万-1000万' ]
+        options: ['100万-200万', '200万-300万', '300万-400万', '400万-500万', '500万-1000万']
     },
     'duration': {
         name: '抵押年限',
-        options: [ '半年以下', '半年-1年', '1年-10年', '10年-25年', '25年以上' ]
+        options: ['半年以下', '半年-1年', '1年-10年', '10年-25年', '25年以上']
     },
     'city': { name: '所在区域' },
     'district': {
@@ -43,9 +41,9 @@ const DisplayItem = inject('mortgage')(observer(CSSModules((props) => {
             onClick={() => { !immutable && mortgage.setCurrentPanel(history, field) }}>
             <div styleName="item-name">{Model[field].name}</div>
             <div styleName="item-value" style={{ 'color': itemValue ? '#333' : '#999' }}>
-                { itemValue || itemPlaceholder }
-                { field === 'area' && itemValue &&
-                    <span styleName="area-measure-unit">m<span styleName="super-align-char">2</span></span> }
+                {itemValue || itemPlaceholder}
+                {field === 'area' && itemValue &&
+                    <span styleName="area-measure-unit">m<span styleName="super-align-char">2</span></span>}
             </div>
         </div>
     )
@@ -90,8 +88,8 @@ class InputItem extends React.Component {
             <div>
                 <div styleName="input-item-container">
                     <div styleName="item-name">{Model[field].name}</div>
-                    { field === 'area' &&
-                        <span styleName="area-measure-unit"> m<span styleName="super-align-char">2</span></span> }
+                    {field === 'area' &&
+                        <span styleName="area-measure-unit"> m<span styleName="super-align-char">2</span></span>}
                     <input maxLength={field === 'area' ? "4" : "20"}
                         type={field === 'area' ? "num" : "text"}
                         placeholder="请输入"
@@ -100,7 +98,7 @@ class InputItem extends React.Component {
                 </div>
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn"
-                        style={{ 'background': value ? '#639afb' : '#ccc'}}
+                        style={{ 'background': value ? '#639afb' : '#ccc' }}
                         onClick={this.handleSubmit}>
                         确定
                     </a>
@@ -134,7 +132,7 @@ const SelectItem = inject('mortgage')(observer(CSSModules((props) => {
         <div>
             <div styleName="select-label">{`选择${Model[field].name}`}</div>
             <div styleName="option-grp">
-                { itemOptions.map(gen_options) }
+                {itemOptions.map(gen_options)}
             </div>
         </div>
     )
@@ -144,7 +142,7 @@ const SelectItem = inject('mortgage')(observer(CSSModules((props) => {
 @inject('mortgage')
 @observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
-class MortgageApply extends React.Component {
+class Apply extends React.Component {
 
     componentDidMount() {
         document.title = '房产抵押贷款';
@@ -159,12 +157,12 @@ class MortgageApply extends React.Component {
             <div styleName="cnt-container">
                 <Header title="房产抵押贷款" history={history} />
 
-                { currentPanel && (
+                {currentPanel && (
                     Model[currentPanel].options ?
                         <SelectItem field={currentPanel} history={history} />
                         :
-                        <InputItem field={currentPanel} history={history} /> )}
-                { !currentPanel && <div>
+                        <InputItem field={currentPanel} history={history} />)}
+                {!currentPanel && <div>
                     <div styleName="item-grp-name">申请人信息</div>
                     <div styleName="item-grp">
                         <DisplayItem field="phone" history={history} immutable />
@@ -187,15 +185,15 @@ class MortgageApply extends React.Component {
 
                     <div styleName="submit-btn-container">
                         <a styleName="submit-btn"
-                            style={{ 'background': mortgage.allFieldsFilled ? '#639afb' : '#ccc'}}
+                            style={{ 'background': mortgage.allFieldsFilled ? '#639afb' : '#ccc' }}
                             onClick={() => { mortgage.submit(history) }}>
                             提交
                         </a>
                     </div>
-                </div> }
+                </div>}
             </div>
         )
     }
 }
 
-export default MortgageApply
+export default Apply

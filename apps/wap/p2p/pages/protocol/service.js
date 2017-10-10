@@ -10,13 +10,13 @@ import styleNames from '../../css/protocol/service.css'
 })
 class UserService extends React.Component {
     componentDidMount() {
-        document.title = '工场微金用户服务协议'
+        // document.title = '工场微金用户服务协议'
     }
 
     render() {
         let {history} = this.props
         return <div styleName="us-box">
-            {(!Browser.inApp) && <Header title="工场微金用户服务协议" history={history}/> }
+            {!Browser.inApp && <Header title="工场微金用户服务协议" history={history}/> }
             <div styleName="us-content">
                 重要提示：<br/><br/>
                 工场微金依据本协议的规定为您提供服务，本协议在您和工场微金之间具有合同上的法律效力。工场微金在此特别提醒您认真阅读、充分理解本协议各条款，特别是其中所涉及的免除或限制工场微金责任的条款、排除或限制您权利的条款等。请您审慎阅读并选择接受或不接受本协议。除非您接受本协议所有条款，否则您无权使用工场微金于本协议下所提供的服务。您一经注册或使用工场微金服务即视为对本协议全部条款已充分理解并完全接受。

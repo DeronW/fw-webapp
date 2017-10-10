@@ -1,9 +1,7 @@
-/*  input-field--width: 598px;
-    input-field--height: 74px; */
 
 .cnt-container {
     padding: 790px 0 60px;
-    background: url('../images/mortgage-outside-entry/bg.jpg') #218a75 no-repeat;
+    background: url('../../images/mortgage/outside-entry/bg.jpg') #218a75 no-repeat;
 }
 
 .input-item {
@@ -21,11 +19,11 @@
     float: left;
     width: 54px;
     height: 72px;
-    background: url('../images/mortgage-outside-entry/code-icon.png') no-repeat center;
+    background: url('../../images/mortgage/outside-entry/code-icon.png') no-repeat center;
 }
 
 .phone-input .item-icon {
-    background: url('../images/mortgage-outside-entry/phone-icon.png') no-repeat center;
+    background: url('../../images/mortgage/outside-entry/phone-icon.png') no-repeat center;
 }
 
 .input-item input {
