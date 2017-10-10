@@ -27,7 +27,7 @@ export default (stores) => {
                 <Route exact path="/reserve/info" component={Reserve.Info} />
                 <Route exact path="/reserve/apply" component={Reserve.Apply} />
                 <Route exact path="/reserve/records" component={Reserve.Records} />
-                {/* <Route exact path="/reserve/protocol" component={Reserve.Protocol} /> */}
+                <Route exact path="/reserve/protocol" component={Reserve.Protocol} /> 
 
                 <Route exact path='/features/faq' component={Features.FAQList} />
                 <Route exact path='/features/faq/:kind' component={Features.FAQPage} />
