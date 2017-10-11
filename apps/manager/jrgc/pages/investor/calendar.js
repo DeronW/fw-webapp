@@ -64,7 +64,7 @@ class Calendar extends React.Component {
         let month = `${y}-${m}`
         return month
     }
-    selectedHandler = (index,date) => {
+    selectedHandler = (index, date) => {
         let { history } = this.props
 
         this.setState({ selectedIndex: index })
@@ -86,6 +86,11 @@ class Calendar extends React.Component {
         t[index] = !t[index]
         this.setState({ toggleList: t })
     }
+    formatDateHandler = (date) => {
+        let d = new Date(date)
+        var t = d.getFullYear() + "年" + d.getMonth() + 1 + "月" + d.getDate() + "日"
+        return t
+    }
     render() {
         let { history } = this.props
         let { month, year, selectedIndex, monthArrow, tab } = this.state
@@ -98,7 +103,7 @@ class Calendar extends React.Component {
             </div>
         }
         let dayFn = (item, index) => {
-            return <div styleName={selectedIndex == index ? 'day daySelected' : 'day'} onClick={() => { this.selectedHandler(index,date) }}>
+            return <div styleName={selectedIndex == index ? 'day daySelected' : 'day'} onClick={() => { this.selectedHandler(index, date) }}>
                 <div styleName="week">{item.day} {item.week}</div>
                 <div styleName="circle"></div>
                 <div styleName="receivable">{item.totalPlanCount}笔回款</div>
@@ -113,12 +118,12 @@ class Calendar extends React.Component {
                 return <div styleName="investor" key={personItem.custId}>
                     <div styleName="investorName">{personItem.realName}</div>
                     <div styleName={personFn.busType == 2 ? "investorAmount" : "investorAmountRed"}>{personItem.total}</div>
-                    <div styleName="investorText">购买克重{personItem.principal}克 | 收益克重{personItem.interest}克</div>
+                    <div styleName="investorText">{personItem.principal} | {personItem.interest}</div>
                 </div>
             }
             return <div styleName="dueItem" key={dueItem.createDate}>
                 <div styleName="dueDate">
-                    <div>{dueItem.createDate}</div>
+                    <div>{this.formatDateHandler(Object.keys(dueItem.createDate)[dueIndex])}</div>
                     <div onClick={() => this.toggleHandler(dueIndex)}></div>
                 </div>
                 <div styleName="investorList">
@@ -153,7 +158,7 @@ class Calendar extends React.Component {
                     {/*
                         calendarList.map(dayFn)
                     */}
-                    <div styleName="day" onClick={() => { this.selectedHandler(1,'2017-10-11') }}>
+                    <div styleName="day" onClick={() => { this.selectedHandler(1, '2017-10-11') }}>
                         <div styleName="week">06日 星期日</div>
                         <div styleName="circle"></div>
                         <div styleName="receivable">6笔回款</div>

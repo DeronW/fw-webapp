@@ -19,6 +19,9 @@ export default class Investor {
                 monthDueList: [],//月份 即将到期列表/已到期列表
                 dayDueList: [],//当天 即将到期列表/已到期列表
             },
+            birthday:{
+                list:[]
+            },
             custDetail: {//客户详情
 
             }
@@ -49,37 +52,44 @@ export default class Investor {
     }
     //回款日历-到期列表-回款月份
     fetchDueMonth = (tab,month) => {
+        let {monthDueList} = this.data.calendar
         if(tab == '即将到期'){
             this.Get("/api/finManager/payment/v2/dueList.shtml",{
                 month:month
             }).then(data=>{
-                this.data.calendar.monthDueList = data.data.result
+                monthDueList = data.data.result
             })
         }else{
             this.Get("/api/finManager/payment/v2/expiredList.shtml",{
                 month:month
             }).then(data=>{
-                this.data.calendar.monthDueList = data.data.result
+                monthDueList = data.data.result
             })
         }
     }
     //回款日历-到期列表-回款日期
     fetchDueDay = (tab,day) => {
+        let {dayDueList} = this.data.calendar
         if(tab == '即将到期'){
             this.Get("/api/finManager/payment/v2/dueList.shtml",{
                 day:day
             }).then(data=>{
-                this.data.calendar.dayDueList = data.data.result
+                dayDueList = data.data.result
             })
         }else{
             this.Get("/api/finManager/payment/v2/expiredList.shtml",{
                 day:day
             }).then(data=>{
-                this.data.calendar.dayDueList = data.data.result
+                dayDueList = data.data.result
             })
         }
     }
-
+    //生日提醒
+    fetchBirthday = () => {
+        this.Get("/api/finManager/cust/v2/birthCustList.shtml").then(data=>{
+            this.data.birthday.list = data.data.result
+        })
+    }
     fetchCouponList = () => {
         this.data.coupon.couponList = [
             {

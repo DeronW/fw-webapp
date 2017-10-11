@@ -12,6 +12,9 @@ class Investor extends React.Component {
         select:'可用余额最高排序',
         show:false
     }
+    componentDidMount(){
+
+    }
     switchTab = (tab) => {
         if(tab == this.state.tab) return
         this.setState({tab:tab,select:'可用余额最高排序'})
