@@ -4,12 +4,19 @@ import ReactEcharts from 'echarts-for-react'
 import {observer, inject} from 'mobx-react'
 import styles from '../../css/user/rebate.css'
 
+@inject("user")
+@observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Rebate extends React.Component {
     state = {
         tab_num: 0,
         chart_num: 0
     }
+
+    componentDidMount() {
+        // this.porps.user.fetGraphData('11')
+    }
+
     gotoHandler = (params) => {
         let {history} = this.props
         history.push('/investor-info')
@@ -21,9 +28,9 @@ class Rebate extends React.Component {
     chartTabHandler = (index) => {
         this.setState({chart_num: index})
     }
-    getOption = () => ({
+    getOption = (updateTime, timeDimensionList, rebateAmtList) => ({
         title: {
-            text: '当前数据更新于:',
+            text: `当前数据更新于:${updateTime}`,
             textStyle: {
                 color: '#555',
                 fontSize: 16,
@@ -43,7 +50,7 @@ class Rebate extends React.Component {
                 fontSize: 16
             },
             name: '日期',
-            data: ['9.16', '9.17', '9,18', '9.19', '9.20', '9.21', '9.22'],
+            data: timeDimensionList,
             axisTick: {
                 alignWithLabel: true
             }
@@ -89,7 +96,7 @@ class Rebate extends React.Component {
             name: '返利额',
             type: 'bar',
             barWidth: '30%',
-            data: [5, 20, 12, 9, 2, 14, 9]
+            data: rebateAmtList
         }],
         dataZoom: [{
             type: 'inside',
@@ -106,7 +113,7 @@ class Rebate extends React.Component {
     render() {
         let {history} = this.props;
         let {tab_num} = this.state;
-
+        let {graph} = this.props.user.data
         let tabs = ['全部', '微金', '尊享', '黄金']
         let tab_func = (item, index) => {
             return <div key={index} styleName={tab_num == index ? "tab tabActive" : "tab"}
@@ -126,9 +133,11 @@ class Rebate extends React.Component {
             return <div>
                 <div styleName="allChart">
                     <div styleName="chartWrapper">
-                        {chart_num == 0 && <ReactEcharts option={this.getOption()}
-                                                         style={{height: '100%', width: '100%'}}
-                                                         styleName='echarts'/>}
+                        {/*{chart_num == 0 &&*/}
+                        {/*<ReactEcharts*/}
+                            {/*option={this.getOption(graph.updateTime, graph.timeDimensionList, graph.rebateAmtList)}*/}
+                            {/*style={{height: '100%', width: '100%'}}*/}
+                            {/*styleName='echarts'/>}*/}
                     </div>
 
                     <div styleName="chartTab">
@@ -158,8 +167,8 @@ class Rebate extends React.Component {
                     </div>
                 </div>
                 <div styleName="users">
-                    <div styleName="userItem" >
-                        <div styleName="itemDetail" onClick={()=>this.gotoHandler()}>
+                    <div styleName="userItem">
+                        <div styleName="itemDetail" onClick={() => this.gotoHandler()}>
                             <div styleName="detailLine">
                                 <div styleName="detailLeft">李丽华</div>
                                 <div styleName="detailRight">¥7000.00</div>
@@ -169,7 +178,7 @@ class Rebate extends React.Component {
                                 <div styleName="detailRight userDate">2017-08-13 00:00:00</div>
                             </div>
                         </div>
-                        <div styleName="itemDetail" onClick={()=>this.gotoHandler()}>
+                        <div styleName="itemDetail" onClick={() => this.gotoHandler()}>
                             <div styleName="detailLine">
                                 <div styleName="detailLeft">李丽华</div>
                                 <div styleName="detailRight">¥7000.00</div>

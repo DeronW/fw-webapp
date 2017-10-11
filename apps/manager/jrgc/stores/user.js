@@ -14,6 +14,11 @@ export default class User {
             coupon: {
                 totalCount: null,
                 couponList: [],
+            },
+            graph: {
+                updateTime: '',
+                timeDimensionList: [],
+                rebateAmtList: []
             }
         })
     }
@@ -52,6 +57,16 @@ export default class User {
         }).then(data => {
             this.data.coupon.totalCount = data.moneySum
             this.data.coupon.couponList = data.pageData.result
+        })
+    }
+
+    fetGraphData = (type) => {
+        this.Get('/api/finManager/user/v2/stat.shtml', {
+            statType: type
+        }).then(data => {
+            this.data.graph.updateTime = data.result.updateTime
+            this.data.graph.timeDimensionList = data.result.timeDimensionList
+            this.data.graph.rebateAmtList = data.result.rebateAmtList
         })
     }
 }
