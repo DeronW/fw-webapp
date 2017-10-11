@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Components } from 'fw-javascripts'
+import { Components, Utils } from 'fw-javascripts'
 
 import { Header } from '../components'
 import { NativeBridge, Browser, Get } from '../helpers'
@@ -198,10 +198,15 @@ class Evaluate extends React.Component {
     }
 
     back_handler = () => {
-        // this.props.history.push(`/reserve/info`)
-        Browser.inApp ?
-            NativeBridge.close() :
-            this.props.history.goBack()
+
+        if (Utils.hashQuery.from_reserve) {
+            // 针对批量预约功能, 如果用户未评测, 先评测然后直接去预约, 而不是普通返回
+            location.href = `/static/wap/invest/index.html#/reserve/info?applyInvestClaimId=${Utils.hashQuery.applyInvestClaimId}`
+        } else {
+            Browser.inApp ?
+                NativeBridge.close() :
+                this.props.history.goBack()
+        }
     }
 
     componentDidMount() {
@@ -327,7 +332,8 @@ class Evaluate extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header noClose title="风险承受能力评估" history={history} />
+            <Header noClose title="风险承受能力评估" history={history}
+            backArrowHandler={this.back_handler} />
             {!finished && questions()}
             {finished && result()}
         </div>
