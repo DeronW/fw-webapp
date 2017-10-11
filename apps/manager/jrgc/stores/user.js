@@ -14,6 +14,10 @@ export default class User {
             coupon: {
                 totalCount: null,
                 couponList: [],
+            },
+            graph: {
+                totalList: [],
+
             }
         })
     }
