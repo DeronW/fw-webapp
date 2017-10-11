@@ -14,7 +14,7 @@ class Rebate extends React.Component {
     }
 
     componentDidMount() {
-
+        // this.porps.user.fetGraphData('11')
     }
 
     gotoHandler = (params) => {
@@ -28,9 +28,9 @@ class Rebate extends React.Component {
     chartTabHandler = (index) => {
         this.setState({chart_num: index})
     }
-    getOption = () => ({
+    getOption = (updateTime, timeDimensionList, rebateAmtList) => ({
         title: {
-            text: '当前数据更新于:',
+            text: `当前数据更新于:${updateTime}`,
             textStyle: {
                 color: '#555',
                 fontSize: 16,
@@ -50,7 +50,7 @@ class Rebate extends React.Component {
                 fontSize: 16
             },
             name: '日期',
-            data: ['9.16', '9.17', '9,18', '9.19', '9.20', '9.21', '9.22'],
+            data: timeDimensionList,
             axisTick: {
                 alignWithLabel: true
             }
@@ -96,7 +96,7 @@ class Rebate extends React.Component {
             name: '返利额',
             type: 'bar',
             barWidth: '30%',
-            data: [5, 20, 12, 9, 2, 14, 9]
+            data: rebateAmtList
         }],
         dataZoom: [{
             type: 'inside',
@@ -113,7 +113,7 @@ class Rebate extends React.Component {
     render() {
         let {history} = this.props;
         let {tab_num} = this.state;
-
+        let {graph} = this.props.user.data
         let tabs = ['全部', '微金', '尊享', '黄金']
         let tab_func = (item, index) => {
             return <div key={index} styleName={tab_num == index ? "tab tabActive" : "tab"}
@@ -133,9 +133,11 @@ class Rebate extends React.Component {
             return <div>
                 <div styleName="allChart">
                     <div styleName="chartWrapper">
-                        {chart_num == 0 && <ReactEcharts option={this.getOption()}
-                                                         style={{height: '100%', width: '100%'}}
-                                                         styleName='echarts'/>}
+                        {/*{chart_num == 0 &&*/}
+                        {/*<ReactEcharts*/}
+                            {/*option={this.getOption(graph.updateTime, graph.timeDimensionList, graph.rebateAmtList)}*/}
+                            {/*style={{height: '100%', width: '100%'}}*/}
+                            {/*styleName='echarts'/>}*/}
                     </div>
 
                     <div styleName="chartTab">
