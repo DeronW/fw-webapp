@@ -30,7 +30,6 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        document.title = '借钱';
         Post(`/api/product/v1/productList.json`)
             .then(data => this.setState({ products: data.resultList }))
             .then(() => Post(`/api/product/v1/recommendedList.json`))
@@ -86,8 +85,11 @@ class Home extends React.Component {
 
         let sub_product = (props, index) => {
             let clickHandler = () => {
-                gotoHandler(props.redirectUrl)
+                // 应该是动态链接, 但是目前只有一个活动, 所以写死
+                // gotoHandler(props.redirectUrl)
+                gotoHandler('https://m.easyloan888.com/static/loan/products/index.html#/mortgage/apply')
             }
+
             return <div styleName="sp-item" key={index}
                 onClick={() => { gotoHandler(props.redirectUrl) }}>
                 <img styleName="sp-logo" src={decodeURIComponent(props.logoUrl)} />

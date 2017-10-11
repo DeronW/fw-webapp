@@ -19,10 +19,16 @@ export default class User {
                 updateTime: '',
                 timeDimensionList: [],
                 rebateAmtList: []
+            },
+            cust: {
+                cust_page_no: 1,//值为0的时候表示数据加载完毕
+                custList: []//返利客户列表
             }
+
         })
     }
 
+    //获取公告数据
     fetchNotice = () => {
         this.data.user.notice = [{
             des: '第三方发',
@@ -42,12 +48,14 @@ export default class User {
         ]
     }
 
+    //获取我的页面基本信息
     fetchInfo = () => {
         this.Get('/api/finManager/user/v2/home.shtml').then(data => {
             this.data.user.info = data.result
         })
     }
 
+    //获取优惠券列表（转赠优惠券）
     fetchCouponList = (couponStatus, couponType) => {
         this.Post('/api/finManager/coupon/v2/myCouponList.shtml', {
             couponStatus: couponStatus,
@@ -60,6 +68,7 @@ export default class User {
         })
     }
 
+    //获取返利额数据
     fetGraphData = (type) => {
         this.Get('/api/finManager/user/v2/stat.shtml', {
             statType: type
@@ -67,6 +76,21 @@ export default class User {
             this.data.graph.updateTime = data.result.updateTime
             this.data.graph.timeDimensionList = data.result.timeDimensionList
             this.data.graph.rebateAmtList = data.result.rebateAmtList
+        })
+    }
+
+    //获取返利客户列表
+    fetchCustList = (done) => {
+        const PAGE_SIZE = 10
+        let {cust_page_no, custList} = this.data.cust
+        if (cust_page_no === 0) return done && done();
+        this.Get('/api/finManager/user/v2/rebateCustList.shtml', {
+            pageNo: cust_page_no,
+            pageSize: PAGE_SIZE
+        }).then(data => {
+            custList.push(...data.pageData.result)
+            cust_page_no < data.result.pageData.pagination.totalPage ? cust_page_no++ : cust_page_no = 0
+            done&&done()
         })
     }
 }

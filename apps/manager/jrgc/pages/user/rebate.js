@@ -14,7 +14,13 @@ class Rebate extends React.Component {
     }
 
     componentDidMount() {
-        // this.porps.user.fetGraphData('11')
+        this.props.user.fetGraphData('11')
+        this.props.user.fetchCustList()
+        Event.touchBottom(this.props.user.fetchCustList)
+    }
+
+    componentWillUnmount() {
+        Event.cancelTouchBottom()
     }
 
     gotoHandler = (params) => {
@@ -39,81 +45,32 @@ class Rebate extends React.Component {
         },
         tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
         legend: {
-            textStyle: {
-                fontSize: 18
-            },
-            bottom: 3,
             data: ['返利额']
         },
         xAxis: {
-            axisLabel: {
-                fontSize: 16
-            },
             name: '日期',
-            data: timeDimensionList,
-            axisTick: {
-                alignWithLabel: true
-            }
+            data: timeDimensionList
         },
         yAxis: {
-            type: 'value',
-            axisLabel: {
-                fontSize: 16
-            },
-            nameTextStyle: {
-                padding: [6, 0]
-            },
-            name: '金额(万元)',
-            max: function (value) {
-                return Math.round(value.max + 0.1 * (value.max - value.min));
-            },
-            splitLine: {show: false}  //改设置不显示坐标区域内的y轴分割线
+            name: '金额(元)'
         },
         series: [{
+            symbol: 'diamond',
             symbolSize: 8,
-            emphasis: {
-                barBorderRadius: 30
-            },
-            itemStyle: {
-                normal: {
-                    //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-                    color: function (params) {
-                        let colorList = ['#9b5b54', '#ab827e', '#a7928f', '#a34b41', '#e16557', '#ad281a', '#e1c8c6'];
-                        return colorList[params.dataIndex];
-                    },
-                    //柱形图圆角，初始化效果
-                    barBorderRadius: [10, 10, 0, 0],
-                    label: {
-                        show: true,//是否展示
-                        textStyle: {
-                            fontWeight: 'bolder',
-                            fontSize: '12',
-                            fontFamily: '微软雅黑',
-                        }
-                    }
-                },
-            },
+            showAllSymbol: true,
+            smooth: true,
+            lineStyle: {normal: {color: '#d75063'}},
             name: '返利额',
-            type: 'bar',
-            barWidth: '30%',
+            type: 'line',
             data: rebateAmtList
-        }],
-        dataZoom: [{
-            type: 'inside',
-            xAxisIndex: [0],
-            filterMode: 'none',
-            start: 0,
-            end: 100
-        }],
-        textStyle: {
-            fontSize: 16
-        }
+        }]
     })
 
     render() {
         let {history} = this.props;
         let {tab_num} = this.state;
         let {graph} = this.props.user.data
+        let {cust_page_no, custList} = this.props.user.data.cust
         let tabs = ['全部', '微金', '尊享', '黄金']
         let tab_func = (item, index) => {
             return <div key={index} styleName={tab_num == index ? "tab tabActive" : "tab"}
@@ -135,9 +92,9 @@ class Rebate extends React.Component {
                     <div styleName="chartWrapper">
                         {/*{chart_num == 0 &&*/}
                         {/*<ReactEcharts*/}
-                            {/*option={this.getOption(graph.updateTime, graph.timeDimensionList, graph.rebateAmtList)}*/}
-                            {/*style={{height: '100%', width: '100%'}}*/}
-                            {/*styleName='echarts'/>}*/}
+                        {/*option={this.getOption(graph.updateTime, graph.timeDimensionList, graph.rebateAmtList)}*/}
+                        {/*style={{height: '100%', width: '100%'}}*/}
+                        {/*styleName='echarts'/>}*/}
                     </div>
 
                     <div styleName="chartTab">
@@ -188,6 +145,7 @@ class Rebate extends React.Component {
                                 <div styleName="detailRight userDate">2017-08-13 00:00:00</div>
                             </div>
                         </div>
+                        {(cust_page_no == 0 && custList.length > 0 ) && <div>已经全部加载完毕</div>}
                     </div>
                 </div>
             </div>
