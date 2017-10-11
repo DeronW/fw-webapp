@@ -1,0 +1,150 @@
+.cnt-container {
+  box-sizing: border-box;
+  background-color: #eee;
+  min-height: 100%;
+}
+
+.item-grp-name, .select-label {
+  margin-left: 30px;
+  height: 64px;
+  line-height: 64px;
+  color: #999;
+  font-size: 20px;
+}
+
+.item-grp, .option-grp {
+  box-sizing: border-box;
+  padding-left: 30px;
+  background-color: #fff;
+}
+
+.item-grp:last-child {
+  margin-bottom: 178px;
+}
+
+.item-container, .unselected-option {
+  box-sizing: border-box;
+  display: table;
+  width: 100%;
+  height: 86px;
+  line-height: 86px;
+  border-bottom: 1px solid #eee;
+  padding-right: 24px;
+  color: #333;
+  font-size: 28px;
+}
+
+.selected-option {
+  composes: unselected-option;
+  background: url('../images/loan-fq-form/selected.png') no-repeat 630px;
+}
+
+.mutable-item-container {
+  composes: item-container;
+  padding-right: 54px;
+  background: url('../images/loan-fq-form/expand.png') no-repeat 650px;
+}
+
+.input-item-container {
+  composes: item-container;
+  padding-left: 30px;
+  margin-top: 20px;
+  background-color: #fff;
+}
+
+.item-container:last-child {
+  border-bottom: none;
+}
+
+.item-name {
+  float: left;
+  height: 86px;
+  line-height: 86px;
+  color: #666;
+  font-size: 28px;
+}
+
+.item-value-display, .input-item-container input {
+  box-sizing: border-box;
+  float: right;
+  width: 450px;
+  height: 86px;
+  line-height: 86px;
+  color: #333;
+  font-size: 28px;
+  text-align: right;
+}
+
+.item-value, .area-measure-unit {
+  composes: item-value-display;
+}
+
+.input-item-container input {
+  line-height: 33px;
+  padding: 33px 0;
+}
+
+.item-value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.area-measure-unit {
+  width: auto;
+  margin-left: 12px;
+  line-height: 90px;
+}
+
+.super-align-char {
+  vertical-align: super;
+  font-size: 18px;
+}
+
+.submit-btn-container {
+  width: 100%;
+  height: 128px;
+}
+
+.submit-btn {
+  display: block;
+  height: 82px;
+  line-height: 82px;
+  margin: 22px 20px;
+  background-color: #ccc;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+}
+
+.agree {
+  padding: 20px 30px
+}
+
+.agree .agree-icon {
+  float: left;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #dadada;
+  background-color: #fff;
+  border-radius: 50%
+}
+
+.agree .select-icon {
+  width: 32px;
+  height: 32px;
+  background: #6aa4f0 url(../images/loan-fq-form/agree-icon.png) no-repeat 50%;
+  border: none
+}
+
+.agree .text {
+  margin: -4px 0 0;
+  line-height: 32px;
+  color: #999;
+  font-size: 20px
+}
+
+.agree .text a {
+  color: #6aa4f0
+}

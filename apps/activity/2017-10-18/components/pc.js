@@ -44,7 +44,7 @@ class PC extends React.Component {
                                 <div styleName="reward-invite-value-rb">(工豆)</div>
                             </div>
                         </div>
-                        <div styleName="reward-condition">5万≤单个被邀请人累投额&lt;20万送邀请人</div>
+                        <div styleName="reward-invite-condition">5万≤单个被邀请人累投额&lt;20万送邀请人</div>
                     </div>
                     <div styleName="reward-invite-2">
                         <div styleName="reward-invite-value">
