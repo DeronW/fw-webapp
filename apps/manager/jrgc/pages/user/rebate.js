@@ -4,12 +4,19 @@ import ReactEcharts from 'echarts-for-react'
 import {observer, inject} from 'mobx-react'
 import styles from '../../css/user/rebate.css'
 
+@inject("user")
+@observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Rebate extends React.Component {
     state = {
         tab_num: 0,
         chart_num: 0
     }
+
+    componentDidMount() {
+
+    }
+
     gotoHandler = (params) => {
         let {history} = this.props
         history.push('/investor-info')
@@ -158,8 +165,8 @@ class Rebate extends React.Component {
                     </div>
                 </div>
                 <div styleName="users">
-                    <div styleName="userItem" >
-                        <div styleName="itemDetail" onClick={()=>this.gotoHandler()}>
+                    <div styleName="userItem">
+                        <div styleName="itemDetail" onClick={() => this.gotoHandler()}>
                             <div styleName="detailLine">
                                 <div styleName="detailLeft">李丽华</div>
                                 <div styleName="detailRight">¥7000.00</div>
@@ -169,7 +176,7 @@ class Rebate extends React.Component {
                                 <div styleName="detailRight userDate">2017-08-13 00:00:00</div>
                             </div>
                         </div>
-                        <div styleName="itemDetail" onClick={()=>this.gotoHandler()}>
+                        <div styleName="itemDetail" onClick={() => this.gotoHandler()}>
                             <div styleName="detailLine">
                                 <div styleName="detailLeft">李丽华</div>
                                 <div styleName="detailRight">¥7000.00</div>
