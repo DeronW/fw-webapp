@@ -7,6 +7,7 @@ import { Post, StoreSpy, mobxStoreExtend } from '../lib/helpers'
 
 let stores = {
     account: new (mobxStoreExtend(Stores.Account))(Post),
+    user_info: new Stores.UserInfo(Post),
     bank_card: new Stores.BankCard(Post),
     redbag: new Stores.Redbag(Post),
     repayment_youyi: new Stores.RepaymentYouyi(Post),

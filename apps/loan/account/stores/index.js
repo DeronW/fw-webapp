@@ -1,4 +1,5 @@
 import Account from './account.js'
+import UserInfo from './user-info.js'
 import BankCard from './bank-card.js'
 import Redbag from './redbag.js'
 import RepaymentYouyi from './repayment-youyi.js'
@@ -6,6 +7,7 @@ import RepaymentFangXin from './repayment-fangxin.js'
 
 export default {
     Account,
+    UserInfo,
     BankCard,
     Redbag,
     RepaymentYouyi,
