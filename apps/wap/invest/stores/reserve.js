@@ -80,7 +80,6 @@ export default class Reserve {
             pageSize: PAGE_SIZE,
             status: type
         }, { loading: false }).then(data => {
-            current_tab.list = []
             current_tab.list.push(...data.pageData.result)
 
             current_tab.page_no < data.pageData.pagination.totalPage ?
