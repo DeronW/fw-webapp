@@ -206,9 +206,9 @@ class Evaluate extends React.Component {
     }
 
     back_handler = () => {
-            Browser.inApp ?
-                NativeBridge.close() :
-                this.props.history.goBack()
+        Browser.inApp ?
+            NativeBridge.close() :
+            this.props.history.goBack()
     }
 
     selectHandler = (questionIndex, answerIndex) => {
