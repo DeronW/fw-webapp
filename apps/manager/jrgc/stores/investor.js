@@ -22,14 +22,13 @@ export default class Investor {
         })
     }
     //回款日历-总回款信息接口
-    fetchPaymentOverview = () => {
+    fetchOverview = () => {
         this.Get('/api/finManager/cust/v2/paymentOverview.shtml').then(data=>{
             this.data.calendar.overview = data.data.result
         })
     }
     //回款日历-月份回款日历
-    fetchPaymentMonthCal = (month) => {
-        console.log(month)
+    fetchMonthCal = (month) => {
         this.Get("/api/finManager/payment/v2/paymentMonthCal.shtml",{
             month:month
         }).then(data=>{
@@ -37,46 +36,46 @@ export default class Investor {
         })
     }
     //回款日历-月度回款信息
-    fetchPaymentMonthInfo = (month) => {
+    fetchMonthInfo = (month) => {
         this.Get("/api/finManager/payment/v2/paymentMonthInfo.shtml",{
             month:month
         }).then(data=>{
             this.data.calendar.monthInfo = data.data.result
         })
     }
-    //回款日历-即将到期列表-回款月份
-    fetchPaymentDueMonth = (month) => {
-        this.Get("/api/finManager/payment/v2/dueList.shtml",{
-            month:month
-        }).then(data=>{
-            this.data.calendar.monthDueList = data.data.result
-        })
+    //回款日历-到期列表-回款月份
+    fetchDueMonth = (tab,month) => {
+        if(tab == '即将到期'){
+            this.Get("/api/finManager/payment/v2/dueList.shtml",{
+                month:month
+            }).then(data=>{
+                this.data.calendar.monthDueList = data.data.result
+            })
+        }else{
+            this.Get("/api/finManager/payment/v2/expiredList.shtml",{
+                month:month
+            }).then(data=>{
+                this.data.calendar.monthDueList = data.data.result
+            })
+        }
     }
-    //回款日历-即将到期列表-回款日期
-    fetchPaymentDueDay = (day) => {
-        this.Get("/api/finManager/payment/v2/dueList.shtml",{
-            day:day
-        }).then(data=>{
-            this.data.calendar.dayDueList = data.data.result
-        })
+    //回款日历-到期列表-回款日期
+    fetchDueDay = (tab,day) => {
+        if(tab == '即将到期'){
+            this.Get("/api/finManager/payment/v2/dueList.shtml",{
+                day:day
+            }).then(data=>{
+                this.data.calendar.dayDueList = data.data.result
+            })
+        }else{
+            this.Get("/api/finManager/payment/v2/expiredList.shtml",{
+                day:day
+            }).then(data=>{
+                this.data.calendar.dayDueList = data.data.result
+            })
+        }
     }
 
-    //回款日历-已到期列表-回款月份
-    fetchPaymentExpireMonth = (month) => {
-        this.Get("/api/finManager/payment/v2/expiredList.shtml",{
-            month:month
-        }).then(data=>{
-            this.data.calendar.dayDueList = data.data.result
-        })
-    }
-    //回款日历-已到期列表-回款日期
-    fetchPaymentExpireDay = (day) => {
-        this.Get("/api/finManager/payment/v2/expiredList.shtml",{
-            day:day
-        }).then(data=>{
-            this.data.calendar.dayDueList = data.data.result
-        })
-    }
     fetchCouponList = () => {
         this.data.coupon.couponList = [
             {

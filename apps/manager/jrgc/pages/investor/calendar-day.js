@@ -1,18 +1,29 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
+import { Utils } from 'fw-javascripts'
 
 import styles from '../../css/investor/calendar-day.css'
 
+@inject('investor')
+@observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class calendarDay extends React.Component {
     state = {
-        tab: '即将到期'
+        tab: '即将到期',
+        date:Utils.hashQuery.date
+    }
+    componentDidMount(){
+        let {tab,date} = this.state
+        let {fetchDueDay} =this.props.investor
+
+        fetchDueDay(tab,date)
     }
     switchTab = tab => {
         if (tab == this.state.tab) return
-        let t = tab == 'Ta的项目' ? '未起息' : '全部'
-        this.setState({ tab: tab })
+        let {fetchDueDay} =this.props.investor
+
+        this.setState({ tab: tab },fetchDueDay(tab,this.state.date))
     }
     render() {
         let { history } = this.props
