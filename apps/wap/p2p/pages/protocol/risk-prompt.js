@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 
 import { Header } from '../../components/'
 import styles from '../../css/protocol/risk-prompt.css'
-import { NativeBridge } from '../../helpers'
+import { NativeBridge,Browser } from '../../helpers'
 
 
 @CSSModules(styles, {
