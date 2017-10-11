@@ -89,7 +89,7 @@ class User extends React.Component {
         let {user} = this.props.user.data, {banners} = user
         let {position} = this.state
         let bannerGroup;
-        let userInfo = this.props.user.data.user.info
+        let {info} = this.props.user.data.user
         let noticeFn = (item, index) => {
             return <div styleName="noticeItem" key={index} onClick={() => this.gotoHandler(item.url)}>{item.des}</div>
         }
@@ -103,19 +103,19 @@ class User extends React.Component {
 
         return <div styleName="bg">
             <div styleName="bar">
-                <img styleName="portrait" src={require(userInfo.headUrl)}/>
+                <img styleName="portrait" src={info.headUrl}/>
                 <div styleName="barItem info">
-                    <div styleName="name">{userInfo.loginName}</div>
-                    <div styleName="des">{userInfo.promotionCode}</div>
+                    <div styleName="name">{info.loginName}</div>
+                    <div styleName="des">{info.promotionCode}</div>
                 </div>
                 <div styleName="barItem">
                     <div styleName="des">全部客户(人)</div>
-                    <div styleName="num">{userInfo.totleCustCount}</div>
+                    <div styleName="num">{info.totleCustCount}</div>
                 </div>
                 <div styleName="line"></div>
                 <div styleName="barItem">
                     <div styleName="des">在投客户(人)</div>
-                    <div styleName="num">{userInfo.investingCustCount}</div>
+                    <div styleName="num">{info.investingCustCount}</div>
                 </div>
             </div>
             <div styleName="notice">
@@ -129,30 +129,30 @@ class User extends React.Component {
                 <img styleName="noticeArrow" src={require('../../images/user/user/arrow.png')}/>
             </div>
             <div styleName="bean">
-                <div styleName="beanNum"><span>¥{userInfo.beanAmount}</span>可用返利（工豆）</div>
+                <div styleName="beanNum"><span>¥{info.beanAmount}</span>可用返利（工豆）</div>
                 <div styleName="beanText">工豆投金融工场标可抵现金，请尽快使用。</div>
                 <div styleName="rebate">
                     <div styleName="rebateNum">
                         <div styleName="rebateText">今日返利</div>
-                        <div styleName="rebateMoney">¥{userInfo.todayRebate}</div>
+                        <div styleName="rebateMoney">¥{info.todayRebate}</div>
                     </div>
                     <div styleName="rebateNum rebateBorder" onClick={this.gotoRebate}>
                         <div styleName="rebateText">待发返利</div>
-                        <div styleName="rebateMoney">¥{userInfo.pendingRebate}</div>
+                        <div styleName="rebateMoney">¥{info.pendingRebate}</div>
                     </div>
                     <img styleName="rebateArrow" src={require('../../images/user/user/arrow.png')}
                          onClick={this.gotoRebate}/>
                 </div>
             </div>
             <div styleName="banner">{bannerGroup}</div>
-            <div styleName="rate">年化佣金 <span>{userInfo.commission}%</span></div>
+            <div styleName="rate">年化佣金 <span>{info.commission}%</span></div>
             <div styleName="rule">
                 <div styleName="ruleText">
                     非等额标包括还款方式为一次性还本付息、按月付息到期还本、按天一次性还本付息的一次性还本标；<br/><br/>
                     等额标包括还款方式为按月还款和按季等额还款的标。该类标最终年化佣金乘以0.56且超过18个月标按18个月计算佣金。0.56为借款方占用投资方的资金使用率。
                 </div>
                 <div styleName="invest">邀请好友</div>
-                <div styleName="couponBtn" onClick={this.gotoCoupon}><span>{userInfo.couponCount}</span></div>
+                <div styleName="couponBtn" onClick={this.gotoCoupon}><span>{info.couponCount}</span></div>
             </div>
             <BottomNavBar history={history}/>
         </div>
