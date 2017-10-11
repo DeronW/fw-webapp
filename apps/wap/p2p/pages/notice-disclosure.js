@@ -259,7 +259,7 @@ class MiddlePanel extends React.Component {
             </div>
             <div styleName="chairmanRight">
                 <div styleName="chairmanRightTitle">
-                    董监高人员名单
+                    管理团队
                     </div>
                 <div styleName="chairmanRightTitleContent">
                     {chairman.map(chairmanFn)}

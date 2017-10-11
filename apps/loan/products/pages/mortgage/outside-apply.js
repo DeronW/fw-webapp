@@ -3,14 +3,14 @@ import CSSModules from 'react-css-modules'
 
 import { Components, Utils } from 'fw-javascripts'
 
-import { Header } from '../../lib/components'
-import { Post } from '../../lib/helpers'
+import { Header } from '../../../lib/components'
+import { Post } from '../../../lib/helpers'
 
-import styles from '../css/mortgage-outside-apply.css'
+import styles from '../../css/mortgage/outside-apply.css'
 
 
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
-class MortgageOutsideApply extends React.Component {
+class OutsideApply extends React.Component {
 
     DISTRICT = ['东城区', '西城区', '朝阳区', '海淀区', '丰台区', '石景山区', '门头沟区', '房山区', '大兴区', '通州区', '顺义区', '昌平区', '平谷区', '怀柔区', '密云县', '延庆县', '北京经济技术开发区', '北京周边']
 
@@ -27,6 +27,7 @@ class MortgageOutsideApply extends React.Component {
 
     handleSubmit = () => {
         let { amount, duration, district, neighbour, area } = this.state;
+
         if (!(amount && duration && district && neighbour && area)) return
 
         let { phone, uid, token } = Utils.hashQuery,
@@ -46,9 +47,9 @@ class MortgageOutsideApply extends React.Component {
             realName: '',
             sourceType: 3
         }).then(data => {
-            history.push('/mortgage-download')
+            history.push('/mortgage/download')
         }, e => {
-            Components.showToast(e.message);
+            Components.showToast(e.message)
         });
     }
 
@@ -56,6 +57,7 @@ class MortgageOutsideApply extends React.Component {
         let { history } = this.props;
         let { amount, duration, district, neighbour, area, showLeavePop } = this.state,
             allFieldsFilled = amount && duration && district && neighbour && area;
+
         return (
             <div styleName="cnt-container">
                 <Header title="放心花" history={history} />
@@ -100,7 +102,7 @@ class MortgageOutsideApply extends React.Component {
                         <select value={district}
                             onChange={this.handleChange('district')} >
                             <option value="">请选择</option>
-                            { this.DISTRICT.map(v => <option key={v} value={v}>{v}</option>) }
+                            {this.DISTRICT.map(v => <option key={v} value={v}>{v}</option>)}
                         </select>
                     </div>
 
@@ -122,19 +124,22 @@ class MortgageOutsideApply extends React.Component {
 
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn"
-                        style={{ 'background': allFieldsFilled ? '#639afb' : '#ccc'}}
+                        style={{ 'background': allFieldsFilled ? '#639afb' : '#ccc' }}
                         onClick={this.handleSubmit}>
                         提交资料
                     </a>
                 </div>
 
-                <div styleName="leave-catch" onClick={() => { this.setState({ showLeavePop: true }) }}></div>
-                { showLeavePop &&
+                <div styleName="leave-catch" onClick={() => {
+                    this.setState({ showLeavePop: true })
+                }}></div>
+
+                {showLeavePop &&
                     <div styleName="mask">
                         <div styleName="pop">
                             <div styleName="pop-content">马上就要申请成功了，真的要退出吗？</div>
                             <div styleName="pop-btn-grp">
-                                <div styleName="pop-btn-cancel" onClick={() => { history.push('/mortgage-outside-entry') }}>离开</div>
+                                <div styleName="pop-btn-cancel" onClick={() => { history.push('/mortgage/outside-entry') }}>离开</div>
                                 <div styleName="pop-btn-confirm" onClick={() => { this.setState({ showLeavePop: false }) }}>继续申请</div>
                             </div>
                         </div>
@@ -145,4 +150,4 @@ class MortgageOutsideApply extends React.Component {
     }
 }
 
-export default MortgageOutsideApply
+export default OutsideApply

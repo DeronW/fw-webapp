@@ -3,14 +3,14 @@ import CSSModules from 'react-css-modules'
 
 import { Components, Utils } from 'fw-javascripts'
 
-import { Header } from '../../lib/components'
-import { Post } from '../../lib/helpers'
+import { Header } from '../../../lib/components'
+import { Post } from '../../../lib/helpers'
 
-import styles from '../css/mortgage-outside-entry.css'
+import styles from '../../css/mortgage/outside-entry.css'
 
 
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class MortgageOutsideEntry extends React.Component {
+@CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
+class OutsideEntry extends React.Component {
 
     state = {
         phone: '',
@@ -78,7 +78,7 @@ class MortgageOutsideEntry extends React.Component {
         }, e => {
             if (e.code == 201003) {
                 Components.showToast('手机号已注册');
-                setTimeout(() => this.props.history.push('/mortgage-download'), 1700)
+                setTimeout(() => this.props.history.push('/mortgage/download'), 1700)
             }
             if (e.code == 20020) {
                 Components.showToast('图形验证码不正确');
@@ -101,7 +101,7 @@ class MortgageOutsideEntry extends React.Component {
             channelCode: Utils.hashQuery.channelCode || 'OFFICIAL',
             sourceType: 5
         }).then(data => {
-            history.push(`/mortgage-outside-apply?uid=${data.userLogin.uid}&token=${data.userLogin.userToken}&phone=${this.state.phone}`);
+            history.push(`/mortgage/outside-apply?uid=${data.userLogin.uid}&token=${data.userLogin.userToken}&phone=${this.state.phone}`);
         }, e => {
             Components.showToast(e.message);
         })
@@ -122,7 +122,7 @@ class MortgageOutsideEntry extends React.Component {
                         <input maxLength="11" type="tel"
                             value={phone}
                             placeholder="请输入手机号"
-                            onChange={this.handleInput('phone')}/>
+                            onChange={this.handleInput('phone')} />
                     </div>
 
                     <div styleName="input-item captcha-input">
@@ -130,7 +130,7 @@ class MortgageOutsideEntry extends React.Component {
                         <input maxLength="4"
                             value={captchaInput}
                             placeholder="请输入图形验证码"
-                            onChange={this.handleInput('captchaInput')}/>
+                            onChange={this.handleInput('captchaInput')} />
                         <div styleName="captcha-img-container" onClick={this.getCaptcha}>
                             <img src={captchaImgUrl} />
                         </div>
@@ -143,12 +143,15 @@ class MortgageOutsideEntry extends React.Component {
                             placeholder="请输入短信验证码"
                             onChange={this.handleInput('SMSInput')} />
                         <div styleName="sms-btn" onClick={this.getSMS}>
-                            {getSMSTimer === 60 ? "获取验证码": `${getSMSTimer}s`}
+                            {getSMSTimer === 60 ? "获取验证码" : `${getSMSTimer}s`}
                         </div>
                     </div>
 
                     <a styleName="register-btn"
-                        style={{ 'background': allFieldsFilled ? '#f26052' : '#1e8570', 'color': allFieldsFilled ? '#fff' : '#0d5c4c'}}
+                        style={{
+                            'background': allFieldsFilled ? '#f26052' : '#1e8570',
+                            'color': allFieldsFilled ? '#fff' : '#0d5c4c'
+                        }}
                         onClick={this.register}>申请千万贷款</a>
                 </div>
             </div>
@@ -156,4 +159,4 @@ class MortgageOutsideEntry extends React.Component {
     }
 }
 
-export default MortgageOutsideEntry
+export default OutsideEntry

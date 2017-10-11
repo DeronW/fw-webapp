@@ -4,7 +4,7 @@
 }
 
 .download-wrap {
-    background: url(../images/mortgage-download/bg.jpg) no-repeat center top;
+    background: url(../../images/mortgage/download/bg.jpg) no-repeat center top;
     width: 720px;
     padding-top: 200px;
 }
@@ -58,12 +58,6 @@
 .download-area .btn img {
     width: 36px;
     position: relative;
-    top: 10px;
+    top: -3px;
     margin: 0 15px 0 0;
-}
-
-.download-area .android-btn {
-    img {
-        top: 14px;
-    }
 }

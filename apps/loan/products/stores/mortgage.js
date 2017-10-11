@@ -40,7 +40,7 @@ export default class Mortgage {
     }
 
     setCurrentPanel = (history, p) => {
-        history.push(`/mortgage-apply#${p}`);
+        history.push(`/mortgage/apply#${p}`);
     }
 
     setPanelData = (history, field, v) => {
@@ -66,7 +66,8 @@ export default class Mortgage {
             province: '北京市',
             city: this.city,
             realName: this.realName
-        }).then(data => history.push('/mortgage-success'),
+        }).then(
+            data => history.push('/mortgage/success'),
             e => Components.showToast(e.message))
     }
 
