@@ -1,26 +1,30 @@
-import { extendObservable } from 'mobx'
+import {extendObservable} from 'mobx'
 
 export default class Investor {
     constructor(Get) {
         this.Get = Get
         this.data = {}
         extendObservable(this.data, {
-            coupon:{
-                couponList:[]
+            coupon: {
+                couponList: []
             },
-            calendar:{//回款日历
-                overview:{
-                    principal:100,
-                    interest:23,
-                    goldAmt:4.5
+            calendar: {//回款日历
+                overview: {
+                    principal: 100,
+                    interest: 23,
+                    goldAmt: 4.5
                 },//总回款信息
-                calendarList:[],//月份回款日历
-                monthInfo:{},//月度回款信息
-                monthDueList:[],//月份 即将到期列表/已到期列表
-                dayDueList:[],//当天 即将到期列表/已到期列表
+                calendarList: [],//月份回款日历
+                monthInfo: {},//月度回款信息
+                monthDueList: [],//月份 即将到期列表/已到期列表
+                dayDueList: [],//当天 即将到期列表/已到期列表
+            },
+            custDetail: {//客户详情
+
             }
         })
     }
+
     //回款日历-总回款信息接口
     fetchOverview = () => {
         this.Get('/api/finManager/cust/v2/paymentOverview.shtml').then(data=>{
@@ -79,19 +83,19 @@ export default class Investor {
     fetchCouponList = () => {
         this.data.coupon.couponList = [
             {
-                id:1
+                id: 1
             },
             {
-                id:2
+                id: 2
             },
             {
-                id:3
+                id: 3
             },
             {
-                id:2
+                id: 2
             },
             {
-                id:3
+                id: 3
             },
         ]
     }
