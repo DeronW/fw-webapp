@@ -10,6 +10,14 @@ import { Browser, NativeBridge } from '../helpers/'
  */
 
 function goBack(props) {
+
+    // 如果传入自定义返回方法, 直接调用并结束
+    if (props.backArrowHandler) {
+        props.backArrowHandler()
+        return
+    }
+
+    // 写了一大堆, 其实是为了兼容在App中点击返回箭头的时候, 关闭当前webviwe
     let old_pop = window.onpopstate
 
     let moved = false
@@ -27,10 +35,12 @@ const Header = CSSModules(styles, {
     allowMultiple: true,
     errorWhenNotFound: false
 })(props => {
-    let back = props.noBack ? null :
+    let back = !props.noBack &&
         <a styleName="btn btn-back" onClick={() => goBack(props)}></a>
-    let close = props.noClose ? null :
+
+    let close = !props.noClose &&
         <a styleName="btn btn-close" onClick={NativeBridge.close}></a>
+
     let sub_title = props.sub_title &&
         <Link to={props.sub_link} styleName="sub-title">{props.sub_title}</Link>
 
@@ -49,7 +59,8 @@ const Header = CSSModules(styles, {
 
 Header.defaultProps = {
     noClose: true,
-    noBack: false
+    noBack: false,
+    backArrowHandler: null
 }
 
 export default Header
