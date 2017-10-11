@@ -10,7 +10,7 @@ import {Browser} from '../../helpers'
 })
 class TrusteeShip extends React.Component {
     componentDidMount() {
-        document.title = '资金存管三方协议'
+        // document.title = '资金存管三方协议'
     }
 
     render() {

@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 
 import { Header } from '../../components/'
 import styles from '../../css/protocol/counseling.css'
-import { NativeBridge } from '../../helpers'
+import { NativeBridge, Browser } from '../../helpers'
 
 @CSSModules(styles, {
     allowMultiple: true,
@@ -15,7 +15,7 @@ class PerformDuty extends React.Component {
         let { history } = this.props
 
         return <div styleName="bg">
-            <Header title="履行反洗钱义务的承诺书" history={history} />
+            {(!Browser.inApp) && <Header title="履行反洗钱义务的承诺书" history={history} />}
 
             <div styleName="content">
                 履行反洗钱义务的承诺书
