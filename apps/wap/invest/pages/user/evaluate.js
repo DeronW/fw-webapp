@@ -206,14 +206,9 @@ class Evaluate extends React.Component {
     }
 
     back_handler = () => {
-        if (Utils.hashQuery.next_url) {
-            // 针对批量预约功能, 如果用户未评测, 先评测然后直接去预约, 而不是普通返回
-            this.props.history.replace(Utils.hashQuery.next_url)
-        } else {
-            Browser.inApp ?
-                NativeBridge.close() :
-                this.props.history.goBack()
-        }
+        Browser.inApp ?
+            NativeBridge.close() :
+            this.props.history.goBack()
     }
 
     selectHandler = (questionIndex, answerIndex) => {

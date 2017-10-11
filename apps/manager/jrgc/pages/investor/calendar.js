@@ -11,24 +11,24 @@ import styles from '../../css/investor/calendar.css'
 class Calendar extends React.Component {
     state = {
         month: new Date().getMonth() + 1,
-        year:new Date().getFullYear(),
+        year: new Date().getFullYear(),
         selectedIndex: 0,
         monthArrow: true,
         tab: '即将到期',
         toggleList: []
     }
     componentDidMount() {
-        let { fetchPaymentMonthCal,fetchPaymentMonthInfo } = this.props.investor
-        let { month,year } = this.state
+        let { fetchMonthCal, fetchMonthInfo, fetchDueMonth, fetchOverview } = this.props.investor
+        let { tab, month, year } = this.state
 
-        if(month<10) month = `0${month}`
-        let m = `${year}-${month}`
-        fetchPaymentMonthCal(m)
-        fetchPaymentMonthInfo(m)
+        fetchOverview()
+        fetchMonthCal(this.getMonthHandler(year, month))
+        fetchMonthInfo(this.getMonthHandler(year, month))
+        fetchDueMonth(tab, this.getMonthHandler(year, month))
     }
     addMonthHandler = () => {
-        let { month,year } = this.state
-        var m = month,y = year
+        let { month, year } = this.state
+        var m = month, y = year
 
         if (month < 12) {
             m = Number(month) + 1
@@ -36,11 +36,11 @@ class Calendar extends React.Component {
             m = 1
             y = year + 1
         }
-        this.updateDateHandler(y,m)
+        this.updateDateHandler(y, m)
     }
     reduceMonthHandler = () => {
-        let { month,year } = this.state
-        var m = month,y = year
+        let { month, year } = this.state
+        var m = month, y = year
 
         if (month > 1) {
             m = Number(month) - 1
@@ -48,45 +48,87 @@ class Calendar extends React.Component {
             m = 12
             y = year - 1
         }
-        this.updateDateHandler(y,m)
+        this.updateDateHandler(y, m)
     }
-    updateDateHandler = (y,m) => {
-        let { fetchPaymentMonthCal,fetchPaymentMonthInfo } = this.props.investor
+    updateDateHandler = (year, month) => {
+        let { fetchMonthCal, fetchMonthInfo, fetchDueMonth } = this.props.investor
+        let { tab } = this.state
 
-        if(m<10) m = `0${m}`
+        this.setState({
+            month: month,
+            year: year
+        }, fetchMonthCal(this.getMonthHandler(year, month)), fetchMonthInfo(this.getMonthHandler(year, month)), fetchDueMonth(tab, this.getMonthHandler(year, month)))
+    }
+    getMonthHandler = (y, m) => {
+        if (m < 10) m = `0${m}`
         let month = `${y}-${m}`
-        this.setState({ month: m,year:y }, fetchPaymentMonthCal(month),fetchPaymentMonthInfo(month))
+        return month
     }
+    selectedHandler = (index, date) => {
+        let { history } = this.props
 
-    selectedHandler = (index) => {
         this.setState({ selectedIndex: index })
+        history.push(`/investor-calendar-day?date=${date}`)
+
     }
     switchMonthArrowHandler = () => {
         this.setState({ monthArrow: !this.state.monthArrow })
     }
     switchTabHandler = (tab) => {
+        let { fetchDueMonth } = this.props.investor
+        let { month, year } = this.state
+
         if (tab == this.state.tab) return
-        this.setState({ tab: tab })
+        this.setState({ tab: tab }, fetchDueMonth(tab, this.getMonthHandler(year, month)))
+    }
+    toggleHandler = (index) => {
+        let t = this.state.toggleList
+        t[index] = !t[index]
+        this.setState({ toggleList: t })
+    }
+    formatDateHandler = (date) => {
+        let d = new Date(date)
+        var t = d.getFullYear() + "年" + d.getMonth() + 1 + "月" + d.getDate() + "日"
+        return t
     }
     render() {
         let { history } = this.props
-        let { month,year, selectedIndex, monthArrow, tab } = this.state
+        let { month, year, selectedIndex, monthArrow, tab } = this.state
         let { calendar } = this.props.investor.data
-        let { overview } = calendar
-        let { calendarList } = calendar
-        let { monthInfo } = calendar
+        let { overview, calendarList, monthInfo, monthDueList } = calendar
 
         let tabFn = (item, index) => {
             return <div styleName="dueTab" key={index} onClick={() => this.switchTabHandler(item)}>
                 <div styleName={tab == item ? "tab tabActive" : "tab"}>{item}</div>
             </div>
         }
-        let dayFn = (item,index) => {
-            return <div styleName={selectedIndex==index?'day daySelected':'day'} onClick={()=>{this.selectedIndex(index)}}>
+        let dayFn = (item, index) => {
+            return <div styleName={selectedIndex == index ? 'day daySelected' : 'day'} onClick={() => { this.selectedHandler(index, date) }}>
                 <div styleName="week">{item.day} {item.week}</div>
                 <div styleName="circle"></div>
                 <div styleName="receivable">{item.totalPlanCount}笔回款</div>
                 <div styleName="receivable actual">{item.totalRealCount}笔回款</div>
+            </div>
+        }
+
+        let dueFn = (dueItem, dueIndex) => {
+            let toggleId = this.state.toggleList[dueIndex]
+
+            let personFn = (personItem, personIndex) => {
+                return <div styleName="investor" key={personItem.custId}>
+                    <div styleName="investorName">{personItem.realName}</div>
+                    <div styleName={personFn.busType == 2 ? "investorAmount" : "investorAmountRed"}>{personItem.total}</div>
+                    <div styleName="investorText">{personItem.principal} | {personItem.interest}</div>
+                </div>
+            }
+            return <div styleName="dueItem" key={dueItem.createDate}>
+                <div styleName="dueDate">
+                    <div>{this.formatDateHandler(Object.keys(dueItem.createDate)[dueIndex])}</div>
+                    <div onClick={() => this.toggleHandler(dueIndex)}></div>
+                </div>
+                <div styleName="investorList">
+                    {toggleId && dueItem.createData.map(personFn)}
+                </div>
             </div>
         }
         return <div styleName="bg">
@@ -116,7 +158,7 @@ class Calendar extends React.Component {
                     {/*
                         calendarList.map(dayFn)
                     */}
-                    <div styleName="day">
+                    <div styleName="day" onClick={() => { this.selectedHandler(1, '2017-10-11') }}>
                         <div styleName="week">06日 星期日</div>
                         <div styleName="circle"></div>
                         <div styleName="receivable">6笔回款</div>
@@ -180,6 +222,7 @@ class Calendar extends React.Component {
                 {['即将到期', '已到期'].map(tabFn)}
             </div>
             <div styleName="dueList">
+                {/*monthDueList.map(dueFn)*/}
                 <div styleName="dueItem">
                     <div styleName="dueDate">
                         <div>2017年8月13日</div>
@@ -194,7 +237,7 @@ class Calendar extends React.Component {
                         <div styleName="investor">
                             <div styleName="investorName">李丽华</div>
                             <div styleName="investorAmountRed">￥90.00万</div>
-                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
+                            <div styleName="investorText">本金790.000万 | 利息110.000</div>
                         </div>
                     </div>
                 </div>
