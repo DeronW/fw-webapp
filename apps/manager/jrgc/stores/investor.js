@@ -16,8 +16,8 @@ export default class Investor {
                 },//总回款信息
                 calendarList:[],//月份回款日历
                 monthInfo:{},//月度回款信息
-                monthDueList:[],//月份即将到期列表/已到期列表
-                dayDueList:[],//当天即将到期列表/已到期列表
+                monthDueList:[],//月份 即将到期列表/已到期列表
+                dayDueList:[],//当天 即将到期列表/已到期列表
             }
         })
     }
@@ -45,7 +45,7 @@ export default class Investor {
         })
     }
     //回款日历-即将到期列表-回款月份
-    fetchPaymentMonthInfo = (month) => {
+    fetchPaymentDueMonth = (month) => {
         this.Get("/api/finManager/payment/v2/dueList.shtml",{
             month:month
         }).then(data=>{
@@ -53,8 +53,25 @@ export default class Investor {
         })
     }
     //回款日历-即将到期列表-回款日期
-    fetchPaymentMonthInfo = (day) => {
+    fetchPaymentDueDay = (day) => {
         this.Get("/api/finManager/payment/v2/dueList.shtml",{
+            day:day
+        }).then(data=>{
+            this.data.calendar.dayDueList = data.data.result
+        })
+    }
+
+    //回款日历-已到期列表-回款月份
+    fetchPaymentExpireMonth = (month) => {
+        this.Get("/api/finManager/payment/v2/expiredList.shtml",{
+            month:month
+        }).then(data=>{
+            this.data.calendar.dayDueList = data.data.result
+        })
+    }
+    //回款日历-已到期列表-回款日期
+    fetchPaymentExpireDay = (day) => {
+        this.Get("/api/finManager/payment/v2/expiredList.shtml",{
             day:day
         }).then(data=>{
             this.data.calendar.dayDueList = data.data.result
