@@ -22,7 +22,7 @@ class ReserveInfo extends React.Component {
             if (data.isRisk == 0) {
                 // history.push(`/user/evaluate?next_url=/reserve/info?applyInvestClaimId=${reserve.applyInvestClaimId}`)
 
-                location.href = `/static/wap/p2p/index.html#/user/evaluate?from_reserve&applyInvestClaimId=${reserve.applyInvestClaimId}`
+                location.href = `/static/wap/p2p/index.html#/evaluate?from_reserve&applyInvestClaimId=${reserve.applyInvestClaimId}`
 
 
             } else if (data.batchMaxmum === 0) {
