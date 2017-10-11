@@ -20,7 +20,11 @@ class ReserveInfo extends React.Component {
         let {history, reserve} = this.props
         reserve.fetchProduct().then(data => {
             if (data.isRisk == 0) {
-                history.push(`/user/evaluate?next_url=/reserve/info?applyInvestClaimId=${reserve.applyInvestClaimId}`)
+                // history.push(`/user/evaluate?next_url=/reserve/info?applyInvestClaimId=${reserve.applyInvestClaimId}`)
+
+                location.href = `/static/wap/p2p/index.html#/user/evaluate?from_reserve&applyInvestClaimId=${reserve.applyInvestClaimId}`
+
+
             } else if (data.batchMaxmum === 0) {
                 //调到自动投资页面
                 NativeBridge.toNative('auto_bid_auth')
