@@ -2,6 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import ReactEcharts from 'echarts-for-react'
+import { Utils } from 'fw-javascripts'
 
 import {Header} from '../../components'
 import styles from '../../css/investor/info.css'
@@ -15,8 +16,9 @@ class Info extends React.Component {
     }
 
     componentDidMount() {
+
         //id为从客户页面跳转时url中的cust_id
-        // this.props.investor.fetchCustDetail(id)
+        // this.props.investor.fetchCustDetail(Utils.hashQuery.id)
     }
 
     showMore = () => {
