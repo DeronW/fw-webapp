@@ -4,7 +4,7 @@ const PROJ = 'activity'
 
 const APP_NAMES = [
     {
-        name: '2017-08-16',
+        name: '2017-10-18',
         compiler: 'webpack'
     }
 ]
