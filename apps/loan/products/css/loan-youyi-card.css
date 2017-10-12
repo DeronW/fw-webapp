@@ -19,11 +19,14 @@
     width: 660px;
     margin: 0 auto 20px;
     overflow: hidden;
+    position:relative;
 }
 
 .checkbox-wrap {
-    float: left;
-    margin-top: 53px;
+    position: absolute;
+    top:50px;
+    right:30px;
+    z-index:10;
 }
 
 .checked-box {
@@ -43,12 +46,10 @@
 }
 
 .card {
-    width: 572px;
+    width: 660px;
     height: 154px;
-    float: left;
     border-radius: 10px;
     position: relative;
-    margin-left: 30px;
 }
 
 .card-item:nth-child(1n) .card {
@@ -117,4 +118,17 @@
     background: #556bb8;
     border-radius: 4px;
     margin: 22px auto;
+}
+.card-add{
+    height:100px;
+    background:#fff;
+    padding:0 30px;
+    margin-bottom:40px;
+    font-size:32px;
+    color:#555;
+    line-height:100px;
+}
+.icon-img{
+    display:inline-block;
+    margin-right:30px;
 }
