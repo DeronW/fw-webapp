@@ -27,8 +27,8 @@ export default class Investor {
                 records: [],
                 keyword:''
             },
-            custDetail: {//客户详情
-
+            info: {//客户详情
+                analysis:{}
             }
         })
     }
@@ -117,11 +117,22 @@ export default class Investor {
     }
     setKeyword = (keyword) => {
         this.data.search.keyword = keyword
-        console.log(this.data.search.keyword)
     }
     //客户整体投资期限分析-饼图
-    fetchInvestAnalysis = () => {
-
+    fetchInvestAnalysis = (id) => {
+        this.Get('/api/finManager/cust/v2/investAnalysis.shtml',{
+            custId:id
+        }).then(data=>{
+            this.data.info.analysis = data.result
+        })
+    }
+    //客户详情
+    fetchInfo = (cust_id) => {
+        this.Get('/api/finManager/cust/v2/custDetail.shtml', {
+            custId: cust_id
+        }).then(data => {
+            this.data.info = data.result
+        })
     }
     fetchCouponList = () => {
         this.data.coupon.couponList = [
