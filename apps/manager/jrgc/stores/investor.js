@@ -1,4 +1,4 @@
-import {extendObservable} from 'mobx'
+import { extendObservable } from 'mobx'
 
 export default class Investor {
     constructor(Get) {
@@ -19,8 +19,13 @@ export default class Investor {
                 monthDueList: [],//月份 即将到期列表/已到期列表
                 dayDueList: [],//当天 即将到期列表/已到期列表
             },
-            birthday:{
-                list:[]
+            birthday: {
+                list: []
+            },
+            search: {
+                pageNo: 1,
+                records: [],
+                keyword:''
             },
             custDetail: {//客户详情
 
@@ -30,65 +35,93 @@ export default class Investor {
 
     //回款日历-总回款信息接口
     fetchOverview = () => {
-        this.Get('/api/finManager/cust/v2/paymentOverview.shtml').then(data=>{
-            this.data.calendar.overview = data.data.result
+        this.Get('/api/finManager/cust/v2/paymentOverview.shtml').then(data => {
+            this.data.calendar.overview = data.result
         })
     }
     //回款日历-月份回款日历
     fetchMonthCal = (month) => {
-        this.Get("/api/finManager/payment/v2/paymentMonthCal.shtml",{
-            month:month
-        }).then(data=>{
-            this.data.calendar.calendarList = data.data.result
+        this.Get("/api/finManager/payment/v2/paymentMonthCal.shtml", {
+            month: month
+        }).then(data => {
+            this.data.calendar.calendarList = data.result
         })
     }
     //回款日历-月度回款信息
     fetchMonthInfo = (month) => {
-        this.Get("/api/finManager/payment/v2/paymentMonthInfo.shtml",{
-            month:month
-        }).then(data=>{
-            this.data.calendar.monthInfo = data.data.result
+        this.Get("/api/finManager/payment/v2/paymentMonthInfo.shtml", {
+            month: month
+        }).then(data => {
+            this.data.calendar.monthInfo = data.result
         })
     }
     //回款日历-到期列表-回款月份
-    fetchDueMonth = (tab,month) => {
-        let {monthDueList} = this.data.calendar
-        if(tab == '即将到期'){
-            this.Get("/api/finManager/payment/v2/dueList.shtml",{
-                month:month
-            }).then(data=>{
-                monthDueList = data.data.result
+    fetchDueMonth = (tab, month) => {
+        let { monthDueList } = this.data.calendar
+        if (tab == '即将到期') {
+            this.Get("/api/finManager/payment/v2/dueList.shtml", {
+                month: month
+            }).then(data => {
+                monthDueList = data.result
             })
-        }else{
-            this.Get("/api/finManager/payment/v2/expiredList.shtml",{
-                month:month
-            }).then(data=>{
-                monthDueList = data.data.result
+        } else {
+            this.Get("/api/finManager/payment/v2/expiredList.shtml", {
+                month: month
+            }).then(data => {
+                monthDueList = data.result
             })
         }
     }
     //回款日历-到期列表-回款日期
-    fetchDueDay = (tab,day) => {
-        let {dayDueList} = this.data.calendar
-        if(tab == '即将到期'){
-            this.Get("/api/finManager/payment/v2/dueList.shtml",{
-                day:day
-            }).then(data=>{
-                dayDueList = data.data.result
+    fetchDueDay = (tab, day) => {
+        let { dayDueList } = this.data.calendar
+        if (tab == '即将到期') {
+            this.Get("/api/finManager/payment/v2/dueList.shtml", {
+                day: day
+            }).then(data => {
+                dayDueList = data.result
             })
-        }else{
-            this.Get("/api/finManager/payment/v2/expiredList.shtml",{
-                day:day
-            }).then(data=>{
-                dayDueList = data.data.result
+        } else {
+            this.Get("/api/finManager/payment/v2/expiredList.shtml", {
+                day: day
+            }).then(data => {
+                dayDueList = data.result
             })
         }
     }
     //生日提醒
     fetchBirthday = () => {
-        this.Get("/api/finManager/cust/v2/birthCustList.shtml").then(data=>{
-            this.data.birthday.list = data.data.result
+        this.Get("/api/finManager/cust/v2/birthCustList.shtml").then(data => {
+            this.data.birthday.list = data.result
         })
+    }
+    //搜索
+    resetSearchPageNo = () => {
+        this.data.search.pageNo = 1
+    }
+    fetchSearch = (done) => {
+        let { keyword,pageNo, records } = this.data.search
+        const PAGE_SIZE = 10
+        if(pageNo == 0) return done && done()
+        if(pageNo == 1) records=[]
+
+        this.Get("/api/finManager/cust/v2/search.shtml", {
+            keyword: keyword,
+            pageNo: pageNo,
+            pageSize: PAGE_SIZE
+        }).then(data => {
+            records.push(...data.pageData.result)
+            pageNo < data.pageData.totalPage ? pageNo++ : pageNo = 0
+            done && done()
+        })
+    }
+    setKeyword = (keyword) => {
+        this.data.search.keyword = keyword
+        console.log(this.data.search.keyword)
+    }
+    //客户整体投资期限分析-饼图
+    fetchInvestAnalysis = () => {
+
     }
     fetchCouponList = () => {
         this.data.coupon.couponList = [
