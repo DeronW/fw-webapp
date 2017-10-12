@@ -6,6 +6,7 @@
     bottom: 0;
     background: rgba(1, 1, 0, .7);
     z-index: 1000;
+    text-align: left;
 }
 
 .gift-panel {
@@ -167,8 +168,3 @@
         font-style: normal;
     }
 }
-
-
-
-
-

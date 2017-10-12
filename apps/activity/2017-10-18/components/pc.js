@@ -1,19 +1,72 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
+import { Post } from '../../lib/helpers'
 import Header from '../../lib/components/pc-header.js'
+import InviteRewardPop from '../../lib/components/pop-panel.js'
 
 import styles from '../css/pc.css'
+
+
+const INVEST_REWARD_DIST = [
+    { value: 0, reward: 0 },
+    { value: 500000, reward: 500 },
+    { value: 1000000, reward: 1300 },
+    { value: 2000000, reward: 2300 },
+    { value: 3000000, reward: 6000 },
+    { value: 5000000, reward: 12500 }
+]
 
 
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class PC extends React.Component {
 
     state = {
-
+        isCompany: false,
+        inviteCnt: '',
+        inviteReward: '',
+        invested: '',
+        investedRewardLevel: 0,
+        investMore: '',
+        showInviteRewardPop: false,
+        showHowToInvitePop: false,
     }
 
+    componentDidMount() {
+        Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
+            this.setState({
+                isCompany: !data.isPerson,
+                inviteCnt: data.inviteCount,
+                inviteReward: data.reward,
+                invested: data.selfInvestAmt
+            }, () => {
+                const invested = Number(this.state.invested);
+                let investedRewardLevel = 0,
+                    investMore = 0;
+                for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
+                    if (i === INVEST_REWARD_DIST.length - 1) investedRewardLevel = i;
+                    if (invested < INVEST_REWARD_DIST[i].value) {
+                        investedRewardLevel = i-1;
+                        investMore = (INVEST_REWARD_DIST[i].value*100 - invested*100)/100;
+                        break
+                    }
+                }
+                this.setState({
+                    investedRewardLevel: investedRewardLevel,
+                    investMore: investMore,
+                })
+            })
+        })
+    }
+
+    loginHandler = () => this.props.gotoHandler('登录', 'https://www.gongchangp2p.com/api/activityPullNew/ActivityControl.shtml?code=ONLTHD')
+
+    toggleInviteRewardPop = () => this.setState({ showInviteRewardPop: !this.state.showInviteRewardPop})
+
     render() {
+        const { isLoggedIn } = this.props;
+        const { isCompany, inviteCnt, inviteReward, invested, investedRewardLevel,
+            investMore, showInviteRewardPop, showHowToInvitePop } = this.state;
         return <div styleName="bg">
             <Header bgColor="#725749" />
 
@@ -33,7 +86,8 @@ class PC extends React.Component {
                     活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。
                 </div>
                 <div styleName="reward-state">
-                    <span styleName="blue-anchor">如何邀请</span>
+                    您活动期内已邀请<span>{inviteCnt}</span>人，暂可获奖励<span>{inviteReward}</span>元
+                    <div styleName="blue-anchor">如何邀请</div>
                 </div>
                 <div styleName="reward-invite-grp">
                     <div styleName="reward-invite-1">
@@ -59,7 +113,7 @@ class PC extends React.Component {
                 </div>
                 <div styleName="reward-invite-more">
                     每成功邀1位好友升级达标，最高可再得350元
-                    <span styleName="blue-anchor">了解更多</span>
+                    <div styleName="blue-anchor" onClick={this.toggleInviteRewardPop}>了解更多</div>
                 </div>
                 <div styleName="invite-tip">温馨提示：按被邀请人活动内累投前10名计算返佣，单个被邀请人仅按最高返佣计算1次。工豆有效期15天。</div>
 
@@ -70,7 +124,11 @@ class PC extends React.Component {
                     活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。
                 </div>
                 <div styleName="reward-state">
-                    <span styleName="blue-anchor">继续投资</span>
+                    您活动期内已累投<span> {invested} </span>元，
+                    可奖励<span> {INVEST_REWARD_DIST[investedRewardLevel].reward} </span>元
+                    { investedRewardLevel !== INVEST_REWARD_DIST.length - 1 &&
+                        `，再投 ${investMore} 元就可奖励 ${INVEST_REWARD_DIST[investedRewardLevel + 1].reward} 元哦！`}
+                    <div styleName="blue-anchor">继续投资</div>
                 </div>
                 <div styleName="reward-invest-grp">
                     <div styleName="reward-invest-1">
@@ -104,6 +162,9 @@ class PC extends React.Component {
                     4. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
                 </div>
             </div>
+
+            { showInviteRewardPop &&
+                <InviteRewardPop isLogin={isLoggedIn} gotoLogin={this.loginHandler} closeHandler={this.toggleInviteRewardPop} /> }
         </div>
     }
 }

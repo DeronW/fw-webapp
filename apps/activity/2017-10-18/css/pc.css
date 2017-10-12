@@ -64,7 +64,13 @@ body {
     font-size: 14px;
 }
 
+.reward-state span {
+    color: #fd4d4c;
+}
+
 .blue-anchor {
+    cursor: pointer;
+    display: inline;
     color: #4aa1f9;
 }
 
@@ -163,7 +169,7 @@ body {
 
 .reward-invest {
     display: inline-block;
-    width: 326px;
+    width: 319px;
     height: 267px;
     margin-bottom: 60px;
     color: #fff;

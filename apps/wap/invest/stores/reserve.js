@@ -66,7 +66,6 @@ export default class Reserve {
     }
     setRecordsCurrentStatus = status => {
         this.data.records.type = status;
-        this.resetPageNo()
         this.getReserveList()
     }
 
@@ -75,6 +74,7 @@ export default class Reserve {
         if (current_tab.page_no === 0) return done && done();
         const PAGE_SIZE = 10
 
+        if(current_tab.page_no == 1) current_tab.list.splice(0,current_tab.list.length)
         this.Post('/api/v1/appointRecordList.shtml', {
             page: current_tab.page_no,
             pageSize: PAGE_SIZE,

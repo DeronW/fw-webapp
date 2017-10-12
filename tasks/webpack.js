@@ -29,7 +29,8 @@ module.exports = function (site_name, page_name, CONFIG) {
                             ['env', {
                                 targets: {
                                     browsers: [
-                                        "last 2 major versions"
+                                        "last 2 major versions",
+                                        "ie 9", "ie 10"
                                     ],
                                     useBuiltIns: true,
                                     uglify: false,
