@@ -4,13 +4,13 @@ import {observer, inject} from 'mobx-react'
 import {Header, BottomNavBar} from '../../components'
 import styles from '../../css/investor/account-hj.css'
 
-@inject('investor')
+@inject('investor_account')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class AccountHj extends React.Component {
     componentDidMount() {
         //id为从上一页面获取
-        //this.props.investor.fetchAccountHj(cust_id)
+        //this.props.investor_account.fetchAccountHj(cust_id)
     }
 
     jumpToList = () => {
@@ -20,7 +20,7 @@ class AccountHj extends React.Component {
 
     render() {
         let {history} = this.props
-        let {info, goldPrice} = this.props.investor.data.account.hj
+        let {info, goldPrice} = this.props.investor_account.data.hj
         return <div>
             <Header title="TA的黄金账户" history={history}/>
             <div styleName="hjInfo">
