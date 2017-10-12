@@ -4,6 +4,8 @@ import CSSModules from 'react-css-modules'
 import { Post } from '../../lib/helpers'
 import Header from '../../lib/components/pc-header.js'
 import InviteRewardPop from '../../lib/components/pop-panel.js'
+import HowToInvitePop from '../../lib/components/pc-pop-how-to-invite.js'
+import CompanyUserPop from '../../lib/components/pc-pop-company-user.js'
 
 import styles from '../css/pc.css'
 
@@ -63,8 +65,10 @@ class PC extends React.Component {
 
     toggleInviteRewardPop = () => this.setState({ showInviteRewardPop: !this.state.showInviteRewardPop})
 
+    toggleHowToInvitePop = () => this.setState({ showHowToInvitePop: !this.state.showHowToInvitePop})
+
     render() {
-        const { isLoggedIn } = this.props;
+        const { isLoggedIn, gcm } = this.props;
         const { isCompany, inviteCnt, inviteReward, invested, investedRewardLevel,
             investMore, showInviteRewardPop, showHowToInvitePop } = this.state;
         return <div styleName="bg">
@@ -85,10 +89,17 @@ class PC extends React.Component {
                 <div styleName="sub-title">
                     活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。
                 </div>
-                <div styleName="reward-state">
-                    您活动期内已邀请<span>{inviteCnt}</span>人，暂可获奖励<span>{inviteReward}</span>元
-                    <div styleName="blue-anchor">如何邀请</div>
-                </div>
+                { isLoggedIn ? (
+                    <div styleName="reward-state">
+                        您活动期内已邀请<span>{inviteCnt}</span>人，暂可获奖励<span>{inviteReward}</span>元
+                        <div styleName="blue-anchor" onClick={this.toggleHowToInvitePop}>如何邀请</div>
+                    </div>
+                ) : (
+                    <div styleName="reward-state">
+                        请登录后查看邀友及奖励情况，
+                        <div styleName="blue-anchor" onClick={this.loginHandler}>立即登录</div>
+                    </div>
+                )}
                 <div styleName="reward-invite-grp">
                     <div styleName="reward-invite-1">
                         <div styleName="reward-invite-value">
@@ -123,13 +134,20 @@ class PC extends React.Component {
                 <div styleName="sub-title">
                     活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。
                 </div>
-                <div styleName="reward-state">
-                    您活动期内已累投<span> {invested} </span>元，
-                    可奖励<span> {INVEST_REWARD_DIST[investedRewardLevel].reward} </span>元
-                    { investedRewardLevel !== INVEST_REWARD_DIST.length - 1 &&
-                        `，再投 ${investMore} 元就可奖励 ${INVEST_REWARD_DIST[investedRewardLevel + 1].reward} 元哦！`}
-                    <div styleName="blue-anchor">继续投资</div>
-                </div>
+                { isLoggedIn ? (
+                    <div styleName="reward-state">
+                        您活动期内已累投<span> {invested} </span>元，
+                        可奖励<span> {INVEST_REWARD_DIST[investedRewardLevel].reward} </span>元
+                        { investedRewardLevel !== INVEST_REWARD_DIST.length - 1 &&
+                            `，再投 ${investMore} 元就可奖励 ${INVEST_REWARD_DIST[investedRewardLevel + 1].reward} 元哦！`}
+                        <a styleName="blue-anchor invest-link" href="https://www.9888keji.com">继续投资</a>
+                    </div>
+                ) : (
+                    <div styleName="reward-state">
+                        请登录后查看累投及奖励情况，
+                        <div styleName="blue-anchor" onClick={this.loginHandler}>立即登录</div>
+                    </div>
+                )}
                 <div styleName="reward-invest-grp">
                     <div styleName="reward-invest-1">
                         <div styleName="reward-invest-condition">50万≤累投额&lt;100万，奖励</div>
@@ -165,6 +183,11 @@ class PC extends React.Component {
 
             { showInviteRewardPop &&
                 <InviteRewardPop isLogin={isLoggedIn} gotoLogin={this.loginHandler} closeHandler={this.toggleInviteRewardPop} /> }
+
+            { showHowToInvitePop &&
+                <HowToInvitePop isLoggedIn={isLoggedIn} gcm={gcm} loginHandler={this.loginHandler} closeHandler={this.toggleHowToInvitePop} /> }
+
+            { isCompany && <CompanyUserPop /> }
         </div>
     }
 }
