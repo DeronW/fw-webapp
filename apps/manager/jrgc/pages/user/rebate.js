@@ -42,12 +42,9 @@ class Rebate extends React.Component {
 
     chartTabHandler = (index) => {
         let {tab_num, chart_num} = this.state
-        let {fetGraphData} = this.props.user
+        let {fetGraphData, fetchGraphSortNo} = this.props.user
         this.setState({chart_num: index})
-        let sort
-        if (tab_num == 0 && index == 0) sort = '11'
-
-        fetGraphData(sort)
+        fetGraphData(fetchGraphSortNo(tab_num, index))
 
     }
 
@@ -86,7 +83,7 @@ class Rebate extends React.Component {
     render() {
         let {history} = this.props;
         let {tab_num} = this.state;
-        let {rebate_graph, rebate_graph} = this.props.user.data
+        let {rebate_graph, rebate_cust} = this.props.user.data
         let {type, list} = this.props.user.data.rebate_cust
         let current_list = list[type], current_pageNo = current_list.page_no
         let tabs = ['全部', '微金', '尊享', '黄金']
