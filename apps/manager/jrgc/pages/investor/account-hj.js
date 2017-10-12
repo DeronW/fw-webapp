@@ -4,8 +4,15 @@ import {observer, inject} from 'mobx-react'
 import {Header, BottomNavBar} from '../../components'
 import styles from '../../css/investor/account-hj.css'
 
+@inject('investor')
+@observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class AccountHj extends React.Component {
+    componentDidMount() {
+        //id为从上一页面获取
+        //this.props.investor.fetchAccountHj(cust_id)
+    }
+
     jumpToList = () => {
         let {history} = this.props
         history.push('investor-hj-list')
@@ -13,19 +20,20 @@ class AccountHj extends React.Component {
 
     render() {
         let {history} = this.props
+        let {info, goldPrice} = this.props.investor.data.account.hj
         return <div>
             <Header title="TA的黄金账户" history={history}/>
             <div styleName="hjInfo">
                 <div styleName="infoName">持有黄金</div>
-                <div styleName="infoCount">1,000.000 <span styleName="unit-hj">克</span></div>
+                <div styleName="infoCount">{info.goldAmount} <span styleName="unit-hj">克</span></div>
                 <div styleName="infoLine line1">
                     <div styleName="lineLeft">可用黄金</div>
                     <div styleName="lineRight">总待收黄金</div>
                 </div>
                 <div styleName="infoLine line2">
-                    <div styleName="lineLeft">1,000.000克(当前市值约¥1280)</div>
+                    <div styleName="lineLeft">{info.availableAmount}克(当前市值约¥{info.cuurMarketValue})</div>
                     <div styleName="lineRight">
-                        <span styleName="number">800,00.000克</span>
+                        <span styleName="number">{info.waitAmount}克</span>
                         <span styleName="icon-question-up"></span>
                     </div>
                 </div>
@@ -34,16 +42,16 @@ class AccountHj extends React.Component {
                 <div styleName="priceItem">
                     <div styleName="itemLineUp"><span styleName="itemName">浮动盈亏</span><span
                         styleName="icon-question"></span></div>
-                    <div styleName="itemLineDown colorRed">+¥3.14</div>
+                    <div styleName="itemLineDown colorRed">+¥{info.accProfitLoss}</div>
                 </div>
                 <div styleName="priceItem">
                     <div styleName="itemLineUp"><span styleName="itemName">实时金价(每克)</span><span
                         styleName="icon-refresh"></span></div>
-                    <div styleName="itemLineDown">¥280.14</div>
+                    <div styleName="itemLineDown">¥{goldPrice}</div>
                 </div>
                 <div styleName="priceItem itemLast">
                     <div styleName="itemLineUp"><span>成交金价(每克)</span></div>
-                    <div styleName="itemLineDown">¥279.50</div>
+                    <div styleName="itemLineDown">¥{info.dealPrice}</div>
                 </div>
             </div>
 
@@ -57,7 +65,7 @@ class AccountHj extends React.Component {
             </div>
 
             <div styleName="remain">
-                可用余额<span>¥50.00</span>
+                可用余额<span>¥{info.availableBalance}</span>
             </div>
         </div>
     }
