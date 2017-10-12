@@ -63,6 +63,7 @@ export default class LoopLoanCardAdd extends React.Component {
         }
         
     }
+
     componentDidMount() {
         document.title = '设置提现卡';
       
@@ -75,17 +76,20 @@ export default class LoopLoanCardAdd extends React.Component {
           v = v.replace(/[0-9a-z]/gi, '');
       }
       v.length < 21 && this.setState({ name: trim(v) });
-  }
+    }
+
     changeIdHandler = (e) => {
         let v = e.target.value;
         v = v.replace(/[a-w|y|z]/gi, '');
         v.length <= 18 && this.setState({ id: v });
     }
+
     changeBankNum = (e) => {
         let v = e.target.value;
         //v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
         v.length < 19 + 5 && this.setState({ bankNum: v });
     }
+
     blurBankNum = (e) => {
 
         let {bankNum} = this.state, len = space(this.state.bankNum).length;
@@ -106,12 +110,14 @@ export default class LoopLoanCardAdd extends React.Component {
             });
         }, e => Components.showToast(e.message))
     }
+
     changePhone = (e) => {
         let val = e.target.value;
         verificationNum(val) &&
         val.length <= 11 &&
         this.setState({ phone: space(val) });
     }
+
     handlerNext = () => {
         let err, {name, id, bankName, bankNum, phone, cardType, canVerify} = this.state;
         if (canVerify == 0) err = "不支持绑定此类卡";
@@ -181,7 +187,7 @@ export default class LoopLoanCardAdd extends React.Component {
         }
     }
 
-    closeHandler = () => {
+    popupHideHandler = () => {
         this.setState({codePop:false})
     }
 
@@ -204,7 +210,7 @@ export default class LoopLoanCardAdd extends React.Component {
                             <span styleName="text">身份证号</span>
                             <div styleName="input">
                                 <input onChange={this.changeIdHandler} value={this.state.id}
-                                    type="text" placeholder="请输入身份证号码" />
+                                    type="number" placeholder="请输入身份证号码" />
                             </div>
                         </div>
                     </div>
@@ -214,7 +220,7 @@ export default class LoopLoanCardAdd extends React.Component {
                             <span styleName="text">储蓄卡号</span>
                             <div styleName="input">
                                 <input onChange={this.changeBankNum} onBlur={this.blurBankNum}
-                                    value={this.state.bankNum} type="text" placeholder="输入储蓄卡号" />
+                                    value={this.state.bankNum} type="number" placeholder="输入储蓄卡号" />
                             </div>
     
                             <div styleName="list-bank-li">
@@ -236,16 +242,7 @@ export default class LoopLoanCardAdd extends React.Component {
                             </div>
                         </div>
                     </div>
-    
-                    {/*<div styleName="clause">
-                    <span styleName={`icon ${selectClause ? "select-icon" : "icon"}`}
-                    onClick={this.handlerClause}></span>
-                    <span styleName="text">
-                    同意
-                    <a href={`/static/loan/protocol-cost/index.html`}>《代扣服务协议》</a>
-                    </span>
-                    </div>*/}
-    
+        
                     <div styleName="next-btn">
                         <div onClick={this.handlerNext} styleName="ui-btn">确定</div>
                     </div>
@@ -256,7 +253,7 @@ export default class LoopLoanCardAdd extends React.Component {
                         <div styleName="verify-popup-close" onClick={this.popupHideHandler}></div>
                         <div styleName="verify-popup-title">短信验证</div>
                         <div styleName="verify-popup-tip">
-                            已向发送短信验证码
+                            已向{loopLoan.mask_phone}发送短信验证码
                         </div>
                         <div styleName="verify-input">
                             <input styleName="sms-input" type="number" name="number"
