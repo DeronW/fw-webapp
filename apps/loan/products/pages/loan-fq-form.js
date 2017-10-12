@@ -239,8 +239,6 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                 <div styleName="item-name">{Model[field].name}</div>
                 <div styleName="item-value" style={{ 'color': itemValue ? '#333' : '#999' }}>
                     {itemValue || itemPlaceholder}
-                    {field === 'area' && itemValue &&
-                        <span styleName="area-measure-unit">m<span styleName="super-align-char">2</span></span>}
                 </div>
             </div>
         )
@@ -341,7 +339,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
     class FqForm extends React.Component {
     
         componentDidMount() {
-            document.title = '房产抵押贷款';
+            document.title = '借款申请';
             this.props.fq.fetchBasicInfo();
         }
     
@@ -365,7 +363,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                         </div>
                         <div styleName="item-grp-name">基本信息</div>
                         <div styleName="item-grp">
-                            <DisplayItem field="realName" history={history} immutable={fq.hasRealName} />
+                            <DisplayItem field="realName" history={history} immutable/>
                             <DisplayItem field="idCard" history={history} immutable />
                             <DisplayItem field="creditCard" history={history} />
                             <DisplayItem field="email" history={history} />
