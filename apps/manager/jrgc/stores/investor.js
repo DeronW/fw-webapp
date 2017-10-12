@@ -1,4 +1,4 @@
-import { extendObservable } from 'mobx'
+import {extendObservable} from 'mobx'
 
 export default class Investor {
     constructor(Get) {
@@ -25,11 +25,25 @@ export default class Investor {
             search: {
                 pageNo: 1,
                 records: [],
-                keyword:''
+                keyword: ''
             },
             info: {//客户详情
-                detail:{},
-                analysis:{}
+                detail: {},
+                analysis: {}
+            },
+            account: {
+                p2p: {},
+                hj: {
+                    info: {},
+                    type: '0',
+                    records: {
+                        '0': {name: "全部", page_no: 1, list: []},
+                        '1': {name: '持有中', page_no: 1, list: []},
+                        '2': {name: '已到期', page_no: 2, list: []}
+                    },
+                    goldPrice: '',
+                    amount: {}
+                }
             }
         })
     }
@@ -58,7 +72,7 @@ export default class Investor {
     }
     //回款日历-到期列表-回款月份
     fetchDueMonth = (tab, month) => {
-        let { monthDueList } = this.data.calendar
+        let {monthDueList} = this.data.calendar
         if (tab == '即将到期') {
             this.Get("/api/finManager/payment/v2/dueList.shtml", {
                 month: month
@@ -75,7 +89,7 @@ export default class Investor {
     }
     //回款日历-到期列表-回款日期
     fetchDueDay = (tab, day) => {
-        let { dayDueList } = this.data.calendar
+        let {dayDueList} = this.data.calendar
         if (tab == '即将到期') {
             this.Get("/api/finManager/payment/v2/dueList.shtml", {
                 day: day
@@ -101,10 +115,10 @@ export default class Investor {
         this.data.search.pageNo = 1
     }
     fetchSearch = (done) => {
-        let { keyword,pageNo, records } = this.data.search
+        let {keyword, pageNo, records} = this.data.search
         const PAGE_SIZE = 10
-        if(pageNo == 0) return done && done()
-        if(pageNo == 1) records=[]
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) records = []
 
         this.Get("/api/finManager/cust/v2/search.shtml", {
             keyword: keyword,
@@ -121,9 +135,9 @@ export default class Investor {
     }
     //客户整体投资期限分析-饼图
     fetchInvestAnalysis = (id) => {
-        this.Get('/api/finManager/cust/v2/investAnalysis.shtml',{
-            custId:id
-        }).then(data=>{
+        this.Get('/api/finManager/cust/v2/investAnalysis.shtml', {
+            custId: id
+        }).then(data => {
             this.data.info.analysis = data.result
         })
     }
@@ -134,6 +148,21 @@ export default class Investor {
         }).then(data => {
             this.data.info.detail = data.result
         })
+    }
+    //黄金账户信息页
+    fetchAccountHj = (custId) => {
+        this.Get('/api/finManager/cust/v2/goldAccount.shtml', {
+            custId: custId
+        }).then(data => {
+            this.data.account.hj.info = data.result
+        })
+    }
+    //实时金价
+    fetchGoldPrice = () => {
+        this.Get('/api/finManager/cust/v2/goldPrice.shtml')
+            .then(data => {
+                this.data.account.hj.goldPrice = data.goldPrice
+            })
     }
     fetchCouponList = () => {
         this.data.coupon.couponList = [
