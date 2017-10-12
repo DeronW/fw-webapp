@@ -158,8 +158,7 @@ export default class Investor {
 
     //查询客户工豆列表
     fetchBean = (done) => {
-        let { bean } = this.data.bean
-        let { pageNo, records, id } = bean
+        let { pageNo, records, id } = this.data.bean
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records = []

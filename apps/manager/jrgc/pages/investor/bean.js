@@ -12,7 +12,7 @@ const bean_data = [{ money: 1000 }, { money: 200 }]
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Bean extends React.Component {
     componentDidMount() {
-        let { fetchBean, resetBeanPageNo, setBeanId } = this.props.investor.bean
+        let { fetchBean, resetBeanPageNo, setBeanId } = this.props.investor
         resetBeanPageNo()
         setBeanId(Utils.hashQuery.id)
         fetchBean()
@@ -35,7 +35,7 @@ class Bean extends React.Component {
                 </div>
                 <div styleName="beanItemDown">
                     <div styleName="beanDownLeft">期间返利0.25%</div>
-                    <div styleName="beanDownRight">有效期 2017-09-18</div>
+                    <div styleName="beanDownRight">有效期 {item.overdueTime}</div>
                 </div>
             </div>
         }
