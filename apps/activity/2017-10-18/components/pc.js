@@ -30,7 +30,7 @@ class PC extends React.Component {
         investedRewardLevel: 0,
         investMore: '',
         showInviteRewardPop: false,
-        showHowToInvitePop: false,
+        showHowToInvitePop: true,
     }
 
     componentDidMount() {

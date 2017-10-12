@@ -111,6 +111,26 @@
     text-align: center;
 }
 
+.login-entry {
+    margin-top: 123px;
+    color: #a6421a;
+    font-size: 16px;
+    text-align: center;
+    line-height: 2;
+}
+
+.login-btn {
+    width: 184px;
+    height: 45px;
+    line-height: 45px;
+    margin: 24px auto;
+    background-color: #fe6261;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+}
+
 .pop-info {
     position: absolute;
     left: 50%;
@@ -131,5 +151,7 @@
 
 .blue-anchor {
     cursor: pointer;
+    text-decoration: none;
+    display: block;
     color: #4aa1f9;
 }

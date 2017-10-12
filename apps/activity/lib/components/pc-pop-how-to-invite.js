@@ -37,7 +37,7 @@ class InviteRewardPop extends React.Component {
             <div styleName="pop" onClick={e => e.stopPropagation()}>
                 <div styleName="close-btn" onClick={closeHandler}></div>
 
-                { isLoggedIn ? (
+                { false ? (
                     <div>
                         <div styleName="step-1">
                             <div styleName="step-no">1</div>
@@ -67,7 +67,7 @@ class InviteRewardPop extends React.Component {
                     新手注册即送<span>200元</span>+<span>2.6g</span>黄金，
                     首投还获<span>0.6%返息券</span>，
                     邀友最高再送<span>350元</span>
-                    <div styleName="blue-anchor">更多秘籍></div>
+                    <a styleName="blue-anchor" href="https://www.9888keji.com/news/notice/2200.html" target="_blank">更多秘籍></a>
                 </div>
             </div>
         </div>
