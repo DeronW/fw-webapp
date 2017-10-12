@@ -163,6 +163,10 @@ body {
     font-size: 14px;
 }
 
+.invest-link {
+    text-decoration: none;
+}
+
 .reward-invest-grp {
     margin-top: 72px;
 }
