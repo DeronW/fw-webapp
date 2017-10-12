@@ -6,6 +6,8 @@ import styles from '../../css/investor/bean.css'
 
 const bean_data = [{money: 1000}, {money: 200}]
 
+@inject('investor')
+@observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Bean extends React.Component {
     render() {
