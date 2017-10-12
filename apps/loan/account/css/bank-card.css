@@ -1,4 +1,4 @@
-.cnt-container {
+/*.cnt-container {
     min-height: 100%;
     background-color: #eee;
 }
@@ -123,4 +123,15 @@
     color: #fff;
     font-size: 30px;
     text-align: center;
+}*/
+.bg{
+    min-height: 100%;
+    background-color: #eee;
+}
+.tabs{
+    height:100px;
+    line-height:100px;
+    box-sizing:border-box;
+    border-top:2px solid #eee;
+    background:#fff;
 }
