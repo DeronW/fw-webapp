@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules'
 
 import { Post } from '../../lib/helpers'
 import Header from '../../lib/components/pc-header.js'
+import InviteRewardPop from '../../lib/components/pop-panel.js'
 
 import styles from '../css/pc.css'
 
@@ -27,6 +28,8 @@ class PC extends React.Component {
         invested: '',
         investedRewardLevel: 0,
         investMore: '',
+        showInviteRewardPop: false,
+        showHowToInvitePop: false,
     }
 
     componentDidMount() {
@@ -56,8 +59,14 @@ class PC extends React.Component {
         })
     }
 
+    loginHandler = () => this.props.gotoHandler('登录', 'https://www.gongchangp2p.com/api/activityPullNew/ActivityControl.shtml?code=ONLTHD')
+
+    toggleInviteRewardPop = () => this.setState({ showInviteRewardPop: !this.state.showInviteRewardPop})
+
     render() {
-        const { isCompany, inviteCnt, inviteReward, invested, investedRewardLevel, investMore } = this.state;
+        const { isLoggedIn } = this.props;
+        const { isCompany, inviteCnt, inviteReward, invested, investedRewardLevel,
+            investMore, showInviteRewardPop, showHowToInvitePop } = this.state;
         return <div styleName="bg">
             <Header bgColor="#725749" />
 
@@ -104,7 +113,7 @@ class PC extends React.Component {
                 </div>
                 <div styleName="reward-invite-more">
                     每成功邀1位好友升级达标，最高可再得350元
-                    <div styleName="blue-anchor">了解更多</div>
+                    <div styleName="blue-anchor" onClick={this.toggleInviteRewardPop}>了解更多</div>
                 </div>
                 <div styleName="invite-tip">温馨提示：按被邀请人活动内累投前10名计算返佣，单个被邀请人仅按最高返佣计算1次。工豆有效期15天。</div>
 
@@ -153,6 +162,9 @@ class PC extends React.Component {
                     4. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
                 </div>
             </div>
+
+            { showInviteRewardPop &&
+                <InviteRewardPop isLogin={isLoggedIn} gotoLogin={this.loginHandler} closeHandler={this.toggleInviteRewardPop} /> }
         </div>
     }
 }

@@ -58,10 +58,6 @@ export default class Fq {
     }
 
     
-    @computed get hasRealName() {
-        return this.realName !== ''
-    }
-
     @computed get allFieldsFilled() {
         return this.phone && this.realName && this.amount && this.duration && this.city && this.district && this.neighbour && this.area
     }
