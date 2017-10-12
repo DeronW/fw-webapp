@@ -1,31 +1,52 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
+import { Event, Components } from 'fw-javascripts'
 import { Header, BottomNavBar } from '../../components'
 import styles from '../../css/investor/search.css'
 
+@inject('investor')
+@observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Search extends React.Component {
-    state = {
-        keyword: ''
+    componentDidMount(){
+        Event.touchBottom(this.props.investor.fetchSearch)
+    }
+    componentWillUnmount(){
+        Event.cancelTouchBottom()
     }
     changeValue = e => {
-        this.setState({ keyword: e.target.value })
+        let {setKeyword} = this.props.investor
+        setKeyword( e.target.value)
     }
     clearhandler = () => {
-        this.setState({ keyword: '' })
+        let {setKeyword} = this.props.investor
+        setKeyword('')
     }
     searchHandler = () => {
-        console.log("搜索")
+        let {fetchSearch,resetPageNo} = this.props.investor
+        resetSearchPageNo()
+        fetchSearch()
     }
-    gotoInfo = () => {
+    gotoInfo = (id) => {
         let { history } = this.props
-        history.push('/investor-info')
+        history.push(`/investor-info?id=${id}`)
     }
     render() {
         let { history } = this.props
-        let { keyword } = this.state
+        let { search } = this.props.investor.data
+        let { keyword } = search
 
+        let recordFn = (item,index) => {
+            return <div styleName="listItem" key={index} onClick={() => this.gotoInfo(item.custId)}>
+                <div styleName="name">{item.realName}</div>
+                <div styleName="time">注册时间：{item.createTime}</div>
+                <div styleName="mobile">
+                    <span>{item.mobile}</span>
+                    <img src={require("../../images/investor/search/arrow.png")} />
+                </div>
+            </div>
+        }
         return <div styleName="bg">
             <Header title="搜索客户" history={history} />
             <div styleName="searchBar">
