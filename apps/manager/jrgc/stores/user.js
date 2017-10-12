@@ -15,14 +15,19 @@ export default class User {
                 totalCount: null,
                 couponList: [],
             },
-            graph: {
+            rebate_graph: {
                 updateTime: '',
                 timeDimensionList: [],
                 rebateAmtList: []
             },
-            cust: {
-                cust_page_no: 1,//值为0的时候表示数据加载完毕
-                custList: []//返利客户列表
+            rebate_cust: {
+                type: '0',
+                list: {
+                    '0': {name: '全部', page_no: 1, custList: []},
+                    '1': {name: '微金', page_no: 1, custList: []},
+                    '2': {name: '尊享', page_no: 1, custList: []},
+                    '3': {name: '黄金', page_no: 1, custList: []}
+                }
             }
 
         })
@@ -78,19 +83,34 @@ export default class User {
             this.data.graph.rebateAmtList = data.result.rebateAmtList
         })
     }
+    //重置页码
+    resetPageNo = () => {
+        let {type, list} = this.data.cust, current_list = list[type]
+        current_list.page_no = 1
+    }
+
+    //
+    resetType = (type) => {
+        this.data.cust.type = type
+        this.fetchCustList()
+    }
 
     //获取返利客户列表
     fetchCustList = (done) => {
         const PAGE_SIZE = 10
-        let {cust_page_no, custList} = this.data.cust
-        if (cust_page_no === 0) return done && done();
+        let {type, list} = this.data.cust, current_list = list[type]
+        if (current_list.page_no === 0) return done && done();
+        if (current_list.page_no == 1) current_list.custList.splice(0, current_list.custList.length)
         this.Get('/api/finManager/user/v2/rebateCustList.shtml', {
-            pageNo: cust_page_no,
-            pageSize: PAGE_SIZE
+            pageNo: current_list.page_no,
+            pageSize: PAGE_SIZE,
+            type: type
         }).then(data => {
-            custList.push(...data.pageData.result)
-            cust_page_no < data.result.pageData.pagination.totalPage ? cust_page_no++ : cust_page_no = 0
-            done&&done()
+            current_list.custList.push(...data.pageData.result)
+            current_list.page_no < data.result.pageData.pagination.totalPage
+                ? current_list.page_no++
+                : current_list.page_no = 0
+            done && done()
         })
     }
 }

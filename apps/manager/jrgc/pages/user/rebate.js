@@ -3,18 +3,20 @@ import CSSModules from 'react-css-modules'
 import ReactEcharts from 'echarts-for-react'
 import {observer, inject} from 'mobx-react'
 import styles from '../../css/user/rebate.css'
+import {Event, Components} from 'fw-javascripts'
 
 @inject("user")
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Rebate extends React.Component {
     state = {
-        tab_num: 0,
-        chart_num: 0
+        tab_num: '0',
+        chart_num: '0'
     }
 
     componentDidMount() {
         this.props.user.fetGraphData('11')
+        this.props.user.resetPageNo()
         this.props.user.fetchCustList()
         Event.touchBottom(this.props.user.fetchCustList)
     }
@@ -27,13 +29,28 @@ class Rebate extends React.Component {
         let {history} = this.props
         history.push('/investor-info')
     }
+
     switchTabHandler = (index) => {
+        let {type} = this.props.user.data.rebate_cust
+        let {resetType} = this.props.user
         this.setState({tab_num: index})
+        console.log(type, index)
+        console.log(type == index)
+        if (type == index) return
+        resetType(index)
     }
 
     chartTabHandler = (index) => {
+        let {tab_num, chart_num} = this.state
+        let {fetGraphData} = this.props.user
         this.setState({chart_num: index})
+        let sort
+        if (tab_num == 0 && index == 0) sort = '11'
+
+        fetGraphData(sort)
+
     }
+
     getOption = (updateTime, timeDimensionList, rebateAmtList) => ({
         title: {
             text: `当前数据更新于:${updateTime}`,
@@ -69,8 +86,9 @@ class Rebate extends React.Component {
     render() {
         let {history} = this.props;
         let {tab_num} = this.state;
-        let {graph} = this.props.user.data
-        let {cust_page_no, custList} = this.props.user.data.cust
+        let {rebate_graph, rebate_graph} = this.props.user.data
+        let {type, list} = this.props.user.data.rebate_cust
+        let current_list = list[type], current_pageNo = current_list.page_no
         let tabs = ['全部', '微金', '尊享', '黄金']
         let tab_func = (item, index) => {
             return <div key={index} styleName={tab_num == index ? "tab tabActive" : "tab"}
@@ -90,9 +108,9 @@ class Rebate extends React.Component {
             return <div>
                 <div styleName="allChart">
                     <div styleName="chartWrapper">
-                        {/*{chart_num == 0 &&*/}
+                        {/*{chart_num == '0' &&*/}
                         {/*<ReactEcharts*/}
-                        {/*option={this.getOption(graph.updateTime, graph.timeDimensionList, graph.rebateAmtList)}*/}
+                        {/*option={this.getOption(rebate_graph.updateTime, rebate_graph.timeDimensionList, rebate_graph.rebateAmtList)}*/}
                         {/*style={{height: '100%', width: '100%'}}*/}
                         {/*styleName='echarts'/>}*/}
                     </div>
@@ -145,7 +163,7 @@ class Rebate extends React.Component {
                                 <div styleName="detailRight userDate">2017-08-13 00:00:00</div>
                             </div>
                         </div>
-                        {(cust_page_no == 0 && custList.length > 0 ) && <div>已经全部加载完毕</div>}
+                        {(current_pageNo == '0' && current_list.custList.length > 0 ) && <div>已经全部加载完毕</div>}
                     </div>
                 </div>
             </div>
@@ -176,10 +194,10 @@ class Rebate extends React.Component {
                     {tabs.map(tab_func)}
                 </div>
             </div>
-            {tab_num == 0 && all_section()}
-            {tab_num == 1 && p2p_section()}
-            {tab_num == 2 && zx_section()}
-            {tab_num == 3 && gold_section()}
+            {tab_num == '0' && all_section()}
+            {tab_num == '1' && p2p_section()}
+            {tab_num == '2' && zx_section()}
+            {tab_num == '3' && gold_section()}
         </div>
     }
 }
