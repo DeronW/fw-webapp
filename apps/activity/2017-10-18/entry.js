@@ -21,7 +21,6 @@ class October extends React.Component {
 
     render() {
         const { inMobile, isLoggedIn } = this.state;
-        console.log(inMobile);
         return <div>
             { inMobile ? (
                 <Mobile isLoggedIn={isLoggedIn} />
