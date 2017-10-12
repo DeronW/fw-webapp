@@ -1,17 +1,30 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
-import {Header, BottomNavBar} from '../../components'
+import { observer, inject } from 'mobx-react'
+import { Event, Components, Utils } from 'fw-javascripts'
+import { Header, BottomNavBar } from '../../components'
 import styles from '../../css/investor/bean.css'
 
-const bean_data = [{money: 1000}, {money: 200}]
+const bean_data = [{ money: 1000 }, { money: 200 }]
 
 @inject('investor')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Bean extends React.Component {
+    componentDidMount() {
+        let { fetchBean, resetBeanPageNo, setBeanId } = this.props.investor.bean
+        resetBeanPageNo()
+        setBeanId(Utils.hashQuery.id)
+        fetchBean()
+        Event.touchBottom(fetchBean)
+    }
+    componentWillUnmount() {
+        Event.cancelTouchBottom()
+    }
     render() {
-        let {history} = this.props
+        let { history } = this.props
+        let { bean } = this.props.investor.data
+        let { records } = bean
         let bean_func = (item, index) => {
             return <div styleName="beanItem" key={index}>
                 <div styleName="beanItemUp">
@@ -27,7 +40,7 @@ class Bean extends React.Component {
             </div>
         }
         return <div>
-            <Header title="他的工豆" history={history}/>
+            <Header title="他的工豆" history={history} />
             <div styleName="beanInfo">
                 <div styleName="line1">他的工豆</div>
                 <div styleName="line2">¥0.17<span styleName="lineCal">（总共17工豆，100工豆=0.01元）</span></div>
@@ -37,5 +50,6 @@ class Bean extends React.Component {
         </div>
     }
 }
+
 
 export default Bean

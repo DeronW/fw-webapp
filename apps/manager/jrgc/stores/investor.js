@@ -25,11 +25,17 @@ export default class Investor {
             search: {
                 pageNo: 1,
                 records: [],
-                keyword:''
+                keyword: ''
             },
             info: {//客户详情
-                detail:{},
-                analysis:{}
+                detail: {},
+                analysis: {}
+            },
+            bean: {
+                id: null,
+                info: {},
+                pageNo: 1,
+                records: []
             }
         })
     }
@@ -101,10 +107,10 @@ export default class Investor {
         this.data.search.pageNo = 1
     }
     fetchSearch = (done) => {
-        let { keyword,pageNo, records } = this.data.search
+        let { keyword, pageNo, records } = this.data.search
         const PAGE_SIZE = 10
-        if(pageNo == 0) return done && done()
-        if(pageNo == 1) records=[]
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) records = []
 
         this.Get("/api/finManager/cust/v2/search.shtml", {
             keyword: keyword,
@@ -119,14 +125,6 @@ export default class Investor {
     setKeyword = (keyword) => {
         this.data.search.keyword = keyword
     }
-    //客户整体投资期限分析-饼图
-    fetchInvestAnalysis = (id) => {
-        this.Get('/api/finManager/cust/v2/investAnalysis.shtml',{
-            custId:id
-        }).then(data=>{
-            this.data.info.analysis = data.result
-        })
-    }
     //客户详情
     fetchInfo = (cust_id) => {
         this.Get('/api/finManager/cust/v2/custDetail.shtml', {
@@ -135,6 +133,41 @@ export default class Investor {
             this.data.info.detail = data.result
         })
     }
+    //客户整体投资期限分析-饼图
+    fetchInvestAnalysis = (id) => {
+        this.Get('/api/finManager/cust/v2/investAnalysis.shtml', {
+            custId: id
+        }).then(data => {
+            this.data.info.analysis = data.result
+        })
+    }
+
+    //查询客户工豆列表
+    fetchBean = (done) => {
+        let { bean } = this.data.bean
+        let { pageNo, records, id } = bean
+        const PAGE_SIZE = 10
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) records = []
+        this.Get('/api/finManager/cust/v2/beanList.shtml', {
+            custId: id,
+            pageNo: pageNo,
+            pageSize: PAGE_SIZE
+        }).then(data => {
+            records.push(...data.pageData.result)
+            pageNo < data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
+
+            done && done()
+        })
+    }
+    setBeanId = (id) => {
+        this.data.bean.id = id
+    }
+    resetBeanPageNo = () =>{
+        this.data.bean.pageNo = 1
+    }
+
+
     fetchCouponList = () => {
         this.data.coupon.couponList = [
             {
