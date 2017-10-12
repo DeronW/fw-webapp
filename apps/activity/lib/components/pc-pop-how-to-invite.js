@@ -8,6 +8,7 @@ import styles from '../css/pc-pop-how-to-invite.css'
     props:
     -- isLoggedIn|!boolean
     -- gcm|!string
+    -- loginHandler|!function
     -- closeHandler|!function
 */
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
@@ -37,7 +38,7 @@ class InviteRewardPop extends React.Component {
             <div styleName="pop" onClick={e => e.stopPropagation()}>
                 <div styleName="close-btn" onClick={closeHandler}></div>
 
-                { false ? (
+                { isLoggedIn ? (
                     <div>
                         <div styleName="step-1">
                             <div styleName="step-no">1</div>
@@ -59,7 +60,7 @@ class InviteRewardPop extends React.Component {
                         活动期内，请好友用您的工场码注册或投标，好友累投达标您可获奖励<br />
                         登录后查看您的工场码<br />
                         还没有工场码？注册即可拥有
-                        <div styleName="login-btn">登录注册</div>
+                        <div styleName="login-btn" onClick={this.props.loginHandler}>登录注册</div>
                     </div>
                 )}
 

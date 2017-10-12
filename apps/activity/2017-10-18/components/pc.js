@@ -170,7 +170,7 @@ class PC extends React.Component {
                 <InviteRewardPop isLogin={isLoggedIn} gotoLogin={this.loginHandler} closeHandler={this.toggleInviteRewardPop} /> }
 
             { showHowToInvitePop &&
-                <HowToInvitePop isLoggedIn={isLoggedIn} gcm={gcm} closeHandler={this.toggleHowToInvitePop} /> }
+                <HowToInvitePop isLoggedIn={isLoggedIn} gcm={gcm} loginHandler={this.loginHandler} closeHandler={this.toggleHowToInvitePop} /> }
         </div>
     }
 }

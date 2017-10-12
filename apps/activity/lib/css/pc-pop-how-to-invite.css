@@ -120,6 +120,7 @@
 }
 
 .login-btn {
+    cursor: pointer;
     width: 184px;
     height: 45px;
     line-height: 45px;
