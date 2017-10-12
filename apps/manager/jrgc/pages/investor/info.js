@@ -1,15 +1,15 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import ReactEcharts from 'echarts-for-react'
 import { Utils } from 'fw-javascripts'
 
-import {Header} from '../../components'
+import { Header } from '../../components'
 import styles from '../../css/investor/info.css'
 
 @inject('investor')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Info extends React.Component {
     state = {
         hidden: false
@@ -18,18 +18,18 @@ class Info extends React.Component {
     componentDidMount() {
 
         //id为从客户页面跳转时url中的cust_id
-        // this.props.investor.fetchCustDetail(Utils.hashQuery.id)
+        // this.props.investor.fetchInfo(Utils.hashQuery.id)
     }
 
     showMore = () => {
-        this.setState({hidden: !this.state.hidden})
+        this.setState({ hidden: !this.state.hidden })
     }
     gotoHandler = (link) => {
-        let {history} = this.props
+        let { history } = this.props
         history.push(link)
     }
     jumpToRemark = () => {
-        let {history} = this.props
+        let { history } = this.props
         history.push('/investor-remark')
     }
     getOption = () => ({
@@ -54,11 +54,11 @@ class Info extends React.Component {
             left: '400',
             top: '100',
             data: [
-                {name: '≤3个月', icon: 'circle'},
-                {name: '＞3个月,≤6个月', icon: 'circle'},
-                {name: '＞6个月,≤9个月', icon: 'circle'},
-                {name: '＞9个月,≤12个月', icon: 'circle'},
-                {name: '＞12个月', icon: 'circle'},
+                { name: '≤3个月', icon: 'circle' },
+                { name: '＞3个月,≤6个月', icon: 'circle' },
+                { name: '＞6个月,≤9个月', icon: 'circle' },
+                { name: '＞9个月,≤12个月', icon: 'circle' },
+                { name: '＞12个月', icon: 'circle' },
             ],
             textStyle: {
                 color: '#999',
@@ -91,11 +91,11 @@ class Info extends React.Component {
                     }
                 },
                 data: [
-                    {value: 335, name: '≤3个月'},
-                    {value: 310, name: '＞3个月,≤6个月'},
-                    {value: 234, name: '＞6个月,≤9个月'},
-                    {value: 135, name: '＞9个月,≤12个月'},
-                    {value: 1548, name: '＞12个月'}
+                    { value: 335, name: '≤3个月' },
+                    { value: 310, name: '＞3个月,≤6个月' },
+                    { value: 234, name: '＞6个月,≤9个月' },
+                    { value: 135, name: '＞9个月,≤12个月' },
+                    { value: 1548, name: '＞12个月' }
                 ]
             }
         ],
@@ -103,38 +103,38 @@ class Info extends React.Component {
     })
 
     render() {
-        let {history} = this.props
-        let {hidden} = this.state;
+        let { history } = this.props
+        let { hidden } = this.state;
 
         let desStyle = {
             height: hidden ? '100%' : '100px',
             overflow: hidden ? 'visible' : 'hidden'
         }
 
-        let {custDetail} = this.props.investor.data
+        let { info } = this.props.investor.data
         return <div styleName="bg">
-            <Header title="客户详情" history={history}/>
+            <Header title="客户详情" history={history} />
             <div styleName="bar">
                 <div styleName="leftBar">
-                    <img src={require('../../images/investor/info/man.png')}/>
-                    <div styleName="level">{custDetail.userLevel}</div>
+                    <img src={require('../../images/investor/info/man.png')} />
+                    <div styleName="level">{info.userLevel}</div>
                 </div>
                 <div styleName="rightBar">
-                    <div styleName="name">{custDetail.realName}<span>({custDetail.birthday})</span></div>
-                    <div styleName="amount">差<span>{custDetail.mumValue}元</span>年化投资额升级VIP2</div>
-                    <div styleName="time">注册时间 {custDetail.createTime}</div>
+                    <div styleName="name">{info.realName}<span>({info.birthday})</span></div>
+                    <div styleName="amount">差<span>{info.mumValue}元</span>年化投资额升级VIP2</div>
+                    <div styleName="time">注册时间 {info.createTime}</div>
                 </div>
                 <div styleName="bottomBar">
                     <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-bean')}>
-                        <div styleName="itemBarNum">{custDetail.availableBalance}</div>
+                        <div styleName="itemBarNum">{info.availableBalance}</div>
                         <div styleName="itemBarText">工豆(元)</div>
                     </div>
                     <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-coupon')}>
-                        <div styleName="itemBarNum">{custDetail.quanCount}</div>
+                        <div styleName="itemBarNum">{info.quanCount}</div>
                         <div styleName="itemBarText">优惠券(张)</div>
                     </div>
                     <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-score')}>
-                        <div styleName="itemBarNum">{custDetail.reditCount}万</div>
+                        <div styleName="itemBarNum">{info.reditCount}万</div>
                         <div styleName="itemBarText">工分</div>
                     </div>
                 </div>
@@ -151,49 +151,49 @@ class Info extends React.Component {
             </div>
             <div styleName="pie">
                 <ReactEcharts option={this.getOption()}
-                              style={{height: '100%', width: '100%'}}/>
+                    style={{ height: '100%', width: '100%' }} />
             </div>
             <div styleName="total">
                 <div styleName="totalTitle">客户投资总额</div>
-                <div styleName="totalAmount"><span>¥{custDetail.totalInvestAmt}</span>万</div>
+                <div styleName="totalAmount"><span>¥{info.totalInvestAmt}</span>万</div>
             </div>
             <div styleName="investBox">
                 <div styleName="invest">
                     <div styleName="investItem">
                         <div styleName="investTitle">年化投资总额</div>
-                        <div styleName="investAmount">¥{custDetail.totalYearAmt}</div>
+                        <div styleName="investAmount">¥{info.totalYearAmt}</div>
                     </div>
                     <div styleName="investItem">
                         <div styleName="investTitle">在投总金额</div>
-                        <div styleName="investAmount">¥{custDetail.currInvestAmt}</div>
+                        <div styleName="investAmount">¥{info.currInvestAmt}</div>
                     </div>
                 </div>
                 <div styleName="invest">
                     <div styleName="investItem">
                         <div styleName="investTitle">可用余额(不含工豆)</div>
-                        <div styleName="investAmount">¥{custDetail.availableBalance}</div>
+                        <div styleName="investAmount">¥{info.availableBalance}</div>
                     </div>
                     <div styleName="investItem">
                         <div styleName="investTitle">累计总收益</div>
-                        <div styleName="investAmount red">¥{custDetail.accAmt}</div>
+                        <div styleName="investAmount red">¥{info.accAmt}</div>
                     </div>
                 </div>
             </div>
             <div styleName="remark" onClick="">
                 <div styleName="remarkTitle">备注</div>
-                <img src={require('../../images/investor/info/arrow.png')}/>
+                <img src={require('../../images/investor/info/arrow.png')} />
                 <div styleName="remarkAmend" onClick={this.jumpToRemark}>修改</div>
             </div>
             <div styleName="remarkText">
                 <div styleName="remarkDes" style={desStyle}>
-                    {custDetail.remark}
+                    {info.remark}
                     {/*客户喜欢短期，回款会及时投资，<br/>很少提现 家为湖北 <br/>比较喜欢奖励和优惠<br/>*/}
                     {/*客户喜欢短期，回款会及时投资，<br/>很少提现 家为湖北 <br/>比较喜欢奖励和优惠*/}
                 </div>
                 <div styleName="more" onClick={this.showMore}>
                     <span>{hidden ? '收起' : '更多'}</span>
-                    <img style={{transform: hidden ? 'rotate(180deg)' : 'rotate(0deg)'}}
-                         src={require('../../images/investor/info/down.png')}/>
+                    <img style={{ transform: hidden ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                        src={require('../../images/investor/info/down.png')} />
                 </div>
             </div>
             <div styleName="account">
@@ -201,34 +201,34 @@ class Info extends React.Component {
                     <div styleName="accountName">TA的尊享账户</div>
                     <div styleName="accountText">
                         可用余额
-                        <span>{custDetail.zxBalance}元</span>
-                        <img src={require('../../images/investor/info/arrow.png')}/>
+                        <span>{info.zxBalance}元</span>
+                        <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
                 <div styleName="accountItem" onClick={() => this.gotoHandler('/investor-account-p2p')}>
                     <div styleName="accountName">TA的微金账户</div>
                     <div styleName="accountText">
                         可用余额
-                        <span>{custDetail.wjBalance}元</span>
-                        <img src={require('../../images/investor/info/arrow.png')}/>
+                        <span>{info.wjBalance}元</span>
+                        <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
                 <div styleName="accountItem" onClick={() => this.gotoHandler('/investor-account-hj')}>
                     <div styleName="accountName">TA的黄金账户</div>
                     <div styleName="accountText">
                         持有黄金
-                        <span>{custDetail.goldAmount}克</span>
-                        <img src={require('../../images/investor/info/arrow.png')}/>
+                        <span>{info.goldAmount}克</span>
+                        <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
             </div>
             <div styleName="tabBar">
                 <div styleName="tabBarItem" onClick={() => this.gotoHandler('/user-transfer-coupon')}>
-                    <img src={require('../../images/investor/info/coupon.png')}/>
+                    <img src={require('../../images/investor/info/coupon.png')} />
                     <div>送优惠券</div>
                 </div>
-                <a styleName="tabBarItem" href={`tel:${custDetail.mobile}`}>
-                    <img src={require('../../images/investor/info/contact.png')}/>
+                <a styleName="tabBarItem" href={`tel:${info.mobile}`}>
+                    <img src={require('../../images/investor/info/contact.png')} />
                     <div>联系客户</div>
                 </a>
             </div>
