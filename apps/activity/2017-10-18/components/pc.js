@@ -4,6 +4,7 @@ import CSSModules from 'react-css-modules'
 import { Post } from '../../lib/helpers'
 import Header from '../../lib/components/pc-header.js'
 import InviteRewardPop from '../../lib/components/pop-panel.js'
+import HowToInvitePop from '../../lib/components/pc-pop-how-to-invite.js'
 
 import styles from '../css/pc.css'
 
@@ -63,8 +64,10 @@ class PC extends React.Component {
 
     toggleInviteRewardPop = () => this.setState({ showInviteRewardPop: !this.state.showInviteRewardPop})
 
+    toggleHowToInvitePop = () => this.setState({ showHowToInvitePop: !this.state.showHowToInvitePop})
+
     render() {
-        const { isLoggedIn } = this.props;
+        const { isLoggedIn, gcm } = this.props;
         const { isCompany, inviteCnt, inviteReward, invested, investedRewardLevel,
             investMore, showInviteRewardPop, showHowToInvitePop } = this.state;
         return <div styleName="bg">
@@ -87,7 +90,7 @@ class PC extends React.Component {
                 </div>
                 <div styleName="reward-state">
                     您活动期内已邀请<span>{inviteCnt}</span>人，暂可获奖励<span>{inviteReward}</span>元
-                    <div styleName="blue-anchor">如何邀请</div>
+                    <div styleName="blue-anchor" onClick={this.toggleHowToInvitePop}>如何邀请</div>
                 </div>
                 <div styleName="reward-invite-grp">
                     <div styleName="reward-invite-1">
@@ -165,6 +168,9 @@ class PC extends React.Component {
 
             { showInviteRewardPop &&
                 <InviteRewardPop isLogin={isLoggedIn} gotoLogin={this.loginHandler} closeHandler={this.toggleInviteRewardPop} /> }
+
+            { showHowToInvitePop &&
+                <HowToInvitePop isLoggedIn={isLoggedIn} gcm={gcm} closeHandler={this.toggleHowToInvitePop} /> }
         </div>
     }
 }

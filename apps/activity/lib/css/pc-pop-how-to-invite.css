@@ -1,0 +1,135 @@
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    text-align: left;
+}
+
+.pop {
+    box-sizing: border-box;
+    position: relative;
+    width: 703px;
+    height: 462px;
+    padding: 0 56px;
+    border: 1px solid transparent;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background: url('../images/pop/bg.png');
+    background-size: 100%;
+}
+
+.close-btn {
+    position: absolute;
+    top: -27px;
+    right: -27px;
+    width: 55px;
+    height: 55px;
+    background: url('../images/pop/close.png');
+    background-size: 100%;
+}
+
+.step-1 {
+    margin-top: 143px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.step-no {
+    float: left;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    margin: 6px 10px 0 0;
+    background-color: #a6421a;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 18px;
+    text-align: center;
+}
+
+.step-desc {
+    float: left;
+    color: #a6421a;
+    font-size: 16px;
+}
+
+.gcm {
+    float: left;
+    width: 137px;
+    height: 40px;
+    margin: 0 8px;
+    border-radius: 2px;
+    background-color: #ededed;
+    color: #555;
+    font-size: 24px;
+    text-align: center;
+}
+
+.step-2 {
+    margin-top: 27px;
+}
+
+.step-2 .step-desc {
+    line-height: 36px;
+}
+
+.invite-link {
+    display: table;
+    margin-left: 32px;
+    width: 570px;
+    height: 55px;
+    border-radius: 2px;
+    background-color: #fff;
+    color: #555;
+    font-size: 14px;
+}
+
+.link {
+    box-sizing: border-box;
+    float: left;
+    width: calc(100% - 89px);
+    height: 55px;
+    padding: 4px 10px;
+    line-height: 1.7;
+}
+
+.copy-btn {
+    cursor: pointer;
+    float: right;
+    width: 89px;
+    height: 55px;
+    line-height: 55px;
+    background-color: #fe6261;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+}
+
+.pop-info {
+    position: absolute;
+    left: 50%;
+    bottom: 78px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 100%;
+    margin: auto;
+    color: #064277;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.pop-info span {
+    color: #fe6261;
+}
+
+.blue-anchor {
+    cursor: pointer;
+    color: #4aa1f9;
+}
