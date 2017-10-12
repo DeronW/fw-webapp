@@ -5,6 +5,7 @@ import { Post } from '../../lib/helpers'
 import Header from '../../lib/components/pc-header.js'
 import InviteRewardPop from '../../lib/components/pop-panel.js'
 import HowToInvitePop from '../../lib/components/pc-pop-how-to-invite.js'
+import CompanyUserPop from '../../lib/components/pc-pop-company-user.js'
 
 import styles from '../css/pc.css'
 
@@ -185,6 +186,8 @@ class PC extends React.Component {
 
             { showHowToInvitePop &&
                 <HowToInvitePop isLoggedIn={isLoggedIn} gcm={gcm} loginHandler={this.loginHandler} closeHandler={this.toggleHowToInvitePop} /> }
+
+            { isCompany && <CompanyUserPop /> }
         </div>
     }
 }
