@@ -91,7 +91,7 @@ class BankCard extends React.Component {
             }, this.loadMore);
         }
     }
-    toAddYouyiCard = () => {
+    toAddCard = () => {
         this.state.tab == 'yyj' ? this.gotoHandler(`/static/loan/products/index.html#/loan-youyi-card-add`)
         : this.state.tab == 'fxh' ? this.gotoHandler(`/static/loan/user-card-set/index.html`) : "";
     }
@@ -110,7 +110,7 @@ class BankCard extends React.Component {
                     <span styleName="line"></span>
                 </div>
 
-                {bank_card.all.length == 0 && <div styleName="add" onClick = {this.toAddYouyiCard}>
+                {bank_card.all.length == 0 && <div styleName="add" onClick = {this.toAddCard}>
                     <img styleName="logo" src={require("../images/add-bank.png")}/>
                     <span>添加银行卡</span>
                 </div>}
