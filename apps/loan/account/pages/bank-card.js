@@ -86,8 +86,13 @@ class BankCard extends React.Component {
             <Header title="银行卡管理" history={history} />
             <div styleName = "content">
                 <div styleName = "tabs">
-                    <a styleName = {this.state.tab == "yyj" && "active"} onClick = {() => this.switchTab('yyj')}>优易借</a>
-                <a styleName = {this.state.tab == "fxh" && "active"} onClick = {() => this.switchTab('fxh')}>放心花</a>
+                    <div styleName = "tab"  onClick = {() => this.switchTab('yyj')}><span styleName = {`text ${this.state.tab == "yyj" && "active"}`}>优易借</span></div>
+                <div styleName = "tab"  onClick = {() => this.switchTab('fxh')}> <span styleName = {`text ${this.state.tab == "fxh" && "active"}`}>放心花</span></div>
+                <span styleName = "line"></span>
+                </div>
+                <div styleName = "add">
+                    <img styleName = "logo" src={require("../images/add-bank.png")}/>
+                    <span>添加银行卡</span>
                 </div>
             </div>
         </div>
