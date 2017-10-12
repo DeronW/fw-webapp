@@ -28,6 +28,7 @@ export default class Investor {
                 keyword:''
             },
             info: {//客户详情
+                detail:{},
                 analysis:{}
             }
         })
@@ -131,7 +132,7 @@ export default class Investor {
         this.Get('/api/finManager/cust/v2/custDetail.shtml', {
             custId: cust_id
         }).then(data => {
-            this.data.info = data.result
+            this.data.info.detail = data.result
         })
     }
     fetchCouponList = () => {
