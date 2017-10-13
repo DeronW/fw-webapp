@@ -41,23 +41,25 @@ class PC extends React.Component {
                 inviteCnt: data.inviteCount,
                 inviteReward: data.reward,
                 invested: data.selfInvestAmt
-            }, () => {
-                const invested = Number(this.state.invested);
-                let investedRewardLevel = 0,
-                    investMore = 0;
-                for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
-                    if (i === INVEST_REWARD_DIST.length - 1) investedRewardLevel = i;
-                    if (invested < INVEST_REWARD_DIST[i].value) {
-                        investedRewardLevel = i-1;
-                        investMore = (INVEST_REWARD_DIST[i].value*100 - invested*100)/100;
-                        break
-                    }
-                }
-                this.setState({
-                    investedRewardLevel: investedRewardLevel,
-                    investMore: investMore,
-                })
-            })
+            }, this.calInvestLevel)
+        })
+    }
+
+    calInvestLevel = () => {
+        const invested = Number(this.state.invested);
+        let investedRewardLevel = 0,
+            investMore = 0;
+        for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
+            if (i === INVEST_REWARD_DIST.length - 1) investedRewardLevel = i;
+            if (invested < INVEST_REWARD_DIST[i].value) {
+                investedRewardLevel = i-1;
+                investMore = (INVEST_REWARD_DIST[i].value*100 - invested*100)/100;
+                break
+            }
+        }
+        this.setState({
+            investedRewardLevel: investedRewardLevel,
+            investMore: investMore,
         })
     }
 

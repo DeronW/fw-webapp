@@ -1,0 +1,200 @@
+.bg {
+    position: relative;
+    background-color: #fff4e9;
+    text-align: center;
+    font-size: 24px;
+    overflow-x: hidden;
+}
+
+p {
+    margin: 15px 0;
+    padding: 0 27px;
+    color: #a8410f;
+    line-height: 1.5;
+}
+
+.text-red {
+    color: #fe6261;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-darker-bg {
+    background-color: #ffeede;
+    margin-top: 40px;
+    padding: 32px;
+}
+
+.btn-red {
+    width: 477px;
+    height: 56px;
+    line-height: 56px;
+    margin: 28px auto;
+    background-color: #fe6261;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.desc-entry {
+    box-sizing: border-box;
+    position: absolute;
+    top: 56px;
+    right: -42px;
+    padding-top: 50px;
+    width: 192px;
+    height: 154px;
+    background: url('../images/mobile/desc-entry.png') no-repeat;
+    color: #fff;
+    font-size: 24px;
+    transform: rotate(45deg);
+}
+
+.desc {
+    box-sizing: border-box;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 30px 26px;
+    background-color: #ffe0c2;
+    color: #a8410f;
+    font-size: 24px;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.desc-back {
+    composes: desc-entry;
+    top: -24px;
+    text-align: center;
+}
+
+.desc-title {
+    font-size: 26px;
+    line-height: 2.5;
+}
+
+.theme {
+    box-sizing: border-box;
+    height: 365px;
+    padding-top: 90px;
+    background-color: #fcd5b0;
+    color: #fff;
+    font-size: 60px;
+}
+
+.time {
+    font-size: 25px;
+}
+
+.sub-title {
+    margin: 76px auto 24px;
+}
+
+.reward-invite {
+    box-sizing: border-box;
+    width: 588px;
+    height: 321px;
+    margin: 50px 80px 20px;
+    padding-top: 20px;
+    color: #fff;
+}
+
+.reward-invite-1 {
+    composes: reward-invite;
+    background: url('../images/mobile/env-1.png') no-repeat;
+}
+
+.reward-invite-2 {
+    composes: reward-invite;
+    background: url('../images/mobile/env-2.png') no-repeat;
+}
+
+.reward-invite-value {
+    height: 145px;
+    margin-left: 190px;
+    color: #ec3654;
+}
+
+.reward-invite-2 .reward-invite-value {
+    margin-left: 150px;
+}
+
+.reward-invite-value-lt {
+    float: left;
+    font-size: 85px;
+    font-weight: bold;
+    margin-right: 3px;
+}
+
+.reward-invite-value-r {
+    float: left;
+    font-size: 24px;
+}
+
+.reward-invite-value-rt {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    margin: 19px 0 0 9px;
+    border-radius: 50px;
+    background-color: #ec3654;
+    color: #fff;
+    font-size: 22px;
+}
+
+.basket-grp {
+    padding: 12px 0;
+}
+
+.basket {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 378px;
+    height: 306px;
+    padding-top: 170px;
+    margin: 25px -10px;
+    color: #fff;
+}
+
+.basket i {
+    font-style: normal;
+    font-size: 36px;
+}
+
+.basket b {
+    font-size: 60px;
+}
+
+.basket-1 {
+    composes: basket;
+    background: url('../images/mobile/basket-1.png') no-repeat;
+}
+
+.basket-2 {
+    composes: basket;
+    background: url('../images/mobile/basket-2.png') no-repeat;
+}
+
+.basket-3 {
+    composes: basket;
+    background: url('../images/mobile/basket-3.png') no-repeat;
+}
+
+.basket-4 {
+    composes: basket;
+    background: url('../images/mobile/basket-4.png') no-repeat;
+}
+
+.basket-5 {
+    composes: basket;
+    background: url('../images/mobile/basket-5.png') no-repeat;
+}
+
+.tip {
+    margin-top: 48px;
+    font-size: 26px;
+}
