@@ -24,17 +24,17 @@ class Bean extends React.Component {
     render() {
         let { history } = this.props
         let { bean } = this.props.investor.data
-        let { records } = bean
+        let { info,records } = bean
         let bean_func = (item, index) => {
             return <div styleName="beanItem" key={index}>
                 <div styleName="beanItemUp">
                     <div styleName="beanUpLeft">工豆个数</div>
-                    <div styleName={item.money > 200 ? "beanUpRight colorRed" : "beanUpRight colorGreen"}>
-                        {item.money > 200 ? `+${item.money}` : `-${item.money}`}
+                    <div styleName={item.beanCount > 0 ? "beanUpRight colorRed" : "beanUpRight colorGreen"}>
+                        {item.beanCount > 0 ? `+${item.beanCount}` : item.beanCount}
                     </div>
                 </div>
                 <div styleName="beanItemDown">
-                    <div styleName="beanDownLeft">期间返利0.25%</div>
+                    <div styleName="beanDownLeft">{item.remark}</div>
                     <div styleName="beanDownRight">有效期 {item.overdueTime}</div>
                 </div>
             </div>
@@ -43,8 +43,8 @@ class Bean extends React.Component {
             <Header title="他的工豆" history={history} />
             <div styleName="beanInfo">
                 <div styleName="line1">他的工豆</div>
-                <div styleName="line2">¥0.17<span styleName="lineCal">（总共17工豆，100工豆=0.01元）</span></div>
-                <div styleName="line3">即将过期：¥0.00</div>
+                <div styleName="line2">¥{info.cashBalance}<span styleName="lineCal">（总共{info.cashBalance*100}工豆，100工豆=0.01元）</span></div>
+                <div styleName="line3">即将过期：¥{info.overbeancount}</div>
             </div>
             {bean_data.map(bean_func)}
         </div>

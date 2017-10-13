@@ -145,7 +145,7 @@ export default class Investor {
 
     //查询客户工豆列表
     fetchBean = (done) => {
-        let { pageNo, records, id } = this.data.bean
+        let { pageNo, records, id,info } = this.data.bean
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records = []
@@ -154,6 +154,7 @@ export default class Investor {
             pageNo: pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
+            info = data
             records.push(...data.pageData.result)
             pageNo < data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
 
