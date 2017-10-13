@@ -151,7 +151,7 @@ class Mobile extends React.Component {
             </p>
 
             <img styleName="sub-title" src={require('../images/mobile/invest-title.png')} alt="拼累投金额，赢最高万元红包" />
-            <p>活动期内，累投额达相应档位，可获该档位红包奖励，每人限1份。</p>
+            <p>活动期间，累投额达相应档位，可获该档位红包奖励，每人限1份。</p>
             <div styleName="basket-grp">
                 <div styleName="basket-1">
                     50万≤累投额&lt;100万<br />

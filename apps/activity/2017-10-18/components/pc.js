@@ -136,7 +136,7 @@ class PC extends React.Component {
                     <img src={require('../images/pc/invest-title.png')} alt="拼累投金额,赢最高万元红包" height="77px"/>
                 </div>
                 <div styleName="sub-title">
-                    活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。
+                    活动期间，累投额达相应档位，可获该档位红包奖励，每人限1份。
                 </div>
                 { isLoggedIn ? (
                     <div styleName="reward-state">
