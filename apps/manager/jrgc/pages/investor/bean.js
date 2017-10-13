@@ -5,8 +5,6 @@ import { Event, Components, Utils } from 'fw-javascripts'
 import { Header, BottomNavBar } from '../../components'
 import styles from '../../css/investor/bean.css'
 
-const bean_data = [{ money: 1000 }, { money: 200 }]
-
 @inject('investor')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
@@ -39,6 +37,9 @@ class Bean extends React.Component {
                 </div>
             </div>
         }
+        let empty = <div styleName="empty">
+            <img src={require('../../images/investor/empty.png')} />
+        </div>
         return <div>
             <Header title="他的工豆" history={history} />
             <div styleName="beanInfo">
@@ -46,7 +47,7 @@ class Bean extends React.Component {
                 <div styleName="line2">¥{info.cashBalance}<span styleName="lineCal">（总共{info.cashBalance*100}工豆，100工豆=0.01元）</span></div>
                 <div styleName="line3">即将过期：¥{info.overbeancount}</div>
             </div>
-            {bean_data.map(bean_func)}
+            {records && records.length > 0 ? records.map(score_func) : empty}
         </div>
     }
 }
