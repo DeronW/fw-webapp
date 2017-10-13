@@ -1,6 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
+import { Event, Components, Utils } from 'fw-javascripts'
 import {Header, BottomNavBar} from '../../components'
 import styles from '../../css/user/transfer-friends.css'
 
@@ -11,7 +12,9 @@ class TransferFriends extends React.Component {
         is_empty: false,
         input_value: ''
     }
+    componentDidMount(){
 
+    }
     inputHandler = (e) => {
         this.setState({input_value: e.target.value})
     }

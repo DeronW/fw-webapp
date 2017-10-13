@@ -222,7 +222,6 @@ const Model = {
     'realName': { name: '姓名' },
 }
 
-
 /* parameters
     <DisplayItem field="" immutable=Bool history={history} />
 */
@@ -259,6 +258,9 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         componentDidMount() {
             let { fq, field } = this.props;
             this.setState({ value: fq[field] })
+
+            
+
         }
     
         handleInput = e => {
@@ -267,10 +269,26 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         }
     
         handleSubmit = () => {
-            let v = this.state.value,
-                { fq, field, history } = this.props;
-            if (v === '') return
-            fq.setPanelData(history, field, v);
+            let v = this.state.value;
+            let { fq, field, history } = this.props;
+            let err = '';
+            let vld = Model[field].validate || [];
+            for (let i = 0; i < vld.length; i++) {
+                if (vld[i].test && vld[i].test(v)) {
+                    err = vld[i].msg
+                    break
+                }
+            }
+            console.log(vld)
+            console.log(err)
+
+            if(field == 'balance'){
+                err ? Components.showToast(err) :
+                    fq.setPanelData(history, 'balance', v)
+                    fq.term = ''  
+            }else{
+                err ? Components.showToast(err) : fq.setPanelData(history, field, v)
+            }   
         }
     
         render() {
@@ -280,17 +298,15 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                 <div>
                     <div styleName="input-item-container">
                         <div styleName="item-name">{Model[field].name}</div>
-                        {field === 'area' &&
-                            <span styleName="area-measure-unit"> m<span styleName="super-align-char">2</span></span>}
-                        <input maxLength={field === 'area' ? "4" : "20"}
-                            type={field === 'area' ? "num" : "text"}
-                            placeholder="请输入"
+                        <input
+                            type={field === 'creditCard' || field === 'emMobile' ? "number" : "text"}
+                            placeholder={field == 'balance' ? Model[field].placeholder :"请输入"}
                             value={value}
                             onChange={this.handleInput} />
                     </div>
                     <div styleName="submit-btn-container">
                         <a styleName="submit-btn"
-                            style={{ 'background': value ? '#639afb' : '#ccc' }}
+                            style={{ 'background':'#639afb'}}
                             onClick={this.handleSubmit}>
                             确定
                         </a>
@@ -304,13 +320,25 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         <SelectItem field="" history={history} />
     */
     const SelectItem = inject('fq')(observer(CSSModules((props) => {
+        let { fq, field, immutable, history } = props;
         let new_array = [];
 
-        let { fq, field, immutable, history } = props,
-            itemOptions = Model[field].options.map((o)=>{
-                new_array.push(o["text"])
-            }),
-            itemValue = fq[field];
+        if (field == 'term') {
+            let pool = Model[field].option_pool;
+            Model[field].options = [pool[1], pool[2], pool[3]];
+            if (fq.balance > 3000) {
+                Model[field].options = [pool[1], pool[2], pool[3]]
+            }
+            if (fq.balance > 5000) {
+                Model[field].options = [pool[2], pool[3], pool[4], pool[5]]
+            }
+            if (fq.balance > 20000) {
+                Model[field].options = [pool[3], pool[4], pool[5]]
+            }
+        }
+
+        let itemOptions = Model[field].options.map((o)=>{new_array.push(o["text"])});
+        let itemValue = fq[field];
     
         let gen_options = (optValue) => {
             let optStyleName = optValue === itemValue ? 'selected-option' : 'unselected-option';
@@ -341,12 +369,13 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         componentDidMount() {
             document.title = '借款申请';
             this.props.fq.fetchBasicInfo();
+            Components.showToast('12345')
         }
     
         render() {
             let { fq, history } = this.props,
                 currentPanel = history.location.hash.slice(1);
-    
+
             return (
                 <div styleName="cnt-container">
                     <Header title="借款申请" history={history} />

@@ -25,6 +25,9 @@ class itemDetial extends React.Component {
                         onClick={() => this.switchType(item)}>{item}
             </div>
         }
+        let empty = <div styleName="empty">
+            <img src={require('../../images/investor/empty.png')}/>
+        </div>
         return <div>
             <Header title="TA的回款明细" history={history}/>
             <div styleName="types">
@@ -72,9 +75,6 @@ class itemDetial extends React.Component {
                 </div>
                 <div styleName="load">已经全部加载完毕</div>
             </div>
-            {/*<div styleName="no-data">
-                <img src={require('../../images/investor/zx-item/no-data.png')}/>
-            </div>*/}
         </div>
     }
 }

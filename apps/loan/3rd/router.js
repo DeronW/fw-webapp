@@ -17,6 +17,8 @@ import IdcardOcr from './pages/idcard-ocr.js'
 import IdcardLiveMatch from './pages/idcard-live-match.js'
 import IdentificationResult from './pages/identification-result.js'
 
+import * as Outside from './pages/outside'
+
 export default (stores) => {
     return <Router>
         <Provider {...stores} >
@@ -35,6 +37,12 @@ export default (stores) => {
                 <Route exact path='/idcard-ocr' component={IdcardOcr} />
                 <Route exact path='/idcard-live-match' component={IdcardLiveMatch} />
                 <Route exact path='/identification-result' component={IdentificationResult} />
+
+                {/* 渠道落地页 */}
+                <Route exact path='/outside/register' component={Outside.Register} />
+                <Route exact path='/outside/show-app' component={Outside.ShowApp} />
+                <Route exact path='/outside/show-wx' component={Outside.ShowWeixin} />
+                <Route exact path='/outside/show-other-app' component={Outside.ShowOtherApp} />
             </Switch>
         </Provider>
     </Router>
