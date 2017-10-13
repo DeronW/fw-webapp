@@ -3,6 +3,7 @@
     background-color: #fff4e9;
     text-align: center;
     font-size: 24px;
+    overflow-x: hidden;
 }
 
 p {
@@ -48,6 +49,32 @@ p {
     color: #fff;
     font-size: 24px;
     transform: rotate(45deg);
+}
+
+.desc {
+    box-sizing: border-box;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 30px 26px;
+    background-color: #ffe0c2;
+    color: #a8410f;
+    font-size: 24px;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.desc-back {
+    composes: desc-entry;
+    top: -24px;
+    text-align: center;
+}
+
+.desc-title {
+    font-size: 26px;
+    line-height: 2.5;
 }
 
 .theme {

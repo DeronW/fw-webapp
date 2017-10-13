@@ -13,13 +13,24 @@ class Mobile extends React.Component {
         showDesc: false,
     }
 
+    toggleShowDesc = () => this.setState({ showDesc: !this.state.showDesc })
+
     render() {
         const { showDesc } = this.state;
 
         return <div styleName="bg">
             <Header />
 
-            <div styleName="desc-entry">活动说明</div>
+            <div styleName="desc-entry" onClick={this.toggleShowDesc}>活动说明</div>
+
+            { showDesc && <div styleName="desc">
+                <div styleName="desc-back" onClick={this.toggleShowDesc}>返回</div>
+                <div styleName="desc-title">活动说明</div>
+                1. 活动期内，投资转让项目，不能参与本次活动；<br />
+                2. 本次活动累投金额包含工场微金、工场尊享和工场黄金的尊享金产品的购买金额；<br />
+                3. 活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br />
+                4. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
+            </div> }
 
             <div styleName="theme">
                 这里有份万元红包<br/>让双11不再剁手
