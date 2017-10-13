@@ -1,0 +1,59 @@
+.bg {
+    min-height: 100%;
+    background: #4a86e8 url(../images/bg.jpg) no-repeat;
+    background-size: 100% auto;
+    box-sizing: border-box;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.form {
+    position: relative;
+    width: 14.55rem;
+    margin: 12rem auto 1rem;
+}
+
+.field {
+    position: relative;
+    width: 100%;
+    height: 1.9rem;
+    margin-bottom: .7rem;
+    border: 1px solid hsla(0, 0%, 100%, .4);
+    border-radius: .2rem;
+    background-color: rgba(254, 254, 255, .08);
+}
+
+.field .icon {
+    position: absolute;
+    display: block;
+    left: .5em;
+    top: .5em;
+}
+
+.field input {
+    display: block;
+    width: 80%;
+    height: 100%;
+    border: none;
+    outline: none;
+    margin-left: 2rem;
+    padding-left: 0;
+    background-color: transparent;
+    color: #fff;
+    font-size: .7rem;
+
+}
+
+
+.field input::-webkit-input-placeholder {
+    color: rgb(139, 183, 254);
+}
+
+.login {
+    width: 100%;
+    color: #fff;
+    font-size: .7rem;
+    text-align: center;
+    display: block;
+    margin-bottom: 2em;
+}
