@@ -46,7 +46,7 @@ class Info extends React.Component {
         },
         tooltip: {
             trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
+            formatter: "{b}: {c} ({d}%)"
         },
         legend: {
             orient: 'vertical',
@@ -67,7 +67,7 @@ class Info extends React.Component {
         },
         series: [
             {
-                name: '客户整体投资期限分析',
+                name: '',
                 type: 'pie',
                 center: ['30%', '50%'],
                 radius: ['50%', '70%'],
@@ -153,7 +153,7 @@ class Info extends React.Component {
                 </div>
             </div>
             <div styleName="pie">
-                <ReactEcharts option={this.getOption(within3MonthRate,four2SixMonthRate,seven2NineMonthRate,ten2TwelveMonthRate,moreThanOneYearRate)}
+                <ReactEcharts option={this.getOption(1,2,3,4,5)}
                     style={{ height: '100%', width: '100%' }} />
             </div>
             <div styleName="total">

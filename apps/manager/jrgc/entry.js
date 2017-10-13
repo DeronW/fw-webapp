@@ -11,6 +11,7 @@ let stores = {
     login: new Stores.Login(Post),
     user: new Stores.User(Get, Post),
     investor: new Stores.Investor(Get),
+    investor_account: new Stores.InvestorAccount(Get,Post),
     stats_overview: new Stores.StatsOverview(Get),
     stats_investor: new Stores.StatsInvestor(Get)
 }

@@ -14,11 +14,13 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     APP_NAMES.forEach(i => {
         generate_task(PROJ, i, {
             debug: true,
+            compatible_IE: true,
             environment: 'development',
             api_path: CONSTANTS[PROJ].dev_api_path
         })
 
         generate_task(PROJ, i, {
+            compatible_IE: true,
             cmd_prefix: 'pack',
             api_path: '',
             environment: 'production',
