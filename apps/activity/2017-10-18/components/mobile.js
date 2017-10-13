@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
-import { NativeBridge, gotoPage, Post, Browser } from '../../lib/helpers'
+import { NativeBridge, gotoPage, Post, Browser, UserReady } from '../../lib/helpers'
 import Header from '../../lib/components/mobile-header.js'
 import HowToInvitePop from '../../lib/components/mobile-pop-how-to-invite.js'
 import CompanyUserPop from '../../lib/components/mobile-pop-company-user.js'
@@ -35,13 +35,15 @@ class Mobile extends React.Component {
     }
 
     componentDidMount() {
-        Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
-            this.setState({
-                isCompany: !data.isPerson,
-                inviteCnt: data.inviteCount,
-                inviteReward: data.reward,
-                invested: data.selfInvestAmt
-            }, this.calInvestLevel)
+        UserReady(() => {
+            Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
+                this.setState({
+                    isCompany: !data.isPerson,
+                    inviteCnt: data.inviteCount,
+                    inviteReward: data.reward,
+                    invested: data.selfInvestAmt
+                }, this.calInvestLevel)
+            })
         })
     }
 

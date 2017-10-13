@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
-import { Post } from '../../lib/helpers'
+import { Post, UserReady } from '../../lib/helpers'
 import Header from '../../lib/components/pc-header.js'
 import InviteRewardPop from '../../lib/components/pop-panel.js'
 import HowToInvitePop from '../../lib/components/pc-pop-how-to-invite.js'
@@ -35,13 +35,15 @@ class PC extends React.Component {
     }
 
     componentDidMount() {
-        Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
-            this.setState({
-                isCompany: !data.isPerson,
-                inviteCnt: data.inviteCount,
-                inviteReward: data.reward,
-                invested: data.selfInvestAmt
-            }, this.calInvestLevel)
+        UserReady(() => {
+            Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
+                this.setState({
+                    isCompany: !data.isPerson,
+                    inviteCnt: data.inviteCount,
+                    inviteReward: data.reward,
+                    invested: data.selfInvestAmt
+                }, this.calInvestLevel)
+            })
         })
     }
 

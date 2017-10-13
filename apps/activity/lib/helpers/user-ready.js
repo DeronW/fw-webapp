@@ -6,7 +6,8 @@ let is_ready = false,
     resolve_list = [];
 
 Ajax({
-    url: '/api/userState/v1/userState.json'
+    url: '/api/userState/v1/userState.json',
+    silence: true
 }).then(data => {
     is_ready = true
     USER = {
