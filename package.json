@@ -20,7 +20,7 @@
     "es6-promise": "^4.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.3.0",
-    "fw-components": "^0.3.3",
+    "fw-components": "^0.4.0",
     "fw-javascripts": "^0.5.1",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "^7.0.0",

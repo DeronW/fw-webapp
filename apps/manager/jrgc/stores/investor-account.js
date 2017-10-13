@@ -6,7 +6,9 @@ export default class InvestorAccount {
         this.Post = Post
         this.data = {}
         extendObservable(this.data, {
-            p2p: {},
+            p2p: {
+                info: {}
+            },
             hj: {
                 info: {},
                 type: '0',
@@ -70,5 +72,14 @@ export default class InvestorAccount {
     resetGoldListPageNo = () => {
         let {type, records} = this.data.hj, current_record = records[type]
         current_record.page_no = 1
+    }
+    //获取微金账户信息页
+    fetchAccountP2P = (custId) => {
+        this.Get('/api/finManager/cust/v2/wjAccount.shtml', {
+            custId: custId
+        }).then(data => {
+            this.data.p2p.info = data.result
+        })
+
     }
 }
