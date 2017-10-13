@@ -14,6 +14,7 @@ import styles from '../../css/features/cookbook.css'
 class Cookbook extends React.Component {
 
     componentDidMount() {
+        NativeBridge.trigger('hide_header')
     }
 
     registerHandler = () => {
