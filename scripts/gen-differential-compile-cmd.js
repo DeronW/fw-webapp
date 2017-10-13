@@ -38,15 +38,21 @@ fs.readFile(sourceF, (err, data) => {
 
     let sh_script = [];
     if (r.npm) sh_script.push('npm install')
-    if (r.lib) {
+    if (r.npm || r.lib) {
         sh_script.push(`npm run build:${PROJ}`)
     } else {
-        sh_script.push(`npm run gulp ${PROJ}:common_js`)
+        // sh_script.push(`npm run gulp ${PROJ}:common_js`)
+        let tmp_sh_script = []
         for (let i in r.pages) {
             if (r.pages.hasOwnProperty(i))
-                sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
+                tmp_sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
         }
-        if (sh_script.length === 1) sh_script = [];
+
+        if (tmp_sh_script.length > 0) {
+            sh_script.push(
+                `npm run gulp ${PROJ}:common_js`,
+                ...tmp_sh_script)
+        }
     }
 
     fs.writeFile(targetF, sh_script.join('\n'), (err) => {
