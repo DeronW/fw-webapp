@@ -3,6 +3,8 @@ import CSSModules from 'react-css-modules'
 
 import { NativeBridge, gotoPage, Post, Browser } from '../../lib/helpers'
 import Header from '../../lib/components/mobile-header.js'
+import HowToInvitePop from '../../lib/components/mobile-pop-how-to-invite.js'
+import CompanyUserPop from '../../lib/components/mobile-pop-company-user.js'
 
 import styles from '../css/mobile.css'
 
@@ -72,8 +74,6 @@ class Mobile extends React.Component {
 
     gotoInvest = () => gotoPage('投资')
 
-    toggleInviteRewardPop = () => this.setState({ showInviteRewardPop: !this.state.showInviteRewardPop})
-
     toggleHowToInvitePop = () => this.setState({ showHowToInvitePop: !this.state.showHowToInvitePop})
 
     render() {
@@ -117,7 +117,6 @@ class Mobile extends React.Component {
                     <div styleName="btn-red" onClick={this.loginHandler}>立即登录</div>
                 </div>
             )}
-
 
             <div styleName="reward-invite-1">
                 <div styleName="reward-invite-value">
@@ -193,6 +192,11 @@ class Mobile extends React.Component {
 
                 <p styleName="tip">*以上活动由金融工场主办 与Apple Inc. 无关</p>
             </div>
+
+            { showHowToInvitePop &&
+                <HowToInvitePop isLoggedIn={isLoggedIn} gcm={gcm} loginHandler={this.loginHandler} closeHandler={this.toggleHowToInvitePop} /> }
+
+            { isCompany && <CompanyUserPop /> }
         </div>
     }
 
