@@ -68,8 +68,9 @@ class Mobile extends React.Component {
     loginHandler = () => this.props.gotoHandler('登录', 'https://www.gongchangp2p.com/api/activityPullNew/ActivityControl.shtml?code=ONLTHD')
 
     gotoMoreAboutInvite = () => {
-        if (Browser.inApp) NativeBridge.goto('https://m.9888.cn/static/wap/topic-invite/index.html')
-        location.href = 'https://m.9888.cn/static/wap/topic-invite/index.html'
+        const link = 'https://m.9888.cn/static/wap/topic-invite/index.html';
+        if (Browser.inApp) NativeBridge.goto(link)
+        location.href = link;
     }
 
     gotoInvest = () => gotoPage('投资')
