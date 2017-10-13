@@ -31,20 +31,13 @@ export default class Investor {
                 detail: {},
                 analysis: {}
             },
-            account: {
-                p2p: {},
-                hj: {
-                    info: {},
-                    type: '0',
-                    records: {
-                        '0': {name: "全部", page_no: 1, list: []},
-                        '1': {name: '持有中', page_no: 1, list: []},
-                        '2': {name: '已到期', page_no: 2, list: []}
-                    },
-                    goldPrice: '',
-                    amount: {}
-                }
-            }
+            bean: {
+                id: null,
+                info: {},
+                pageNo: 1,
+                records: []
+            },
+
         })
     }
 
@@ -115,7 +108,7 @@ export default class Investor {
         this.data.search.pageNo = 1
     }
     fetchSearch = (done) => {
-        let {keyword, pageNo, records} = this.data.search
+        let { keyword, pageNo, records } = this.data.search
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records = []
@@ -133,14 +126,6 @@ export default class Investor {
     setKeyword = (keyword) => {
         this.data.search.keyword = keyword
     }
-    //客户整体投资期限分析-饼图
-    fetchInvestAnalysis = (id) => {
-        this.Get('/api/finManager/cust/v2/investAnalysis.shtml', {
-            custId: id
-        }).then(data => {
-            this.data.info.analysis = data.result
-        })
-    }
     //客户详情
     fetchInfo = (cust_id) => {
         this.Get('/api/finManager/cust/v2/custDetail.shtml', {
@@ -149,21 +134,40 @@ export default class Investor {
             this.data.info.detail = data.result
         })
     }
-    //黄金账户信息页
-    fetchAccountHj = (custId) => {
-        this.Get('/api/finManager/cust/v2/goldAccount.shtml', {
-            custId: custId
+    //客户整体投资期限分析-饼图
+    fetchInvestAnalysis = (id) => {
+        this.Get('/api/finManager/cust/v2/investAnalysis.shtml', {
+            custId: id
         }).then(data => {
-            this.data.account.hj.info = data.result
+            this.data.info.analysis = data.result
         })
     }
-    //实时金价
-    fetchGoldPrice = () => {
-        this.Get('/api/finManager/cust/v2/goldPrice.shtml')
-            .then(data => {
-                this.data.account.hj.goldPrice = data.goldPrice
-            })
+
+    //查询客户工豆列表
+    fetchBean = (done) => {
+        let { pageNo, records, id,info } = this.data.bean
+        const PAGE_SIZE = 10
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) records = []
+        this.Get('/api/finManager/cust/v2/beanList.shtml', {
+            custId: id,
+            pageNo: pageNo,
+            pageSize: PAGE_SIZE
+        }).then(data => {
+            info = data
+            records.push(...data.pageData.result)
+            pageNo < data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
+
+            done && done()
+        })
     }
+    setBeanId = (id) => {
+        this.data.bean.id = id
+    }
+    resetBeanPageNo = () =>{
+        this.data.bean.pageNo = 1
+    }
+
     fetchCouponList = () => {
         this.data.coupon.couponList = [
             {
