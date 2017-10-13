@@ -14,89 +14,61 @@ import styles from '../css/bank-card.css'
 })
 class BankCard extends React.Component {
 
-    // componentDidMount() {
-    //     document.title = '银行卡管理';
-    //     this.props.bank_card.fetch_card_list();
-    // }
 
-    // render() {
-    //     // 从银行卡管理入口进来：
-    //     // *1 显示卡片label
-    //     // *2 显示tips
-    //     // *3 不允许绑卡
-    //     let { bank_card, history } = this.props;
-    //
-    //     let bank_item = (item, index) => {
-    //         let cardLabelStr = item.authPlatform || '',
-    //             cardLabelArray = cardLabelStr === '' ? [] : cardLabelStr.split(','),
-    //             gen_card_labels = labelNo => {
-    //                 let cardLabel;
-    //                 if (labelNo == 1) {
-    //                     cardLabel = '放心花';
-    //                 } else if (labelNo == 2) {
-    //                     cardLabel = '优易借';
-    //                 }
-    //                 return <div styleName="card-label" key={labelNo}>
-    //                     <span>{cardLabel}</span>
-    //                 </div>
-    //
-    //             };
-    //
-    //         return <div styleName="card" key={item.cardNo}>
-    //             <div styleName="bank-info">
-    //                 <div styleName="bank-logo">
-    //                     <img src={item.logoUrl} />
-    //                 </div>
-    //                 <div styleName="bank-name">{item.bankShortName}</div>
-    //             </div>
-    //             <div styleName="card-info">
-    //                 <span styleName="card-no">{item.cardNo}</span>
-    //                 { cardLabelArray.map(gen_card_labels) }
-    //             </div>
-    //         </div>
-    //     }
-    //
-    //     return <div styleName="cnt-container">
-    //         <Header title="银行卡管理" history={history} />
-    //
-    //         <div styleName="tips">
-    //             1.在这里您可以看到使用不同借款产品时绑定过的银行卡；
-    //             <br/>
-    //             2.在实际使用中我们会自动为您筛选当前可用的银行卡。
-    //         </div>
-    //
-    //         <div styleName="list-container">
-    //             { bank_card.all.map(bank_item) }
-    //         </div>
-    //     </div>
-    // }
     state = {
         tab: 'yyj',
-        link: '',
-        records: [],
-        page: 1
+        fxhList:[],
+        yyjList:[]
     }
     gotoHandler = link => {
         location.href = encodeURI(link);
     }
     componentDidMount() {
         let {bank_card} = this.props;
-        bank_card.fetch_card_list();
+        bank_card.fetch_card_list().then(() => {
+            bank_card.all.map(this.filter);
+        });
+
+
     }
-    loadMore = () => {}
+    filter = (item) => {
+        let cardLabel = item.authPlatform || '',
+            cardLabelArray = cardLabel === '' ? [] : cardLabel.split(',');
+        if(cardLabelArray.indexOf("1")!= "-1"){
+            this.state.fxhList.push(item);
+        }
+        if(cardLabelArray.indexOf("2")!= "-1"){
+            this.state.yyjList.push(item);
+        }
+    }
+
     switchTab = tab => {
         if (tab != this.state.tab) {
             this.setState({
                 tab: tab
-            }, this.loadMore);
+            });
         }
     }
-    toAddCard = () => {
-        this.state.tab == 'yyj' ? this.gotoHandler(`/static/loan/products/index.html#/loan-youyi-card-add`)
-        : this.state.tab == 'fxh' ? this.gotoHandler(`/static/loan/user-card-set/index.html`) : "";
-    }
+    // toAddCard = () => {
+    //     this.state.tab == 'yyj' ? this.gotoHandler(`/static/loan/products/index.html#/loan-youyi-card-add`)
+    //     : this.state.tab == 'fxh' ? this.gotoHandler(`/static/loan/user-card-set/index.html`) : "";
+    // }
     render() {
         let {history,bank_card} = this.props;
+        let bank_item = (item, index) => {
+            return <div styleName="card" key={item.cardNo}>
+                <div styleName="bank-info">
+                    <div styleName="bank-logo">
+                        <img src={item.logoUrl} />
+                    </div>
+                    <div styleName="bank-name">{item.bankShortName}</div>
+                </div>
+                <div styleName="card-info">
+                    <span styleName="card-no">{item.cardNo}</span>
+                    {/* { cardLabelArray.map(gen_card_labels) } */}
+                </div>
+            </div>
+        }
         return <div styleName="bg">
             <Header title="银行卡管理" history={history}/>
             <div styleName="content">
@@ -110,10 +82,20 @@ class BankCard extends React.Component {
                     <span styleName="line"></span>
                 </div>
 
-                {bank_card.all.length == 0 && <div styleName="add" onClick = {this.toAddCard}>
+                {this.state.tab == 'yyj' && this.state.yyjList.length == 0 && <div styleName="add" onClick = {() => {this.gotoHandler(`/static/loan/products/index.html#/loan-youyi-card-add`)}}>
                     <img styleName="logo" src={require("../images/add-bank.png")}/>
                     <span>添加银行卡</span>
                 </div>}
+                {this.state.tab == 'fxh' && this.state.fxhList.length == 0 && <div styleName="add" onClick = {() => {this.gotoHandler(`/static/loan/user-card-set/index.html`)}}>
+                    <img styleName="logo" src={require("../images/add-bank.png")}/>
+                    <span>添加银行卡</span>
+                </div>}
+                {this.state.tab == 'yyj' && <div styleName="list-container">
+                           { this.state.yyjList.map(bank_item) }
+                       </div>}
+                {this.state.tab == 'fxh' && <div styleName="list-container">
+                                  { this.state.fxhList.map(bank_item) }
+                              </div>}
             </div>
             {this.state.tab == 'fxh' && <div styleName="add-bank-cover">
                 <div styleName="add-bank-btn" onClick = {() => {history.push('/bank-card-add')}}>添加银行卡</div>
