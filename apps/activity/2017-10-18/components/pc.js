@@ -35,7 +35,7 @@ class PC extends React.Component {
     }
 
     componentDidMount() {
-        UserReady(() => {
+        this.props.isLoggedIn && UserReady(() => {
             Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
                 this.setState({
                     isCompany: !data.isPerson,
