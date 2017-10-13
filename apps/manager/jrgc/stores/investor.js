@@ -37,7 +37,12 @@ export default class Investor {
                 pageNo: 1,
                 records: []
             },
-
+            score:{
+                id: null,
+                info: {},
+                pageNo: 1,
+                records: []
+            }
         })
     }
 
@@ -145,7 +150,7 @@ export default class Investor {
 
     //查询客户工豆列表
     fetchBean = (done) => {
-        let { pageNo, records, id } = this.data.bean
+        let { pageNo, records, id,info } = this.data.bean
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records = []
@@ -154,6 +159,7 @@ export default class Investor {
             pageNo: pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
+            info = data
             records.push(...data.pageData.result)
             pageNo < data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
 
@@ -165,6 +171,31 @@ export default class Investor {
     }
     resetBeanPageNo = () =>{
         this.data.bean.pageNo = 1
+    }
+
+    //查询客户工分列表
+    fetchScore = (done) => {
+        let { pageNo, records, id,info } = this.data.score
+        const PAGE_SIZE = 10
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) records = []
+        this.Get('/api/finManager/cust/v2/scoreList.shtml', {
+            custId: id,
+            pageNo: pageNo,
+            pageSize: PAGE_SIZE
+        }).then(data => {
+            info = data
+            records.push(...data.pageData.result)
+            pageNo < data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
+
+            done && done()
+        })
+    }
+    setScoreId = (id) => {
+        this.data.score.id = id
+    }
+    resetScorePageNo = () =>{
+        this.data.score.pageNo = 1
     }
 
     fetchCouponList = () => {

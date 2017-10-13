@@ -9,7 +9,13 @@ module.exports = function (site_name, page_name, CONFIG) {
 
     const page_path = path.resolve(__dirname, `../apps/${site_name}/${page_name}`),
         build_path = path.resolve(__dirname, `../build/${site_name}/${page_name}`),
-        relative_path = `/static/${site_name}/${page_name}`
+        relative_path = `/static/${site_name}/${page_name}`;
+
+    let PRESETS_ENV_BROWSERS = ['last 2 major versions'];
+
+    if (CONFIG.compatible_IE) {
+        PRESETS_ENV_BROWSERS.push('ie 9')
+    }
 
     const compiler = webpack({
         entry: ['babel-polyfill', 'proxy-polyfill', `${page_path}/entry.js`],
@@ -28,10 +34,7 @@ module.exports = function (site_name, page_name, CONFIG) {
                         presets: [
                             ['env', {
                                 targets: {
-                                    browsers: [
-                                        "last 2 major versions",
-                                        "ie 9", "ie 10"
-                                    ],
+                                    browsers: PRESETS_ENV_BROWSERS,
                                     useBuiltIns: true,
                                     uglify: false,
                                     include: ['transform-es2015-arrow-functions'],
