@@ -40,11 +40,11 @@ class TransferFriends extends React.Component {
     render() {
         let { history } = this.props
         let { couponType,pageNo, list, keyword } = this.props.user_coupon.data.friends
-        let {remark,overdueTime,investMultip,inverstPeriod} = Utils.hashQuery
+        let {beanCount,remark,overdueTime,investMultip,inverstPeriod} = Utils.hashQuery
         let coupon = () => {
             let coupon_style = couponType == '返现券' ? "couponItem typeBlue" : couponType == '返息券' ? "couponItem typeRed" : "couponItem typeYellow"
             return <div styleName={coupon_style}>
-                <div styleName="couponValue"><span styleName="rmb">¥</span>80</div>
+                <div styleName="couponValue"><span styleName="rmb">¥</span>{beanCount}</div>
                 <div styleName="couponDes">
                     <div styleName="lineLeft desLeft">{remark}</div>
                     <div styleName="lineRight desRight">有效期 {overdueTime}</div>
