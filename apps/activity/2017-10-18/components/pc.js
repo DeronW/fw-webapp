@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
-import { Post } from '../../lib/helpers'
+import { Post, UserReady } from '../../lib/helpers'
 import Header from '../../lib/components/pc-header.js'
 import InviteRewardPop from '../../lib/components/pop-panel.js'
 import HowToInvitePop from '../../lib/components/pc-pop-how-to-invite.js'
@@ -24,10 +24,6 @@ const INVEST_REWARD_DIST = [
 class PC extends React.Component {
 
     state = {
-        isCompany: false,
-        inviteCnt: '',
-        inviteReward: '',
-        invested: '',
         investedRewardLevel: 0,
         investMore: '',
         showInviteRewardPop: false,
@@ -35,18 +31,11 @@ class PC extends React.Component {
     }
 
     componentDidMount() {
-        Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
-            this.setState({
-                isCompany: !data.isPerson,
-                inviteCnt: data.inviteCount,
-                inviteReward: data.reward,
-                invested: data.selfInvestAmt
-            }, this.calInvestLevel)
-        })
+        this.calInvestLevel()
     }
 
     calInvestLevel = () => {
-        const invested = Number(this.state.invested);
+        const invested = Number(this.props.invested);
         let investedRewardLevel = 0,
             investMore = 0;
         for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
@@ -70,8 +59,8 @@ class PC extends React.Component {
     toggleHowToInvitePop = () => this.setState({ showHowToInvitePop: !this.state.showHowToInvitePop})
 
     render() {
-        const { isLoggedIn, gcm } = this.props;
-        const { isCompany, inviteCnt, inviteReward, invested, investedRewardLevel,
+        const { isLoggedIn, gcm, isCompany, inviteCnt, inviteReward, invested } = this.props;
+        const { investedRewardLevel,
             investMore, showInviteRewardPop, showHowToInvitePop } = this.state;
         return <div styleName="bg">
             <Header bgColor="#725749" />
@@ -134,7 +123,7 @@ class PC extends React.Component {
                     <img src={require('../images/pc/invest-title.png')} alt="拼累投金额,赢最高万元红包" height="77px"/>
                 </div>
                 <div styleName="sub-title">
-                    活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。
+                    活动期间，累投额达相应档位，可获该档位红包奖励，每人限1份。
                 </div>
                 { isLoggedIn ? (
                     <div styleName="reward-state">

@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
-import { NativeBridge, gotoPage, Post, Browser } from '../../lib/helpers'
+import { NativeBridge, gotoPage, Post, Browser, UserReady } from '../../lib/helpers'
 import Header from '../../lib/components/mobile-header.js'
 import HowToInvitePop from '../../lib/components/mobile-pop-how-to-invite.js'
 import CompanyUserPop from '../../lib/components/mobile-pop-company-user.js'
@@ -35,18 +35,11 @@ class Mobile extends React.Component {
     }
 
     componentDidMount() {
-        Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
-            this.setState({
-                isCompany: !data.isPerson,
-                inviteCnt: data.inviteCount,
-                inviteReward: data.reward,
-                invested: data.selfInvestAmt
-            }, this.calInvestLevel)
-        })
+        this.calInvestLevel()
     }
 
     calInvestLevel = () => {
-        const invested = Number(this.state.invested);
+        const invested = Number(this.props.invested);
         let investedRewardLevel = 0,
             investMore = 0;
         for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
@@ -78,8 +71,8 @@ class Mobile extends React.Component {
     toggleHowToInvitePop = () => this.setState({ showHowToInvitePop: !this.state.showHowToInvitePop})
 
     render() {
-        const { isLoggedIn, gcm } = this.props;
-        const { isCompany, inviteCnt, inviteReward, invested, investedRewardLevel,
+        const { isLoggedIn, gcm, isCompany, inviteCnt, inviteReward, invested } = this.props;
+        const { investedRewardLevel,
             investMore, showInviteRewardPop, showHowToInvitePop, showDesc } = this.state;
 
         return <div styleName="bg">
@@ -149,7 +142,7 @@ class Mobile extends React.Component {
             </p>
 
             <img styleName="sub-title" src={require('../images/mobile/invest-title.png')} alt="拼累投金额，赢最高万元红包" />
-            <p>活动期内，累投额达相应档位，可获该档位红包奖励，每人限1份。</p>
+            <p>活动期间，累投额达相应档位，可获该档位红包奖励，每人限1份。</p>
             <div styleName="basket-grp">
                 <div styleName="basket-1">
                     50万≤累投额&lt;100万<br />
