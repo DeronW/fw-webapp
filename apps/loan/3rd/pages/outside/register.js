@@ -17,15 +17,16 @@ forceHotCSS()
 class Register extends React.Component {
 
     state = {
-        phone: ''
+        phone: '',
+        captcha: ''
     }
 
     componentDidMount() {
 
     }
 
-    changeHandler = (e) => {
-        this.setState({ phone: e.target.value })
+    changeHandler = field_name => e => {
+        this.setState({ [field_name]: e.target.value })
     }
 
     emptyHandler = name => () => {
@@ -34,10 +35,13 @@ class Register extends React.Component {
 
     render() {
 
-        let { phone } = this.state
+        let { phone, captcha } = this.state
 
         let empty_btn = field_name => {
-            return <div styleName="btn-empty" onClick={this.emptyHandler(field_name)}>
+            if (!this.state[field_name]) return null;
+
+            return <div styleName="btn-empty"
+                onClick={this.emptyHandler(field_name)}>
             </div>
         }
 
@@ -46,13 +50,15 @@ class Register extends React.Component {
                 <div styleName="field">
                     <img styleName="icon"
                         src={require('../../images/outside/register/icon-phone.png')} />
-                    <input placeholder="请输入手机号" type="tel" maxLength="11" value={phone} onChange={this.changeHandler} />
-
+                    <input placeholder="请输入手机号" type="tel"
+                        maxLength="11" value={phone}
+                        onChange={this.changeHandler('phone')} />
                 </div>
                 <div styleName="field">
                     <img styleName="icon"
                         src={require('../../images/outside/register/icon-code.png')} />
-                    <input placeholder="请输入图片验证码" type="tel" maxLength="11" value={phone} />
+                    <input placeholder="请输入图片验证码" maxLength="6"
+                        value={captcha} />
                 </div>
                 <div styleName="field">
                     <img styleName="icon"
