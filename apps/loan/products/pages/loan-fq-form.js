@@ -350,7 +350,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             let optStyleName = optValue === itemValue ? 'selected-option' : 'unselected-option';
             return (
                 <div key={optValue}
-                    styleName={styles[optStyleName]}
+                    className={styles[optStyleName]}
                     onClick={() => { fq.setPanelData(history, field, optValue)}}>
                     {optValue}
                 </div>
