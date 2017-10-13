@@ -8,8 +8,7 @@
 }
 
 .header {
-    position: -webkit-sticky;
-    position: sticky;
+    position: fixed;
     z-index: 99;
     top: 0;
     left: 0;
@@ -34,8 +33,7 @@
     float: left;
     width: 80px;
     height: 88px;
-    position: -webkit-sticky;
-    position: sticky;
+    position: absolute;
     background-position: center;
     background-repeat: no-repeat;
     bottom: 0;
