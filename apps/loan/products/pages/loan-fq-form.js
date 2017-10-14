@@ -231,7 +231,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             itemPlaceholder = Model[field].options !== undefined ? '请选择' : '请输入',
             itemStyleName = immutable ? 'item-container' : 'mutable-item-container';
 
-        var itemValue = fq[field];    
+        var itemValue;    
 
         if(Model[field].options !== undefined){
             let index = Model[field].options.findIndex(i=>i["value"] == itemValue);
@@ -239,6 +239,8 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             if(indexOption !== undefined){
                 itemValue = indexOption.text
             }
+        }else{
+            itemValue = fq[field]; 
         }
         
         return (
