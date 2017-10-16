@@ -12,7 +12,8 @@ import styles from '../../css/investor/info.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Info extends React.Component {
     state = {
-        hidden: false
+        hidden: false,
+        id:Utils.hashQuery.id
     }
 
     componentDidMount() {
@@ -26,7 +27,7 @@ class Info extends React.Component {
     }
     gotoHandler = (link) => {
         let { history } = this.props
-        history.push(link)
+        history.push(`${link}?id=${this.state.id}`)
     }
     jumpToRemark = () => {
         let { history } = this.props
@@ -104,7 +105,7 @@ class Info extends React.Component {
 
     render() {
         let { history } = this.props
-        let { hidden } = this.state;
+        let { hidden,id } = this.state;
 
         let desStyle = {
             height: hidden ? '100%' : '100px',

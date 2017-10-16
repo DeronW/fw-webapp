@@ -2,7 +2,6 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 
 import { NativeBridge, gotoPage, Post, Browser, UserReady } from '../../lib/helpers'
-import Header from '../../lib/components/mobile-header.js'
 import HowToInvitePop from '../../lib/components/mobile-pop-how-to-invite.js'
 import CompanyUserPop from '../../lib/components/mobile-pop-company-user.js'
 
@@ -71,8 +70,6 @@ class Mobile extends React.Component {
         const { investedRewardLevel, investMore, showInviteRewardPop, showHowToInvitePop, showDesc } = this.state;
 
         return <div styleName="bg">
-            <Header />
-
             <div styleName="desc-entry" onClick={this.toggleShowDesc}>活动说明</div>
 
             { showDesc && <div styleName="desc">
@@ -91,19 +88,19 @@ class Mobile extends React.Component {
             </div>
 
             <img styleName="sub-title" src={require('../images/mobile/invite-title.png')} alt="邀请好友赚佣金" />
-            <p>活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。</p>
+            <div styleName="text-normal">活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。</div>
 
             { isLoggedIn ? (
                 <div>
-                    <p>
+                    <div styleName="text-normal">
                         您活动期内已邀请<span styleName="text-red">{inviteCnt}</span>人，
                         暂可获奖励<span styleName="text-red">{inviteReward}</span>元
-                    </p>
+                    </div>
                     <div styleName="btn-red" onClick={this.toggleHowToInvitePop}>如何邀友</div>
                 </div>
             ) : (
                 <div>
-                    <p>请登录后查看邀友及奖励情况</p>
+                    <div styleName="text-normal">请登录后查看邀友及奖励情况</div>
                     <div styleName="btn-red" onClick={this.loginHandler}>立即登录</div>
                 </div>
             )}
@@ -128,17 +125,19 @@ class Mobile extends React.Component {
                 </div>
                 单个被邀请人累投额≥20万<br />送邀请人
             </div>
-            <p>每成功邀1位好友升级达标，最高可再得350元。</p>
+            <div styleName="text-normal">每成功邀1位好友升级达标，最高可再得350元。</div>
             <div styleName="btn-red" onClick={this.gotoMoreAboutInvite}>了解更多</div>
 
-            <p styleName="text-darker-bg text-left">
-                温馨提示：<br />
-                1. 按被邀请人活动内累投前10名计算返佣，单个被邀请人仅按最高返佣计算1次。<br />
-                2. 工豆有效期15天。
-            </p>
+            <div styleName="text-darker-bg text-left">
+                <div styleName="text-normal">温馨提示：</div>
+                <ol>
+                    <li>按被邀请人活动内累投前10名计算返佣，单个被邀请人仅按最高返佣计算1次。</li>
+                    <li>工豆有效期15天</li>
+                </ol>
+            </div>
 
             <img styleName="sub-title" src={require('../images/mobile/invest-title.png')} alt="拼累投金额，赢最高万元红包" />
-            <p>活动期间，累投额达相应档位，可获该档位红包奖励，每人限1份。</p>
+            <div styleName="text-normal">活动期间，累投额达相应档位，可获该档位红包奖励，每人限1份。</div>
             <div styleName="basket-grp">
                 <div styleName="basket-1">
                     50万≤累投额&lt;100万<br />
@@ -161,26 +160,27 @@ class Mobile extends React.Component {
                     奖励<i>&yen;</i><b>12500</b>
                 </div>
             </div>
-            <p styleName="text-left">温馨提示：红包奖励以工豆形式发放，工豆有效期15天。</p>
+
+            <div styleName="text-normal text-left">温馨提示：红包奖励以工豆形式发放，工豆有效期15天。</div>
             <div styleName="text-darker-bg">
                 { isLoggedIn ? (
                     <div>
-                        <p>
+                        <div styleName="text-normal">
                             您活动期内已累投<span styleName="text-red"> {invested} </span>元，
                             可奖励<span styleName="text-red"> {INVEST_REWARD_DIST[investedRewardLevel].reward} </span>元，<br />
                             { investedRewardLevel !== INVEST_REWARD_DIST.length - 1 &&
                                 `，再投 ${investMore} 元就可奖励 ${INVEST_REWARD_DIST[investedRewardLevel + 1].reward} 元哦！`}
-                        </p>
+                        </div>
                         <div styleName="btn-red" onClick={this.gotoInvest}>继续投资</div>
                     </div>
                 ) : (
                     <div>
-                        <p>请登录后查看累投及奖励情况</p>
+                        <div styleName="text-normal">请登录后查看累投及奖励情况</div>
                         <div styleName="btn-red" onClick={this.loginHandler}>立即登录</div>
                     </div>
                 )}
 
-                <p styleName="tip">*以上活动由金融工场主办 与Apple Inc. 无关</p>
+                <div styleName="text-normal tip">*以上活动由金融工场主办 与Apple Inc. 无关</div>
             </div>
 
             { showHowToInvitePop &&

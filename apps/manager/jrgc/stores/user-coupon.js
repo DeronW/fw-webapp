@@ -10,6 +10,7 @@ export default class UserCoupon {
         extendObservable(this.data, {
             coupon: {
                 sum: null,
+                number:0,
                 type: '1',
                 list: {
                     '1': { name: '返现券', pageNo: 1, list: [] },
@@ -38,7 +39,7 @@ export default class UserCoupon {
         this.data.coupon.status = status
     }
     fetchCouponList = (done) => {
-        let { type, sum, list, status } = this.data.coupon
+        let { type, sum,number, list, status } = this.data.coupon
         let current_tab = list[type]
         if (current_tab.pageNo == 0) return done && done()
         if (current_tab.pageNo == 1) current_tab.list = []
@@ -50,6 +51,8 @@ export default class UserCoupon {
             pageSize: 10
         }).then(data => {
             sum = data.moneySum
+            number = data.pageData.pagination.totalCount
+
             current_tab.list.push(...data.pageData.result)
 
             current_tab.pageNo < data.pageData.pagination.totalPage ?
@@ -89,6 +92,7 @@ export default class UserCoupon {
             done&&done()
         })
     }
+    //转增优惠券
     presentCoupon = (couponId,couponType,custId) => {
         this.Get(' /api/finManager/coupon/v2/presentCoupon.shtml',{
             couponId: couponId,
