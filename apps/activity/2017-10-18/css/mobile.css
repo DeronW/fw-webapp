@@ -45,7 +45,7 @@ li {
 .desc-entry {
     box-sizing: border-box;
     position: absolute;
-    top: 56px;
+    top: -24px;
     right: -42px;
     padding-top: 50px;
     width: 192px;
