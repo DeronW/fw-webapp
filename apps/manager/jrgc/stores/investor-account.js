@@ -8,7 +8,11 @@ export default class InvestorAccount {
         extendObservable(this.data, {
             zx: {
                 info: {},
-                
+                type: '0',
+                payments: {
+                    '0': {name: '未回', page_no: 1, list: []},
+                    '1': {name: '已回', page_no: 1, list: []}
+                }
             },
             p2p: {
                 info: {}
