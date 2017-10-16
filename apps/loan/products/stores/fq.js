@@ -59,7 +59,7 @@ export default class Fq {
 
     get_base_info = () => {
         return this.Post(`/api/product/v1/productDetail.json`, {
-                productId: this.pid
+                productId: this.product_data.pid
             })
             .then(data => {
                 this.product_data.productLogo = data.productLogo;
