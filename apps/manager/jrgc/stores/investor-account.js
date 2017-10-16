@@ -19,7 +19,8 @@ export default class InvestorAccount {
                 },
                 goldPrice: '',
                 amount: {},
-                id: null
+                id: null,
+                totalCount: null
             }
         })
     }
@@ -52,6 +53,7 @@ export default class InvestorAccount {
             pageSize: PAGE_SIZE
         }).then(data => {
             this.data.hj.amount = data.userDataInfo
+            this.data.hj.totalCount = data.pageData.pagination.totalCount
             current_record.list.push(...data.pageData.result)
             current_record.page_no < data.pageData.pagination.totalPage
                 ? current_record.page_no++
