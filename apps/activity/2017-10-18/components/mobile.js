@@ -174,7 +174,7 @@ class Mobile extends React.Component {
                     </div>
                 ) : (
                     <div>
-                        <p>请登录后查看累投及奖励情况</p>
+                        <div styleName="text-normal">请登录后查看累投及奖励情况</div>
                         <div styleName="btn-red" onClick={this.loginHandler}>立即登录</div>
                     </div>
                 )}
