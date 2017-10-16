@@ -10,7 +10,10 @@ import styles from '../../css/investor/search.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Search extends React.Component {
     componentDidMount(){
-        Event.touchBottom(this.props.investor.fetchSearch)
+        let {resetSearchPageNo,fetchSearch} = this.props.investor
+
+        resetSearchPageNo()
+        Event.touchBottom(fetchSearch)
     }
     componentWillUnmount(){
         Event.cancelTouchBottom()
@@ -24,8 +27,7 @@ class Search extends React.Component {
         setKeyword('')
     }
     searchHandler = () => {
-        let {fetchSearch,resetPageNo} = this.props.investor
-        resetSearchPageNo()
+        let {fetchSearch} = this.props.investor
         fetchSearch()
     }
     gotoInfo = (id) => {

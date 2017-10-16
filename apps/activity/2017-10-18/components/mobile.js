@@ -35,20 +35,11 @@ class Mobile extends React.Component {
     }
 
     componentDidMount() {
-        this.props.isLoggedIn && UserReady(() => {
-            Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
-                this.setState({
-                    isCompany: !data.isPerson,
-                    inviteCnt: data.inviteCount,
-                    inviteReward: data.reward,
-                    invested: data.selfInvestAmt
-                }, this.calInvestLevel)
-            })
-        })
+        this.calInvestLevel()
     }
 
     calInvestLevel = () => {
-        const invested = Number(this.state.invested);
+        const invested = Number(this.props.invested);
         let investedRewardLevel = 0,
             investMore = 0;
         for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
@@ -80,8 +71,8 @@ class Mobile extends React.Component {
     toggleHowToInvitePop = () => this.setState({ showHowToInvitePop: !this.state.showHowToInvitePop})
 
     render() {
-        const { isLoggedIn, gcm } = this.props;
-        const { isCompany, inviteCnt, inviteReward, invested, investedRewardLevel,
+        const { isLoggedIn, gcm, isCompany, inviteCnt, inviteReward, invested } = this.props;
+        const { investedRewardLevel,
             investMore, showInviteRewardPop, showHowToInvitePop, showDesc } = this.state;
 
         return <div styleName="bg">

@@ -24,10 +24,6 @@ const INVEST_REWARD_DIST = [
 class PC extends React.Component {
 
     state = {
-        isCompany: false,
-        inviteCnt: '',
-        inviteReward: '',
-        invested: '',
         investedRewardLevel: 0,
         investMore: '',
         showInviteRewardPop: false,
@@ -35,20 +31,11 @@ class PC extends React.Component {
     }
 
     componentDidMount() {
-        this.props.isLoggedIn && UserReady(() => {
-            Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
-                this.setState({
-                    isCompany: !data.isPerson,
-                    inviteCnt: data.inviteCount,
-                    inviteReward: data.reward,
-                    invested: data.selfInvestAmt
-                }, this.calInvestLevel)
-            })
-        })
+        this.calInvestLevel()
     }
 
     calInvestLevel = () => {
-        const invested = Number(this.state.invested);
+        const invested = Number(this.props.invested);
         let investedRewardLevel = 0,
             investMore = 0;
         for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
@@ -72,8 +59,8 @@ class PC extends React.Component {
     toggleHowToInvitePop = () => this.setState({ showHowToInvitePop: !this.state.showHowToInvitePop})
 
     render() {
-        const { isLoggedIn, gcm } = this.props;
-        const { isCompany, inviteCnt, inviteReward, invested, investedRewardLevel,
+        const { isLoggedIn, gcm, isCompany, inviteCnt, inviteReward, invested } = this.props;
+        const { investedRewardLevel,
             investMore, showInviteRewardPop, showHowToInvitePop } = this.state;
         return <div styleName="bg">
             <Header bgColor="#725749" />

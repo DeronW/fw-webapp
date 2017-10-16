@@ -1,4 +1,5 @@
-import { extendObservable } from 'mobx'
+import { extendObservable,computed } from 'mobx'
+import { Utils } from 'fw-javascripts'
 
 export default class UserCoupon {
     constructor(Get, Post) {
@@ -18,11 +19,24 @@ export default class UserCoupon {
                 status: 1
             },
             friends:{
-
+                couponType:'返现券',
+                pageNo:1,
+                list:[],
+                keyword:''
             }
         })
     }
     //获取优惠券列表,可用优惠券，赠送记录（转赠优惠券）
+    resetCouponPageNo = () => {
+        let { type, list } = this.data.coupon
+        list[type].pageNo = 1
+    }
+    setCouponType = (type) => {
+        this.data.coupon.type = type
+    }
+    setCouponStatus = (status) => {
+        this.data.coupon.status = status
+    }
     fetchCouponList = (done) => {
         let { type, sum, list, status } = this.data.coupon
         let current_tab = list[type]
@@ -45,14 +59,38 @@ export default class UserCoupon {
         })
     }
 
-    resetCouponPageNo = () => {
-        let { type, list } = this.data.coupon
-        list[type].pageNo = 1
+    //获取赠送好友列表
+    @computed get couponId() {
+        return Utils.hashQuery.couponId
     }
-    setCouponType = (type) => {
-        this.data.coupon.type = type
+    @computed get couponType() {
+        this.data.friends.couponType = Utils.hashQuery.couponType
+        return Utils.hashQuery.couponType
     }
-    setCouponStatus = (status) => {
-        this.data.coupon.status = status
+    setKeyword = (keyword) => {
+        this.data.friends.keyword = keyword
+    }
+    resetFriendsPageNo = () => {
+        this.data.friends.pageNo = 1
+    }
+    fetchFriendsList = (done) => {
+        let { pageNo,list,keyword } = this.data.friends
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) list = []
+
+        this.Post('/api/finManager/coupon/v2/custList.shtml', {
+            couponId: this.couponId,
+            couponType: this.couponType,
+            keyword:keyword,
+            pageNo: pageNo,
+            pageSize: 10
+        }).then(data => {
+            list.push(...data.pageData.result)
+
+            pageNo < data.pageData.pagination.totalPage ?
+                pageNo++ : pageNo = 0
+
+            done&&done()
+        })
     }
 }

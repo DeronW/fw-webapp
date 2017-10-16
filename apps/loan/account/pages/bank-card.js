@@ -27,8 +27,8 @@ class BankCard extends React.Component {
         let {bank_card} = this.props;
         bank_card.fetch_card_list().then(() => {
             bank_card.all.map(this.filter);
+            this.setState({fxhList:this.state.fxhList,yyjList:this.state.yyjList})
         });
-
 
     }
     filter = (item) => {

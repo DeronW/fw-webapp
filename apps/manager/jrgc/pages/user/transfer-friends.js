@@ -1,75 +1,88 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import { Event, Components, Utils } from 'fw-javascripts'
-import {Header, BottomNavBar} from '../../components'
+import { Header, BottomNavBar } from '../../components'
 import styles from '../../css/user/transfer-friends.css'
 
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@inject('user_coupon')
+@observer
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class TransferFriends extends React.Component {
     state = {
         coupon_type: 0,
         is_empty: false,
         input_value: ''
     }
-    componentDidMount(){
-
+    componentDidMount() {
+        let { resetFriendsPageNo, fetchFriendsList } = this.props.user_coupon
+        resetFriendsPageNo()
+    }
+    searchFriendsHandler = () => {
+        this.props.user_coupon.fetchFriendsList()
     }
     inputHandler = (e) => {
-        this.setState({input_value: e.target.value})
+        this.props.user_coupon.setKeyword(e.target.value)
     }
     emptyHandler = () => {
-        this.setState({input_value: ''})
+        this.props.user_coupon.setKeyword('')
     }
-
+    presentHandler = (name,id) => {
+        //弹层
+        let beanCount = Utils.hashQuery.beanCount
+        let type = Utils.hashQuery.couponType
+        let unit =  type == '返金券' ? '克':'元'
+        let v= confirm(`确认将${beanCount}${unit}${type},赠送给${name}吗？`)
+        if (v==true){
+            Components.showAlert("赠送成功");
+        }
+    }
     render() {
-        let {history} = this.props
-        let {coupon_type, is_empty, input_value} = this.state
+        let { history } = this.props
+        let { couponType,pageNo, list, keyword } = this.props.user_coupon.data.friends
+        let {beanCount,remark,overdueTime,investMultip,inverstPeriod} = Utils.hashQuery
         let coupon = () => {
-            let coupon_style = coupon_type == 0 ? "couponItem typeBlue" : coupon_type == 1 ? "couponItem typeRed" : coupon_type == 2 ? "couponItem typeYellow" : null
+            let coupon_style = couponType == '返现券' ? "couponItem typeBlue" : couponType == '返息券' ? "couponItem typeRed" : "couponItem typeYellow"
             return <div styleName={coupon_style}>
-                <div styleName="couponValue"><span styleName="rmb">¥</span>80</div>
+                <div styleName="couponValue"><span styleName="rmb">¥</span>{beanCount}</div>
                 <div styleName="couponDes">
-                    <div styleName="lineLeft desLeft">王者尊享</div>
-                    <div styleName="lineRight desRight">有效期 2017-11-18</div>
+                    <div styleName="lineLeft desLeft">{remark}</div>
+                    <div styleName="lineRight desRight">有效期 {overdueTime}</div>
                 </div>
                 <div styleName="couponAddtion">
-                    <div styleName="lineLeft addLeft">投资 ¥36,000 可用</div>
-                    <div styleName="lineRight addRight">投资期限 ≥180天 可用</div>
+                    <div styleName="lineLeft addLeft">投资 ¥{investMultip} 可用</div>
+                    <div styleName="lineRight addRight">投资期限 ≥{inverstPeriod}天 可用</div>
                 </div>
             </div>
         }
 
-        let empty = () => {
-            return <div styleName="emptyWrapper">
-                <div>该用户不存在</div>
-                <div styleName="emptyLine">请检查筛选条件，只可通过汉字与数字筛选</div>
-            </div>
-        }
+        let empty = <div styleName="emptyWrapper">
+            <div>该用户不存在</div>
+            <div styleName="emptyLine">请检查筛选条件，只可通过汉字与数字筛选</div>
+        </div>
 
-        let friends_record = () => {
-            return <div styleName="recordItem">
+        let friends_record = (item,index) => {
+            return <div styleName="recordItem" key={index}>
                 <div styleName="itemText">
-                    <div styleName="textLine line1">未认证</div>
-                    <div styleName="textLine">18911392598</div>
-                    <div styleName="textLine line3">赠送</div>
+                    <div styleName="textLine line1">{item.realName}</div>
+                    <div styleName="textLine">{item.mobile}</div>
+                    <div styleName="textLine line3" onClick={()=>this.presentHandler(item.custId)}>赠送</div>
                 </div>
             </div>
         }
         return <div>
-            <Header title="转赠好友" history={history}/>
+            <Header title="转赠好友" history={history} />
             <div styleName="bg">
                 <div styleName="couponWrapper">
                     {coupon()}
                 </div>
                 <div styleName="searchWrapper">
                     <input type="text" styleName="inputBox" placeholder="请输入关键字" onChange={this.inputHandler}
-                           value={input_value}/>
-                    <span styleName="searchBtn">搜索</span>
+                        value={keyword} />
+                    <span styleName="searchBtn" onClick={this.searchFriendsHandler}>搜索</span>
                     <div styleName="emptyBtn" onClick={this.emptyHandler}></div>
                 </div>
-                {friends_record()}
-                {is_empty && empty()}
+                {list && list.length > 0 ? list.map(friends_record) : empty}
             </div>
         </div>
     }
