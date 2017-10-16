@@ -91,7 +91,7 @@ export default class FqIndex extends React.Component {
         if (fq.borrowStatus == 1 || fq.borrowStatus == 101) {
             gotoHandler('/static/loan/user-card-set/index.html');
         } else if (fq.canStatus == 2) {
-            let link = `/static/loan/dumiao-put-in/index.html?pid=${fq.pid}`;
+            let link = `/static/loan/products/index.html#/loan-fq-form`;
             gotoHandler(link);
         } else if (fq.canStatus == 0) {
             this.setState({ dumiaoEnterPopShow: true });

@@ -6,6 +6,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     text-align: left;
+    z-index: 99999;
 }
 
 .pop {

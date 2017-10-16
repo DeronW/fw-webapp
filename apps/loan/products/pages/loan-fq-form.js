@@ -229,9 +229,20 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
     
         let { fq, field, immutable, history } = props,
             itemPlaceholder = Model[field].options !== undefined ? '请选择' : '请输入',
-            itemValue = fq[field],
             itemStyleName = immutable ? 'item-container' : 'mutable-item-container';
-    
+
+        var itemValue;    
+
+        if(Model[field].options !== undefined){
+            let index = Model[field].options.findIndex(i=>i["value"] == itemValue);
+            let indexOption = Model[field].options[index];
+            if(indexOption !== undefined){
+                itemValue = indexOption.text
+            }
+        }else{
+            itemValue = fq[field]; 
+        }
+        
         return (
             <div className={styles[itemStyleName]}
                 onClick={() => { !immutable && fq.setCurrentPanel(history, field) }}>
@@ -258,9 +269,6 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         componentDidMount() {
             let { fq, field } = this.props;
             this.setState({ value: fq[field] })
-
-            
-
         }
     
         handleInput = e => {
@@ -279,8 +287,6 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                     break
                 }
             }
-            console.log(vld)
-            console.log(err)
 
             if(field == 'balance'){
                 err ? Components.showToast(err) :
@@ -322,6 +328,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
     const SelectItem = inject('fq')(observer(CSSModules((props) => {
         let { fq, field, immutable, history } = props;
         let new_array = [];
+        let new_value = [];
 
         if (field == 'term') {
             let pool = Model[field].option_pool;
@@ -338,6 +345,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         }
 
         let itemOptions = Model[field].options.map((o)=>{new_array.push(o["text"])});
+        let itemOptionsValue = Model[field].options.map((o)=>{new_value.push(o["value"])});
         let itemValue = fq[field];
     
         let gen_options = (optValue) => {
@@ -345,11 +353,12 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             return (
                 <div key={optValue}
                     className={styles[optStyleName]}
-                    onClick={() => { fq.setPanelData(history, field, optValue) }}>
+                    onClick={() => { fq.setPanelData(history, field, optValue)}}>
                     {optValue}
                 </div>
             )
         }
+
         return (
             <div>
                 <div styleName="select-label">{`选择${Model[field].name}`}</div>
@@ -369,7 +378,6 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         componentDidMount() {
             document.title = '借款申请';
             this.props.fq.fetchBasicInfo();
-            Components.showToast('12345')
         }
     
         render() {
@@ -396,7 +404,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                             <DisplayItem field="idCard" history={history} immutable />
                             <DisplayItem field="creditCard" history={history} />
                             <DisplayItem field="email" history={history} />
-                            <DisplayItem field="city" history={history}/>
+                            {/*<DisplayItem field="city" history={history}/>*/}
                             <DisplayItem field="address" history={history}/>
                             <DisplayItem field="homeSituation" history={history}/>
                         </div>

@@ -1,82 +1,88 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
-import {Header, BottomNavBar} from '../../components'
+import { observer, inject } from 'mobx-react'
+import { Event, Components, Utils } from 'fw-javascripts'
+import { Header, BottomNavBar } from '../../components'
 import styles from '../../css/user/transfer-coupon.css'
 
 
-const couponData = [{count: 100, data: '2017-09-22', des: '返现券'}, {count: 200, data: '2017-09-22', des: '返现券'}]
+const couponData = [{ count: 100, data: '2017-09-22', des: '返现券' }, { count: 200, data: '2017-09-22', des: '返现券' }]
 
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@inject('user_coupon')
+@observer
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class TransferCoupon extends React.Component {
-    state = {
-        coupon_num: 0
+
+    componentDidMount() {
+        let { resetCouponPageNo, fetchCouponList } = this.props.user_coupon
+        resetCouponPageNo()
+        fetchCouponList()
+        Event.touchBottom(fetchCouponList)
+    }
+    componentWillUnmount() {
+        Event.cancelTouchBottom()
+    }
+    tabHanlder = (tab) => {
+        let { setCouponType, fetchCouponList } = this.props.user_coupon
+        let { type } = this.props.user_coupon.data.coupon
+        if (type == tab) return
+        setCouponType(tab)
+        fetchCouponList()
     }
 
-    tabHanlder = (index) => {
-        this.setState({coupon_num: index})
-    }
-
-    transferHandler = (index) => {
-        let {history} = this.props
-        history.push(`/user-transfer-friends?index=${index}`)
+    transferHandler = (couponId,conponType,beanCount) => {
+        let { history } = this.props
+        history.push(`/user-transfer-friends?couponId=${couponId}&conponType=${conponType}&beanCount=${beanCount}&remark=${remark}&overdueTime=${overdueTime}&investMultip=${investMultip}&inverstPeriod=${inverstPeriod}`)
     }
 
     render() {
-        let {history} = this.props
-        let {coupon_num} = this.state
+        let { history } = this.props
+        let { sum,type, list } = this.props.user_coupon.data.coupon
+        let current_tab = list[type]
         let coupon_func = (item, index) => {
-            return <div styleName={index == coupon_num ? "couponTabItem tabOn" : "couponTabItem"} key={index}
-                        onClick={() => this.tabHanlder(index)}>
-                {item}
-            </div>
+            return <div styleName={item == type ? "couponTabItem tabOn" : "couponTabItem"} key={index}
+                onClick={() => this.tabHanlder(item)}>{list[item].name}</div>
         }
         let coupon_detail = (item, index) => {
-            let coutent_style = coupon_num == 0 ? "contentItem contentBlue" : coupon_num == 1 ? "contentItem contentRed" : coupon_num == 2 ? "contentItem contentYellow" : null
-            let btn_style = coupon_num == 0 ? "giveBtn giveBtnBlue" : coupon_num == 1 ? "giveBtn giveBtnRed" : coupon_num == 2 ? "giveBtn giveBtnYellow" : null
-            return <div styleName={coutent_style} key={index} onClick={() => this.transferHandler(index)}>
+            let coutent_style = item == '1' ? "contentItem contentBlue" : item == '0' ? "contentItem contentRed" : "contentItem contentYellow"
+            let btn_style = item == '1' ? "giveBtn giveBtnBlue" : item == '0' ? "giveBtn giveBtnRed" : "giveBtn giveBtnYellow"
+            let unit = item == '2' ?'克':'元'
+
+            return <div styleName={coutent_style}
+                        key={index}
+                        onClick={() => this.transferHandler(item.couponId,item.conponType,item.beanCount,item.remark,item.overdueTime,item.investMultip,item.inverstPeriod)}>
                 <div styleName="itemLine itemUp">
-                    <div styleName="lineLeft"><span styleName="rmb">￥</span>10</div>
-                    <div styleName={btn_style}>满赠</div>
+                    <div styleName="lineLeft"><span styleName="rmb">￥</span>{item.beanCount}{unit}</div>
+                    <div styleName={btn_style}>转赠</div>
                 </div>
                 <div styleName="itemLine itemDown">
-                    <div styleName="lineLeft">满福金秋</div>
-                    <div styleName="lineRight">有效期 2017-09-18</div>
+                    <div styleName="lineLeft">{item.remark}</div>
+                    <div styleName="lineRight">有效期 {item.overdueTime}</div>
                 </div>
                 <div styleName="itemLine itemDes">
-                    <div styleName="lineLeft desLeft">投资 ¥18,000 可用</div>
-                    <div styleName="lineRight desRight">投资期限 ≥90天 可用</div>
+                    <div styleName="lineLeft desLeft">投资 ¥{item.investMultip} 可用</div>
+                    <div styleName="lineRight desRight">投资期限 {item.inverstPeriod}天 可用</div>
                 </div>
-                <div styleName="labelOverdate"></div>
+                {item.isOver && <div styleName="labelOverdate"></div>}
             </div>
         }
-        let count_type = () => {
-            if (coupon_num == 0) {
-                return "返现券"
-            } else if (coupon_num == 1) {
-                return "返息券"
-            } else if (coupon_num == 2) {
-                return "返金券"
-            }
-        }
+
         return <div styleName="coupons">
-            <Header title="转赠优惠券" history={history} sub_title="转赠记录" sub_link="/user-transfer-record"/>
+            <Header title="转赠优惠券" history={history} sub_title="转赠记录" sub_link="/user-transfer-record" />
             <div styleName="couponTab">
-                {['返现券', '返息券', '返金券'].map(coupon_func)}
+                {['1', '0', '2'].map(coupon_func)}
             </div>
             <div styleName="couponCount">
                 <div styleName="countLeft">
-                    <div>可转赠{count_type()}</div>
-                    <div><span styleName="totalNum">1</span>张</div>
+                    <div>可转赠{current_tab.name}</div>
+                    <div><span styleName="totalNum">{sum}</span>张</div>
                 </div>
                 <div styleName="countRight">
                     不可转赠的券请至金融工场app查看
                 </div>
             </div>
             <div styleName="tabContent">
-                {coupon_num == 0 && couponData.map(coupon_detail)}
-                {coupon_num == 1 && couponData.map(coupon_detail)}
-                {coupon_num == 2 && couponData.map(coupon_detail)}
+                {current_tab && current_tab.list.map(coupon_detail)}
             </div>
         </div>
     }

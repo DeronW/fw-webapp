@@ -55,23 +55,23 @@ class HjList extends React.Component {
                     <div styleName="dataLineRight">¥284.14</div>
                 </div>
                 <div styleName="dataLine">
-                    <div styleName="dataLineLeft">成交金价(每克)</div>
+                    <div styleName="dataLineLeft">购买克重</div>
                     <div styleName="dataLineRight">¥284.14</div>
                 </div>
                 <div styleName="dataLine">
-                    <div styleName="dataLineLeft">成交金价(每克)</div>
+                    <div styleName="dataLineLeft">预期赠金克重</div>
                     <div styleName="dataLineRight">¥284.14</div>
                 </div>
                 <div styleName="dataLine">
-                    <div styleName="dataLineLeft">成交金价(每克)</div>
+                    <div styleName="dataLineLeft">已获赠金克重</div>
                     <div styleName="dataLineRight">¥284.14</div>
                 </div>
                 <div styleName="dataLine">
-                    <div styleName="dataLineLeft">成交金价(每克)</div>
+                    <div styleName="dataLineLeft">起算日</div>
                     <div styleName="dataLineRight">¥284.14</div>
                 </div>
                 <div styleName="dataLine">
-                    <div styleName="dataLineLeft">成交金价(每克)</div>
+                    <div styleName="dataLineLeft">到期日</div>
                     <div styleName="dataLineRight">¥284.14</div>
                 </div>
             </div>
