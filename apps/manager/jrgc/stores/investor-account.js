@@ -1,4 +1,5 @@
-import {extendObservable} from 'mobx'
+import {extendObservable,computed} from 'mobx'
+import { Utils, Components } from 'fw-javascripts'
 
 export default class InvestorAccount {
     constructor(Get, Post) {
@@ -33,11 +34,14 @@ export default class InvestorAccount {
             }
         })
     }
-
+    //获取客户id
+    @computed get custId(){
+        return Utils.hashQuery.id
+    }
     //黄金账户信息页
-    fetchAccountHj = (custId) => {
+    fetchAccountHj = () => {
         this.Get('/api/finManager/cust/v2/goldAccount.shtml', {
-            custId: custId
+            custId: this.custId
         }).then(data => {
             this.data.hj.info = data.result
         })
@@ -70,10 +74,7 @@ export default class InvestorAccount {
             done && done()
         })
     }
-    //获取客户id
-    getCustId = (id) => {
-        this.data.id = id
-    }
+
     //重置type
     resetGoldListType = (status) => {
         this.data.hj.type = status
@@ -87,7 +88,7 @@ export default class InvestorAccount {
     //获取微金账户信息页
     fetchAccountP2P = (custId) => {
         this.Get('/api/finManager/cust/v2/wjAccount.shtml', {
-            custId: this.data.id
+            custId: this.custId
         }).then(data => {
             this.data.p2p.info = data.result
         })
@@ -95,9 +96,9 @@ export default class InvestorAccount {
     }
 
     //尊享账户信息页
-    fetchAccountZX = (custId) => {
+    fetchAccountZX = () => {
         this.Get('/api/finManager/cust/v2/zxAccount.shtml', {
-            custId: this.data.id
+            custId: this.custId
         }).then(data => {
             this.data.zx.info = data.result
         })
