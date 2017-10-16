@@ -1,24 +1,20 @@
-import { extendObservable, computed } from 'mobx'
-import { Components, Utils, Event } from 'fw-javascripts'
+import {extendObservable, computed} from 'mobx'
+import {Components, Utils, Event} from 'fw-javascripts'
 
 export default class Reserve {
     constructor(Post) {
         this.Post = Post
-
-        this.data = {}
-
-        extendObservable(this.data, {
+        this.noviceBid_data = {}
+        this.othersBid_data = {}
+        extendObservable(this.othersBid_data, {
             records: {
                 type: '0',
                 tab: {
-                    '0': { name: '预约中', page_no: 1, list: [] },
-                    '1': { name: '预约结束', page_no: 1, list: [] },
-                    '2': { name: '已取消', page_no: 1, list: [] },
+                    '0': {name: '预约中', page_no: 1, list: []},
+                    '1': {name: '预约结束', page_no: 1, list: []},
+                    '2': {name: '已取消', page_no: 1, list: []},
                 }
-            }
-        })
-
-        extendObservable(this, {
+            },
             context: {
                 avgLoanPeriod: '',//平均起息时间
                 bookValidPeriod: null,//预约有效期
@@ -35,6 +31,24 @@ export default class Reserve {
             contractMsg: '',
             isCompany: null
         })
+
+        extendObservable(this.noviceBid_data, {
+            context: {
+                avgLoanPeriod: '',
+                bookValidPeriod: null,
+                id: null,
+                loadRate: '',
+                minAmt: '',
+                repayPeriod: '',
+            },
+            accountAmount: null,
+            isRisk: 0,
+            batchMaxmum: 0,
+            reserveMoney: '',
+            isChecked: true,
+            contractMsg: '',
+            isCompany: null
+        })
     }
 
     @computed get applyInvestClaimId() {
@@ -45,41 +59,41 @@ export default class Reserve {
         return this.Post('/api/v1/intoAppointPage.shtml', {
             applyInvestClaimId: this.applyInvestClaimId
         }).then(data => {
-            this.context = data.appointClaim;
-            this.accountAmount = data.accountAmount;
-            this.isRisk = data.isRisk;
-            this.batchMaxmum = data.batchMaxmum
-            this.minAmt = data.appointClaim.minAmt
-            this.avgLoanPeriod = data.appointClaim.avgLoanPeriod
-            this.isCompany = data.isCompany
+            this.othersBid_data.context = data.appointClaim;
+            this.othersBid_data.accountAmount = data.accountAmount;
+            this.othersBid_data.isRisk = data.isRisk;
+            this.othersBid_data.batchMaxmum = data.batchMaxmum
+            this.othersBid_data.minAmt = data.appointClaim.minAmt
+            this.othersBid_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
+            this.othersBid_data.isCompany = data.isCompany
             return {
-                isRisk: this.isRisk,
-                batchMaxmum: this.batchMaxmum,
-                isCompany: this.isCompany
+                isRisk: this.othersBid_data.isRisk,
+                batchMaxmum: this.othersBid_data.batchMaxmum,
+                isCompany: this.othersBid_data.isCompany
             }
         })
     }
 
     resetPageNo = () => {
-        let { tab, type } = this.data.records, current_tab = tab[type]
+        let {tab, type} = this.othersBid_data.records, current_tab = tab[type]
         current_tab.page_no = 1
     }
     setRecordsCurrentStatus = status => {
-        this.data.records.type = status;
+        this.othersBid_data.records.type = status;
         this.getReserveList()
     }
 
     getReserveList = (done) => {
-        let { tab, type } = this.data.records, current_tab = tab[type]
+        let {tab, type} = this.othersBid_data.records, current_tab = tab[type]
         if (current_tab.page_no === 0) return done && done();
         const PAGE_SIZE = 10
 
-        if(current_tab.page_no == 1) current_tab.list.splice(0,current_tab.list.length)
+        if (current_tab.page_no == 1) current_tab.list.splice(0, current_tab.list.length)
         this.Post('/api/v1/appointRecordList.shtml', {
             page: current_tab.page_no,
             pageSize: PAGE_SIZE,
             status: type
-        }, { loading: false }).then(data => {
+        }, {loading: false}).then(data => {
             current_tab.list.push(...data.pageData.result)
 
             current_tab.page_no < data.pageData.pagination.totalPage ?
@@ -96,8 +110,8 @@ export default class Reserve {
             applyInvestClaimId: this.applyInvestClaimId
         }).then((data) => {
             return this.Post('/api/v1/investAppoint.shtml', {
-                applyAmt: this.reserveMoney,
-                applyInvestClaimId: this.context.id,
+                applyAmt: this.othersBid_data.reserveMoney,
+                applyInvestClaimId: this.othersBid_data.context.id,
                 bookInvestToken: data.bookInvestToken
             })
         })
@@ -111,9 +125,9 @@ export default class Reserve {
 
     getContractHandler = () => {
         return this.Post('/api/v1/appointContractMess.shtml').then(data => {
-            this.contractMsg = data.contractMsg
+            this.othersBid_data.contractMsg = data.contractMsg
             return {
-                contractMsg: this.contractMsg
+                contractMsg: this.othersBid_data.contractMsg
             }
         })
     }

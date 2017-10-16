@@ -32,11 +32,7 @@ class ReserveInfo extends React.Component {
 
     render() {
         let {reserve, history} = this.props
-        let {context} = reserve
-
-        let tabItem = (tab) => {
-            return <div styleName="tab-item">{tab}</div>
-        }
+        let {context} = reserve.othersBid_data
         return <div styleName='infoPanel'>
             <Header noClose title="详情" history={history}/>
             <div styleName="topInfo">
