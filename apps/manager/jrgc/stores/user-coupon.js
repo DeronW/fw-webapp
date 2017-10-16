@@ -1,5 +1,5 @@
 import { extendObservable,computed } from 'mobx'
-import { Utils } from 'fw-javascripts'
+import { Utils,Components } from 'fw-javascripts'
 
 export default class UserCoupon {
     constructor(Get, Post) {
@@ -19,7 +19,7 @@ export default class UserCoupon {
                 status: 1
             },
             friends:{
-                couponType:'返现券',
+                type:Utils.hashQuery.couponType,
                 pageNo:1,
                 list:[],
                 keyword:''
@@ -43,7 +43,7 @@ export default class UserCoupon {
         if (current_tab.pageNo == 0) return done && done()
         if (current_tab.pageNo == 1) current_tab.list = []
 
-        this.Post('/api/finManager/coupon/v2/myCouponList.shtml', {
+        this.Get('/api/finManager/coupon/v2/myCouponList.shtml', {
             couponStatus: status,
             couponType: type,
             pageNo: current_tab.pageNo,
@@ -63,10 +63,6 @@ export default class UserCoupon {
     @computed get couponId() {
         return Utils.hashQuery.couponId
     }
-    @computed get couponType() {
-        this.data.friends.couponType = Utils.hashQuery.couponType
-        return Utils.hashQuery.couponType
-    }
     setKeyword = (keyword) => {
         this.data.friends.keyword = keyword
     }
@@ -74,13 +70,13 @@ export default class UserCoupon {
         this.data.friends.pageNo = 1
     }
     fetchFriendsList = (done) => {
-        let { pageNo,list,keyword } = this.data.friends
+        let { type,pageNo,list,keyword } = this.data.friends
         if (pageNo == 0) return done && done()
         if (pageNo == 1) list = []
 
-        this.Post('/api/finManager/coupon/v2/custList.shtml', {
+        this.Get('/api/finManager/coupon/v2/custList.shtml', {
             couponId: this.couponId,
-            couponType: this.couponType,
+            couponType: type,
             keyword:keyword,
             pageNo: pageNo,
             pageSize: 10
@@ -91,6 +87,17 @@ export default class UserCoupon {
                 pageNo++ : pageNo = 0
 
             done&&done()
+        })
+    }
+    presentCoupon = (couponId,couponType,custId) => {
+        this.Get(' /api/finManager/coupon/v2/presentCoupon.shtml',{
+            couponId: couponId,
+            couponType: couponType,
+            custId:custId
+        }).catch(data => {
+            Components.showAlert("赠送成功");
+        }).catch(error => {
+            Components.showAlert(error.message);
         })
     }
 }
