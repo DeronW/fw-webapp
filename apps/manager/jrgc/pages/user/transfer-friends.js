@@ -19,6 +19,7 @@ class TransferFriends extends React.Component {
         resetFriendsPageNo()
     }
     searchFriendsHandler = () => {
+        if(this.props.user_coupon.data.friends.keyword == '') return Components.showToast('请输入关键字')
         this.props.user_coupon.fetchFriendsList()
     }
     inputHandler = (e) => {
@@ -27,22 +28,22 @@ class TransferFriends extends React.Component {
     emptyHandler = () => {
         this.props.user_coupon.setKeyword('')
     }
-    presentHandler = (name,id) => {
+    presentHandler = (name, custId) => {
         //弹层
-        let beanCount = Utils.hashQuery.beanCount
-        let type = Utils.hashQuery.couponType
-        let unit =  type == '返金券' ? '克':'元'
-        let v= confirm(`确认将${beanCount}${unit}${type},赠送给${name}吗？`)
-        if (v==true){
-            Components.showAlert("赠送成功");
+        let { beanCount, couponId, type } = Utils.hashQuery
+        let unit = type == '返金券' ? '克' : '元'
+
+        let v = confirm(`确认将${beanCount}${unit}${type},赠送给${name}吗？`)
+        if (v == true) {
+            this.props.user_coupon.presentCoupon(couponId, type, custId)
         }
     }
     render() {
         let { history } = this.props
-        let { couponType,pageNo, list, keyword } = this.props.user_coupon.data.friends
-        let {beanCount,remark,overdueTime,investMultip,inverstPeriod} = Utils.hashQuery
+        let { type, pageNo, list, keyword } = this.props.user_coupon.data.friends
+        let { beanCount, remark, overdueTime, investMultip, inverstPeriod } = Utils.hashQuery
         let coupon = () => {
-            let coupon_style = couponType == '返现券' ? "couponItem typeBlue" : couponType == '返息券' ? "couponItem typeRed" : "couponItem typeYellow"
+            let coupon_style = type == '返现券' ? "couponItem typeBlue" : type == '返息券' ? "couponItem typeRed" : "couponItem typeYellow"
             return <div styleName={coupon_style}>
                 <div styleName="couponValue"><span styleName="rmb">¥</span>{beanCount}</div>
                 <div styleName="couponDes">
@@ -61,12 +62,12 @@ class TransferFriends extends React.Component {
             <div styleName="emptyLine">请检查筛选条件，只可通过汉字与数字筛选</div>
         </div>
 
-        let friends_record = (item,index) => {
+        let friends_record = (item, index) => {
             return <div styleName="recordItem" key={index}>
                 <div styleName="itemText">
                     <div styleName="textLine line1">{item.realName}</div>
                     <div styleName="textLine">{item.mobile}</div>
-                    <div styleName="textLine line3" onClick={()=>this.presentHandler(item.custId)}>赠送</div>
+                    <div styleName="textLine line3" onClick={() => this.presentHandler(item.realName, item.custId)}>赠送</div>
                 </div>
             </div>
         }
