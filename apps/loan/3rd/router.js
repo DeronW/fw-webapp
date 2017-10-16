@@ -41,7 +41,7 @@ export default (stores) => {
                 {/* 渠道落地页 */}
                 <Route exact path='/outside/register' component={Outside.Register} />
                 <Route exact path='/outside/show-app' component={Outside.ShowApp} />
-                <Route exact path='/outside/show-wx' component={Outside.ShowWeixin} />
+                <Route exact path='/outside/show-weixin' component={Outside.ShowWeixin} />
                 <Route exact path='/outside/show-other-app' component={Outside.ShowOtherApp} />
             </Switch>
         </Provider>

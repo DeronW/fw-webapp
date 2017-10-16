@@ -1,0 +1,53 @@
+.bg {
+    text-align: center;
+    padding-top: 1px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100%;
+    background: #4a86e8 url(../../images/outside/show-app/bg.png) no-repeat;
+    background-size: 100% auto;
+    background-position: bottom;
+}
+
+.success-info {
+    text-shadow: 0 0.05rem 0.05rem rgba(74, 134, 232, .31);
+}
+
+.success-info h3 {
+    margin-bottom: .375rem;
+    color: #ffcd75;
+    font-size: 1.35rem;
+}
+
+.success-info p {
+    color: #fff;
+    font-size: .9rem;
+}
+
+.btns {
+    position: relative;
+    color: #3c79dc;
+    font-size: .7rem;
+}
+
+.gift {
+    width: 100%;
+    position: relative;
+    top: -2rem;
+}
+
+.btns>div {
+    width: 13.25rem;
+    height: 1.85rem;
+    margin: .9rem auto;
+    border-radius: .2rem;
+    background-color: #fff;
+    line-height: 1.85rem;
+    border: 0;
+}
+
+.btns img {
+    width: .9rem;
+    margin-right: .3rem;
+    vertical-align: text-bottom;
+}
