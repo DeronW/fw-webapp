@@ -13,7 +13,7 @@ const INVEST_REWARD_DIST = [
     { value: 0, reward: 0 },
     { value: 500000, reward: 500 },
     { value: 1000000, reward: 1300 },
-    { value: 2000000, reward: 2300 },
+    { value: 2000000, reward: 3200 },
     { value: 3000000, reward: 6000 },
     { value: 5000000, reward: 12500 }
 ]
@@ -34,12 +34,12 @@ class Mobile extends React.Component {
         showDesc: false,
     }
 
-    componentDidMount() {
-        this.calInvestLevel()
+    componentWillReceiveProps(nextProps) {
+        nextProps.invested !== this.props.invested && this.calInvestLevel(nextProps)
     }
 
-    calInvestLevel = () => {
-        const invested = Number(this.props.invested);
+    calInvestLevel = props => {
+        const invested = Number(props.invested);
         let investedRewardLevel = 0,
             investMore = 0;
         for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
