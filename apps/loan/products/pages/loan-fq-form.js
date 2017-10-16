@@ -231,7 +231,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             itemPlaceholder = Model[field].options !== undefined ? '请选择' : '请输入',
             itemStyleName = immutable ? 'item-container' : 'mutable-item-container';
 
-        var itemValue;    
+        var itemValue = fq[field];    
 
         if(Model[field].options !== undefined){
             let index = Model[field].options.findIndex(i=>i["value"] == itemValue);
@@ -239,8 +239,6 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             if(indexOption !== undefined){
                 itemValue = indexOption.text
             }
-        }else{
-            itemValue = fq[field]; 
         }
         
         return (
@@ -328,7 +326,6 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
     const SelectItem = inject('fq')(observer(CSSModules((props) => {
         let { fq, field, immutable, history } = props;
         let new_array = [];
-        let new_value = [];
 
         if (field == 'term') {
             let pool = Model[field].option_pool;
@@ -345,8 +342,16 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         }
 
         let itemOptions = Model[field].options.map((o)=>{new_array.push(o["text"])});
-        let itemOptionsValue = Model[field].options.map((o)=>{new_value.push(o["value"])});
-        let itemValue = fq[field];
+
+        var itemValue = fq[field];    
+        
+        if(Model[field].options !== undefined){
+            let index = Model[field].options.findIndex(i=>i["value"] == itemValue);
+            let indexOption = Model[field].options[index];
+            if(indexOption !== undefined){
+                itemValue = indexOption.text
+            }
+        }
     
         let gen_options = (optValue) => {
             let optStyleName = optValue === itemValue ? 'selected-option' : 'unselected-option';
