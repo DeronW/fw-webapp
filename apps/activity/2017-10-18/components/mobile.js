@@ -2,7 +2,6 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 
 import { NativeBridge, gotoPage, Post, Browser, UserReady } from '../../lib/helpers'
-import Header from '../../lib/components/mobile-header.js'
 import HowToInvitePop from '../../lib/components/mobile-pop-how-to-invite.js'
 import CompanyUserPop from '../../lib/components/mobile-pop-company-user.js'
 
@@ -13,7 +12,7 @@ const INVEST_REWARD_DIST = [
     { value: 0, reward: 0 },
     { value: 500000, reward: 500 },
     { value: 1000000, reward: 1300 },
-    { value: 2000000, reward: 2300 },
+    { value: 2000000, reward: 3200 },
     { value: 3000000, reward: 6000 },
     { value: 5000000, reward: 12500 }
 ]
@@ -23,10 +22,6 @@ const INVEST_REWARD_DIST = [
 class Mobile extends React.Component {
 
     state = {
-        isCompany: false,
-        inviteCnt: '',
-        inviteReward: '',
-        invested: '',
         investedRewardLevel: 0,
         investMore: '',
         showInviteRewardPop: false,
@@ -34,12 +29,12 @@ class Mobile extends React.Component {
         showDesc: false,
     }
 
-    componentDidMount() {
-        this.calInvestLevel()
+    componentWillReceiveProps(nextProps) {
+        nextProps.invested !== this.props.invested && this.calInvestLevel(nextProps)
     }
 
-    calInvestLevel = () => {
-        const invested = Number(this.props.invested);
+    calInvestLevel = props => {
+        const invested = Number(props.invested);
         let investedRewardLevel = 0,
             investMore = 0;
         for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
@@ -72,21 +67,19 @@ class Mobile extends React.Component {
 
     render() {
         const { isLoggedIn, gcm, isCompany, inviteCnt, inviteReward, invested } = this.props;
-        const { investedRewardLevel,
-            investMore, showInviteRewardPop, showHowToInvitePop, showDesc } = this.state;
+        const { investedRewardLevel, investMore, showInviteRewardPop, showHowToInvitePop, showDesc } = this.state;
 
         return <div styleName="bg">
-            <Header />
-
             <div styleName="desc-entry" onClick={this.toggleShowDesc}>活动说明</div>
 
             { showDesc && <div styleName="desc">
                 <div styleName="desc-back" onClick={this.toggleShowDesc}>返回</div>
                 <div styleName="desc-title">活动说明</div>
-                1. 活动期内，投资转让项目，不能参与本次活动；<br />
-                2. 本次活动累投金额包含工场微金、工场尊享和工场黄金的尊享金产品的购买金额；<br />
-                3. 活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br />
-                4. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
+                    1. 活动期内，投资转让项目，不能参与本次活动；<br />
+                    2. 企业用户不参与本次活动；<br />
+                    3. 本次活动累投金额包含工场微金、工场尊享和工场黄金的尊享金产品的购买金额；<br />
+                    4. 活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br />
+                    5. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
             </div> }
 
             <div styleName="theme">
@@ -95,19 +88,19 @@ class Mobile extends React.Component {
             </div>
 
             <img styleName="sub-title" src={require('../images/mobile/invite-title.png')} alt="邀请好友赚佣金" />
-            <p>活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。</p>
+            <div styleName="text-normal">活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。</div>
 
             { isLoggedIn ? (
                 <div>
-                    <p>
+                    <div styleName="text-normal">
                         您活动期内已邀请<span styleName="text-red">{inviteCnt}</span>人，
                         暂可获奖励<span styleName="text-red">{inviteReward}</span>元
-                    </p>
+                    </div>
                     <div styleName="btn-red" onClick={this.toggleHowToInvitePop}>如何邀友</div>
                 </div>
             ) : (
                 <div>
-                    <p>请登录后查看邀友及奖励情况</p>
+                    <div styleName="text-normal">请登录后查看邀友及奖励情况</div>
                     <div styleName="btn-red" onClick={this.loginHandler}>立即登录</div>
                 </div>
             )}
@@ -132,17 +125,19 @@ class Mobile extends React.Component {
                 </div>
                 单个被邀请人累投额≥20万<br />送邀请人
             </div>
-            <p>每成功邀1位好友升级达标，最高可再得350元。</p>
+            <div styleName="text-normal">每成功邀1位好友升级达标，最高可再得350元。</div>
             <div styleName="btn-red" onClick={this.gotoMoreAboutInvite}>了解更多</div>
 
-            <p styleName="text-darker-bg text-left">
-                温馨提示：<br />
-                1. 按被邀请人活动内累投前10名计算返佣，单个被邀请人仅按最高返佣计算1次。<br />
-                2. 工豆有效期15天。
-            </p>
+            <div styleName="text-darker-bg text-left">
+                <div styleName="text-normal">温馨提示：</div>
+                <ol>
+                    <li>按被邀请人活动内累投前10名计算返佣，单个被邀请人仅按最高返佣计算1次。</li>
+                    <li>工豆有效期15天</li>
+                </ol>
+            </div>
 
             <img styleName="sub-title" src={require('../images/mobile/invest-title.png')} alt="拼累投金额，赢最高万元红包" />
-            <p>活动期间，累投额达相应档位，可获该档位红包奖励，每人限1份。</p>
+            <div styleName="text-normal">活动期间，累投额达相应档位，可获该档位红包奖励，每人限1份。</div>
             <div styleName="basket-grp">
                 <div styleName="basket-1">
                     50万≤累投额&lt;100万<br />
@@ -165,26 +160,27 @@ class Mobile extends React.Component {
                     奖励<i>&yen;</i><b>12500</b>
                 </div>
             </div>
-            <p styleName="text-left">温馨提示：红包奖励以工豆形式发放，工豆有效期15天。</p>
+
+            <div styleName="text-normal text-left">温馨提示：红包奖励以工豆形式发放，工豆有效期15天。</div>
             <div styleName="text-darker-bg">
                 { isLoggedIn ? (
                     <div>
-                        <p>
+                        <div styleName="text-normal">
                             您活动期内已累投<span styleName="text-red"> {invested} </span>元，
                             可奖励<span styleName="text-red"> {INVEST_REWARD_DIST[investedRewardLevel].reward} </span>元，<br />
                             { investedRewardLevel !== INVEST_REWARD_DIST.length - 1 &&
                                 `，再投 ${investMore} 元就可奖励 ${INVEST_REWARD_DIST[investedRewardLevel + 1].reward} 元哦！`}
-                        </p>
+                        </div>
                         <div styleName="btn-red" onClick={this.gotoInvest}>继续投资</div>
                     </div>
                 ) : (
                     <div>
-                        <p>请登录后查看累投及奖励情况</p>
+                        <div styleName="text-normal">请登录后查看累投及奖励情况</div>
                         <div styleName="btn-red" onClick={this.loginHandler}>立即登录</div>
                     </div>
                 )}
 
-                <p styleName="tip">*以上活动由金融工场主办 与Apple Inc. 无关</p>
+                <div styleName="text-normal tip">*以上活动由金融工场主办 与Apple Inc. 无关</div>
             </div>
 
             { showHowToInvitePop &&

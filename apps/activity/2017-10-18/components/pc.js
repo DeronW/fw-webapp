@@ -14,7 +14,7 @@ const INVEST_REWARD_DIST = [
     { value: 0, reward: 0 },
     { value: 500000, reward: 500 },
     { value: 1000000, reward: 1300 },
-    { value: 2000000, reward: 2300 },
+    { value: 2000000, reward: 3200 },
     { value: 3000000, reward: 6000 },
     { value: 5000000, reward: 12500 }
 ]
@@ -30,12 +30,12 @@ class PC extends React.Component {
         showHowToInvitePop: false,
     }
 
-    componentDidMount() {
-        this.calInvestLevel()
+    componentWillReceiveProps(nextProps) {
+        nextProps.invested !== this.props.invested && this.calInvestLevel(nextProps)
     }
 
-    calInvestLevel = () => {
-        const invested = Number(this.props.invested);
+    calInvestLevel = props => {
+        const invested = Number(props.invested);
         let investedRewardLevel = 0,
             investMore = 0;
         for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
@@ -60,8 +60,8 @@ class PC extends React.Component {
 
     render() {
         const { isLoggedIn, gcm, isCompany, inviteCnt, inviteReward, invested } = this.props;
-        const { investedRewardLevel,
-            investMore, showInviteRewardPop, showHowToInvitePop } = this.state;
+        const { investedRewardLevel, investMore, showInviteRewardPop, showHowToInvitePop } = this.state;
+
         return <div styleName="bg">
             <Header bgColor="#725749" />
 
@@ -166,9 +166,10 @@ class PC extends React.Component {
                 <div styleName="tip-title">活动说明</div>
                 <div styleName="tip">
                     1. 活动期内，投资转让项目，不能参与本次活动；<br />
-                    2. 本次活动累投金额包含工场微金、工场尊享和工场黄金的尊享金产品的购买金额；<br />
-                    3. 活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br />
-                    4. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
+                    2. 企业用户不参与本次活动；<br />
+                    3. 本次活动累投金额包含工场微金、工场尊享和工场黄金的尊享金产品的购买金额；<br />
+                    4. 活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br />
+                    5. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
                 </div>
             </div>
 

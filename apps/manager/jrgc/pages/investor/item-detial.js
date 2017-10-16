@@ -1,26 +1,31 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { observer, inject } from 'mobx-react'
+import {observer, inject} from 'mobx-react'
 import {Header} from '../../components'
 
 import styles from '../../css/investor/item-detial.css'
 
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class itemDetial extends React.Component {
     state = {
-        type:'未回',
+        type: '未回',
+    }
+
+    componentDidMount() {
+
     }
 
     switchType = type => {
         if (type == this.state.type) return
         this.setState({type: type})
     }
-    render(){
-        let {history}=this.props
+
+    render() {
+        let {history} = this.props
         let {type} = this.state
         let types = ['未回', '已回']
 
-        let typeFn = (item,index) => {
+        let typeFn = (item, index) => {
             return <div key={index} styleName={item == type ? "type typeActive" : "type"}
                         onClick={() => this.switchType(item)}>{item}
             </div>
@@ -78,4 +83,5 @@ class itemDetial extends React.Component {
         </div>
     }
 }
+
 export default itemDetial

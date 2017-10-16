@@ -37,42 +37,42 @@ class HjList extends React.Component {
     render() {
         let {history} = this.props
         let {list_num} = this.state
-        let {type, records, amount} = this.props.investor_account.data.hj, current_record = records[type]
+        let {type, records, amount, totalCount} = this.props.investor_account.data.hj, current_record = records[type]
         let listtab_func = (item, index) => {
             let listItem_style = index == list_num ? `listItem listItem${index} listOn` : `listItem listItem${index}`
             return <div styleName={listItem_style} key={index} onClick={() => this.tabHandler(index)}>
                 {item}
             </div>
         }
-        let detail_func = () => {
-            return <div styleName="detailItem">
+        let detail_func = (item, index) => {
+            return <div styleName="detailItem" key={index}>
                 <div styleName="detailTitle">
                     <div styleName="titleLeft">优享金12065</div>
                     <div styleName="titleRight">未起算</div>
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">成交金价(每克)</div>
-                    <div styleName="dataLineRight">¥284.14</div>
+                    <div styleName="dataLineRight">¥{item.dealGoldPrice}</div>
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">购买克重</div>
-                    <div styleName="dataLineRight">¥284.14</div>
+                    <div styleName="dataLineRight">{item.purchaseGoldAmount}</div>
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">预期赠金克重</div>
-                    <div styleName="dataLineRight">¥284.14</div>
+                    <div styleName="dataLineRight">{item.perGiveGoldAmount}</div>
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">已获赠金克重</div>
-                    <div styleName="dataLineRight">¥284.14</div>
+                    <div styleName="dataLineRight">{item.hasGiveGoldAmount}</div>
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">起算日</div>
-                    <div styleName="dataLineRight">¥284.14</div>
+                    <div styleName="dataLineRight">{item.startDate}</div>
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">到期日</div>
-                    <div styleName="dataLineRight">¥284.14</div>
+                    <div styleName="dataLineRight">{item.expiredDate}</div>
                 </div>
             </div>
         }
@@ -90,9 +90,9 @@ class HjList extends React.Component {
                 {['全部', '持有中', '已到期'].map(listtab_func)}
             </div>
             <div styleName="countTotal">
-                共3笔记录
+                共{totalCount}笔记录
             </div>
-            {detail_func()}
+            {current_record.list.map(detail_func)}
         </div>
     }
 }
