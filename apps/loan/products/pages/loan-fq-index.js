@@ -72,7 +72,7 @@ export default class FqIndex extends React.Component {
             tryOtherLoanMsg: '',
             loanShow:false,
             title:'',
-            failMsg:this.props.fq.failMsg
+            failMsg:this.props.fq.product_data.failMsg
         }
     }
     componentDidMount = () => {
@@ -87,19 +87,19 @@ export default class FqIndex extends React.Component {
     clickHandler = () => {
         let { fq } = this.props;
         // 初始化数据没有完成, 稍后再试
-        if (fq.canStatus === null && fq.errCode != 20013 && fq.errCode !=1001003 && fq.errCode !=10001) return;
-        if (fq.borrowStatus == 1 || fq.borrowStatus == 101) {
+        if (fq.product_data.canStatus === null && fq.product_data.errCode != 20013 && fq.product_data.errCode !=1001003 && fq.product_data.errCode !=10001) return;
+        if (fq.product_data.borrowStatus == 1 || fq.product_data.borrowStatus == 101) {
             gotoHandler('/static/loan/user-card-set/index.html');
-        } else if (fq.canStatus == 2) {
+        } else if (fq.product_data.canStatus == 2) {
             let link = `/static/loan/products/index.html#/loan-fq-form`;
             gotoHandler(link);
-        } else if (fq.canStatus == 0) {
+        } else if (fq.product_data.canStatus == 0) {
             this.setState({ dumiaoEnterPopShow: true });
-        } else if (fq.canStatus == 1) {
+        } else if (fq.product_data.canStatus == 1) {
             this.setState({loanShow:true, failMsg:"您无法申请分期借款", title:"提示"});
-        } else if(fq.errCode == 20013 || fq.errCode == 1001003){
+        } else if(fq.product_data.errCode == 20013 || fq.product_data.errCode == 1001003){
             this.setState({loanShow:true});
-        } else if(fq.errCode == 10001){
+        } else if(fq.product_data.errCode == 10001){
             Component.showToast(this.state.failMsg)
         }else {
             this.setState({ tryOtherLoanPopShow: true });
@@ -127,14 +127,14 @@ export default class FqIndex extends React.Component {
         let inApp = ua.indexOf('FinancialWorkshop') > -1;
         let SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
         let user = Storage.getUserDict();
-        let labelList = fq.productLabelList;
-        let link = `/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}&loanUuid=${fq.loanUuid == null ? '' : fq.loanUuid}`;
-        let app_link = `https://m.easyloan888.com/api/order/v1/jump.shtml?token=${user.token}&uid=${user.uid}&loanUuid=${fq.loanUuid == null ? '' : fq.loanUuid}`;
+        let labelList = fq.product_data.productLabelList;
+        let link = `/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${user.token}&uid=${user.uid}&loanUuid=${fq.product_data.loanUuid == null ? '' : fq.product_data.loanUuid}`;
+        let app_link = `https://m.easyloan888.com/api/order/v1/jump.shtml?token=${user.token}&uid=${user.uid}&loanUuid=${fq.product_data.loanUuid == null ? '' : fq.product_data.loanUuid}`;
         let goDumiao = () => {
             return <div styleName="mask" style={{ zIndex: 100 }}>
                 <div styleName="detail-pop">
                     <div styleName="pop-close" onClick={this.dumiaoCloseHandler}></div>
-                    <div styleName="pop-tip">{fq.canMessage}</div>
+                    <div styleName="pop-tip">{fq.product_data.canMessage}</div>
                     <div styleName="know-btn" onClick={() => { Browser.inApp ? NativeBridge.goto(app_link, false, "分期") : gotoHandler(link) }}>
                         点击查看详情</div>
                 </div>
@@ -151,11 +151,11 @@ export default class FqIndex extends React.Component {
             <div styleName="">
                 <div styleName="borrow-money-list">
                     <div styleName="icon-block">
-                        <img src={fq.productLogo} /> </div>
+                        <img src={fq.product_data.productLogo} /> </div>
                     <div styleName="info">
                         <div styleName="t">
-                            <span styleName="title-text">{fq.productName}</span>
-                            <div styleName="text"> 借款范围（{fq.amountStr}） </div>
+                            <span styleName="title-text">{fq.product_data.productName}</span>
+                            <div styleName="text"> 借款范围（{fq.product_data.amountStr}） </div>
                         </div>
                         <div styleName="b">
                             <div styleName="tag" >
@@ -168,20 +168,20 @@ export default class FqIndex extends React.Component {
                 </div>
                 <div styleName="borrow-money-detail-data">
                     <div styleName="list">
-                        <div styleName="name-text">{fq.monthRateStr}</div>
+                        <div styleName="name-text">{fq.product_data.monthRateStr}</div>
                         <div styleName="data-text">
                             每月费用
                             <img src={require("../images/loan-fq-index/icon-6.png")} onClick={this.imgClickHandler} />
                         </div>
                     </div>
                     <div styleName="list">
-                        <div styleName="name-text">{fq.termRangeStr}个月</div>
+                        <div styleName="name-text">{fq.product_data.termRangeStr}个月</div>
                         <div styleName="data-text">
                             期限范围
                         </div>
                     </div>
                     <div styleName="list">
-                        <div styleName="name-text">{fq.fastLoanValue}</div>
+                        <div styleName="name-text">{fq.product_data.fastLoanValue}</div>
                         <div styleName="data-text">
                             最快放款
                         </div>
@@ -197,15 +197,15 @@ export default class FqIndex extends React.Component {
                     <div styleName="pop-title">费用说明</div>
                     <div styleName="pop-close" onClick={this.detailClickHandler}></div>
                     <div styleName="pop-item">
-                        <div styleName="pop-item-wrap"><span styleName="pop-item-name">月利率</span><span styleName="pop-item-num">{fq.loanRateStr}</span></div>
+                        <div styleName="pop-item-wrap"><span styleName="pop-item-name">月利率</span><span styleName="pop-item-num">{fq.product_data.loanRateStr}</span></div>
                         <div styleName="pop-item-desc">贷款机构收取的贷款利率,按月收取</div>
                     </div>
                     <div styleName="pop-item">
-                        <div styleName="pop-item-wrap"><span styleName="pop-item-name">月服务利率</span><span styleName="pop-item-num">{fq.serviceRateStr}</span></div>
+                        <div styleName="pop-item-wrap"><span styleName="pop-item-name">月服务利率</span><span styleName="pop-item-num">{fq.product_data.serviceRateStr}</span></div>
                         <div styleName="pop-item-desc">贷款机构收取的贷款服务费,按月收取</div>
                     </div>
                     <div styleName="pop-item">
-                        <div styleName="pop-item-wrap"><span styleName="pop-item-name">一次性手续费</span><span styleName="pop-item-num">{fq.commRateStr}</span></div>
+                        <div styleName="pop-item-wrap"><span styleName="pop-item-name">一次性手续费</span><span styleName="pop-item-num">{fq.product_data.commRateStr}</span></div>
                         <div styleName="pop-item-desc">贷款机构收取的一次性费用</div>
                     </div>
                     <a styleName="know-btn" onClick={this.detailClickHandler}>知道了</a>
