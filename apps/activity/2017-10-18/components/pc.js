@@ -30,12 +30,12 @@ class PC extends React.Component {
         showHowToInvitePop: false,
     }
 
-    componentDidMount() {
-        this.calInvestLevel()
+    componentWillReceiveProps(nextProps) {
+        nextProps.invested !== this.props.invested && this.calInvestLevel(nextProps)
     }
 
-    calInvestLevel = () => {
-        const invested = Number(this.props.invested);
+    calInvestLevel = props => {
+        const invested = Number(props.invested);
         let investedRewardLevel = 0,
             investMore = 0;
         for (let i = 0; i < INVEST_REWARD_DIST.length; i++) {
