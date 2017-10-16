@@ -24,7 +24,7 @@ class October extends React.Component {
     fetchUserData = () => {
         Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
             this.setState({ userData: {
-                isCompany: !data.isPerson,
+                isCompany: data.isPerson == 0,
                 inviteCnt: data.inviteCount,
                 inviteReward: data.reward,
                 invested: data.selfInvestAmt
