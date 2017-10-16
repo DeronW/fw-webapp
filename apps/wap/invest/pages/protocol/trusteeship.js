@@ -16,7 +16,7 @@ export default class Trusteeship extends React.Component {
         let { history } = this.props
 
         return <div styleName="bg">
-            <Header title="徽商银行网络交易资金账户服务三方协议" history={history} />
+            {/*<Header title="徽商银行网络交易资金账户服务三方协议" history={history} />*/}
 
             <div styleName="content">
 

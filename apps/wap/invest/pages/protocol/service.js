@@ -15,7 +15,7 @@ class Service extends React.Component {
         let { history } = this.props
 
         return <div styleName="bg">
-            <Header title="工场尊享用户服务协议" history={history} />
+            {/*<Header title="工场尊享用户服务协议" history={history} />*/}
 
 
             <div styleName="content">
