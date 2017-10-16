@@ -6,6 +6,10 @@ export default class InvestorAccount {
         this.Post = Post
         this.data = {}
         extendObservable(this.data, {
+            zx: {
+                info: {},
+                
+            },
             p2p: {
                 info: {}
             },
@@ -83,5 +87,14 @@ export default class InvestorAccount {
             this.data.p2p.info = data.result
         })
 
+    }
+
+    //尊享账户信息页
+    fetchAccountZX = (custId) => {
+        this.Get('/api/finManager/cust/v2/zxAccount.shtml', {
+            custId: custId
+        }).then(data => {
+            this.data.zx.info = data.result
+        })
     }
 }
