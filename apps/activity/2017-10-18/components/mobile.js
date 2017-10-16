@@ -160,6 +160,7 @@ class Mobile extends React.Component {
                     奖励<i>&yen;</i><b>12500</b>
                 </div>
             </div>
+
             <div styleName="text-normal text-left">温馨提示：红包奖励以工豆形式发放，工豆有效期15天。</div>
             <div styleName="text-darker-bg">
                 { isLoggedIn ? (
