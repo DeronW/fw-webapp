@@ -6,11 +6,16 @@
     overflow-x: hidden;
 }
 
-p {
+.text-normal {
     margin: 15px 0;
     padding: 0 27px;
     color: #a8410f;
     line-height: 1.5;
+    font-size: 24px;
+}
+
+li {
+    color: #a8410f;
 }
 
 .text-red {
