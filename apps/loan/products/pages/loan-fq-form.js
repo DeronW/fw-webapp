@@ -231,7 +231,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             itemPlaceholder = Model[field].options !== undefined ? '请选择' : '请输入',
             itemStyleName = immutable ? 'item-container' : 'mutable-item-container';
 
-        var itemValue = fq[field];    
+        var itemValue = fq.put_in_data[field];    
 
         if(Model[field].options !== undefined){
             let index = Model[field].options.findIndex(i=>i["value"] == itemValue);
@@ -266,7 +266,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
     
         componentDidMount() {
             let { fq, field } = this.props;
-            this.setState({ value: fq[field] })
+            this.setState({ value: fq.put_in_data[field] })
         }
     
         handleInput = e => {
@@ -289,7 +289,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             if(field == 'balance'){
                 err ? Components.showToast(err) :
                     fq.setPanelData(history, 'balance', v)
-                    fq.term = ''  
+                    fq.put_in_data.term = ''  
             }else{
                 err ? Components.showToast(err) : fq.setPanelData(history, field, v)
             }   
@@ -330,20 +330,20 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         if (field == 'term') {
             let pool = Model[field].option_pool;
             Model[field].options = [pool[1], pool[2], pool[3]];
-            if (fq.balance > 3000) {
+            if (fq.put_in_data.balance > 3000) {
                 Model[field].options = [pool[1], pool[2], pool[3]]
             }
-            if (fq.balance > 5000) {
+            if (fq.put_in_data.balance > 5000) {
                 Model[field].options = [pool[2], pool[3], pool[4], pool[5]]
             }
-            if (fq.balance > 20000) {
+            if (fq.put_in_data.balance > 20000) {
                 Model[field].options = [pool[3], pool[4], pool[5]]
             }
         }
 
         let itemOptions = Model[field].options.map((o)=>{new_array.push(o["text"])});
 
-        var itemValue = fq[field];    
+        var itemValue = fq.put_in_data[field];      
         
         if(Model[field].options !== undefined){
             let index = Model[field].options.findIndex(i=>i["value"] == itemValue);
@@ -382,7 +382,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
     
         componentDidMount() {
             document.title = '借款申请';
-            this.props.fq.fetchBasicInfo();
+            this.props.fq.fetchPutInData();
         }
     
         render() {
