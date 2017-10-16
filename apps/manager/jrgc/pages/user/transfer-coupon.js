@@ -5,9 +5,6 @@ import { Event, Components, Utils } from 'fw-javascripts'
 import { Header, BottomNavBar } from '../../components'
 import styles from '../../css/user/transfer-coupon.css'
 
-
-const couponData = [{ count: 100, data: '2017-09-22', des: '返现券' }, { count: 200, data: '2017-09-22', des: '返现券' }]
-
 @inject('user_coupon')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
@@ -30,11 +27,24 @@ class TransferCoupon extends React.Component {
         fetchCouponList()
     }
 
-    transferHandler = (couponId,conponType,beanCount) => {
+    transferHandler = (couponId,conponType,beanCount,remark,overdueTime,investMultip,inverstPeriod) => {
         let { history } = this.props
-        history.push(`/user-transfer-friends?couponId=${couponId}&conponType=${conponType}&beanCount=${beanCount}&remark=${remark}&overdueTime=${overdueTime}&investMultip=${investMultip}&inverstPeriod=${inverstPeriod}`)
+        let {custId,realName} =Utils.hashQuery
+        if(custId !== undefined){
+            this.presentHandler(beanCount,conponType,realName,custId)
+        }else{
+            history.push(`/user-transfer-friends?couponId=${couponId}&conponType=${conponType}&beanCount=${beanCount}&remark=${remark}&overdueTime=${overdueTime}&investMultip=${investMultip}&inverstPeriod=${inverstPeriod}`)
+        }
     }
+    presentHandler = (beanCount,type,name, custId) => {
+        //弹层
+        let unit = type == '返金券' ? '克' : '元'
 
+        let v = confirm(`确认将${beanCount}${unit}${type},赠送给${name}吗？`)
+        if (v == true) {
+            this.props.user_coupon.presentCoupon(couponId, type, custId)
+        }
+    }
     render() {
         let { history } = this.props
         let { sum,type, list } = this.props.user_coupon.data.coupon
@@ -66,7 +76,9 @@ class TransferCoupon extends React.Component {
                 {item.isOver && <div styleName="labelOverdate"></div>}
             </div>
         }
-
+        let empty = <div styleName="empty">
+            <img src={require('../../images/investor/empty.png')} />
+        </div>
         return <div styleName="coupons">
             <Header title="转赠优惠券" history={history} sub_title="转赠记录" sub_link="/user-transfer-record" />
             <div styleName="couponTab">
@@ -82,7 +94,7 @@ class TransferCoupon extends React.Component {
                 </div>
             </div>
             <div styleName="tabContent">
-                {current_tab && current_tab.list.map(coupon_detail)}
+                {current_tab.list && current_tab.list.length>0 ?current_tab.list.map(coupon_detail):empty}
             </div>
         </div>
     }
