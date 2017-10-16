@@ -40,7 +40,13 @@ class Register extends React.Component {
     }
 
     refreshCaptcha = () => {
-        captcha_url
+        Post('/api/userBase/v1/verifyNum.json')
+            .then((data) => {
+                this.setState({
+                    captcha_url: data.url,
+                    verifyToken: data.verifyToken
+                })
+            })
     }
 
     registerHandler = () => {
