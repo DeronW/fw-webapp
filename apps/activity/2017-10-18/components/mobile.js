@@ -82,10 +82,7 @@ class Mobile extends React.Component {
                     5. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
             </div> }
 
-            <div styleName="theme">
-                这里有份万元红包<br/>让双11不再剁手
-                <div styleName="time">10月18日 10:00 - 11月15日</div>
-            </div>
+            <img styleName="banner" src={require('../images/mobile/banner.jpg')} />
 
             <img styleName="sub-title" src={require('../images/mobile/invite-title.png')} alt="邀请好友赚佣金" />
             <div styleName="text-normal">活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。</div>

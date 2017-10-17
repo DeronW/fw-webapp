@@ -9,12 +9,12 @@ body {
     text-align: center;
 }
 
-.theme {
-    box-sizing: border-box;
-    height: 318px;
-    padding: 72px 83px;
-    margin-bottom: 97px;
-    background-color: #fbd5b2;
+.banner {
+    margin-bottom: 80px;
+}
+
+.banner img {
+    width: 100%;
 }
 
 .theme-text-container {
