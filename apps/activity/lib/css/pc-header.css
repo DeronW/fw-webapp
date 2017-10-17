@@ -10,6 +10,11 @@
     background: white;
     height: 50px;
     z-index: 1000;
+    text-align: left;
+}
+
+.header a {
+    text-decoration: none;
 }
 
 .header-panel {
