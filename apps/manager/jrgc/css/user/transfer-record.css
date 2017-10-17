@@ -107,15 +107,28 @@
 .itemUsed .itemLineUp, .itemUsed .itemLineDown, .itemUsed .money {
     color: #ccc;
 }
-
+.labelDued{
+    width: 146px;
+    height: 104px;
+    background: url("../../images/user/transfer-record/used.png") no-repeat center;
+}
 .labelUsed {
     width: 138px;
     height: 71px;
-    background: url("../../images/user/transfer-record/used.png") no-repeat center;
+    background: url("../../images/user/transfer-record/dued.png") no-repeat center;
     position: absolute;
     top: 60px;
     left: 50%;
     margin-left: -69px;
     background-size: 100%;
-    transform: rotate(30deg);
+}
+.empty{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.empty img{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 200px;
 }

@@ -311,7 +311,6 @@ class InteractWrap extends React.Component {
             }
         }
 
-
     }
 
     togglePasswordDisplay = () => {

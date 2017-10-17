@@ -168,6 +168,16 @@
     top: 0;
     right: 20px;
 }
+.empty{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.empty img{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 200px;
+}
 .load{
     width: 100%;
     text-align: center;
