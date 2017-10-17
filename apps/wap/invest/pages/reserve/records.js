@@ -1,17 +1,17 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { observer, inject } from 'mobx-react'
-import { Event, Components } from 'fw-javascripts'
+import {observer, inject} from 'mobx-react'
+import {Event, Components} from 'fw-javascripts'
 
 import styles from '../../css/reserve/records.css'
 import Header from '../../components/header'
 import showConfirm from '../../components/confirm'
-import { NativeBridge } from '../../helpers'
-import { Browser } from '../../helpers'
+import {NativeBridge} from '../../helpers'
+import {Browser} from '../../helpers'
 
 @inject('reserve')
 @observer
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveRecords extends React.Component {
 
     componentDidMount() {
@@ -26,7 +26,7 @@ class ReserveRecords extends React.Component {
     }
 
     cancelReserveHandler = (bookTime, id) => {
-        let { reserve, history } = this.props;
+        let {reserve, history} = this.props;
         let cb = () => {
             reserve.cancelHandler(id).then((data) => {
                 if (data.cancelResult == '1') {
@@ -45,19 +45,19 @@ class ReserveRecords extends React.Component {
     }
 
     tabHandler = (status) => {
-        let { type } = this.props.reserve.othersBid_data.records
-        let { setRecordsCurrentStatus, getReserveList } = this.props.reserve
+        let {type} = this.props.reserve.others_bid_data.records
+        let {setRecordsCurrentStatus, getReserveList} = this.props.reserve
         if (status == type) return
         setRecordsCurrentStatus(status)
     }
 
     render() {
-        let { reserve, history } = this.props
-        let { type, tab } = this.props.reserve.othersBid_data.records
-        let { list } = reserve.othersBid_data.records.tab[type]
+        let {reserve, history} = this.props
+        let {type, tab} = this.props.reserve.othersBid_data.records
+        let {list} = reserve.othersBid_data.records.tab[type]
 
         let no_records = <div styleName="emptyPanel">
-            <img src={require('../../images/reserve/records/norecords.png')} />
+            <img src={require('../../images/reserve/records/norecords.png')}/>
             <div styleName="norecords-text">暂无预约</div>
         </div>
 
@@ -82,13 +82,13 @@ class ReserveRecords extends React.Component {
 
             return <div className={cancelstyle} key={index}>
                 {item.status == 0 &&
-                    <div styleName="itemHeader headerOn">
-                        {status}
-                        <div styleName="itemHeaderRight cancelBtn"
-                            onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
-                            取消预约
+                <div styleName="itemHeader headerOn">
+                    {status}
+                    <div styleName="itemHeaderRight cancelBtn"
+                         onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
+                        取消预约
                     </div>
-                    </div>}
+                </div>}
                 {item.status == 1 && <div styleName="itemHeader headerOver">{status}</div>}
                 {item.status == 2 && <div styleName="itemHeader headerCancel">{status}</div>}
                 <div styleName="infoContainer">
@@ -113,7 +113,7 @@ class ReserveRecords extends React.Component {
                     {(item.status == 0 || item.status == 1) && <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约协议</div>
                         <div styleName="itemHeaderRight"
-                            onClick={() => this.lookProtocolHandler(item.contractType, item.id)}>
+                             onClick={() => this.lookProtocolHandler(item.contractType, item.id)}>
                             已签署<span styleName="arrow"></span>
                         </div>
                     </div>}
@@ -124,7 +124,7 @@ class ReserveRecords extends React.Component {
         let tab_style = Browser.inIOSApp ? 'tabWrapperIos' : 'tabWrapper'
 
         return <div styleName="recordsPanel">
-            <Header title="我的预约" history={history} />
+            <Header title="我的预约" history={history}/>
             <div styleName={tab_style}>
                 {['0', '1', '2'].map(tab_func)}
             </div>

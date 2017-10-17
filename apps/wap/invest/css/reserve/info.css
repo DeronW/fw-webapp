@@ -61,6 +61,10 @@
     text-align: center;
 }
 
+.rateDown {
+    color: #a3c5df;
+}
+
 .tipsBox {
     width: 100%;
     height: 28px;
@@ -182,7 +186,7 @@
 
 .rulerBox {
     width: 100%;
-    height: 490px;
+    height: auto;
     background: #fff;
     display: table;
     margin-top: 20px;
@@ -208,7 +212,7 @@
 .introduceBox {
     background-color: #fff;
     width: 100%;
-    height: 1000px;
+    height: auto;
     line-height: 36px;
 }
 
@@ -225,7 +229,7 @@
 
 .introduceText {
     width: 650px;
-    padding: 30px 40px 140px 30px;
+    padding: 30px 40px 10px 30px;
     font-size: 24px;
     color: #555;
 }
@@ -237,7 +241,7 @@
     font-family: PingFangSC-Regular, sans-serif;
 }
 
-.sectionOne {
+.sectionText {
     margin-bottom: 50px;
     font-family: PingFangSC-Regular, sans-serif;
 }
@@ -254,21 +258,21 @@
     display: table;
 }
 
-.recordBtn {
-    width: 316px;
-    height: 74px;
-    line-height: 74px;
-    background-color: #7c9dc7;
-    font-size: 32px;
-    color: #fff;
-    text-align: center;
-    border-radius: 4px;
-    margin-right: 30px;
-    float: left;
-}
+/*.recordBtn {*/
+/*width: 316px;*/
+/*height: 74px;*/
+/*line-height: 74px;*/
+/*background-color: #7c9dc7;*/
+/*font-size: 32px;*/
+/*color: #fff;*/
+/*text-align: center;*/
+/*border-radius: 4px;*/
+/*margin-right: 30px;*/
+/*float: left;*/
+/*}*/
 
 .reserveBtn {
-    width: 316px;
+    width: 660px;
     height: 74px;
     line-height: 74px;
     background-color: #fd4d4c;
@@ -276,10 +280,9 @@
     color: #fff;
     text-align: center;
     border-radius: 4px;
-    float: left;
 }
 
-.question {
+.jumpLink {
     width: 660px;
     height: 88px;
     line-height: 88px;
@@ -289,15 +292,23 @@
     display: table;
 }
 
-.questionText {
+.jumpLinkText {
     float: left;
 }
 
-.quesionArrow {
+.jumpLinkArrow {
     width: 16px;
     height: 26px;
     background: url("../../images/reserve/info/arrow.png") no-repeat center;
     float: right;
     margin-top: 31px;
+}
+
+.introBanner {
+    width: 100%;
+    height: 227px;
+    background: url("../../images/reserve/info/banner-intro.png") no-repeat center;
+    background-size: 100%;
+    margin-bottom: 20px;
 }
 
