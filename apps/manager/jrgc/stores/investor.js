@@ -10,7 +10,49 @@ export default class Investor {
             },
             custmor: {
                 pageNo: 1,
-                type: 1,//1-全部-余额 2-全部-返利 3-全部-回款 4-在投-余额 5-在投-返利 6-在投-回款 7-空仓-余额 8-空仓-返利 9-未投-注册时间 10-未投-余额
+                tab: '全部客户',
+                type: '可用余额最高排序',
+                value:1,//1-全部-余额 2-全部-返利 3-全部-回款 4-在投-余额 5-在投-返利 6-在投-回款 7-空仓-余额 8-空仓-返利 9-未投-注册时间 10-未投-余额
+                sort: {
+                    '全部客户': [
+                        {
+                            '可用余额最高排序': 1
+                        },
+                        {
+                            '返利最多排序': 2
+                        },
+                        {
+                            '最近回款时间排序': 3
+                        }
+                    ],
+                    '在投': [
+                        {
+                            '可用余额最高排序': 4
+                        },
+                        {
+                            '返利最多排序': 5
+                        },
+                        {
+                            '最近回款时间排序': 6
+                        }
+                    ],
+                    '空仓': [
+                        {
+                            '可用余额最高排序': 7
+                        },
+                        {
+                            '返利最多排序': 8
+                        }
+                    ],
+                    '未投资': [
+                        {
+                            '可用余额最高排序': 10
+                        },
+                        {
+                            '最近回款时间排序': 9
+                        }
+                    ]
+                },
                 list: []
             },
             calendar: {//回款日历
@@ -54,15 +96,23 @@ export default class Investor {
     resetCustPageNo = () => {
         this.data.custmor.pageNo = 1
     }
+    setCustTab = (tab) => {
+        this.data.custmor.tab = tab
+        this.data.custmor.type = '可用余额最高排序'
+    }
     setCustType = (type) => {
         this.data.custmor.type = type
     }
+    setCustValue = (value) => {
+        console.log(value)
+        this.data.custmor.value = value
+    }
     fetchCustList = (done) => {
-        let { type, pageNo, list } = this.data.custmor
+        let { value, pageNo, list } = this.data.custmor
         if (pageNo == 0) return done && done()
         if (pageNo == 1) list = []
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
-            type: type,
+            type: value,
             pageNo: pageNo,
             pageSize: 10
         }).then(data => {
