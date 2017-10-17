@@ -102,7 +102,7 @@
     -webkit-transform: skew(10deg);
     transform: skew(10deg);
 }
-
+*/
 .submit-btn-container {
     position: fixed;
     bottom: 0;
@@ -123,7 +123,7 @@
     color: #fff;
     font-size: 30px;
     text-align: center;
-}*/
+}
 .list-container {
     padding: 27px 34px 178px;
 }
