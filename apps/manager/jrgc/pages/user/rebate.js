@@ -89,7 +89,7 @@ class Rebate extends React.Component {
         let tabs = ['全部', '微金', '尊享', '黄金']
         let tab_func = (item, index) => {
             return <div key={index} styleName={tab_num == index ? "tab tabActive" : "tab"}
-                        onClick={() => this.switchTabHandler(index)}>
+                        onClick={() => this.switchTabHandler(index+1)}>
                 {item}
             </div>
         }

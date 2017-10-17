@@ -18,16 +18,14 @@ export default class InvestorAccount {
                 project:{
                     info:{},
                     tab:'100',
+                    type:'Ta的项目',
                     record:{
                         '100':{name:'未起息',pageNo:1,records:[]},
                         '3':{name:'回款中',pageNo:1,records:[]},
                         '4':{name:'已回款',pageNo:1,records:[]},
-                    },
-                    transfer_tab:'',
-                    list:{
-                        '':{name:'全部',pageNo:1,lists:[]},
-                        '5':{name:'回款中',pageNo:1,lists:[]},
-                        '6':{name:'已回款',pageNo:1,lists:[]},
+                        '':{name:'全部',pageNo:1,records:[]},
+                        '5':{name:'回款中',pageNo:1,records:[]},
+                        '6':{name:'已回款',pageNo:1,records:[]},
                     }
                 }
             },
@@ -82,21 +80,26 @@ export default class InvestorAccount {
         let pro = this.data.zx.project
 
         pro.record[pro.tab].pageNO = 1
-        pro.list[pro.transfer_tab].pageNO = 1
     }
     setTabZX = (tab) => {
         this.data.zx.project.tab = tab
     }
-    setTransferTabZX = (tab) => {
-        this.data.zx.project.transfer_tab = tab
+    setTypeZX = (type) => {
+        this.data.zx.project.type = type
     }
     //TA的尊享-投资-TA的项目列表
     fetchProjectZX = (done) => {
-        let { tab,record } = this.data.zx.project
-
+        let url
+        let { tab,record,type } = this.data.zx.project
         if( record[tab].pageNO == 0) return done && done()
         if( record[tab].pageNO == 1) record[tab].records = []
-        this.Get('/api/finManager/cust/v2/zxPrdInvest.shtml',{
+
+        if(type=="Ta的项目"){
+            url='/api/finManager/cust/v2/zxPrdInvest.shtml'
+        }else if(type=="转入项目"){
+            url='/api/finManager/cust/v2/zxPrdInvest.shtml'
+        }
+        this.Get(url,{
             custId:this.custId,
             flag:tab,
             pageNo:record[tab].pageNo,
@@ -104,24 +107,6 @@ export default class InvestorAccount {
         }).then(data=>{
             record[tab].records.push(...data.pageData.result)
             record[tab].pageNO > data.pageData.pagination.totalPage ? record[tab].pageNO++ : record[tab].pageNO = 0
-
-            done()
-        })
-    }
-    //TA的尊享-投资-转入项目
-    fetchTransferProjectZX = (done) => {
-        let { transfer_tab,list } = this.data.zx.project
-
-        if( list[transfer_tab].pageNO == 0) return done && done()
-        if( list[transfer_tab].pageNO == 1) list[transfer_tab].lists = []
-        this.Get('/api/finManager/cust/v2/zxPrdInvest.shtml',{
-            custId:this.custId,
-            flag:transfer_tab,
-            pageNo:list[transfer_tab].pageNo,
-            pageSize:10
-        }).then(data=>{
-            list[transfer_tab].lists.push(...data.pageData.result)
-            list[transfer_tab].pageNO > data.pageData.pagination.totalPage ? list[transfer_tab].pageNO++ : list[transfer_tab].pageNO = 0
 
             done()
         })

@@ -16,7 +16,6 @@ class zxItem extends React.Component {
         resetPageNoZX()
         fetchInvestInfoZX()
         fetchProjectZX()
-        fetchTransferProjectZX()
     }
     gotoHandler = (params) => {
         let { history } = this.props
@@ -24,24 +23,23 @@ class zxItem extends React.Component {
     }
 
     switchType = type => {
-        if (type == this.state.type) return
-        this.setState({ type: type })
-        if(type="Ta的项目"){
-            this.props.investor_account.fetchProjectZX()
-        }else{
-            this.props.investor_account.fetchTransferProjectZX()
+        if (type == this.props.investor_account.data.zx.project.type) return
+        this.props.investor_account.setTypeZX(type)
+        console.log(type)
+        if(type=="Ta的项目"){
+            this.props.investor_account.setTabZX('100')
+        }else if(type=="转入项目"){
+            this.props.investor_account.setTabZX('')
         }
+        this.props.investor_account.fetchProjectZX()
     }
 
     switchTab = tab => {
         this.props.investor_account.setTabZX(tab)
     }
-    switchTransferTab = (transfer_tab) => {
-        this.props.investor_account.setTransferTabZX(transfer_tab)
-    }
     render() {
         let { history } = this.props
-        let { type } = this.state
+        let { type } = this.props.investor_account.data.zx.project
 
         let { info,tab,transfer_tab,record,list } = this.props.investor_account.data.zx.project
         let types = type == 'Ta的项目' ? ['100', '3', '4'] : ['', '5', '6']
@@ -54,11 +52,6 @@ class zxItem extends React.Component {
         let tabFn = (item, index) => {
             return <div key={index} styleName={item == tab ? "type typeActive" : "type"}
                 onClick={() => this.switchTab(item)}>{record[item].name}
-            </div>
-        }
-        let transfer_tabFn = (item, index) => {
-            return <div key={index} styleName={item == transfer_tab ? "type typeActive" : "type"}
-                onClick={() => this.switchTransferTab(item)}>{list[item].name}
             </div>
         }
 
@@ -110,15 +103,15 @@ class zxItem extends React.Component {
                     </div>
                     <div styleName="item">
                         <span>计划回款日</span>
-                        <span>2017-01-22</span>
+                        <span>{item.repayPerDate}</span>
                     </div>
                     <div styleName="item">
                         <span>实付金额</span>
-                        <span styleName="red">¥3,000.00</span>
+                        <span styleName="red">¥{item.contributionAmt}</span>
                     </div>
                     <div styleName="item">
                         <span>交易日期</span>
-                        <span>2017-01-22</span>
+                        <span>{item.lastDays}</span>
                     </div>
                 </div>
             }
@@ -141,8 +134,7 @@ class zxItem extends React.Component {
                 <div styleName="interest">待收利息：¥{info.waitInvest}</div>
             </div>
             <div styleName="types">
-                {type == 'Ta的项目' && types.map(tabFn)}
-                {type == '转入项目' && types.map(transfer_tabFn)}
+                {types.map(tabFn)}
             </div>
             <div styleName="number">共<span>5</span>笔记录</div>
             {/*<div styleName="records">
