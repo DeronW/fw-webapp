@@ -1,10 +1,12 @@
 import { extendObservable } from 'mobx'
 
+import { showToast } from 'fw-components'
+
 
 const isPhoneNum = str => /^1[3|4|5|7|8]\d{9}$/.test(String(str));
 
 
-export default class userInfo {
+export default class UserInfo {
 
     constructor(Post) {
         this.Post = Post;
@@ -59,7 +61,14 @@ export default class userInfo {
     fetchUserInfo = () => {
         this.Post('/api/userBase/v1/userInfoItem.json').then(data => {
             this.setInfoData(data);
+        }, e => showToast(e.message))
+    }
+
+    submitUserInfo = () => {
+        this.Post('/api/userBase/v1/saveUserInfo.json').then(data => {
+            this.setInfoData(data);
         }, e => {
+            showToast(e.message);
 
         })
     }

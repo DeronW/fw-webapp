@@ -17,18 +17,19 @@ const TAB_MODEL = {
     },
     idCard: {
         name: '身份证号',
+        type: 'number',
         placeholder: '未实名',
     },
     creditCard: {
         name: '信用卡',
-        inputType: 'number',
+        type: 'number',
     },
     email: {
         name: '邮箱',
-        inputType: 'email',
+        type: 'email',
     },
     address: {
-        name: '姓名',
+        name: '现居住地',
     },
     marriage: {
         name: '婚姻',
@@ -93,14 +94,18 @@ class InputItem extends React.Component {
         placeholder | string,
     */
 
-    handleChange = e => this.props.user_info.inputHandler(field, e.target.value);
+    handleChange = e => {
+        const { user_info, field } = this.props;
+        user_info.inputHandler(field, e.target.value);
+    }
 
     render() {
         const { user_info, field, name, type, placeholder } = this.props,
             value = user_info.data[field];
         return <div styleName="item">
             <div styleName="item-name">{name}</div>
-            <input styleName="item-value" type={type || "text"}
+            <input styleName="item-value"
+                type={type || "text"}
                 placeholder={placeholder || "请填写"}
                 value={value}
                 onChange={this.handleChange} />
@@ -122,23 +127,45 @@ class SelectItem extends React.Component {
 
     state = { expandOptions: false }
 
+    toggleExpand = () => this.setState({ expandOptions: !this.state.expandOptions })
+
+    handleChange = v => () => {
+        const { user_info, field } = this.props;
+        user_info.inputHandler(field, v);
+        this.toggleExpand();
+    }
+
     _genOptions = optValue => {
-        const { options } = this.props,
+        const { user_info, field, options } = this.props,
             optName = options[optValue],
             value = user_info.data[field];
-        return <div key="optName" styleName={value == optValue ? "selected-option" : "option"}>optName</div>
+        return <div key={optName}
+            styleName={value == optValue ? "selected-option" : "option"}
+            onClick={this.handleChange(optValue)}>
+            {optName}
+        </div>
     }
 
     render() {
+
         const { user_info, field, name, options, placeholder } = this.props,
-            value = user_info.data[field];
+            value = user_info.data[field],
+            valueName = options[value];
+
         const { expandOptions } = this.state;
-        return <div styleName="item">
-            <div styleName="item-name">{name}</div>
-            <i styleName="expand-icon"></i>
-            <div styleName="item-value">{value}</div>
+
+        return <div>
+            <div styleName="item">
+                <div styleName="item-name">{name}</div>
+                <i styleName="expand-icon"></i>
+                <div style={{ color: value ? '#333' : '#999' }}
+                    styleName="item-value"
+                    onClick={this.toggleExpand}>
+                    {valueName || '请选择'}
+                </div>
+            </div>
             { expandOptions && <div styleName="select-options">
-                Object.keys(options).map(this._genOptions)
+                { Object.keys(options).map(this._genOptions) }
             </div> }
         </div>
     }
@@ -165,10 +192,10 @@ class UserInfo extends React.Component {
         const { history } = this.props;
         const { currentTab } = this.state;
 
-        const genInfoItem = name => {
-            const itemData = TAB_MODEL[name];
-            if (itemData.option) return <SelectItem {...itemData} />
-            if (!itemData.option) return <InputItem {...itemData} />
+        const genInfoItem = field => {
+            const itemData = TAB_MODEL[field];
+            if (itemData.options) return <SelectItem key={field} field={field} {...itemData} />
+            if (!itemData.options) return <InputItem key={field} field={field} {...itemData} />
         }
 
         return <div styleName="bg">
@@ -189,12 +216,12 @@ class UserInfo extends React.Component {
                 </div>
             </div>
 
-            {/* { currentTab == '1' && <div>
+            { currentTab == '1' && <div>
                 <div styleName="item-grp">
-                    { ['name', 'idCard', 'creditCard', 'email'].map(genInfoItem) }
+                    { ['realName', 'idCard', 'creditCard', 'email'].map(genInfoItem) }
                 </div>
                 <div styleName="item-grp">
-                    { ['city', 'address'].map(genInfoItem) }
+                    { ['address'].map(genInfoItem) }
                 </div>
                 <div styleName="item-grp">
                     { ['marriage'].map(genInfoItem) }
@@ -208,8 +235,10 @@ class UserInfo extends React.Component {
             </div> }
 
             { currentTab == '3' && <div>
-                { ['income', 'workExperience'].map(genInfoItem) }
-            </div> } */}
+                <div styleName="item-grp">
+                    { ['income', 'workExperience'].map(genInfoItem) }
+                </div>
+            </div> }
 
         </div>
     }

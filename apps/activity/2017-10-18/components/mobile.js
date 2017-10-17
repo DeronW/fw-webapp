@@ -75,7 +75,7 @@ class Mobile extends React.Component {
             { showDesc && <div styleName="desc">
                 <div styleName="desc-back" onClick={this.toggleShowDesc}>返回</div>
                 <div styleName="desc-title">活动说明</div>
-                    1. 活动期内，投资转让项目，不能参与本次活动；<br />
+                    1. 活动期内，投资预约宝和转让项目，不能参与本次活动；<br />
                     2. 企业用户不参与本次活动；<br />
                     3. 本次活动累投金额包含工场微金、工场尊享和工场黄金的尊享金产品的购买金额；<br />
                     4. 活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br />

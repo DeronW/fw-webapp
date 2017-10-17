@@ -33,7 +33,7 @@ class ReserveApply extends React.Component {
 
     allMadeHandler = () => {
         let {reserve} = this.props
-        this.props.reserve.setFormData('reserveMoney', reserve.accountAmount)
+        this.props.reserve.setFormData('reserveMoney', reserve.others_bid_data.accountAmount)
     }
 
     applyHandler = () => {
@@ -53,14 +53,14 @@ class ReserveApply extends React.Component {
                 })
         }
         reserve.fetchProduct().then(data => {
-            if (reserve.othersBid_data.reserveMoney === '') {
+            if (reserve.others_bid_data.reserveMoney === '') {
                 Components.showToast("预约金额不能为空")
-            } else if (reserve.othersBid_data.reserveMoney < reserve.othersBid_data.context.minAmt) {
+            } else if (reserve.others_bid_data.reserveMoney < reserve.othersBid_data.context.minAmt) {
                 Components.showToast("预约金额不足100")
-            } else if (reserve.othersBid_data.reserveMoney > reserve.othersBid_data.accountAmount) {
+            } else if (reserve.others_bid_data.reserveMoney > reserve.othersBid_data.accountAmount) {
                 Components.showToast("可用金额不足，请充值后重试")
-            } else if (!reserve.othersBid_data.isCompany) {
-                if (reserve.othersBid_data.reserveMoney > data.batchMaxmum) {
+            } else if (!reserve.others_bid_data.isCompany) {
+                if (reserve.others_bid_data.reserveMoney > data.batchMaxmum) {
                     Components.showToast("自动投标金额不足").then(() => {
                         NativeBridge.toNative('auto_bid_second')
                     })
@@ -85,7 +85,7 @@ class ReserveApply extends React.Component {
 
     render() {
         let {reserve, history} = this.props
-        let {context} = reserve.othersBid_data
+        let {context} = reserve.others_bid_data
 
         let infoItem = (name, value) => {
             return <div styleName="infoItem">
