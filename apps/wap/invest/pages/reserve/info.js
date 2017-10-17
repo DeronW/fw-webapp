@@ -37,7 +37,7 @@ class ReserveInfo extends React.Component {
 
     render() {
         let {reserve, history} = this.props
-        let {context} = reserve.othersBid_data
+        let {context} = reserve.others_bid_data
         let banner_section = () => {
             return <div styleName="topInfo">
                 <div styleName="infoRate">

@@ -4,9 +4,9 @@ import {Components, Utils, Event} from 'fw-javascripts'
 export default class Reserve {
     constructor(Post) {
         this.Post = Post
-        this.noviceBid_data = {}
-        this.othersBid_data = {}
-        extendObservable(this.othersBid_data, {
+        this.novice_bid_data = {}
+        this.others_bid_data = {}
+        extendObservable(this.others_bid_data, {
             records: {
                 type: '0',
                 tab: {
@@ -32,7 +32,7 @@ export default class Reserve {
             isCompany: null
         })
 
-        extendObservable(this.noviceBid_data, {
+        extendObservable(this.novice_bid_data, {
             context: {
                 avgLoanPeriod: '',
                 bookValidPeriod: null,
@@ -60,32 +60,32 @@ export default class Reserve {
         return this.Post('/api/v1/intoAppointPage.shtml', {
             applyInvestClaimId: this.applyInvestClaimId
         }).then(data => {
-            this.othersBid_data.context = data.appointClaim;
-            this.othersBid_data.accountAmount = data.accountAmount;
-            this.othersBid_data.isRisk = data.isRisk;
-            this.othersBid_data.batchMaxmum = data.batchMaxmum
-            this.othersBid_data.minAmt = data.appointClaim.minAmt
-            this.othersBid_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
-            this.othersBid_data.isCompany = data.isCompany
+            this.others_bid_data.context = data.appointClaim;
+            this.others_bid_data.accountAmount = data.accountAmount;
+            this.others_bid_data.isRisk = data.isRisk;
+            this.others_bid_data.batchMaxmum = data.batchMaxmum
+            this.others_bid_data.minAmt = data.appointClaim.minAmt
+            this.others_bid_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
+            this.others_bid_data.isCompany = data.isCompany
             return {
-                isRisk: this.othersBid_data.isRisk,
-                batchMaxmum: this.othersBid_data.batchMaxmum,
-                isCompany: this.othersBid_data.isCompany
+                isRisk: this.others_bid_data.isRisk,
+                batchMaxmum: this.others_bid_data.batchMaxmum,
+                isCompany: this.others_bid_data.isCompany
             }
         })
     }
 
     resetPageNo = () => {
-        let {tab, type} = this.othersBid_data.records, current_tab = tab[type]
+        let {tab, type} = this.others_bid_data.records, current_tab = tab[type]
         current_tab.page_no = 1
     }
     setRecordsCurrentStatus = status => {
-        this.othersBid_data.records.type = status;
+        this.others_bid_data.records.type = status;
         this.getReserveList()
     }
 
     getReserveList = (done) => {
-        let {tab, type} = this.othersBid_data.records, current_tab = tab[type]
+        let {tab, type} = this.others_bid_data.records, current_tab = tab[type]
         if (current_tab.page_no === 0) return done && done();
         const PAGE_SIZE = 10
 
@@ -111,8 +111,8 @@ export default class Reserve {
             applyInvestClaimId: this.applyInvestClaimId
         }).then((data) => {
             return this.Post('/api/v1/investAppoint.shtml', {
-                applyAmt: this.othersBid_data.reserveMoney,
-                applyInvestClaimId: this.othersBid_data.context.id,
+                applyAmt: this.others_bid_data.reserveMoney,
+                applyInvestClaimId: this.others_bid_data.context.id,
                 bookInvestToken: data.bookInvestToken
             })
         })
@@ -126,9 +126,9 @@ export default class Reserve {
 
     getContractHandler = () => {
         return this.Post('/api/v1/appointContractMess.shtml').then(data => {
-            this.othersBid_data.contractMsg = data.contractMsg
+            this.others_bid_data.contractMsg = data.contractMsg
             return {
-                contractMsg: this.othersBid_data.contractMsg
+                contractMsg: this.others_bid_data.contractMsg
             }
         })
     }
