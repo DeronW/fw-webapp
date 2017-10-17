@@ -10,8 +10,9 @@ import {NativeBridge} from '../../helpers'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveInfoNovice extends React.Component {
     componentDidMount() {
+        window.scrollTo(0, 0)
         // NativeBridge.trigger('hide_header')
-        this.props.reserve.fetchProduct()
+        this.props.reserve.fetchNoviceProduct()
     }
 
     jumpHandler = () => {

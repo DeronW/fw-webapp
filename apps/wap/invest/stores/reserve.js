@@ -46,8 +46,7 @@ export default class Reserve {
             batchMaxmum: 0,
             reserveMoney: '',
             isChecked: true,
-            contractMsg: '',
-            isCompany: null
+            contractMsg: ''
         })
     }
 
@@ -60,17 +59,36 @@ export default class Reserve {
         return this.Post('/api/v1/intoAppointPage.shtml', {
             applyInvestClaimId: this.applyInvestClaimId
         }).then(data => {
-            this.others_bid_data.context = data.appointClaim;
-            this.others_bid_data.accountAmount = data.accountAmount;
-            this.others_bid_data.isRisk = data.isRisk;
-            this.others_bid_data.batchMaxmum = data.batchMaxmum
-            this.others_bid_data.minAmt = data.appointClaim.minAmt
-            this.others_bid_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
-            this.others_bid_data.isCompany = data.isCompany
+            let others_data = this.others_bid_data
+            others_data.context = data.appointClaim;
+            others_data.accountAmount = data.accountAmount;
+            others_data.isRisk = data.isRisk;
+            others_data.batchMaxmum = data.batchMaxmum
+            others_data.minAmt = data.appointClaim.minAmt
+            others_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
+            others_data.isCompany = data.isCompany
             return {
-                isRisk: this.others_bid_data.isRisk,
-                batchMaxmum: this.others_bid_data.batchMaxmum,
-                isCompany: this.others_bid_data.isCompany
+                isRisk: others_data.isRisk,
+                batchMaxmum: others_data.batchMaxmum,
+                isCompany: others_data.isCompany
+            }
+        })
+    }
+
+    fetchNoviceProduct = () => {
+        return this.Post('/api/v1/intoAppointPage.shtml', {
+            applyInvestClaimId: this.applyInvestClaimId
+        }).then(data => {
+            let novice_data = this.novice_bid_data
+            novice_data.context = data.appointClaim
+            novice_data.accountAmount = data.accountAmount
+            novice_data.isRisk = data.isRisk
+            novice_data.batchMaxmum = data.batchMaxmum
+            novice_data.minAmt = data.appointClaim.minAmt
+            novice_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
+            return {
+                isRisk: novice_data.isRisk,
+                batchMaxmum: novice_data.batchMaxmum
             }
         })
     }
@@ -133,7 +151,7 @@ export default class Reserve {
         })
     }
 
-    setFormData = (field, value) => {
-        this[field] = value
+    setFormData = (field, value, type) => {
+        this[type][field] = value
     }
 }
