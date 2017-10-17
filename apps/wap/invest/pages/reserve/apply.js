@@ -24,16 +24,16 @@ class ReserveApply extends React.Component {
 
         if (v[1] && v[1].length > 2) {
             v[1] = v[1].substr(0, 2)
-            this.props.reserve.setFormData(name, `${v[0]}.${v[1]}`, 'others_bid_data')
+            this.props.reserve.setFormData(name, `${v[0]}.${v[1]}`, 'bid_data')
         } else {
-            this.props.reserve.setFormData(name, e.target.value, 'others_bid_data')
+            this.props.reserve.setFormData(name, e.target.value, 'bid_data')
         }
 
     }
 
     allMadeHandler = () => {
         let {reserve} = this.props
-        this.props.reserve.setFormData('reserveMoney', reserve.others_bid_data.accountAmount, 'others_bid_data')
+        this.props.reserve.setFormData('reserveMoney', reserve.bid_data.accountAmount, 'bid_data')
     }
 
     applyHandler = () => {
@@ -53,14 +53,14 @@ class ReserveApply extends React.Component {
                 })
         }
         reserve.fetchProduct().then(data => {
-            if (reserve.others_bid_data.reserveMoney === '') {
+            if (reserve.bid_data.reserveMoney === '') {
                 Components.showToast("预约金额不能为空")
-            } else if (reserve.others_bid_data.reserveMoney < reserve.others_bid_data.context.minAmt) {
+            } else if (reserve.bid_data.reserveMoney < reserve.bid_data.context.minAmt) {
                 Components.showToast("预约金额不足100")
-            } else if (reserve.others_bid_data.reserveMoney > reserve.others_bid_data.accountAmount) {
+            } else if (reserve.bid_data.reserveMoney > reserve.bid_data.accountAmount) {
                 Components.showToast("可用金额不足，请充值后重试")
-            } else if (!reserve.others_bid_data.isCompany) {
-                if (reserve.others_bid_data.reserveMoney > data.batchMaxmum) {
+            } else if (!reserve.bid_data.isCompany) {
+                if (reserve.bid_data.reserveMoney > data.batchMaxmum) {
                     Components.showToast("自动投标金额不足").then(() => {
                         NativeBridge.toNative('auto_bid_second')
                     })
@@ -85,7 +85,7 @@ class ReserveApply extends React.Component {
 
     render() {
         let {reserve, history} = this.props
-        let {context} = reserve.others_bid_data
+        let {context} = reserve.bid_data
 
         let infoItem = (name, value) => {
             return <div styleName={name == '预约有效期' ? "infoItem itemLast" : "infoItem"}>
@@ -99,7 +99,7 @@ class ReserveApply extends React.Component {
                 <div styleName="reserveMoney">抢购金额</div>
                 <div styleName="userMoney">
                     <div styleName="inputMoney">
-                        <input type="number" placeholder="100元起预约" value={reserve.others_bid_data.reserveMoney}
+                        <input type="number" placeholder="100元起预约" value={reserve.bid_data.reserveMoney}
                                onChange={this.inputChangeHandler('reserveMoney')}/>
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
@@ -107,7 +107,7 @@ class ReserveApply extends React.Component {
                     </div>
                     <div styleName="money">
                         <div styleName="balance">
-                            可用余额<span styleName="remain">&yen;{reserve.others_bid_data.accountAmount}</span>
+                            可用余额<span styleName="remain">&yen;{reserve.bid_data.accountAmount}</span>
                         </div>
                         <div styleName="recharge" onClick={this.rechargeHandler}>充值</div>
                     </div>
@@ -119,7 +119,7 @@ class ReserveApply extends React.Component {
                     <div styleName="infoAmount">
                         <div styleName="amountLeft">预计收益</div>
                         <div styleName="amountRight">
-                            &yen;{reserve.others_bid_data.reserveMoney * (context.loadRate / 100)}
+                            &yen;{reserve.bid_data.reserveMoney * (context.loadRate / 100)}
                         </div>
                     </div>
                     <div styleName="itemWrapper">
