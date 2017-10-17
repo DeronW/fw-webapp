@@ -24,16 +24,16 @@ class ReserveApply extends React.Component {
 
         if (v[1] && v[1].length > 2) {
             v[1] = v[1].substr(0, 2)
-            this.props.reserve.setFormData(name, `${v[0]}.${v[1]}`)
+            this.props.reserve.setFormData(name, `${v[0]}.${v[1]}`, 'others_bid_data')
         } else {
-            this.props.reserve.setFormData(name, e.target.value)
+            this.props.reserve.setFormData(name, e.target.value, 'others_bid_data')
         }
 
     }
 
     allMadeHandler = () => {
         let {reserve} = this.props
-        this.props.reserve.setFormData('reserveMoney', reserve.accountAmount)
+        this.props.reserve.setFormData('reserveMoney', reserve.others_bid_data.accountAmount, 'others_bid_data')
     }
 
     applyHandler = () => {
@@ -53,14 +53,14 @@ class ReserveApply extends React.Component {
                 })
         }
         reserve.fetchProduct().then(data => {
-            if (reserve.othersBid_data.reserveMoney === '') {
+            if (reserve.others_bid_data.reserveMoney === '') {
                 Components.showToast("预约金额不能为空")
-            } else if (reserve.othersBid_data.reserveMoney < reserve.othersBid_data.context.minAmt) {
+            } else if (reserve.others_bid_data.reserveMoney < reserve.others_bid_data.context.minAmt) {
                 Components.showToast("预约金额不足100")
-            } else if (reserve.othersBid_data.reserveMoney > reserve.othersBid_data.accountAmount) {
+            } else if (reserve.others_bid_data.reserveMoney > reserve.others_bid_data.accountAmount) {
                 Components.showToast("可用金额不足，请充值后重试")
-            } else if (!reserve.othersBid_data.isCompany) {
-                if (reserve.othersBid_data.reserveMoney > data.batchMaxmum) {
+            } else if (!reserve.others_bid_data.isCompany) {
+                if (reserve.others_bid_data.reserveMoney > data.batchMaxmum) {
                     Components.showToast("自动投标金额不足").then(() => {
                         NativeBridge.toNative('auto_bid_second')
                     })
@@ -85,41 +85,48 @@ class ReserveApply extends React.Component {
 
     render() {
         let {reserve, history} = this.props
-        let {context} = reserve.othersBid_data
+        let {context} = reserve.others_bid_data
 
         let infoItem = (name, value) => {
-            return <div styleName="infoItem">
+            return <div styleName={name == '预约有效期' ? "infoItem itemLast" : "infoItem"}>
                 <div styleName="itemLeft">{name}</div>
-                <div styleName={name == "预期年化" ? "itemRight rightRed" : "itemRight"}>{value}</div>
+                <div styleName={name == "预期年化利率" ? "itemRight rightRed" : "itemRight"}>{value}</div>
             </div>
         }
         return <div styleName='applyPanel'>
-            <Header title="提交预约" history={history}/>
+            <Header title="预约抢购" history={history}/>
             <div styleName="submitPanel">
-                <div styleName="reserveMoney">预约金额</div>
+                <div styleName="reserveMoney">抢购金额</div>
                 <div styleName="userMoney">
-                    <div styleName="money">可用余额
-                        <span styleName="remain">&yen;{reserve.accountAmount}</span>
-                        <span styleName="recharge" onClick={this.rechargeHandler}>充值</span>
-                    </div>
                     <div styleName="inputMoney">
-                        <input type="number" placeholder="100元起预约" value={reserve.reserveMoney}
+                        <input type="number" placeholder="100元起预约" value={reserve.others_bid_data.reserveMoney}
                                onChange={this.inputChangeHandler('reserveMoney')}/>
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
                         </span>
+                    </div>
+                    <div styleName="money">
+                        <div styleName="balance">
+                            可用余额<span styleName="remain">&yen;{reserve.others_bid_data.accountAmount}</span>
+                        </div>
+                        <div styleName="recharge" onClick={this.rechargeHandler}>充值</div>
                     </div>
                 </div>
             </div>
             <div styleName="interval"></div>
             <div styleName="submitInfo">
                 <div styleName="infoContent">
-                    {infoItem("预期年化", `${context.loadRate}%`)}
-                    {infoItem("期限", `${context.repayPeriod}天`)}
-                    {infoItem("预约有效期", `${context.bookValidPeriod}天`)}
-                    <div styleName="infoItem itemLast">
-                        <div styleName="itemLeft">预计起息时间</div>
-                        <div styleName="itemRight">预计今日起息</div>
+                    <div styleName="infoAmount">
+                        <div styleName="amountLeft">预计收益</div>
+                        <div styleName="amountRight">
+                            &yen;{reserve.others_bid_data.reserveMoney * (context.loadRate / 100)}
+                        </div>
+                    </div>
+                    <div styleName="itemWrapper">
+                        {infoItem("预期年化利率", `${context.loadRate}%`)}
+                        {infoItem("期限", `${context.repayPeriod}天`)}
+                        {infoItem("预计起息时间", "预计今日起息")}
+                        {infoItem("预约有效期", `${context.bookValidPeriod}天`)}
                     </div>
                 </div>
             </div>

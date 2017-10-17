@@ -12,6 +12,7 @@ import {Browser} from '../../helpers'
 class ReserveInfo extends React.Component {
 
     componentDidMount() {
+        window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
         this.props.reserve.fetchProduct()
     }
@@ -30,9 +31,14 @@ class ReserveInfo extends React.Component {
         })
     }
 
+    jumpHandler = () => {
+        let {history} = this.props
+        history.push('/reserve/faq')
+    }
+
     render() {
         let {reserve, history} = this.props
-        let {context} = reserve.othersBid_data
+        let {context} = reserve.others_bid_data
         let banner_section = () => {
             return <div styleName="topInfo">
                 <div styleName="infoRate">
@@ -151,13 +157,13 @@ class ReserveInfo extends React.Component {
             {advanced_section()}
             {ruler_section()}
             {intro_section()}
-            <div styleName="jumpLink">
+            <div styleName="jumpLink" onClick={this.jumpHandler}>
                 <div styleName="jumpLinkText">常见问题</div>
                 <div styleName="jumpLinkArrow"></div>
             </div>
             <div styleName="bottomBox">
                 {/*<div styleName="recordBtn" onClick={*/}
-                    {/*() => this.props.history.push(`/reserve/records`)*/}
+                {/*() => this.props.history.push(`/reserve/records`)*/}
                 {/*}>预约记录*/}
                 {/*</div>*/}
                 <div styleName="reserveBtn" onClick={this.reserveHandler}>立即预约</div>

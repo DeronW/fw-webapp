@@ -30,15 +30,15 @@
 .item-grp {
     box-sizing: border-box;
     margin-top: 20px;
-    padding-left: 34px;
     background-color: #fff;
 }
 
 .item {
     box-sizing: border-box;
     display: table;
-    width: 100%;
+    width: calc(100% - 34px);
     height: 100px;
+    margin-left: 34px;
     padding-right: 40px;
     border-bottom: 1px solid #eee;
 }
@@ -57,14 +57,70 @@
 .item-value {
     box-sizing: border-box;
     float: right;
+    width: 450px;
     height: 100px;
     line-height: 34px;
-    padding: 33px;
+    padding: 33px 0;
     color: #333;
+    text-align: right;
 }
 
 .item input {
     outline: none;
     border: none;
     font-size: 30px;
+}
+
+.item input::placeholder {
+    color: #999;
+}
+
+.select-options {
+    box-sizing: border-box;
+    padding-left: 34px;
+    background-color: #f9f9f9;
+}
+
+.option {
+    height: 90px;
+    line-height: 90px;
+    border-bottom: 1px solid #eee;
+    color: #888;
+}
+
+.option:last-child {
+    border: none;
+}
+
+.selected-option {
+    composes: option;
+    background: url('../images/user-info/selected.png') 606px no-repeat;
+}
+
+.expand-icon {
+    float: right;
+    width: 40px;
+    height: 100px;
+}
+
+.fake-arrow {
+    display: block;
+    margin: 38px 0 0 15px;
+    width: 21px;
+    height: 21px;
+    border-top: 3px solid #ccc;
+    border-left: 3px solid #ccc;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+
+.submit-btn {
+    width: 660px;
+    height: 74px;
+    line-height: 74px;
+    margin: 30px;
+    background-color: #649cfe;
+    border-radius: 4px;
+    color: #fff;
+    text-align: center;
 }
