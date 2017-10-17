@@ -155,7 +155,9 @@ class SelectItem extends React.Component {
         return <div>
             <div styleName="item">
                 <div styleName="item-name">{name}</div>
-                <i styleName="expand-icon"></i>
+                <div styleName="expand-icon" onClick={this.toggleExpand}>
+                    <i styleName="fake-arrow"></i>
+                </div>
                 <div style={{ color: value ? '#333' : '#999' }}
                     styleName="item-value"
                     onClick={this.toggleExpand}>
