@@ -14,6 +14,11 @@ class ReserveInfoNovice extends React.Component {
         this.props.reserve.fetchProduct()
     }
 
+    jumpHandler = () => {
+        let {history} = this.props
+        history.push('/reserve/info-intro')
+    }
+
     render() {
         let {reserve, history} = this.props
         let {context} = reserve.noviceBid_data
@@ -98,7 +103,7 @@ class ReserveInfoNovice extends React.Component {
             </div>
         }
         let jumpLink_section = () => {
-            return <div styleName="jumpLink">
+            return <div styleName="jumpLink" onClick={this.jumpHandler}>
                 <div styleName="jumpLinkText">预约宝详情</div>
                 <div styleName="jumpLinkArrow"></div>
             </div>
