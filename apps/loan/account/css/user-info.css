@@ -96,3 +96,14 @@
     composes: option;
     background: url('../images/user-info/selected.png') 606px no-repeat;
 }
+
+.submit-btn {
+    width: 660px;
+    height: 74px;
+    line-height: 74px;
+    margin: 30px;
+    background-color: #649cfe;
+    border-radius: 4px;
+    color: #fff;
+    text-align: center;
+}

@@ -41,7 +41,7 @@ export default class UserInfo {
         };
     }
 
-    inputHandler = (k, v) => this.data[k] = v
+    inputHandler = (field, v) => this.data[field] = v
 
     setInfoData = data => {
         this.data.realName = data.realName;

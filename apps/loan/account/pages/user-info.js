@@ -83,25 +83,21 @@ const TAB_MODEL = {
 }
 
 
-@inject('user_info')
-@observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class InputItem extends React.Component {
     /* props:
-        field       | !string,
-        name        | !string,
-        type        | string,
-        placeholder | string,
+        field           | !string,
+        value           | !string,
+        changeHandler   | !function
     */
 
-    handleChange = e => {
-        const { user_info, field } = this.props;
-        user_info.inputHandler(field, e.target.value);
-    }
+    _MODEL = TAB_MODEL[this.props.field]
+
+    handleChange = e => this.props.changeHandler(this.props.field, e.target.value)
 
     render() {
-        const { user_info, field, name, type, placeholder } = this.props,
-            value = user_info.data[field];
+        const { field, value } = this.props,
+            { name, type, placeholder } = this._MODEL;
         return <div styleName="item">
             <div styleName="item-name">{name}</div>
             <input styleName="item-value"
@@ -114,31 +110,29 @@ class InputItem extends React.Component {
 }
 
 
-@inject('user_info')
-@observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class SelectItem extends React.Component {
     /* props:
-        field       | !string,
-        name        | !string,
-        options     | !object,
-        placeholder | string,
+        field           | !string,
+        value           | !string,
+        changeHandler   | !function
     */
+
+    _MODEL = TAB_MODEL[this.props.field]
 
     state = { expandOptions: false }
 
     toggleExpand = () => this.setState({ expandOptions: !this.state.expandOptions })
 
     handleChange = v => () => {
-        const { user_info, field } = this.props;
-        user_info.inputHandler(field, v);
+        this.props.changeHandler(this.props.field, v)
         this.toggleExpand();
     }
 
     _genOptions = optValue => {
-        const { user_info, field, options } = this.props,
-            optName = options[optValue],
-            value = user_info.data[field];
+        const { field, value } = this.props,
+            { options } = this._MODEL,
+            optName = options[optValue];
         return <div key={optName}
             styleName={value == optValue ? "selected-option" : "option"}
             onClick={this.handleChange(optValue)}>
@@ -148,8 +142,8 @@ class SelectItem extends React.Component {
 
     render() {
 
-        const { user_info, field, name, options, placeholder } = this.props,
-            value = user_info.data[field],
+        const { field, value } = this.props,
+            { name, options } = this._MODEL,
             valueName = options[value];
 
         const { expandOptions } = this.state;
@@ -178,7 +172,8 @@ class SelectItem extends React.Component {
 class UserInfo extends React.Component {
 
     state = {
-        currentTab: '1'
+        currentTab: '1',
+        showSubmitBtn: false
     }
 
     componentDidMount() {
@@ -187,15 +182,25 @@ class UserInfo extends React.Component {
 
     switchTab = tab => () => this.setState({ currentTab: tab })
 
+    enableSubmitBtn = () => this.setState({ showSubmitBtn: true })
+
+    disableSubmitBtn = () => this.setState({ showSubmitBtn: false })
+
+    changeHandler = (field, v) => {
+        const { user_info } = this.props;
+        user_info.inputHandler(field, v);
+        this.enableSubmitBtn();
+    }
+
     render() {
 
-        const { history } = this.props;
-        const { currentTab } = this.state;
+        const { history, user_info } = this.props;
+        const { currentTab, showSubmitBtn } = this.state;
 
         const genInfoItem = field => {
-            const itemData = TAB_MODEL[field];
-            if (itemData.options) return <SelectItem key={field} field={field} {...itemData} />
-            if (!itemData.options) return <InputItem key={field} field={field} {...itemData} />
+            const value = user_info.data[field];
+            if (TAB_MODEL[field].options) return <SelectItem key={field} field={field} value={value} changeHandler={this.changeHandler} />
+            if (!TAB_MODEL[field].options) return <InputItem key={field} field={field} value={value} changeHandler={this.changeHandler} />
         }
 
         return <div styleName="bg">
@@ -239,6 +244,8 @@ class UserInfo extends React.Component {
                     { ['income', 'workExperience'].map(genInfoItem) }
                 </div>
             </div> }
+
+            { showSubmitBtn && <div styleName="submit-btn" onClick={user_info.submitUserInfo}>提交</div> }
 
         </div>
     }
