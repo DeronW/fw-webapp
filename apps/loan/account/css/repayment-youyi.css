@@ -1,5 +1,5 @@
 .cnt-container {
-    min-height: 100%;
+    /*min-height: 100%;*/
     padding-bottom: 178px;
     background-color: #eee;
 }
@@ -64,7 +64,41 @@
     margin: 20px 0;
     background-color: #fff;
 }
+.repayment-day{
+    display: table;
+    box-sizing: border-box;
+    height: 99px;
+    width: 100%;
+    padding:0 33px;
+    border-bottom: 1px solid #eee;
+    font-size: 30px;
+    background-color: #fff;
+}
+.repayment-amount{
+    box-sizing: border-box;
+    float: left;
+    height: 99px;
+    line-height: 103px;
+    color: #666;
 
+}
+.arrow-left-amount{
+    display: inline-block;
+    vertical-align: middle;
+}
+.arrow-self{
+    vertical-align: middle;
+    margin-left: 20px;
+}
+.notice{
+    font-size: 28px;
+    color:#999;
+    padding: 0 30px;
+    margin-top: 38px;
+}
+.overdue-money{
+    color:#6ba4f1;
+}
 .info-item, .repayment-input-item {
     display: table;
     box-sizing: border-box;
@@ -106,6 +140,8 @@
     color: #333;
     font-size: 30px;
     line-height: 30px;
+    float: right;
+    text-align: right;
 }
 
 .repayment-input::-webkit-input-placeholder {
