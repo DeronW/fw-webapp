@@ -23,7 +23,7 @@ class zxItem extends React.Component {
     }
 
     switchType = type => {
-        if (type == this.props.investor_account.data.zx.project.type) return
+        if (type == this.props.investor_account.data_zx.project.type) return
         this.props.investor_account.setTypeZX(type)
         console.log(type)
         if(type=="Ta的项目"){
@@ -39,9 +39,9 @@ class zxItem extends React.Component {
     }
     render() {
         let { history } = this.props
-        let { type } = this.props.investor_account.data.zx.project
+        let { type } = this.props.investor_account.data_zx.project
 
-        let { info,tab,transfer_tab,record,list } = this.props.investor_account.data.zx.project
+        let { info,tab,transfer_tab,record,list } = this.props.investor_account.data_zx.project
         let types = type == 'Ta的项目' ? ['100', '3', '4'] : ['', '5', '6']
 
         let typeFn = (item, index) => {

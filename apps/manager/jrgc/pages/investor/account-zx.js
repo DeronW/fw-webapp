@@ -28,7 +28,7 @@ class AccountZx extends React.Component {
     render() {
         let { history } = this.props
         let { eye } = this.state
-        let { info } = this.props.investor_account.data.zx
+        let { info } = this.props.investor_account.data_zx.detail
         let { custId } = this.props.investor_account
         let path = eye ? require("../../images/investor/account-zx/icon-visible.png") : require("../../images/investor/account-zx/icon-hidden.png")
         console.log(custId)

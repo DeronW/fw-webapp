@@ -6,6 +6,15 @@ export default class InvestorCoupon {
         this.Get = Get
         this.Post = Post
         this.data = {}
+        this._data = {}
+
+        extendObservable(this._data, {
+            category: 'a',
+            type: 'f',
+            records: [],
+            pageNo: ''
+        })
+
         extendObservable(this.data, {
             tab: '1',
             totalCount:0,
