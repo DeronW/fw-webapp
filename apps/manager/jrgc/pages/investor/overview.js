@@ -1,19 +1,24 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
+import { Utils, Components } from 'fw-javascripts'
 import {Header, BottomNavBar} from '../../components'
 import styles from '../../css/investor/overview.css'
 
+@inject('investor_account')
+@observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Overview extends React.Component {
     state = {
-        accumulated_control: false,
+        accumulated_control: true,
         totalAssets_control: false,
         principal_control: false,
         balance_control: false
 
     }
-
+    componentDidMount(){
+        this.props.investor_account.fetchOverview(Utils.hashQuery.type)
+    }
     accumulatedHandler = () => {
         this.setState({accumulated_control: !this.state.accumulated_control})
     }
@@ -32,85 +37,60 @@ class Overview extends React.Component {
 
     render() {
         let {history} = this.props
+        let { overview } = this.props.investor_account.data
         let {accumulated_control, totalAssets_control, principal_control, balance_control} = this.state
-        let accumulated_text = () => {
-            return <div styleName="accumulatedText">
-                <div styleName="accumulatedLine">
-                    <div styleName="lineLeft">已收本息</div>
-                    <div styleName="lineRight">￥100.29</div>
-                </div>
-                <div styleName="accumulatedLine">
-                    <div styleName="lineLeft">代收本息</div>
-                    <div styleName="lineRight">￥100.29</div>
-                </div>
-                <div styleName="accumulatedLine">
-                    <div styleName="lineLeft">已用返息券</div>
-                    <div styleName="lineRight">￥100.29</div>
-                </div>
-                <div styleName="accumulatedLine">
-                    <div styleName="lineLeft">已用工豆</div>
-                    <div styleName="lineRight">￥100.29</div>
-                </div>
-                <div styleName="accumulatedLine">
-                    <div styleName="lineLeft">余额利息</div>
-                    <div styleName="lineRight">￥100.29</div>
-                </div>
+
+        let item = (text,amount) => {
+            return <div styleName="accumulatedLine">
+                <div styleName="lineLeft">{text}</div>
+                <div styleName="lineRight">￥{amount}</div>
             </div>
         }
 
-        let totalAssets_text = () => {
-            return <div styleName="accumulatedText">
-                <div styleName="accumulatedLine">
-                    <div styleName="lineLeft">余额利息</div>
-                    <div styleName="lineRight">￥100.29</div>
-                </div>
-            </div>
-        }
-
-        let principal_text = () => {
-            return <div styleName="accumulatedText">
-                <div styleName="accumulatedLine">
-                    <div styleName="lineLeft">待收本息</div>
-                    <div styleName="lineRight">￥100.29</div>
-                </div>
-            </div>
-        }
-
-        let balance_text = () => {
-            return <div styleName="accumulatedText">
-                <div styleName="accumulatedLine">
-                    <div styleName="lineLeft">待收本息</div>
-                    <div styleName="lineRight">￥100.29</div>
-                </div>
-            </div>
-        }
         return <div>
             <Header title="款项总览" history={history}/>
             <div styleName={accumulated_control ? "accumulatedTitle aTitleUp" : "accumulatedTitle aTitleDown"}
                  onClick={this.accumulatedHandler}>
-                <div styleName="titleLeft">累计收益￥9,888.12</div>
+                <div styleName="titleLeft">累计收益￥{overview.accAmt}</div>
                 <div styleName="titleRight"></div>
             </div>
-            {accumulated_control && accumulated_text()}
+            {accumulated_control && <div styleName="accumulatedText">
+                {item('已收本息',overview.realInvest)}
+                {item('待收利息',overview.waitInvest)}
+                {item('已用返现券',overview.usedQuans)}
+                {item('已用工豆',overview.usedBeans)}
+                {item('余额利息',overview.balanceInterest)}
+            </div>}
+
             <div styleName={totalAssets_control ? "accumulatedTitle aTitleUp" : "accumulatedTitle aTitleDown"}
                  onClick={this.totalAssetsHandler}>
-                <div styleName="titleLeft">总计资产￥9,888.12</div>
+                <div styleName="titleLeft">总计资产￥{overview.total}</div>
                 <div styleName="titleRight"></div>
             </div>
-            {totalAssets_control && totalAssets_text()}
+            {totalAssets_control && <div styleName="accumulatedText">
+                {item('待收本息',overview.waitPrincipalInterest)}
+                {item('账户余额',overview.cashBalance)}
+            </div>}
+
             <div styleName={principal_control ? "accumulatedTitle aTitleUp" : "accumulatedTitle aTitleDown"}
                  onClick={this.principalHanlder}>
-                <div styleName="titleLeft">待收本息￥9,888.12</div>
+                <div styleName="titleLeft">待收本息￥{overview.waitPrincipalInterest}</div>
                 <div styleName="titleRight"></div>
             </div>
-            {principal_control && principal_text()}
+            {principal_control && <div styleName="accumulatedText">
+                {item('待收本金',overview.waitPrincipal)}
+                {item('待收利息',overview.waitInvest)}
+            </div>}
 
             <div styleName={balance_control ? "accumulatedTitle aTitleUp" : "accumulatedTitle aTitleDown"}
                  onClick={this.balanceHandler}>
-                <div styleName="titleLeft">账户余额￥9,888.12</div>
+                <div styleName="titleLeft">账户余额￥{overview.cashBalance}</div>
                 <div styleName="titleRight"></div>
             </div>
-            {balance_control && balance_text()}
+            {balance_control && <div styleName="accumulatedText">
+                {item('TA的余额',overview.bankBalance)}
+                {item('冻结资金',overview.tradeFrozenAmt)}
+            </div>}
         </div>
     }
 }
