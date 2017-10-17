@@ -166,7 +166,7 @@ class Mobile extends React.Component {
                             您活动期内已累投<span styleName="text-red"> {invested} </span>元，
                             可奖励<span styleName="text-red"> {INVEST_REWARD_DIST[investedRewardLevel].reward} </span>元，<br />
                             { investedRewardLevel !== INVEST_REWARD_DIST.length - 1 &&
-                                `，再投 ${investMore} 元就可奖励 ${INVEST_REWARD_DIST[investedRewardLevel + 1].reward} 元哦！`}
+                                `再投 ${investMore} 元就可奖励 ${INVEST_REWARD_DIST[investedRewardLevel + 1].reward} 元哦！`}
                         </div>
                         <div styleName="btn-red" onClick={this.gotoInvest}>继续投资</div>
                     </div>

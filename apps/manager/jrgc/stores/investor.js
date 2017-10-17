@@ -1,4 +1,4 @@
-import {extendObservable} from 'mobx'
+import { extendObservable } from 'mobx'
 
 export default class Investor {
     constructor(Get) {
@@ -7,6 +7,11 @@ export default class Investor {
         extendObservable(this.data, {
             coupon: {
                 couponList: []
+            },
+            custmor: {
+                pageNo: 1,
+                type: 1,//1-全部-余额 2-全部-返利 3-全部-回款 4-在投-余额 5-在投-返利 6-在投-回款 7-空仓-余额 8-空仓-返利 9-未投-注册时间 10-未投-余额
+                list: []
             },
             calendar: {//回款日历
                 overview: {
@@ -37,12 +42,34 @@ export default class Investor {
                 pageNo: 1,
                 records: []
             },
-            score:{
+            score: {
                 id: null,
                 info: {},
                 pageNo: 1,
                 records: []
             }
+        })
+    }
+    //我的客户列表，包含全部、在投、空仓未投资四种类型，以及余额最高，返利最多，最近回款时间三种排序方式
+    resetCustPageNo = () => {
+        this.data.custmor.pageNo = 1
+    }
+    setCustType = (type) => {
+        this.data.custmor.type = type
+    }
+    fetchCustList = (done) => {
+        let { type, pageNo, list } = this.data.custmor
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) list = []
+        this.Get('/api/finManager/cust/v2/myCustList.shtml', {
+            type: type,
+            pageNo: pageNo,
+            pageSize: 10
+        }).then(data => {
+            list.push(...data.pageData.result)
+            pageNo < data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
+
+            done && done()
         })
     }
 
@@ -70,7 +97,7 @@ export default class Investor {
     }
     //回款日历-到期列表-回款月份
     fetchDueMonth = (tab, month) => {
-        let {monthDueList} = this.data.calendar
+        let { monthDueList } = this.data.calendar
         if (tab == '即将到期') {
             this.Get("/api/finManager/payment/v2/dueList.shtml", {
                 month: month
@@ -87,7 +114,7 @@ export default class Investor {
     }
     //回款日历-到期列表-回款日期
     fetchDueDay = (tab, day) => {
-        let {dayDueList} = this.data.calendar
+        let { dayDueList } = this.data.calendar
         if (tab == '即将到期') {
             this.Get("/api/finManager/payment/v2/dueList.shtml", {
                 day: day
@@ -150,7 +177,7 @@ export default class Investor {
 
     //查询客户工豆列表
     fetchBean = (done) => {
-        let { pageNo, records, id,info } = this.data.bean
+        let { pageNo, records, id, info } = this.data.bean
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records = []
@@ -169,13 +196,13 @@ export default class Investor {
     setBeanId = (id) => {
         this.data.bean.id = id
     }
-    resetBeanPageNo = () =>{
+    resetBeanPageNo = () => {
         this.data.bean.pageNo = 1
     }
 
     //查询客户工分列表
     fetchScore = (done) => {
-        let { pageNo, records, id,info } = this.data.score
+        let { pageNo, records, id, info } = this.data.score
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records = []
@@ -194,7 +221,7 @@ export default class Investor {
     setScoreId = (id) => {
         this.data.score.id = id
     }
-    resetScorePageNo = () =>{
+    resetScorePageNo = () => {
         this.data.score.pageNo = 1
     }
 

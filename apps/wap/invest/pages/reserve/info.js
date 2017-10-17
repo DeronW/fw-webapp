@@ -48,10 +48,9 @@ class ReserveInfo extends React.Component {
                 <div styleName="infoDate">
                     <div styleName="dateUp">
                         <span>{context.repayPeriod}</span>
-                        <span styleName="percent">天</span>
                     </div>
-                    <div styleName="dateDown">
-                        期限
+                    <div styleName="rateDown">
+                        理财期限(天)
                     </div>
                 </div>
                 <div styleName="tipsBox">
@@ -60,10 +59,8 @@ class ReserveInfo extends React.Component {
                 <div styleName="flag"></div>
             </div>
         }
-        return <div styleName='infoPanel'>
-            <Header noClose title="详情" history={history}/>
-            {banner_section()}
-            <div styleName="timeLine">
+        let timeline_section = () => {
+            return <div styleName="timeLine">
                 <div styleName="fLine">
                     <div styleName="fLineItem fLineItem1">抢购</div>
                     <div styleName="fLineItem fLineItem2">预计起息</div>
@@ -76,7 +73,9 @@ class ReserveInfo extends React.Component {
                     <div styleName="fLineItem fLineItem3">2017-09-22</div>
                 </div>
             </div>
-            <div styleName="flowBox">
+        }
+        let advanced_section = () => {
+            return <div styleName="flowBox">
                 <div styleName="flowHeader">预约优势</div>
                 <div styleName="flowContent">
                     <div styleName="tabItem">
@@ -97,7 +96,10 @@ class ReserveInfo extends React.Component {
                     </div>
                 </div>
             </div>
-            <div styleName="rulerBox">
+        }
+
+        let ruler_section = () => {
+            return <div styleName="rulerBox">
                 <div styleName="subTitle">
                     预约规则
                 </div>
@@ -112,24 +114,25 @@ class ReserveInfo extends React.Component {
                     <br/>6.取消预约后，系统将不再为您匹配项目，剩余未匹配资金将实时解冻并退还至您的微金账户内。
                 </div>
             </div>
-            <div styleName="introduceBox">
+        }
+
+        let intro_section = () => {
+            return <div styleName="introduceBox">
                 <div styleName="introduceTitle">
                     产品详情
                 </div>
                 <div styleName="introduceText">
-
                     <div styleName="textTitle">
                         您所出借的项目是掌众金服旗下闪电借款精心筛选的优质21天借款项目，借款用途为日常消费，金额在 500元一1万元。
                     </div>
                     <div styleName="textTitle">还款保障：</div>
-                    <div styleName="sectionOne">
+                    <div styleName="sectionText">
                         一、闪电借款基于大数据风控建模体系，北京掌众金融信息服务有限公司通过自主研发出国内领先的“如来”风控引擎，已经成为国内实现纯在线自动化审核信审的平台，有效控制用户的欺诈与信用风险，保障客户的投资安全性。
                     </div>
-                    <div styleName="sectionTwo">
+                    <div styleName="sectionText">
                         二、闪电借款主要借款客户具备良好的经济偿还能力，属于可持续发展和培育的“高成长性人群”。
                     </div>
-                    <br/>
-                    <div styleName="sectionTwo">
+                    <div styleName="sectionText">
                         三、预约项目由北京掌众金融信息服务有限公司为出借人提供无限连带责任保证担保。
                         <br/>
                         <br/>
@@ -140,15 +143,23 @@ class ReserveInfo extends React.Component {
                     </div>
                 </div>
             </div>
-            <div styleName="question">
-                <div styleName="questionText">常见问题</div>
-                <div styleName="quesionArrow"></div>
+        }
+        return <div styleName='infoPanel'>
+            <Header noClose title="详情" history={history}/>
+            {banner_section()}
+            {timeline_section()}
+            {advanced_section()}
+            {ruler_section()}
+            {intro_section()}
+            <div styleName="jumpLink">
+                <div styleName="jumpLinkText">常见问题</div>
+                <div styleName="jumpLinkArrow"></div>
             </div>
             <div styleName="bottomBox">
-                <div styleName="recordBtn" onClick={
-                    () => this.props.history.push(`/reserve/records`)
-                }>预约记录
-                </div>
+                {/*<div styleName="recordBtn" onClick={*/}
+                    {/*() => this.props.history.push(`/reserve/records`)*/}
+                {/*}>预约记录*/}
+                {/*</div>*/}
                 <div styleName="reserveBtn" onClick={this.reserveHandler}>立即预约</div>
             </div>
         </div>
