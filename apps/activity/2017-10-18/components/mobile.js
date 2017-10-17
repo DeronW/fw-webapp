@@ -82,10 +82,7 @@ class Mobile extends React.Component {
                     5. 活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
             </div> }
 
-            <div styleName="theme">
-                这里有份万元红包<br/>让双11不再剁手
-                <div styleName="time">10月18日 10:00 - 11月15日</div>
-            </div>
+            <img styleName="banner" src={require('../images/mobile/banner.jpg')} />
 
             <img styleName="sub-title" src={require('../images/mobile/invite-title.png')} alt="邀请好友赚佣金" />
             <div styleName="text-normal">活动期内，每邀一位累投额达标用户，送邀请人相应工豆奖励，最多限10人。</div>
@@ -169,7 +166,7 @@ class Mobile extends React.Component {
                             您活动期内已累投<span styleName="text-red"> {invested} </span>元，
                             可奖励<span styleName="text-red"> {INVEST_REWARD_DIST[investedRewardLevel].reward} </span>元，<br />
                             { investedRewardLevel !== INVEST_REWARD_DIST.length - 1 &&
-                                `，再投 ${investMore} 元就可奖励 ${INVEST_REWARD_DIST[investedRewardLevel + 1].reward} 元哦！`}
+                                `再投 ${investMore} 元就可奖励 ${INVEST_REWARD_DIST[investedRewardLevel + 1].reward} 元哦！`}
                         </div>
                         <div styleName="btn-red" onClick={this.gotoInvest}>继续投资</div>
                     </div>

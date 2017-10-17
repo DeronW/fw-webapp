@@ -65,12 +65,8 @@ class PC extends React.Component {
         return <div styleName="bg">
             <Header bgColor="#725749" />
 
-            <div styleName="theme">
-                <div styleName="theme-text-container">
-                    <div styleName="theme-text-lt">这里有份万元红包</div>
-                    <div styleName="theme-text-lb">10月18日 10:00 - 11月15日</div>
-                    <div styleName="theme-text-rb">让双11不再剁手</div>
-                </div>
+            <div styleName="banner">
+                <img src={require('../images/pc/banner.jpg')} />
             </div>
 
             <div styleName="content">

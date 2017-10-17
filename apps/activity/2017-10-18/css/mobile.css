@@ -82,13 +82,8 @@ li {
     line-height: 2.5;
 }
 
-.theme {
-    box-sizing: border-box;
-    height: 365px;
-    padding-top: 90px;
-    background-color: #fcd5b0;
-    color: #fff;
-    font-size: 60px;
+.banner {
+    width: 100%;
 }
 
 .time {
