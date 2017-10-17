@@ -10,8 +10,7 @@ import styles from '../../css/investor/account-hj.css'
 class AccountHj extends React.Component {
     componentDidMount() {
         //id为从上一页面获取
-        let cust_id = 1
-        this.props.investor_account.fetchAccountHj(cust_id)
+        this.props.investor_account.fetchAccountHj()
     }
 
     jumpToList = () => {

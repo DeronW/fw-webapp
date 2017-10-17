@@ -4,85 +4,116 @@ import { observer, inject } from 'mobx-react'
 
 import styles from '../../css/investor/zx-item.css'
 
+@inject('investor_account')
+@observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class zxItem extends React.Component {
     state = {
-        tab: 'Ta的项目',
-        type:'未起息',
+        type: 'Ta的项目',
+    }
+    componentDidMount() {
+        let { fetchInvestInfoZX, fetchProjectZX, fetchTransferProjectZX, resetPageNoZX } = this.props.investor_account
+        resetPageNoZX()
+        fetchInvestInfoZX()
+        fetchProjectZX()
+        fetchTransferProjectZX()
     }
     gotoHandler = (params) => {
         let { history } = this.props
         history.push('/investor-item-detial')
     }
-    switchTab = tab => {
-        if (tab == this.state.tab) return
-        let t = tab == 'Ta的项目' ? '未起息':'全部'
-        this.setState({tab: tab, type:t})
-    }
+
     switchType = type => {
         if (type == this.state.type) return
-        this.setState({type: type})
+        this.setState({ type: type })
+        if(type="Ta的项目"){
+            this.props.investor_account.fetchProjectZX()
+        }else{
+            this.props.investor_account.fetchTransferProjectZX()
+        }
+    }
+
+    switchTab = tab => {
+        this.props.investor_account.setTabZX(tab)
+    }
+    switchTransferTab = (transfer_tab) => {
+        this.props.investor_account.setTransferTabZX(transfer_tab)
     }
     render() {
         let { history } = this.props
-        let { tab,type } = this.state
-        let tabs = ['Ta的项目', '转入项目']
-        let types = tab == 'Ta的项目' ? ['未起息','回款中','已回款']:['全部','回款中','已回款']
+        let { type } = this.state
 
-        let tabFn = (item, index) => {
-            return <div key={index} styleName={item == tab ? "tab tabActive" : "tab"}
-                        onClick={() => this.switchTab(item)}>{item}
-            </div>}
-        let typeFn = (item,index) => {
-            return <div key={index} styleName={item == type ? "type typeActive" : "type"}
-                        onClick={() => this.switchType(item)}>{item}
+        let { info,tab,transfer_tab,record,list } = this.props.investor_account.data.zx.project
+        let types = type == 'Ta的项目' ? ['100', '3', '4'] : ['', '5', '6']
+
+        let typeFn = (item, index) => {
+            return <div key={index} styleName={item == type ? "tab tabActive" : "tab"}
+                onClick={() => this.switchType(item)}>{item}
             </div>
         }
-        return <div styleName="bg">
-            <div styleName="header">
-                <a styleName="btnBack" onClick={history.goBack}></a>
-                <div styleName="tabs">
-                    {tabs.map(tabFn)}
-                </div>
+        let tabFn = (item, index) => {
+            return <div key={index} styleName={item == tab ? "type typeActive" : "type"}
+                onClick={() => this.switchTab(item)}>{record[item].name}
             </div>
-            <div styleName="earnings">
-                <div styleName="text">累计收益</div>
-                <div styleName="money">¥9,888.12</div>
-                <div styleName="capital">待收本金：¥1,028,000.00</div>
-                <div styleName="detail" onClick={()=>this.gotoHandler()}>
-                    <span>查看回款明细</span>
-                    <img  src={require('../../images/investor/zx-item/arrow.png')} />
-                </div>
-                <div styleName="interest">待收利息：¥10,015.56</div>
+        }
+        let transfer_tabFn = (item, index) => {
+            return <div key={index} styleName={item == transfer_tab ? "type typeActive" : "type"}
+                onClick={() => this.switchTransferTab(item)}>{list[item].name}
             </div>
-            <div styleName="types">
-                {types.map(typeFn)}
-            </div>
-            <div styleName="number">共<span>5</span>笔记录</div>
-            {/*<div styleName="records">
-                <div styleName="record">
+        }
+
+        let zx_item = (item,index) => {
+            if(type == 'Ta的项目'){
+                return <div styleName="record">
                     <div styleName="title">
-                        <span>尊享计划-T00010006</span>
-                        <div styleName="end">已回款</div>
+                        <span>{item.prdName}</span>
+                        <div styleName="end">{item.status}</div>
                     </div>
                     <div styleName="item">
-                        <span>预期年化</span>
-                        <span styleName="bold">8.5%</span>
+                        <span>预期年化利率</span>
+                        <span styleName="bold">{item.annualRate}</span>
                     </div>
                     <div styleName="item">
                         <span>年化加息奖励</span>
-                        <span styleName="bold">8.5%</span>
+                        <span styleName="bold">{item.gradeIncreases}</span>
                     </div>
                     <div styleName="item">
                         <span>起息日</span>
-                        <span>2017-01-22</span>
+                        <span>{item.effactiveDate}</span>
+                    </div>
+                    <div styleName="item">
+                        <span>计划回款日</span>
+                        <span>{item.repayPerDate}</span>
+                    </div>
+                    <div styleName="item">
+                        <span>投资金额</span>
+                        <span styleName="red">¥{item.investAmt}</span>
+                    </div>
+                    <div styleName="item">
+                        <span>交易日期</span>
+                        <span>{item.applyDate}</span>
+                    </div>
+                </div>
+            }else if(type == '转入项目'){
+                <div styleName="record">
+                    <div styleName="title">
+                        <span>{item.name}</span>
+                        <div styleName="end">{item.status}</div>
+                    </div>
+                    <div styleName="item">
+                        <span>预期年化利率</span>
+                        <span styleName="bold">{item.transfereeYearRate}</span>
+                    </div>
+                    <div styleName="item">
+                        <span>起息日</span>
+                        <span>{item.startInervestTime}</span>
                     </div>
                     <div styleName="item">
                         <span>计划回款日</span>
                         <span>2017-01-22</span>
                     </div>
                     <div styleName="item">
-                        <span>投资金额</span>
+                        <span>实付金额</span>
                         <span styleName="red">¥3,000.00</span>
                     </div>
                     <div styleName="item">
@@ -90,10 +121,36 @@ class zxItem extends React.Component {
                         <span>2017-01-22</span>
                     </div>
                 </div>
+            }
+        }
+        return <div styleName="bg">
+            <div styleName="header">
+                <a styleName="btnBack" onClick={history.goBack}></a>
+                <div styleName="tabs">
+                    {['Ta的项目', '转入项目'].map(typeFn)}
+                </div>
+            </div>
+            <div styleName="earnings">
+                <div styleName="text">累计收益</div>
+                <div styleName="money">¥{info.realInvest}</div>
+                <div styleName="capital">待收本金：¥{info.waitPrincipal}</div>
+                <div styleName="detail" onClick={() => this.gotoHandler()}>
+                    <span>查看回款明细</span>
+                    <img src={require('../../images/investor/zx-item/arrow.png')} />
+                </div>
+                <div styleName="interest">待收利息：¥{info.waitInvest}</div>
+            </div>
+            <div styleName="types">
+                {type == 'Ta的项目' && types.map(tabFn)}
+                {type == '转入项目' && types.map(transfer_tabFn)}
+            </div>
+            <div styleName="number">共<span>5</span>笔记录</div>
+            {/*<div styleName="records">
+
                 <div styleName="load">已经全部加载完毕</div>
             </div>*/}
             <div styleName="no-data">
-                <img src={require('../../images/investor/zx-item/no-data.png')}/>
+                <img src={require('../../images/investor/zx-item/no-data.png')} />
             </div>
         </div>
     }
