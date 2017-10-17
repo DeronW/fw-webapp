@@ -42,7 +42,7 @@ class Investor extends React.Component {
     render() {
         let { show } = this.state
         let { history } = this.props
-        let { tab,sort,type }= this.props.investor.data.custmor
+        let { tab,sort,type,list }= this.props.investor.data.custmor
 
         let tabFn = (item, index) => {
             return <div styleName={item == tab ? 'tab tabActive' : 'tab'}
@@ -54,7 +54,14 @@ class Investor extends React.Component {
                 key={item + index}
                 onClick={() => this.switchType(Object.keys(item)[0],index)}>{Object.keys(item)[0]}</div>
         }
-
+        let listFn = (item,index) => {
+            return <div styleName="listItem" onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
+                <div styleName="name">{item.realName}</div>
+                <div styleName="money">¥{item.bankBalance}</div>
+                <div styleName="time">注册时间：{item.createTime}</div>
+                <div styleName="balance">可用余额</div>
+            </div>
+        }
         return <div styleName="bg">
             <div styleName="header">
                 我的客户<div styleName="searchBtn" onClick={() => this.gotoHandler('/investor-search')}></div>
@@ -85,12 +92,8 @@ class Investor extends React.Component {
             </div>}
             <div styleName="list">
                 {/*只是简单实现，等有真正数据需要传递客户的ID到客户详情页，并且采用数组map形式显示数据*/}
-                <div styleName="listItem" onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
-                    <div styleName="name">钱程</div>
-                    <div styleName="money">¥7000.00</div>
-                    <div styleName="time">注册时间：2017-08-13 00:00:00</div>
-                    <div styleName="balance">可用余额</div>
-                </div>
+                {list.map(listFn)}
+
                 <div styleName="listItem" onClick={() => this.gotoHandler('/investor-info')}>
                     <div styleName="name">钱程</div>
                     <div styleName="money">¥7000.00</div>

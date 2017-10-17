@@ -1,12 +1,12 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
-import {Header} from '../../components'
+import { observer, inject } from 'mobx-react'
+import { Header } from '../../components'
 import styles from '../../css/investor/account-zx.css'
 
 @inject('investor_account')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class AccountZx extends React.Component {
     state = {
         eye: true
@@ -18,35 +18,36 @@ class AccountZx extends React.Component {
     }
 
     changeEyeHandler = () => {
-        this.setState({eye: !this.state.eye})
+        this.setState({ eye: !this.state.eye })
     }
     gotoHandler = (link) => {
-        let {history} = this.props
+        let { history } = this.props
         history.push(link)
     }
 
     render() {
-        let {history} = this.props
-        let {eye} = this.state
-        let {info} = this.props.investor_account.data.zx
+        let { history } = this.props
+        let { eye } = this.state
+        let { info } = this.props.investor_account.data.zx
+        let { custId } = this.props.investor_account
         let path = eye ? require("../../images/investor/account-zx/icon-visible.png") : require("../../images/investor/account-zx/icon-hidden.png")
-
+        console.log(custId)
         return <div>
-            <Header title="TA的尊享账户" history={history}/>
+            <Header title="TA的尊享账户" history={history} />
             <div styleName="totalIncome">
                 <div styleName="incomeLeft">
                     <div styleName="incomeName">累计收益</div>
                     <div styleName="incomeCount">{eye ? `¥${info.totalAmount}` : '*******'}</div>
                 </div>
-                <img src={path} styleName="incomeRight" onClick={this.changeEyeHandler}/>
+                <img src={path} styleName="incomeRight" onClick={this.changeEyeHandler} />
             </div>
 
             <div styleName="incomeInfo">
-                <div styleName="inIofoItem inIofoLeft" onClick={() => this.gotoHandler('/investor-overview')}>
+                <div styleName="inIofoItem inIofoLeft" onClick={() => this.gotoHandler(`/investor-overview?custId=${custId}&type="zx"`)}>
                     <div>尊享总资产</div>
                     <div styleName="incomeNum">¥{info.totalInvest}</div>
                 </div>
-                <div styleName="inIofoItem inIofoRight" onClick={() => this.gotoHandler('/investor-overview')}>
+                <div styleName="inIofoItem inIofoRight" onClick={() => this.gotoHandler(`/investor-overview?custId=${custId}&type="zx"`)}>
                     <div>可用金额</div>
                     <div styleName="incomeNum">¥{info.bankBalance}</div>
                 </div>

@@ -47,7 +47,7 @@ export default class InvestorCoupon {
     //TA的优惠券列表 ： 可用优惠券，使用记录，过期记录
     resetPageNo = () => {
         let { tab, coupon } = this.data
-        let { tabName, type, record } = coupon[tab]
+        let { ttype, record } = coupon[tab]
         coupon[status].record[type].pageNO = 1
     }
     setTab = (tab) => {
@@ -59,7 +59,7 @@ export default class InvestorCoupon {
     }
     fetchCustCoupon = (done) => {
         let { totalCount,tab, coupon } = this.data
-        let { tabName, type, record } = coupon[tab]
+        let { type, record } = coupon[tab]
         let { pageNO,records } = record
 
         if( pageNO == 0) return done && done()
