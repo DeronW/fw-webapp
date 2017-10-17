@@ -5,16 +5,19 @@ export default class Reserve {
     constructor(Post) {
         this.Post = Post
         this.novice_bid_data = {}
-        this.others_bid_data = {}
-        extendObservable(this.others_bid_data, {
-            records: {
-                type: '0',
-                tab: {
-                    '0': {name: '预约中', page_no: 1, list: []},
-                    '1': {name: '预约结束', page_no: 1, list: []},
-                    '2': {name: '已取消', page_no: 1, list: []},
-                }
-            },
+        this.bid_data = {}
+        this.records = {}
+
+        extendObservable(this.records, {
+            type: '0',
+            tab: {
+                '0': {name: '预约中', page_no: 1, list: []},
+                '1': {name: '预约结束', page_no: 1, list: []},
+                '2': {name: '已取消', page_no: 1, list: []},
+            }
+        })
+
+        extendObservable(this.bid_data, {
             context: {
                 avgLoanPeriod: '',//平均起息时间
                 bookValidPeriod: null,//预约有效期
@@ -59,18 +62,18 @@ export default class Reserve {
         return this.Post('/api/v1/intoAppointPage.shtml', {
             applyInvestClaimId: this.applyInvestClaimId
         }).then(data => {
-            let others_data = this.others_bid_data
-            others_data.context = data.appointClaim;
-            others_data.accountAmount = data.accountAmount;
-            others_data.isRisk = data.isRisk;
-            others_data.batchMaxmum = data.batchMaxmum
-            others_data.minAmt = data.appointClaim.minAmt
-            others_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
-            others_data.isCompany = data.isCompany
+            let bid_data = this.bid_data
+            bid_data.context = data.appointClaim;
+            bid_data.accountAmount = data.accountAmount;
+            bid_data.isRisk = data.isRisk;
+            bid_data.batchMaxmum = data.batchMaxmum
+            bid_data.minAmt = data.appointClaim.minAmt
+            bid_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
+            bid_data.isCompany = data.isCompany
             return {
-                isRisk: others_data.isRisk,
-                batchMaxmum: others_data.batchMaxmum,
-                isCompany: others_data.isCompany
+                isRisk: bid_data.isRisk,
+                batchMaxmum: bid_data.batchMaxmum,
+                isCompany: bid_data.isCompany
             }
         })
     }
@@ -94,16 +97,16 @@ export default class Reserve {
     }
 
     resetPageNo = () => {
-        let {tab, type} = this.others_bid_data.records, current_tab = tab[type]
+        let {tab, type} = this.records, current_tab = tab[type]
         current_tab.page_no = 1
     }
     setRecordsCurrentStatus = status => {
-        this.others_bid_data.records.type = status;
+        this.records.type = status;
         this.getReserveList()
     }
 
     getReserveList = (done) => {
-        let {tab, type} = this.others_bid_data.records, current_tab = tab[type]
+        let {tab, type} = this.records, current_tab = tab[type]
         if (current_tab.page_no === 0) return done && done();
         const PAGE_SIZE = 10
 
@@ -129,8 +132,8 @@ export default class Reserve {
             applyInvestClaimId: this.applyInvestClaimId
         }).then((data) => {
             return this.Post('/api/v1/investAppoint.shtml', {
-                applyAmt: this.others_bid_data.reserveMoney,
-                applyInvestClaimId: this.others_bid_data.context.id,
+                applyAmt: this.bid_data.reserveMoney,
+                applyInvestClaimId: this.bid_data.context.id,
                 bookInvestToken: data.bookInvestToken
             })
         })
@@ -144,9 +147,9 @@ export default class Reserve {
 
     getContractHandler = () => {
         return this.Post('/api/v1/appointContractMess.shtml').then(data => {
-            this.others_bid_data.contractMsg = data.contractMsg
+            this.bid_data.contractMsg = data.contractMsg
             return {
-                contractMsg: this.others_bid_data.contractMsg
+                contractMsg: this.bid_data.contractMsg
             }
         })
     }
