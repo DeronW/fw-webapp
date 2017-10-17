@@ -4,7 +4,7 @@ import { extendObservable } from 'mobx'
 const isPhoneNum = str => /^1[3|4|5|7|8]\d{9}$/.test(String(str));
 
 
-export default class userInfo {
+export default class UserInfo {
 
     constructor(Post) {
         this.Post = Post;

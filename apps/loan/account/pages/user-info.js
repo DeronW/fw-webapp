@@ -132,7 +132,7 @@ class SelectItem extends React.Component {
     handleChange = v => () => {
         const { user_info, field } = this.props;
         user_info.inputHandler(field, v);
-        // this.toggleExpand();
+        this.toggleExpand();
     }
 
     _genOptions = optValue => {
@@ -194,8 +194,8 @@ class UserInfo extends React.Component {
 
         const genInfoItem = field => {
             const itemData = TAB_MODEL[field];
-            if (itemData.options) return <SelectItem {...itemData} key={field} />
-            if (!itemData.options) return <InputItem {...itemData} key={field} />
+            if (itemData.options) return <SelectItem key={field} field={field} {...itemData} />
+            if (!itemData.options) return <InputItem key={field} field={field} {...itemData} />
         }
 
         return <div styleName="bg">
