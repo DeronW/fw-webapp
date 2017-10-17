@@ -7,6 +7,10 @@ import {NativeBridge} from '../../helpers'
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveFaq extends React.Component {
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
     render() {
         let {history} = this.props
         return <div styleName="faqPanel">

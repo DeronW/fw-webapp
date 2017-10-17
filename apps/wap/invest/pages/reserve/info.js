@@ -12,6 +12,7 @@ import {Browser} from '../../helpers'
 class ReserveInfo extends React.Component {
 
     componentDidMount() {
+        window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
         this.props.reserve.fetchProduct()
     }

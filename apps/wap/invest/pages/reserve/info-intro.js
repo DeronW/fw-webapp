@@ -9,6 +9,10 @@ import {NativeBridge} from '../../helpers'
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveInfoIntro extends React.Component {
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
     render() {
         let {reserve, history} = this.props
         let banner_section = () => {
