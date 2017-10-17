@@ -83,6 +83,8 @@ const TAB_MODEL = {
 }
 
 
+@inject('user_info')
+@observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class InputItem extends React.Component {
     /* props:
@@ -110,6 +112,8 @@ class InputItem extends React.Component {
 }
 
 
+@inject('user_info')
+@observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class SelectItem extends React.Component {
     /* props:
