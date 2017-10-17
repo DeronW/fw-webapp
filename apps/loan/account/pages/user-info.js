@@ -41,10 +41,6 @@ const TAB_MODEL = {
     // 紧急联系人
     ecName: {
         name: '紧急联系人',
-        validator: v => {
-            if (v.match(/\d/)) return showToast('联系人姓名不可包含数字!')
-            if (v.length < 2) return showToast('联系人姓名字符长度需在2位以上!')
-        },
     },
     ecRelationship: {
         name: '联系人关系',
@@ -61,9 +57,6 @@ const TAB_MODEL = {
     ecPhone: {
         name: '联系人手机',
         type: 'tel',
-        validator: v => {
-            if (isPhoneNum(v)) return showToast('联系人手机格式不正确!')
-        }
     },
     // 工作信息
     income: {
@@ -89,22 +82,65 @@ const TAB_MODEL = {
 }
 
 
-const isPhoneNum = str => /^1[3|4|5|7|8]\d{9}$/.test(String(str));
+@inject('user_info')
+@observer
+@CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
+class InputItem extends React.Component {
+    /* props:
+        field       | !string,
+        name        | !string,
+        type        | string,
+        placeholder | string,
+    */
+
+    handleChange = e => this.props.user_info.inputHandler(field, e.target.value);
+
+    render() {
+        const { user_info, field, name, type, placeholder } = this.props,
+            value = user_info.data[field];
+        return <div styleName="item">
+            <div styleName="item-name">{name}</div>
+            <input styleName="item-value" type={type || "text"}
+                placeholder={placeholder || "请填写"}
+                value={value}
+                onChange={this.handleChange} />
+        </div>
+    }
+}
 
 
 @inject('user_info')
 @observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
-class InputInfoItem extends React.Component {
+class SelectItem extends React.Component {
     /* props:
+        field       | !string,
         name        | !string,
-        type        | string,
+        options     | !object,
         placeholder | string,
-        validator   | function,
     */
+
+    state = { expandOptions: false }
+
+    _genOptions = optValue => {
+        const { options } = this.props,
+            optName = options[optValue],
+            value = user_info.data[field];
+        return <div key="optName" styleName={value == optValue ? "selected-option" : "option"}>optName</div>
+    }
+
     render() {
-        const { user_info, name, type, placeholder, validator } = this.props;
-        return <div styleName=""></div>
+        const { user_info, field, name, options, placeholder } = this.props,
+            value = user_info.data[field];
+        const { expandOptions } = this.state;
+        return <div styleName="item">
+            <div styleName="item-name">{name}</div>
+            <i styleName="expand-icon"></i>
+            <div styleName="item-value">{value}</div>
+            { expandOptions && <div styleName="select-options">
+                Object.keys(options).map(this._genOptions)
+            </div> }
+        </div>
     }
 }
 
@@ -131,11 +167,11 @@ class UserInfo extends React.Component {
 
         const genInfoItem = name => {
             const itemData = TAB_MODEL[name];
-            if (itemData.option) return <SelectInfoItem {...itemData} />
-            if (!itemData.option) return <InputInfoItem {...itemData} />
+            if (itemData.option) return <SelectItem {...itemData} />
+            if (!itemData.option) return <InputItem {...itemData} />
         }
 
-        return <div>
+        return <div styleName="bg">
             <Header title="个人信息" history={history} />
 
             <div styleName="tab-grp">
@@ -154,19 +190,19 @@ class UserInfo extends React.Component {
             </div>
 
             {/* { currentTab == '1' && <div>
-                <div styleName="info-item-grp">
+                <div styleName="item-grp">
                     { ['name', 'idCard', 'creditCard', 'email'].map(genInfoItem) }
                 </div>
-                <div styleName="info-item-grp">
+                <div styleName="item-grp">
                     { ['city', 'address'].map(genInfoItem) }
                 </div>
-                <div styleName="info-item-grp">
+                <div styleName="item-grp">
                     { ['marriage'].map(genInfoItem) }
                 </div>
             </div> }
 
             { currentTab == '2' && <div>
-                <div styleName="info-item-grp">
+                <div styleName="item-grp">
                     { ['ecName', 'ecRelationship', 'ecPhone'].map(genInfoItem) }
                 </div>
             </div> }
