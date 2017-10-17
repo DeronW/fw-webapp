@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react'
 
 import { showToast } from 'fw-components'
 
-import { Header } from '../../lib/components'
+import { Header, CitySelector } from '../../lib/components'
 
 import styles from '../css/user-info.css'
 
@@ -226,6 +226,8 @@ class UserInfo extends React.Component {
                     工作信息
                 </div>
             </div>
+
+            <CitySelector selected="北京市" changeHandler={() => {}} closeHandler={() => {}} />
 
             { currentTab == '1' && <div>
                 <div styleName="item-grp">
