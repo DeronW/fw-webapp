@@ -97,6 +97,23 @@
     background: url('../images/user-info/selected.png') 606px no-repeat;
 }
 
+.expand-icon {
+    float: right;
+    width: 40px;
+    height: 100px;
+}
+
+.fake-arrow {
+    display: block;
+    margin: 38px 0 0 15px;
+    width: 21px;
+    height: 21px;
+    border-top: 3px solid #ccc;
+    border-left: 3px solid #ccc;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+
 .submit-btn {
     width: 660px;
     height: 74px;

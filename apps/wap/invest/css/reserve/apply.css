@@ -16,39 +16,62 @@
 
 .reserveMoney {
     box-sizing: border-box;
-    height: 90px;
-    line-height: 90px;
-    border-top: 1px solid #d8d8d8;
-    border-bottom: 1px solid #e3e5ea;
+    height: 70px;
+    line-height: 70px;
     padding-left: 30px;
     width: 100%;
-    background: #f9f9f9;
+    background: #fff;
 }
 
 .userMoney {
     color: #555;
     font-size: 30px;
-    padding: 34px 30px 30px 30px;
+    padding: 14px 30px 30px 30px;
     width: 100%;
     box-sizing: border-box;
     background: #fff;
     border-bottom: 1px solid #d8d8d8;
+    margin-top: -1px;
+}
+
+.money {
+    width: 100%;
+    height: 44px;
+    display: table;
 }
 
 .money .remain {
-    color: #fd4d4c;
-    font-weight: 700;
+    color: #333;
     padding-left: 5px;
 }
 
+.money .balance {
+    width: 50%;
+    height: 100%;
+    float: left;
+    color: #999;
+}
+
+.money .recharge {
+    float: right;
+    width: 100px;
+    height: 44px;
+    background: #fd4d4c;
+    font-size: 26px;
+    color: #fff;
+    line-height: 44px;
+    border-radius: 24px;
+    text-align: center;
+}
+
 .inputMoney {
-    margin-top: 30px;
     border: 1px solid #e3e5ea;
     border-radius: 8px;
     width: 660px;
-    height: 84px;
+    height: 74px;
     background: #f2f2f2;
     display: table;
+    margin-bottom: 24px;
 }
 
 .inputMoney input {
@@ -72,7 +95,7 @@
     float: right;
     padding-right: 20px;
     text-align: right;
-    margin: 25px 0;
+    margin: 20px 0;
 }
 
 .interval {
@@ -83,9 +106,7 @@
 
 .submitInfo {
     width: 100%;
-    height: 360px;
-    border-top: 1px solid #d8d8d8;
-    border-bottom: 1px solid #d8d8d8;
+    height: auto;
     background-color: #fff;
 }
 
@@ -96,12 +117,40 @@
     color: #555555;
 }
 
-.infoItem {
+.infoAmount {
     width: 100%;
     height: 90px;
     line-height: 90px;
     display: table;
     border-bottom: 1px solid #e3e5ea;
+}
+
+.amountLeft {
+    float: left;
+    font-size: 32px;
+    color: #333;
+}
+
+.amountRight {
+    float: right;
+    font-size: 30px;
+    color: #fd4d4c;
+    margin-right: 30px;
+    font-weight: 700;
+}
+
+.itemWrapper {
+    width: 660px;
+    padding: 40px 30px 40px 0;
+    height: auto;
+}
+
+.infoItem {
+    width: 100%;
+    display: table;
+    font-size: 26px;
+    color: #555;
+    margin-bottom: 30px;
 }
 
 .itemLeft {
@@ -110,18 +159,20 @@
 
 .itemRight {
     float: right;
-    margin-right: 30px;
+    font-weight: 700;
+    color: #333;
 }
 
 .itemLast {
     border-bottom: 0 none;
+    margin-bottom: 0;
 }
 
 .submitProtocol {
     width: 690px;
     margin: 30px 0 0 30px;
     font-size: 28px;
-    color: #555555;
+    color: #999999;
     line-height: 30px;
     padding-bottom: 300px;
 }
@@ -171,13 +222,6 @@
     line-height: 74px;
     text-align: center;
     border-radius: 4px;
-}
-
-.recharge {
-    display: inline-block;
-    font-size: 30px;
-    color: #4aa1f9;
-    margin-left: 16px;
 }
 
 .rightRed {

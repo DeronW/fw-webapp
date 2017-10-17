@@ -5,6 +5,7 @@ import Protocol from './protocol.js'
 import InfoNovice from './info-novice'
 import InfoIntro from './info-intro'
 import Faq from './faq'
+import ApplyNovice from './apply-novice'
 
 export {
     Info,
@@ -13,5 +14,6 @@ export {
     Protocol,
     InfoNovice,
     InfoIntro,
-    Faq
+    Faq,
+    ApplyNovice
 }

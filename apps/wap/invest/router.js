@@ -31,6 +31,7 @@ export default (stores) => {
                 <Route exact path="/reserve/info-novice" component={Reserve.InfoNovice}/>
                 <Route exact path="/reserve/info-intro" component={Reserve.InfoIntro}/>
                 <Route exact path="/reserve/faq" component={Reserve.Faq}/>
+                <Route exact path="/reserve/apply-novice" component={Reserve.ApplyNovice}/>
 
                 <Route exact path='/features/faq' component={Features.FAQList}/>
                 <Route exact path='/features/faq/:kind' component={Features.FAQPage}/>
