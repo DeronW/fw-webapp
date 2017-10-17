@@ -1,10 +1,14 @@
 import { extendObservable } from 'mobx'
 
 
+const isPhoneNum = str => /^1[3|4|5|7|8]\d{9}$/.test(String(str));
+
+
 export default class userInfo {
 
     constructor(Post) {
         this.Post = Post;
+
         this.data = {};
         extendObservable(this.data, {
             // 基本信息
@@ -22,8 +26,20 @@ export default class userInfo {
             // 工作信息
             income: '',
             workExperience: '',
-        })
+        });
+
+        this._VALIDATOR = {
+            ecName: v => {
+                if (v.match(/\d/)) return showToast('联系人姓名不可包含数字!')
+                if (v.length < 2) return showToast('联系人姓名字符长度需在2位以上!')
+            },
+            ecPhone: v => {
+                if (isPhoneNum(v)) return showToast('联系人手机格式不正确!')
+            }
+        };
     }
+
+    inputHandler = (k, v) => this.data[k] = v
 
     setInfoData = data => {
         this.data.realName = data.realName;

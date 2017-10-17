@@ -1,3 +1,7 @@
+.bg {
+    font-size: 30px;
+}
+
 .tab-grp {
     display: table;
     width: 100%;
@@ -21,4 +25,46 @@
 .tab-item-active {
     composes: tab-item;
     border-bottom: 3px solid #649cfe;
+}
+
+.item-grp {
+    box-sizing: border-box;
+    margin-top: 20px;
+    padding-left: 34px;
+    background-color: #fff;
+}
+
+.item {
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+    height: 100px;
+    padding-right: 40px;
+    border-bottom: 1px solid #eee;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    float: left;
+    height: 100px;
+    line-height: 100px;
+    color: #666;
+}
+
+.item-value {
+    box-sizing: border-box;
+    float: right;
+    height: 100px;
+    line-height: 34px;
+    padding: 33px;
+    color: #333;
+}
+
+.item input {
+    outline: none;
+    border: none;
+    font-size: 30px;
 }

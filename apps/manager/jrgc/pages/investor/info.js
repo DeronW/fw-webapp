@@ -13,7 +13,7 @@ import styles from '../../css/investor/info.css'
 class Info extends React.Component {
     state = {
         hidden: false,
-        id:Utils.hashQuery.id
+        custId:Utils.hashQuery.custId
     }
 
     componentDidMount() {
@@ -27,7 +27,7 @@ class Info extends React.Component {
     }
     gotoHandler = (link) => {
         let { history } = this.props
-        history.push(`${link}?id=${this.state.id}`)
+        history.push(`${link}?custId=${this.state.custId}`)
     }
     jumpToRemark = () => {
         let { history } = this.props
