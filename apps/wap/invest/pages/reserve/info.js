@@ -33,9 +33,8 @@ class ReserveInfo extends React.Component {
     render() {
         let {reserve, history} = this.props
         let {context} = reserve.othersBid_data
-        return <div styleName='infoPanel'>
-            <Header noClose title="详情" history={history}/>
-            <div styleName="topInfo">
+        let banner_section = () => {
+            return <div styleName="topInfo">
                 <div styleName="infoRate">
                     <div styleName="rateUp">
                         <span>{context.loadRate}</span>
@@ -60,6 +59,10 @@ class ReserveInfo extends React.Component {
                 </div>
                 <div styleName="flag"></div>
             </div>
+        }
+        return <div styleName='infoPanel'>
+            <Header noClose title="详情" history={history}/>
+            {banner_section()}
             <div styleName="timeLine">
                 <div styleName="fLine">
                     <div styleName="fLineItem fLineItem1">抢购</div>

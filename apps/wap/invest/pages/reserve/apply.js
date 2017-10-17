@@ -1,20 +1,21 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { observer, inject } from 'mobx-react'
-import { Header } from '../../components/'
+import {observer, inject} from 'mobx-react'
+import {Header} from '../../components/'
 import styles from '../../css/reserve/apply.css'
-import { Components } from 'fw-javascripts'
-import { NativeBridge } from '../../helpers/'
+import {Components} from 'fw-javascripts'
+import {NativeBridge} from '../../helpers/'
 
 @inject('reserve')
 @observer
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveApply extends React.Component {
     state = {
         pending: false,
     }
 
     componentDidMount() {
+        console.log(1111)
         NativeBridge.trigger('hide_header')
         this.props.reserve.fetchProduct()
     }
@@ -22,45 +23,45 @@ class ReserveApply extends React.Component {
     inputChangeHandler = name => e => {
         let v = e.target.value.toString().split(".")
 
-        if (v[1]&&v[1].length > 2) {
-            v[1] = v[1].substr(0,2)
+        if (v[1] && v[1].length > 2) {
+            v[1] = v[1].substr(0, 2)
             this.props.reserve.setFormData(name, `${v[0]}.${v[1]}`)
-        }else{
+        } else {
             this.props.reserve.setFormData(name, e.target.value)
         }
 
     }
 
     allMadeHandler = () => {
-        let { reserve } = this.props
+        let {reserve} = this.props
         this.props.reserve.setFormData('reserveMoney', reserve.accountAmount)
     }
 
     applyHandler = () => {
-        let { reserve, history } = this.props
+        let {reserve, history} = this.props
         let sussessHandler = () => {
             if (this.state.pending) return
-            this.setState({ pending: true })
+            this.setState({pending: true})
             reserve.submitReserveHandler()
                 .then(() => {
-                    Components.showToast('预约成功')
-                },
-                () => {
-                    this.setState({ pending: false })
-                })
+                        Components.showToast('预约成功')
+                    },
+                    () => {
+                        this.setState({pending: false})
+                    })
                 .then(() => {
                     history.push(`/reserve/records`)
                 })
         }
         reserve.fetchProduct().then(data => {
-            if (reserve.reserveMoney === '') {
+            if (reserve.othersBid_data.reserveMoney === '') {
                 Components.showToast("预约金额不能为空")
-            } else if (reserve.reserveMoney < reserve.context.minAmt) {
+            } else if (reserve.othersBid_data.reserveMoney < reserve.othersBid_data.context.minAmt) {
                 Components.showToast("预约金额不足100")
-            } else if (reserve.reserveMoney > reserve.accountAmount) {
+            } else if (reserve.othersBid_data.reserveMoney > reserve.othersBid_data.accountAmount) {
                 Components.showToast("可用金额不足，请充值后重试")
-            } else if (!reserve.isCompany) {
-                if (reserve.reserveMoney > data.batchMaxmum) {
+            } else if (!reserve.othersBid_data.isCompany) {
+                if (reserve.othersBid_data.reserveMoney > data.batchMaxmum) {
                     Components.showToast("自动投标金额不足").then(() => {
                         NativeBridge.toNative('auto_bid_second')
                     })
@@ -74,7 +75,7 @@ class ReserveApply extends React.Component {
     }
 
     jumpToProtocol = () => {
-        let { history } = this.props
+        let {history} = this.props
         history.push(`/reserve/protocol`)
     }
 
@@ -84,8 +85,8 @@ class ReserveApply extends React.Component {
     }
 
     render() {
-        let { reserve, history } = this.props
-        let { context } = reserve
+        let {reserve, history} = this.props
+        let {context} = reserve.othersBid_data
 
         let infoItem = (name, value) => {
             return <div styleName="infoItem">
@@ -94,7 +95,7 @@ class ReserveApply extends React.Component {
             </div>
         }
         return <div styleName='applyPanel'>
-            <Header title="提交预约" history={history} />
+            <Header title="提交预约" history={history}/>
             <div styleName="submitPanel">
                 <div styleName="reserveMoney">预约金额</div>
                 <div styleName="userMoney">
@@ -104,7 +105,7 @@ class ReserveApply extends React.Component {
                     </div>
                     <div styleName="inputMoney">
                         <input type="number" placeholder="100元起预约" value={reserve.reserveMoney}
-                            onChange={this.inputChangeHandler('reserveMoney')} />
+                               onChange={this.inputChangeHandler('reserveMoney')}/>
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
                         </span>
