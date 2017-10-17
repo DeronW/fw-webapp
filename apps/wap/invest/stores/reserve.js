@@ -51,7 +51,8 @@ export default class Reserve {
         })
     }
 
-    @computed get applyInvestClaimId() {
+    @computed
+    get applyInvestClaimId() {
         return Utils.hashQuery.applyInvestClaimId
     }
 
