@@ -18,8 +18,7 @@ class Repayment extends React.Component {
         amountEditDisabled: false,
         showSMSPop: false,
         SMSTimer: 60,
-        SMSInput: '',
-        uppaidModalShow:false
+        SMSInput: ''
     }
 
     componentDidMount() {
@@ -41,12 +40,7 @@ class Repayment extends React.Component {
     componentWillUnmount() {
         this.clearSMSTimer();
     }
-    showUnpaidModal = () => {
-        this.setState({uppaidModalShow:true})
-    }
-    hideUnpaidModal = () => {
-        this.setState({uppaidModalShow:false});
-    }
+
     handleInput = e => {
         let { repayment_youyi } = this.props,
             v = e.target.value;
@@ -111,7 +105,7 @@ class Repayment extends React.Component {
 
     render() {
         let { history, repayment_youyi, account } = this.props,
-            { amountEditDisabled, showSMSPop, SMSTimer, SMSInput ,uppaidModalShow} = this.state,
+            { amountEditDisabled, showSMSPop, SMSTimer, SMSInput } = this.state,
             amountEditItem;
 
         if (amountEditDisabled) {
@@ -121,14 +115,13 @@ class Repayment extends React.Component {
             </div>
         } else {
             amountEditItem = <div styleName="repayment-input-item">
-                <div styleName="repayment-amount">还款金额</div>
                 <input styleName="repayment-input"
                     type="num"
                     placeholder="请输入还款金额"
                     value={repayment_youyi.repaymentAmount}
                     onChange={this.handleInput} />
-                {/* <div styleName="pay-off-btn"
-                    onClick={() => { repayment_youyi.setAmount(repayment_youyi.unpaidAmount) }}>全部还清</div> */}
+                <div styleName="pay-off-btn"
+                    onClick={() => { repayment_youyi.setAmount(repayment_youyi.unpaidAmount) }}>全部还清</div>
             </div>
         }
 
@@ -150,12 +143,6 @@ class Repayment extends React.Component {
                     确定</div>
             </div>
         </div>
-        let UnpaidModal = <div styleName="pop-mask">
-            <div styleName="pop">
-                <div styleName="pop-close" onClick = {this.hideUnpaidModal}></div>
-            666
-            </div>
-        </div>
 
         return (
             <div styleName="cnt-container">
@@ -166,7 +153,7 @@ class Repayment extends React.Component {
                     <img src={repayment_youyi.logoUrl}></img>
                     优易借</div>
 
-                {/* <div styleName="amount-overview">
+                <div styleName="amount-overview">
                     <div styleName="amount-payable">
                         <div styleName="amount-num">{repayment_youyi.unpaidAmount}</div>
                         <div styleName="amount-name">待还金额(元)</div>
@@ -175,44 +162,31 @@ class Repayment extends React.Component {
                         <div styleName="amount-num">{repayment_youyi.overdueAmount}</div>
                         <div styleName="amount-name">逾期费(元)</div>
                     </div>
-                </div> */}
-                <div styleName="repayment-day">
-                    <div styleName="item-name">还款日期</div>
-                    <div styleName="item-value">{repayment_youyi.dueDate}</div>
                 </div>
 
                 <div styleName="repayment-info">
                     <div styleName="info-item">
-                        <div styleName="item-name">应还金额</div>
-                    <div styleName="item-value"  onClick = {this.showUnpaidModal}><span styleName="arrow-left-amount">{repayment_youyi.unpaidAmount}</span><img styleName="arrow-self" src={require("../images/repayment-youyi/entry.png")} alt="" /></div>
-
-                    </div>
-                    {/* <div styleName="info-item">
                         <div styleName="item-name">还款日</div>
                         <div styleName="item-value">{repayment_youyi.dueDate}</div>
-                    </div> */}
+                    </div>
                     <div styleName="info-item">
                         <div styleName="item-name">已还金额</div>
                         { repayment_youyi.paidAmount == 0 ?
                             <div styleName="item-value">{repayment_youyi.paidAmount}</div>
                             :
-                            <a styleName="item-value" href={`/static/loan/account/index.html#/repayment-youyi-records?id=${repayment_youyi.loopLoanUuid}`}><span styleName="arrow-left-amount">{repayment_youyi.paidAmount}</span><img styleName="arrow-self" src={require("../images/repayment-youyi/entry.png")} alt="" /></a>
+                            <a styleName="item-value" href={`/static/loan/account/index.html#/repayment-youyi-records?id=${repayment_youyi.loopLoanUuid}`}>{repayment_youyi.paidAmount}</a>
                         }
-                    </div>
-                    <div styleName="info-item">
-                        <div styleName="item-name">待还金额</div>
-                        <div styleName="item-value">{repayment_youyi.unpaidAmount}</div>
                     </div>
                 </div>
 
                 <div styleName="repayment-info left-space-4-btn">
                     <div styleName="info-item">
-                        <div styleName="item-name">银行卡</div>
+                        <div styleName="item-name">选择银行卡</div>
                         <div styleName="item-value">{`${repayment_youyi.bank}(${repayment_youyi.cardNo})`}</div>
                     </div>
                     {amountEditItem}
                 </div>
-                <div styleName="notice">请按时还款，避免产生<a href="" styleName="overdue-money">逾期罚息</a></div>
+
                 <div styleName="submit-btn-container">
                     {repayment_youyi.unpaidAmount != 0  && <a styleName="submit-btn"
                         onClick={this.handleSubmit}>
@@ -225,7 +199,6 @@ class Repayment extends React.Component {
 
 
                 {showSMSPop && SMSPop}
-                {uppaidModalShow && UnpaidModal}
             </div>
         )
     }
