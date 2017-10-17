@@ -119,7 +119,10 @@ body {
     font-size: 22px;
     line-height: 40px;
     color: #666;
-    text-align:left;
+    /*text-align:left;*/
+    display: inline-block;
+    text-align: justify;
+    width: 92%;
 }
 
 .datail-list:last-child {

@@ -4,75 +4,15 @@ import {observer, inject} from 'mobx-react'
 import {Header} from '../../components/'
 import styles from '../../css/reserve/info.css'
 import {NativeBridge} from '../../helpers'
-import {Browser} from '../../helpers'
 
 @inject('reserve')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-class ReserveInfo extends React.Component {
-
-    componentDidMount() {
-        NativeBridge.trigger('hide_header')
-        this.props.reserve.fetchProduct()
-    }
-
-    reserveHandler = () => {
-        let {history, reserve} = this.props
-        reserve.fetchProduct().then(data => {
-            if (data.isRisk == 0) {
-                location.href = `/static/wap/p2p/index.html#/evaluate?from_reserve&applyInvestClaimId=${reserve.applyInvestClaimId}`
-            } else if (data.batchMaxmum === 0) {
-                //调到自动投资页面
-                NativeBridge.toNative('auto_bid_auth')
-            } else {
-                history.push(`/reserve/apply?applyInvestClaimId=${reserve.applyInvestClaimId}`)
-            }
-        })
-    }
-
+class ReserveInfoIntro extends React.Component {
     render() {
         let {reserve, history} = this.props
-        let {context} = reserve.othersBid_data
         let banner_section = () => {
-            return <div styleName="topInfo">
-                <div styleName="infoRate">
-                    <div styleName="rateUp">
-                        <span>{context.loadRate}</span>
-                        <span styleName="percent">%</span>
-                    </div>
-                    <div styleName="rateDown">
-                        年化借款利率
-                    </div>
-                </div>
-                <div styleName="garyGap"></div>
-                <div styleName="infoDate">
-                    <div styleName="dateUp">
-                        <span>{context.repayPeriod}</span>
-                    </div>
-                    <div styleName="rateDown">
-                        理财期限(天)
-                    </div>
-                </div>
-                <div styleName="tipsBox">
-                    <span styleName="tipsItem">{context.minAmt}元起投</span>
-                </div>
-                <div styleName="flag"></div>
-            </div>
-        }
-        let timeline_section = () => {
-            return <div styleName="timeLine">
-                <div styleName="fLine">
-                    <div styleName="fLineItem fLineItem1">抢购</div>
-                    <div styleName="fLineItem fLineItem2">预计起息</div>
-                    <div styleName="fLineItem fLineItem3">预计到期</div>
-                </div>
-                <div styleName="sLine"></div>
-                <div styleName="tLine">
-                    <div styleName="fLineItem fLineItem1">2017-09-01</div>
-                    <div styleName="fLineItem fLineItem2">2017-09-12</div>
-                    <div styleName="fLineItem fLineItem3">2017-09-22</div>
-                </div>
-            </div>
+            return <div styleName="introBanner"></div>
         }
         let advanced_section = () => {
             return <div styleName="flowBox">
@@ -97,7 +37,6 @@ class ReserveInfo extends React.Component {
                 </div>
             </div>
         }
-
         let ruler_section = () => {
             return <div styleName="rulerBox">
                 <div styleName="subTitle">
@@ -115,7 +54,6 @@ class ReserveInfo extends React.Component {
                 </div>
             </div>
         }
-
         let intro_section = () => {
             return <div styleName="introduceBox">
                 <div styleName="introduceTitle">
@@ -144,26 +82,17 @@ class ReserveInfo extends React.Component {
                 </div>
             </div>
         }
-        return <div styleName='infoPanel'>
+        return <div styleName="infoPanel">
             <Header noClose title="详情" history={history}/>
             {banner_section()}
-            {timeline_section()}
             {advanced_section()}
             {ruler_section()}
             {intro_section()}
-            <div styleName="jumpLink">
-                <div styleName="jumpLinkText">常见问题</div>
-                <div styleName="jumpLinkArrow"></div>
-            </div>
             <div styleName="bottomBox">
-                {/*<div styleName="recordBtn" onClick={*/}
-                    {/*() => this.props.history.push(`/reserve/records`)*/}
-                {/*}>预约记录*/}
-                {/*</div>*/}
                 <div styleName="reserveBtn" onClick={this.reserveHandler}>立即预约</div>
             </div>
         </div>
     }
 }
 
-export default ReserveInfo
+export default ReserveInfoIntro

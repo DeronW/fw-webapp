@@ -15,7 +15,6 @@ class ReserveApply extends React.Component {
     }
 
     componentDidMount() {
-        console.log(1111)
         NativeBridge.trigger('hide_header')
         this.props.reserve.fetchProduct()
     }
