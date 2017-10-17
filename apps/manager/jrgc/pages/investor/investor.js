@@ -4,24 +4,33 @@ import { observer, inject } from 'mobx-react'
 import { BottomNavBar } from '../../components'
 import styles from '../../css/investor/investor.css'
 
-
+@inject('investor')
+@observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Investor extends React.Component {
     state = {
-        tab: '全部客户',
-        select: '可用余额最高排序',
         show: false
     }
     componentDidMount() {
 
     }
-    switchTab = (tab) => {
-        if (tab == this.state.tab) return
-        this.setState({ tab: tab, select: '可用余额最高排序' })
+    switchTab = (t) => {
+        let {setCustTab,setCustValue,fetchCustList} = this.props.investor
+        let { tab,type,sort } = this.props.investor.data.custmor
+
+        if (t == tab) return
+        setCustTab(t)
+        setCustValue(sort[t][0][type])
+        fetchCustList()
     }
-    switchSelect = (select) => {
-        if (select == this.state.select) return
-        this.setState({ select: select })
+    switchType = (t,i) => {
+        let {setCustType,setCustValue,fetchCustList} = this.props.investor
+        let { tab,type,sort } = this.props.investor.data.custmor
+
+        if (t == type) return
+        setCustType(t)
+        setCustValue(sort[tab][i][t])
+        fetchCustList()
     }
     switchShow = () => {
         this.setState({ show: !this.state.show })
@@ -31,7 +40,9 @@ class Investor extends React.Component {
         history.push(link)
     }
     render() {
-        let { tab, select, show } = this.state
+        let { show } = this.state
+        let { history } = this.props
+        let { tab,sort,type }= this.props.investor.data.custmor
 
         let tabFn = (item, index) => {
             return <div styleName={item == tab ? 'tab tabActive' : 'tab'}
@@ -39,10 +50,9 @@ class Investor extends React.Component {
                 onClick={() => this.switchTab(item)}>{item}</div>
         }
         let selectFn = (item, index) => {
-            let s = tab == "未投资" ? (item == select ? 'selectActive' : 'noSelect') : (item == select ? 'selectActive' : 'selectItem')
-            return <div styleName={s}
+            return <div styleName={Object.keys(item)[0] == type ? 'selectActive' : 'selectItem'}
                 key={item + index}
-                onClick={tab != "未投资" ? () => this.switchSelect(item) : ''}>{item}</div>
+                onClick={() => this.switchType(Object.keys(item)[0],index)}>{Object.keys(item)[0]}</div>
         }
 
         return <div styleName="bg">
@@ -62,7 +72,7 @@ class Investor extends React.Component {
             </div>
             <div styleName="container">
                 <div styleName="tabs">
-                    {['全部客户', '在投', '空仓', '未投资'].map(tabFn)}
+                    {['全部客户','在投','空仓','未投资'].map(tabFn)}
                 </div>
                 <div styleName="filter" onClick={() => this.switchShow()}>
                     <span>筛选</span><img src={require("../../images/investor/investor/filter.png")} />
@@ -70,7 +80,7 @@ class Investor extends React.Component {
             </div>
             {show && <div styleName="mask">
                 <div styleName="select">
-                    {['可用余额最高排序', '返利最多排序', '最近回款时间排序'].map(selectFn)}
+                    {sort[tab].map(selectFn)}
                 </div>
             </div>}
             <div styleName="list">
