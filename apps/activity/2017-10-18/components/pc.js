@@ -7,7 +7,10 @@ import InviteRewardPop from '../../lib/components/pop-panel.js'
 import HowToInvitePop from '../../lib/components/pc-pop-how-to-invite.js'
 import CompanyUserPop from '../../lib/components/pc-pop-company-user.js'
 
-import styles from '../css/pc.css'
+import commonStyles from '../../lib/css/common.css'
+import pcStyles from '../css/pc.css'
+
+let styles = Object.assign({}, commonStyles, pcStyles);
 
 
 const INVEST_REWARD_DIST = [

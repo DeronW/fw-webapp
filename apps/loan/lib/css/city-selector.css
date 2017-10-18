@@ -4,7 +4,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #f9f9f9;
     color: #333;
     font-size: 30px;
 }
@@ -17,6 +16,7 @@
 .header {
     box-sizing: border-box;
     position: fixed;
+    z-index: 1299;
     top: 0;
     left: 0;
     width: 100%;
@@ -30,6 +30,7 @@
 
 .close-btn {
     position: fixed;
+    z-index: 1300;
     top: 0;
     right: 0;
     width: 100px;
@@ -37,10 +38,36 @@
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAkBAMAAAD87O6VAAAAGFBMVEUAAABqpPBqpPBqpPBqpPBqpPBqpPBqpPBYcNXdAAAAB3RSTlMADsXyk5IbVLMVcgAAAI9JREFUKM+F0LENwjAQBdCjoXYiFkgaRqBlBSpaZgiF1wefIj8kS8SF863/lOQcEVMM67SW39Oj7XNdwpq3Jp51K9i1LunAPGS1QxkUlZJWUGO9x0AMxMCpM3DtDKwYuDPrfKvvVxw47zv4rv/7N8c473gvmCcmqCWtqJR1IAZ2Bt6/WzIwJ0oGtuMlGVjiA0h+RU0MLXFZAAAAAElFTkSuQmCC') center no-repeat;
 }
 
-.hot-city-label, .capital-letter {
-    padding: 30px 0 20px 24px;
-    font-size: 27px;
+.capital-letter-nav {
+    position: fixed;
+    z-index: 2999;
+    top: 327px;
+    right: 15px;
+    color: #649cfe;
+    font-size: 24px;
+    text-align: center;
+}
+
+.capital-letter-nav span {
+    display: block;
+    width: 36px;
+    height: 33px;
+}
+
+.hot-city-label {
+    box-sizing: border-box;
+    height: 80px;
+    padding: 28px 0 0 24px;
+    background-color: #f9f9f9;
     color: #999;
+    font-size: 27px;
+}
+
+.city-grp-letter {
+    composes: hot-city-label;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
 }
 
 .hot-city-grp {
@@ -74,9 +101,10 @@
 }
 
 .city-item {
+    box-sizing: border-box;
     height: 88px;
     line-height: 88px;
-    margin: 0 24px;
+    margin-left: 24px;
     border-bottom: 1px solid #e6e6e6;
     color: #333;
 }

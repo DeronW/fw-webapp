@@ -98,20 +98,22 @@
 }
 
 .expand-icon {
+    box-sizing: border-box;
     float: right;
     width: 40px;
     height: 100px;
+    padding: 43px 0 0 10px;
 }
 
 .fake-arrow {
     display: block;
-    margin: 38px 0 0 15px;
     width: 21px;
     height: 21px;
     border-top: 3px solid #ccc;
-    border-left: 3px solid #ccc;
-    -webkit-transform: rotate(135deg);
-    transform: rotate(135deg);
+    border-right: 3px solid #ccc;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    transform-origin: 80% 40%;
 }
 
 .submit-btn {
