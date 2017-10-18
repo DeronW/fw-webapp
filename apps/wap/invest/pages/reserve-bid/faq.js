@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Header} from '../../components/'
-import styles from '../../css/reserve/faq.css'
+import styles from '../../css/reserve-bid/faq.css'
 import {NativeBridge} from '../../helpers'
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})

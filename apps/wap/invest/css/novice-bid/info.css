@@ -9,7 +9,7 @@
 .topInfo {
     width: 100%;
     height: 280px;
-    background: url("../../images/reserve/info/banner.png") no-repeat center;
+    background: url("../../images/novice-bid/info/banner.png") no-repeat center;
     display: table;
     font-size: 22px;
     color: #fff;
@@ -22,7 +22,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    background: url("../../images/reserve/info/icon-flag.png") no-repeat center;
+    background: url("../../images/novice-bid/info/icon-flag.png") no-repeat center;
 }
 
 .infoRate {
@@ -119,7 +119,7 @@
 .sLine {
     width: 543px;
     height: 21px;
-    background: url("../../images/reserve/info/timeline.png") no-repeat center;
+    background: url("../../images/novice-bid/info/timeline.png") no-repeat center;
     margin: 10px auto;
 }
 
@@ -169,19 +169,19 @@
 }
 
 .itemUp1 {
-    background: url("../../images/reserve/info/icon-feature1.png") no-repeat center;
+    background: url("../../images/novice-bid/info/icon-feature1.png") no-repeat center;
 }
 
 .itemUp2 {
-    background: url("../../images/reserve/info/icon-feature2.png") no-repeat center;
+    background: url("../../images/novice-bid/info/icon-feature2.png") no-repeat center;
 }
 
 .itemUp3 {
-    background: url("../../images/reserve/info/icon-feature3.png") no-repeat center;
+    background: url("../../images/novice-bid/info/icon-feature3.png") no-repeat center;
 }
 
 .itemUp4 {
-    background: url("../../images/reserve/info/icon-feature4.png") no-repeat center;
+    background: url("../../images/novice-bid/info/icon-feature4.png") no-repeat center;
 }
 
 .rulerBox {
@@ -299,7 +299,7 @@
 .jumpLinkArrow {
     width: 16px;
     height: 26px;
-    background: url("../../images/reserve/info/arrow.png") no-repeat center;
+    background: url("../../images/novice-bid/info/arrow.png") no-repeat center;
     float: right;
     margin-top: 31px;
 }
@@ -307,7 +307,7 @@
 .introBanner {
     width: 100%;
     height: 227px;
-    background: url("../../images/reserve/info/banner-intro.png") no-repeat center;
+    background: url("../../images/novice-bid/info/banner-intro.png") no-repeat center;
     background-size: 100%;
     margin-bottom: 20px;
 }
