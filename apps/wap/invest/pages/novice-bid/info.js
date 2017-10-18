@@ -17,7 +17,7 @@ class ReserveInfoNovice extends React.Component {
 
     jumpHandler = () => {
         let {history} = this.props
-        history.push('/reserve/info-intro')
+        history.push('/novice-bid/info-intro')
     }
 
     render() {

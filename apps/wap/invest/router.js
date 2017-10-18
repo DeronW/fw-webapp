@@ -35,6 +35,9 @@ export default (stores) => {
                 {/*预约投资新手标*/}
                 <Route exact path="/novice-bid/info" component={NoviceBid.Info}/>
                 <Route exact path="/novice-bid/apply" component={NoviceBid.Apply}/>
+                <Route exact path="/novice-bid/protocol" component={NoviceBid.Protocol}/>
+                <Route exact path="/novice-bid/records" component={NoviceBid.Records}/>
+                <Route exact path="/novice-bid/info-intro" component={NoviceBid.InfoIntro}/>
 
                 {/* 杂项页面 */}
                 <Route exact path='/features/faq' component={Features.FAQList}/>
