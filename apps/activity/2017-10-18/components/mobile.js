@@ -58,7 +58,7 @@ class Mobile extends React.Component {
 
     gotoMoreAboutInvite = () => {
         const link = 'https://m.9888.cn/static/wap/topic-invite/index.html';
-        if (Browser.inApp) NativeBridge.goto(link)
+        // if (Browser.inApp) NativeBridge.goto(link)
         location.href = link;
     }
 
