@@ -28,7 +28,7 @@ const USER_PAGES = [
 const NOTICE_PAGES = [
     // 内容展示页面
     // 'notice-corporate-structure', // 信息披露 公司结构
-    'notice-safeguard', // 资金安全保障
+    // 'notice-safeguard', // 资金安全保障
     'notice-risk-prompt', // 风险揭示
 ]
 

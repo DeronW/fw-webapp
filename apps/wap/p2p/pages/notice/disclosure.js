@@ -2,9 +2,9 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { getJSONP, Utils } from 'fw-javascripts'
 
-import { Header } from '../components'
-import { NativeBridge } from '../helpers'
-import styles from '../css/notice-disclosure.css'
+import { Header } from '../../components'
+import { NativeBridge } from '../../helpers'
+import styles from '../../css/notice/disclosure.css'
 
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class LeftPanel extends React.Component {
@@ -116,6 +116,7 @@ class LeftPanel extends React.Component {
         </div>
     }
 }
+
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class MiddlePanel extends React.Component {
     render() {
@@ -133,31 +134,31 @@ class MiddlePanel extends React.Component {
         }
         let chairman = [
             {
-                img: require("../images/notice-disclosure/men2.png"),
+                img: require("../../images/notice/disclosure/men2.png"),
                 name: '魏薇·董事长',
                 job: '',
                 profile: '毕业于中国人民大学。曾任北京联合开元投资担保有限公司副总经理和联合创业集团有限公司营运管理中心总经理。经过10余年金融行业管理岗位的历练，拥有丰富的网贷行业实战经验和全面而独到的行业视角及理念，是小微金融的领军人物，普惠金融体系的积极践行者。'
             },
             {
-                img: require("../images/notice-disclosure/men6.png"),
+                img: require("../../images/notice/disclosure/men6.png"),
                 name: '朱海涛',
                 job: 'COO 首席运营官',
                 profile: '毕业于天津大学，曾就职于IBM(NYSE:IBM)研发中心，并在Tom网，安博教育（NYSE:AMBO)有多年技术研发管理工作经验。对互联网技术与互联网产品相结合，实践经验丰富，同时对互联网技术与互联网运营高度紧密结合的相关工作有着丰富经验。现任工场微金COO，负责工场微金整体网站的运营管理。'
             },
             {
-                img: require("../images/notice-disclosure/men4.png"),
+                img: require("../../images/notice/disclosure/men4.png"),
                 name: '邹晓东',
                 job: '首席风险官',
                 profile: '毕业于东北财经大学，中国注册会计师（CICPA），英国特许公认会计师 （FCCA），曾任普华永道中天会计师事务所审计经理，联合创业担保集团辽宁公司首席风险官，拥有多年的风险管理经验。'
             },
             {
-                img: require("../images/notice-disclosure/men7.png"),
+                img: require("../../images/notice/disclosure/men7.png"),
                 name: '张锐',
                 job: 'CTO 首席技术官',
                 profile: '毕业于青岛理工大学，曾任人人(NYSE:RENN)高级技术经理，先锋支付技术基础架构负责人，去哪儿(NYSE: QUNR)国际机票(供应链)技术负责人。现任工场微金CTO，负责工场微金互联网产品与技术团队。对大规模复杂在线交易系统架构设计及互联网产品技术团队管理具备丰富经验。'
             },
             {
-                img: require("../images/notice-disclosure/men8.png"),
+                img: require("../../images/notice/disclosure/men8.png"),
                 name: '段炼',
                 job: 'CMO 首席营销官',
                 profile: '毕业于北京交通大学，曾就职于中信国安集团和北京锐安科技有限公司，从事综合管理及互联网信息安全监管等相关工作，具备多年跨行业跨职能相关管理工作经验。对于营销管理、成本管理、团队管理具有丰富的工作经验，现任工场微金CMO,负责工场微金用户运营营销工作。'
@@ -220,7 +221,7 @@ class MiddlePanel extends React.Component {
 
                 <div styleName="webInfoContentR fl">
                     <p styleName="rline">风险管理部：首席风险官1名；高级风险经理1名；风险经理3名</p>
-                    <img src={require("../images/notice-disclosure/flow.jpg")} alt=""/>
+                    <img src={require("../../images/notice/disclosure/flow.jpg")} alt="" />
                     <p styleName="rline riskRline">资产端业务部门进行贷后管理检查前要制定检查计划。贷后检查分日常检查和重点检查。对合作授信的资产端需要提供每月的资产质量报表（主要包括：平均贷款余额、期末贷款余额、新增账户数、新增贷款、审批通过率、首次逾期率、核销金额、迁移率等），平台严格按《北京凤凰信用管理有限公司网络借贷信息中介平台贷后管理办法》与《北京凤凰信用管理有限公司网络借贷信息中介平台业务档案管理办法》执行。</p>
                     <p styleName="rline riskText">资产端推荐每个借款用户在平台借款时，到期未还采取的风险缓释措施：担保方连带责任保证担保。</p>
                 </div>
@@ -251,10 +252,10 @@ class MiddlePanel extends React.Component {
             <div styleName="orgTitle">
                 组织架构
                 </div>
-            <img src={require("../images/notice-disclosure/org.jpg")} alt="" styleName="orgPic" />
+            <img src={require("../../images/notice/disclosure/org.jpg")} alt="" styleName="orgPic" />
             <div styleName="shareTitle">实际控股人与持股5%以上的股东名单</div>
             <div styleName="shareContent">
-                {/*<img src={require("../images/notice-disclosure/logo3.png")} alt="" styleName="sharePic" />*/}
+                {/*<img src={require("../../images/notice/disclosure/logo3.png")} alt="" styleName="sharePic" />*/}
                 <p styleName="des">Decade Elite Global Limited</p>
             </div>
             <div styleName="chairmanRight">
@@ -268,6 +269,7 @@ class MiddlePanel extends React.Component {
         </div>
     }
 }
+
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class RightPanel extends React.Component {
     render() {
@@ -290,12 +292,11 @@ class RightPanel extends React.Component {
 
 
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
-class NoticeDisclosure extends React.Component {
+class Disclosure extends React.Component {
     state = {
         tab: '平台运营信息'
     }
     componentDidMount() {
-        document.title = "信息披露"
         NativeBridge.trigger("hide_header")
     }
     switchTabHandler = (t) => {
@@ -310,6 +311,7 @@ class NoticeDisclosure extends React.Component {
                 onClick={() => this.switchTabHandler(item)}>{item}
             </div>
         }
+
         let showPanel = () => {
             let p
             if (tab == "平台运营信息") {
@@ -321,14 +323,17 @@ class NoticeDisclosure extends React.Component {
             }
             return p
         }
+
         return <div styleName="bg">
             <Header title='信息披露' history={this.props.history} />
+
             <div styleName="tabPanel">
                 {["平台运营信息", "企业信息", "专项报告"].map(tabFn)}
             </div>
+
             {showPanel()}
         </div>
     }
 }
 
-export default NoticeDisclosure
+export default Disclosure
