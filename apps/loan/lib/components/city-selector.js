@@ -15,40 +15,24 @@ class CitySelector extends React.Component {
     sortedCapitalLetter = Object.keys(CITY_LIST).sort();
 
     handleLetterNav = letter => () => {
-        const cityGrpLabelHeight = 100,
+        const cityGrpLabelHeight = 80,
             cityItemHeight = 88,
-            hotCityGrpHeight = 220 + 88,
+            hotCityGrpHeight = 220 + 80,
             cityGrpCnt = this.sortedCapitalLetter.indexOf(letter);
-            console.log(letter, cityGrpCnt);
         let scrollHeight = hotCityGrpHeight;
-        for (let i = 0; i < cityGrpCnt.length; i++) {
-            console.log('aaaaaaaaaa!');
+        for (let i = 0; i < cityGrpCnt; i++) {
             const letter = this.sortedCapitalLetter[i];
             scrollHeight += cityGrpLabelHeight;
             scrollHeight += cityItemHeight * CITY_LIST[letter].length;
-            console.log(scrollHeight);
         }
         window.scrollTo(0, scrollHeight);
     }
 
-    handleSelect = e => {
-
-    }
-
-    _genCityGrp = () => {
-        const { selected, changeHandler, closeHandler } = this.props;
-        return <div>
-            { this.sortedCapitalLetter.map(letter => <div key={letter}>
-                <div styleName="city-grp-letter">{ letter.toUpperCase() }</div>
-                <div styleName="city-grp">
-                    { CITY_LIST[letter].map(city => <div key={city}
-                        styleName={ selected == city ? "city-item-selected" : "city-item"}
-                        onClick={() => { changeHandler(city); closeHandler() }}>
-                        { city }
-                    </div>) }
-                </div>
-            </div>) }
-        </div>
+    handleSelect = city => e => {
+        const { changeHandler, closeHandler } = this.props;
+        if (e.clientX / e.target.clientWidth > 0.9) return
+        changeHandler(city);
+        closeHandler();
     }
 
     render() {
@@ -63,24 +47,32 @@ class CitySelector extends React.Component {
             </div>
 
             <div styleName="capital-letter-nav">
-                { this.sortedCapitalLetter.map(letter => <span key={letter} onClick={this.handleLetterNav(letter)}>
+                { this.sortedCapitalLetter.map(letter => <span key={letter}
+                    onClick={this.handleLetterNav(letter)}>
                     { letter.toUpperCase() }
                 </span>) }
             </div>
 
             <div styleName="hot-city-label">热门城市</div>
             <div styleName="hot-city-grp">
-                { HOT_CITY_LIST.map(city => {
-                    return <div key={city}
-                        styleName={ selected == city ? "hot-city-item-selected" : "hot-city-item"}
-                        onClick={() => { changeHandler(city); closeHandler() }}>
-                        {city}
-                    </div>
-                }) }
+                { HOT_CITY_LIST.map(city => <div key={city}
+                    styleName={ selected == city ? "hot-city-item-selected" : "hot-city-item"}
+                    onClick={() => { changeHandler(city); closeHandler() }}>
+                    {city}
+                </div>) }
             </div>
 
-            <div>
-                { this._genCityGrp() }
+            <div styleName="city-list">
+                { this.sortedCapitalLetter.map(letter => <div key={letter}>
+                    <div styleName="city-grp-letter">{ letter.toUpperCase() }</div>
+                    <div styleName="city-grp">
+                        { CITY_LIST[letter].map(city => <div key={city}
+                            styleName={ selected == city ? "city-item-selected" : "city-item"}
+                            onClick={this.handleSelect(city)}>
+                            { city }
+                        </div>) }
+                    </div>
+                </div>) }
             </div>
 
         </div>

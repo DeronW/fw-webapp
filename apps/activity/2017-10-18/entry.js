@@ -6,8 +6,6 @@ import { Browser, UserReady, gotoPage, Post } from '../lib/helpers'
 import PC from './components/pc.js'
 import Mobile from './components/mobile.js'
 
-import '../lib/css/common.css'
-
 
 class October extends React.Component {
 
