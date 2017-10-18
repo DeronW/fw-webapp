@@ -5,6 +5,8 @@ import {Header} from '../../components'
 
 import styles from '../../css/investor/item-detial.css'
 
+@inject('investor_account')
+@observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class itemDetial extends React.Component {
     state = {

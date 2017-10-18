@@ -1,14 +1,17 @@
 import { extendObservable } from 'mobx'
 
 export default class Investor {
-    constructor(Get) {
+    constructor(Get,Post) {
         this.Get = Get
+        this.Post = Post
         this.data = {}
+
         extendObservable(this.data, {
             coupon: {
                 couponList: []
             },
             custmor: {
+                list: [],
                 pageNo: 1,
                 tab: '全部客户',
                 type: '可用余额最高排序',
@@ -53,7 +56,6 @@ export default class Investor {
                         }
                     ]
                 },
-                list: []
             },
             calendar: {//回款日历
                 overview: {
@@ -104,20 +106,21 @@ export default class Investor {
         this.data.custmor.type = type
     }
     setCustValue = (value) => {
-        console.log(value)
         this.data.custmor.value = value
     }
     fetchCustList = (done) => {
-        let { value, pageNo, list } = this.data.custmor
+        let { value,list,pageNo } = this.data.custmor
         if (pageNo == 0) return done && done()
-        if (pageNo == 1) list = []
+        if (pageNo == 1) list.splice(0,list.length)
+
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
             pageNo: pageNo,
             pageSize: 10
         }).then(data => {
             list.push(...data.pageData.result)
-            pageNo < data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
+            console.log(list)
+            this.data.custmor.pageNo < data.pageData.pagination.totalPage ? this.data.custmor.pageNo++ : this.data.custmor.pageNo = 0
 
             done && done()
         })
@@ -190,18 +193,20 @@ export default class Investor {
         this.data.search.pageNo = 1
     }
     fetchSearch = (done) => {
-        let { keyword, pageNo, records } = this.data.search
+        let { keyword, records } = this.data.search
         const PAGE_SIZE = 10
-        if (pageNo == 0) return done && done()
-        if (pageNo == 1) records = []
+        if (this.data.search.pageNo == 0) return done && done()
+        if (this.data.search.pageNo == 1) records.splice(0,records.length)
 
         this.Get("/api/finManager/cust/v2/search.shtml", {
             keyword: keyword,
-            pageNo: pageNo,
+            pageNo: this.data.search.pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
             records.push(...data.pageData.result)
-            pageNo < data.pageData.totalPage ? pageNo++ : pageNo = 0
+            this.data.search.pageNo < data.pageData.totalPage ?
+            this.data.search.pageNo++ :
+            this.data.search.pageNo = 0
             done && done()
         })
     }
@@ -229,8 +234,8 @@ export default class Investor {
     fetchBean = (done) => {
         let { pageNo, records, id, info } = this.data.bean
         const PAGE_SIZE = 10
-        if (pageNo == 0) return done && done()
-        if (pageNo == 1) records = []
+        if (this.data.bean.pageNo == 0) return done && done()
+        if (pageNo == 1) records.splice(0,records.length)
         this.Get('/api/finManager/cust/v2/beanList.shtml', {
             custId: id,
             pageNo: pageNo,
@@ -238,7 +243,7 @@ export default class Investor {
         }).then(data => {
             info = data
             records.push(...data.pageData.result)
-            pageNo < data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
+            this.data.bean.pageNo < data.pageData.pagination.totalPage ? this.data.bean.pageNo++ : this.data.bean.pageNo = 0
 
             done && done()
         })
@@ -255,7 +260,7 @@ export default class Investor {
         let { pageNo, records, id, info } = this.data.score
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
-        if (pageNo == 1) records = []
+        if (pageNo == 1) records.splice(0,records.length)
         this.Get('/api/finManager/cust/v2/scoreList.shtml', {
             custId: id,
             pageNo: pageNo,
@@ -263,7 +268,9 @@ export default class Investor {
         }).then(data => {
             info = data
             records.push(...data.pageData.result)
-            pageNo < data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
+            this.data.score.pageNo < data.pageData.pagination.totalPage ?
+            this.data.score.pageNo++ :
+            this.data.score.pageNo = 0
 
             done && done()
         })
