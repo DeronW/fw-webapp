@@ -338,8 +338,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         }
 
         closeHandler = () => {
-            let {history} = this.props;
-            history.goBack();
+            location.href = '/static/loan/products/index.html#/loan-fq-form'
         }
 
         render(){
