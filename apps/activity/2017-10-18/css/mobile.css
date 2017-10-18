@@ -99,7 +99,7 @@ li {
     width: 588px;
     height: 321px;
     margin: 50px 80px 20px;
-    padding-top: 20px;
+    padding-top: 17px;
     color: #fff;
 }
 
@@ -125,21 +125,21 @@ li {
 
 .reward-invite-value-lt {
     float: left;
-    font-size: 85px;
+    font-size: 86px;
     font-weight: bold;
     margin-right: 3px;
 }
 
 .reward-invite-value-r {
     float: left;
-    font-size: 24px;
+    font-size: 21px;
 }
 
 .reward-invite-value-rt {
-    width: 44px;
-    height: 44px;
-    line-height: 44px;
-    margin: 19px 0 0 9px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin: 29px 0 -2px 8px;
     border-radius: 50px;
     background-color: #ec3654;
     color: #fff;
@@ -155,9 +155,10 @@ li {
     display: inline-block;
     width: 378px;
     height: 306px;
-    padding-top: 170px;
+    padding-top: 163px;
     margin: 25px -10px;
     color: #fff;
+    line-height: 52px;
 }
 
 .basket i {

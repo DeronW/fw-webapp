@@ -5,7 +5,10 @@ import { NativeBridge, gotoPage, Post, Browser, UserReady } from '../../lib/help
 import HowToInvitePop from '../../lib/components/mobile-pop-how-to-invite.js'
 import CompanyUserPop from '../../lib/components/mobile-pop-company-user.js'
 
-import styles from '../css/mobile.css'
+import commonStyles from '../../lib/css/common.css'
+import mobileStyles from '../css/mobile.css'
+
+let styles = Object.assign({}, commonStyles, mobileStyles);
 
 
 const INVEST_REWARD_DIST = [
