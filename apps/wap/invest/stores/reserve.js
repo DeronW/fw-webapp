@@ -49,7 +49,8 @@ export default class Reserve {
             batchMaxmum: 0,
             reserveMoney: '',
             isChecked: true,
-            contractMsg: ''
+            contractMsg: '',
+            isCompany: null
         })
     }
 
@@ -91,7 +92,8 @@ export default class Reserve {
             novice_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
             return {
                 isRisk: novice_data.isRisk,
-                batchMaxmum: novice_data.batchMaxmum
+                batchMaxmum: novice_data.batchMaxmum,
+                isCompany: novice_data.isCompany
             }
         })
     }
@@ -100,6 +102,7 @@ export default class Reserve {
         let {tab, type} = this.records, current_tab = tab[type]
         current_tab.page_no = 1
     }
+
     setRecordsCurrentStatus = status => {
         this.records.type = status;
         this.getReserveList()
@@ -134,6 +137,18 @@ export default class Reserve {
             return this.Post('/api/v1/investAppoint.shtml', {
                 applyAmt: this.bid_data.reserveMoney,
                 applyInvestClaimId: this.bid_data.context.id,
+                bookInvestToken: data.bookInvestToken
+            })
+        })
+    }
+
+    submitNoviceHandler = () => {
+        return this.Post('/api/v1/intoAppointPage.shtml', {
+            applyInvestClaimId: this.applyInvestClaimId
+        }).then((data) => {
+            return this.Post('/api/v1/investAppoint.shtml', {
+                applyAmt: this.novice_bid_data.reserveMoney,
+                applyInvestClaimId: this.novice_bid_data.context.id,
                 bookInvestToken: data.bookInvestToken
             })
         })

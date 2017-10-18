@@ -10,6 +10,10 @@ import {NativeBridge} from '../../helpers/'
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveApplyNovice extends React.Component {
+    state = {
+        pending: false
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
@@ -27,6 +31,7 @@ class ReserveApplyNovice extends React.Component {
         }
 
     }
+
     allMadeHandler = () => {
         let {reserve} = this.props
         this.props.reserve.setFormData('reserveMoney', reserve.novice_bid_data.accountAmount, 'novice_bid_data')
@@ -34,7 +39,49 @@ class ReserveApplyNovice extends React.Component {
 
     protocolHandler = () => {
         let {history} = this.props
-        history.push(`/reserve/protocol`)
+        history.push(`/novice-bid/protocol`)
+    }
+
+    rechargeHandler = () => {
+        //跳到充值页面
+        NativeBridge.toNative('app_recharge')
+    }
+
+    applyHandler = () => {
+        let {reserve, history} = this.props
+        let sussessHandler = () => {
+            if (this.state.pending) return
+            this.setState({pending: true})
+            reserve.submitNoviceHandler()
+                .then(() => {
+                        Components.showToast('预约成功')
+                    },
+                    () => {
+                        this.setState({pending: false})
+                    })
+                .then(() => {
+                    history.push(`/novice-bid/records`)
+                })
+        }
+        reserve.fetchNoviceProduct().then(data => {
+            if (reserve.novice_bid_data.reserveMoney === '') {
+                Components.showToast("预约金额不能为空")
+            } else if (reserve.novice_bid_data.reserveMoney < reserve.novice_bid_data.context.minAmt) {
+                Components.showToast("预约金额不足100")
+            } else if (reserve.novice_bid_data.reserveMoney > reserve.novice_bid_data.accountAmount) {
+                Components.showToast("可用金额不足，请充值后重试")
+            } else if (!reserve.novice_bid_data.isCompany) {
+                if (reserve.novice_bid_data.reserveMoney > data.batchMaxmum) {
+                    Components.showToast("自动投标金额不足").then(() => {
+                        NativeBridge.toNative('auto_bid_second')
+                    })
+                } else {
+                    sussessHandler()
+                }
+            } else {
+                sussessHandler()
+            }
+        })
     }
 
     render() {
