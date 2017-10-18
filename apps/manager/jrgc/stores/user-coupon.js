@@ -1,64 +1,56 @@
-import { extendObservable,computed } from 'mobx'
-import { Utils,Components } from 'fw-javascripts'
+import { extendObservable, computed } from 'mobx'
+import { Utils, Components } from 'fw-javascripts'
 
 export default class UserCoupon {
     constructor(Get, Post) {
         this.Get = Get
         this.Post = Post
         this.data = {}
+        this.coupon_data = {}
+        this.friends_data = {}
 
-        extendObservable(this.data, {
-            coupon: {
-                sum: null,
-                number:0,
-                type: '1',
-                list: {
-                    '1': { name: '返现券', pageNo: 1, list: [] },
-                    '0': { name: '返息券', pageNo: 1, list: [] },
-                    '2': { name: '返金券', pageNo: 1, list: [] },
-                },
-                status: 1
-            },
-            friends:{
-                type:Utils.hashQuery.couponType,
-                pageNo:1,
-                list:[],
-                keyword:''
-            }
+        extendObservable(this.coupon_data, {
+            totalCount: 1,
+            status: 1,
+            type: '1',
+            pageNo: 1,
+            records: []
+        })
+        extendObservable(this.friends_data, {
+            pageNo: 1,
+            list: [],
+            keyword: ''
         })
     }
     //获取优惠券列表,可用优惠券，赠送记录（转赠优惠券）
     resetCouponPageNo = () => {
-        let { type, list } = this.data.coupon
-        list[type].pageNo = 1
+        this.coupon_data.pageNo = 1
     }
     setCouponType = (type) => {
-        this.data.coupon.type = type
+        this.coupon_data.type = type
+        this.fetchCouponList()
     }
     setCouponStatus = (status) => {
-        this.data.coupon.status = status
+        this.coupon_data.status = status
     }
     fetchCouponList = (done) => {
-        let { type, sum,number, list, status } = this.data.coupon
-        let current_tab = list[type]
-        if (current_tab.pageNo == 0) return done && done()
-        if (current_tab.pageNo == 1) current_tab.list = []
+        let {records} = this.coupon_data
 
+        if (this.coupon_data.pageNo == 0) return done && done()
+        if (this.coupon_data.pageNo == 1) records.splice(0,records.length)
         this.Get('/api/finManager/coupon/v2/myCouponList.shtml', {
-            couponStatus: status,
-            couponType: type,
-            pageNo: current_tab.pageNo,
+            couponStatus: this.coupon_data.status,
+            couponType: this.coupon_data.type,
+            pageNo: this.coupon_data.pageNo,
             pageSize: 10
         }).then(data => {
-            sum = data.moneySum
-            number = data.pageData.pagination.totalCount
+            this.coupon_data.totalCount = data.pageData.pagination.totalCount
 
-            current_tab.list.push(...data.pageData.result)
+            records.push(...data.pageData.result)
+            this.coupon_data.pageNo < data.pageData.pagination.totalPage ?
+                 this.coupon_data.pageNo++ : this.coupon_data.pageNo = 0
 
-            current_tab.pageNo < data.pageData.pagination.totalPage ?
-                current_tab.pageNo++ : current_tab.pageNo = 0
-
-            done&&done()
+            done && done()
         })
     }
 
@@ -66,42 +58,42 @@ export default class UserCoupon {
     @computed get couponId() {
         return Utils.hashQuery.couponId
     }
+    @computed get couponType() {
+        return Utils.hashQuery.couponType
+    }
     setKeyword = (keyword) => {
-        this.data.friends.keyword = keyword
+        this.friends_data.keyword = keyword
     }
     resetFriendsPageNo = () => {
-        this.data.friends.pageNo = 1
+        this.friends_data.pageNo = 1
     }
     fetchFriendsList = (done) => {
-        let { type,pageNo,list,keyword } = this.data.friends
-        if (pageNo == 0) return done && done()
-        if (pageNo == 1) list = []
+        let { type, list, keyword } = this.friends_data
+        if ( this.friends_data.pageNo == 0) return done && done()
+        if (this.friends_data.pageNo == 1) list.splice(0,list.length)
 
-        this.Get('/api/finManager/coupon/v2/custList.shtml', {
+        this.Post('/api/finManager/coupon/v2/custList.shtml', {
             couponId: this.couponId,
-            couponType: type,
-            keyword:keyword,
-            pageNo: pageNo,
+            couponType: this.couponType,
+            keyword: keyword,
+            pageNo: this.friends_data.pageNo,
             pageSize: 10
         }).then(data => {
             list.push(...data.pageData.result)
 
-            pageNo < data.pageData.pagination.totalPage ?
-                pageNo++ : pageNo = 0
+            this.friends_data.pageNo < data.pageData.pagination.totalPage ?
+            this.friends_data.pageNo++ :
+            this.friends_data.pageNo = 0
 
-            done&&done()
+            done && done()
         })
     }
     //转增优惠券
-    presentCoupon = (couponId,couponType,custId) => {
-        this.Get(' /api/finManager/coupon/v2/presentCoupon.shtml',{
+    presentCoupon = (couponId, couponType, custId) => {
+        return this.Get('/api/finManager/coupon/v2/presentCoupon.shtml', {
             couponId: couponId,
             couponType: couponType,
-            custId:custId
-        }).catch(data => {
-            Components.showAlert("赠送成功");
-        }).catch(error => {
-            Components.showAlert(error.message);
+            custId: custId
         })
     }
 }

@@ -21,15 +21,17 @@ export default class User {
                 rebateAmtList: []
             },
             rebate_cust: {
-                type: '0',
+                type: '1',
                 list: {
-                    '0': {name: '全部', page_no: 1, custList: []},
-                    '1': {name: '微金', page_no: 1, custList: []},
-                    '2': {name: '尊享', page_no: 1, custList: []},
-                    '3': {name: '黄金', page_no: 1, custList: []}
+                    '1': {name: '全部', page_no: 1, custList: []},
+                    '2': {name: '微金', page_no: 1, custList: []},
+                    '3': {name: '尊享', page_no: 1, custList: []},
+                    '4': {name: '黄金', page_no: 1, custList: []}
                 }
-            }
+            },
+            rebate_info:{
 
+            }
         })
     }
 
@@ -109,7 +111,7 @@ export default class User {
     }
 
     //
-    resetType = (type) => {
+    setType = (type) => {
         this.data.rebate_cust.type = type
         this.fetchCustList()
     }
@@ -126,10 +128,16 @@ export default class User {
             type: type
         }).then(data => {
             current_list.custList.push(...data.pageData.result)
-            current_list.page_no < data.result.pageData.pagination.totalPage
+            current_list.page_no < data.pageData.pagination.totalPage
                 ? current_list.page_no++
                 : current_list.page_no = 0
             done && done()
+        })
+    }
+    //返利信息
+    fetchRebateInfo = ()=>{
+        this.Get('/api/finManager/user/v2/rebateInfo.shtml').then(data=>{
+            this.data.rebate_info = data.result
         })
     }
 }
