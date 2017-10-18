@@ -123,7 +123,9 @@ const TO_NATIVE_ACTION = {
 
 function tellApp(word, value) {
     if (TO_NATIVE_ACTION[word]) {
-        word == '设置标题' ? send2app('setTitle', value) : send2app(TO_NATIVE_ACTION[word])
+        word == '设置标题' ?
+            send2app('setTitle', value) :
+            send2app(TO_NATIVE_ACTION[word])
     } else if (TO_NATIVE_VALUE[word]) {
         send2app('toNative', TO_NATIVE_VALUE[word])
     } else {
@@ -131,11 +133,16 @@ function tellApp(word, value) {
     }
 }
 
-
 export default (word, value) => {
-    if (Browser.inApp) {
+    if (Browser.inJRGCApp) {
         tellApp(LINKS[word].app)
     } else {
-        location.href = word == '登录' ? `${LINKS[word].web}?service=${value}` : LINKS[word].web;
+        let link = Browser.inMobile ?
+            LINKS[word].mobile :
+            LINKS[word].web;
+
+        if (word == '登录') link = `${LINKS[word].web}?service=${value}`
+
+        location.href = link
     }
 }
