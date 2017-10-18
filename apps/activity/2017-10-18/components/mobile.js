@@ -142,23 +142,23 @@ class Mobile extends React.Component {
             <div styleName="basket-grp">
                 <div styleName="basket-1">
                     50万≤累投额&lt;100万<br />
-                    奖励<i>&yen;</i><b>500</b>
+                    <span>奖励</span><i>&yen;</i><b>500</b>
                 </div>
                 <div styleName="basket-2">
                     100万≤累投额&lt;200万<br />
-                    奖励<i>&yen;</i><b>1300</b>
+                    <span>奖励</span><i>&yen;</i><b>1300</b>
                 </div>
                 <div styleName="basket-3">
                     200万≤累投额&lt;300万<br />
-                    奖励<i>&yen;</i><b>3200</b>
+                    <span>奖励</span><i>&yen;</i><b>3200</b>
                 </div>
                 <div styleName="basket-4">
                     300万≤累投额&lt;500万<br />
-                    奖励<i>&yen;</i><b>6000</b>
+                    <span>奖励</span><i>&yen;</i><b>6000</b>
                 </div>
                 <div styleName="basket-5">
                     累投额≥500万<br />
-                    奖励<i>&yen;</i><b>12500</b>
+                    <span>奖励</span><i>&yen;</i><b>12500</b>
                 </div>
             </div>
 

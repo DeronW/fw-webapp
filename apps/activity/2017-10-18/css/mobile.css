@@ -139,7 +139,7 @@ li {
     width: 40px;
     height: 40px;
     line-height: 40px;
-    margin: 29px 0 -2px 8px;
+    margin: 30px 0 -2px 8px;
     border-radius: 50px;
     background-color: #ec3654;
     color: #fff;
@@ -161,12 +161,20 @@ li {
     line-height: 52px;
 }
 
+.basket span {
+    position: relative;
+    bottom: 1px;
+}
+
 .basket i {
+    display: inline-block;
     font-style: normal;
+    font-weight: bold;
     font-size: 36px;
 }
 
 .basket b {
+    display: inline-block;
     font-size: 60px;
 }
 
