@@ -25,22 +25,22 @@ const USER_PAGES = [
 ]
 
 
-const NOTICE_PAGES = [
+// const NOTICE_PAGES = [
     // 内容展示页面
     // 'notice-corporate-structure', // 信息披露 公司结构
-    'notice-safeguard', // 资金安全保障
-    'notice-risk-prompt', // 风险揭示
-]
+    // 'notice-safeguard', // 资金安全保障
+    // 'notice-risk-prompt', // 风险揭示
+// ]
 
 const TOPIC_PAGES = [
     // 专题页面
     'topic-hui-shang', // 徽商专题页面
     'topic-hui-shang-guide', //徽商用户引导页面
-    'topic-score', // 玩转工分
+    // 'topic-score', // 玩转工分
     'topic-interest-reward', // 年化加息奖励
     'topic-recommender-recruitment', //推荐人页面
     'topic-annual-commision', //年化佣金页面
-    'topic-invite', //邀请返利, 邀请人,
+    // 'topic-invite', //邀请返利, 邀请人,
     'topic-gong-you-hui', //工友会专题页面,
     'topic-invite-strategy', //邀请攻略页面
     // 'topic-novice-strategy', //新手策略页面
@@ -90,19 +90,12 @@ const OUTSIDE_PAGES = [
     // 'p2p-topic-invest-school', //微金投资学堂页面
 // ]
 
-// const REFACTOR_PAGES = [{
-//     name: 'invest',
-//     compiler: 'webpack'
-// }]
-
 APP_NAMES.push(
     ...USER_PAGES,
-    // ...TOPIC_PAGES,
+    ...TOPIC_PAGES,
     // ...HUISHANG_PAGES,
-    // ...NOTICE_PAGES,
     ...SHOUSHAN, // 这是给首山提现用的页面
     // ...OUTSIDE_PAGES,
-    // ...P2P,
     {
         name: 'invest',
         compiler: 'webpack'
