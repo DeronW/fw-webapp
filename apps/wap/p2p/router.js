@@ -37,11 +37,15 @@ export default (stores) => {
                 <Route exact path='/pdf' component={PDF} />
                 <Route exact path='/evaluate' component={Evaluate} />
 
+                {/* 预约标 */}
+
+                {/* 新手标 */}
+
                 {/* 公告 */}
                 <Route exact path='/notice/risk-prompt' component={Notice.RiskPrompt} />
                 <Route exact path='/notice/safeguard' component={Notice.Safeguard} />
                 <Route exact path='/notice/disclosure' component={Notice.Disclosure} />
-                {/* 兼容 公告 老连接 */}
+                {/* 公告 兼容 老连接 */}
                 <Route exact path='/notice-safeguard' component={Notice.Safeguard} />
                 <Route exact path='/notice-disclosure' component={Notice.Disclosure} />
 
