@@ -13,7 +13,6 @@ import Download from './pages/download.js'
 import Waiting from './pages/waiting.js'
 import FollowFXH from './pages/follow-fxh.js'
 import FollowJRGC from './pages/follow-jrgc.js'
-import InviteActivity from './pages/invite-activity.js'
 
 export default (stores) => {
     return <Router>
@@ -30,7 +29,6 @@ export default (stores) => {
                 <Route exact path='/download' component={Download} />
                 <Route exact path='/follow-fxh' component={FollowFXH} />
                 <Route exact path='/follow-jrgc' component={FollowJRGC} />
-                <Route exact path='/invite-activity' component={InviteActivity} />
             </Switch>
         </Provider>
     </Router>
