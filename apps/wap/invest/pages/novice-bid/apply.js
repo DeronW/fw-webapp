@@ -60,7 +60,7 @@ class ReserveApplyNovice extends React.Component {
                         this.setState({pending: false})
                     })
                 .then(() => {
-                    history.push(`/novice-bid/records`)
+                    history.push(`/novice-bid/success`)
                 })
         }
         reserve.fetchNoviceProduct().then(data => {

@@ -112,7 +112,7 @@ class ReserveInfoNovice extends React.Component {
 
         let bottom_section = () => {
             return <div styleName="bottomBox">
-                <div styleName="reserveBtn" onClick={this.reserveHandler}>立即预约</div>
+                <div styleName="reserveBtn" onClick={this.reserveHandler}>立即抢购</div>
             </div>
         }
         return <div styleName="infoPanel">
@@ -121,7 +121,7 @@ class ReserveInfoNovice extends React.Component {
             {timeline_section()}
             {advanced_section()}
             {intro_section()}
-            {jumpLink_section()}
+            {/*{jumpLink_section()}*/}
             {bottom_section()}
         </div>
     }

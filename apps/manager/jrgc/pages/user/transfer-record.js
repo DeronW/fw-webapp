@@ -10,11 +10,11 @@ import styles from '../../css/user/transfer-record.css'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class TransferRecord extends React.Component {
     state = {
-        tab_n: 0,
-        is_used: true
+        type:'返现券'
     }
     componentDidMount() {
-        let { resetCouponPageNo, fetchCouponList } = this.props.user_coupon
+        let { resetCouponPageNo,setCouponStatus, fetchCouponList } = this.props.user_coupon
+        setCouponStatus(4)
         resetCouponPageNo()
         fetchCouponList()
         Event.touchBottom(fetchCouponList)
@@ -22,18 +22,30 @@ class TransferRecord extends React.Component {
     componentWillUnmount() {
         Event.cancelTouchBottom()
     }
-    tabHandler = (i) => {
-        this.setState({tab_n: i})
+    typeHanlder = (type) => {
+        let { resetCouponPageNo,setCouponType } = this.props.user_coupon
+        if (type == this.state.type) return
+        this.setState({type:type})
+        let t
+        if(type == "返现券"){
+            t = '1'
+        }else if(type == "返息券"){
+            t = '0'
+        }else{
+            t = '2'
+        }
+        resetCouponPageNo()
+        setCouponType(t)
     }
 
     render() {
         let { history } = this.props
-        let { type, list,number } = this.props.user_coupon.data.coupon
-        let current_tab = list[type]
+        let { totalCount, records } = this.props.user_coupon.coupon_data
+        let { type } = this.state
 
         let tab_func = (item, index) => {
             return <div styleName={item == type ? "tabItem tabItemOn" : "tabItem"} key={index}
-                        onClick={() => this.tabHandler(item)}>{list[item].name} </div>
+                        onClick={() => this.typeHanlder(item)}>{item} </div>
         }
 
         let record_item = (item, index) => {
@@ -63,15 +75,15 @@ class TransferRecord extends React.Component {
         return <div>
             <Header title="转赠记录" history={history}/>
             <div styleName="tabWrapper">
-                {['1', '0', '2'].map(tab_func)}
+                {['返现券', '返息券', '返金券'].map(tab_func)}
             </div>
             <div styleName="recordCount">
                 <div styleName="recordLeft">
-                    <div>已赠送{current_tab.name}</div>
-                    <div><span styleName="totalNumber">{number}</span>张</div>
+                    <div>已赠送{type}</div>
+                    <div><span styleName="totalNumber">{totalCount}</span>张</div>
                 </div>
             </div>
-            {list && list.length>0?list.map(record_item):empty}
+            {records && records.length>0?records.map(record_item):empty}
         </div>
     }
 }
