@@ -170,7 +170,7 @@
 .submitProtocol {
     width: 690px;
     margin: 30px 0 0 30px;
-    font-size: 28px;
+    font-size: 24px;
     color: #999999;
     line-height: 30px;
     padding-bottom: 300px;
@@ -180,7 +180,7 @@
     width: 34px;
     height: 34px;
     display: inline-block;
-    background: url("../../images/reserve/apply/procotol-checked.png") no-repeat center;
+    background: url("../../images/reserve-bid/apply/procotol-checked.png") no-repeat center;
     vertical-align: middle;
 }
 
@@ -188,7 +188,7 @@
     width: 34px;
     height: 34px;
     display: inline-block;
-    background: url("../../images/reserve/apply/protocol-unchecked.png") no-repeat center;
+    background: url("../../images/reserve-bid/apply/protocol-unchecked.png") no-repeat center;
     vertical-align: middle;
 }
 

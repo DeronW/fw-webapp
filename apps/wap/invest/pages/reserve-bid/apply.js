@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Header} from '../../components/'
-import styles from '../../css/reserve/apply.css'
+import styles from '../../css/reserve-bid/apply.css'
 import {Components} from 'fw-javascripts'
 import {NativeBridge} from '../../helpers/'
 

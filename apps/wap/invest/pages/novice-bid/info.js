@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Header} from '../../components/'
-import styles from '../../css/reserve/info.css'
+import styles from '../../css/novice-bid/info.css'
 import {NativeBridge} from '../../helpers'
 
 @inject('reserve')
@@ -11,7 +11,7 @@ import {NativeBridge} from '../../helpers'
 class ReserveInfoNovice extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0)
-        // NativeBridge.trigger('hide_header')
+        NativeBridge.trigger('hide_header')
         this.props.reserve.fetchNoviceProduct()
     }
 

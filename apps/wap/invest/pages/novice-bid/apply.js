@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Header} from '../../components/'
-import styles from '../../css/reserve/apply.css'
+import styles from '../../css/novice-bid/apply.css'
 import {Components} from 'fw-javascripts'
 import {NativeBridge} from '../../helpers/'
 
@@ -11,7 +11,7 @@ import {NativeBridge} from '../../helpers/'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveApplyNovice extends React.Component {
     componentDidMount() {
-
+        window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
         this.props.reserve.fetchNoviceProduct()
     }
@@ -30,6 +30,11 @@ class ReserveApplyNovice extends React.Component {
     allMadeHandler = () => {
         let {reserve} = this.props
         this.props.reserve.setFormData('reserveMoney', reserve.novice_bid_data.accountAmount, 'novice_bid_data')
+    }
+
+    protocolHandler = () => {
+        let {history} = this.props
+        history.push(`/reserve/protocol`)
     }
 
     render() {
@@ -83,18 +88,50 @@ class ReserveApplyNovice extends React.Component {
             return <div styleName="couponPanel">
                 <div styleName="couponLeft">
                     <span styleName="iconChecked"></span>
-                    使用优惠券
+                    <span styleName="couponLeftText">使用优惠券</span>
                 </div>
-                <div styleName="couponRight"></div>
+                <div styleName="couponRight">
+                    <span styleName="rightRed">&yen;20</span>返现券，满<span styleName="rightRed">&yen;2000</span>可用
+                </div>
             </div>
         }
-        return <div>
+
+        let procotol_panel = () => {
+            return <div styleName="submitProtocol protocolNovice">
+                <span styleName="protocolText">本人已阅读并签署
+                    <span styleName="applyProtocol" onClick={this.protocolHandler}>
+                        《预约协议》
+                    </span>
+                </span>
+            </div>
+        }
+
+        let novice_intro = () => {
+            return <div styleName="introPanel">
+                新手标简介
+                <br/>1、您投的新手标所匹配的资产是期限为21天消费贷，即工场微金预约宝产品。
+                <br/>2、结果可在金融工场app-我的-点击预约宝(非预约按钮)预约记录中查看。
+                <br/>3、2%奖励将以工豆形式在标的起息后发到您的工豆账户中。
+                <br/>4、奖励工豆可在您再次出借时抵现（100个工豆=1元）。
+                5、工豆是平台对新用户的奖励，不可提现。
+            </div>
+        }
+
+        let bottom_panel = () => {
+            return <div styleName="submitBtnContainer">
+                <div styleName="submitBtn" onClick={this.applyHandler}>立即预约</div>
+            </div>
+        }
+        return <div styleName="applyPanel">
             <Header title="新手标抢购" history={history}/>
             {submit_panel()}
             <div styleName="interval"></div>
             {amount_panel()}
             <div styleName="interval"></div>
-            {}
+            {coupon_panel()}
+            {procotol_panel()}
+            {novice_intro()}
+            {bottom_panel()}
         </div>
     }
 }

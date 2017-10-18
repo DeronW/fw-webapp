@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Event, Components} from 'fw-javascripts'
 
-import styles from '../../css/reserve/records.css'
+import styles from '../../css/reserve-bid/records.css'
 import Header from '../../components/header'
 import showConfirm from '../../components/confirm'
 import {NativeBridge} from '../../helpers'
@@ -57,7 +57,7 @@ class ReserveRecords extends React.Component {
         let {list} = reserve.records.tab[type]
 
         let no_records = <div styleName="emptyPanel">
-            <img src={require('../../images/reserve/records/norecords.png')}/>
+            <img src={require('../../images/reserve-bid/records/norecords.png')}/>
             <div styleName="norecords-text">暂无预约</div>
         </div>
 
