@@ -18,6 +18,7 @@ class Rebate extends React.Component {
         this.props.user.fetGraphData('11')
         this.props.user.resetPageNo()
         this.props.user.fetchCustList()
+        this.props.user.fetchRebateInfo()
         Event.touchBottom(this.props.user.fetchCustList)
     }
 
@@ -32,12 +33,12 @@ class Rebate extends React.Component {
 
     switchTabHandler = (index) => {
         let {type} = this.props.user.data.rebate_cust
-        let {resetType} = this.props.user
+        let {setType} = this.props.user
         this.setState({tab_num: index})
         console.log(type, index)
         console.log(type == index)
         if (type == index) return
-        resetType(index)
+        setType(index+1)
     }
 
     chartTabHandler = (index) => {
@@ -83,17 +84,29 @@ class Rebate extends React.Component {
     render() {
         let {history} = this.props;
         let {tab_num} = this.state;
-        let {rebate_graph, rebate_cust} = this.props.user.data
+        let {rebate_graph, rebate_cust,rebate_info} = this.props.user.data
         let {type, list} = this.props.user.data.rebate_cust
         let current_list = list[type], current_pageNo = current_list.page_no
+        console.log(rebate_graph)
         let tabs = ['全部', '微金', '尊享', '黄金']
         let tab_func = (item, index) => {
             return <div key={index} styleName={tab_num == index ? "tab tabActive" : "tab"}
-                        onClick={() => this.switchTabHandler(index+1)}>
+                        onClick={() => this.switchTabHandler(index)}>
                 {item}
             </div>
         }
-
+        let itemFn = (item,index) => {
+            return <div styleName="itemDetail" key={item.custId+index} onClick={() => this.gotoHandler(item.custId)}>
+                <div styleName="detailLine">
+                    <div styleName="detailLeft">{item.custRealName}</div>
+                    <div styleName="detailRight">¥{item.alreadyRebate}</div>
+                </div>
+                <div styleName="detailLine">
+                    <div styleName="detailLeft userDes">{item.prdName} | {item.annualRate} | {item.repayPeriod}</div>
+                    <div styleName="detailRight userDate">{item.applyDate}</div>
+                </div>
+            </div>
+        }
         let all_section = () => {
             let {chart_num} = this.state
             let chart_func = (item, index) => {
@@ -105,11 +118,9 @@ class Rebate extends React.Component {
             return <div>
                 <div styleName="allChart">
                     <div styleName="chartWrapper">
-                        {/*{chart_num == '0' &&*/}
-                        {/*<ReactEcharts*/}
-                        {/*option={this.getOption(rebate_graph.updateTime, rebate_graph.timeDimensionList, rebate_graph.rebateAmtList)}*/}
-                        {/*style={{height: '100%', width: '100%'}}*/}
-                        {/*styleName='echarts'/>}*/}
+                        {/*<ReactEcharts option={this.getOption(rebate_graph.updateTime, rebate_graph.timeDimensionList, rebate_graph.rebateAmtList)}
+                        style={{height: '100%', width: '100%'}}
+                        styleName='echarts'/>*/}
                     </div>
 
                     <div styleName="chartTab">
@@ -120,46 +131,27 @@ class Rebate extends React.Component {
                     <div styleName="dataLine">
                         <div styleName="lineItem">
                             <div styleName="name">总返利</div>
-                            <div styleName="count">¥100,000,000.00</div>
+                            <div styleName="count">¥{rebate_info.totalRebate}</div>
                         </div>
                         <div styleName="lineItem">
                             <div styleName="name">今日返利</div>
-                            <div styleName="count">¥4.06</div>
+                            <div styleName="count">¥{rebate_info.todayRebate}</div>
                         </div>
                     </div>
                     <div styleName="dataLine lastLine">
                         <div styleName="lineItem">
                             <div styleName="name">已发返利</div>
-                            <div styleName="count">¥4.06</div>
+                            <div styleName="count">¥{rebate_info.issuedRebate}</div>
                         </div>
                         <div styleName="lineItem">
                             <div styleName="name">待发返利</div>
-                            <div styleName="count">¥4.06</div>
+                            <div styleName="count">¥{rebate_info.pendingRebate}</div>
                         </div>
                     </div>
                 </div>
                 <div styleName="users">
                     <div styleName="userItem">
-                        <div styleName="itemDetail" onClick={() => this.gotoHandler()}>
-                            <div styleName="detailLine">
-                                <div styleName="detailLeft">李丽华</div>
-                                <div styleName="detailRight">¥7000.00</div>
-                            </div>
-                            <div styleName="detailLine">
-                                <div styleName="detailLeft userDes">利随享28930 | 8.5% | 48天</div>
-                                <div styleName="detailRight userDate">2017-08-13 00:00:00</div>
-                            </div>
-                        </div>
-                        <div styleName="itemDetail" onClick={() => this.gotoHandler()}>
-                            <div styleName="detailLine">
-                                <div styleName="detailLeft">李丽华</div>
-                                <div styleName="detailRight">¥7000.00</div>
-                            </div>
-                            <div styleName="detailLine">
-                                <div styleName="detailLeft userDes">利随享28930 | 8.5% | 48天</div>
-                                <div styleName="detailRight userDate">2017-08-13 00:00:00</div>
-                            </div>
-                        </div>
+                        {current_list.custList&&current_list.custList.map(itemFn)}
                         {(current_pageNo == '0' && current_list.custList.length > 0 ) && <div>已经全部加载完毕</div>}
                     </div>
                 </div>

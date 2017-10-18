@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/loan-fq-form.css'
 import { observer, inject } from 'mobx-react'
-import { Header } from '../../lib/components'
+import { Header, CitySelector } from '../../lib/components'
 import { Utils, Components } from 'fw-javascripts'
 import { Post, NativeBridge, Browser, Storage } from '../../lib/helpers'
 
@@ -323,63 +323,86 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
     /* parameters
         <SelectItem field="" history={history} />
     */
-    const SelectItem = inject('fq')(observer(CSSModules((props) => {
-        let { fq, field, immutable, history } = props;
-        let new_array = [];
+    @inject('fq')
+    @observer
+    @CSSModules(styles)
+    class SelectItem extends React.Component {
 
-        if (field == 'term') {
-            let pool = Model[field].option_pool;
-            Model[field].options = [pool[1], pool[2], pool[3]];
-            if (fq.put_in_data.balance > 3000) {
-                Model[field].options = [pool[1], pool[2], pool[3]]
-            }
-            if (fq.put_in_data.balance > 5000) {
-                Model[field].options = [pool[2], pool[3], pool[4], pool[5]]
-            }
-            if (fq.put_in_data.balance > 20000) {
-                Model[field].options = [pool[3], pool[4], pool[5]]
-            }
+        constructor(props){
+            super(props)
         }
-
-        let itemOptions = Model[field].options.map((o)=>{new_array.push(o["text"])});
-
-        var itemValue = fq.put_in_data[field];      
         
-        if(Model[field].options !== undefined){
-            let index = Model[field].options.findIndex(i=>i["value"] == itemValue);
-            let indexOption = Model[field].options[index];
-            if(indexOption !== undefined){
-                itemValue = indexOption.text
-            }
+        changeHandler = (v) => {
+            this.props.fq.put_in_data['city'] = v;
+            this.closeHandler();
         }
-    
-        let gen_options = (optValue) => {
-            let optStyleName = optValue === itemValue ? 'selected-option' : 'unselected-option';
+
+        closeHandler = () => {
+            location.href = '/static/loan/products/index.html#/loan-fq-form'
+        }
+
+        render(){
+            let { fq, field, immutable, history } = this.props;
+            let new_array = [];
+
+            if (field == 'term') {
+                let pool = Model[field].option_pool;
+                Model[field].options = [pool[1], pool[2], pool[3]];
+                if (fq.put_in_data.balance > 3000) {
+                    Model[field].options = [pool[1], pool[2], pool[3]]
+                }
+                if (fq.put_in_data.balance > 5000) {
+                    Model[field].options = [pool[2], pool[3], pool[4], pool[5]]
+                }
+                if (fq.put_in_data.balance > 20000) {
+                    Model[field].options = [pool[3], pool[4], pool[5]]
+                }
+            }
+
+            let itemOptions = Model[field].options.map((o)=>{new_array.push(o["text"])});
+
+            var itemValue = fq.put_in_data[field];      
+            
+            if(Model[field].options !== undefined){
+                let index = Model[field].options.findIndex(i=>i["value"] == itemValue);
+                let indexOption = Model[field].options[index];
+                if(indexOption !== undefined){
+                    itemValue = indexOption.text
+                }
+            }
+
+            let gen_options = (optValue) => {
+                let optStyleName = optValue === itemValue ? 'selected-option' : 'unselected-option';
+                return (
+                    <div key={optValue}
+                        className={styles[optStyleName]}
+                        onClick={() => { fq.setPanelData(history, field, optValue)}}>
+                        {optValue}
+                    </div>
+                )
+            }
+
+            const selectOptions = field == 'city' ? 
+                <CitySelector selected={fq.put_in_data['city']} changeHandler={v=>this.changeHandler(v)} closeHandler={this.closeHandler}/>
+             : (
+                <div styleName="option-grp">
+                {new_array.map(gen_options)}
+            </div> )
+
             return (
-                <div key={optValue}
-                    className={styles[optStyleName]}
-                    onClick={() => { fq.setPanelData(history, field, optValue)}}>
-                    {optValue}
+                <div>
+                    <div styleName="select-label">{`选择${Model[field].name}`}</div>
+                    {selectOptions}
                 </div>
             )
         }
-
-        return (
-            <div>
-                <div styleName="select-label">{`选择${Model[field].name}`}</div>
-                <div styleName="option-grp">
-                    {new_array.map(gen_options)}
-                </div>
-            </div>
-        )
-    }, styles)))
-    
+    }
     
     @inject('fq')
     @observer
     @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
     class FqForm extends React.Component {
-    
+
         componentDidMount() {
             document.title = '借款申请';
             this.props.fq.fetchPutInData();
@@ -409,7 +432,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                             <DisplayItem field="idCard" history={history} immutable />
                             <DisplayItem field="creditCard" history={history} />
                             <DisplayItem field="email" history={history} />
-                            {/*<DisplayItem field="city" history={history}/>*/}
+                            <DisplayItem field="city" history={history}/>
                             <DisplayItem field="address" history={history}/>
                             <DisplayItem field="homeSituation" history={history}/>
                         </div>
