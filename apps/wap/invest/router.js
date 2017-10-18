@@ -36,7 +36,6 @@ export default (stores) => {
                 <Route exact path="/novice-bid/info" component={NoviceBid.Info}/>
                 <Route exact path="/novice-bid/apply" component={NoviceBid.Apply}/>
                 <Route exact path="/novice-bid/protocol" component={NoviceBid.Protocol}/>
-                <Route exact path="/novice-bid/records" component={NoviceBid.Records}/>
                 <Route exact path="/novice-bid/success" component={NoviceBid.Success}/>
 
                 {/* 杂项页面 */}

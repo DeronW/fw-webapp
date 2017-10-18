@@ -12,7 +12,7 @@ import {NativeBridge} from '../../helpers'
 class ReserveSuccess extends React.Component {
     toRecordsHandler = () => {
         let {history} = this.props
-        history.push('/novice-bid/records')
+        history.push('/reserve-bid/records')
     }
 
     toHomeHandler = () => {
