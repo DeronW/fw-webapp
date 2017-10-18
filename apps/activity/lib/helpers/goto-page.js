@@ -6,7 +6,7 @@ const PROTOCOL = location.protocol;
 
 const LINKS = {
     '投资': {
-        web: PROTOCOL + '//www.9888keji.com/prdClaims/list.shtml',
+        web: PROTOCOL + '//www.9888keji.com',
         mobile: PROTOCOL + '//m.9888.cn/mpwap',
         app: '投资'
     },
