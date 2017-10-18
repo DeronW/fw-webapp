@@ -90,19 +90,12 @@ const OUTSIDE_PAGES = [
     // 'p2p-topic-invest-school', //微金投资学堂页面
 // ]
 
-// const REFACTOR_PAGES = [{
-//     name: 'invest',
-//     compiler: 'webpack'
-// }]
-
 APP_NAMES.push(
     ...USER_PAGES,
     ...TOPIC_PAGES,
     // ...HUISHANG_PAGES,
-    // ...NOTICE_PAGES,
     ...SHOUSHAN, // 这是给首山提现用的页面
     // ...OUTSIDE_PAGES,
-    // ...P2P,
     {
         name: 'invest',
         compiler: 'webpack'
