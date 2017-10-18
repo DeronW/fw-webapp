@@ -127,9 +127,19 @@ class SelectItem extends React.Component {
 
     _MODEL = TAB_MODEL[this.props.field]
 
-    state = { expandOptions: false }
+    state = { expandOptions: false, expandIconDeg: 45 }
 
-    toggleExpand = () => this.setState({ expandOptions: !this.state.expandOptions })
+    toggleExpand = () => {
+        const { expandOptions } = this.state;
+
+        this.setState({ expandOptions: !expandOptions })
+        const interval = setInterval(() => {
+            const { expandOptions, expandIconDeg } = this.state;
+            this.setState({ expandIconDeg: expandOptions ? (expandIconDeg + 10) : (expandIconDeg - 10) }, () => {
+                if (this.state.expandIconDeg == 45 || this.state.expandIconDeg == 135) clearInterval(interval)
+            })
+        }, 20)
+    }
 
     handleChange = v => {
         this.props.changeHandler(this.props.field, v)
@@ -152,7 +162,7 @@ class SelectItem extends React.Component {
         const { field, value } = this.props,
             { name, options } = this._MODEL;
 
-        const { expandOptions } = this.state;
+        const { expandOptions, expandIconDeg } = this.state;
 
         const selectOptions = field == 'city' ? (
             <CitySelector selected={value} changeHandler={v => this.handleChange(v)} closeHandler={this.toggleExpand} />
@@ -163,11 +173,16 @@ class SelectItem extends React.Component {
 
         const selectedValue = field == 'city' ? value : options[value];
 
+        const expandIconStyle = {
+            WebkitTransform: `rotate(${expandIconDeg}deg)`,
+            transform: `rotate(${expandIconDeg}deg)`
+        }
+
         return <div>
             <div styleName="item">
                 <div styleName="item-name">{name}</div>
                 <div styleName="expand-icon" onClick={this.toggleExpand}>
-                    <i styleName="fake-arrow"></i>
+                    <i style={expandIconStyle} styleName="fake-arrow"></i>
                 </div>
                 <div style={{ color: value ? '#333' : '#999' }}
                     styleName="item-value"

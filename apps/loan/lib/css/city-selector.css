@@ -30,6 +30,7 @@
 
 .close-btn {
     position: fixed;
+    z-index: 1300;
     top: 0;
     right: 0;
     width: 100px;
