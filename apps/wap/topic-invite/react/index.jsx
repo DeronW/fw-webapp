@@ -1,1 +1,1 @@
-$FW.DOMReady(function () {NativeBridge.setTitle('邀请返利')});
+// $FW.DOMReady(function () {NativeBridge.setTitle('邀请返利')});
