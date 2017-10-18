@@ -33,7 +33,7 @@ const Ajax = options => {
     })
 }
 
-const Get = (url, params, silence = false) => {
+const Get = (url, params, silence = true) => {
     return Ajax({
         url: url,
         method: 'GET',
