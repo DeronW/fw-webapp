@@ -97,7 +97,7 @@ const OUTSIDE_PAGES = [
 
 APP_NAMES.push(
     ...USER_PAGES,
-    // ...TOPIC_PAGES,
+    ...TOPIC_PAGES,
     // ...HUISHANG_PAGES,
     // ...NOTICE_PAGES,
     ...SHOUSHAN, // 这是给首山提现用的页面
