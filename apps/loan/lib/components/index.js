@@ -7,6 +7,7 @@ import Header from './header.js'
 import BottomNavBar from './bottom-nav-bar.js'
 import Bulletin from './bulletin.js'
 import BlueAlert from './blue-alert.js'
+import CitySelector from './city-selector.js'
 
 let showBulletin = text => {
     return new Promise((resolve, reject) => {
@@ -37,4 +38,10 @@ let showBlueAlert = function (title, options) {
     })
 }
 
-export {Header, BottomNavBar, showBulletin, showBlueAlert}
+export {
+    Header,
+    BottomNavBar,
+    showBulletin,
+    showBlueAlert,
+    CitySelector
+}

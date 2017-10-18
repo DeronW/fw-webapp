@@ -6,31 +6,32 @@ export default class InvestorAccount {
         this.Get = Get
         this.Post = Post
         this.data = {}
-        extendObservable(this.data, {
-            zx: {
+        this.data_zx = {}
+        extendObservable(this.data_zx,{
+            detail:{
                 info: {},
                 type: '0',
                 payments: {
                     '0': {name: '未回', pageNo: 1, list: []},
                     '1': {name: '已回', pageNo: 1, list: []}
-                },
-                payments_count: null,
-                project:{
-                    info:{},
-                    tab:'100',
-                    record:{
-                        '100':{name:'未起息',pageNo:1,records:[]},
-                        '3':{name:'回款中',pageNo:1,records:[]},
-                        '4':{name:'已回款',pageNo:1,records:[]},
-                    },
-                    transfer_tab:'',
-                    list:{
-                        '':{name:'全部',pageNo:1,lists:[]},
-                        '5':{name:'回款中',pageNo:1,lists:[]},
-                        '6':{name:'已回款',pageNo:1,lists:[]},
-                    }
                 }
             },
+            payments_count: null,
+            project:{
+                info:{},
+                tab:'100',
+                type:'Ta的项目',
+                record:{
+                    '100':{name:'未起息',pageNo:1,records:[]},
+                    '3':{name:'回款中',pageNo:1,records:[]},
+                    '4':{name:'已回款',pageNo:1,records:[]},
+                    '':{name:'全部',pageNo:1,records:[]},
+                    '5':{name:'回款中',pageNo:1,records:[]},
+                    '6':{name:'已回款',pageNo:1,records:[]},
+                }
+            }
+        })
+        extendObservable(this.data, {
             p2p: {
                 info: {}
             },
@@ -74,29 +75,34 @@ export default class InvestorAccount {
         this.Get('/api/finManager/cust/v2/zxPrdInvestInfo.shtml',{
             custId:this.custId
         }).then(data=>{
-            this.data.zx.project.info = data.result
+            this.data_zx.project.info = data.result
         })
     }
 
     resetPageNoZX = () => {
-        let pro = this.data.zx.project
+        let pro = this.data_zx.project
 
         pro.record[pro.tab].pageNO = 1
-        pro.list[pro.transfer_tab].pageNO = 1
     }
     setTabZX = (tab) => {
-        this.data.zx.project.tab = tab
+        this.data_zx.project.tab = tab
     }
-    setTransferTabZX = (tab) => {
-        this.data.zx.project.transfer_tab = tab
+    setTypeZX = (type) => {
+        this.data_zx.project.type = type
     }
     //TA的尊享-投资-TA的项目列表
     fetchProjectZX = (done) => {
-        let { tab,record } = this.data.zx.project
-
+        let url
+        let { tab,record,type } = this.data_zx.project
         if( record[tab].pageNO == 0) return done && done()
         if( record[tab].pageNO == 1) record[tab].records = []
-        this.Get('/api/finManager/cust/v2/zxPrdInvest.shtml',{
+
+        if(type=="Ta的项目"){
+            url='/api/finManager/cust/v2/zxPrdInvest.shtml'
+        }else if(type=="转入项目"){
+            url='/api/finManager/cust/v2/zxPrdInvest.shtml'
+        }
+        this.Get(url,{
             custId:this.custId,
             flag:tab,
             pageNo:record[tab].pageNo,
@@ -104,24 +110,6 @@ export default class InvestorAccount {
         }).then(data=>{
             record[tab].records.push(...data.pageData.result)
             record[tab].pageNO > data.pageData.pagination.totalPage ? record[tab].pageNO++ : record[tab].pageNO = 0
-
-            done()
-        })
-    }
-    //TA的尊享-投资-转入项目
-    fetchTransferProjectZX = (done) => {
-        let { transfer_tab,list } = this.data.zx.project
-
-        if( list[transfer_tab].pageNO == 0) return done && done()
-        if( list[transfer_tab].pageNO == 1) list[transfer_tab].lists = []
-        this.Get('/api/finManager/cust/v2/zxPrdInvest.shtml',{
-            custId:this.custId,
-            flag:transfer_tab,
-            pageNo:list[transfer_tab].pageNo,
-            pageSize:10
-        }).then(data=>{
-            list[transfer_tab].lists.push(...data.pageData.result)
-            list[transfer_tab].pageNO > data.pageData.pagination.totalPage ? list[transfer_tab].pageNO++ : list[transfer_tab].pageNO = 0
 
             done()
         })
@@ -190,13 +178,13 @@ export default class InvestorAccount {
         this.Get('/api/finManager/cust/v2/zxAccount.shtml', {
             custId: this.custId
         }).then(data => {
-            this.data.zx.info = data.result
+            this.data_zx.detail.info = data.result
         })
     }
 
     //尊享  他的回款明细
     fetchZXPayment = (done) => {
-        let {type, payments} = this.data.zx, current_payment = payments[type]
+        let {type, payments} = this.data_zx.detail, current_payment = payments[type]
         const PAGE_SIZE = 10
         if (current_payment.pageNo === 0) return done && done()
         if (current_payment.pageNo == 1) current_payment.list.splice(0, current_payment.list.length)
@@ -206,7 +194,7 @@ export default class InvestorAccount {
             pageSize: PAGE_SIZE,
             status: type
         }).then(data => {
-            this.data.zx.payments_count = data.pageData.pagination.totalCount
+            this.data_zx.payments_count = data.pageData.pagination.totalCount
             current_payment.list.push(...data.result)
             current_payment.pageNo < data.pageData.pagination.totalPage
                 ? current_payment.pageNo++
@@ -217,13 +205,13 @@ export default class InvestorAccount {
 
     //重置尊享回款明细的状态
     resetZXPaymentType = (type) => {
-        this.data.zx.type = type
+        this.data_zx.type = type
         this.fetchZXPayment()
     }
 
     //充值尊享回款明细的页码
     resetZXPaymentPageNo = () => {
-        let {type, payments} = this.data.zx, current_payment = payments[type]
+        let {type, payments} = this.data_zx.detail, current_payment = payments[type]
         current_payment.pageNo = 1
     }
 }
