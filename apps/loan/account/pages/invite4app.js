@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react'
 
 import { BottomNavBar } from '../../lib/components'
 import { Post, Storage, Browser } from '../../lib/helpers'
+import { Utils } from 'fw-javascripts'
 import styles from '../css/invite4app.css'
 
 @inject('account')
@@ -13,27 +14,24 @@ import styles from '../css/invite4app.css'
 class InviteForApp extends React.Component {
 
     state = {
-        link: '',
         show_info: false
-    }
-
-    componentDidMount() {
-        Post('/api/shareTemplate/v1/getContent.json', {
-            channelCode: "OFFICIAL",
-            templateType: 1
-        }).then(data => {
-            this.setState({ link: data.shareTemplate.templateUrl })
-        })
     }
 
     toggleInfo = () => {
         this.setState({ show_info: !this.state.show_info })
     }
 
+    nativeShare = () => {
+        let inviteCode = Utils.hashQuery.yqm;
+        NativeBridge.command.share({
+            title: '掌上钱包，随用随取',
+            image: 'https://static.9888.cn/images/loan/invitation.jpg',
+            link: `https://m.easyloan888.com/static/loan/outside-register/index.html?channelCode=OFFICIAL&invitationCode=${inviteCode}&jumpType=wx`,
+            desc: '缺钱不用愁，注册放心花，借款神器，急速到账'
+        })
+    }
+
     render() {
-
-        let code = Storage.getUserDict().invite_code
-
         let info = <div styleName="info-panel">
             <div styleName="info-panel-cnt ">
                 <div styleName="close-btn" onClick={this.toggleInfo}></div>
@@ -60,10 +58,9 @@ class InviteForApp extends React.Component {
 
         return <div styleName="bg">
             <div styleName="banner">
-                <div styleName="code">我的邀请码：{code}</div>
+                <div styleName="code">我的邀请码：{Utils.hashQuery.yqm}</div>
             </div>
             <a styleName="btn-info" onClick={this.toggleInfo}></a>
-            <div styleName='fxh-panel'>
             <div styleName="share-txt-wrap">
                 <div styleName="share-txt">
                     <div styleName="content-title">放心花</div>
@@ -72,13 +69,9 @@ class InviteForApp extends React.Component {
                     邀请越多，红包越大，最高奖励可达150元！<br />
                     放心花，有钱赚，快来邀友来借款，有！福！同！享！<br />
                 </div>
-             <div styleName="invite-btn"><img src={require("../images/invite4app/invite-btn.jpg")}/></div>
+             <div styleName="invite-btn" onClick={this.nativeShare}><img styleName="invite-btn-img" src={require("../images/invite4app/invite-btn.jpg")}/></div>
             </div>
-
-            </div>
-
             {this.state.show_info && info}
-
         </div>
     }
 }

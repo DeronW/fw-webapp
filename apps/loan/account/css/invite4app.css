@@ -68,7 +68,6 @@
 .share-txt {
     padding: 20px; 
     min-height: 350px;
-    border-radius: 0 4px 4px 4px;
     margin: 0 auto;
     font-size: 24px;
     color: #196b80;
@@ -99,11 +98,6 @@
     width: 512px;
     margin: 0 auto;
     display: block;
-}
-
-.fxh-panel,
-.records-panel {
-    min-height: 490px;
 }
 
 .empty-records {
@@ -225,4 +219,7 @@
     text-align:center;
     color:#196b80;
     margin-bottom:10px;
+}
+.invite-btn-img{
+    vertical-align: middle;
 }
