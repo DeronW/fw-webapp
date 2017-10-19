@@ -271,19 +271,31 @@ class UserInfo extends React.Component {
     }
 
     componentDidMount() {
-        document.title = '个人信息'
+        document.title = '个人信息';
+        this.props.user_info.fetchUserInfo();
     }
 
-    switchTab = tab => () => this.setState({ currentTab: tab })
+    switchTab = tab => () => {
+        if (this.state.showSubmitBtn) return showToast('请先提交当前页信息!')
+        this.setState({ currentTab: tab })
+    }
 
     enableSubmitBtn = () => this.setState({ showSubmitBtn: true })
 
     disableSubmitBtn = () => this.setState({ showSubmitBtn: false })
 
-    changeHandler = (field, v) => {
+    handleChange = (field, v) => {
         const { user_info } = this.props;
         user_info.inputHandler(field, v);
         this.enableSubmitBtn();
+    }
+
+    handleSubmit = () => {
+        this.props.user_info.submitUserInfo().then(() => {
+            this.disableSubmitBtn();
+        }, e => {
+            showToast(e.message);
+        })
     }
 
     render() {
@@ -293,8 +305,8 @@ class UserInfo extends React.Component {
 
         const genInfoItem = field => {
             const value = user_info.data[field];
-            if (TAB_MODEL[field].options || field == 'city') return <SelectItem key={field} field={field} value={value} changeHandler={this.changeHandler} />
-            if (!TAB_MODEL[field].options) return <InputItem key={field} field={field} value={value} changeHandler={this.changeHandler} />
+            if (TAB_MODEL[field].options || field == 'city') return <SelectItem key={field} field={field} value={value} changeHandler={this.handleChange} />
+            if (!TAB_MODEL[field].options) return <InputItem key={field} field={field} value={value} changeHandler={this.handleChange} />
         }
 
         return <div styleName="bg">
@@ -340,7 +352,7 @@ class UserInfo extends React.Component {
                 </div>
             </div> }
 
-            { showSubmitBtn && <div styleName="submit-btn" onClick={user_info.submitUserInfo}>提交</div> }
+            { showSubmitBtn && <div styleName="submit-btn" onClick={this.handleSubmit}>提交</div> }
 
         </div>
     }
