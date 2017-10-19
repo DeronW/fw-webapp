@@ -89,10 +89,7 @@ export default class UserInfo {
             workExperience: this.data.workExperience
         };
 
-        return this.Post('/api/userBase/v1/saveUserInfo.json', submitData).then(data => {
-            this.setInfoData(data);
-            showToast('信息已提交');
-        }, e => new Promise((res, rej) => rej(e)) )
+        return this.Post('/api/userBase/v1/saveUserInfo.json', submitData)
     }
 
 }

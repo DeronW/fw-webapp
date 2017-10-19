@@ -14,11 +14,13 @@ const TAB_MODEL = {
     realName: {
         name: '姓名',
         placeholder: '未实名',
+        disabled: true,
     },
     idCard: {
         name: '身份证号',
         type: 'number',
         placeholder: '未实名',
+        disabled: true,
     },
     creditCard: {
         name: '信用卡',
@@ -91,9 +93,9 @@ const TAB_MODEL = {
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class InputItem extends React.Component {
     /* props:
-        field           | !string,
-        value           | !string,
-        changeHandler   | !function
+        field           | ! string,
+        value           | ! string,
+        changeHandler   | ! function
     */
 
     _MODEL = TAB_MODEL[this.props.field]
@@ -102,11 +104,12 @@ class InputItem extends React.Component {
 
     render() {
         const { field, value } = this.props,
-            { name, type, placeholder } = this._MODEL;
+            { name, type, placeholder, disabled } = this._MODEL;
         return <div styleName="item">
             <div styleName="item-name">{name}</div>
             <input styleName="item-value"
                 type={type || "text"}
+                disabled={!!disabled}
                 placeholder={placeholder || "请填写"}
                 value={value}
                 onChange={this.handleChange} />
@@ -120,9 +123,9 @@ class InputItem extends React.Component {
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class SelectItem extends React.Component {
     /* props:
-        field           | !string,
-        value           | !string,
-        changeHandler   | !function
+        field           | ! string,
+        value           | ! string,
+        changeHandler   | ! function
     */
 
     _MODEL = TAB_MODEL[this.props.field];
@@ -292,6 +295,7 @@ class UserInfo extends React.Component {
 
     handleSubmit = () => {
         this.props.user_info.submitUserInfo().then(() => {
+            showToast('信息已提交');
             this.disableSubmitBtn();
         }, e => {
             showToast(e.message);
