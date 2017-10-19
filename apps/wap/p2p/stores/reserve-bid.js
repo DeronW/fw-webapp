@@ -1,10 +1,9 @@
 import {extendObservable, computed} from 'mobx'
 import {Components, Utils, Event} from 'fw-javascripts'
 
-export default class Reserve {
+export default class ReserveBid {
     constructor(Post) {
         this.Post = Post
-        this.novice_bid_data = {}
         this.bid_data = {}
         this.records = {}
 
@@ -32,25 +31,8 @@ export default class Reserve {
             reserveMoney: '',//用户输入的预约金额
             isChecked: true,
             contractMsg: '',
-            isCompany: null
-        })
-
-        extendObservable(this.novice_bid_data, {
-            context: {
-                avgLoanPeriod: '',
-                bookValidPeriod: null,
-                id: null,
-                loadRate: '',
-                minAmt: '',
-                repayPeriod: '',
-            },
-            accountAmount: null,
-            isRisk: 0,
-            batchMaxmum: 0,
-            reserveMoney: '',
-            isChecked: true,
-            contractMsg: '',
-            isCompany: null
+            isCompany: null,
+            bidList: []
         })
     }
 
@@ -75,25 +57,6 @@ export default class Reserve {
                 isRisk: bid_data.isRisk,
                 batchMaxmum: bid_data.batchMaxmum,
                 isCompany: bid_data.isCompany
-            }
-        })
-    }
-
-    fetchNoviceProduct = () => {
-        return this.Post('/api/v1/intoAppointPage.shtml', {
-            applyInvestClaimId: this.applyInvestClaimId
-        }).then(data => {
-            let novice_data = this.novice_bid_data
-            novice_data.context = data.appointClaim
-            novice_data.accountAmount = data.accountAmount
-            novice_data.isRisk = data.isRisk
-            novice_data.batchMaxmum = data.batchMaxmum
-            novice_data.minAmt = data.appointClaim.minAmt
-            novice_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
-            return {
-                isRisk: novice_data.isRisk,
-                batchMaxmum: novice_data.batchMaxmum,
-                isCompany: novice_data.isCompany
             }
         })
     }
@@ -142,18 +105,6 @@ export default class Reserve {
         })
     }
 
-    submitNoviceHandler = () => {
-        return this.Post('/api/v1/intoAppointPage.shtml', {
-            applyInvestClaimId: this.applyInvestClaimId
-        }).then((data) => {
-            return this.Post('/api/v1/investAppoint.shtml', {
-                applyAmt: this.novice_bid_data.reserveMoney,
-                applyInvestClaimId: this.novice_bid_data.context.id,
-                bookInvestToken: data.bookInvestToken
-            })
-        })
-    }
-
     cancelHandler = (id) => {
         return this.Post('/api/v1/cancelAppoint.shtml', {
             applyId: id
@@ -166,6 +117,13 @@ export default class Reserve {
             return {
                 contractMsg: this.bid_data.contractMsg
             }
+        })
+    }
+
+    //获取聚合页标的列表
+    fetchBidList = () => {
+        this.Post('/api/appointInvest/v2/appointInvestList.shtml').then(data => {
+            console.log(data)
         })
     }
 

@@ -6,7 +6,7 @@ import Header from '../../components/header'
 import {NativeBridge} from '../../helpers'
 
 
-@inject('reserve')
+@inject('novice_bid')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveSuccess extends React.Component {
@@ -17,6 +17,7 @@ class ReserveSuccess extends React.Component {
 
     toHomeHandler = () => {
         let {history} = this.props
+        // 跳到首页
     }
 
     render() {

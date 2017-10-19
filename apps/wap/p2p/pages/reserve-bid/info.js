@@ -6,7 +6,7 @@ import styles from '../../css/reserve-bid/info.css'
 import {NativeBridge} from '../../helpers'
 import {Browser} from '../../helpers'
 
-@inject('reserve')
+@inject('reserve_bid')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveInfo extends React.Component {
@@ -14,19 +14,19 @@ class ReserveInfo extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
-        this.props.reserve.fetchProduct()
+        this.props.reserve_bid.fetchProduct()
     }
 
     reserveHandler = () => {
-        let {history, reserve} = this.props
-        reserve.fetchProduct().then(data => {
+        let {history, reserve_bid} = this.props
+        reserve_bid.fetchProduct().then(data => {
             if (data.isRisk == 0) {
-                location.href = `/static/wap/p2p/index.html#/evaluate?from_reserve&applyInvestClaimId=${reserve.applyInvestClaimId}`
+                location.href = `/static/wap/p2p/index.html#/evaluate?from_reserve&applyInvestClaimId=${reserve_bid.applyInvestClaimId}`
             } else if (data.batchMaxmum === 0) {
                 //调到自动投资页面
                 NativeBridge.toNative('auto_bid_auth')
             } else {
-                history.push(`/reserve/apply?applyInvestClaimId=${reserve.applyInvestClaimId}`)
+                history.push(`/reserve-bid/apply?applyInvestClaimId=${reserve_bid.applyInvestClaimId}`)
             }
         })
     }
@@ -37,8 +37,8 @@ class ReserveInfo extends React.Component {
     }
 
     render() {
-        let {reserve, history} = this.props
-        let {context} = reserve.bid_data
+        let {reserve_bid, history} = this.props
+        let {context} = reserve_bid.bid_data
         let banner_section = () => {
             return <div styleName="topInfo">
                 <div styleName="infoRate">

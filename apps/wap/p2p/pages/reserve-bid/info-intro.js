@@ -5,7 +5,7 @@ import {Header} from '../../components/'
 import styles from '../../css/reserve-bid/info.css'
 import {NativeBridge} from '../../helpers'
 
-@inject('reserve')
+@inject('reserve_bid')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveInfoIntro extends React.Component {
@@ -16,6 +16,7 @@ class ReserveInfoIntro extends React.Component {
 
     componentDidMount() {
         window.scrollTo(0, 0)
+        this.props.reserve_bid.fetchBidList()
     }
 
     rulerControlHandler = () => {
@@ -31,24 +32,35 @@ class ReserveInfoIntro extends React.Component {
         history.push('/reserve-bid/faq')
     }
 
+    toInfoHandler = (id) => {
+        let {history} = this.props
+        history.push(`/reserve-bid/info?applyInvestClaimId=${id}`)
+    }
+
+    toApplyHandler = (id) => {
+        let {history} = this.props
+        //是否加上判断
+        history.push(`/reserve-bid/apply?applyInvestClaimId=${id}`)
+    }
+
     render() {
-        let {reserve, history} = this.props
+        let {reserve_bid, history} = this.props
         let banner_section = () => {
             return <div styleName="introBanner"></div>
         }
         let bid_section = () => {
             return <div styleName="bidBox">
                 <div styleName="bidItem">
-                    <div styleName="itemCeil ceilOne">
+                    <div styleName="itemCeil ceilOne" onClick={() => this.toInfoHandler(1)}>
                         <div styleName="ceilUp">6<span>%</span></div>
                         <div styleName="ceilDown">预期年化利率</div>
                     </div>
-                    <div styleName="itemCeil ceilTwo">
+                    <div styleName="itemCeil ceilTwo" onClick={() => this.toInfoHandler(1)}>
                         <div styleName="ceilUp">21天</div>
                         <div styleName="ceilDown">期限</div>
                     </div>
                     <div styleName="itemBtn">
-                        <div styleName="btn">抢购</div>
+                        <div styleName="btn" onClick={() => this.toApplyHandler(1)}>抢购</div>
                     </div>
                 </div>
             </div>

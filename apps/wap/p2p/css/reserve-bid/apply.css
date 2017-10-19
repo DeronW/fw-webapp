@@ -7,26 +7,28 @@
 
 .submitPanel {
     width: 100%;
-    background: #ebebee;
+    background: #fff;
     color: #333;
     font-size: 32px;
     box-sizing: border-box;
-    padding-top: 20px;
+    margin-top: 20px;
 }
 
 .reserveMoney {
     box-sizing: border-box;
-    height: 70px;
-    line-height: 70px;
+    height: 50px;
+    line-height: 50px;
     padding-left: 30px;
     width: 100%;
     background: #fff;
+    font-size: 24px;
+    color: #999;
 }
 
 .userMoney {
     color: #555;
     font-size: 30px;
-    padding: 14px 30px 30px 30px;
+    padding: 4px 30px 30px 30px;
     width: 100%;
     box-sizing: border-box;
     background: #fff;
@@ -55,12 +57,12 @@
     float: right;
     width: 100px;
     height: 44px;
-    background: #fd4d4c;
     font-size: 26px;
-    color: #fff;
+    color: #7c9dc7;
     line-height: 44px;
-    border-radius: 24px;
+    border-radius: 22px;
     text-align: center;
+    border: solid 2px #7c9dc7;
 }
 
 .inputMoney {
@@ -224,5 +226,46 @@
 }
 
 .rightRed {
+    color: #fd4d4c;
+}
+
+.typeTitle {
+    padding: 30px 0 30px 30px;
+}
+
+.typeSubtitle {
+    font-size: 24px;
+    color: #999;
+    padding: 0 0 10px 30px;
+}
+
+.typeText {
+    width: 660px;
+    height: 56px;
+    display: table;
+    padding: 0 30px 30px;
+}
+
+.typeItem {
+    float: left;
+    font-size: 26px;
+    color: #555;
+    padding: 8px 16px;
+    border: solid 2px #e3e5ea;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+
+.color9 {
+    color: #999;
+}
+
+.typeItemChecked {
+    color: #fd4d4c;
+    border: solid 2px #fd4d4c;
+    background: url("../../images/reserve-bid/apply/icon-checked.png") no-repeat right bottom;
+}
+
+.typeItemChecked .color9 {
     color: #fd4d4c;
 }
