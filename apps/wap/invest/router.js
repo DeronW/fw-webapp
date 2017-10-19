@@ -6,8 +6,6 @@ import {
     Switch
 } from 'react-router-dom'
 
-import * as ReserveBid from './pages/reserve-bid'
-import * as NoviceBid from './pages/novice-bid'
 import * as User from './pages/user'
 import * as Features from './pages/features'
 import * as Faxian from './pages/fa-xian'
