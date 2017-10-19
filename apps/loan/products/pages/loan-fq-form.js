@@ -338,7 +338,8 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         }
 
         closeHandler = () => {
-            location.href = '/static/loan/products/index.html#/loan-fq-form'
+            let {history} = this.props;
+            history.go(-1);
         }
 
         render(){
@@ -373,10 +374,12 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
 
             let gen_options = (optValue) => {
                 let optStyleName = optValue === itemValue ? 'selected-option' : 'unselected-option';
+                let optIndex = Model[field].options.findIndex(i=>i['text'] == optValue);
+                let optIndexValue = Model[field].options[optIndex]['value'];
                 return (
                     <div key={optValue}
                         className={styles[optStyleName]}
-                        onClick={() => { fq.setPanelData(history, field, optValue)}}>
+                        onClick={() => { fq.setPanelData(history, field, optIndexValue)}}>
                         {optValue}
                     </div>
                 )

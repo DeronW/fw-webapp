@@ -15,7 +15,8 @@ let stores = {
     cash_records: new Stores.CashRecords(Request),
     reset_deal_password: new Stores.ResetDealPassword(Request),
     bank_account: new Stores.BankAccount(Request),
-    reserve: new Stores.Reserve(Post),
+    reserve_bid: new Stores.ReserveBid(Post),
+    novice_bid: new Stores.NoviceBid(Post)
 }
 
 render(Withdraw(stores), document.getElementById('cnt'))

@@ -6,24 +6,24 @@ import Header from '../../components/header'
 import {NativeBridge} from '../../helpers'
 
 
-@inject('reserve')
+@inject('reserve_bid')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveProtocol extends React.Component {
 
     componentDidMount() {
         NativeBridge.trigger('hide_header')
-        this.props.reserve.getContractHandler().then(data => {
-            this.props.reserve.bid_data.contractMsg = data.contractMsg
+        this.props.reserve_bid.getContractHandler().then(data => {
+            this.props.reserve_bid.bid_data.contractMsg = data.contractMsg
         })
     }
 
     render() {
-        let {history, reserve} = this.props
+        let {history, reserve_bid} = this.props
 
         return <div styleName="protocol-box">
             <Header noClose title="预约出借服务协议" history={history}/>
-            <div styleName="contractText" dangerouslySetInnerHTML={{__html: reserve.bid_data.contractMsg}}>
+            <div styleName="contractText" dangerouslySetInnerHTML={{__html: reserve_bid.bid_data.contractMsg}}>
             </div>
         </div>
     }
