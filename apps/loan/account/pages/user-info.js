@@ -245,13 +245,13 @@ class SelectItem extends React.Component {
 
         const selectedValue = field == 'city' ? value : options[value];
 
-        return <div>
+        return <div styleName="item-container">
             <div styleName="item">
                 <div styleName="item-name">{name}</div>
                 <div styleName="expand-icon" onClick={this.toggleExpand}>
                     <i style={expandIconStyle} styleName="fake-arrow"></i>
                 </div>
-                <div style={{ color: value != null ? '#333' : '#999' }}
+                <div style={{ color: selectedValue ? '#333' : '#999' }}
                     styleName="item-value"
                     onClick={this.toggleExpand}>
                     {selectedValue || '请选择'}
