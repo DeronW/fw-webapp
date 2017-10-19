@@ -15,14 +15,15 @@ class itemDetial extends React.Component {
     }
 
     componentDidMount(){
-        let {fetchZXPayment,resetZXPaymentPageNo} = this.props.investor_account
+        let {fetchZXPayment,resetZXPaymentPageNo,fetchPaymentP2P,resetP2PPaymentPageNo} = this.props.investor_account
         if(Utils.hashQuery.type === "zx"){
             resetZXPaymentPageNo()
             fetchZXPayment()
             Event.touchBottom(fetchZXPayment)
         }else{
-            // fetchWJPayment()
-            // Event.touchBottom(fetchWJPayment)
+            resetP2PPaymentPageNo()
+            fetchPaymentP2P()
+            Event.touchBottom(fetchPaymentP2P)
         }
     }
     componentWillUnmount() {
@@ -33,18 +34,25 @@ class itemDetial extends React.Component {
         this.setState({tab: tab})
         let t
         if(tab == "未回"){
-            t=0
+            t = 0
         }else{
-            t =1
+            t = 1
         }
-        this.props.investor_account.setZXPaymentType(t)
+        if(Utils.hashQuery.type === "zx"){
+            this.props.investor_account.resetZXPaymentPageNo()
+            this.props.investor_account.setZXPaymentType(t)
+        }else{
+            this.props.investor_account.resetP2PPaymentPageNo()
+            this.props.investor_account.setP2PPaymentType(t)
+        }
+
     }
 
     render() {
         let {history} = this.props
         let {tab} = this.state
         let tabs = ['未回', '已回']
-        let { payments,type,payments_count } = this.props.investor_account.data_zx.detail
+        let { payments,type,totalCount } = this.props.investor_account.data_zx.detail
 
         let tabFn = (item, index) => {
             return <div key={index} styleName={item == tab ? "type typeActive" : "type"}
@@ -95,7 +103,7 @@ class itemDetial extends React.Component {
             <div styleName="types">
                 {tabs.map(tabFn)}
             </div>
-            <div styleName="number">共<span>{payments_count}</span>笔记录</div>
+            <div styleName="number">共<span>{totalCount}</span>笔记录</div>
             <div styleName="records">
                 {payments[type].list.length>0?payments[type].list.map(recordFn):empty}
                 {payments[type].list.length>0 && <div styleName="load">已经全部加载完毕</div>}
