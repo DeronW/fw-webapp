@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 
 import { BottomNavBar } from '../../lib/components'
-import { Post, Storage, Browser } from '../../lib/helpers'
+import { Post, Storage, Browser, NativeBridge } from '../../lib/helpers'
 import { Utils } from 'fw-javascripts'
 import styles from '../css/invite4app.css'
 
