@@ -334,7 +334,6 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         
         changeHandler = (v) => {
             this.props.fq.put_in_data['city'] = v;
-            this.closeHandler();
         }
 
         closeHandler = () => {

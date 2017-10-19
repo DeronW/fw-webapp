@@ -32,11 +32,11 @@ export default class UserInfo {
 
         this._VALIDATOR = {
             ecName: v => {
-                if (v.match(/\d/)) return showToast('联系人姓名不可包含数字!')
-                if (v.length < 2) return showToast('联系人姓名字符长度需在2位以上!')
+                if (v && v.match(/\d/)) return showToast('联系人姓名不可包含数字!')
+                if (v && v.length < 2) return showToast('联系人姓名字符长度需在2位以上!')
             },
             ecPhone: v => {
-                if (isPhoneNum(v)) return showToast('联系人手机格式不正确!')
+                if (v && isPhoneNum(v)) return showToast('联系人手机格式不正确!')
             }
         };
     }
@@ -64,13 +64,32 @@ export default class UserInfo {
         }, e => showToast(e.message))
     }
 
-    submitUserInfo = () => {
-        this.Post('/api/userBase/v1/saveUserInfo.json').then(data => {
-            this.setInfoData(data);
-        }, e => {
-            showToast(e.message);
+    validateData = () => {
+        for (let field in this._VALIDATOR) {
+            const validator = this._VALIDATOR[field],
+                value = this.data[field];
+            validator(value);
+        }
+    }
 
-        })
+    submitUserInfo = () => {
+
+        this.validateData();
+
+        const submitData = {
+            creditCard: this.data.creditCard,
+            email: this.data.email,
+            city: this.data.city,
+            address: this.data.address,
+            homeSituation: this.data.marriage,
+            emContact: this.data.ecName,
+            emRelationship: this.data.ecRelationship,
+            emMobile: this.data.ecPhone,
+            income: this.data.income,
+            workExperience: this.data.workExperience
+        };
+
+        return this.Post('/api/userBase/v1/saveUserInfo.json', submitData)
     }
 
 }
