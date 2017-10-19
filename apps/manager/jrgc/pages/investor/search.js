@@ -49,6 +49,10 @@ class Search extends React.Component {
                 </div>
             </div>
         }
+        let empty = <div styleName="emptyWrapper">
+            <div>该用户不存在</div>
+            <div styleName="emptyLine">请检查筛选条件，只可通过汉字与数字筛选</div>
+        </div>
         return <div styleName="bg">
             <Header title="搜索客户" history={history} />
             <div styleName="searchBar">
@@ -60,7 +64,7 @@ class Search extends React.Component {
                 <div styleName="searchBtn" onClick={this.searchHandler}>搜索</div>
             </div>
             <div styleName="list">
-                {records.records && records.records.length>0&&records.records.map(recordFn)}
+                {search.records && search.records.length>0 ? search.records.map(recordFn):empty}
             </div>
             <div styleName="load">已经全部加载完毕</div>
         </div>

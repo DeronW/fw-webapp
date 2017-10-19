@@ -29,9 +29,8 @@ class Investor extends React.Component {
         setCustTab(t)
 
         let next_tab = sort[t]
-        let next_type = Object.keys(next_tab[0])[0]
-        // let next_type = next_tab[0].value()[0]
-        setCustValue(next_tab[0][next_type])
+        let next_type = Object.values(next_tab[0])[0]
+        setCustValue(next_type)
     }
     switchType = (t,i) => {
         let {resetCustPageNo,setCustType,setCustValue,fetchCustList} = this.props.investor
