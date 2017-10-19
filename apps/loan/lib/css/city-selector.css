@@ -41,17 +41,17 @@
 .capital-letter-nav {
     position: fixed;
     z-index: 2999;
-    top: 327px;
-    right: 15px;
+    top: 318px;
+    right: 9px;
     color: #649cfe;
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
 }
 
 .capital-letter-nav span {
     display: block;
     width: 36px;
-    height: 33px;
+    height: 30px;
 }
 
 .hot-city-label {

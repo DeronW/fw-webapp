@@ -17,9 +17,10 @@ class zxItem extends React.Component {
         fetchInvestInfoZX()
         fetchProjectZX()
     }
-    gotoHandler = (params) => {
+    gotoHandler = () => {
         let { history } = this.props
-        history.push('/investor-item-detial')
+        let { custId } = this.props.investor_account
+        history.push(`/investor-item-detial?custId=${custId}&type=zx`)
     }
 
     switchType = type => {

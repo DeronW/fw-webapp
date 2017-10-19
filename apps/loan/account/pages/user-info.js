@@ -125,20 +125,78 @@ class SelectItem extends React.Component {
         changeHandler   | !function
     */
 
-    _MODEL = TAB_MODEL[this.props.field]
+    _MODEL = TAB_MODEL[this.props.field];
 
-    state = { expandOptions: false, expandIconDeg: 45 }
+    _OPTIONS_CNT = this._MODEL.options ? Object.keys(this._MODEL.options).length : null;
+
+    state = {
+        expandFlag: this.props.field != 'city',
+        expandIconDeg: 45,
+        optionsContainerHeight: 0,
+        optionsOpacity: 0
+    }
+
+    _animationExpandIcon = () => {
+        const frame = 60,
+            initialDeg = this.state.expandIconDeg,
+            deltaSign = (90 - initialDeg) / 45; // either 1 (to expand) or -1 (to fold)
+
+        const interval = setInterval(() => {
+            this.setState({ expandIconDeg: this.state.expandIconDeg + deltaSign * 10 }, () => {
+                if (this.state.expandIconDeg == initialDeg + 90 * deltaSign) {
+                    clearInterval(interval);
+                }
+            })
+        }, 1000 / frame)
+    }
+
+    _animationoptionsContainerHeight = () => {
+        const frame = 60,
+            optionsContainerHeightTotal = 90 * this._OPTIONS_CNT,
+            initialHeight = this.state.optionsContainerHeight,
+            deltaSign = initialHeight == 0 ? 1 : -1; // either 1 (to grow) or -1 (to pinch)
+
+        const interval = setInterval(() => {
+            this.setState({ optionsContainerHeight: this.state.optionsContainerHeight + deltaSign * optionsContainerHeightTotal / 9 }, () => {
+                if (this.state.optionsContainerHeight == optionsContainerHeightTotal || this.state.optionsContainerHeight == 0) {
+                    clearInterval(interval);
+                }
+            })
+        }, 1000 / frame)
+    }
+
+    _animationOptionsOpacity = () => {
+        const initialOpacity = this.state.optionsOpacity;
+
+        if (initialOpacity == 100 ) {
+            this.setState({ optionsOpacity: 0 })
+        } else {
+            const frame = 60,
+                delta = 10,
+                timeout = 100;
+            setTimeout(() => {
+                const interval = setInterval(() => {
+                    const { optionsOpacity } = this.state;
+                    this.setState({ optionsOpacity: optionsOpacity + delta }, () => {
+                        if (this.state.optionsOpacity == 100 || this.state.optionsOpacity == 0) {
+                            clearInterval(interval)
+                        }
+                    })
+                }, 1000 / frame)
+            }, timeout)
+        }
+    }
 
     toggleExpand = () => {
-        const { expandOptions } = this.state;
+        const { expandFlag } = this.state;
 
-        this.setState({ expandOptions: !expandOptions })
-        const interval = setInterval(() => {
-            const { expandOptions, expandIconDeg } = this.state;
-            this.setState({ expandIconDeg: expandOptions ? (expandIconDeg + 10) : (expandIconDeg - 10) }, () => {
-                if (this.state.expandIconDeg == 45 || this.state.expandIconDeg == 135) clearInterval(interval)
-            })
-        }, 20)
+        if (this.props.field == 'city') {
+            this.setState({ expandFlag: !expandFlag })
+        } else {
+            this._animationExpandIcon();
+            this._animationoptionsContainerHeight();
+            this._animationOptionsOpacity();
+        }
     }
 
     handleChange = v => {
@@ -151,6 +209,7 @@ class SelectItem extends React.Component {
             { options } = this._MODEL,
             optName = options[optValue];
         return <div key={optName}
+            style={{ opacity: this.state.optionsOpacity / 100 }}
             styleName={value == optValue ? "selected-option" : "option"}
             onClick={() => this.handleChange(optValue)}>
             {optName}
@@ -162,21 +221,26 @@ class SelectItem extends React.Component {
         const { field, value } = this.props,
             { name, options } = this._MODEL;
 
-        const { expandOptions, expandIconDeg } = this.state;
+        const { expandFlag, expandIconDeg, optionsContainerHeight } = this.state;
+
+        const selectOptionsContainerStyle = {
+                height: optionsContainerHeight
+            },
+            expandIconStyle = {
+                WebkitTransform: `rotate(${expandIconDeg}deg)`,
+                transform: `rotate(${expandIconDeg}deg)`
+            };
 
         const selectOptions = field == 'city' ? (
             <CitySelector selected={value} changeHandler={v => this.handleChange(v)} closeHandler={this.toggleExpand} />
         ) : (
-            <div styleName="select-options">
-                { Object.keys(options).map(this._genOptions) }
+            <div style={selectOptionsContainerStyle} styleName="select-options-container">
+                <div styleName="select-options">
+                    { Object.keys(options).map(this._genOptions) }
+                </div>
             </div> )
 
         const selectedValue = field == 'city' ? value : options[value];
-
-        const expandIconStyle = {
-            WebkitTransform: `rotate(${expandIconDeg}deg)`,
-            transform: `rotate(${expandIconDeg}deg)`
-        }
 
         return <div>
             <div styleName="item">
@@ -190,7 +254,7 @@ class SelectItem extends React.Component {
                     {selectedValue || '请选择'}
                 </div>
             </div>
-            { expandOptions && selectOptions }
+            { expandFlag && selectOptions }
         </div>
     }
 }

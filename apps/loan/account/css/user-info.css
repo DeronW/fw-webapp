@@ -2,6 +2,10 @@
     font-size: 30px;
 }
 
+.bg * {
+    -webkit-tap-highlight-color: transparent;
+}
+
 .tab-grp {
     display: table;
     width: 100%;
@@ -43,7 +47,7 @@
     border-bottom: 1px solid #eee;
 }
 
-.item:last-child {
+.item:last-child, .item:first-child {
     border-bottom: none;
 }
 
@@ -75,13 +79,24 @@
     color: #999;
 }
 
+.select-options-container {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+}
+
 .select-options {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
     box-sizing: border-box;
     padding-left: 34px;
     background-color: #f9f9f9;
 }
 
 .option {
+    box-sizing: border-box;
     height: 90px;
     line-height: 90px;
     border-bottom: 1px solid #eee;
