@@ -339,7 +339,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
 
         closeHandler = () => {
             let {history} = this.props;
-            history.goBack();
+            history.push(`/loan-fq-form`);
         }
 
         render(){
