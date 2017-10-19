@@ -9,7 +9,6 @@ import { Browser, Post, NativeBridge } from '../../lib/helpers'
 import { Utils, Components } from 'fw-javascripts'
 
 import styles from '../css/invite-activity.css'
-@inject('invite_activity')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class InviteActivity extends React.Component {
@@ -34,14 +33,12 @@ export default class InviteActivity extends React.Component {
         })
     }
     componentDidMount(){
-        let {invite_activity} = this.props;
-        invite_activity.getShareLink();
-        NativeBridge.setTitle("放心花");
+        // NativeBridge.setTitle("放心花");
 
     }
 
     render(){
-        let {invite_activity,history} = this.props;
+        let {history} = this.props;
         let goBack = () => {
             Browser.inApp ? NativeBridge.close() : history.goBack()
         }
@@ -56,7 +53,7 @@ export default class InviteActivity extends React.Component {
             </div>) : (<div styleName="share-link">
                 <div styleName="top-tip">长按复制链接分享给好友注册</div>
                 <div styleName="btn-tip">
-                    <input type="text" value={invite_activity.shareLink+ `&jumpType=${Browser.inWeixin ? 'to_home' : 'app'}`}/>
+                    <input type="text" value={'https://m.easyloan888.com/static/loan/outside-register/index.html?'+ `&jumpType=${Browser.inWeixin ? 'to_home' : 'app'}`}/>
             </div>
             </div>)
             }
