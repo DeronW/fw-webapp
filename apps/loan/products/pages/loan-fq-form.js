@@ -415,9 +415,13 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             let { fq, history } = this.props,
                 currentPanel = history.location.hash.slice(1);
 
+            let goBack = () => {
+                location.href = '/static/loan/products/index.html#/loan-fq-index?pid=21'
+            }    
+
             return (
                 <div styleName="cnt-container">
-                    <Header title="借款申请" history={history} />
+                    <Header title="借款申请" goBack={goBack} />
     
                     {currentPanel && (
                         Model[currentPanel].options ?
