@@ -17,9 +17,12 @@ class TransferFriends extends React.Component {
     componentDidMount() {
         let { resetFriendsPageNo, fetchFriendsList } = this.props.user_coupon
         resetFriendsPageNo()
+        Event.touchBottom(fetchFriendsList)
+    }
+    componentWillUnmount() {
+        Event.cancelTouchBottom()
     }
     searchFriendsHandler = () => {
-        // if(this.props.user_coupon.friends_data.keyword == '') return Components.showToast('请输入关键字')
         this.props.user_coupon.resetFriendsPageNo()
         this.props.user_coupon.fetchFriendsList()
     }

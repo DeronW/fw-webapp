@@ -115,7 +115,7 @@ body {
 }
 
 .datail-list .info-block {
-    padding: 0px 30px 20px;
+    padding: 0px 0 20px 30px;
     font-size: 22px;
     line-height: 40px;
     color: #666;

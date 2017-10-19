@@ -43,17 +43,17 @@ class AccountZx extends React.Component {
             </div>
 
             <div styleName="incomeInfo">
-                <div styleName="inIofoItem inIofoLeft" onClick={() => this.gotoHandler(`/investor-overview?custId=${custId}&type="zx"`)}>
+                <div styleName="inIofoItem inIofoLeft" onClick={() => this.gotoHandler(`/investor-overview?custId=${custId}&type=zx`)}>
                     <div>尊享总资产</div>
                     <div styleName="incomeNum">¥{info.totalInvest}</div>
                 </div>
-                <div styleName="inIofoItem inIofoRight" onClick={() => this.gotoHandler(`/investor-overview?custId=${custId}&type="zx"`)}>
+                <div styleName="inIofoItem inIofoRight" onClick={() => this.gotoHandler(`/investor-overview?custId=${custId}&type=zx`)}>
                     <div>可用金额</div>
                     <div styleName="incomeNum">¥{info.bankBalance}</div>
                 </div>
             </div>
             <div styleName="incomeItem">
-                <div styleName="itemDes" onClick={() => this.gotoHandler('/investor-zx-item')}>
+                <div styleName="itemDes" onClick={() => this.gotoHandler(`/investor-zx-item?custId=${custId}`)}>
                     <div styleName="desLeft">Ta的投资</div>
                     <div styleName="desRight">
                         <span styleName="rightText">{info.refCount}笔</span>
@@ -62,7 +62,7 @@ class AccountZx extends React.Component {
                 </div>
             </div>
             <div styleName="incomeItem">
-                <div styleName="itemDes" onClick={() => this.gotoHandler('/investor-item-detial')}>
+                <div styleName="itemDes" onClick={() => this.gotoHandler(`/investor-item-detial?custId=${custId}&type=zx`)}>
                     <div styleName="desLeft">Ta的回款明细</div>
                     <div styleName="desRight">
                         <span styleName="rightText">最近还款日{info.repayPerDate}</span>

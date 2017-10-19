@@ -338,7 +338,8 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         }
 
         closeHandler = () => {
-            location.href = '/static/loan/products/index.html#/loan-fq-form'
+            let {history} = this.props;
+            history.push(`/loan-fq-form`);
         }
 
         render(){
@@ -373,10 +374,12 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
 
             let gen_options = (optValue) => {
                 let optStyleName = optValue === itemValue ? 'selected-option' : 'unselected-option';
+                let optIndex = Model[field].options.findIndex(i=>i['text'] == optValue);
+                let optIndexValue = Model[field].options[optIndex]['value'];
                 return (
                     <div key={optValue}
                         className={styles[optStyleName]}
-                        onClick={() => { fq.setPanelData(history, field, optValue)}}>
+                        onClick={() => { fq.setPanelData(history, field, optIndexValue)}}>
                         {optValue}
                     </div>
                 )
@@ -412,9 +415,13 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             let { fq, history } = this.props,
                 currentPanel = history.location.hash.slice(1);
 
+            let goBack = () => {
+                location.href = '/static/loan/products/index.html#/loan-fq-index?pid=21'
+            }    
+
             return (
                 <div styleName="cnt-container">
-                    <Header title="借款申请" history={history} />
+                    <Header title="借款申请" goBack={goBack} />
     
                     {currentPanel && (
                         Model[currentPanel].options ?

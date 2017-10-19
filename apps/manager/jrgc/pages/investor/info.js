@@ -17,9 +17,7 @@ class Info extends React.Component {
     }
 
     componentDidMount() {
-
-        //id为从客户页面跳转时url中的cust_id
-        // this.props.investor.fetchInfo(Utils.hashQuery.id)
+        this.props.investor.fetchInfo(this.state.custId)
     }
 
     showMore = () => {

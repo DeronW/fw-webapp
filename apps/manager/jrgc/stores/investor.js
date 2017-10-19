@@ -112,14 +112,12 @@ export default class Investor {
         let { value,list,pageNo } = this.data.custmor
         if (pageNo == 0) return done && done()
         if (pageNo == 1) list.splice(0,list.length)
-
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
             pageNo: pageNo,
             pageSize: 10
         }).then(data => {
             list.push(...data.pageData.result)
-            console.log(list)
             this.data.custmor.pageNo < data.pageData.pagination.totalPage ? this.data.custmor.pageNo++ : this.data.custmor.pageNo = 0
 
             done && done()
