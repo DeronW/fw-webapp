@@ -76,7 +76,7 @@ class zxItem extends React.Component {
                         <span>{item.effactiveDate}</span>
                     </div>
                     <div styleName="item">
-                        <span>计划回款日</span>
+                        <span>实际回款日</span>
                         <span>{item.repayPerDate}</span>
                     </div>
                     <div styleName="item">

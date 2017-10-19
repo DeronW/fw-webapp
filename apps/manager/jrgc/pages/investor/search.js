@@ -60,23 +60,7 @@ class Search extends React.Component {
                 <div styleName="searchBtn" onClick={this.searchHandler}>搜索</div>
             </div>
             <div styleName="list">
-                {/*只是简单实现，等有真正数据需要传递客户的ID到客户详情页，并且采用数组map形式显示数据*/}
-                <div styleName="listItem" onClick={() => this.gotoInfo()}>
-                    <div styleName="name">钱程</div>
-                    <div styleName="time">注册时间：2017-08-13 00:00:00</div>
-                    <div styleName="mobile">
-                        <span>18911392598</span>
-                        <img src={require("../../images/investor/search/arrow.png")} />
-                    </div>
-                </div>
-                <div styleName="listItem">
-                    <div styleName="name">钱程</div>
-                    <div styleName="time">注册时间：2017-08-13 00:00:00</div>
-                    <div styleName="mobile">
-                        <span>18911392598</span>
-                        <img src={require("../../images/investor/search/arrow.png")} />
-                    </div>
-                </div>
+                {records.records && records.records.length>0&&records.records.map(recordFn)}
             </div>
             <div styleName="load">已经全部加载完毕</div>
         </div>

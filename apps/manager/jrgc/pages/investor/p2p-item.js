@@ -81,7 +81,7 @@ class p2pItem extends React.Component {
         }
         let t = () => {
             if (tab == '批量项目') {
-                return <div styleName="collection" onClick={() => this.gotoHandler('/investor-item-collection')}>
+                return <div styleName="collection" onClick={() => this.gotoHandler(`/investor-item-collection?colPrdClaimId=${item.colId}&batchOrderId=${item.id}`)}>
                     <div styleName="title">
                         <span>{item.collName}</span>
                         <div styleName="end">{item.status}</div>
@@ -122,11 +122,11 @@ class p2pItem extends React.Component {
                         <span>{item.effactiveDate || '--'}</span>
                     </div>
                     <div styleName="item">
-                        <span>计划回款日</span>
+                        <span>实际回款日</span>
                         <span>{item.repayPerDate || '--'}</span>
                     </div>
                     <div styleName="item">
-                        <span>投资金额</span>
+                        <span>出借金额</span>
                         <span styleName="red">¥{item.investAmt}</span>
                     </div>
                     <div styleName="item">
@@ -157,7 +157,7 @@ class p2pItem extends React.Component {
                         <span>{item.repayPerDate || '--'}</span>
                     </div>
                     <div styleName="item">
-                        <span>投资金额</span>
+                        <span>实付金额</span>
                         <span styleName="red">¥{item.totalInvestAmt}</span>
                     </div>
                     <div styleName="item">

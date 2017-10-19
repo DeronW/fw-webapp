@@ -18,6 +18,6 @@ let stores = {
     stats_investor: new Stores.StatsInvestor(Get)
 }
 
-new StoreSpy(stores).wiretap()
+// new StoreSpy(stores).wiretap()
 
 render(AppRouter(stores), document.getElementById('cnt'))

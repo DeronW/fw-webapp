@@ -107,11 +107,18 @@ export default class Investor {
     }
     setCustValue = (value) => {
         this.data.custmor.value = value
+
+        this.fetchCustList(null, {
+            value: value,
+            list: [],
+            pageNo: 1
+        })
     }
-    fetchCustList = (done) => {
-        let { value,list,pageNo } = this.data.custmor
+    fetchCustList = (done, option=null) => {
+        let { value,list,pageNo } = (option || this.data.custmor)
         if (pageNo == 0) return done && done()
         if (pageNo == 1) list.splice(0,list.length)
+        alert(value)
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
             pageNo: pageNo,
@@ -196,7 +203,7 @@ export default class Investor {
         if (this.data.search.pageNo == 0) return done && done()
         if (this.data.search.pageNo == 1) records.splice(0,records.length)
 
-        this.Get("/api/finManager/cust/v2/search.shtml", {
+        this.Post("/api/finManager/cust/v2/search.shtml", {
             keyword: keyword,
             pageNo: this.data.search.pageNo,
             pageSize: PAGE_SIZE

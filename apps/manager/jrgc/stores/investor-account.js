@@ -24,6 +24,12 @@ export default class InvestorAccount {
                 category:'100',
                 pageNo:1,
                 records:[]
+            },
+            batch:{
+                info:{},
+                totalCount:0,
+                pageNo:1,
+                records:[],
             }
         })
 
@@ -227,7 +233,40 @@ export default class InvestorAccount {
             done && done()
         })
     }
+    @computed get colPrdClaimId(){
+        return Utils.hashQuery.colPrdClaimId //集合标id
+    }
+    @computed get batchOrderId(){
+        return Utils.hashQuery.batchOrderId //集合订单id
+    }
+    //TA的微金-批量标详情
+    fetchBatchInfo = ()=>{
+        this.Get('/api/finManager/cust/v2/wjBatchInvest.shtml',{
+            colPrdClaimId:this.colPrdClaimId
+        }).then(data => {
+            this.props.data_p2p.batch.info = data
+        })
+    }
+    //批量标子标列表
+    fetchBatchList = (done)=>{
+        let {pageNo,records} = this.data_p2p.batch
 
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) records.splice(0, records.length)
+        this.Get('/api/finManager/cust/v2/wjChildBatchPrdList.shtml',{
+            batchOrderId:this.batchOrderId,
+            colPrdClaimsId:this.colPrdClaimsId,
+            pageNo:pageNo,
+            pageSize:10
+        }).then(data=>{
+            this.data_p2p.batch.totalCount = data.pageData.pagination.totalCount
+            records.push(...data.pageData.result)
+            this.data_p2p.batch.pageNo < data.pageData.pagination.totalPage
+                ? this.data_p2p.batch.pageNo++
+                : this.data_p2p.batch.pageNo = 0
+            done && done()
+        })
+    }
     //设置微金回款明细的状态
     setP2PPaymentType = (type) => {
         this.data_p2p.detail.type = type
