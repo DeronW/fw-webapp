@@ -47,7 +47,11 @@
     border-bottom: 1px solid #eee;
 }
 
-.item:last-child, .item:first-child {
+.item-grp > .item:last-child { /* input item */
+    border-bottom: none;
+}
+
+.item-container:last-child .item { /* select item */
     border-bottom: none;
 }
 

@@ -12,7 +12,7 @@ class Bean extends React.Component {
     componentDidMount() {
         let { fetchBean, resetBeanPageNo, setBeanId } = this.props.investor
         resetBeanPageNo()
-        setBeanId(Utils.hashQuery.id)
+        setBeanId(Utils.hashQuery.custId)
         fetchBean()
         Event.touchBottom(fetchBean)
     }
@@ -22,7 +22,8 @@ class Bean extends React.Component {
     render() {
         let { history } = this.props
         let { bean } = this.props.investor.data
-        let { info,records } = bean
+        let { cashBalance,overbeancount,records } = bean
+
         let bean_func = (item, index) => {
             return <div styleName="beanItem" key={index}>
                 <div styleName="beanItemUp">
@@ -44,8 +45,8 @@ class Bean extends React.Component {
             <Header title="他的工豆" history={history} />
             <div styleName="beanInfo">
                 <div styleName="line1">他的工豆</div>
-                <div styleName="line2">¥{info.cashBalance}<span styleName="lineCal">（总共{info.cashBalance*100}工豆，100工豆=0.01元）</span></div>
-                <div styleName="line3">即将过期：¥{info.overbeancount}</div>
+                <div styleName="line2">¥{cashBalance}<span styleName="lineCal">（总共{(cashBalance)*100}工豆，100工豆=0.01元）</span></div>
+                <div styleName="line3">即将过期：¥{overbeancount}</div>
             </div>
             {records && records.length > 0 ? records.map(score_func) : empty}
         </div>

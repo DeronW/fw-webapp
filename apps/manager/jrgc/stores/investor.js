@@ -82,7 +82,8 @@ export default class Investor {
             },
             bean: {
                 id: null,
-                info: {},
+                cashBalance:null,
+                overbeancount:null,
                 pageNo: 1,
                 records: []
             },
@@ -107,11 +108,14 @@ export default class Investor {
     }
     setCustValue = (value) => {
         this.data.custmor.value = value
+
+        this.fetchCustList()
     }
     fetchCustList = (done) => {
         let { value,list,pageNo } = this.data.custmor
         if (pageNo == 0) return done && done()
         if (pageNo == 1) list.splice(0,list.length)
+
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
             pageNo: pageNo,
@@ -196,7 +200,7 @@ export default class Investor {
         if (this.data.search.pageNo == 0) return done && done()
         if (this.data.search.pageNo == 1) records.splice(0,records.length)
 
-        this.Get("/api/finManager/cust/v2/search.shtml", {
+        this.Post("/api/finManager/cust/v2/search.shtml", {
             keyword: keyword,
             pageNo: this.data.search.pageNo,
             pageSize: PAGE_SIZE
@@ -230,7 +234,7 @@ export default class Investor {
 
     //查询客户工豆列表
     fetchBean = (done) => {
-        let { pageNo, records, id, info } = this.data.bean
+        let { pageNo, records, id} = this.data.bean
         const PAGE_SIZE = 10
         if (this.data.bean.pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0,records.length)
@@ -239,7 +243,9 @@ export default class Investor {
             pageNo: pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
-            info = data
+            this.data.bean.cashBalance = data.cashBalance
+            this.data.bean.overbeancount = data.overbeancount
+
             records.push(...data.pageData.result)
             this.data.bean.pageNo < data.pageData.pagination.totalPage ? this.data.bean.pageNo++ : this.data.bean.pageNo = 0
 

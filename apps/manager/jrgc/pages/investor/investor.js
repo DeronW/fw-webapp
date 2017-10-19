@@ -27,8 +27,10 @@ class Investor extends React.Component {
         if (t == tab) return
         resetCustPageNo()
         setCustTab(t)
-        setCustValue(sort[t][0][type])
-        fetchCustList()
+
+        let next_tab = sort[t]
+        let next_type = Object.values(next_tab[0])[0]
+        setCustValue(next_type)
     }
     switchType = (t,i) => {
         let {resetCustPageNo,setCustType,setCustValue,fetchCustList} = this.props.investor
@@ -38,7 +40,6 @@ class Investor extends React.Component {
         resetCustPageNo()
         setCustType(t)
         setCustValue(sort[tab][i][t])
-        fetchCustList()
     }
     switchShow = () => {
         this.setState({ show: !this.state.show })

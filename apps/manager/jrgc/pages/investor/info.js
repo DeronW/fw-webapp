@@ -18,6 +18,7 @@ class Info extends React.Component {
 
     componentDidMount() {
         this.props.investor.fetchInfo(this.state.custId)
+        this.props.investor.fetchInvestAnalysis(this.state.custId)
     }
 
     showMore = () => {
@@ -152,7 +153,7 @@ class Info extends React.Component {
                 </div>
             </div>
             <div styleName="pie">
-                <ReactEcharts option={this.getOption(1,2,3,4,5)}
+                <ReactEcharts option={this.getOption(within3MonthRate,four2SixMonthRate,seven2NineMonthRate,ten2TwelveMonthRate,moreThanOneYearRate)}
                     style={{ height: '100%', width: '100%' }} />
             </div>
             <div styleName="total">

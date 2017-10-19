@@ -17,6 +17,20 @@ export default class InvestorAccount {
                 pageNo:1,
                 list:[]
             },
+            project:{
+                info:{},
+                tab:'Ta的项目',
+                totalCount:0,
+                category:'100',
+                pageNo:1,
+                records:[]
+            },
+            batch:{
+                info:{},
+                totalCount:0,
+                pageNo:1,
+                records:[],
+            }
         })
 
         extendObservable(this.data_zx,{
@@ -72,7 +86,7 @@ export default class InvestorAccount {
             }).then(data=>{
                 this.data.overview = data.result
             })
-        }else if(type == 'wj'){
+        }else if(type == 'p2p'){
             this.Get('/api/finManager/cust/v2/wjOverview.shtml',{
                 custId:this.custId
             }).then(data=>{
@@ -172,7 +186,87 @@ export default class InvestorAccount {
             this.data_p2p.detail.info = data.result
         })
     }
+    //TA的微金-出借（项目）信息
+    fetchInvestInfoP2P = () => {
+        this.Get('/api/finManager/cust/v2/wjPrdInvestInfo.shtml',{
+            custId: this.custId
+        }).then(data=>{
+            this.data_p2p.project.info = data.result
+        })
+    }
+    resetCategoryPageNo = () => {
+        this.data_p2p.project.pageNo = 1
+    }
+    setProjectTabP2P = (tab) => {
+        this.data_p2p.project.tab = tab
+        this.fetchPrdInvestP2P()
+    }
+    setProjectCategory2P = (type) => {
+        this.data_p2p.project.category = type
+        this.fetchPrdInvestP2P()
+    }
+    //TA的微金-TA的项目列表
+    fetchPrdInvestP2P = (done)=>{
+        let {tab,pageNo,category,records} = this.data_p2p.project
+        let url
+        if(tab == 'Ta的项目'){
+            url = '/api/finManager/cust/v2/wjPrdInvest.shtml'
+        }else if(tab == '批量项目'){
+            url = '/api/finManager/cust/v2/wjBatchPrdInvest.shtml'
+        }else{
+            url = '/api/finManager/cust/v2/wjSwitchPrdInvest.shtml'
+        }
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) records.splice(0, records.length)
+        this.Get(url,{
+            custId:this.custId,
+            flag:category,
+            pageNo:pageNo,
+            pageSize:10
+        }).then(data => {
+            this.data_p2p.project.totalCount = data.pageData.pagination.totalCount
 
+            records.push(...data.pageData.result)
+            this.data_p2p.project.pageNo < data.pageData.pagination.totalPage
+                ? this.data_p2p.project.pageNo++
+                : this.data_p2p.project.pageNo = 0
+            done && done()
+        })
+    }
+    @computed get colPrdClaimId(){
+        return Utils.hashQuery.colPrdClaimId //集合标id
+    }
+    @computed get batchOrderId(){
+        return Utils.hashQuery.batchOrderId //集合订单id
+    }
+    //TA的微金-批量标详情
+    fetchBatchInfo = ()=>{
+        this.Get('/api/finManager/cust/v2/wjBatchInvest.shtml',{
+            colPrdClaimId:this.colPrdClaimId
+        }).then(data => {
+            this.props.data_p2p.batch.info = data
+        })
+    }
+    //批量标子标列表
+    fetchBatchList = (done)=>{
+        let {pageNo,records} = this.data_p2p.batch
+
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) records.splice(0, records.length)
+        this.Get('/api/finManager/cust/v2/wjChildBatchPrdList.shtml',{
+            batchOrderId:this.batchOrderId,
+            colPrdClaimsId:this.colPrdClaimsId,
+            pageNo:pageNo,
+            pageSize:10
+        }).then(data=>{
+            this.data_p2p.batch.totalCount = data.pageData.pagination.totalCount
+            records.push(...data.pageData.result)
+            this.data_p2p.batch.pageNo < data.pageData.pagination.totalPage
+                ? this.data_p2p.batch.pageNo++
+                : this.data_p2p.batch.pageNo = 0
+            done && done()
+        })
+    }
     //设置微金回款明细的状态
     setP2PPaymentType = (type) => {
         this.data_p2p.detail.type = type

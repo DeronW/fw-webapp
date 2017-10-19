@@ -64,7 +64,7 @@ class Rebate extends React.Component {
         },
         xAxis: {
             name: '日期',
-            data: timeDimensionList
+            data: timeDimensionList.flatten()
         },
         yAxis: {
             name: '金额(元)'
@@ -77,7 +77,7 @@ class Rebate extends React.Component {
             lineStyle: {normal: {color: '#d75063'}},
             name: '返利额',
             type: 'line',
-            data: rebateAmtList
+            data: rebateAmtList.flatten()
         }]
     })
 
@@ -87,7 +87,7 @@ class Rebate extends React.Component {
         let {rebate_graph, rebate_cust,rebate_info} = this.props.user.data
         let {type, list} = this.props.user.data.rebate_cust
         let current_list = list[type], current_pageNo = current_list.page_no
-        console.log(rebate_graph)
+
         let tabs = ['全部', '微金', '尊享', '黄金']
         let tab_func = (item, index) => {
             return <div key={index} styleName={tab_num == index ? "tab tabActive" : "tab"}
@@ -118,9 +118,13 @@ class Rebate extends React.Component {
             return <div>
                 <div styleName="allChart">
                     <div styleName="chartWrapper">
-                        {/*<ReactEcharts option={this.getOption(rebate_graph.updateTime, rebate_graph.timeDimensionList, rebate_graph.rebateAmtList)}
+                        {<ReactEcharts option={
+                            this.getOption(
+                                rebate_graph.updateTime,
+                                rebate_graph.timeDimensionList,
+                                rebate_graph.rebateAmtList)}
                         style={{height: '100%', width: '100%'}}
-                        styleName='echarts'/>*/}
+                        styleName='echarts'/>}
                     </div>
 
                     <div styleName="chartTab">

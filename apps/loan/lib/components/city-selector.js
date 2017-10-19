@@ -5,9 +5,9 @@ import styles from '../css/city-selector.css'
 
 
 /* props:
-    selected        |!string
-    changeHandler   |!function
-    closeHandler    |!function
+    selected        | ! string
+    changeHandler   | ! function
+    closeHandler    | ! function
 */
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class CitySelector extends React.Component {

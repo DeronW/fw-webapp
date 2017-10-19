@@ -85,10 +85,10 @@ class itemDetial extends React.Component {
                     <span>利息</span>
                     <span>¥{item.interest}</span>
                 </div>
-                {tab=="已回"&&<div styleName="item">
+                <div styleName="item">
                     <span>违约金</span>
                     <span>¥{item.prepaymentPenalty}</span>
-                </div>}
+                </div>
                 <div styleName="item">
                     <span>总计金额</span>
                     <span styleName="red">¥{item.princAndIntest}</span>

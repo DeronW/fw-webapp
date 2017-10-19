@@ -14,11 +14,13 @@ const TAB_MODEL = {
     realName: {
         name: '姓名',
         placeholder: '未实名',
+        disabled: true,
     },
     idCard: {
         name: '身份证号',
         type: 'number',
         placeholder: '未实名',
+        disabled: true,
     },
     creditCard: {
         name: '信用卡',
@@ -91,9 +93,9 @@ const TAB_MODEL = {
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class InputItem extends React.Component {
     /* props:
-        field           | !string,
-        value           | !string,
-        changeHandler   | !function
+        field           | ! string,
+        value           | ! string,
+        changeHandler   | ! function
     */
 
     _MODEL = TAB_MODEL[this.props.field]
@@ -102,11 +104,12 @@ class InputItem extends React.Component {
 
     render() {
         const { field, value } = this.props,
-            { name, type, placeholder } = this._MODEL;
+            { name, type, placeholder, disabled } = this._MODEL;
         return <div styleName="item">
             <div styleName="item-name">{name}</div>
             <input styleName="item-value"
                 type={type || "text"}
+                disabled={!!disabled}
                 placeholder={placeholder || "请填写"}
                 value={value}
                 onChange={this.handleChange} />
@@ -120,9 +123,9 @@ class InputItem extends React.Component {
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class SelectItem extends React.Component {
     /* props:
-        field           | !string,
-        value           | !string,
-        changeHandler   | !function
+        field           | ! string,
+        value           | ! string,
+        changeHandler   | ! function
     */
 
     _MODEL = TAB_MODEL[this.props.field];
@@ -242,13 +245,13 @@ class SelectItem extends React.Component {
 
         const selectedValue = field == 'city' ? value : options[value];
 
-        return <div>
+        return <div styleName="item-container">
             <div styleName="item">
                 <div styleName="item-name">{name}</div>
                 <div styleName="expand-icon" onClick={this.toggleExpand}>
                     <i style={expandIconStyle} styleName="fake-arrow"></i>
                 </div>
-                <div style={{ color: value ? '#333' : '#999' }}
+                <div style={{ color: selectedValue ? '#333' : '#999' }}
                     styleName="item-value"
                     onClick={this.toggleExpand}>
                     {selectedValue || '请选择'}
@@ -271,19 +274,32 @@ class UserInfo extends React.Component {
     }
 
     componentDidMount() {
-        document.title = '个人信息'
+        document.title = '个人信息';
+        this.props.user_info.fetchUserInfo();
     }
 
-    switchTab = tab => () => this.setState({ currentTab: tab })
+    switchTab = tab => () => {
+        if (this.state.showSubmitBtn) return showToast('请先提交当前页信息!')
+        this.setState({ currentTab: tab })
+    }
 
     enableSubmitBtn = () => this.setState({ showSubmitBtn: true })
 
     disableSubmitBtn = () => this.setState({ showSubmitBtn: false })
 
-    changeHandler = (field, v) => {
+    handleChange = (field, v) => {
         const { user_info } = this.props;
         user_info.inputHandler(field, v);
         this.enableSubmitBtn();
+    }
+
+    handleSubmit = () => {
+        this.props.user_info.submitUserInfo().then(() => {
+            showToast('信息已提交');
+            this.disableSubmitBtn();
+        }, e => {
+            showToast(e.message);
+        })
     }
 
     render() {
@@ -293,8 +309,8 @@ class UserInfo extends React.Component {
 
         const genInfoItem = field => {
             const value = user_info.data[field];
-            if (TAB_MODEL[field].options || field == 'city') return <SelectItem key={field} field={field} value={value} changeHandler={this.changeHandler} />
-            if (!TAB_MODEL[field].options) return <InputItem key={field} field={field} value={value} changeHandler={this.changeHandler} />
+            if (TAB_MODEL[field].options || field == 'city') return <SelectItem key={field} field={field} value={value} changeHandler={this.handleChange} />
+            if (!TAB_MODEL[field].options) return <InputItem key={field} field={field} value={value} changeHandler={this.handleChange} />
         }
 
         return <div styleName="bg">
@@ -340,7 +356,7 @@ class UserInfo extends React.Component {
                 </div>
             </div> }
 
-            { showSubmitBtn && <div styleName="submit-btn" onClick={user_info.submitUserInfo}>提交</div> }
+            { showSubmitBtn && <div styleName="submit-btn" onClick={this.handleSubmit}>提交</div> }
 
         </div>
     }
