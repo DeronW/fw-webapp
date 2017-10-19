@@ -11,7 +11,8 @@ import {NativeBridge} from '../../helpers/'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveApplyNovice extends React.Component {
     state = {
-        pending: false
+        pending: false,
+        is_used: false
     }
 
     componentDidMount() {
@@ -84,6 +85,11 @@ class ReserveApplyNovice extends React.Component {
         })
     }
 
+    useCouponHandler = () => {
+        let {is_used} = this.state
+        this.setState({is_used: !is_used})
+    }
+
     render() {
         let {history, novice_bid} = this.props
         let {context} = novice_bid.novice_bid_data
@@ -132,9 +138,10 @@ class ReserveApplyNovice extends React.Component {
         }
 
         let coupon_panel = () => {
+            let {is_used} = this.state
             return <div styleName="couponPanel">
                 <div styleName="couponLeft">
-                    <span styleName="iconChecked"></span>
+                    <span styleName={is_used ? "iconChecked" : "iconUnChecked"} onClick={this.useCouponHandler}></span>
                     <span styleName="couponLeftText">使用优惠券</span>
                 </div>
                 <div styleName="couponRight">

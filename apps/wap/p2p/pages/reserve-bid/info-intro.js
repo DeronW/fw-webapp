@@ -43,26 +43,34 @@ class ReserveInfoIntro extends React.Component {
         history.push(`/reserve-bid/apply?applyInvestClaimId=${id}`)
     }
 
+    reserveHandler = () => {
+        let {history, reserve_bid} = this.props
+        history.push('/reserve-bid/apply')
+    }
+
     render() {
         let {reserve_bid, history} = this.props
         let banner_section = () => {
             return <div styleName="introBanner"></div>
         }
         let bid_section = () => {
-            return <div styleName="bidBox">
-                <div styleName="bidItem">
-                    <div styleName="itemCeil ceilOne" onClick={() => this.toInfoHandler(1)}>
-                        <div styleName="ceilUp">6<span>%</span></div>
+            let bid_list_func = (item, index) => {
+                return <div styleName="bidItem" key={index}>
+                    <div styleName="itemCeil ceilOne" onClick={() => this.toInfoHandler(item.id)}>
+                        <div styleName="ceilUp">{item.loadRate}<span>%</span></div>
                         <div styleName="ceilDown">预期年化利率</div>
                     </div>
-                    <div styleName="itemCeil ceilTwo" onClick={() => this.toInfoHandler(1)}>
-                        <div styleName="ceilUp">21天</div>
+                    <div styleName="itemCeil ceilTwo" onClick={() => this.toInfoHandler(item.id)}>
+                        <div styleName="ceilUp">{item.repayPeriod}天</div>
                         <div styleName="ceilDown">期限</div>
                     </div>
                     <div styleName="itemBtn">
-                        <div styleName="btn" onClick={() => this.toApplyHandler(1)}>抢购</div>
+                        <div styleName="btn" onClick={() => this.toApplyHandler(item.id)}>抢购</div>
                     </div>
                 </div>
+            }
+            return <div styleName="bidBox">
+                {reserve_bid.bid_data.bidList.map(bid_list_func)}
             </div>
         }
         let ruler_section = () => {

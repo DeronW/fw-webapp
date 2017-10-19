@@ -301,18 +301,20 @@
 }
 
 .bidBox {
-    width: 640px;
+    width: 100%;
     height: auto;
     display: table;
     margin: 20px 0;
     background: #fff;
-    padding: 40px;
 }
 
 .bidItem {
-    width: 100%;
+    width: 660px;
     height: 90px;
     display: table;
+    padding: 40px 40px 40px 0;
+    margin-left: 40px;
+    border-bottom: 1px solid #d8d8d8;
 }
 
 .itemCeil {

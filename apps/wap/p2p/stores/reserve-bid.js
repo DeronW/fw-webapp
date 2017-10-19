@@ -1,5 +1,5 @@
 import {extendObservable, computed} from 'mobx'
-import {Components, Utils, Event} from 'fw-javascripts'
+import {Utils} from 'fw-javascripts'
 
 export default class ReserveBid {
     constructor(Post) {
@@ -19,11 +19,11 @@ export default class ReserveBid {
         extendObservable(this.bid_data, {
             context: {
                 avgLoanPeriod: '',//平均起息时间
-                bookValidPeriod: null,//预约有效期
+                bookValidPeriod: '-',//预约有效期
                 id: null,//预约标id
-                loadRate: '',//利率
+                loadRate: '-',//利率
                 minAmt: '',//最小预约额
-                repayPeriod: '',//期限
+                repayPeriod: '-',//期限
             },
             accountAmount: null,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
@@ -32,7 +32,9 @@ export default class ReserveBid {
             isChecked: true,
             contractMsg: '',
             isCompany: null,
-            bidList: []
+            bidList: [],
+            checkBidList: [],
+            bids: []
         })
     }
 
@@ -42,21 +44,30 @@ export default class ReserveBid {
     }
 
     fetchProduct = () => {
+        // let claimId = id ? id : this.applyInvestClaimId
         return this.Post('/api/v1/intoAppointPage.shtml', {
             applyInvestClaimId: this.applyInvestClaimId
         }).then(data => {
-            let bid_data = this.bid_data
-            bid_data.context = data.appointClaim;
-            bid_data.accountAmount = data.accountAmount;
-            bid_data.isRisk = data.isRisk;
-            bid_data.batchMaxmum = data.batchMaxmum
-            bid_data.minAmt = data.appointClaim.minAmt
-            bid_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
-            bid_data.isCompany = data.isCompany
+            this.bid_data.context = data.appointClaim;
+            this.bid_data.accountAmount = data.accountAmount;
+            this.bid_data.isRisk = data.isRisk;
+            this.bid_data.batchMaxmum = data.batchMaxmum
+            this.bid_data.minAmt = data.appointClaim.minAmt
+            this.bid_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
+            this.bid_data.isCompany = data.isCompany
+            if (Array.isArray(data.appointClaimList)) {
+                this.bid_data.checkBidList.splice(0, this.bid_data.checkBidList.length)
+                this.bid_data.checkBidList && this.bid_data.checkBidList.push(...data.appointClaimList)
+            }
+
+            let mix_bids = data.appointClaimList || []
+            mix_bids.push(data.appointClaim)
+
+            this.bid_data.bids = mix_bids
             return {
-                isRisk: bid_data.isRisk,
-                batchMaxmum: bid_data.batchMaxmum,
-                isCompany: bid_data.isCompany
+                isRisk: this.bid_data.isRisk,
+                batchMaxmum: this.bid_data.batchMaxmum,
+                isCompany: this.bid_data.isCompany,
             }
         })
     }
@@ -93,14 +104,16 @@ export default class ReserveBid {
 
     }
 
-    submitReserveHandler = () => {
+    submitReserveHandler = (id) => {
+        let claimId = id ? id : this.applyInvestClaimId
         return this.Post('/api/v1/intoAppointPage.shtml', {
-            applyInvestClaimId: this.applyInvestClaimId
+            applyInvestClaimId: claimId
         }).then((data) => {
             return this.Post('/api/v1/investAppoint.shtml', {
                 applyAmt: this.bid_data.reserveMoney,
-                applyInvestClaimId: this.bid_data.context.id,
-                bookInvestToken: data.bookInvestToken
+                applyInvestClaimId: claimId,
+                bookInvestToken: data.bookInvestToken,
+                couponId: ""
             })
         })
     }
@@ -122,8 +135,8 @@ export default class ReserveBid {
 
     //获取聚合页标的列表
     fetchBidList = () => {
-        this.Post('/api/appointInvest/v2/appointInvestList.shtml').then(data => {
-            console.log(data)
+        this.Post('/api/v2/appointInvestList.shtml').then(data => {
+            this.bid_data.bidList = data.appointClaimList
         })
     }
 

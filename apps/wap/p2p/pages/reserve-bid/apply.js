@@ -12,12 +12,14 @@ import {NativeBridge} from '../../helpers/'
 class ReserveApply extends React.Component {
     state = {
         pending: false,
+        type_tab: -1
     }
 
     componentDidMount() {
         window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
         this.props.reserve_bid.fetchProduct()
+        console.log(this.props.reserve_bid.bid_data.checkBidList)
     }
 
     inputChangeHandler = name => e => {
@@ -39,12 +41,20 @@ class ReserveApply extends React.Component {
 
     applyHandler = () => {
         let {reserve_bid, history} = this.props
+        let {type_tab} = this.state
+        let t
+        if (reserve_bid.bid_data.bids.length == 1) {
+            t = 0
+        } else {
+            t = type_tab
+        }
+        let current_bid = reserve_bid.bid_data.bids[t]
         let sussessHandler = () => {
             if (this.state.pending) return
             this.setState({pending: true})
-            reserve_bid.submitReserveHandler()
+            reserve_bid.submitReserveHandler(current_bid.id, current_bid.couponId)
                 .then(() => {
-                        Components.showToast('预约成功')
+                        return Components.showToast('预约成功')
                     },
                     () => {
                         this.setState({pending: false})
@@ -53,14 +63,17 @@ class ReserveApply extends React.Component {
                     history.push(`/reserve-bid/records`)
                 })
         }
-        reserve.fetchProduct().then(data => {
-            if (reserve_bid.bid_data.reserveMoney === '') {
+
+        reserve_bid.fetchProduct().then(data => {
+            if (type_tab == -1 && (!this.props.reserve_bid.applyInvestClaimId)) {
+                Components.showToast("请选择预约类型")
+            } else if (reserve_bid.bid_data.reserveMoney === '') {
                 Components.showToast("预约金额不能为空")
-            } else if (reserve_bid.bid_data.reserveMoney < reserve_bid.bid_data.context.minAmt) {
+            } else if (reserve_bid.bid_data.reserveMoney < current_bid.minAmt) {
                 Components.showToast("预约金额不足100")
-            } else if (reserve_bid.bid_data.reserveMoney > reserve_bid.bid_data.accountAmount) {
+            } else if (reserve_bid.bid_data.reserveMoney > current_bid.accountAmount) {
                 Components.showToast("可用金额不足，请充值后重试")
-            } else if (!reserve_bid.bid_data.isCompany) {
+            } else if (!current_bid.isCompany) {
                 if (reserve_bid.bid_data.reserveMoney > data.batchMaxmum) {
                     Components.showToast("自动投标金额不足").then(() => {
                         NativeBridge.toNative('auto_bid_second')
@@ -72,6 +85,8 @@ class ReserveApply extends React.Component {
                 sussessHandler()
             }
         })
+
+
     }
 
     jumpToProtocol = () => {
@@ -84,14 +99,75 @@ class ReserveApply extends React.Component {
         NativeBridge.toNative('app_recharge')
     }
 
+    switchTypeHandler = (index, id) => {
+        this.setState({type_tab: index})
+        console.log(id)
+        console.log(this.props.reserve_bid.bid_data.context.id)
+    }
+
     render() {
         let {reserve_bid, history} = this.props
         let {context} = reserve_bid.bid_data
-
+        let {type_tab} = this.state
         let infoItem = (name, value) => {
             return <div styleName={name == '预约有效期' ? "infoItem itemLast" : "infoItem"}>
                 <div styleName="itemLeft">{name}</div>
                 <div styleName={name == "预期年化利率" ? "itemRight rightRed" : "itemRight"}>{value}</div>
+            </div>
+        }
+        let type_list_func = (item, index) => {
+            if (!item) return;
+            return <div
+                styleName={(item.id == reserve_bid.applyInvestClaimId || type_tab == index) ? "typeItem typeItemChecked" : "typeItem"}
+                key={index}
+                onClick={() => this.switchTypeHandler(index, item.id)}>
+                {item.loadRate}%<span
+                styleName="color9">/</span>{item.repayPeriod}天
+            </div>
+        }
+
+        let single_info = <div styleName="infoContent">
+            <div styleName="infoAmount">
+                <div styleName="amountLeft">预计收益</div>
+                <div styleName="amountRight">
+                    &yen;{reserve_bid.bid_data.reserveMoney * (context.loadRate / 100)}
+                </div>
+            </div>
+            <div styleName="itemWrapper">
+                {infoItem("预期年化利率", `${context.loadRate}%`)}
+                {infoItem("期限", `${context.repayPeriod}天`)}
+                {infoItem("预计起息时间", "预计今日起息")}
+                {infoItem("预约有效期", `${context.bookValidPeriod}天`)}
+            </div>
+        </div>
+
+        let all_info = (checkBidList) => {
+            let bid = checkBidList[this.state.type_tab]
+            let item = {
+                goals: '--',
+                rate: '--%',
+                term: '--天',
+                indate: '--天'
+            }
+
+            if (bid) item = {
+                goals: reserve_bid.bid_data.reserveMoney * (bid.loadRate / 100),
+                rate: bid.loadRate + '%',
+                term: bid.repayPeriod + '天',
+                indate: bid.bookValidPeriod + '天'
+            }
+
+            return <div styleName="infoContent">
+                <div styleName="amountLeft">预计收益</div>
+                <div styleName="amountRight">
+                    &yen;{item.goals}
+                </div>
+                <div styleName="itemWrapper">
+                    {infoItem("预期年化利率", item.rate)}
+                    {infoItem("期限", item.term)}
+                    {infoItem("预计起息时间", "预计今日起息")}
+                    {infoItem("预约有效期", item.indate)}
+                </div>
             </div>
         }
         return <div styleName='applyPanel'>
@@ -101,8 +177,7 @@ class ReserveApply extends React.Component {
                     <div styleName="typeTitle">抢购</div>
                     <div styleName="typeSubtitle">选择类型</div>
                     <div styleName="typeText">
-                        <div styleName="typeItem">6%<span styleName="color9">/</span>21天</div>
-                        <div styleName="typeItem typeItemChecked">6%<span styleName="color9">/</span>21天</div>
+                        {reserve_bid.bid_data.bids.map(type_list_func)}
                     </div>
                 </div>
                 <div styleName="reserveMoney">抢购金额</div>
@@ -124,20 +199,9 @@ class ReserveApply extends React.Component {
             </div>
             <div styleName="interval"></div>
             <div styleName="submitInfo">
-                <div styleName="infoContent">
-                    <div styleName="infoAmount">
-                        <div styleName="amountLeft">预计收益</div>
-                        <div styleName="amountRight">
-                            &yen;{reserve_bid.bid_data.reserveMoney * (context.loadRate / 100)}
-                        </div>
-                    </div>
-                    <div styleName="itemWrapper">
-                        {infoItem("预期年化利率", `${context.loadRate}%`)}
-                        {infoItem("期限", `${context.repayPeriod}天`)}
-                        {infoItem("预计起息时间", "预计今日起息")}
-                        {infoItem("预约有效期", `${context.bookValidPeriod}天`)}
-                    </div>
-                </div>
+                {reserve_bid.applyInvestClaimId ?
+                    single_info :
+                    reserve_bid.bid_data.checkBidList.length > 0 && all_info(reserve_bid.bid_data.checkBidList)}
             </div>
             <div styleName="submitProtocol">
                 <span styleName="protocolText">本人已阅读并签署
