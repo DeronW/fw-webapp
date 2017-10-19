@@ -32,11 +32,11 @@ export default class UserInfo {
 
         this._VALIDATOR = {
             ecName: v => {
-                if (v.match(/\d/)) return showToast('联系人姓名不可包含数字!')
-                if (v.length < 2) return showToast('联系人姓名字符长度需在2位以上!')
+                if (v && v.match(/\d/)) return showToast('联系人姓名不可包含数字!')
+                if (v && v.length < 2) return showToast('联系人姓名字符长度需在2位以上!')
             },
             ecPhone: v => {
-                if (isPhoneNum(v)) return showToast('联系人手机格式不正确!')
+                if (v && isPhoneNum(v)) return showToast('联系人手机格式不正确!')
             }
         };
     }
