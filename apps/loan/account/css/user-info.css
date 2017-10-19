@@ -2,6 +2,10 @@
     font-size: 30px;
 }
 
+.bg * {
+    -webkit-tap-highlight-color: transparent;
+}
+
 .tab-grp {
     display: table;
     width: 100%;

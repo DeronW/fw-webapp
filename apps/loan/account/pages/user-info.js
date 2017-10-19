@@ -125,69 +125,77 @@ class SelectItem extends React.Component {
         changeHandler   | !function
     */
 
-    _MODEL = TAB_MODEL[this.props.field]
+    _MODEL = TAB_MODEL[this.props.field];
 
-    state = { expandOptions: false, expandIconDeg: 45, optionsHeight: 0, optionOpacity: 0 }
+    _OPTIONS_CNT = this._MODEL.options ? Object.keys(this._MODEL.options).length : null;
 
-    toggleExpand = () => {
-        const { expandOptions } = this.state;
+    state = {
+        expandFlag: this.props.field != 'city',
+        expandIconDeg: 45,
+        optionsContainerHeight: 0,
+        optionsOpacity: 0
+    }
 
+    _animationExpandIcon = () => {
+        const frame = 60,
+            initialDeg = this.state.expandIconDeg,
+            deltaSign = (90 - initialDeg) / 45; // either 1 (to expand) or -1 (to fold)
 
-        if (this.props.field != 'city') {
-            if (expandOptions) {
-                const interval1 = setInterval(() => {
-                    const { expandOptions, expandIconDeg } = this.state;
-                    this.setState({ expandIconDeg: expandIconDeg - 10 }, () => {
-                        if (this.state.expandIconDeg == 45 || this.state.expandIconDeg == 135) {
-                            clearInterval(interval1);
-                            this.setState({ expandOptions: !expandOptions })
+        const interval = setInterval(() => {
+            this.setState({ expandIconDeg: this.state.expandIconDeg + deltaSign * 10 }, () => {
+                if (this.state.expandIconDeg == initialDeg + 90 * deltaSign) {
+                    clearInterval(interval);
+                }
+            })
+        }, 1000 / frame)
+    }
+
+    _animationoptionsContainerHeight = () => {
+        const frame = 60,
+            optionsContainerHeightTotal = 90 * this._OPTIONS_CNT,
+            initialHeight = this.state.optionsContainerHeight,
+            deltaSign = initialHeight == 0 ? 1 : -1; // either 1 (to grow) or -1 (to pinch)
+
+        const interval = setInterval(() => {
+            this.setState({ optionsContainerHeight: this.state.optionsContainerHeight + deltaSign * optionsContainerHeightTotal / 9 }, () => {
+                if (this.state.optionsContainerHeight == optionsContainerHeightTotal || this.state.optionsContainerHeight == 0) {
+                    clearInterval(interval);
+                }
+            })
+        }, 1000 / frame)
+    }
+
+    _animationOptionsOpacity = () => {
+        const initialOpacity = this.state.optionsOpacity;
+
+        if (initialOpacity == 100 ) {
+            this.setState({ optionsOpacity: 0 })
+        } else {
+            const frame = 60,
+                delta = 10,
+                timeout = 100;
+            setTimeout(() => {
+                const interval = setInterval(() => {
+                    const { optionsOpacity } = this.state;
+                    this.setState({ optionsOpacity: optionsOpacity + delta }, () => {
+                        if (this.state.optionsOpacity == 100 || this.state.optionsOpacity == 0) {
+                            clearInterval(interval)
                         }
                     })
-                }, 17)
-                const interval2 = setInterval(() => {
-                    const { optionsHeight } = this.state,
-                        optionsHeightTotal = 90 * Object.keys(this._MODEL.options).length;
-                    this.setState({ optionsHeight: optionsHeight - optionsHeightTotal / 9 }, () => {
-                        if (this.state.optionsHeight == optionsHeightTotal || this.state.optionsHeight == 0) clearInterval(interval2)
-                    })
-                }, 17)
-                // setTimeout(() => {
-                    const interval3 = setInterval(() => {
-                        const { optionOpacity } = this.state;
-                        this.setState({ optionOpacity: optionOpacity - 100 / 2 }, () => {
-                            if (this.state.optionOpacity == 100 || this.state.optionOpacity == 0) clearInterval(interval3)
-                        })
-                    }, 10)
-                // }, 100)
-            } else {
-                this.setState({ expandOptions: !expandOptions }, () => {
-                    if (this.props.field != 'city') {
-                        const interval1 = setInterval(() => {
-                            const { expandOptions, expandIconDeg } = this.state;
-                            this.setState({ expandIconDeg: expandOptions ? (expandIconDeg + 10) : (expandIconDeg - 10) }, () => {
-                                if (this.state.expandIconDeg == 45 || this.state.expandIconDeg == 135) clearInterval(interval1)
-                            })
-                        }, 17)
-                        const interval2 = setInterval(() => {
-                            const { expandOptions, optionsHeight } = this.state,
-                                optionsHeightTotal = 90 * Object.keys(this._MODEL.options).length;
-                            this.setState({ optionsHeight: expandOptions ? (optionsHeight + optionsHeightTotal / 9) : (optionsHeight - optionsHeightTotal / 9) }, () => {
-                                if (this.state.optionsHeight == optionsHeightTotal || this.state.optionsHeight == 0) clearInterval(interval2)
-                            })
-                        }, 17)
-                        setTimeout(() => {
-                            const interval3 = setInterval(() => {
-                                const { optionOpacity } = this.state;
-                                this.setState({ optionOpacity: optionOpacity + 100 / 10 }, () => {
-                                    if (this.state.optionOpacity == 100 || this.state.optionOpacity == 0) clearInterval(interval3)
-                                })
-                            }, 20)
-                        }, 100)
-                    }
-                })
-            }
+                }, 1000 / frame)
+            }, timeout)
+        }
+    }
+
+    toggleExpand = () => {
+        const { expandFlag } = this.state;
+
+        if (this.props.field == 'city') {
+            this.setState({ expandFlag: !expandFlag })
         } else {
-            this.setState({ expandOptions: !expandOptions })
+            this._animationExpandIcon();
+            this._animationoptionsContainerHeight();
+            this._animationOptionsOpacity();
         }
     }
 
@@ -201,7 +209,7 @@ class SelectItem extends React.Component {
             { options } = this._MODEL,
             optName = options[optValue];
         return <div key={optName}
-            style={{ opacity: this.state.optionOpacity / 100 }}
+            style={{ opacity: this.state.optionsOpacity / 100 }}
             styleName={value == optValue ? "selected-option" : "option"}
             onClick={() => this.handleChange(optValue)}>
             {optName}
@@ -213,11 +221,15 @@ class SelectItem extends React.Component {
         const { field, value } = this.props,
             { name, options } = this._MODEL;
 
-        const { expandOptions, expandIconDeg, optionsHeight } = this.state;
+        const { expandFlag, expandIconDeg, optionsContainerHeight } = this.state;
 
         const selectOptionsContainerStyle = {
-            height: optionsHeight
-        }
+                height: optionsContainerHeight
+            },
+            expandIconStyle = {
+                WebkitTransform: `rotate(${expandIconDeg}deg)`,
+                transform: `rotate(${expandIconDeg}deg)`
+            };
 
         const selectOptions = field == 'city' ? (
             <CitySelector selected={value} changeHandler={v => this.handleChange(v)} closeHandler={this.toggleExpand} />
@@ -229,11 +241,6 @@ class SelectItem extends React.Component {
             </div> )
 
         const selectedValue = field == 'city' ? value : options[value];
-
-        const expandIconStyle = {
-            WebkitTransform: `rotate(${expandIconDeg}deg)`,
-            transform: `rotate(${expandIconDeg}deg)`
-        }
 
         return <div>
             <div styleName="item">
@@ -247,7 +254,7 @@ class SelectItem extends React.Component {
                     {selectedValue || '请选择'}
                 </div>
             </div>
-            { expandOptions && selectOptions }
+            { expandFlag && selectOptions }
         </div>
     }
 }
