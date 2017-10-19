@@ -248,7 +248,7 @@ class SelectItem extends React.Component {
                 <div styleName="expand-icon" onClick={this.toggleExpand}>
                     <i style={expandIconStyle} styleName="fake-arrow"></i>
                 </div>
-                <div style={{ color: value ? '#333' : '#999' }}
+                <div style={{ color: value != null ? '#333' : '#999' }}
                     styleName="item-value"
                     onClick={this.toggleExpand}>
                     {selectedValue || '请选择'}
