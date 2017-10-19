@@ -405,7 +405,7 @@
     color: #333;
     text-align: center;
     border-radius: 4px;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     z-index: 99;

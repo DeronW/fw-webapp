@@ -144,7 +144,7 @@ class ReserveApply extends React.Component {
         let all_info = (checkBidList) => {
             let bid = checkBidList[this.state.type_tab]
             let item = {
-                goals: '--',
+                goals: '0',
                 rate: '--%',
                 term: '--天',
                 indate: '--天'
@@ -158,9 +158,11 @@ class ReserveApply extends React.Component {
             }
 
             return <div styleName="infoContent">
-                <div styleName="amountLeft">预计收益</div>
-                <div styleName="amountRight">
-                    &yen;{item.goals}
+                <div styleName="infoAmount">
+                    <div styleName="amountLeft">预计收益</div>
+                    <div styleName="amountRight">
+                        &yen;{item.goals}
+                    </div>
                 </div>
                 <div styleName="itemWrapper">
                     {infoItem("预期年化利率", item.rate)}
