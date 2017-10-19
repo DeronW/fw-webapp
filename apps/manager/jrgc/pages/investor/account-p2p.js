@@ -14,9 +14,7 @@ class AccountP2p extends React.Component {
     }
 
     componentDidMount() {
-        //id为该账户的id
-        let id = 1
-        this.props.investor_account.fetchAccountP2P(id)
+        this.props.investor_account.fetchAccountP2P()
     }
 
     changeEyeHandler = () => {
@@ -28,7 +26,8 @@ class AccountP2p extends React.Component {
     }
 
     render() {
-        let {info} = this.props.investor_account.data.p2p
+        let {info} = this.props.investor_account.data_p2p.detail
+        let { custId } = this.props.investor_account
         let {history} = this.props
         let {eye} = this.state
         let path = eye ? require("../../images/investor/account-zx/icon-visible.png") : require("../../images/investor/account-zx/icon-hidden.png")
@@ -62,7 +61,7 @@ class AccountP2p extends React.Component {
                 </div>
             </div>
             <div styleName="incomeItem">
-                <div styleName="itemDes" onClick={() => this.gotoHandler('/investor-item-detial')}>
+                <div styleName="itemDes" onClick={() => this.gotoHandler(`/investor-item-detial?custId=${custId}&type=p2p`)}>
                     <div styleName="desLeft">Ta的回款明细</div>
                     <div styleName="desRight">
                         <span styleName="rightText">最近还款日{info.repayPerDate}</span>

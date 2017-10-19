@@ -7,6 +7,18 @@ export default class InvestorAccount {
         this.Post = Post
         this.data = {}
         this.data_zx = {}
+        this.data_p2p = {}
+
+        extendObservable(this.data_p2p,{
+            detail: {
+                info: {},
+                totalCount:0,
+                type:'0',
+                pageNo:1,
+                list:[]
+            },
+        })
+
         extendObservable(this.data_zx,{
             detail:{
                 info: {},
@@ -32,9 +44,7 @@ export default class InvestorAccount {
             }
         })
         extendObservable(this.data, {
-            p2p: {
-                info: {}
-            },
+
             hj: {
                 info: {},
                 type: '0',
@@ -111,7 +121,7 @@ export default class InvestorAccount {
             record[tab].records.push(...data.pageData.result)
             record[tab].pageNO > data.pageData.pagination.totalPage ? record[tab].pageNO++ : record[tab].pageNO = 0
 
-            done()
+            done&&done()
         })
     }
      //尊享账户信息页
@@ -122,7 +132,17 @@ export default class InvestorAccount {
             this.data_zx.detail.info = data.result
         })
     }
+    //设置尊享回款明细的状态
+    setZXPaymentType = (type) => {
+        this.data_zx.detail.type = type
+        this.fetchZXPayment()
+    }
 
+    //重置尊享回款明细的页码
+    resetZXPaymentPageNo = () => {
+        let {type, payments} = this.data_zx.detail, current_payment = payments[type]
+        current_payment.pageNo = 1
+    }
     //尊享  他的回款明细
     fetchZXPayment = (done) => {
         let {type, payments} = this.data_zx.detail, current_payment = payments[type]
@@ -136,7 +156,7 @@ export default class InvestorAccount {
             status: type
         }).then(data => {
             this.data_zx.detail.totalCount = data.pageData.pagination.totalCount
-            current_payment.list.push(...data.result)
+            current_payment.list.push(...data.pageData.result)
             current_payment.pageNo < data.pageData.pagination.totalPage
                 ? current_payment.pageNo++
                 : current_payment.pageNo = 0
@@ -144,16 +164,44 @@ export default class InvestorAccount {
         })
     }
 
-    //设置尊享回款明细的状态
-    setZXPaymentType = (type) => {
-        this.data_zx.type = type
-        this.fetchZXPayment()
+    //TA的微金账户首页
+    fetchAccountP2P = () => {
+        this.Get('/api/finManager/cust/v2/wjAccount.shtml',{
+            custId: this.custId
+        }).then(data=>{
+            this.data_p2p.detail.info = data.result
+        })
     }
 
-    //重置尊享回款明细的页码
-    resetZXPaymentPageNo = () => {
-        let {type, payments} = this.data_zx.detail, current_payment = payments[type]
-        current_payment.pageNo = 1
+    //设置微金回款明细的状态
+    setP2PPaymentType = (type) => {
+        this.data_p2p.detail.type = type
+        this.fetchPaymentP2P()
+    }
+
+    //重置微金回款明细的页码
+    resetP2PPaymentPageNo = () => {
+        this.data_p2p.detail.pageNo = 1
+    }
+    //TA的微金-回款明细
+    fetchPaymentP2P = (done)=>{
+        let {pageNo,list,type} = this.data_p2p.detail
+
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) list.splice(0, list.length)
+        this.Get('/api/finManager/cust/v2/wjPayment.shtml',{
+            custId:this.custId,
+            pageNo:pageNo,
+            pageSize:10,
+            status:type
+        }).then(data=>{
+            this.data_p2p.detail.totalCount = data.pageData.pagination.totalCount
+            list.push(...data.pageData.result)
+            this.data_p2p.detail.pageNo < data.pageData.pagination.totalPage
+                ? this.data_p2p.detail.pageNo++
+                : this.data_p2p.detail.pageNo = 0
+            done && done()
+        })
     }
 
     //黄金账户信息页
@@ -203,15 +251,4 @@ export default class InvestorAccount {
         let {type, records} = this.data.hj, current_record = records[type]
         current_record.page_no = 1
     }
-    //获取微金账户信息页
-    fetchAccountP2P = (custId) => {
-        this.Get('/api/finManager/cust/v2/wjAccount.shtml', {
-            custId: this.custId
-        }).then(data => {
-            this.data.p2p.info = data.result
-        })
-
-    }
-
-
 }
