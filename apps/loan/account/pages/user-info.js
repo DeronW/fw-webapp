@@ -127,18 +127,68 @@ class SelectItem extends React.Component {
 
     _MODEL = TAB_MODEL[this.props.field]
 
-    state = { expandOptions: false, expandIconDeg: 45 }
+    state = { expandOptions: false, expandIconDeg: 45, optionsHeight: 0, optionOpacity: 0 }
 
     toggleExpand = () => {
         const { expandOptions } = this.state;
 
-        this.setState({ expandOptions: !expandOptions })
-        const interval = setInterval(() => {
-            const { expandOptions, expandIconDeg } = this.state;
-            this.setState({ expandIconDeg: expandOptions ? (expandIconDeg + 10) : (expandIconDeg - 10) }, () => {
-                if (this.state.expandIconDeg == 45 || this.state.expandIconDeg == 135) clearInterval(interval)
-            })
-        }, 20)
+
+        if (this.props.field != 'city') {
+            if (expandOptions) {
+                const interval1 = setInterval(() => {
+                    const { expandOptions, expandIconDeg } = this.state;
+                    this.setState({ expandIconDeg: expandIconDeg - 10 }, () => {
+                        if (this.state.expandIconDeg == 45 || this.state.expandIconDeg == 135) {
+                            clearInterval(interval1);
+                            this.setState({ expandOptions: !expandOptions })
+                        }
+                    })
+                }, 17)
+                const interval2 = setInterval(() => {
+                    const { optionsHeight } = this.state,
+                        optionsHeightTotal = 90 * Object.keys(this._MODEL.options).length;
+                    this.setState({ optionsHeight: optionsHeight - optionsHeightTotal / 9 }, () => {
+                        if (this.state.optionsHeight == optionsHeightTotal || this.state.optionsHeight == 0) clearInterval(interval2)
+                    })
+                }, 17)
+                // setTimeout(() => {
+                    const interval3 = setInterval(() => {
+                        const { optionOpacity } = this.state;
+                        this.setState({ optionOpacity: optionOpacity - 100 / 2 }, () => {
+                            if (this.state.optionOpacity == 100 || this.state.optionOpacity == 0) clearInterval(interval3)
+                        })
+                    }, 10)
+                // }, 100)
+            } else {
+                this.setState({ expandOptions: !expandOptions }, () => {
+                    if (this.props.field != 'city') {
+                        const interval1 = setInterval(() => {
+                            const { expandOptions, expandIconDeg } = this.state;
+                            this.setState({ expandIconDeg: expandOptions ? (expandIconDeg + 10) : (expandIconDeg - 10) }, () => {
+                                if (this.state.expandIconDeg == 45 || this.state.expandIconDeg == 135) clearInterval(interval1)
+                            })
+                        }, 17)
+                        const interval2 = setInterval(() => {
+                            const { expandOptions, optionsHeight } = this.state,
+                                optionsHeightTotal = 90 * Object.keys(this._MODEL.options).length;
+                            this.setState({ optionsHeight: expandOptions ? (optionsHeight + optionsHeightTotal / 9) : (optionsHeight - optionsHeightTotal / 9) }, () => {
+                                if (this.state.optionsHeight == optionsHeightTotal || this.state.optionsHeight == 0) clearInterval(interval2)
+                            })
+                        }, 17)
+                        setTimeout(() => {
+                            const interval3 = setInterval(() => {
+                                const { optionOpacity } = this.state;
+                                this.setState({ optionOpacity: optionOpacity + 100 / 10 }, () => {
+                                    if (this.state.optionOpacity == 100 || this.state.optionOpacity == 0) clearInterval(interval3)
+                                })
+                            }, 20)
+                        }, 100)
+                    }
+                })
+            }
+        } else {
+            this.setState({ expandOptions: !expandOptions })
+        }
     }
 
     handleChange = v => {
@@ -151,6 +201,7 @@ class SelectItem extends React.Component {
             { options } = this._MODEL,
             optName = options[optValue];
         return <div key={optName}
+            style={{ opacity: this.state.optionOpacity / 100 }}
             styleName={value == optValue ? "selected-option" : "option"}
             onClick={() => this.handleChange(optValue)}>
             {optName}
@@ -162,13 +213,19 @@ class SelectItem extends React.Component {
         const { field, value } = this.props,
             { name, options } = this._MODEL;
 
-        const { expandOptions, expandIconDeg } = this.state;
+        const { expandOptions, expandIconDeg, optionsHeight } = this.state;
+
+        const selectOptionsContainerStyle = {
+            height: optionsHeight
+        }
 
         const selectOptions = field == 'city' ? (
             <CitySelector selected={value} changeHandler={v => this.handleChange(v)} closeHandler={this.toggleExpand} />
         ) : (
-            <div styleName="select-options">
-                { Object.keys(options).map(this._genOptions) }
+            <div style={selectOptionsContainerStyle} styleName="select-options-container">
+                <div styleName="select-options">
+                    { Object.keys(options).map(this._genOptions) }
+                </div>
             </div> )
 
         const selectedValue = field == 'city' ? value : options[value];
