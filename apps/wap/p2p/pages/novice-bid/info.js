@@ -115,6 +115,12 @@ class ReserveInfoNovice extends React.Component {
                 <div styleName="reserveBtn" onClick={this.reserveHandler}>立即抢购</div>
             </div>
         }
+
+        let records_section = () => {
+            return <div styleName="recordBtn" onClick={() => history.push('/reserve-bid/records')}>
+                预约记录
+            </div>
+        }
         return <div styleName="infoPanel">
             <Header noClose title="新手标详情" history={history}/>
             {banner_section()}
@@ -123,6 +129,7 @@ class ReserveInfoNovice extends React.Component {
             {intro_section()}
             {/*{jumpLink_section()}*/}
             {bottom_section()}
+            {records_section()}
         </div>
     }
 }

@@ -150,6 +150,11 @@ class ReserveInfo extends React.Component {
                 </div>
             </div>
         }
+        let records_section = () => {
+            return <div styleName="recordBtn" onClick={() => history.push('/reserve-bid/records')}>
+                预约记录
+            </div>
+        }
         return <div styleName='infoPanel'>
             <Header noClose title="详情" history={history}/>
             {banner_section()}
@@ -162,12 +167,9 @@ class ReserveInfo extends React.Component {
                 <div styleName="jumpLinkArrow"></div>
             </div>
             <div styleName="bottomBox">
-                {/*<div styleName="recordBtn" onClick={*/}
-                {/*() => this.props.history.push(`/reserve/records`)*/}
-                {/*}>预约记录*/}
-                {/*</div>*/}
                 <div styleName="reserveBtn" onClick={this.reserveHandler}>立即预约</div>
             </div>
+            {records_section()}
         </div>
     }
 }
