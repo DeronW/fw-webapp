@@ -7,7 +7,7 @@ import {
     Utils
 } from 'fw-javascripts'
 import {
-    Storage
+    NativeBridge, Browser, Storage
 } from '../../lib/helpers'
 export default class Fq {
     constructor(Post) {
@@ -158,8 +158,17 @@ export default class Fq {
             homeSituation: this.put_in_data.homeSituation,
             income: this.put_in_data.income,
             term: parseInt(this.put_in_data.term),
-            workExperience: this.put_in_data.workExperience
-        }).then()
+            workExperience: this.put_in_data.workExperience,
+            productId:21
+        }).then(()=>{
+            let u = Storage.getUserDict();
+            let ua = window.navigator.userAgent;
+            let inWX = ua.indexOf('MicroMessenger') > -1;
+            let inFXHApp = ua.indexOf('Easyloan888') > -1;
+            let SOURCE_TYPE = inFXHApp ? 3 : inWX ? 4 : 3;
+            let params = `loanUuid=${this.product_data.loanUuid}&uid=${u.uid}&sourceType=${SOURCE_TYPE}&token=${u.token}`;
+            Browser.inFXHApp ? NativeBridge.goto(`https://m.easyloan888.com/api/order/v1/jump.shtml?${params}`,false,"分期"):location.href = `/api/order/v1/jump.shtml?${params}`
+        })
     }
 
 

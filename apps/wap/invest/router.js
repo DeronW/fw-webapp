@@ -24,21 +24,6 @@ export default (stores) => {
                 <Route exact path="/user/contribute" component={User.Contribute}/>
                 <Route exact path="/user/register-success-b" component={User.RegisterSuccessB}/>
 
-                {/*预约投资普通标*/}
-                <Route exact path="/reserve-bid/info" component={ReserveBid.Info}/>
-                <Route exact path="/reserve-bid/apply" component={ReserveBid.Apply}/>
-                <Route exact path="/reserve-bid/records" component={ReserveBid.Records}/>
-                <Route exact path="/reserve-bid/protocol" component={ReserveBid.Protocol}/>
-                <Route exact path="/reserve-bid/info-intro" component={ReserveBid.InfoIntro}/>
-                <Route exact path="/reserve-bid/faq" component={ReserveBid.Faq}/>
-
-                {/*预约投资新手标*/}
-                <Route exact path="/novice-bid/info" component={NoviceBid.Info}/>
-                <Route exact path="/novice-bid/apply" component={NoviceBid.Apply}/>
-                <Route exact path="/novice-bid/protocol" component={NoviceBid.Protocol}/>
-                <Route exact path="/novice-bid/records" component={NoviceBid.Records}/>
-                <Route exact path="/novice-bid/success" component={NoviceBid.Success}/>
-
                 {/* 杂项页面 */}
                 <Route exact path='/features/faq' component={Features.FAQList}/>
                 <Route exact path='/features/faq/:kind' component={Features.FAQPage}/>

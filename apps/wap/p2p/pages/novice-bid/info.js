@@ -5,14 +5,14 @@ import {Header} from '../../components/'
 import styles from '../../css/novice-bid/info.css'
 import {NativeBridge} from '../../helpers'
 
-@inject('reserve')
+@inject('novice_bid')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveInfoNovice extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
-        this.props.reserve.fetchNoviceProduct()
+        this.props.novice_bid.fetchNoviceProduct()
     }
 
     jumpHandler = () => {
@@ -21,8 +21,8 @@ class ReserveInfoNovice extends React.Component {
     }
 
     render() {
-        let {reserve, history} = this.props
-        let {context} = reserve.novice_bid_data
+        let {novice_bid, history} = this.props
+        let {context} = novice_bid.novice_bid_data
         let banner_section = () => {
             return <div styleName="topInfo">
                 <div styleName="infoRate">

@@ -14,7 +14,6 @@ import Waiting from './pages/waiting.js'
 import FollowFXH from './pages/follow-fxh.js'
 import FollowJRGC from './pages/follow-jrgc.js'
 
-
 export default (stores) => {
     return <Router>
         <Provider {...stores}>

@@ -1,15 +1,15 @@
 import React from 'react'
 
 let isActiveTab = (tab) => {
-    let pt = location.pathname,hash = location.hash,cnd = false;
+    let pt = location.pathname, hash = location.hash, cnd = false;
 
-    if(tab == 'user' && hash == '#/')
+    if (tab == 'user' && hash == '#/')
         cnd = true;
 
-    if(tab == 'investor' && hash == '#/investor')
+    if (tab == 'investor' && hash == '#/investor')
         cnd = true;
 
-    if(tab == 'stats' && hash == '#/stats')
+    if (tab == 'stats' && hash == '#/stats')
         cnd = true;
 
     return cnd
@@ -20,7 +20,7 @@ let tabColor = (keyword) => {
         color: cnd ? "#9b5b54" : "#999"
     }
 }
-function getStyle(tab){
+function getStyle(tab) {
     let style = {}
 
     const STYLE_TAB_BASE = {
@@ -38,7 +38,7 @@ function getStyle(tab){
         margin: "14px 0 2px"
     }
 
-    if (tab == 'fixed_panel'){
+    if (tab == 'fixed_panel') {
         style = {
             width: "720px",
             height: "94px",
@@ -53,7 +53,7 @@ function getStyle(tab){
         }
     }
     if (tab == 'tab_user')
-    style = Object.assign({}, STYLE_TAB_BASE, tabColor('user'))
+        style = Object.assign({}, STYLE_TAB_BASE, tabColor('user'))
 
     if (tab == 'tab_investor')
         style = Object.assign({}, STYLE_TAB_BASE, tabColor('investor'))
@@ -64,28 +64,38 @@ function getStyle(tab){
     return style
 }
 
-class BottomNavBar extends React.Component{
-    render(){
+class BottomNavBar extends React.Component {
+    render() {
         // let { history } = this.props
+
         let link_handler = tab => {
             if (isActiveTab(tab)) return;
 
-            if(tab == 'user'){
+            if (tab == 'user') {
                 location.href = '/static/manager/jrgc/index.html#/'
             }
-            if(tab == 'investor'){
+            if (tab == 'investor') {
                 location.href = '/static/manager/jrgc/index.html#/investor'
             }
-            if(tab == 'stats'){
+            if (tab == 'stats') {
                 location.href = '/static/manager/jrgc/index.html#/stats'
             }
         }
         const STYLE_ICON_BASE = {
             marginTop: '4px'
         }
-        let icon_user = isActiveTab("user")?require("../images/components/bottom-nav-bar/user.gif"):require("../images/components/bottom-nav-bar/user.png")
-        let icon_investor = isActiveTab("investor")?require("../images/components/bottom-nav-bar/investor.gif"):require("../images/components/bottom-nav-bar/investor.png")
-        let icon_stats = isActiveTab("stats")?require("../images/components/bottom-nav-bar/stats.gif"):require("../images/components/bottom-nav-bar/stats.png")
+
+        let icon_user = isActiveTab("user") ?
+            require("../images/components/bottom-nav-bar/user.gif") :
+            require("../images/components/bottom-nav-bar/user.png")
+
+        let icon_investor = isActiveTab("investor") ?
+            require("../images/components/bottom-nav-bar/investor.gif") :
+            require("../images/components/bottom-nav-bar/investor.png")
+
+        let icon_stats = isActiveTab("stats") ?
+            require("../images/components/bottom-nav-bar/stats.gif") :
+            require("../images/components/bottom-nav-bar/stats.png")
 
         return <div style={{ height: "100px" }}>
             <div style={getStyle('fixed_panel')}>

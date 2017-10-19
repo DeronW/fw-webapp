@@ -9,16 +9,16 @@ import showConfirm from '../../components/confirm'
 import {NativeBridge} from '../../helpers'
 import {Browser} from '../../helpers'
 
-@inject('reserve')
+@inject('reserve_bid')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveRecords extends React.Component {
 
     componentDidMount() {
         NativeBridge.trigger('hide_header')
-        this.props.reserve.resetPageNo();
-        this.props.reserve.getReserveList()
-        Event.touchBottom(this.props.reserve.getReserveList)
+        this.props.reserve_bid.resetPageNo();
+        this.props.reserve_bid.getReserveList()
+        Event.touchBottom(this.props.reserve_bid.getReserveList)
     }
 
     componentWillUnmount() {
@@ -26,14 +26,14 @@ class ReserveRecords extends React.Component {
     }
 
     cancelReserveHandler = (bookTime, id) => {
-        let {reserve, history} = this.props;
+        let {reserve_bid, history} = this.props;
         let cb = () => {
-            reserve.cancelHandler(id).then((data) => {
+            reserve_bid.cancelHandler(id).then((data) => {
                 if (data.cancelResult == '1') {
 
                 } else if (data.cancelResult == '0') {
                     Components.showToast("取消成功")
-                    reserve.getReserveList()
+                    reserve_bid.getReserveList()
                 }
             })
         };
@@ -45,16 +45,16 @@ class ReserveRecords extends React.Component {
     }
 
     tabHandler = (status) => {
-        let {type} = this.props.reserve.records
-        let {setRecordsCurrentStatus, getReserveList} = this.props.reserve
+        let {type} = this.props.reserve_bid.records
+        let {setRecordsCurrentStatus, getReserveList} = this.props.reserve_bid
         if (status == type) return
         setRecordsCurrentStatus(status)
     }
 
     render() {
-        let {reserve, history} = this.props
-        let {type, tab} = this.props.reserve.records
-        let {list} = reserve.records.tab[type]
+        let {reserve_bid, history} = this.props
+        let {type, tab} = this.props.reserve_bid.records
+        let {list} = reserve_bid.records.tab[type]
 
         let no_records = <div styleName="emptyPanel">
             <img src={require('../../images/reserve-bid/records/norecords.png')}/>

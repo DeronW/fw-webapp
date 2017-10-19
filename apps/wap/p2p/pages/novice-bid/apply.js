@@ -6,7 +6,7 @@ import styles from '../../css/novice-bid/apply.css'
 import {Components} from 'fw-javascripts'
 import {NativeBridge} from '../../helpers/'
 
-@inject('reserve')
+@inject('novice_bid')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveApplyNovice extends React.Component {
@@ -17,7 +17,7 @@ class ReserveApplyNovice extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
-        this.props.reserve.fetchNoviceProduct()
+        this.props.novice_bid.fetchNoviceProduct()
     }
 
     inputChangeHandler = name => e => {
@@ -25,16 +25,16 @@ class ReserveApplyNovice extends React.Component {
 
         if (v[1] && v[1].length > 2) {
             v[1] = v[1].substr(0, 2)
-            this.props.reserve.setFormData(name, `${v[0]}.${v[1]}`, 'novice_bid_data')
+            this.props.novice_bid.setFormData(name, `${v[0]}.${v[1]}`, 'novice_bid_data')
         } else {
-            this.props.reserve.setFormData(name, e.target.value, 'novice_bid_data')
+            this.props.novice_bid.setFormData(name, e.target.value, 'novice_bid_data')
         }
 
     }
 
     allMadeHandler = () => {
-        let {reserve} = this.props
-        this.props.reserve.setFormData('reserveMoney', reserve.novice_bid_data.accountAmount, 'novice_bid_data')
+        let {novice_bid} = this.props
+        this.props.novice_bid.setFormData('reserveMoney', novice_bid.novice_bid_data.accountAmount, 'novice_bid_data')
     }
 
     protocolHandler = () => {
@@ -48,11 +48,11 @@ class ReserveApplyNovice extends React.Component {
     }
 
     applyHandler = () => {
-        let {reserve, history} = this.props
+        let {novice_bid, history} = this.props
         let sussessHandler = () => {
             if (this.state.pending) return
             this.setState({pending: true})
-            reserve.submitNoviceHandler()
+            novice_bid.submitNoviceHandler()
                 .then(() => {
                         Components.showToast('预约成功')
                     },
@@ -63,15 +63,15 @@ class ReserveApplyNovice extends React.Component {
                     history.push(`/novice-bid/success`)
                 })
         }
-        reserve.fetchNoviceProduct().then(data => {
-            if (reserve.novice_bid_data.reserveMoney === '') {
+        novice_bid.fetchNoviceProduct().then(data => {
+            if (novice_bid.novice_bid_data.reserveMoney === '') {
                 Components.showToast("预约金额不能为空")
-            } else if (reserve.novice_bid_data.reserveMoney < reserve.novice_bid_data.context.minAmt) {
+            } else if (novice_bid.novice_bid_data.reserveMoney < novice_bid.novice_bid_data.context.minAmt) {
                 Components.showToast("预约金额不足100")
-            } else if (reserve.novice_bid_data.reserveMoney > reserve.novice_bid_data.accountAmount) {
+            } else if (novice_bid.novice_bid_data.reserveMoney > novice_bid.novice_bid_data.accountAmount) {
                 Components.showToast("可用金额不足，请充值后重试")
-            } else if (!reserve.novice_bid_data.isCompany) {
-                if (reserve.novice_bid_data.reserveMoney > data.batchMaxmum) {
+            } else if (!novice_bid.novice_bid_data.isCompany) {
+                if (novice_bid.novice_bid_data.reserveMoney > data.batchMaxmum) {
                     Components.showToast("自动投标金额不足").then(() => {
                         NativeBridge.toNative('auto_bid_second')
                     })
@@ -85,14 +85,14 @@ class ReserveApplyNovice extends React.Component {
     }
 
     render() {
-        let {history, reserve} = this.props
-        let {context} = reserve.novice_bid_data
+        let {history, novice_bid} = this.props
+        let {context} = novice_bid.novice_bid_data
         let submit_panel = () => {
             return <div styleName="submitPanel">
                 <div styleName="reserveMoney">抢购金额</div>
                 <div styleName="userMoney">
                     <div styleName="inputMoney">
-                        <input type="number" placeholder="100元起预约" value={reserve.novice_bid_data.reserveMoney}
+                        <input type="number" placeholder="100元起预约" value={novice_bid.novice_bid_data.reserveMoney}
                                onChange={this.inputChangeHandler('reserveMoney')}/>
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
@@ -100,7 +100,7 @@ class ReserveApplyNovice extends React.Component {
                     </div>
                     <div styleName="money">
                         <div styleName="balance">
-                            可用余额<span styleName="remain">&yen;{reserve.novice_bid_data.accountAmount}</span>
+                            可用余额<span styleName="remain">&yen;{novice_bid.novice_bid_data.accountAmount}</span>
                         </div>
                         <div styleName="recharge" onClick={this.rechargeHandler}>充值</div>
                     </div>
@@ -119,7 +119,7 @@ class ReserveApplyNovice extends React.Component {
                     <div styleName="infoAmount">
                         <div styleName="amountLeft">预计收益</div>
                         <div styleName="amountRight">
-                            &yen;{reserve.novice_bid_data.reserveMoney * (context.loadRate / 100)}
+                            &yen;{novice_bid.novice_bid_data.reserveMoney * (context.loadRate / 100)}
                         </div>
                     </div>
                     <div styleName="itemWrapper">

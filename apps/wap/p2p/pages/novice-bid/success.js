@@ -6,17 +6,18 @@ import Header from '../../components/header'
 import {NativeBridge} from '../../helpers'
 
 
-@inject('reserve')
+@inject('novice_bid')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveSuccess extends React.Component {
     toRecordsHandler = () => {
         let {history} = this.props
-        history.push('/novice-bid/records')
+        history.push('/reserve-bid/records')
     }
 
     toHomeHandler = () => {
         let {history} = this.props
+        // 跳到首页
     }
 
     render() {

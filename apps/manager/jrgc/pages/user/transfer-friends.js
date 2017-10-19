@@ -17,9 +17,13 @@ class TransferFriends extends React.Component {
     componentDidMount() {
         let { resetFriendsPageNo, fetchFriendsList } = this.props.user_coupon
         resetFriendsPageNo()
+        Event.touchBottom(fetchFriendsList)
+    }
+    componentWillUnmount() {
+        Event.cancelTouchBottom()
     }
     searchFriendsHandler = () => {
-        if(this.props.user_coupon.data.friends.keyword == '') return Components.showToast('请输入关键字')
+        this.props.user_coupon.resetFriendsPageNo()
         this.props.user_coupon.fetchFriendsList()
     }
     inputHandler = (e) => {
@@ -30,22 +34,36 @@ class TransferFriends extends React.Component {
     }
     presentHandler = (name, custId) => {
         //弹层
-        let { beanCount, couponId, type } = Utils.hashQuery
-        let unit = type == '返金券' ? '克' : '元'
-
-        let v = confirm(`确认将${beanCount}${unit}${type},赠送给${name}吗？`)
+        let { history } = this.props
+        let { beanCount, couponId, couponType } = Utils.hashQuery
+        let unit = couponType == '2' ? '克' : '元'
+        let t
+        if(couponType=='0'){
+            t = "返现券"
+        }else if(couponType=='1'){
+            t = '返息券'
+        }else{
+            t = '返金券'
+        }
+        let v = confirm(`确认将${beanCount}${unit}${t},赠送给${name}吗？`)
         if (v == true) {
-            this.props.user_coupon.presentCoupon(couponId, type, custId)
+            this.props.user_coupon.presentCoupon(couponId, couponType, custId)
+            .then(() => Components.showAlert("赠送成功"))
+            .then(()=>{
+                history.push('/user-transfer-coupon')
+            })
         }
     }
     render() {
         let { history } = this.props
-        let { type, pageNo, list, keyword } = this.props.user_coupon.data.friends
-        let { beanCount, remark, overdueTime, investMultip, inverstPeriod } = Utils.hashQuery
+        let { pageNo, list, keyword } = this.props.user_coupon.friends_data
+        let { beanCount, remark, overdueTime, investMultip, inverstPeriod,couponType } = Utils.hashQuery
+        let u = couponType == '2' ? '克' : '元'
+
         let coupon = () => {
-            let coupon_style = type == '返现券' ? "couponItem typeBlue" : type == '返息券' ? "couponItem typeRed" : "couponItem typeYellow"
+            let coupon_style = couponType == '0' ? "couponItem typeBlue" : couponType == '1' ? "couponItem typeRed" : "couponItem typeYellow"
             return <div styleName={coupon_style}>
-                <div styleName="couponValue"><span styleName="rmb">¥</span>{beanCount}</div>
+                <div styleName="couponValue"><span styleName="rmb">¥</span>{beanCount}<span styleName="rmb">{u}</span></div>
                 <div styleName="couponDes">
                     <div styleName="lineLeft desLeft">{remark}</div>
                     <div styleName="lineRight desRight">有效期 {overdueTime}</div>
