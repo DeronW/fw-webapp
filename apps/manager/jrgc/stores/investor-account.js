@@ -11,12 +11,12 @@ export default class InvestorAccount {
             detail:{
                 info: {},
                 type: '0',
+                totalCount:0,
                 payments: {
-                    '0': {name: '未回', pageNo: 1, list: []},
-                    '1': {name: '已回', pageNo: 1, list: []}
+                    '0': {pageNo: 1, list: []},
+                    '1': {pageNo: 1, list: []}
                 }
             },
-            payments_count: null,
             project:{
                 info:{},
                 tab:'100',
@@ -45,7 +45,7 @@ export default class InvestorAccount {
                 },
                 goldPrice: '',
                 amount: {},
-                totalCount: null
+                totalCount: 0
             },
             overview:{}//尊享和微金的款项总览
         })
@@ -114,7 +114,47 @@ export default class InvestorAccount {
             done()
         })
     }
+     //尊享账户信息页
+     fetchAccountZX = () => {
+        this.Get('/api/finManager/cust/v2/zxAccount.shtml', {
+            custId: this.custId
+        }).then(data => {
+            this.data_zx.detail.info = data.result
+        })
+    }
 
+    //尊享  他的回款明细
+    fetchZXPayment = (done) => {
+        let {type, payments} = this.data_zx.detail, current_payment = payments[type]
+        const PAGE_SIZE = 10
+        if (current_payment.pageNo == 0) return done && done()
+        if (current_payment.pageNo == 1) current_payment.list.splice(0, current_payment.list.length)
+        this.Get('/api/finManager/cust/v2/zxPayment.shtml', {
+            custId: this.custId,
+            pageNo: current_payment.pageNo,
+            pageSize: PAGE_SIZE,
+            status: type
+        }).then(data => {
+            this.data_zx.detail.totalCount = data.pageData.pagination.totalCount
+            current_payment.list.push(...data.result)
+            current_payment.pageNo < data.pageData.pagination.totalPage
+                ? current_payment.pageNo++
+                : current_payment.pageNo = 0
+            done && done()
+        })
+    }
+
+    //设置尊享回款明细的状态
+    setZXPaymentType = (type) => {
+        this.data_zx.type = type
+        this.fetchZXPayment()
+    }
+
+    //重置尊享回款明细的页码
+    resetZXPaymentPageNo = () => {
+        let {type, payments} = this.data_zx.detail, current_payment = payments[type]
+        current_payment.pageNo = 1
+    }
 
     //黄金账户信息页
     fetchAccountHj = () => {
@@ -173,45 +213,5 @@ export default class InvestorAccount {
 
     }
 
-    //尊享账户信息页
-    fetchAccountZX = () => {
-        this.Get('/api/finManager/cust/v2/zxAccount.shtml', {
-            custId: this.custId
-        }).then(data => {
-            this.data_zx.detail.info = data.result
-        })
-    }
 
-    //尊享  他的回款明细
-    fetchZXPayment = (done) => {
-        let {type, payments} = this.data_zx.detail, current_payment = payments[type]
-        const PAGE_SIZE = 10
-        if (current_payment.pageNo === 0) return done && done()
-        if (current_payment.pageNo == 1) current_payment.list.splice(0, current_payment.list.length)
-        this.Get('/api/finManager/cust/v2/zxPayment.shtml', {
-            custId: this.data.id,
-            pageNo: current_payment.pageNo,
-            pageSize: PAGE_SIZE,
-            status: type
-        }).then(data => {
-            this.data_zx.payments_count = data.pageData.pagination.totalCount
-            current_payment.list.push(...data.result)
-            current_payment.pageNo < data.pageData.pagination.totalPage
-                ? current_payment.pageNo++
-                : current_payment.pageNo = 0
-            done && done()
-        })
-    }
-
-    //重置尊享回款明细的状态
-    resetZXPaymentType = (type) => {
-        this.data_zx.type = type
-        this.fetchZXPayment()
-    }
-
-    //充值尊享回款明细的页码
-    resetZXPaymentPageNo = () => {
-        let {type, payments} = this.data_zx.detail, current_payment = payments[type]
-        current_payment.pageNo = 1
-    }
 }

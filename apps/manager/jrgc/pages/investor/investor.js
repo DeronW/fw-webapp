@@ -21,19 +21,21 @@ class Investor extends React.Component {
         Event.cancelTouchBottom()
     }
     switchTab = (t) => {
-        let {setCustTab,setCustValue,fetchCustList} = this.props.investor
+        let {resetCustPageNo,setCustTab,setCustValue,fetchCustList} = this.props.investor
         let { tab,type,sort } = this.props.investor.data.custmor
 
         if (t == tab) return
+        resetCustPageNo()
         setCustTab(t)
         setCustValue(sort[t][0][type])
         fetchCustList()
     }
     switchType = (t,i) => {
-        let {setCustType,setCustValue,fetchCustList} = this.props.investor
+        let {resetCustPageNo,setCustType,setCustValue,fetchCustList} = this.props.investor
         let { tab,type,sort } = this.props.investor.data.custmor
 
         if (t == type) return
+        resetCustPageNo()
         setCustType(t)
         setCustValue(sort[tab][i][t])
         fetchCustList()
