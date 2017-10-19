@@ -12,7 +12,7 @@ class Score extends React.Component {
     componentDidMount() {
         let { fetchScore, resetScorePageNo, setScoreId } = this.props.investor
         resetScorePageNo()
-        setScoreId(Utils.hashQuery.id)
+        setScoreId(Utils.hashQuery.custId)
         fetchScore()
         Event.touchBottom(fetchScore)
     }

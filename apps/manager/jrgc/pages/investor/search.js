@@ -32,7 +32,7 @@ class Search extends React.Component {
     }
     gotoInfo = (id) => {
         let { history } = this.props
-        history.push(`/investor-info?id=${id}`)
+        history.push(`/investor-info?custId=${id}`)
     }
     render() {
         let { history } = this.props
