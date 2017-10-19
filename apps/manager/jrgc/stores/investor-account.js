@@ -17,6 +17,14 @@ export default class InvestorAccount {
                 pageNo:1,
                 list:[]
             },
+            project:{
+                info:{},
+                tab:'Ta的项目',
+                totalCount:0,
+                category:'100',
+                pageNo:1,
+                records:[]
+            }
         })
 
         extendObservable(this.data_zx,{
@@ -72,7 +80,7 @@ export default class InvestorAccount {
             }).then(data=>{
                 this.data.overview = data.result
             })
-        }else if(type == 'wj'){
+        }else if(type == 'p2p'){
             this.Get('/api/finManager/cust/v2/wjOverview.shtml',{
                 custId:this.custId
             }).then(data=>{
@@ -170,6 +178,53 @@ export default class InvestorAccount {
             custId: this.custId
         }).then(data=>{
             this.data_p2p.detail.info = data.result
+        })
+    }
+    //TA的微金-出借（项目）信息
+    fetchInvestInfoP2P = () => {
+        this.Get('/api/finManager/cust/v2/wjPrdInvestInfo.shtml',{
+            custId: this.custId
+        }).then(data=>{
+            this.data_p2p.project.info = data.result
+        })
+    }
+    resetCategoryPageNo = () => {
+        this.data_p2p.project.pageNo = 1
+    }
+    setProjectTabP2P = (tab) => {
+        this.data_p2p.project.tab = tab
+        this.fetchPrdInvestP2P()
+    }
+    setProjectCategory2P = (type) => {
+        this.data_p2p.project.category = type
+        this.fetchPrdInvestP2P()
+    }
+    //TA的微金-TA的项目列表
+    fetchPrdInvestP2P = (done)=>{
+        let {tab,pageNo,category,records} = this.data_p2p.project
+        let url
+        if(tab == 'Ta的项目'){
+            url = '/api/finManager/cust/v2/wjPrdInvest.shtml'
+        }else if(tab == '批量项目'){
+            url = '/api/finManager/cust/v2/wjBatchPrdInvest.shtml'
+        }else{
+            url = '/api/finManager/cust/v2/wjSwitchPrdInvest.shtml'
+        }
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) records.splice(0, records.length)
+        this.Get(url,{
+            custId:this.custId,
+            flag:category,
+            pageNo:pageNo,
+            pageSize:10
+        }).then(data => {
+            this.data_p2p.project.totalCount = data.pageData.pagination.totalCount
+
+            records.push(...data.pageData.result)
+            this.data_p2p.project.pageNo < data.pageData.pagination.totalPage
+                ? this.data_p2p.project.pageNo++
+                : this.data_p2p.project.pageNo = 0
+            done && done()
         })
     }
 

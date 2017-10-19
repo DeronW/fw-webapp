@@ -27,9 +27,9 @@ class zxItem extends React.Component {
         if (type == this.props.investor_account.data_zx.project.type) return
         this.props.investor_account.setTypeZX(type)
         console.log(type)
-        if(type=="Ta的项目"){
+        if (type == "Ta的项目") {
             this.props.investor_account.setTabZX('100')
-        }else if(type=="转入项目"){
+        } else if (type == "转入项目") {
             this.props.investor_account.setTabZX('')
         }
         this.props.investor_account.fetchProjectZX()
@@ -42,7 +42,7 @@ class zxItem extends React.Component {
         let { history } = this.props
         let { type } = this.props.investor_account.data_zx.project
 
-        let { info,tab,transfer_tab,record,list } = this.props.investor_account.data_zx.project
+        let { info, tab, record } = this.props.investor_account.data_zx.project
         let types = type == 'Ta的项目' ? ['100', '3', '4'] : ['', '5', '6']
 
         let typeFn = (item, index) => {
@@ -56,8 +56,8 @@ class zxItem extends React.Component {
             </div>
         }
 
-        let zx_item = (item,index) => {
-            if(type == 'Ta的项目'){
+        let zx_item = (item, index) => {
+            if (type == 'Ta的项目') {
                 return <div styleName="record">
                     <div styleName="title">
                         <span>{item.prdName}</span>
@@ -88,7 +88,7 @@ class zxItem extends React.Component {
                         <span>{item.applyDate}</span>
                     </div>
                 </div>
-            }else if(type == '转入项目'){
+            } else if (type == '转入项目') {
                 <div styleName="record">
                     <div styleName="title">
                         <span>{item.name}</span>
@@ -117,6 +117,9 @@ class zxItem extends React.Component {
                 </div>
             }
         }
+        let empty = <div styleName="empty">
+            <img src={require('../../images/investor/empty.png')} />
+        </div>
         return <div styleName="bg">
             <div styleName="header">
                 <a styleName="btnBack" onClick={history.goBack}></a>
@@ -138,12 +141,9 @@ class zxItem extends React.Component {
                 {types.map(tabFn)}
             </div>
             <div styleName="number">共<span>5</span>笔记录</div>
-            {/*<div styleName="records">
-
-                <div styleName="load">已经全部加载完毕</div>
-            </div>*/}
-            <div styleName="no-data">
-                <img src={require('../../images/investor/zx-item/no-data.png')} />
+            <div styleName="records">
+                {record[record].records.length > 0 ? record[record].records.map(zx_item) : empty}
+                {record[record].records.length > 0 && <div styleName="load">已经全部加载完毕</div>}
             </div>
         </div>
     }

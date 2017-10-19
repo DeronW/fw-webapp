@@ -17,6 +17,7 @@ class Overview extends React.Component {
 
     }
     componentDidMount(){
+        alert(3)
         this.props.investor_account.fetchOverview(Utils.hashQuery.type)
     }
     accumulatedHandler = () => {
