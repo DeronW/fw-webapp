@@ -82,7 +82,8 @@ export default class Investor {
             },
             bean: {
                 id: null,
-                info: {},
+                cashBalance:null,
+                overbeancount:null,
                 pageNo: 1,
                 records: []
             },
@@ -233,7 +234,7 @@ export default class Investor {
 
     //查询客户工豆列表
     fetchBean = (done) => {
-        let { pageNo, records, id, info } = this.data.bean
+        let { pageNo, records, id} = this.data.bean
         const PAGE_SIZE = 10
         if (this.data.bean.pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0,records.length)
@@ -242,7 +243,9 @@ export default class Investor {
             pageNo: pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
-            info = data
+            this.data.bean.cashBalance = data.cashBalance
+            this.data.bean.overbeancount = data.overbeancount
+
             records.push(...data.pageData.result)
             this.data.bean.pageNo < data.pageData.pagination.totalPage ? this.data.bean.pageNo++ : this.data.bean.pageNo = 0
 
