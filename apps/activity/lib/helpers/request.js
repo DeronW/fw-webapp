@@ -20,6 +20,7 @@ const Ajax = options => {
         */
         if (error.code == 40101 || error.code == 63001) {
             // 'here ! should go to login'
+            console.log('this request need login',options.url)
             // if (Browser.inApp) {
             //     NativeBridge.login()
             // } else {
@@ -30,7 +31,6 @@ const Ajax = options => {
             //         location.href = 'https://passport.9888keji.com/passport/login?sourceSite=jrgc&service=' + location.href
             //     }
             // }
-
         } else {
             // 如果不弹出错误, 就直接reject
             if (silence)
