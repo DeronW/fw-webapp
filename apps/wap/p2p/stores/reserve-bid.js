@@ -36,7 +36,6 @@ export default class ReserveBid {
             contractMsg: '',
             isCompany: null,
             bidList: [],
-            checkBidList: [],
             bids: []
         })
     }
@@ -58,10 +57,6 @@ export default class ReserveBid {
             this.bid_data.minAmt = data.appointClaim.minAmt
             this.bid_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
             this.bid_data.isCompany = data.isCompany
-            if (Array.isArray(data.appointClaimList)) {
-                this.bid_data.checkBidList.splice(0, this.bid_data.checkBidList.length)
-                this.bid_data.checkBidList && this.bid_data.checkBidList.push(...data.appointClaimList)
-            }
 
             let mix_bids = data.appointClaimList || []
             mix_bids.push(data.appointClaim)
