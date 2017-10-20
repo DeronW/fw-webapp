@@ -56,22 +56,30 @@
     float: right;
 }
 
+.infoContainer {
+    padding-top: 20px;
+}
+
 .infoItem {
     width: 670px;
     margin-left: 50px;
-    height: 74px;
-    line-height: 74px;
-    border-bottom: 1px solid #e3e5ea;
+    height: 60px;
+    line-height: 60px;
     display: table;
     font-size: 26px;
 }
 
 .infoItem:last-child {
-    border-bottom: 0 none;
+    border-bottom: 1px solid #d8d8d8;
+    padding-bottom: 20px;
 }
 
 .infoItemLeft {
     float: left;
+}
+
+.infoProtocol {
+    padding: 10px 0;
 }
 
 .itemHeaderRight {
@@ -181,8 +189,16 @@
     margin-right: 20px;
 }
 
+.icon-status0 {
+    background: url("../../images/reserve-bid/records/icon-on.png") no-repeat center;
+}
+
 .icon-status1 {
     background: url("../../images/reserve-bid/records/icon-over.png") no-repeat center;
+}
+
+.icon-status2 {
+    background: url("../../images/reserve-bid/records/icon-cancel.png") no-repeat center;
 }
 
 .statusText {

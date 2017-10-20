@@ -24,13 +24,13 @@ export default class ReserveBid {
                 loadRate: '-',//利率
                 minAmt: '',//最小预约额
                 repayPeriod: '-',//期限
-                valueTime:'',//预计起息时间
-                startTime:'',//抢购时间
-                paymentTime:'',//预计到期时间
+                valueTime: '',//预计起息时间
+                startTime: '',//抢购时间
+                paymentTime: '',//预计到期时间
             },
             accountAmount: null,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
-            batchMaxmum: 0,//批量投资限额
+            batchMaxmum: null,//批量投资限额
             reserveMoney: '',//用户输入的预约金额
             isChecked: true,
             contractMsg: '',

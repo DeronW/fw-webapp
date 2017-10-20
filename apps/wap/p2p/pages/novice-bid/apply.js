@@ -18,7 +18,8 @@ class ReserveApplyNovice extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
-        this.props.novice_bid.fetchNoviceProduct()
+        this.props.novice_bid.fetchNoviceProduct();
+        (this.props.novice_bid.novice_bid_data.couponId != "") && this.setState({is_used: true})
     }
 
     inputChangeHandler = name => e => {
@@ -50,10 +51,12 @@ class ReserveApplyNovice extends React.Component {
 
     applyHandler = () => {
         let {novice_bid, history} = this.props
+        let {is_used} = this.state
         let sussessHandler = () => {
             if (this.state.pending) return
             this.setState({pending: true})
-            novice_bid.submitNoviceHandler()
+            let coupon_id = is_used ? novice_bid.novice_bid_data.couponId : ''
+            novice_bid.submitNoviceHandler(coupon_id)
                 .then(() => {
                         Components.showToast('预约成功')
                     },
@@ -69,8 +72,12 @@ class ReserveApplyNovice extends React.Component {
                 Components.showToast("预约金额不能为空")
             } else if (novice_bid.novice_bid_data.reserveMoney < novice_bid.novice_bid_data.context.minAmt) {
                 Components.showToast("预约金额不足100")
+            } else if (is_used && novice_bid.novice_bid_data.reserveMoney > novice_bid.novice_bid_data.context.investMaxAmount) {
+                Components.showToast("抢购金额超限")
             } else if (novice_bid.novice_bid_data.reserveMoney > novice_bid.novice_bid_data.accountAmount) {
                 Components.showToast("可用金额不足，请充值后重试")
+            } else if (is_used && novice_bid.novice_bid_data.reserveMoney < novice_bid.novice_bid_data.couponInvestMultip) {
+                Components.showToast("不满足20元返现券使用条件，抢购金额满2000可用")
             } else if (!novice_bid.novice_bid_data.isCompany) {
                 if (novice_bid.novice_bid_data.reserveMoney > data.batchMaxmum) {
                     Components.showToast("自动投标金额不足").then(() => {
@@ -125,7 +132,7 @@ class ReserveApplyNovice extends React.Component {
                     <div styleName="infoAmount">
                         <div styleName="amountLeft">预计收益</div>
                         <div styleName="amountRight">
-                            &yen;{novice_bid.novice_bid_data.reserveMoney * (context.loadRate / 100)}
+                            &yen;{(novice_bid.novice_bid_data.reserveMoney * (context.loadRate / 100) * novice_bid.novice_bid_data.context.repayPeriod) / 360}
                         </div>
                     </div>
                     <div styleName="itemWrapper">
@@ -182,7 +189,7 @@ class ReserveApplyNovice extends React.Component {
             <div styleName="interval"></div>
             {amount_panel()}
             <div styleName="interval"></div>
-            {coupon_panel()}
+            {novice_bid.novice_bid_data.couponId != '' && coupon_panel()}
             {procotol_panel()}
             {novice_intro()}
             {bottom_panel()}

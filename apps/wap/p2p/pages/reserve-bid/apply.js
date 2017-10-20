@@ -151,7 +151,7 @@ class ReserveApply extends React.Component {
             }
 
             if (bid) item = {
-                goals: reserve_bid.bid_data.reserveMoney * (bid.loadRate / 100),
+                goals: (reserve_bid.bid_data.reserveMoney * (bid.loadRate / 100) * bid.repayPeriod) / 360,
                 rate: bid.loadRate + '%',
                 term: bid.repayPeriod + '天',
                 indate: bid.bookValidPeriod + '天'

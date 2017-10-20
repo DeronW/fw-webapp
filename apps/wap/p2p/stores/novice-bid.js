@@ -14,6 +14,8 @@ export default class NoviceBid {
                 loadRate: '',
                 minAmt: '',
                 repayPeriod: '',
+                investMaxAmount: '',//预约最大金额
+
             },
             accountAmount: null,
             isRisk: 0,
@@ -21,7 +23,10 @@ export default class NoviceBid {
             reserveMoney: '',
             isChecked: true,
             contractMsg: '',
-            isCompany: null
+            isCompany: null,
+            couponAmount: '',//	可用券的面额
+            couponId: '',//	可用券的id（只有新手标才会返回值）
+            couponInvestMultip: ''
         })
     }
 
@@ -49,14 +54,15 @@ export default class NoviceBid {
         })
     }
 
-    submitNoviceHandler = () => {
+    submitNoviceHandler = (id) => {
         return this.Post('/api/v1/intoAppointPage.shtml', {
             applyInvestClaimId: this.applyInvestClaimId
         }).then((data) => {
             return this.Post('/api/v1/investAppoint.shtml', {
                 applyAmt: this.novice_bid_data.reserveMoney,
                 applyInvestClaimId: this.novice_bid_data.context.id,
-                bookInvestToken: data.bookInvestToken
+                bookInvestToken: data.bookInvestToken,
+                couponId: id
             })
         })
     }
