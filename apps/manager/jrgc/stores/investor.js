@@ -136,7 +136,7 @@ export default class Investor {
     }
     //回款日历-月份回款日历
     fetchMonthCal = (month) => {
-        this.Get("/api/finManager/payment/v2/paymentMonthCal.shtml", {
+        this.Get("/api/finManager/cust/v2/paymentMonthCal.shtml", {
             month: month
         }).then(data => {
             this.data.calendar.calendarList = data.result
@@ -144,7 +144,7 @@ export default class Investor {
     }
     //回款日历-月度回款信息
     fetchMonthInfo = (month) => {
-        this.Get("/api/finManager/payment/v2/paymentMonthInfo.shtml", {
+        this.Get("/api/finManager/cust/v2/paymentMonthInfo.shtml", {
             month: month
         }).then(data => {
             this.data.calendar.monthInfo = data.result
@@ -154,13 +154,13 @@ export default class Investor {
     fetchDueMonth = (tab, month) => {
         let { monthDueList } = this.data.calendar
         if (tab == '即将到期') {
-            this.Get("/api/finManager/payment/v2/dueList.shtml", {
+            this.Get("/api/finManager/cust/v2/dueList.shtml", {
                 month: month
             }).then(data => {
                 monthDueList = data.result
             })
         } else {
-            this.Get("/api/finManager/payment/v2/expiredList.shtml", {
+            this.Get("/api/finManager/cust/v2/expiredList.shtml", {
                 month: month
             }).then(data => {
                 monthDueList = data.result
@@ -284,25 +284,5 @@ export default class Investor {
     }
     resetScorePageNo = () => {
         this.data.score.pageNo = 1
-    }
-
-    fetchCouponList = () => {
-        this.data.coupon.couponList = [
-            {
-                id: 1
-            },
-            {
-                id: 2
-            },
-            {
-                id: 3
-            },
-            {
-                id: 2
-            },
-            {
-                id: 3
-            },
-        ]
     }
 }

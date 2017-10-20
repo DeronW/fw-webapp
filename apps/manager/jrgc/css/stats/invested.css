@@ -178,3 +178,12 @@
     height: calc(100% - 338px);
     background: url('../../images/stats/empty-bg.png') no-repeat center;
 }
+.invest-search{
+    position: absolute;
+    width: 33px;
+    height: 30px;
+    background: url('../../images/stats/search-icon.png') no-repeat center;
+    right: 30px;
+    top: 28px;
+    z-index: 999;
+}

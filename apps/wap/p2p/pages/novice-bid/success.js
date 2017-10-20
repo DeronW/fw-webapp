@@ -18,6 +18,7 @@ class ReserveSuccess extends React.Component {
     toHomeHandler = () => {
         let {history} = this.props
         // 跳到首页
+        NativeBridge.close()
     }
 
     render() {

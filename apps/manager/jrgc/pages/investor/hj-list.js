@@ -14,9 +14,6 @@ class HjList extends React.Component {
     }
 
     componentDidMount() {
-        //id为从上一页面获取
-        let cust_id = 1
-        this.props.investor_account.getCustId(cust_id)
         this.props.investor_account.resetGoldListPageNo()
         this.props.investor_account.fetchGoldList()
         Event.touchBottom(this.props.investor_account.fetchGoldList)
@@ -27,7 +24,7 @@ class HjList extends React.Component {
     }
 
     tabHandler = (index) => {
-        let {type} = this.props.investor_account.data.hj
+        let {type} = this.props.investor_account.data_hj
         this.setState({list_num: index})
         console.log(type, index)
         if (type == index) return
@@ -37,7 +34,7 @@ class HjList extends React.Component {
     render() {
         let {history} = this.props
         let {list_num} = this.state
-        let {type, records, amount, totalCount} = this.props.investor_account.data.hj, current_record = records[type]
+        let {type, records, amount, totalCount} = this.props.investor_account.data_hj, current_record = records[type]
         let listtab_func = (item, index) => {
             let listItem_style = index == list_num ? `listItem listItem${index} listOn` : `listItem listItem${index}`
             return <div styleName={listItem_style} key={index} onClick={() => this.tabHandler(index)}>
