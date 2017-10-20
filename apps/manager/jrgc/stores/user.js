@@ -1,6 +1,6 @@
 import {extendObservable} from 'mobx'
 import {Components, Utils, Event} from 'fw-javascripts'
-
+import { NativeBridge }  from './helpers'
 export default class User {
     constructor(Ajax,Get, Post) {
         this.Ajax = Ajax
@@ -141,6 +141,16 @@ export default class User {
     fetchRebateInfo = ()=>{
         this.Get('/api/finManager/user/v2/rebateInfo.shtml').then(data=>{
             this.data.rebate_info = data.result
+        })
+    }
+    //分享
+    nativeShare = () => {
+        let inviteCode = Utils.hashQuery.yqm;
+        NativeBridge.command.share({
+            title: '掌上钱包，随用随取',
+            image: 'https://static.9888.cn/images/loan/invitation.jpg',
+            link: `https://m.easyloan888.com/static/loan/outside-register/index.html?channelCode=OFFICIAL&invitationCode=${inviteCode}&jumpType=wx`,
+            desc: '缺钱不用愁，注册放心花，借款神器，急速到账'
         })
     }
 }
