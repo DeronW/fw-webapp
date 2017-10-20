@@ -260,7 +260,7 @@
 
 .iconUnChecked {
     composes: iconChecked;
-    background: blue;
+    background: url("../../images/novice-bid/apply/coupon-unchecked.png") no-repeat center;
 }
 
 .couponLeftText {

@@ -83,7 +83,11 @@ class ReserveRecords extends React.Component {
             return <div className={cancelstyle} key={index}>
                 {item.status == 0 &&
                 <div styleName="itemHeader headerOn">
-                    {status}
+                    <span styleName="icon-status icon-status0"></span>
+                    <div styleName="statusText">
+                        {status}<br/>
+                        <span styleName="statusNum">{item.loanRate}%<span styleName="sprit">/</span>{item.repayPeriod}天</span>
+                    </div>
                     <div styleName="itemHeaderRight cancelBtn"
                          onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
                         取消预约
@@ -97,19 +101,22 @@ class ReserveRecords extends React.Component {
                         <span styleName="statusNum">{item.loanRate}%<span styleName="sprit">/</span>{item.repayPeriod}天</span>
                     </div>
                 </div>}
-                {item.status == 2 && <div styleName="itemHeader headerCancel">{status}</div>}
+                {item.status == 2 &&
+                <div styleName="itemHeader headerCancel">
+                    <span styleName="icon-status icon-status2"></span>
+                    <div styleName="statusText">
+                        {status}<br/>
+                        <span styleName="statusNum">{item.loanRate}%<span styleName="sprit">/</span>{item.repayPeriod}天</span>
+                    </div>
+                </div>}
                 <div styleName="infoContainer">
                     <div styleName="infoItem">
-                        <div styleName="infoItemLeft">实际投资金额</div>
-                        <div styleName="itemHeaderRight colorRed">￥{item.investAmt}元</div>
+                        <div styleName="infoItemLeft">预计收益</div>
+                        <div styleName="itemHeaderRight colorRed">￥{}元</div>
                     </div>
                     <div styleName="infoItem">
-                        <div styleName="infoItemLeft">预约冻结金额</div>
+                        <div styleName="infoItemLeft">预约金额</div>
                         <div styleName="itemHeaderRight colorRed">￥{item.bookInvestAmt}元</div>
-                    </div>
-                    <div styleName="infoItem">
-                        <div styleName="infoItemLeft">期限/预期年化利率</div>
-                        <div styleName="itemHeaderRight">{item.repayPeriod}天/{item.loanRate}%</div>
                     </div>
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约时间</div>
@@ -117,14 +124,18 @@ class ReserveRecords extends React.Component {
                             {new Date(parseInt(item.bookTime)).toLocaleDateString().replace(/\//g, "-") + " " + new Date(parseInt(item.bookTime)).toTimeString().substr(0, 8)}
                         </div>
                     </div>
-                    {(item.status == 0 || item.status == 1) && <div styleName="infoItem">
-                        <div styleName="infoItemLeft">预约协议</div>
-                        <div styleName="itemHeaderRight"
-                             onClick={() => this.lookProtocolHandler(item.contractType, item.id)}>
-                            已签署<span styleName="arrow"></span>
-                        </div>
-                    </div>}
+                    <div styleName="infoItem">
+                        <div styleName="infoItemLeft">预约到期日</div>
+                        <div styleName="itemHeaderRight">{}</div>
+                    </div>
                 </div>
+                {(item.status == 0 || item.status == 1) && <div styleName="infoItem infoProtocol">
+                    <div styleName="infoItemLeft">预约协议</div>
+                    <div styleName="itemHeaderRight"
+                         onClick={() => this.lookProtocolHandler(item.contractType, item.id)}>
+                        已签署<span styleName="arrow"></span>
+                    </div>
+                </div>}
             </div>
         }
 
