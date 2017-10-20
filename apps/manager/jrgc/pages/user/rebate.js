@@ -26,19 +26,18 @@ class Rebate extends React.Component {
         Event.cancelTouchBottom()
     }
 
-    gotoHandler = (params) => {
+    gotoHandler = (link) => {
         let {history} = this.props
-        history.push('/investor-info')
+        history.push(link)
     }
 
     switchTabHandler = (index) => {
         let {type} = this.props.user.data.rebate_cust
-        let {setType} = this.props.user
+        let {setType,fetGraphData, fetchGraphSortNo} = this.props.user
         this.setState({tab_num: index})
-        console.log(type, index)
-        console.log(type == index)
-        if (type == index) return
+
         setType(index+1)
+        fetGraphData(fetchGraphSortNo(index, this.state.chart_num))
     }
 
     chartTabHandler = (index) => {
@@ -96,7 +95,7 @@ class Rebate extends React.Component {
             </div>
         }
         let itemFn = (item,index) => {
-            return <div styleName="itemDetail" key={item.custId+index} onClick={() => this.gotoHandler(item.custId)}>
+            return <div styleName="itemDetail" key={item.custId+index} onClick={() => this.gotoHandler(`/investor-info?custid=${item.custId}`)}>
                 <div styleName="detailLine">
                     <div styleName="detailLeft">{item.custRealName}</div>
                     <div styleName="detailRight">¥{item.alreadyRebate}</div>
@@ -162,24 +161,6 @@ class Rebate extends React.Component {
             </div>
         }
 
-        let p2p_section = () => {
-            return <div>
-                this is p2p section
-            </div>
-        }
-
-        let zx_section = () => {
-            return <div>
-                this is zx section
-            </div>
-        }
-
-        let gold_section = () => {
-            return <div>
-                this is gold section
-            </div>
-        }
-
         return <div>
             <div styleName="header">
                 <a styleName="btnBack" onClick={history.goBack}></a>
@@ -187,10 +168,7 @@ class Rebate extends React.Component {
                     {tabs.map(tab_func)}
                 </div>
             </div>
-            {tab_num == '0' && all_section()}
-            {tab_num == '1' && p2p_section()}
-            {tab_num == '2' && zx_section()}
-            {tab_num == '3' && gold_section()}
+            {all_section()}
         </div>
     }
 }

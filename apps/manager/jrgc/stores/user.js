@@ -57,25 +57,6 @@ export default class User {
             this.data.user.notice = data
         })
     }
-    //获取公告数据
-    fetchNotice = () => {
-        this.data.user.notice = [{
-            des: '第三方发',
-            url: 'https://www.baidu.com/?tn=78040160_5_pg&ch=1'
-        }, {
-            des: '电话号给的图',
-            url: 'https://www.360.cn/'
-        }, {
-            des: '阿森松岛',
-            url: 'https://www.baidu.com/'
-        }]
-
-        this.data.user.banners = [
-            {
-                img: ''
-            }
-        ]
-    }
 
     //获取我的页面基本信息
     fetchInfo = () => {

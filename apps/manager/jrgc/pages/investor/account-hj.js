@@ -8,6 +8,9 @@ import styles from '../../css/investor/account-hj.css'
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class AccountHj extends React.Component {
+    state={
+        close:false
+    }
     componentDidMount() {
         //id为从上一页面获取
         this.props.investor_account.fetchAccountHj()
@@ -17,9 +20,15 @@ class AccountHj extends React.Component {
         let {history} = this.props
         history.push('investor-hj-list')
     }
-
+    showHandler = () => {
+        this.setState({close:true})
+    }
+    closeHandler = () => {
+        this.setState({close:false})
+    }
     render() {
         let {history} = this.props
+        let {close} = this.state
         let {info, goldPrice} = this.props.investor_account.data.hj
         return <div>
             <Header title="TA的黄金账户" history={history}/>
@@ -34,7 +43,7 @@ class AccountHj extends React.Component {
                     <div styleName="lineLeft">{info.availableAmount}克(当前市值约¥{info.cuurMarketValue})</div>
                     <div styleName="lineRight">
                         <span styleName="number">{info.waitAmount}克</span>
-                        <span styleName="icon-question-up"></span>
+                        <span styleName="icon-question-up" onClick={this.showHandler}></span>
                     </div>
                 </div>
             </div>
@@ -67,6 +76,19 @@ class AccountHj extends React.Component {
             <div styleName="remain">
                 可用余额<span>¥{info.availableBalance}</span>
             </div>
+            {close && <div styleName="pop-bg">
+                <div styleName="pop">
+                    <div styleName="pop-title">总资产</div>
+                    <div styleName="remind">总资产=现金资产+黄金市值<br/>10000=8000+2000</div>
+                    <div styleName="formula">
+                        计算公式：
+                        <div>现金资产=微金总资产+尊享总资产</div>
+                        <div>黄金市值=持有克重x实时金价</div>
+                    </div>
+                    <div styleName="pop-close" onClick={this.closeHandler}></div>
+                </div>
+            </div>}
+
         </div>
     }
 }
