@@ -58,9 +58,9 @@ class ReserveInfoNovice extends React.Component {
                 </div>
                 <div styleName="sLine"></div>
                 <div styleName="tLine">
-                    <div styleName="fLineItem fLineItem1">2017-09-01</div>
-                    <div styleName="fLineItem fLineItem2">2017-09-12</div>
-                    <div styleName="fLineItem fLineItem3">2017-09-22</div>
+                    <div styleName="fLineItem fLineItem1">{context.startTime}</div>
+                    <div styleName="fLineItem fLineItem2">{context.valueTime}</div>
+                    <div styleName="fLineItem fLineItem3">{context.paymentTime}</div>
                 </div>
             </div>
         }

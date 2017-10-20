@@ -66,7 +66,7 @@ class ReserveApply extends React.Component {
 
         reserve_bid.fetchProduct().then(data => {
             if (type_tab == -1 && (!this.props.reserve_bid.applyInvestClaimId)) {
-                Components.showToast("请选择预约类型")
+                Components.showToast("请选择预约产品")
             } else if (reserve_bid.bid_data.reserveMoney === '') {
                 Components.showToast("预约金额不能为空")
             } else if (reserve_bid.bid_data.reserveMoney < current_bid.minAmt) {
