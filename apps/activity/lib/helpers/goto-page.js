@@ -133,7 +133,7 @@ function tellApp(word, value) {
     }
 }
 
-export default (word, value) => {
+export default (word, value = null) => {
     if (Browser.inJRGCApp) {
         tellApp(LINKS[word].app)
     } else {
@@ -141,7 +141,7 @@ export default (word, value) => {
             LINKS[word].mobile :
             LINKS[word].web;
 
-        if (word == '登录') link = `${LINKS[word].web}?service=${value}`
+        if (word == '登录') link = `${LINKS[word].web}?service=${value || location.href}`
 
         location.href = link
     }

@@ -39,7 +39,7 @@ const TOPIC_PAGES = [
     // 'topic-score', // 玩转工分
     'topic-interest-reward', // 年化加息奖励
     'topic-recommender-recruitment', //推荐人页面
-    'topic-annual-commision', //年化佣金页面
+    // 'topic-annual-commision', //年化佣金页面
     // 'topic-invite', //邀请返利, 邀请人,
     'topic-gong-you-hui', //工友会专题页面,
     'topic-invite-strategy', //邀请攻略页面

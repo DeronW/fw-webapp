@@ -55,7 +55,8 @@ class PC extends React.Component {
         })
     }
 
-    loginHandler = () => this.props.gotoHandler('登录', 'https://www.gongchangp2p.com/api/activityPullNew/ActivityControl.shtml?code=ONLTHD')
+    // loginHandler = () => this.props.gotoHandler('登录', 'https://www.gongchangp2p.com/api/activityPullNew/ActivityControl.shtml?code=ONLTHD')
+    loginHandler = () => this.props.gotoHandler('登录')
 
     toggleInviteRewardPop = () => this.setState({ showInviteRewardPop: !this.state.showInviteRewardPop})
 
