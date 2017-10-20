@@ -106,7 +106,10 @@ class Invested extends React.Component {
             sortValue: sortValue
         })
     }
-
+    gotoSearch = () => {
+        let {history} = this.props
+        history.push('/investor-search')
+    }
     render() {
         const { history, stats_investor } = this.props,
             { investorRawData } = stats_investor.data,
@@ -147,7 +150,7 @@ class Invested extends React.Component {
 
         return <div>
             <Header title={`${currentTabName}投资客户(${investorCnt})`} history={history} />
-
+            <div styleName="invest-search" onClick={this.gotoSearch}></div>
             <div styleName="invest-stats-grp">
                 <div styleName="invest-stats">
                     <div styleName="invest-stats-name">{`${currentTabName}投资额`}</div>
