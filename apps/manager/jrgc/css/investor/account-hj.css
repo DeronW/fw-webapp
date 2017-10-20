@@ -187,25 +187,25 @@
     top: 20px;
 }
 .remind{
-    width: 100%;
-    text-align: center;
+    text-align: left;
     font-size: 24px;
     color: #555;
     position: absolute;
-    top: 105px;
+    left: 60px;
+    top: 100px;
     line-height: 36px;
 }
 .formula{
     text-align: left;
     position: absolute;
     left: 60px;
-    top: 190px;
+    top: 180px;
     color: #555;
     font-size: 22px;
 }
 .formula div{
     color: #ccc;
-    margin-top: 10px;
+    margin-top: 6px;
 }
 .pop-close{
     position: absolute;
