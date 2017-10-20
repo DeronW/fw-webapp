@@ -39,16 +39,6 @@ class ReserveApplyNovice extends React.Component {
         this.props.novice_bid.setFormData('reserveMoney', novice_bid.novice_bid_data.accountAmount, 'novice_bid_data')
     }
 
-    protocolHandler = () => {
-        let {history} = this.props
-        history.push(`/novice-bid/protocol`)
-    }
-
-    rechargeHandler = () => {
-        //跳到充值页面
-        NativeBridge.toNative('app_recharge')
-    }
-
     applyHandler = () => {
         let {novice_bid, history} = this.props
         let {is_used} = this.state
@@ -115,7 +105,7 @@ class ReserveApplyNovice extends React.Component {
                         <div styleName="balance">
                             可用余额<span styleName="remain">&yen;{novice_bid.novice_bid_data.accountAmount}</span>
                         </div>
-                        <div styleName="recharge" onClick={this.rechargeHandler}>充值</div>
+                        <div styleName="recharge" onClick={() => NativeBridge.toNative('app_recharge')}>充值</div>
                     </div>
                 </div>
             </div>
@@ -160,7 +150,7 @@ class ReserveApplyNovice extends React.Component {
         let procotol_panel = () => {
             return <div styleName="submitProtocol protocolNovice">
                 <span styleName="protocolText">本人已阅读并签署
-                    <span styleName="applyProtocol" onClick={this.protocolHandler}>
+                    <span styleName="applyProtocol" onClick={() => history.push(`/novice-bid/protocol`)}>
                         《预约协议》
                     </span>
                 </span>
