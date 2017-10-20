@@ -14,9 +14,6 @@ class HjList extends React.Component {
     }
 
     componentDidMount() {
-        //id为从上一页面获取
-        let cust_id = 1
-        this.props.investor_account.getCustId(cust_id)
         this.props.investor_account.resetGoldListPageNo()
         this.props.investor_account.fetchGoldList()
         Event.touchBottom(this.props.investor_account.fetchGoldList)

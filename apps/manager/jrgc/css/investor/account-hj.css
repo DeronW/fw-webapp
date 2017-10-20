@@ -158,3 +158,60 @@
     vertical-align: middle;
     margin-left: 10px;
 }
+.pop-bg{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+}
+.pop{
+    width: 529px;
+    height: 442px;
+    background: url("../../images/investor/account-hj/pop.png") no-repeat center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+.pop-title{
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+    color: #333333;
+    position: absolute;
+    top: 20px;
+}
+.remind{
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    color: #555;
+    position: absolute;
+    top: 105px;
+    line-height: 36px;
+}
+.formula{
+    text-align: left;
+    position: absolute;
+    left: 60px;
+    top: 190px;
+    color: #555;
+    font-size: 22px;
+}
+.formula div{
+    color: #ccc;
+    margin-top: 10px;
+}
+.pop-close{
+    position: absolute;
+    bottom: 0;
+    left: 238px;
+    width: 54px;
+    height: 54px;
+    background: transparent;
+}

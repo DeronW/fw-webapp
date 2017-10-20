@@ -320,7 +320,7 @@ export default class InvestorAccount {
         if (current_record.page_no === 0) return done && done()
         if (current_record.page_no === 1) current_record.list.splice(0, current_record.list.length)
         this.Get('/api/finManager/cust/v2/enjoyGold.shtml', {
-            custId: this.data.id,
+            custId: this.custId,
             orderStatusCode: type,
             pageNo: current_record.page_no,
             pageSize: PAGE_SIZE
