@@ -66,7 +66,7 @@ class ReserveApply extends React.Component {
 
         reserve_bid.fetchProduct().then(data => {
             if (type_tab == -1 && (!this.props.reserve_bid.applyInvestClaimId)) {
-                Components.showToast("请选择预约类型")
+                Components.showToast("请选择预约产品")
             } else if (reserve_bid.bid_data.reserveMoney === '') {
                 Components.showToast("预约金额不能为空")
             } else if (reserve_bid.bid_data.reserveMoney < current_bid.minAmt) {
@@ -151,7 +151,7 @@ class ReserveApply extends React.Component {
             }
 
             if (bid) item = {
-                goals: reserve_bid.bid_data.reserveMoney * (bid.loadRate / 100),
+                goals: (reserve_bid.bid_data.reserveMoney * (bid.loadRate / 100) * bid.repayPeriod) / 360,
                 rate: bid.loadRate + '%',
                 term: bid.repayPeriod + '天',
                 indate: bid.bookValidPeriod + '天'

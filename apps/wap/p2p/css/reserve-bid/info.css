@@ -123,6 +123,10 @@
     margin: 10px auto;
 }
 
+.tLine {
+    font-size: 22px;
+}
+
 .tLine .fLineItem {
     color: #555;
 }
