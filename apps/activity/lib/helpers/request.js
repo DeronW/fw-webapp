@@ -20,16 +20,16 @@ const Ajax = options => {
         */
         if (error.code == 40101 || error.code == 63001) {
             // 'here ! should go to login'
-            // if (Browser.inApp) {
-            //     NativeBridge.login()
-            // } else {
-            //     // Mac电脑上不能自动跳回来, Safari不支持非法字符回跳地址
-            //     if (navigator.userAgent.match(/Macintosh/i)) {
-            //         location.href = 'https://passport.9888keji.com/passport/login'
-            //     } else {
-            //         location.href = 'https://passport.9888keji.com/passport/login?sourceSite=jrgc&service=' + location.href
-            //     }
-            // }
+            if (Browser.inApp) {
+                NativeBridge.login()
+            } else {
+                // Mac电脑上不能自动跳回来, Safari不支持非法字符回跳地址
+                if (navigator.userAgent.match(/Macintosh/i)) {
+                    location.href = 'https://passport.9888keji.com/passport/login'
+                } else {
+                    location.href = 'https://passport.9888keji.com/passport/login?sourceSite=jrgc&service=' + location.href
+                }
+            }
 
         } else {
             // 如果不弹出错误, 就直接reject
@@ -50,6 +50,7 @@ const Get = (url, params, silence = false) => {
         url: url,
         method: 'GET',
         data: params,
+        loading: null,
         silence: silence
     })
 }
@@ -58,6 +59,7 @@ const Post = (url, params, options) => {
     return Ajax(Object.assign({
         url: url,
         method: 'POST',
+        loading: null,
         data: params
     }, options))
 }

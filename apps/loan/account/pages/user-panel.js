@@ -43,6 +43,9 @@ class UserPanel extends React.Component {
             return
         }
 
+        if (type == 'a') {
+            history.push("/user-info")
+        }
         if (type == 'c') {
             history.push('/bank-card')
         }
@@ -61,7 +64,7 @@ class UserPanel extends React.Component {
             </div>
 
             <div styleName="links">
-                <a styleName="link-item" onClick={() => history.push("/user-info")}>
+                <a styleName="link-item" onClick={() => this.clickHandler('a')}>
                     <img src={require("../images/user-panel/info_icon.png")} />
                     个人信息
                 </a>

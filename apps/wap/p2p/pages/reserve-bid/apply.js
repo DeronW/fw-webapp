@@ -19,7 +19,7 @@ class ReserveApply extends React.Component {
         window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
         this.props.reserve_bid.fetchProduct()
-        console.log(this.props.reserve_bid.bid_data.checkBidList)
+        console.log(this.props.reserve_bid.bid_data.bids)
     }
 
     inputChangeHandler = name => e => {
@@ -42,13 +42,13 @@ class ReserveApply extends React.Component {
     applyHandler = () => {
         let {reserve_bid, history} = this.props
         let {type_tab} = this.state
-        let t
+        let current_type
         if (reserve_bid.bid_data.bids.length == 1) {
-            t = 0
+            current_type = 0
         } else {
-            t = type_tab
+            current_type = type_tab
         }
-        let current_bid = reserve_bid.bid_data.bids[t]
+        let current_bid = reserve_bid.bid_data.bids[current_type]
         let sussessHandler = () => {
             if (this.state.pending) return
             this.setState({pending: true})
@@ -89,20 +89,8 @@ class ReserveApply extends React.Component {
 
     }
 
-    jumpToProtocol = () => {
-        let {history} = this.props
-        history.push(`/reserve-bid/protocol`)
-    }
-
-    rechargeHandler = () => {
-        //跳到充值页面
-        NativeBridge.toNative('app_recharge')
-    }
-
-    switchTypeHandler = (index, id) => {
+    switchTypeHandler = (index) => {
         this.setState({type_tab: index})
-        console.log(id)
-        console.log(this.props.reserve_bid.bid_data.context.id)
     }
 
     render() {
@@ -120,7 +108,7 @@ class ReserveApply extends React.Component {
             return <div
                 styleName={(item.id == reserve_bid.applyInvestClaimId || type_tab == index) ? "typeItem typeItemChecked" : "typeItem"}
                 key={index}
-                onClick={() => this.switchTypeHandler(index, item.id)}>
+                onClick={() => this.switchTypeHandler(index)}>
                 {item.loadRate}%<span
                 styleName="color9">/</span>{item.repayPeriod}天
             </div>
@@ -141,8 +129,8 @@ class ReserveApply extends React.Component {
             </div>
         </div>
 
-        let all_info = (checkBidList) => {
-            let bid = checkBidList[this.state.type_tab]
+        let all_info = (bids) => {
+            let bid = bids[this.state.type_tab]
             let item = {
                 goals: '0',
                 rate: '--%',
@@ -195,7 +183,7 @@ class ReserveApply extends React.Component {
                         <div styleName="balance">
                             可用余额<span styleName="remain">&yen;{reserve_bid.bid_data.accountAmount}</span>
                         </div>
-                        <div styleName="recharge" onClick={this.rechargeHandler}>充值</div>
+                        <div styleName="recharge" onClick={() => NativeBridge.toNative('app_recharge')}>充值</div>
                     </div>
                 </div>
             </div>
@@ -203,11 +191,11 @@ class ReserveApply extends React.Component {
             <div styleName="submitInfo">
                 {reserve_bid.applyInvestClaimId ?
                     single_info :
-                    reserve_bid.bid_data.checkBidList.length > 0 && all_info(reserve_bid.bid_data.checkBidList)}
+                    reserve_bid.bid_data.bids.length > 0 && all_info(reserve_bid.bid_data.bids)}
             </div>
             <div styleName="submitProtocol">
                 <span styleName="protocolText">本人已阅读并签署
-                    <span styleName="applyProtocol" onClick={this.jumpToProtocol}>
+                    <span styleName="applyProtocol" onClick={() => history.push(`/reserve-bid/protocol`)}>
                         《预约协议》
                     </span>
                 </span>

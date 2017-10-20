@@ -160,13 +160,14 @@ export default class Fq {
             term: parseInt(this.put_in_data.term),
             workExperience: this.put_in_data.workExperience,
             productId:21
-        }).then(()=>{
+        }).then((data)=>{
+            let uuid = data.uuid;
             let u = Storage.getUserDict();
             let ua = window.navigator.userAgent;
             let inWX = ua.indexOf('MicroMessenger') > -1;
             let inFXHApp = ua.indexOf('Easyloan888') > -1;
             let SOURCE_TYPE = inFXHApp ? 3 : inWX ? 4 : 3;
-            let params = `loanUuid=${this.product_data.loanUuid}&uid=${u.uid}&sourceType=${SOURCE_TYPE}&token=${u.token}`;
+            let params = `loanUuid=${uuid}&uid=${u.uid}&sourceType=${SOURCE_TYPE}&token=${u.token}`;
             Browser.inFXHApp ? NativeBridge.goto(`https://m.easyloan888.com/api/order/v1/jump.shtml?${params}`,false,"分期"):location.href = `/api/order/v1/jump.shtml?${params}`
         })
     }
