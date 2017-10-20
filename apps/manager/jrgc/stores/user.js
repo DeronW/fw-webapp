@@ -1,7 +1,9 @@
 import {extendObservable} from 'mobx'
+import {Components, Utils, Event} from 'fw-javascripts'
 
 export default class User {
-    constructor(Get, Post) {
+    constructor(Ajax,Get, Post) {
+        this.Ajax = Ajax
         this.Get = Get
         this.Post = Post
         this.data = {}
@@ -34,7 +36,27 @@ export default class User {
             }
         })
     }
-
+    getBannersHandler = () => {
+        let q = Utils.urlQuery
+        this.Ajax({
+            fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
+            method: 'get',
+            data: {key: '0ca175b9c0f726a831d895e', id: q.banner_id || '30'},
+            silence: true
+        }).catch(data => {
+            this.data.user.banners = data.map(i => ({url: i.url, img: i.thumb}))
+        })
+    }
+    getNoticeHandler = () => {
+        return this.Ajax({
+            fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
+            method: 'get',
+            data: {key: '0ca175b9c0f726a831d895e', id: '33'},
+            silence: true
+        }).catch(data => {
+            this.data.user.notice = data
+        })
+    }
     //获取公告数据
     fetchNotice = () => {
         this.data.user.notice = [{

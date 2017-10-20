@@ -23,8 +23,10 @@ class User extends React.Component {
     componentDidMount() {
         let {user} = this.props
         user.fetchInfo()
-        user.fetchNotice()
-        this.startMoveNotice()
+        user.getBannersHandler()
+        user.getNoticeHandler().then(() => {
+            this.startMoveNotice()
+        })
     }
 
     gotoHandler = (link) => {
@@ -35,9 +37,9 @@ class User extends React.Component {
     }
     startMoveNotice = () => {
         let delay = 30, duration = 3000, step = 2, singleH = 40, p, position_index;
-        let {notice} = this.props.user.data.user;
+        let {notice} = this.props.user.data.user
         this._time_gap = 0;
-
+        console.log(notice)
         User.t = setInterval(() => {
             this._time_gap += delay;
             if (this._time_gap >= duration) {
@@ -81,12 +83,12 @@ class User extends React.Component {
     }
     render() {
         let {history} = this.props
-        let {user} = this.props.user.data, {banners} = user
         let {position} = this.state
         let bannerGroup;
-        let {info} = this.props.user.data.user
+        let {info,banners,notice} = this.props.user.data.user
+
         let noticeFn = (item, index) => {
-            return <div styleName="noticeItem" key={index} onClick={() => this.gotoHandler(item.url)}>{item.des}</div>
+            return <div styleName="noticeItem" key={index} onClick={() => this.gotoHandler(item.url)}>{item.title}</div>
         }
 
         if (banners && banners.length > 0) {
@@ -117,8 +119,8 @@ class User extends React.Component {
                 <img styleName="noticeIcon" src={require('../../images/user/user/notice.png')}/>
                 <div styleName="noticeDes">
                     <div styleName="noticeDesPanel" style={{top: `${position}px`}}>
-                        {user.notice.map(noticeFn)}
-                        {user.notice[0] && noticeFn(user.notice[0])}
+                        {notice&&notice.map(noticeFn)}
+                        {notice[0] && noticeFn(notice[0])}
                     </div>
                 </div>
                 <img styleName="noticeArrow" src={require('../../images/user/user/arrow.png')}/>
