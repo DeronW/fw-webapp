@@ -50,6 +50,7 @@ const Get = (url, params, silence = false) => {
         url: url,
         method: 'GET',
         data: params,
+        loading: null,
         silence: silence
     })
 }
@@ -58,6 +59,7 @@ const Post = (url, params, options) => {
     return Ajax(Object.assign({
         url: url,
         method: 'POST',
+        loading: null,
         data: params
     }, options))
 }

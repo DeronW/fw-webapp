@@ -5,7 +5,9 @@ export default class Login {
         this.Post = Post
         this.data = {}
         extendObservable(this.data, {
-
+            headUrl:'',
+            loginName:'哈哈哈',
+            code:'12345'
         })
     }
     login = (username,password) => {
@@ -15,6 +17,11 @@ export default class Login {
             pwd:password,
             sourceType:3
         }).then(data => {
+            this.data.loginName = data.userInfo.loginName
+            this.data.code = data.userInfo.promotionCode
         })
+    }
+    exitHandler = () => {
+        return this.Post('/finManager/user/logout.shtml')
     }
 }
