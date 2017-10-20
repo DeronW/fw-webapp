@@ -23,8 +23,10 @@ class User extends React.Component {
     componentDidMount() {
         let {user} = this.props
         user.fetchInfo()
-        user.fetchNotice()
-        this.startMoveNotice()
+        user.getBannersHandler()
+        user.getNoticeHandler().then(() => {
+            this.startMoveNotice()
+        })
     }
 
     gotoHandler = (link) => {
@@ -35,9 +37,9 @@ class User extends React.Component {
     }
     startMoveNotice = () => {
         let delay = 30, duration = 3000, step = 2, singleH = 40, p, position_index;
-        let {notice} = this.props.user.data.user;
+        let {notice} = this.props.user.data.user
         this._time_gap = 0;
-
+        console.log(notice)
         User.t = setInterval(() => {
             this._time_gap += delay;
             if (this._time_gap >= duration) {
@@ -75,23 +77,18 @@ class User extends React.Component {
         }
         if (link) this.gotoHandler(link);
     }
-    gotoRebate = () => {
+    goPageHandler(link){
         let {history} = this.props
-        history.push('/user-rebate')
+        history.push(link)
     }
-    gotoCoupon = () => {
-        let {history} = this.props
-        history.push('/user-transfer-coupon')
-    }
-
     render() {
         let {history} = this.props
-        let {user} = this.props.user.data, {banners} = user
         let {position} = this.state
         let bannerGroup;
-        let {info} = this.props.user.data.user
+        let {info,banners,notice} = this.props.user.data.user
+
         let noticeFn = (item, index) => {
-            return <div styleName="noticeItem" key={index} onClick={() => this.gotoHandler(item.url)}>{item.des}</div>
+            return <div styleName="noticeItem" key={index} onClick={() => this.gotoHandler(item.url)}>{item.title}</div>
         }
 
         if (banners && banners.length > 0) {
@@ -103,17 +100,17 @@ class User extends React.Component {
 
         return <div styleName="bg">
             <div styleName="bar">
-                <img styleName="portrait" src={info.headUrl}/>
+                <img styleName="portrait" src={info.headUrl} onClick={()=>this.goPageHandler('/user-setting')}/>
                 <div styleName="barItem info">
                     <div styleName="name">{info.loginName}</div>
                     <div styleName="des">{info.promotionCode}</div>
                 </div>
-                <div styleName="barItem">
+                <div styleName="barItem" onClick={()=>this.goPageHandler('/investor')}>
                     <div styleName="des">全部客户(人)</div>
                     <div styleName="num">{info.totleCustCount}</div>
                 </div>
                 <div styleName="line"></div>
-                <div styleName="barItem">
+                <div styleName="barItem" onClick={()=>this.goPageHandler('/investor')}>
                     <div styleName="des">在投客户(人)</div>
                     <div styleName="num">{info.investingCustCount}</div>
                 </div>
@@ -122,8 +119,8 @@ class User extends React.Component {
                 <img styleName="noticeIcon" src={require('../../images/user/user/notice.png')}/>
                 <div styleName="noticeDes">
                     <div styleName="noticeDesPanel" style={{top: `${position}px`}}>
-                        {user.notice.map(noticeFn)}
-                        {user.notice[0] && noticeFn(user.notice[0])}
+                        {notice&&notice.map(noticeFn)}
+                        {notice[0] && noticeFn(notice[0])}
                     </div>
                 </div>
                 <img styleName="noticeArrow" src={require('../../images/user/user/arrow.png')}/>
@@ -136,12 +133,12 @@ class User extends React.Component {
                         <div styleName="rebateText">今日返利</div>
                         <div styleName="rebateMoney">¥{info.todayRebate}</div>
                     </div>
-                    <div styleName="rebateNum rebateBorder" onClick={this.gotoRebate}>
+                    <div styleName="rebateNum rebateBorder" onClick={() => this.goPageHandler('/user-rebate')}>
                         <div styleName="rebateText">待发返利</div>
                         <div styleName="rebateMoney">¥{info.pendingRebate}</div>
                     </div>
                     <img styleName="rebateArrow" src={require('../../images/user/user/arrow.png')}
-                         onClick={this.gotoRebate}/>
+                         onClick={() => this.goPageHandler('/user-rebate')}/>
                 </div>
             </div>
             <div styleName="banner">{bannerGroup}</div>
@@ -152,7 +149,7 @@ class User extends React.Component {
                     等额标包括还款方式为按月还款和按季等额还款的标。该类标最终年化佣金乘以0.56且超过18个月标按18个月计算佣金。0.56为借款方占用投资方的资金使用率。
                 </div>
                 <div styleName="invest">邀请好友</div>
-                <div styleName="couponBtn" onClick={this.gotoCoupon}><span>{info.couponCount}</span></div>
+                <div styleName="couponBtn" onClick={()=>this.goPageHandler('/user-transfer-coupon')}><span>{info.couponCount}</span></div>
             </div>
             <BottomNavBar history={history}/>
         </div>

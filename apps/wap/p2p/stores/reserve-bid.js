@@ -24,16 +24,18 @@ export default class ReserveBid {
                 loadRate: '-',//利率
                 minAmt: '',//最小预约额
                 repayPeriod: '-',//期限
+                valueTime: '',//预计起息时间
+                startTime: '',//抢购时间
+                paymentTime: '',//预计到期时间
             },
             accountAmount: null,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
-            batchMaxmum: 0,//批量投资限额
+            batchMaxmum: null,//批量投资限额
             reserveMoney: '',//用户输入的预约金额
             isChecked: true,
             contractMsg: '',
             isCompany: null,
             bidList: [],
-            checkBidList: [],
             bids: []
         })
     }
@@ -55,10 +57,6 @@ export default class ReserveBid {
             this.bid_data.minAmt = data.appointClaim.minAmt
             this.bid_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
             this.bid_data.isCompany = data.isCompany
-            if (Array.isArray(data.appointClaimList)) {
-                this.bid_data.checkBidList.splice(0, this.bid_data.checkBidList.length)
-                this.bid_data.checkBidList && this.bid_data.checkBidList.push(...data.appointClaimList)
-            }
 
             let mix_bids = data.appointClaimList || []
             mix_bids.push(data.appointClaim)

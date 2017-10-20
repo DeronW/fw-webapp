@@ -60,7 +60,7 @@
 .noticeDes{
     float: left;
     position: relative;
-    width: 400px;
+    width: 500px;
     height: 40px;
     overflow: hidden;
     line-height: 40px;
@@ -69,6 +69,10 @@
 .noticeItem{
     font-size: 30px;
     height: 40px;
+    width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .noticeDesPanel{
     position: absolute;

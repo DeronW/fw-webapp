@@ -5,6 +5,7 @@ let API_PATH = document.getElementById('api-path').value;
 const Ajax = options => {
     // add default url prefix
     options.url = `${API_PATH}/mpwap${options.url}`
+    if (options.fullUrl) options.url = options.fullUrl
 
     return Request(options).catch(error => {
         /*
@@ -51,6 +52,7 @@ const Post = (url, params, options) => {
 }
 
 export {
+    Ajax,
     Get,
     Post
 }

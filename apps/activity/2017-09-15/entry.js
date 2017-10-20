@@ -36,7 +36,7 @@ class Activity extends React.Component {
     }
 
     loginHandler = () => {
-        gotoPage('登录', 'https://www.gongchangp2p.com/api/activityPullNew/ActivityControl.shtml?code=BJLTHD')
+        gotoPage('登录')
     }
 
     render() {

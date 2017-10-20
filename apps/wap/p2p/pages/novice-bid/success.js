@@ -21,13 +21,14 @@ class ReserveSuccess extends React.Component {
     }
 
     render() {
-        let {history, reserve} = this.props
+        let {history, novice_bid} = this.props
         return <div styleName="successPanel">
             <Header noClose title="抢购成功" history={history}/>
             <div styleName="content">
                 <div styleName="icon"></div>
                 <div styleName="tips">新手标抢购成功</div>
-                <div><span styleName="colorRed">20元</span>现金奖励已经发放至您的账户，请查收</div>
+                {novice_bid.novice_bid_data.couponId != '' &&
+                <div><span styleName="colorRed">20元</span>现金奖励已经发放至您的账户，请查收</div>}
             </div>
             <div styleName="toRecords" onClick={this.toRecordsHandler}>查看记录</div>
             <div styleName="toHome" onClick={this.toHomeHandler}>返回首页</div>

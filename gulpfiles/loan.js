@@ -13,7 +13,7 @@ let APP_NAMES = [
 // 用户模块
 const USER_PAGES = [
     // 'user', //我 // should removed
-    'user-info', // 个人信息设置
+    // 'user-info', // 个人信息设置
     'user-card-set', //设置提现卡
     'user-card-add', //添加提现卡
     'user-verify-phone', //获取验证码

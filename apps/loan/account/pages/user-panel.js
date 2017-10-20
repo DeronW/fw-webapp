@@ -44,7 +44,7 @@ class UserPanel extends React.Component {
         }
 
         if (type == 'a') {
-            location.href = '/static/loan/user-info/index.html'
+            history.push("/user-info")
         }
         if (type == 'c') {
             history.push('/bank-card')

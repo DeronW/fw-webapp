@@ -18,6 +18,7 @@ export default (stores) => {
         <Provider {...stores}>
             <Switch>
                 {/* 用户相关 模块  */}
+                <Route exact path="/user/level" component={User.Level}/>
                 <Route exact path="/user/evaluate" component={User.Evaluate}/>
                 <Route exact path="/user/contribute" component={User.Contribute}/>
                 <Route exact path="/user/register-success-b" component={User.RegisterSuccessB}/>
@@ -36,6 +37,7 @@ export default (stores) => {
                 <Route exact path='/topic/novice' component={Topic.Novice}/>
                 <Route exact path='/topic/invite' component={Topic.Invite}/>
                 <Route exact path='/topic/score' component={Topic.Score}/>
+                <Route exact path='/topic/commission' component={Topic.Commission}/>
 
                 {/*发现模块  */}
                 <Route exact path='/fa-xian' component={Faxian.Home}/>

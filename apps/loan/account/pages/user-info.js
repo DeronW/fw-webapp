@@ -18,7 +18,6 @@ const TAB_MODEL = {
     },
     idCard: {
         name: '身份证号',
-        type: 'number',
         placeholder: '未实名',
         disabled: true,
     },
