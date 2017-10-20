@@ -26,6 +26,8 @@ export default (stores) => {
                 <Route exact path="/login" component={Login}/>
                 {/*我的 相关页面*/}
                 <Route exact path="/" component={User.User}/>
+                <Route exact path="/user-setting" component={User.Setting}/>
+                <Route exact path="/user-qr-code" component={User.QRCode}/>
                 <Route exact path="/user-rebate" component={User.Rebate}/>
                 <Route exact path="/user-transfer-coupon" component={User.TransferCoupon}/>
                 <Route exact path="/user-transfer-record" component={User.TransferRecord}/>
