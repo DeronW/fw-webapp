@@ -18,6 +18,7 @@ export default (stores) => {
         <Provider {...stores}>
             <Switch>
                 {/* 用户相关 模块  */}
+                <Route exact path="/user/level" component={User.Level}/>
                 <Route exact path="/user/evaluate" component={User.Evaluate}/>
                 <Route exact path="/user/contribute" component={User.Contribute}/>
                 <Route exact path="/user/register-success-b" component={User.RegisterSuccessB}/>
