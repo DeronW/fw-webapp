@@ -89,7 +89,14 @@ class ReserveRecords extends React.Component {
                         取消预约
                     </div>
                 </div>}
-                {item.status == 1 && <div styleName="itemHeader headerOver">{status}</div>}
+                {item.status == 1 &&
+                <div styleName="itemHeader headerOver">
+                    <span styleName="icon-status icon-status1"></span>
+                    <div styleName="statusText">
+                        {status}<br/>
+                        <span styleName="statusNum">{item.loanRate}%<span styleName="sprit">/</span>{item.repayPeriod}天</span>
+                    </div>
+                </div>}
                 {item.status == 2 && <div styleName="itemHeader headerCancel">{status}</div>}
                 <div styleName="infoContainer">
                     <div styleName="infoItem">

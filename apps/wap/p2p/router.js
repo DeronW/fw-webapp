@@ -44,7 +44,7 @@ export default (stores) => {
                 <Route exact path="/reserve-bid/apply" component={ReserveBid.Apply}/>
                 <Route exact path="/reserve-bid/records" component={ReserveBid.Records}/>
                 <Route exact path="/reserve-bid/protocol" component={ReserveBid.Protocol}/>
-                <Route exact path="/reserve-bid/info-intro" component={ReserveBid.InfoIntro}/>
+                <Route exact path="/reserve-bid/products" component={ReserveBid.InfoIntro}/>
                 <Route exact path="/reserve-bid/faq" component={ReserveBid.Faq}/>
 
                 {/*新手标*/}

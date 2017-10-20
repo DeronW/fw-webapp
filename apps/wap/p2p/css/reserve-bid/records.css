@@ -40,13 +40,11 @@
 
 .itemHeader {
     width: 690px;
-    height: 88px;
-    line-height: 88px;
-    padding-left: 30px;
+    height: 70px;
     border-bottom: 1px solid #d8d8d8;
-    /* background-color: #f9f9f9; */
-    font-size: 32px;
+    font-size: 30px;
     color: #333;
+    padding: 30px 0 30px 30px;
 }
 
 .itemHeaderLeft {
@@ -57,7 +55,6 @@
 .itemHeaderRight {
     float: right;
 }
-
 
 .infoItem {
     width: 670px;
@@ -175,4 +172,31 @@
 
 .headerOn {
     color: #4aa1f9;
+}
+
+.icon-status {
+    width: 41px;
+    height: 100%;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.icon-status1 {
+    background: url("../../images/reserve-bid/records/icon-over.png") no-repeat center;
+}
+
+.statusText {
+    width: 270px;
+    height: 100%;
+    display: inline-block;
+}
+
+.statusNum {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.sprit {
+    color: #999;
+    padding: 0 5px;
 }
