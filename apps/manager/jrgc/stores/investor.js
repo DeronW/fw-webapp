@@ -1,4 +1,5 @@
 import { extendObservable } from 'mobx'
+import { Utils, Components } from 'fw-javascripts'
 
 export default class Investor {
     constructor(Get,Post) {
@@ -7,9 +8,6 @@ export default class Investor {
         this.data = {}
 
         extendObservable(this.data, {
-            coupon: {
-                couponList: []
-            },
             custmor: {
                 list: [],
                 pageNo: 1,
@@ -77,8 +75,9 @@ export default class Investor {
                 keyword: ''
             },
             info: {//客户详情
+                remarkToken:'',//修改备注的token
                 detail: {},
-                analysis: {}
+                analysis: {},
             },
             bean: {
                 id: null,
@@ -92,8 +91,11 @@ export default class Investor {
                 info: {},
                 pageNo: 1,
                 records: []
-            }
+            },
         })
+    }
+    @computed get custId(){
+        return Utils.hashQuery.custId
     }
     //我的客户列表，包含全部、在投、空仓未投资四种类型，以及余额最高，返利最多，最近回款时间三种排序方式
     resetCustPageNo = () => {
@@ -220,6 +222,7 @@ export default class Investor {
         this.Get('/api/finManager/cust/v2/custDetail.shtml', {
             custId: cust_id
         }).then(data => {
+            this.data.info.remarkToken = data.remarkToken
             this.data.info.detail = data.result
         })
     }
@@ -284,5 +287,14 @@ export default class Investor {
     }
     resetScorePageNo = () => {
         this.data.score.pageNo = 1
+    }
+    //客户备注修改
+    editRemark = (remark) => {
+        console.log(remark)
+        this.Post('/api/finManager/cust/v2/custRemarkEdit.shtml',{
+            custId:this.custId,
+            remark:remark,
+            remarkToken:this.data.info.remarkToken
+        }).then(() => Components.showToast('保存成功'))
     }
 }
