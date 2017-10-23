@@ -10,9 +10,8 @@ import styles from '../../css/investor/score.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Score extends React.Component {
     componentDidMount() {
-        let { fetchScore, resetScorePageNo, setScoreId } = this.props.investor
+        let { fetchScore, resetScorePageNo } = this.props.investor
         resetScorePageNo()
-        setScoreId(Utils.hashQuery.custId)
         fetchScore()
         Event.touchBottom(fetchScore)
     }

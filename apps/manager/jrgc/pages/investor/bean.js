@@ -10,9 +10,8 @@ import styles from '../../css/investor/bean.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Bean extends React.Component {
     componentDidMount() {
-        let { fetchBean, resetBeanPageNo, setBeanId } = this.props.investor
+        let { fetchBean, resetBeanPageNo } = this.props.investor
         resetBeanPageNo()
-        setBeanId(Utils.hashQuery.custId)
         fetchBean()
         Event.touchBottom(fetchBean)
     }

@@ -76,14 +76,12 @@ export default class Investor {
                 analysis: {},
             },
             bean: {
-                id: null,
                 cashBalance:null,
                 overbeancount:null,
                 pageNo: 1,
                 records: []
             },
             score: {
-                id: null,
                 info: {},
                 pageNo: 1,
                 records: []
@@ -233,12 +231,12 @@ export default class Investor {
 
     //查询客户工豆列表
     fetchBean = (done) => {
-        let { pageNo, records, id} = this.data.bean
+        let { pageNo, records} = this.data.bean
         const PAGE_SIZE = 10
         if (this.data.bean.pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0,records.length)
         this.Get('/api/finManager/cust/v2/beanList.shtml', {
-            custId: id,
+            custId: this.custId,
             pageNo: pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
@@ -251,21 +249,18 @@ export default class Investor {
             done && done()
         })
     }
-    setBeanId = (id) => {
-        this.data.bean.id = id
-    }
     resetBeanPageNo = () => {
         this.data.bean.pageNo = 1
     }
 
     //查询客户工分列表
     fetchScore = (done) => {
-        let { pageNo, records, id, info } = this.data.score
+        let { pageNo, records, info } = this.data.score
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0,records.length)
         this.Get('/api/finManager/cust/v2/scoreList.shtml', {
-            custId: id,
+            custId: this.custId,
             pageNo: pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
@@ -277,9 +272,6 @@ export default class Investor {
 
             done && done()
         })
-    }
-    setScoreId = (id) => {
-        this.data.score.id = id
     }
     resetScorePageNo = () => {
         this.data.score.pageNo = 1

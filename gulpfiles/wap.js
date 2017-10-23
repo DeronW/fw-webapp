@@ -44,7 +44,7 @@ const TOPIC_PAGES = [
     'topic-gong-you-hui', //工友会专题页面,
     'topic-invite-strategy', //邀请攻略页面
     // 'topic-novice-strategy', //新手策略页面
-    'topic-invest-school', // 投资学堂
+    // 'topic-invest-school', // 投资学堂
 ]
 
 const HUISHANG_PAGES = [
