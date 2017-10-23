@@ -27,6 +27,7 @@ export default class ReserveBid {
                 valueTime: '',//预计起息时间
                 startTime: '',//抢购时间
                 paymentTime: '',//预计到期时间
+                addRate:''
             },
             accountAmount: null,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估

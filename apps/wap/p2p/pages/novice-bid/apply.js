@@ -114,7 +114,9 @@ class ReserveApplyNovice extends React.Component {
             let infoItem = (name, value) => {
                 return <div styleName={name == '预计起息时间' ? "infoItem itemLast" : "infoItem"}>
                     <div styleName="itemLeft">{name}</div>
-                    <div styleName={name == "预期年化利率" ? "itemRight rightRed" : "itemRight"}>{value}</div>
+                    <div styleName={name == "预期年化利率" ? "itemRight rightRed" : "itemRight"}>
+                        {value}
+                    </div>
                 </div>
             }
             let goals_num = (novice_bid.novice_bid_data.reserveMoney * (context.loadRate / 100) * context.repayPeriod) / 360
@@ -134,7 +136,12 @@ class ReserveApplyNovice extends React.Component {
                         </div>
                     </div>
                     <div styleName="itemWrapper">
-                        {infoItem("预期年化利率", `${context.loadRate}%`)}
+                        <div styleName="infoItem">
+                            <div styleName="itemLeft">预期年化利率</div>
+                            <div styleName="itemRight rightRed">
+                                {context.addRate == 0 ? context.loadRate + '%' : <span styleName="addRate">{`${context.loadRate}%+${context.addRate}%`}</span>}
+                            </div>
+                        </div>
                         {infoItem("期限", `${context.repayPeriod}天`)}
                         {infoItem("预计起息时间", "预计今日起息")}
                     </div>

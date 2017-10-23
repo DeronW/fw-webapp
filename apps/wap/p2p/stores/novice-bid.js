@@ -15,7 +15,7 @@ export default class NoviceBid {
                 minAmt: '',
                 repayPeriod: '',
                 investMaxAmount: '',//预约最大金额
-
+                addRate: ''
             },
             accountAmount: null,
             isRisk: 0,

@@ -109,7 +109,7 @@ class ReserveApply extends React.Component {
                 styleName={(item.id == reserve_bid.applyInvestClaimId || type_tab == index) ? "typeItem typeItemChecked" : "typeItem"}
                 key={index}
                 onClick={() => this.switchTypeHandler(index)}>
-                {item.loadRate}%<span
+                {item.loadRate}%{item.addRate == 0 ? "" : '+' + item.addRate + '%'}<span
                 styleName="color9">/</span>{item.repayPeriod}天
             </div>
         }
@@ -140,16 +140,19 @@ class ReserveApply extends React.Component {
 
         let all_info = (bids) => {
             let bid = bids[this.state.type_tab]
+            let bid_rate
             let item = {
                 goals: '0',
                 rate: '--%',
                 term: '--天',
                 indate: '--天'
             }
-
+            if (bid) {
+                bid_rate = bid.addRate == 0 ? '' : `+${bid.addRate}%`
+            }
             if (bid) item = {
                 goals: (reserve_bid.bid_data.reserveMoney * (bid.loadRate / 100) * bid.repayPeriod) / 360,
-                rate: bid.loadRate + '%',
+                rate: `${bid.loadRate}%${bid_rate}`,
                 term: bid.repayPeriod + '天',
                 indate: bid.bookValidPeriod + '天'
             }
@@ -180,8 +183,8 @@ class ReserveApply extends React.Component {
             <Header title="预约抢购" history={history}/>
             <div styleName="submitPanel">
                 <div styleName="reserveType">
-                    <div styleName="typeTitle">抢购</div>
-                    <div styleName="typeSubtitle">选择类型</div>
+                    <div styleName="typeTitle">抢购信息</div>
+                    <div styleName="typeSubtitle">抢购类型</div>
                     <div styleName="typeText">
                         {reserve_bid.bid_data.bids.map(type_list_func)}
                     </div>
