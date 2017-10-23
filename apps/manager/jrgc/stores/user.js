@@ -37,11 +37,10 @@ export default class User {
         })
     }
     getBannersHandler = () => {
-        let q = Utils.urlQuery
         this.Ajax({
             fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
             method: 'get',
-            data: {key: '0ca175b9c0f726a831d895e', id: q.banner_id || '30'},
+            data: {key: '0ca175b9c0f726a831d895e', id: '30'},
             silence: true
         }).catch(data => {
             this.data.user.banners = data.map(i => ({url: i.url, img: i.thumb}))
