@@ -50,13 +50,13 @@ export default (stores) => {
                 {/* 老链接跳转兼容 */}
                 <Route exact path='/reserve/info' render={
                     () => {
-                        location.href = '/static/wap/p2p/index.html/#/reserve-bid/info'
+                        location.href = '/static/wap/p2p/index.html#/reserve-bid/info'
                     }
                 } />
                 <Route exact path='/reserve/apply' render={
                     () => {
-                        let p = '?'
-                        location.href = '/static/wap/p2p/index.html/#/reserve-bid/apply' + p
+                        let p = '?' + location.hash.split('?')[1]
+                        location.href = '/static/wap/p2p/index.html#/reserve-bid/apply' + p
                     }
                 } />
 
