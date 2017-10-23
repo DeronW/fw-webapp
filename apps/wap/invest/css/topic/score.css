@@ -103,21 +103,24 @@
     display: table;
     width: 100%;
     padding: 10px 0;
-    .product {
-        float: left;
-        width: 50%;
-        margin-top: 20px;
-        font-size: 24px;
-        .name {
-            color: #857995;
-            padding: 8px 0;
-        }
-        .score {
-            color: #fd4d4c;
-            padding-left: 30px;
-            background: transparent url(../images/play-score-yuanbao.png) no-repeat center left;
-        }
-    }
+}
+
+.product {
+    float: left;
+    width: 50%;
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.product .name {
+    color: #857995;
+    padding: 8px 0;
+}
+
+.product .score {
+    color: #fd4d4c;
+    padding-left: 30px;
+    background: transparent url(../../../images/topic/score/play-score-yuanbao.png) no-repeat center left;
 }
 
 .btn-mall {
