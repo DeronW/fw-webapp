@@ -66,7 +66,6 @@ class Calendar extends React.Component {
     }
     selectedHandler = (index, date) => {
         let { history } = this.props
-
         this.setState({ selectedIndex: index })
         history.push(`/investor-calendar-day?date=${date}`)
 
@@ -103,8 +102,8 @@ class Calendar extends React.Component {
             </div>
         }
         let dayFn = (item, index) => {
-            return <div styleName={selectedIndex == index ? 'day daySelected' : 'day'} onClick={() => { this.selectedHandler(index, date) }}>
-                <div styleName="week">{item.day} {item.week}</div>
+            return <div key={index} styleName={selectedIndex == index ? 'day daySelected' : 'day'} onClick={() => { this.selectedHandler(index, item.date) }}>
+                <div styleName="week">{item.day} {item.weekDate}</div>
                 <div styleName="circle"></div>
                 <div styleName="receivable">{item.totalPlanCount}笔回款</div>
                 <div styleName="receivable actual">{item.totalRealCount}笔回款</div>
@@ -131,6 +130,9 @@ class Calendar extends React.Component {
                 </div>
             </div>
         }
+        let empty = <div styleName="empty">
+            <img src={require('../../images/investor/empty.png')} />
+        </div>
         return <div styleName="bg">
             <Header title="回款日历" history={history} />
             <div styleName="capital">
@@ -153,49 +155,11 @@ class Calendar extends React.Component {
                 <div styleName="rightBtn" onClick={this.addMonthHandler}></div>
                 <div styleName={monthArrow ? "monthArrow monthArrowUp" : "monthArrow"} onClick={this.switchMonthArrowHandler}></div>
             </div>
-            <div styleName="days" style={{ display: monthArrow ? 'block' : 'none' }}>
+            {monthArrow && <div styleName="days">
                 <div styleName="dayBox">
-                    {/*
-                        calendarList.map(dayFn)
-                    */}
-                    <div styleName="day" onClick={() => { this.selectedHandler(1, '2017-10-11') }}>
-                        <div styleName="week">06日 星期日</div>
-                        <div styleName="circle"></div>
-                        <div styleName="receivable">6笔回款</div>
-                        <div styleName="receivable actual">1笔回款</div>
-                    </div>
-                    <div styleName="day daySelected">
-                        <div styleName="week">06日 星期日</div>
-                        <div styleName="circle"></div>
-                        <div styleName="receivable">6笔回款</div>
-                        <div styleName="receivable actual">1笔回款</div>
-                    </div>
-                    <div styleName="day">
-                        <div styleName="week">06日 星期日</div>
-                        <div styleName="circle"></div>
-                        <div styleName="receivable">6笔回款</div>
-                        <div styleName="receivable actual">1笔回款</div>
-                    </div>
-                    <div styleName="day">
-                        <div styleName="week">06日 星期日</div>
-                        <div styleName="circle"></div>
-                        <div styleName="receivable">6笔回款</div>
-                        <div styleName="receivable actual">1笔回款</div>
-                    </div>
-                    <div styleName="day">
-                        <div styleName="week">06日 星期日</div>
-                        <div styleName="circle"></div>
-                        <div styleName="receivable">6笔回款</div>
-                        <div styleName="receivable actual">1笔回款</div>
-                    </div>
-                    <div styleName="day">
-                        <div styleName="week">06日 星期日</div>
-                        <div styleName="circle"></div>
-                        <div styleName="receivable">6笔回款</div>
-                        <div styleName="receivable actual">1笔回款</div>
-                    </div>
+                    {calendarList.map(dayFn)}
                 </div>
-            </div>
+            </div>}
             <div styleName="date">
                 <div styleName="dateType">
                     <div styleName="radius brown"></div>
@@ -222,43 +186,7 @@ class Calendar extends React.Component {
                 {['即将到期', '已到期'].map(tabFn)}
             </div>
             <div styleName="dueList">
-                {/*monthDueList.map(dueFn)*/}
-                <div styleName="dueItem">
-                    <div styleName="dueDate">
-                        <div>2017年8月13日</div>
-                        <div></div>
-                    </div>
-                    <div styleName="investorList">
-                        <div styleName="investor">
-                            <div styleName="investorName">李丽华</div>
-                            <div styleName="investorAmount">10.000克</div>
-                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
-                        </div>
-                        <div styleName="investor">
-                            <div styleName="investorName">李丽华</div>
-                            <div styleName="investorAmountRed">￥90.00万</div>
-                            <div styleName="investorText">本金790.000万 | 利息110.000</div>
-                        </div>
-                    </div>
-                </div>
-                <div styleName="dueItem">
-                    <div styleName="dueDate">
-                        <div>2017年8月14日</div>
-                        <div></div>
-                    </div>
-                    <div styleName="investorList">
-                        <div styleName="investor">
-                            <div styleName="investorName">李丽华</div>
-                            <div styleName="investorAmount">10.000克</div>
-                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
-                        </div>
-                        <div styleName="investor">
-                            <div styleName="investorName">李丽华</div>
-                            <div styleName="investorAmountRed">￥90.00万</div>
-                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
-                        </div>
-                    </div>
-                </div>
+                {monthDueList&&monthDueList.length>0?monthDueList.map(dueFn):empty}
             </div>
         </div>
     }

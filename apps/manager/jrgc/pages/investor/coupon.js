@@ -17,6 +17,7 @@ class Coupon extends React.Component {
     gotoCoupon = () => {
         let { history } = this.props
         let { detail } = this.props.investor.data.info
+
         history.push(`/user-transfer-coupon?custId=${detail.custId}&realName=${detail.realName}`)
     }
     switchTab = tab => {
