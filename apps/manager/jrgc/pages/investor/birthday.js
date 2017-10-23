@@ -9,7 +9,7 @@ import styles from '../../css/investor/birthday.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Birthday extends React.Component {
     componentDidMount() {
-        let {fetchBirthday} = this.props.investor
+        let { fetchBirthday } = this.props.investor
         fetchBirthday()
     }
     gotoHandler = (id) => {
@@ -19,11 +19,11 @@ class Birthday extends React.Component {
 
     render() {
         let { history } = this.props
-        let {birthday} = this.props.investor.data
+        let { birthday } = this.props.investor.data
 
-        let birFn = (item,index) => {
-            let src = item.countDown == 0?require('../../images/investor/birthday/clock.png'):require('../../images/investor/birthday/greyClock.png')
-            let count = item.countDown == 0?'今日生日':`还有${item.countDown}天`
+        let birFn = (item, index) => {
+            let src = item.countDown == 0 ? require('../../images/investor/birthday/clock.png') : require('../../images/investor/birthday/greyClock.png')
+            let count = item.countDown == 0 ? '今日生日' : `还有${item.countDown}天`
 
             return <div styleName="person" onClick={() => this.gotoHandler(item.custId)}>
                 <img src={src} />
@@ -33,12 +33,16 @@ class Birthday extends React.Component {
                 <div styleName="des">count</div>
             </div>
         }
+        let empty = <div styleName="empty">
+            <img src={require('../../images/investor/empty.png')} />
+        </div>
         return <div styleName="bg">
             <Header title="近期过生日的客户" history={history} />
             <div styleName="birthdayList">
-                {birthday.list.map(birFn)}
+                {birthday.list && birthday.list.length > 0 ? birthday.list.map(birFn) : empty}
+                {birthday.list.length > 0 && <div styleName="load">已经全部加载完毕</div>}
             </div>
-            <div styleName="load">已经全部加载完毕</div>
+
         </div>
     }
 }
