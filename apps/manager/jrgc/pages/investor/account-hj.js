@@ -8,8 +8,10 @@ import styles from '../../css/investor/account-hj.css'
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class AccountHj extends React.Component {
+    state={
+        close:false
+    }
     componentDidMount() {
-        //id为从上一页面获取
         this.props.investor_account.fetchAccountHj()
     }
 
@@ -17,10 +19,17 @@ class AccountHj extends React.Component {
         let {history} = this.props
         history.push('investor-hj-list')
     }
-
+    showHandler = () => {
+        this.setState({close:true})
+    }
+    closeHandler = () => {
+        this.setState({close:false})
+    }
     render() {
         let {history} = this.props
-        let {info, goldPrice} = this.props.investor_account.data.hj
+        let {close} = this.state
+        let {info, goldPrice} = this.props.investor_account.data_hj
+        let { fetchGoldPrice } = this.props.investor_account
         return <div>
             <Header title="TA的黄金账户" history={history}/>
             <div styleName="hjInfo">
@@ -34,19 +43,19 @@ class AccountHj extends React.Component {
                     <div styleName="lineLeft">{info.availableAmount}克(当前市值约¥{info.cuurMarketValue})</div>
                     <div styleName="lineRight">
                         <span styleName="number">{info.waitAmount}克</span>
-                        <span styleName="icon-question-up"></span>
                     </div>
                 </div>
             </div>
             <div styleName="hjPrice">
                 <div styleName="priceItem">
-                    <div styleName="itemLineUp"><span styleName="itemName">浮动盈亏</span><span
-                        styleName="icon-question"></span></div>
+                    <div styleName="itemLineUp"><span styleName="itemName">累计盈亏</span><span
+                        styleName="icon-question" onClick={this.showHandler}></span></div>
                     <div styleName="itemLineDown colorRed">+¥{info.accProfitLoss}</div>
                 </div>
                 <div styleName="priceItem">
-                    <div styleName="itemLineUp"><span styleName="itemName">实时金价(每克)</span><span
-                        styleName="icon-refresh"></span></div>
+                    <div styleName="itemLineUp"><span styleName="itemName">实时金价(每克)</span>
+                        <span styleName="icon-refresh" onClick={fetchGoldPrice}></span>
+                    </div>
                     <div styleName="itemLineDown">¥{goldPrice}</div>
                 </div>
                 <div styleName="priceItem itemLast">
@@ -67,6 +76,20 @@ class AccountHj extends React.Component {
             <div styleName="remain">
                 可用余额<span>¥{info.availableBalance}</span>
             </div>
+            {close && <div styleName="pop-bg">
+                <div styleName="pop">
+                    <div styleName="pop-title">累计盈亏</div>
+                    <div styleName="remind">累计盈亏指消费者在尊享进度累计盈利<br/>或亏损</div>
+                    <div styleName="formula">
+                        计算公式：
+                        <div>消费者总盈亏=（消费者持有黄金市值+消费</div>
+                        <div>者变现总金额+消费者提取金条市值+活期</div>
+                        <div>累计收益）-消费者实际购买总金额</div>
+                    </div>
+                    <div styleName="pop-close" onClick={this.closeHandler}></div>
+                </div>
+            </div>}
+
         </div>
     }
 }
