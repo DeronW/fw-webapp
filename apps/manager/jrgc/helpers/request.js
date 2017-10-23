@@ -1,7 +1,5 @@
 import { Request, Components } from 'fw-javascripts'
 
-import history from './history.js'
-
 let API_PATH = document.getElementById('api-path').value;
 
 const Ajax = options => {
@@ -22,12 +20,7 @@ const Ajax = options => {
             if (error.code == 40101) {
                 console.log('here ! should go to login')
 
-                // location.href = 'https://m.9888.cn/static/manager/jrgc/index.html#/login'
-                setTimeout(() => {
-                    if (history.location.pathname.slice(1) != 'login') {
-                        history.push('login')
-                    }
-                }, 1700)
+                location.href = 'https://m.9888.cn/static/manager/jrgc/index.html#/login'
 
             } else {
                 // 如果不弹出错误, 就直接reject
