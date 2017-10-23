@@ -4,23 +4,18 @@ import {observer, inject} from 'mobx-react'
 import {Header} from '../../components'
 import styles from '../../css/investor/remark.css'
 
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-
-@inject('invest')
+@inject('investor')
 @observer
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Remark extends React.Component {
     state = {
         value:''
-    }
-
-    componentDidMount() {
-        this.props.invest.editRemark()
     }
     changeHandler = (e) => {
         this.setState({value:e.target.value})
     }
     keepHandler = () => {
-        this.props.editRemark()
+        this.props.investor.editRemark(this.state.value)
     }
 
     render() {

@@ -1,4 +1,4 @@
-import { extendObservable } from 'mobx'
+import { extendObservable, computed } from 'mobx'
 import { Utils, Components } from 'fw-javascripts'
 
 export default class Investor {
@@ -290,7 +290,6 @@ export default class Investor {
     }
     //客户备注修改
     editRemark = (remark) => {
-        console.log(remark)
         this.Post('/api/finManager/cust/v2/custRemarkEdit.shtml',{
             custId:this.custId,
             remark:remark,
