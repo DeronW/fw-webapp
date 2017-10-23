@@ -39,7 +39,8 @@
     "gulp-uglify": "2.1.2",
     "gulp-util": "3.0.8",
     "proxy-polyfill": "^0.1.7",
-    "pump": "1.0.2"
+    "pump": "1.0.2",
+    "qrcode": "^0.9.0"
   },
   "devDependencies": {
     "babel-loader": "^7.1.2",
