@@ -58,7 +58,10 @@ class ReserveInfoIntro extends React.Component {
             let bid_list_func = (item, index) => {
                 return <div styleName="bidItem" key={index}>
                     <div styleName="itemCeil ceilOne" onClick={() => this.toInfoHandler(item.id)}>
-                        <div styleName="ceilUp">{item.loadRate}<span>%</span></div>
+                        <div
+                            styleName="ceilUp">{item.loadRate}<span>%</span>
+                            <span styleName="addRate">{item.addRate == 0 ? '' : '+' + item.addRate + '%'}</span>
+                        </div>
                         <div styleName="ceilDown">预期年化利率</div>
                     </div>
                     <div styleName="itemCeil ceilTwo" onClick={() => this.toInfoHandler(item.id)}>

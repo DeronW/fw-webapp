@@ -45,6 +45,7 @@ class ReserveInfo extends React.Component {
                     <div styleName="rateUp">
                         <span>{context.loadRate}</span>
                         <span styleName="percent">%</span>
+                        <span styleName="addRate">{context.addRate == 0 ? '' : `+${context.addRate}%`}</span>
                     </div>
                     <div styleName="rateDown">
                         年化借款利率

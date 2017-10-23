@@ -6,6 +6,10 @@ let is_ready = false,
     resolve_list = [];
 
 getJSONP('https://www.gongchangp2p.com/api/userState/v1/userState.json', {}).then(data => {
+
+    // 格式化数据
+    data = data.data
+
     is_ready = true
     let avatar = data.sex == 1 ?
         'https://static.9888.cn/images/keji-web/male.png' :
