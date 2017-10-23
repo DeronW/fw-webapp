@@ -113,7 +113,10 @@ class ReserveInfoNovice extends React.Component {
 
         let bottom_section = () => {
             return <div styleName="bottomBox">
-                <div styleName="reserveBtn" onClick={this.reserveHandler}>立即抢购</div>
+                <div styleName="reserveBtn" onClick={() => {
+                    history.push(`/novice-bid/apply?applyInvestClaimId=${novice_bid.applyInvestClaimId}`)
+                }}>立即预约
+                </div>
             </div>
         }
 
