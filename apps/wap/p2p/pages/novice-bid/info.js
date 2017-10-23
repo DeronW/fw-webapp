@@ -117,7 +117,8 @@ class ReserveInfoNovice extends React.Component {
         }
 
         let records_section = () => {
-            return <div styleName="recordBtn" onClick={() => history.push('/reserve-bid/records')}>
+            let record_btn_style = Browser.inIOSApp ? "recordBtnIos" ? "recordBtn"
+            return <div styleName={record_btn_style} onClick={() => history.push('/reserve-bid/records')}>
                 预约记录
             </div>
         }
