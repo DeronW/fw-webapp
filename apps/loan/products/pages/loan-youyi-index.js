@@ -22,14 +22,19 @@ export default class LoopLoan extends React.Component {
     state = {
         show: false,
         questionShow: false,
-        message:null
+        message:null,
+        authingShow:false
     }
 
     componentDidMount() {
         let { loopLoan } = this.props;
         document.title = '优易借';
         NativeBridge.hide_header();
-        loopLoan.get_baseinfo().catch((e) => {
+        loopLoan.get_baseinfo().then(()=>{
+            if(loopLoan.userStatus == 101){
+                this.setState({authingShow:true})
+            }
+        }).catch((e) => {
             if ([20005, 20009, 20013].indexOf(e.code) > -1) {
                 this.setState({ show: true, message:e.message })
             } else {
@@ -65,6 +70,10 @@ export default class LoopLoan extends React.Component {
     closeHandler = () => {
         let { history } = this.props;
         Browser.inFXHApp ? NativeBridge.close() : history.push('/')
+    }
+
+    confirmHandler = () => {
+        this.setState({authingShow:false})
     }
 
     render() {
@@ -112,12 +121,18 @@ export default class LoopLoan extends React.Component {
                 <div styleName="btn-container">
                     {loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt && <div styleName="btn-tip">最低{loopLoan.minLoanAmt}元起借</div>}
                     {loopLoan.userStatus == 1 && <div styleName="btn-tip">借款前请先完成芝麻信用分认证</div>}
-                    <div styleName="btn" onClick={this.clickHandler}>{btn_title}</div>
+                    {loopLoan.userStatus == 101 ? <div styleName="btn-gray">认证中</div> : <div styleName="btn" onClick={this.clickHandler}>{btn_title}</div>}
                 </div>
                 {this.state.show && <div styleName="mask">
                     <div styleName="popup">
                         <div styleName="popup-tip">{this.state.message}</div>
                         <div styleName="popup-btn" onClick={this.closeHandler}>知道了</div>
+                    </div>
+                </div>}
+                {this.state.authingShow && <div styleName="mask">
+                    <div styleName="popup">
+                        <div styleName="popup-tip">正在授信中，请稍后查看您的信用额度</div>
+                        <div styleName="popup-btn" onClick={this.confirmHandler}>确定</div>
                     </div>
                 </div>}
                 {this.state.questionShow && <div styleName="mask">
