@@ -33,10 +33,6 @@ class Info extends React.Component {
         let { detail } = this.props.investor.data.info
         history.push(`/user-transfer-coupon?custId=${detail.custId}&realName=${detail.realName}`)
     }
-    jumpToRemark = () => {
-        let { history } = this.props
-        history.push('/investor-remark')
-    }
     getOption = (three,four,seven,ten,twelve) => ({
         title: {
             text: '客户整体投资期限分析',
@@ -190,7 +186,7 @@ class Info extends React.Component {
             <div styleName="remark" onClick="">
                 <div styleName="remarkTitle">备注</div>
                 <img src={require('../../images/investor/info/arrow.png')} />
-                <div styleName="remarkAmend" onClick={this.jumpToRemark}>修改</div>
+                <div styleName="remarkAmend" onClick={()=>this.gotoHandler('/investor-remark')}>修改</div>
             </div>
             <div styleName="remarkText">
                 <div styleName="remarkDes" style={desStyle}>
