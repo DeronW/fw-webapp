@@ -13,10 +13,10 @@ class TransferCoupon extends React.Component {
         type:'返现券'
     }
     componentDidMount() {
-        let { resetCouponPageNo,setCouponStatus, fetchCouponList } = this.props.user_coupon
+        let { resetCouponPageNo,setCouponType,setCouponStatus, fetchCouponList } = this.props.user_coupon
         resetCouponPageNo()
+        setCouponType('1')
         setCouponStatus(1)
-        fetchCouponList()
         Event.touchBottom(fetchCouponList)
     }
     componentWillUnmount() {
@@ -42,18 +42,30 @@ class TransferCoupon extends React.Component {
         let { history } = this.props
         let {custId,realName} =Utils.hashQuery
         if(custId !== undefined){
-            this.presentHandler(beanCount,couponType,realName,custId)
+            this.presentHandler(couponId,beanCount,couponType,realName,custId)
         }else{
             history.push(`/user-transfer-friends?couponId=${couponId}&couponType=${couponType}&beanCount=${beanCount}&remark=${remark}&overdueTime=${overdueTime}&investMultip=${investMultip}&inverstPeriod=${inverstPeriod}`)
         }
     }
-    presentHandler = (beanCount,type,name, custId) => {
+    presentHandler = (couponId,beanCount,type,name,custId) => {
         //弹层
         let unit = type == '返金券' ? '克' : '元'
-
-        let v = confirm(`确认将${beanCount}${unit}${type},赠送给${name}吗？`)
+        let t
+        if(type=='0'){
+            t = "返现券"
+        }else if(type=='1'){
+            t = '返息券'
+        }else{
+            t = '返金券'
+        }
+        let v = confirm(`确认将${beanCount}${unit}${t},赠送给${name}吗？`)
         if (v == true) {
             this.props.user_coupon.presentCoupon(couponId, type, custId)
+                                  .then(() => Components.showAlert("赠送成功"))
+                                  .then(() =>{
+                                    this.props.user_coupon.resetCouponPageNo()
+                                    this.props.user_coupon.fetchCouponList()
+                                  })
         }
     }
     render() {

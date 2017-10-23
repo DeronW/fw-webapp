@@ -25,7 +25,7 @@ class Invested extends React.Component {
         investAmount: '',
         investAmountAnnual: '',
         sortBy: 'amountAnnual',
-        sortDescending: true,
+        orderBy: 0, // 0: descending, 1: ascending
         pageNo: 1,
     }
 
@@ -36,7 +36,7 @@ class Invested extends React.Component {
             { stats_overview, stats_investor } = this.props,
             { statsDurationType } = stats_overview.data,
             { invested, investAmount, investAmountAnnual } = stats_overview.investorFormatted,
-            { sortBy, sortDescending, pageNo } = this.state;
+            { sortBy, orderBy, pageNo } = this.state;
 
         stats_investor.initStats(investorType, statsDurationType);
 
@@ -57,11 +57,11 @@ class Invested extends React.Component {
 
     loadMore = (done) => {
         const { stats_investor } = this.props,
-            { sortBy, sortDescending, pageNo } = this.state;
+            { sortBy, orderBy, pageNo } = this.state;
 
         if (pageNo === 0) return done && done();
 
-        return stats_investor.fetchInvestorInfo(sortBy, sortDescending, pageNo)
+        return stats_investor.fetchInvestorInfo(sortBy, orderBy, pageNo)
             .then(pageNo => {
                 this.setState({ pageNo: pageNo });
                 done && done();
@@ -77,14 +77,14 @@ class Invested extends React.Component {
         if (this.state.sortBy === sortBy) {
             this.setState({
                 pageNo: 1,
-                sortDescending: !this.state.sortDescending
+                orderBy: Math.abs(this.state.orderBy - 1)
             }, () => this.loadMore(null)
                 .then(() => Event.touchBottom(this.loadMore)))
         } else {
             this.setState({
                 pageNo: 1,
                 sortBy: sortBy,
-                sortDescending: true
+                orderBy: 0
             }, () => this.loadMore(null)
                 .then(() => Event.touchBottom(this.loadMore)))
         }
@@ -117,17 +117,20 @@ class Invested extends React.Component {
             currentTabName = STATS_DURATION[statsDurationType];
 
         const genSortTabItems = type => {
-            const { sortBy, sortDescending } = this.state;
-            let isSortIconActive = { asc: false, des: false };
+            const { sortBy, orderBy } = this.state;
+            let orderIconActive = { asc: false, des: false };
 
-            if (sortBy === type) isSortIconActive = { asc: !sortDescending, des: sortDescending }
+            if (sortBy === type) {
+                orderIconActive.asc = !!orderBy;
+                orderIconActive.des = !orderBy;
+            }
 
             return <div key={type} styleName="sort-type"
                 onClick={() => { this.handleSort(type) }}>
                 <div styleName={sortBy === type ? "sort-type-name-active" : "sort-type-name"}>{SORT_TABS[type]}</div>
                 <div styleName="sort-btn">
-                    <i styleName={isSortIconActive.asc ? "sort-asc-active" : "sort-asc"}></i>
-                    <i styleName={isSortIconActive.des ? "sort-des-active" : "sort-des"}></i>
+                    <i styleName={orderIconActive.asc ? "sort-asc-active" : "sort-asc"}></i>
+                    <i styleName={orderIconActive.des ? "sort-des-active" : "sort-des"}></i>
                 </div>
             </div>
         }
