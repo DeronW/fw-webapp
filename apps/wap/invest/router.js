@@ -55,7 +55,9 @@ export default (stores) => {
                 } />
                 <Route exact path='/reserve/apply' render={
                     () => {
-                        let p = '?' + location.hash.split('?')[1]
+                        let id = location.hash.split('?')[1]
+                        let p = id ? '?' + id : ''
+
                         location.href = '/static/wap/p2p/index.html#/reserve-bid/apply' + p
                     }
                 } />
