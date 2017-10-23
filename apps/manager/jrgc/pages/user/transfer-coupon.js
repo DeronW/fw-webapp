@@ -13,10 +13,10 @@ class TransferCoupon extends React.Component {
         type:'返现券'
     }
     componentDidMount() {
-        let { resetCouponPageNo,setCouponStatus, fetchCouponList } = this.props.user_coupon
+        let { resetCouponPageNo,setCouponType,setCouponStatus, fetchCouponList } = this.props.user_coupon
         resetCouponPageNo()
+        setCouponType('1')
         setCouponStatus(1)
-        fetchCouponList()
         Event.touchBottom(fetchCouponList)
     }
     componentWillUnmount() {
@@ -62,6 +62,10 @@ class TransferCoupon extends React.Component {
         if (v == true) {
             this.props.user_coupon.presentCoupon(couponId, type, custId)
                                   .then(() => Components.showAlert("赠送成功"))
+                                  .then(() =>{
+                                    this.props.user_coupon.resetCouponPageNo()
+                                    this.props.user_coupon.fetchCouponList()
+                                  })
         }
     }
     render() {
