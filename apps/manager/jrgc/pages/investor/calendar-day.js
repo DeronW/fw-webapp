@@ -59,6 +59,9 @@ class calendarDay extends React.Component {
                 </div>
             </div>
         }
+        let empty = <div styleName="empty">
+            <img src={require('../../images/investor/empty.png')} />
+        </div>
         return <div styleName="bg">
             <div styleName="header">
                 <a styleName="btnBack" onClick={history.goBack}></a>
@@ -67,41 +70,7 @@ class calendarDay extends React.Component {
                 </div>
             </div>
             <div styleName="dueList">
-                {/*dayDueList.map(dueFn)*/}
-                <div styleName="dueItem">
-                    <div styleName="dueDate">
-                        <div>2017年8月13日</div>
-                    </div>
-                    <div styleName="investorList">
-                        <div styleName="investor">
-                            <div styleName="investorName">李丽华</div>
-                            <div styleName="investorAmount">10.000克</div>
-                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
-                        </div>
-                        <div styleName="investor">
-                            <div styleName="investorName">李丽华</div>
-                            <div styleName="investorAmountRed">￥90.00万</div>
-                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
-                        </div>
-                    </div>
-                </div>
-                <div styleName="dueItem">
-                    <div styleName="dueDate">
-                        <div>2017年8月14日</div>
-                    </div>
-                    <div styleName="investorList">
-                        <div styleName="investor">
-                            <div styleName="investorName">李丽华</div>
-                            <div styleName="investorAmount">10.000克</div>
-                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
-                        </div>
-                        <div styleName="investor">
-                            <div styleName="investorName">李丽华</div>
-                            <div styleName="investorAmountRed">￥90.00万</div>
-                            <div styleName="investorText">购买克重790.000克 | 收益克重110.000克</div>
-                        </div>
-                    </div>
-                </div>
+                {dayDueList&&dayDueList.length>0?dayDueList.map(dueFn):empty}
             </div>
         </div>
     }

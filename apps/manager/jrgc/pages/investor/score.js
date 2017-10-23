@@ -10,9 +10,8 @@ import styles from '../../css/investor/score.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Score extends React.Component {
     componentDidMount() {
-        let { fetchScore, resetScorePageNo, setScoreId } = this.props.investor
+        let { fetchScore, resetScorePageNo } = this.props.investor
         resetScorePageNo()
-        setScoreId(Utils.hashQuery.custId)
         fetchScore()
         Event.touchBottom(fetchScore)
     }
@@ -22,7 +21,7 @@ class Score extends React.Component {
     render() {
         let { history } = this.props
         let { score } = this.props.investor.data
-        let { info, records } = score
+        let { frozenAmount,iintegralNum,willExpireAmount, records } = score
 
         let score_func = (item, index) => {
             return <div styleName="scoreItem" key={index}>
@@ -42,16 +41,16 @@ class Score extends React.Component {
             <Header history={history} title="他的工分" />
             <div styleName="total">
                 <div styleName="title">他的工分</div>
-                <div styleName="totalNumber">{info.iintegralNum}</div>
+                <div styleName="totalNumber">{iintegralNum}</div>
             </div>
             <div styleName="info">
                 <div styleName="infoLeft">
                     <div styleName="lineUp">冻结工分数量</div>
-                    <div styleName="lineDown">{info.frozenAmount}</div>
+                    <div styleName="lineDown">{frozenAmount}</div>
                 </div>
                 <div styleName="infoRight">
                     <div styleName="lineUp">即将过期工分</div>
-                    <div styleName="lineDown">{info.willExpireAmount}</div>
+                    <div styleName="lineDown">{willExpireAmount}</div>
                 </div>
             </div>
             {records && records.length > 0 ? records.map(score_func) : empty}

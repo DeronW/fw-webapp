@@ -112,7 +112,7 @@ class ReserveRecords extends React.Component {
                 <div styleName="infoContainer">
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">预计收益</div>
-                        <div styleName="itemHeaderRight colorRed">￥{}元</div>
+                        <div styleName="itemHeaderRight colorRed">￥{item.interest}元</div>
                     </div>
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约金额</div>
@@ -126,7 +126,9 @@ class ReserveRecords extends React.Component {
                     </div>
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约到期日</div>
-                        <div styleName="itemHeaderRight">{}</div>
+                        <div styleName="itemHeaderRight">
+                            {new Date(parseInt(item.paymentDate)).toLocaleDateString().replace(/\//g, "-") + " " + new Date(parseInt(item.bookTime)).toTimeString().substr(0, 8)}
+                        </div>
                     </div>
                 </div>
                 {(item.status == 0 || item.status == 1) && <div styleName="infoItem infoProtocol">

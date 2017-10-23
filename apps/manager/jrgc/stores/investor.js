@@ -56,11 +56,7 @@ export default class Investor {
                 },
             },
             calendar: {//回款日历
-                overview: {
-                    principal: 100,
-                    interest: 23,
-                    goldAmt: 4.5
-                },//总回款信息
+                overview: {},//总回款信息
                 calendarList: [],//月份回款日历
                 monthInfo: {},//月度回款信息
                 monthDueList: [],//月份 即将到期列表/已到期列表
@@ -80,15 +76,15 @@ export default class Investor {
                 analysis: {},
             },
             bean: {
-                id: null,
-                cashBalance:null,
-                overbeancount:null,
+                cashBalance:0,
+                overbeancount:0,
                 pageNo: 1,
                 records: []
             },
             score: {
-                id: null,
-                info: {},
+                frozenAmount:0,
+                iintegralNum:0,
+                willExpireAmount:0,
                 pageNo: 1,
                 records: []
             },
@@ -173,13 +169,13 @@ export default class Investor {
     fetchDueDay = (tab, day) => {
         let { dayDueList } = this.data.calendar
         if (tab == '即将到期') {
-            this.Get("/api/finManager/payment/v2/dueList.shtml", {
+            this.Get("/api/finManager/cust/v2/dueList.shtml", {
                 day: day
             }).then(data => {
                 dayDueList = data.result
             })
         } else {
-            this.Get("/api/finManager/payment/v2/expiredList.shtml", {
+            this.Get("/api/finManager/cust/v2/expiredList.shtml", {
                 day: day
             }).then(data => {
                 dayDueList = data.result
@@ -218,18 +214,18 @@ export default class Investor {
         this.data.search.keyword = keyword
     }
     //客户详情
-    fetchInfo = (cust_id) => {
+    fetchInfo = () => {
         this.Get('/api/finManager/cust/v2/custDetail.shtml', {
-            custId: cust_id
+            custId: this.custId
         }).then(data => {
             this.data.info.remarkToken = data.remarkToken
             this.data.info.detail = data.result
         })
     }
     //客户整体投资期限分析-饼图
-    fetchInvestAnalysis = (id) => {
+    fetchInvestAnalysis = () => {
         this.Get('/api/finManager/cust/v2/investAnalysis.shtml', {
-            custId: id
+            custId: this.custId
         }).then(data => {
             this.data.info.analysis = data.result
         })
@@ -237,12 +233,12 @@ export default class Investor {
 
     //查询客户工豆列表
     fetchBean = (done) => {
-        let { pageNo, records, id} = this.data.bean
+        let { pageNo, records} = this.data.bean
         const PAGE_SIZE = 10
         if (this.data.bean.pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0,records.length)
         this.Get('/api/finManager/cust/v2/beanList.shtml', {
-            custId: id,
+            custId: this.custId,
             pageNo: pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
@@ -255,25 +251,24 @@ export default class Investor {
             done && done()
         })
     }
-    setBeanId = (id) => {
-        this.data.bean.id = id
-    }
     resetBeanPageNo = () => {
         this.data.bean.pageNo = 1
     }
 
     //查询客户工分列表
     fetchScore = (done) => {
-        let { pageNo, records, id, info } = this.data.score
+        let { pageNo, records, frozenAmount,iintegralNum,willExpireAmount } = this.data.score
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0,records.length)
         this.Get('/api/finManager/cust/v2/scoreList.shtml', {
-            custId: id,
+            custId: this.custId,
             pageNo: pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
-            info = data
+            frozenAmount = data.frozenAmount
+            iintegralNum = data.iintegralNum
+            willExpireAmount = data.willExpireAmount
             records.push(...data.pageData.result)
             this.data.score.pageNo < data.pageData.pagination.totalPage ?
             this.data.score.pageNo++ :
@@ -281,9 +276,6 @@ export default class Investor {
 
             done && done()
         })
-    }
-    setScoreId = (id) => {
-        this.data.score.id = id
     }
     resetScorePageNo = () => {
         this.data.score.pageNo = 1

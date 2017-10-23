@@ -26,13 +26,13 @@ class zxItem extends React.Component {
     switchType = type => {
         if (type == this.props.investor_account.data_zx.project.type) return
         this.props.investor_account.setTypeZX(type)
-        console.log(type)
+        this.props.investor_account.resetPageNoZX()
+
         if (type == "Ta的项目") {
             this.props.investor_account.setTabZX('100')
         } else if (type == "转入项目") {
             this.props.investor_account.setTabZX('')
         }
-        this.props.investor_account.fetchProjectZX()
     }
 
     switchTab = tab => {
@@ -42,7 +42,7 @@ class zxItem extends React.Component {
         let { history } = this.props
         let { type } = this.props.investor_account.data_zx.project
 
-        let { info, tab, record } = this.props.investor_account.data_zx.project
+        let { info, tab, record,totalCount } = this.props.investor_account.data_zx.project
         let types = type == 'Ta的项目' ? ['100', '3', '4'] : ['', '5', '6']
 
         let typeFn = (item, index) => {
@@ -140,10 +140,10 @@ class zxItem extends React.Component {
             <div styleName="types">
                 {types.map(tabFn)}
             </div>
-            <div styleName="number">共<span>5</span>笔记录</div>
+            <div styleName="number">共<span>{totalCount}</span>笔记录</div>
             <div styleName="records">
-                {record[record].records.length > 0 ? record[record].records.map(zx_item) : empty}
-                {record[record].records.length > 0 && <div styleName="load">已经全部加载完毕</div>}
+                {record[tab].records.length > 0 ? record[tab].records.map(zx_item) : empty}
+                {record[tab].records.length > 0 && <div styleName="load">已经全部加载完毕</div>}
             </div>
         </div>
     }

@@ -46,6 +46,7 @@ export default class InvestorAccount {
             },
             project:{
                 info:{},
+                totalCount:0,
                 tab:'100',
                 type:'Ta的项目',
                 record:{
@@ -105,11 +106,11 @@ export default class InvestorAccount {
 
     resetPageNoZX = () => {
         let pro = this.data_zx.project
-
         pro.record[pro.tab].pageNO = 1
     }
     setTabZX = (tab) => {
         this.data_zx.project.tab = tab
+        this.fetchProjectZX()
     }
     setTypeZX = (type) => {
         this.data_zx.project.type = type
@@ -119,19 +120,21 @@ export default class InvestorAccount {
         let url
         let { tab,record,type } = this.data_zx.project
         if( record[tab].pageNO == 0) return done && done()
-        if( record[tab].pageNO == 1) record[tab].records = []
+        if( record[tab].pageNO == 1) record[tab].records.splice(0,record[tab].records.length)
 
         if(type=="Ta的项目"){
             url='/api/finManager/cust/v2/zxPrdInvest.shtml'
         }else if(type=="转入项目"){
-            url='/api/finManager/cust/v2/zxPrdInvest.shtml'
+            url='/api/finManager/cust/v2/zxSwitchPrdInvest.shtml'
         }
         this.Get(url,{
             custId:this.custId,
+            callStatus:tab,
             flag:tab,
             pageNo:record[tab].pageNo,
             pageSize:10
         }).then(data=>{
+            this.data_zx.project.totalCount = data.pageData.pagination.totalCount
             record[tab].records.push(...data.pageData.result)
             record[tab].pageNO > data.pageData.pagination.totalPage ? record[tab].pageNO++ : record[tab].pageNO = 0
 
@@ -221,6 +224,7 @@ export default class InvestorAccount {
         this.Get(url,{
             custId:this.custId,
             flag:category,
+            callStatus:category,
             pageNo:pageNo,
             pageSize:10
         }).then(data => {

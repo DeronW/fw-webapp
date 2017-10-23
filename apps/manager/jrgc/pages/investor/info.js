@@ -12,13 +12,12 @@ import styles from '../../css/investor/info.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Info extends React.Component {
     state = {
-        hidden: false,
-        custId:Utils.hashQuery.custId
+        hidden: true
     }
 
     componentDidMount() {
-        this.props.investor.fetchInfo(this.state.custId)
-        this.props.investor.fetchInvestAnalysis(this.state.custId)
+        this.props.investor.fetchInfo()
+        this.props.investor.fetchInvestAnalysis()
     }
 
     showMore = () => {
@@ -26,7 +25,7 @@ class Info extends React.Component {
     }
     gotoHandler = (link) => {
         let { history } = this.props
-        history.push(`${link}?custId=${this.state.custId}`)
+        history.push(`${link}?custId=${this.props.investor.custId}`)
     }
     gotoTransferCoupon = () => {
         let { history } = this.props
@@ -105,15 +104,16 @@ class Info extends React.Component {
 
     render() {
         let { history } = this.props
-        let { hidden,id } = this.state;
+        let { hidden} = this.state;
+        let { info } = this.props.investor.data
+        let { detail,analysis } = info
 
         let desStyle = {
             height: hidden ? '100%' : '100px',
             overflow: hidden ? 'visible' : 'hidden'
         }
+        console.log(detail.mobile)
 
-        let { info } = this.props.investor.data
-        let { detail,analysis } = info
 
         let {within3MonthRate,four2SixMonthRate,seven2NineMonthRate,ten2TwelveMonthRate,moreThanOneYearRate}=analysis
         return <div styleName="bg">

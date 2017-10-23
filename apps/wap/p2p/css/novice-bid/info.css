@@ -4,6 +4,7 @@
     font-family: 'PingFangSC-Regular, sans-serif';
     color: #555;
     padding-bottom: 138px;
+    overflow: hidden;
 }
 
 .topInfo {
@@ -313,3 +314,7 @@
     z-index: 99;
 }
 
+.recordBtnIos {
+    composes: recordBtn;
+    top: 40px;
+}

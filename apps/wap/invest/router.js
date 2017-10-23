@@ -38,6 +38,7 @@ export default (stores) => {
                 <Route exact path='/topic/invite' component={Topic.Invite} />
                 <Route exact path='/topic/score' component={Topic.Score} />
                 <Route exact path='/topic/commission' component={Topic.Commission} />
+                {/* <Route exact path='/topic/school' component={Topic.School} /> */}
 
                 {/*发现模块  */}
                 <Route exact path='/fa-xian' component={Faxian.Home} />
@@ -48,12 +49,15 @@ export default (stores) => {
                 <Route exact path='/protocol/trusteeship' component={Protocol.Trusteeship} />
 
                 {/* 老链接跳转兼容 */}
-                <Route exact path='/reserve/info' render={
+                <Route exact expiredAt="2017-11-30" path='/reserve/info' render={
                     () => {
-                        location.href = '/static/wap/p2p/index.html#/reserve-bid/info'
+                        let id = location.hash.split('?')[1]
+                        let p = id ? '?' + id : ''
+
+                        location.href = '/static/wap/p2p/index.html#/reserve-bid/info' + p
                     }
                 } />
-                <Route exact path='/reserve/apply' render={
+                <Route exact expiredAt="2017-11-30" path='/reserve/apply' render={
                     () => {
                         let id = location.hash.split('?')[1]
                         let p = id ? '?' + id : ''

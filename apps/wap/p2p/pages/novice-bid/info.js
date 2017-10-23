@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Header} from '../../components/'
 import styles from '../../css/novice-bid/info.css'
-import {NativeBridge} from '../../helpers'
+import {NativeBridge, Browser} from '../../helpers'
 
 @inject('novice_bid')
 @observer
@@ -29,6 +29,7 @@ class ReserveInfoNovice extends React.Component {
                     <div styleName="rateUp">
                         <span>{context.loadRate}</span>
                         <span styleName="percent">%</span>
+                        <span styleName="addRate">{context.addRate == 0 ? '' : `+${context.addRate}%`}</span>
                     </div>
                     <div styleName="rateDown">
                         年化借款利率
@@ -117,7 +118,8 @@ class ReserveInfoNovice extends React.Component {
         }
 
         let records_section = () => {
-            return <div styleName="recordBtn" onClick={() => history.push('/reserve-bid/records')}>
+            let record_btn_style = Browser.inIOSApp ? "recordBtnIos" : "recordBtn"
+            return <div styleName={record_btn_style} onClick={() => history.push('/reserve-bid/records')}>
                 预约记录
             </div>
         }

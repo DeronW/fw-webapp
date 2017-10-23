@@ -1,23 +1,28 @@
-import Ajax from './request.js'
+import { getJSONP } from 'fw-javascripts'
 
 let is_ready = false,
     ERROR = null,
     USER = {},
     resolve_list = [];
 
-Ajax({
-    url: '/api/userState/v1/userState.json',
-    silence: true
-}).then(data => {
+getJSONP('https://www.gongchangp2p.com/api/userState/v1/userState.json', {}).then(data => {
+
+    // 格式化数据
+    data = data.data
+
     is_ready = true
+    let avatar = data.sex == 1 ?
+        'https://static.9888.cn/images/keji-web/male.png' :
+        'https://static.9888.cn/images/keji-web/female.png';
+
     USER = {
         isLogin: data.isLogin,
         realname: data.realName,
         level: data.userLevel,
         nickname: data.userName,
         sex: data.sex,
-        avatar: data.avatar || (data.sex == 1 ? '/img/man.png' : '/img/woman.png'),
-        gcm:data.userCode
+        avatar: data.avatar || avatar,
+        gcm: data.userCode
 
     }
     resolve_list.forEach(cb => cb(USER.isLogin, USER))

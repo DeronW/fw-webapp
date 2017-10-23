@@ -42,7 +42,7 @@ class ReserveFaq extends React.Component {
                     <br/>（4）《保证合同》：出借人VS担保方
                     <br/>（5）《出借人承诺书》
                     <br/>（6）《网络借贷出借风险提示》
-                    （7）《履行反洗钱业务的承诺书》
+                    <br/>（7）《履行反洗钱业务的承诺书》
                 </div>
             </div>
             <div styleName="faqItem">
