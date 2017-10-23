@@ -1,6 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
+import { Event, Components, Utils } from 'fw-javascripts'
 import {BannerGroup} from 'fw-components'
 
 import {Header, BottomNavBar} from '../../components';
@@ -13,9 +14,12 @@ class Setting extends React.Component{
     state = {
         close:false
     }
-    exitLoginHandler(){
+    exitLoginHandler = () =>{
         let {history} = this.props
-        this.props.login.exitHandler().then(() => history.push('/login'))
+        this.setState({close:false})
+        this.props.login.exitHandler()
+                        .then(()=>Components.showToast('退出成功'))
+                        .then(() => history.push('/login'))
     }
     showPopHandler = () => {
         this.setState({close:true})
