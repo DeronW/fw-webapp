@@ -16,6 +16,7 @@ export default class Login {
             pwd:password,
             sourceType:3
         }).then(data => {
+            this.data.headUrl = data.userInfo.headerUrl
             this.data.loginName = data.userInfo.loginName
         })
     }

@@ -31,3 +31,10 @@
     color: #555555;
     margin: 10px 0;
 }
+#canvas{
+    position: absolute;
+    top: 200px;
+    left: 100px;
+    width: 340px;
+    height: 340px;
+}
