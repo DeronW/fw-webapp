@@ -48,12 +48,12 @@ export default (stores) => {
                 <Route exact path='/protocol/trusteeship' component={Protocol.Trusteeship} />
 
                 {/* 老链接跳转兼容 */}
-                <Route exact path='/reserve/info' render={
+                <Route exact expireAt="2017-11-30" path='/reserve/info' render={
                     () => {
                         location.href = '/static/wap/p2p/index.html#/reserve-bid/info'
                     }
                 } />
-                <Route exact path='/reserve/apply' render={
+                <Route exact expireAt="2017-11-30" path='/reserve/apply' render={
                     () => {
                         let id = location.hash.split('?')[1]
                         let p = id ? '?' + id : ''
