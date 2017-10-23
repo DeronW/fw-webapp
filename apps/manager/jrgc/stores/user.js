@@ -1,6 +1,6 @@
 import {extendObservable} from 'mobx'
 import {Components, Utils, Event} from 'fw-javascripts'
-import { NativeBridge }  from './helpers'
+import { NativeBridge }  from '../helpers
 export default class User {
     constructor(Ajax,Get, Post) {
         this.Ajax = Ajax
