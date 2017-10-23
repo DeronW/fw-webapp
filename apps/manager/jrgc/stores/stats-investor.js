@@ -6,6 +6,23 @@ export default class StatsInvestor {
     constructor(Get) {
         this.get = Get;
 
+        this.SORT_PARAM_DICT = {
+            'invested-amount-1': '11',
+            'invested-amount-0': '12',
+            'invested-amountAnnual-1': '21',
+            'invested-amountAnnual-0': '22',
+            'invested-balance-1': '31',
+            'invested-balance-0': '32',
+            'registered-time-1': '41',
+            'registered-time-0': '42',
+            'investedFirstTime-amount-1': '51',
+            'investedFirstTime-amount-0': '52',
+            'investedFirstTime-time-1': '61',
+            'investedFirstTime-time-0': '62',
+            'investedFirstTime-balance-1': '71',
+            'investedFirstTime-balance-0': '72'
+        }
+
         this.data = { };
         extendObservable(this.data, {
             investorType: '',
@@ -14,27 +31,10 @@ export default class StatsInvestor {
         })
     }
 
-    _getSortNo = (sortBy, sortDescending) => {
+    _getSortNo = (sortBy, orderBy) => {
         let { investorType } = this.data,
-            sortNo = '';
-        if (investorType === 'invested') {
-            if (sortBy === 'amount' && !sortDescending) sortNo = '11'
-            if (sortBy === 'amount' && sortDescending) sortNo = '12'
-            if (sortBy === 'amountAnnual' && !sortDescending) sortNo = '21'
-            if (sortBy === 'amountAnnual' && sortDescending) sortNo = '22'
-            if (sortBy === 'balance' && !sortDescending) sortNo = '31'
-            if (sortBy === 'balance' && sortDescending) sortNo = '32'
-        } else if (investorType === 'registered') {
-            if (!sortDescending) sortNo = '41'
-            if (sortDescending) sortNo = '42'
-        } else if (investorType === 'investedFirstTime') {
-            if (sortBy === 'amount' && !sortDescending) sortNo = '51'
-            if (sortBy === 'amount' && sortDescending) sortNo = '52'
-            if (sortBy === 'time' && !sortDescending) sortNo = '61'
-            if (sortBy === 'time' && sortDescending) sortNo = '62'
-            if (sortBy === 'balance' && !sortDescending) sortNo = '71'
-            if (sortBy === 'balance' && sortDescending) sortNo = '72'
-        }
+            sortNo = this.SORT_PARAM_DICT[`${investorType}-${sortBy}-${orderBy}`];
+
         return sortNo
     }
 
@@ -43,9 +43,9 @@ export default class StatsInvestor {
         this.data.durationType = durationType;
     }
 
-    fetchInvestorInfo = (sortBy, sortDescending, pageNo) => {
+    fetchInvestorInfo = (sortBy, orderBy, pageNo) => {
         let { durationType, investorRawData } = this.data,
-            sortNo = this._getSortNo(sortBy, sortDescending);
+            sortNo = this._getSortNo(sortBy, orderBy);
 
         if (pageNo === 1) investorRawData.splice(0, investorRawData.length);
 
