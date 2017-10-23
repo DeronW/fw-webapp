@@ -82,7 +82,7 @@ class ReserveRecords extends React.Component {
 
             return <div className={cancelstyle} key={index}>
                 {item.status == 0 &&
-                <div styleName="itemHeader headerOn">
+                <div styleName="itemHeader">
                     <span styleName="icon-status icon-status0"></span>
                     <div styleName="statusText">
                         {status}<br/>

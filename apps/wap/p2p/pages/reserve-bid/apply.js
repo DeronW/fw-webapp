@@ -114,20 +114,29 @@ class ReserveApply extends React.Component {
             </div>
         }
 
-        let single_info = <div styleName="infoContent">
-            <div styleName="infoAmount">
-                <div styleName="amountLeft">预计收益</div>
-                <div styleName="amountRight">
-                    &yen;{reserve_bid.bid_data.reserveMoney * (context.loadRate / 100)}
+        let single_info = () => {
+            let goals = ((reserve_bid.bid_data.reserveMoney * (context.loadRate / 100) * context.repayPeriod) / 360).toString().split(".")
+            if (goals[1] && goals[1].length > 2) {
+                goals[1] = goals[1].substr(0, 2)
+                goals = `${goals[0]}.${goals[1]}`
+            } else {
+                goals = (reserve_bid.bid_data.reserveMoney * (context.loadRate / 100) * context.repayPeriod) / 360
+            }
+            return <div styleName="infoContent">
+                <div styleName="infoAmount">
+                    <div styleName="amountLeft">预计收益</div>
+                    <div styleName="amountRight">
+                        &yen;{goals}
+                    </div>
+                </div>
+                <div styleName="itemWrapper">
+                    {infoItem("预期年化利率", `${context.loadRate}%`)}
+                    {infoItem("期限", `${context.repayPeriod}天`)}
+                    {infoItem("预计起息时间", "预计今日起息")}
+                    {infoItem("预约有效期", `${context.bookValidPeriod}天`)}
                 </div>
             </div>
-            <div styleName="itemWrapper">
-                {infoItem("预期年化利率", `${context.loadRate}%`)}
-                {infoItem("期限", `${context.repayPeriod}天`)}
-                {infoItem("预计起息时间", "预计今日起息")}
-                {infoItem("预约有效期", `${context.bookValidPeriod}天`)}
-            </div>
-        </div>
+        }
 
         let all_info = (bids) => {
             let bid = bids[this.state.type_tab]
@@ -145,11 +154,18 @@ class ReserveApply extends React.Component {
                 indate: bid.bookValidPeriod + '天'
             }
 
+            let goals = item.goals.toString().split('.')
+            if (goals[1] && goals[1].length > 2) {
+                goals[1] = goals[1].substr(0, 2)
+                goals = `${goals[0]}.${goals[1]}`
+            } else {
+                goals = item.goals
+            }
             return <div styleName="infoContent">
                 <div styleName="infoAmount">
                     <div styleName="amountLeft">预计收益</div>
                     <div styleName="amountRight">
-                        &yen;{item.goals}
+                        &yen;{goals}
                     </div>
                 </div>
                 <div styleName="itemWrapper">
@@ -190,7 +206,7 @@ class ReserveApply extends React.Component {
             <div styleName="interval"></div>
             <div styleName="submitInfo">
                 {reserve_bid.applyInvestClaimId ?
-                    single_info :
+                    single_info() :
                     reserve_bid.bid_data.bids.length > 0 && all_info(reserve_bid.bid_data.bids)}
             </div>
             <div styleName="submitProtocol">

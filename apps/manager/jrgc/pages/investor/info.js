@@ -28,9 +28,10 @@ class Info extends React.Component {
         let { history } = this.props
         history.push(`${link}?custId=${this.state.custId}`)
     }
-    jumpToRemark = () => {
+    gotoTransferCoupon = () => {
         let { history } = this.props
-        history.push('/investor-remark')
+        let { detail } = this.props.investor.data.info
+        history.push(`/user-transfer-coupon?custId=${detail.custId}&realName=${detail.realName}`)
     }
     getOption = (three,four,seven,ten,twelve) => ({
         title: {
@@ -185,7 +186,7 @@ class Info extends React.Component {
             <div styleName="remark" onClick="">
                 <div styleName="remarkTitle">备注</div>
                 <img src={require('../../images/investor/info/arrow.png')} />
-                <div styleName="remarkAmend" onClick={this.jumpToRemark}>修改</div>
+                <div styleName="remarkAmend" onClick={()=>this.gotoHandler('/investor-remark')}>修改</div>
             </div>
             <div styleName="remarkText">
                 <div styleName="remarkDes" style={desStyle}>
@@ -226,7 +227,7 @@ class Info extends React.Component {
                 </div>
             </div>
             <div styleName="tabBar">
-                <div styleName="tabBarItem" onClick={() => this.gotoHandler('/user-transfer-coupon')}>
+                <div styleName="tabBarItem" onClick={this.gotoTransferCoupon}>
                     <img src={require('../../images/investor/info/coupon.png')} />
                     <div>送优惠券</div>
                 </div>

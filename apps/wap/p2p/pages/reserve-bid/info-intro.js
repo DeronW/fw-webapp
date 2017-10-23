@@ -16,6 +16,7 @@ class ReserveInfoIntro extends React.Component {
 
     componentDidMount() {
         window.scrollTo(0, 0)
+        NativeBridge.trigger('hide_header')
         this.props.reserve_bid.fetchBidList()
     }
 
@@ -140,7 +141,7 @@ class ReserveInfoIntro extends React.Component {
             </div>
         }
         return <div styleName="infoPanel">
-            <Header noClose title="详情" history={history}/>
+            <Header noClose title="预约" history={history}/>
             {banner_section()}
             {bid_section()}
             {ruler_section()}

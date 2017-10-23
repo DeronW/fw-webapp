@@ -6,8 +6,8 @@ export default class Login {
         this.data = {}
         extendObservable(this.data, {
             headUrl:'',
-            loginName:'哈哈哈',
-            code:'12345'
+            loginName:'',
+            code:''
         })
     }
     login = (username,password) => {
