@@ -38,10 +38,10 @@ class Birthday extends React.Component {
         </div>
         return <div styleName="bg">
             <Header title="近期过生日的客户" history={history} />
-            <div styleName="birthdayList">
-                {birthday.list && birthday.list.length > 0 ? birthday.list.map(birFn) : empty}
+            {birthday.list && birthday.list.length > 0 ? <div styleName="birthdayList">
+                {birthday.list.map(birFn)}
                 {birthday.list.length > 0 && <div styleName="load">已经全部加载完毕</div>}
-            </div>
+            </div> : empty}
 
         </div>
     }
