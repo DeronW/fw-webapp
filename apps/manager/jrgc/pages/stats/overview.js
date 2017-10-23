@@ -22,7 +22,7 @@ const TabHeader = CSSModules(styles, { allowMultiple: true, errorWhenNotFound: f
 
     return <div styleName="tab-placeholder">
         <div styleName="tab-cnt">
-            <div styleName="back-btn" onClick={() => history.go(-1)}></div>
+            {/*<div styleName="back-btn" onClick={() => history.go(-1)}></div>*/}
             <div styleName="tab-group">
                 { ['1', '2', '3', '4'].map(genTabItems) }
             </div>

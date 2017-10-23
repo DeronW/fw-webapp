@@ -8,6 +8,7 @@ export default class InvestorAccount {
         this.data = {}
         this.data_zx = {}
         this.data_p2p = {}
+        this.data_hj = {}
 
         extendObservable(this.data_p2p,{
             detail: {
@@ -57,20 +58,19 @@ export default class InvestorAccount {
                 }
             }
         })
-        extendObservable(this.data, {
-
-            hj: {
-                info: {},
-                type: '0',
-                records: {
-                    '0': {name: "全部", page_no: 1, list: []},
-                    '1': {name: '持有中', page_no: 1, list: []},
-                    '2': {name: '已到期', page_no: 2, list: []}
-                },
-                goldPrice: '',
-                amount: {},
-                totalCount: 0
+        extendObservable(this.data_hj,{
+            info: {},
+            type: '0',
+            records: {
+                '0': {name: "全部", page_no: 1, list: []},
+                '1': {name: '持有中', page_no: 1, list: []},
+                '2': {name: '已到期', page_no: 2, list: []}
             },
+            goldPrice: '',
+            amount: {},
+            totalCount: 0
+        })
+        extendObservable(this.data, {
             overview:{}//尊享和微金的款项总览
         })
     }
@@ -303,20 +303,20 @@ export default class InvestorAccount {
         this.Get('/api/finManager/cust/v2/goldAccount.shtml', {
             custId: this.custId
         }).then(data => {
-            this.data.hj.info = data.result
+            this.data_hj.info = data.result
         })
     }
     //实时金价
     fetchGoldPrice = () => {
         this.Get('/api/finManager/cust/v2/goldPrice.shtml')
             .then(data => {
-                this.data.hj.goldPrice = data.goldPrice
+                this.data_hj.goldPrice = data.goldPrice
             })
     }
     //黄金记录列表和累计黄金
     fetchGoldList = (done) => {
         const PAGE_SIZE = 10
-        let {type, records} = this.data.hj, current_record = records[type]
+        let {type, records} = this.data_hj, current_record = records[type]
         if (current_record.page_no === 0) return done && done()
         if (current_record.page_no === 1) current_record.list.splice(0, current_record.list.length)
         this.Get('/api/finManager/cust/v2/enjoyGold.shtml', {
@@ -325,8 +325,8 @@ export default class InvestorAccount {
             pageNo: current_record.page_no,
             pageSize: PAGE_SIZE
         }).then(data => {
-            this.data.hj.amount = data.userDataInfo
-            this.data.hj.totalCount = data.pageData.pagination.totalCount
+            this.data_hj.amount = data.userDataInfo
+            this.data_hj.totalCount = data.pageData.pagination.totalCount
             current_record.list.push(...data.pageData.result)
             current_record.page_no < data.pageData.pagination.totalPage
                 ? current_record.page_no++
@@ -337,12 +337,12 @@ export default class InvestorAccount {
 
     //重置type
     resetGoldListType = (status) => {
-        this.data.hj.type = status
+        this.data_hj.type = status
         this.fetchGoldList()
     }
     //重置页码
     resetGoldListPageNo = () => {
-        let {type, records} = this.data.hj, current_record = records[type]
+        let {type, records} = this.data_hj, current_record = records[type]
         current_record.page_no = 1
     }
 }
