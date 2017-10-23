@@ -1,4 +1,4 @@
-import { extendObservable } from 'mobx'
+import { extendObservable,computed } from 'mobx'
 import { Utils, Components } from 'fw-javascripts'
 
 export default class Investor {
