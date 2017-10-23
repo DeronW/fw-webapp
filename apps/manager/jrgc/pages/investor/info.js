@@ -28,6 +28,11 @@ class Info extends React.Component {
         let { history } = this.props
         history.push(`${link}?custId=${this.state.custId}`)
     }
+    gotoTransferCoupon = () => {
+        let { history } = this.props
+        let { detail } = this.props.investor.data.info
+        history.push(`/user-transfer-coupon?custId=${detail.custId}&realName=${detail.realName}`)
+    }
     jumpToRemark = () => {
         let { history } = this.props
         history.push('/investor-remark')
@@ -226,7 +231,7 @@ class Info extends React.Component {
                 </div>
             </div>
             <div styleName="tabBar">
-                <div styleName="tabBarItem" onClick={() => this.gotoHandler('/user-transfer-coupon')}>
+                <div styleName="tabBarItem" onClick={this.gotoTransferCoupon}>
                     <img src={require('../../images/investor/info/coupon.png')} />
                     <div>送优惠券</div>
                 </div>

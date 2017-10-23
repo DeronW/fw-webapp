@@ -10,7 +10,7 @@ export default class UserCoupon {
         this.friends_data = {}
 
         extendObservable(this.coupon_data, {
-            totalCount: 1,
+            totalCount: 0,
             status: 1,
             type: '1',
             pageNo: 1,
