@@ -94,7 +94,7 @@ class Rebate extends React.Component {
             </div>
         }
         let itemFn = (item,index) => {
-            return <div styleName="itemDetail" key={item.custId+index} onClick={() => this.gotoHandler(`/investor-info?custid=${item.custId}`)}>
+            return <div styleName="itemDetail" key={item.custId+index} onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
                 <div styleName="detailLine">
                     <div styleName="detailLeft">{item.custRealName}</div>
                     <div styleName="detailRight">¥{item.alreadyRebate}</div>

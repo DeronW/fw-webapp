@@ -47,8 +47,10 @@ export default class LoopLoan extends React.Component {
         let { loopLoan, history } = this.props;
         if (loopLoan.userStatus == 0) {
             history.push('/loan-youyi-card')
-        } else if (loopLoan.userStatus == 1) {
-            gotoHandler(loopLoan.url, false, "芝麻信用授权", false)
+        } else if(loopLoan.userStatus == 1) {
+            loopLoan.get_authUrl().then(()=>{
+                gotoHandler(loopLoan.url, false, "芝麻信用授权", false)
+            });
         } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt) {
             history.push('/loan-youyi-form')
         } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt) {

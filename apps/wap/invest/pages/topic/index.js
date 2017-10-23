@@ -4,6 +4,7 @@ import Novice from './novice.js'
 import Invite from './invite.js'
 import Score from './score.js'
 import Commission from './commission.js'
+import School from './school.js'
 
 export {
     HuangJin,
@@ -11,5 +12,6 @@ export {
     Novice,
     Invite,
     Score,
-    Commission
+    Commission,
+    School
 }

@@ -178,9 +178,9 @@
     width: 121px;
     height: 131px;
     background: url('../../images/user/user/coupon-icon.png') no-repeat;
-    position: absolute;
+    position: fixed;
     right: 20px;
-    top:130px;
+    bottom:130px;
 }
 .couponBtn span{
     display: block;
