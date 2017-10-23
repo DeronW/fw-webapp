@@ -305,3 +305,13 @@
     left: 0;
     top: 80px;
 }
+.empty{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.empty img{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 100px 0;
+}

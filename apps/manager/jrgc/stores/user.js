@@ -78,22 +78,25 @@ export default class User {
     }
     //获取返利图标的sort_no
     fetchGraphSortNo = (tab_num, chart_num) => {
-        if (tab_num == 0 && chart_num == 0) return '11'
-        if (tab_num == 0 && chart_num == 1) return '12'
-        if (tab_num == 0 && chart_num == 2) return '13'
-        if (tab_num == 0 && chart_num == 3) return '14'
-        if (tab_num == 1 && chart_num == 0) return '21'
-        if (tab_num == 1 && chart_num == 1) return '22'
-        if (tab_num == 1 && chart_num == 2) return '23'
-        if (tab_num == 1 && chart_num == 3) return '24'
-        if (tab_num == 2 && chart_num == 0) return '31'
-        if (tab_num == 2 && chart_num == 1) return '32'
-        if (tab_num == 2 && chart_num == 2) return '33'
-        if (tab_num == 2 && chart_num == 3) return '34'
-        if (tab_num == 3 && chart_num == 0) return '41'
-        if (tab_num == 3 && chart_num == 1) return '42'
-        if (tab_num == 3 && chart_num == 2) return '43'
-        if (tab_num == 3 && chart_num == 3) return '44'
+        const ENUM ={
+            [[0,0]] :'11',
+            [[0,1]] :'12',
+            [[0,2]] :'13',
+            [[0,3]] :'14',
+            [[1,0]] :'21',
+            [[1,1]] :'22',
+            [[1,2]] :'23',
+            [[1,3]] :'24',
+            [[2,0]] :'31',
+            [[2,1]] :'32',
+            [[2,2]] :'33',
+            [[2,3]] :'34',
+            [[3,0]] :'41',
+            [[3,1]] :'42',
+            [[3,2]] :'43',
+            [[3,3]] :'44',
+        }
+        return ENUM[[tab_num,chart_num]]
     }
 
     //获取返利额数据

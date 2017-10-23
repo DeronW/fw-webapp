@@ -45,7 +45,6 @@ class Rebate extends React.Component {
         let {fetGraphData, fetchGraphSortNo} = this.props.user
         this.setState({chart_num: index})
         fetGraphData(fetchGraphSortNo(tab_num, index))
-
     }
 
     getOption = (updateTime, timeDimensionList, rebateAmtList) => ({

@@ -17,7 +17,7 @@ export default class InvestorCoupon {
 
         extendObservable(this.data, {
             tab: '1',
-            totalCount:0,
+            totalCount: 0,
             coupon: {
                 '1': {
                     tabName: 'TA的优惠券',
@@ -50,14 +50,14 @@ export default class InvestorCoupon {
             }
         })
     }
-    @computed get custId(){
-        return Utils.hashQuery.id
+    @computed get custId() {
+        return Utils.hashQuery.custId
     }
     //TA的优惠券列表 ： 可用优惠券，使用记录，过期记录
     resetPageNo = () => {
         let { tab, coupon } = this.data
-        let { ttype, record } = coupon[tab]
-        coupon[status].record[type].pageNO = 1
+        let { type, record } = coupon[tab]
+        coupon[tab].record[type].pageNO = 1
     }
     setTab = (tab) => {
         this.data.tab = tab
@@ -67,24 +67,24 @@ export default class InvestorCoupon {
         coupon[tab].type = type
     }
     fetchCustCoupon = (done) => {
-        let { totalCount,tab, coupon } = this.data
+        let { totalCount, tab, coupon } = this.data
         let { type, record } = coupon[tab]
-        let { pageNO,records } = record
+        let { pageNO, records } = record[type]
 
-        if( pageNO == 0) return done && done()
-        if( pageNO == 1) list = []
+        if (pageNO == 0) return done && done()
+        if (pageNO == 1) records.splice(0, records.length)
         this.Get('/api/finManager/coupon/v2/custCouponList.shtml', {
             couponStatus: tab,
             couponType: type,
-            custId:this.custId,
-            pageNo:pageNO,
-            pageSize:10,
+            custId: this.custId,
+            pageNo: pageNO,
+            pageSize: 10,
         }).then(data => {
             totalCount = data.pageData.pagination.totalCount
             records.push(...data.pageData.result)
             pageNO > data.pageData.pagination.totalPage ? pageNO++ : pageNO = 0
 
-            done()
+            done && done()
         })
     }
 }

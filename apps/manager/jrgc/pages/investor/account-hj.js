@@ -13,6 +13,7 @@ class AccountHj extends React.Component {
     }
     componentDidMount() {
         this.props.investor_account.fetchAccountHj()
+        this.props.investor_account.fetchGoldPrice()
     }
 
     jumpToList = () => {
