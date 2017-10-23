@@ -313,3 +313,7 @@
     z-index: 99;
 }
 
+.recordBtnIos {
+    composes: recordBtn;
+    top: 40px;
+}
