@@ -18,7 +18,7 @@ const Ajax = options => {
         }
 
         */
-        return new Promise((res, rej) => {
+        return new Promise((_, reject) => {
             if (error.code == 40101) {
                 console.log('here ! should go to login')
 

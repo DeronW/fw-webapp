@@ -117,12 +117,20 @@ class ReserveApplyNovice extends React.Component {
                     <div styleName={name == "预期年化利率" ? "itemRight rightRed" : "itemRight"}>{value}</div>
                 </div>
             }
+            let goals_num = (novice_bid.novice_bid_data.reserveMoney * (context.loadRate / 100) * context.repayPeriod) / 360
+            let goals = goals_num.toString().split('.')
+            if (goals[1] && goals[1].length > 2) {
+                goals[1] = goals[1].substr(0, 2)
+                goals = `${goals[0]}.${goals[1]}`
+            } else {
+                goals = goals_num
+            }
             return <div styleName="submitInfo">
                 <div styleName="infoContent">
                     <div styleName="infoAmount">
                         <div styleName="amountLeft">预计收益</div>
                         <div styleName="amountRight">
-                            &yen;{(novice_bid.novice_bid_data.reserveMoney * (context.loadRate / 100) * novice_bid.novice_bid_data.context.repayPeriod) / 360}
+                            &yen;{goals}
                         </div>
                     </div>
                     <div styleName="itemWrapper">
