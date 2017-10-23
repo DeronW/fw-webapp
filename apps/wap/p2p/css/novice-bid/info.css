@@ -318,3 +318,8 @@
     composes: recordBtn;
     top: 40px;
 }
+
+.addRate {
+    font-size: 30px;
+    font-weight: 700;
+}
