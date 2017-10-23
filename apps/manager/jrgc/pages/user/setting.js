@@ -7,7 +7,7 @@ import {BannerGroup} from 'fw-components'
 import {Header, BottomNavBar} from '../../components';
 import styles from '../../css/user/setting.css'
 
-@inject("login")
+@inject("login","user")
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Setting extends React.Component{
@@ -35,6 +35,7 @@ class Setting extends React.Component{
         let {history} = this.props
         let {close} = this.state
         let { loginName,code } = this.props.login.data
+        let { info } = this.props.user.data.user
         let pop = <div styleName="pop-bg">
             <div styleName="pop">
                 <div styleName="reminder">提示</div>
@@ -55,7 +56,7 @@ class Setting extends React.Component{
                     <img src={require('../../images/user/setting/code.png')}/>
                     <span>工场码</span>
                     <div styleName="loginName gcm" onClick={this.gotoQRCode}>
-                        {code}
+                        {info.promotionCode}
                         <img src={require('../../images/user/setting/arrow.png')}/>
                     </div>
                 </div>

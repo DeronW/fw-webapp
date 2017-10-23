@@ -6,8 +6,7 @@ export default class Login {
         this.data = {}
         extendObservable(this.data, {
             headUrl:'',
-            loginName:'',
-            code:''
+            loginName:''
         })
     }
     login = (username,password) => {
@@ -18,7 +17,6 @@ export default class Login {
             sourceType:3
         }).then(data => {
             this.data.loginName = data.userInfo.loginName
-            this.data.code = data.userInfo.promotionCode
         })
     }
     exitHandler = () => {
