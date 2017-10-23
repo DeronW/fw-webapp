@@ -76,13 +76,15 @@ export default class Investor {
                 analysis: {},
             },
             bean: {
-                cashBalance:null,
-                overbeancount:null,
+                cashBalance:0,
+                overbeancount:0,
                 pageNo: 1,
                 records: []
             },
             score: {
-                info: {},
+                frozenAmount:0,
+                iintegralNum:0,
+                willExpireAmount:0,
                 pageNo: 1,
                 records: []
             },
@@ -212,18 +214,18 @@ export default class Investor {
         this.data.search.keyword = keyword
     }
     //客户详情
-    fetchInfo = (cust_id) => {
+    fetchInfo = () => {
         this.Get('/api/finManager/cust/v2/custDetail.shtml', {
-            custId: cust_id
+            custId: this.custId
         }).then(data => {
             this.data.info.remarkToken = data.remarkToken
             this.data.info.detail = data.result
         })
     }
     //客户整体投资期限分析-饼图
-    fetchInvestAnalysis = (id) => {
+    fetchInvestAnalysis = () => {
         this.Get('/api/finManager/cust/v2/investAnalysis.shtml', {
-            custId: id
+            custId: this.custId
         }).then(data => {
             this.data.info.analysis = data.result
         })
@@ -255,7 +257,7 @@ export default class Investor {
 
     //查询客户工分列表
     fetchScore = (done) => {
-        let { pageNo, records, info } = this.data.score
+        let { pageNo, records, frozenAmount,iintegralNum,willExpireAmount } = this.data.score
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0,records.length)
@@ -264,7 +266,9 @@ export default class Investor {
             pageNo: pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
-            info = data
+            frozenAmount = data.frozenAmount
+            iintegralNum = data.iintegralNum
+            willExpireAmount = data.willExpireAmount
             records.push(...data.pageData.result)
             this.data.score.pageNo < data.pageData.pagination.totalPage ?
             this.data.score.pageNo++ :
