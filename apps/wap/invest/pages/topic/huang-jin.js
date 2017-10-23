@@ -1,6 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import styles from '../../css/topic/topic-huang-jin.css'
+import styles from '../../css/topic/huang-jin.css'
 
 @CSSModules(styles, {allowMultiple: true, errorWhenNotFound: false})
 class HuangJin extends React.Component {

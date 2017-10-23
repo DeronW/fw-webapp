@@ -58,7 +58,7 @@ class ZengJinBao extends React.Component {
         let genTabs = (t, i) => {
             let className = currentTab === i ? styles['tab-item--active'] : styles['tab-item'];
             return <div key={i} className={className}
-                onClick={() => { this.scrollToFragment(i)} }>{t.text}</div>
+                onClick={() => { this.scrollToFragment(i) }}>{t.text}</div>
         }
 
         return <div>
@@ -69,7 +69,7 @@ class ZengJinBao extends React.Component {
             </div>
 
             <div styleName="tab-group">
-                { TABS.map(genTabs) }
+                {TABS.map(genTabs)}
             </div>
 
             <div styleName="fragment product">
@@ -137,30 +137,33 @@ class ZengJinBao extends React.Component {
                 <div styleName="case-background">
                     <table>
                         <caption styleName="sub-title"><i></i>案例背景</caption>
-                        <tr>
-                            <th>客户</th>
-                            <td>张女士</td>
-                        </tr>
-                        <tr>
-                            <th>认购产品</th>
-                            <td>增金宝A00000042</td>
-                        </tr>
-                        <tr>
-                            <th>成交金价</th>
-                            <td>279.00 元/克</td>
-                        </tr>
-                        <tr>
-                            <th>购买克重</th>
-                            <td>1.000 克</td>
-                        </tr>
-                        <tr>
-                            <th>购金手续费</th>
-                            <td>0.00 元</td>
-                        </tr>
-                        <tr>
-                            <th>支付金额</th>
-                            <td>279.00 元</td>
-                        </tr>
+                        <tbody>
+
+                            <tr>
+                                <th>客户</th>
+                                <td>张女士</td>
+                            </tr>
+                            <tr>
+                                <th>认购产品</th>
+                                <td>增金宝A00000042</td>
+                            </tr>
+                            <tr>
+                                <th>成交金价</th>
+                                <td>279.00 元/克</td>
+                            </tr>
+                            <tr>
+                                <th>购买克重</th>
+                                <td>1.000 克</td>
+                            </tr>
+                            <tr>
+                                <th>购金手续费</th>
+                                <td>0.00 元</td>
+                            </tr>
+                            <tr>
+                                <th>支付金额</th>
+                                <td>279.00 元</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
 
