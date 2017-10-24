@@ -14,10 +14,10 @@ class QRCode extends React.Component {
     componentDidMount(){
         let { info } = this.props.user.data.user
         let url = `https://m.9888.cn/mpwap/orderuser/toRegister.shtml?gcm=${info.promotionCode}`
-        qrcode.toCanvas(document.getElementById('canvas'), url, function (error) {
-            if (error) console.error(error)
-            console.log('success!..');
-        })
+        // qrcode.toCanvas(document.getElementById('canvas'), url, function (error) {
+        //     if (error) console.error(error)
+        //     console.log('success!..');
+        // })
     }
     render(){
         let {history} = this.props

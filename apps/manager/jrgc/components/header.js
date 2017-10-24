@@ -15,7 +15,7 @@ const Header = CSSModules(styles, {
 })(props => (
     <div styleName="header-placeholder">
         <div styleName="header">
-            <a styleName="btn" onClick={props.history.goBack}> </a>
+            {props.backBtn && <a styleName="btn" onClick={props.history.goBack}> </a>}
             {props.title}
             {props.sub_title &&
                 <Link to={props.sub_link} styleName="sub-title">{props.sub_title}</Link>
@@ -23,4 +23,7 @@ const Header = CSSModules(styles, {
         </div>
     </div>
 ))
+Header.defaultProps = {
+    backBtn: true,
+}
 export default Header

@@ -39,7 +39,7 @@ class Login extends React.Component {
         let { username, password } = this.state
 
         return <div styleName="bg">
-            <Header title="登录" history={history} />
+            <Header title="登录" history={history} backBtn={false}/>
             <div styleName="username">
                 <i></i>
                 <input

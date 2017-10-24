@@ -39,6 +39,7 @@
 .countLeft {
     float: left;
     font-size: 30px;
+    margin-top: -8px;
 }
 
 .countRight {
@@ -166,5 +167,5 @@
 .empty img{
     display: inline-block;
     vertical-align: middle;
-    margin-top: 200px;
+    margin-top: 250px;
 }
