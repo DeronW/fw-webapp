@@ -139,7 +139,7 @@ class Info extends React.Component {
                 </div>
                 <div styleName="bottomBar">
                     <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-bean')}>
-                        <div styleName="itemBarNum">{detail.availableBalance}</div>
+                        <div styleName="itemBarNum">{detail.beansInvest}</div>
                         <div styleName="itemBarText">工豆(元)</div>
                     </div>
                     <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-coupon')}>

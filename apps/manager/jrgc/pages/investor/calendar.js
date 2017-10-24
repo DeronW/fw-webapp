@@ -87,7 +87,7 @@ class Calendar extends React.Component {
     }
     formatDateHandler = (date) => {
         let d = new Date(date)
-        var t = d.getFullYear() + "年" + d.getMonth() + 1 + "月" + d.getDate() + "日"
+        var t = d.getFullYear() + "年" + Number(d.getMonth()+1) + "月" + d.getDate() + "日"
         return t
     }
     render() {
@@ -111,9 +111,8 @@ class Calendar extends React.Component {
             </div>
         }
         let dueFn = (dueItem,dueIndex) => {
-            console.log(monthList)
-            // let toggleId = this.state.toggleList[dueIndex]
-            // console.log(toggleId)
+            let toggleId = this.state.toggleList[dueIndex]
+
             let personFn = (personItem, personIndex) => {
                 return <div styleName="investor" key={personItem.custId}>
                     <div styleName="investorName">{personItem.realName}</div>
@@ -124,10 +123,10 @@ class Calendar extends React.Component {
             return <div styleName="dueItem" key={dueIndex}>
                 <div styleName="dueDate">
                     <div>{this.formatDateHandler(dueItem)}</div>
-                    <div onClick={() => this.toggleHandler(dueIndex)}></div>
+                    <div styleName={toggleId?'arrowBottom':'arrowTop'} onClick={() => this.toggleHandler(dueIndex)}></div>
                 </div>
                 <div styleName="investorList">
-                    {monthList.map(personFn)}
+                    {toggleId && monthList[dueIndex].map(personFn)}
                 </div>
             </div>
         }
@@ -137,7 +136,8 @@ class Calendar extends React.Component {
                 timeList.push(i)
                 monthList.push(monthDueList[i])
             }
-            timeList.map(dueFn)
+            let t = timeList.length>0?timeList.map(dueFn):empty
+            return t
         }
         let empty = <div styleName="empty">
             <img src={require('../../images/investor/empty.png')} />

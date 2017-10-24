@@ -11,7 +11,7 @@ import styles from '../../css/user/transfer-friends.css'
 class TransferFriends extends React.Component {
     state = {
         coupon_type: 0,
-        is_empty: false,
+        isSearch:false,
         input_value: ''
     }
     componentDidMount() {
@@ -23,6 +23,7 @@ class TransferFriends extends React.Component {
         Event.cancelTouchBottom()
     }
     searchFriendsHandler = () => {
+        this.setState({isSearch:true})
         this.props.user_coupon.resetFriendsPageNo()
         this.props.user_coupon.fetchFriendsList()
     }
@@ -56,6 +57,7 @@ class TransferFriends extends React.Component {
     }
     render() {
         let { history } = this.props
+        let { isSearch } =this.state
         let { pageNo, list, keyword } = this.props.user_coupon.friends_data
         let { beanCount, remark, overdueTime, investMultip, inverstPeriod,couponType } = Utils.hashQuery
         let u = couponType == '2' ? '克' : '元'
@@ -101,7 +103,7 @@ class TransferFriends extends React.Component {
                     <span styleName="searchBtn" onClick={this.searchFriendsHandler}>搜索</span>
                     <div styleName="emptyBtn" onClick={this.emptyHandler}></div>
                 </div>
-                {list && list.length > 0 ? list.map(friends_record) : empty}
+                {isSearch ? (list && list.length>0 ? list.map(friends_record):empty):''}
             </div>
         </div>
     }

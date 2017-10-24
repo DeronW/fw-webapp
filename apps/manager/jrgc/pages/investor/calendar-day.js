@@ -27,7 +27,7 @@ class calendarDay extends React.Component {
     }
     formatDateHandler = (date) => {
         let d = new Date(date)
-        var t = d.getFullYear() + "年" + d.getMonth() + 1 + "月" + d.getDate() + "日"
+        var t = d.getFullYear() + "年" + Number(d.getMonth()+1) + "月" + d.getDate() + "日"
         return t
     }
     render() {
@@ -36,13 +36,16 @@ class calendarDay extends React.Component {
         let { tab } = this.state
         let { calendar } = this.props.investor.data
         let { dayDueList } = calendar
+        let dayList = []
+        let timeList = []
 
         let tabFn = (item, index) => {
             return <div key={index} styleName={item == tab ? "tab tabActive" : "tab"}
                 onClick={() => this.switchTab(item)}>{item}
             </div>
         }
-        let dueFn = (dueItem, dueIndex) => {
+        let dueFn = (dueItem,dueIndex) => {
+
             let personFn = (personItem, personIndex) => {
                 return <div styleName="investor" key={personItem.custId}>
                     <div styleName="investorName">{personItem.realName}</div>
@@ -50,14 +53,23 @@ class calendarDay extends React.Component {
                     <div styleName="investorText">{personItem.principal} | {personItem.interest}</div>
                 </div>
             }
-            return <div styleName="dueItem" key={dueItem.createDate}>
+            return <div styleName="dueItem" key={dueIndex}>
                 <div styleName="dueDate">
-                    <div>{this.formatDateHandler(Object.keys(dueItem.createDate)[dueIndex])}</div>
+                    <div>{this.formatDateHandler(dueItem)}</div>
                 </div>
                 <div styleName="investorList">
-                    {dueItem.createData.map(personFn)}
+                    {dayList[dueIndex].map(personFn)}
                 </div>
             </div>
+        }
+
+        let dayBox = () => {
+            for(var i in dayDueList){
+                timeList.push(i)
+                dayList.push(dayDueList[i])
+            }
+            let t = timeList.length>0?timeList.map(dueFn):empty
+            return t
         }
         let empty = <div styleName="empty">
             <img src={require('../../images/investor/empty.png')} />
@@ -70,7 +82,7 @@ class calendarDay extends React.Component {
                 </div>
             </div>
             <div styleName="dueList">
-                {dayDueList&&dayDueList.length>0?dayDueList.map(dueFn):empty}
+                {dayBox()}
             </div>
         </div>
     }
