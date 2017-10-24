@@ -14,7 +14,7 @@ class Birthday extends React.Component {
     }
     gotoHandler = (id) => {
         let { history } = this.props
-        history.push(`/investor-info?id=${id}`)
+        history.push(`/investor-info?custId=${id}`)
     }
 
     render() {
@@ -25,12 +25,12 @@ class Birthday extends React.Component {
             let src = item.countDown == 0 ? require('../../images/investor/birthday/clock.png') : require('../../images/investor/birthday/greyClock.png')
             let count = item.countDown == 0 ? '今日生日' : `还有${item.countDown}天`
 
-            return <div styleName="person" onClick={() => this.gotoHandler(item.custId)}>
+            return <div styleName="person" key={indez} onClick={() => this.gotoHandler(item.custId)}>
                 <img src={src} />
                 <div styleName="name">{item.realName}</div>
                 <div styleName="date">({item.birthday})</div>
                 <img styleName="arrow" src={require('../../images/investor/birthday/arrow.png')} />
-                <div styleName="des">count</div>
+                <div styleName="des">{count}</div>
             </div>
         }
         let empty = <div styleName="empty">
@@ -40,9 +40,8 @@ class Birthday extends React.Component {
             <Header title="近期过生日的客户" history={history} />
             {birthday.list && birthday.list.length > 0 ? <div styleName="birthdayList">
                 {birthday.list.map(birFn)}
-                {birthday.list.length > 0 && <div styleName="load">已经全部加载完毕</div>}
             </div> : empty}
-
+            {birthday.list.length > 0 && <div styleName="load">已经全部加载完毕</div>}
         </div>
     }
 }

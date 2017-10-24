@@ -129,7 +129,7 @@ class Rebate extends React.Component {
                         {['7天', '30天', '90天', '年度'].map(chart_func)}
                     </div>
                 </div>
-                <div styleName="allData">
+                {tab_num == '0' && <div styleName="allData">
                     <div styleName="dataLine">
                         <div styleName="lineItem">
                             <div styleName="name">总返利</div>
@@ -150,7 +150,7 @@ class Rebate extends React.Component {
                             <div styleName="count">¥{rebate_info.pendingRebate}</div>
                         </div>
                     </div>
-                </div>
+                </div>}
                 <div styleName="users">
                     <div styleName="userItem">
                         {current_list.custList&&current_list.custList.map(itemFn)}

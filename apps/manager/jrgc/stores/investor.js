@@ -47,9 +47,6 @@ export default class Investor {
                     ],
                     '未投资': [
                         {
-                            '可用余额最高排序': 10
-                        },
-                        {
                             '最近回款时间排序': 9
                         }
                     ]
@@ -100,6 +97,7 @@ export default class Investor {
     setCustTab = (tab) => {
         this.data.custmor.tab = tab
         this.data.custmor.type = '可用余额最高排序'
+        if(tab == '未投资') this.data.custmor.type = '最近回款时间排序'
     }
     setCustType = (type) => {
         this.data.custmor.type = type
@@ -150,18 +148,17 @@ export default class Investor {
     }
     //回款日历-到期列表-回款月份
     fetchDueMonth = (tab, month) => {
-        let { monthDueList } = this.data.calendar
         if (tab == '即将到期') {
             this.Get("/api/finManager/cust/v2/dueList.shtml", {
                 month: month
             }).then(data => {
-                monthDueList = data.result
+                this.data.calendar.monthDueList = data.result
             })
         } else {
             this.Get("/api/finManager/cust/v2/expiredList.shtml", {
                 month: month
             }).then(data => {
-                monthDueList = data.result
+                this.data.calendar.monthDueList = data.result
             })
         }
     }
@@ -172,13 +169,13 @@ export default class Investor {
             this.Get("/api/finManager/cust/v2/dueList.shtml", {
                 day: day
             }).then(data => {
-                dayDueList = data.result
+                this.data.calendar.dayDueList = data.result
             })
         } else {
             this.Get("/api/finManager/cust/v2/expiredList.shtml", {
                 day: day
             }).then(data => {
-                dayDueList = data.result
+                this.data.calendar.dayDueList = data.result
             })
         }
     }

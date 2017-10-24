@@ -112,20 +112,29 @@ class Info extends React.Component {
             height: hidden ? '100%' : '100px',
             overflow: hidden ? 'visible' : 'hidden'
         }
-        console.log(detail.mobile)
-
-
+        let getHeadUrl = ()=>{
+            let url = '../../images/investor/info/default.png'
+            if(detail.isComp==0){
+                if(detail.gender==0){
+                    url = '../../images/investor/info/woman.png'
+                }else if(detail.gender==1){
+                    url = '../../images/investor/info/man.png'
+                }
+            }
+            return require(url)
+        }
         let {within3MonthRate,four2SixMonthRate,seven2NineMonthRate,ten2TwelveMonthRate,moreThanOneYearRate}=analysis
+        let level = detail.userLevel  == 1 ?'普通用户':detail.userLevel
         return <div styleName="bg">
             <Header title="客户详情" history={history} />
             <div styleName="bar">
                 <div styleName="leftBar">
-                    <img src={require('../../images/investor/info/man.png')} />
-                    <div styleName="level">{detail.userLevel}</div>
+                    <img src={getHeadUrl()} />
+                    <div styleName="level">{level}</div>
                 </div>
                 <div styleName="rightBar">
                     <div styleName="name">{detail.realName}<span>({detail.birthday})</span></div>
-                    <div styleName="amount">差<span>{detail.mumValue}元</span>年化投资额升级VIP2</div>
+                    <div styleName="amount">差<span>{detail.mumValue}元</span>年化投资额升级VIP{detail.userLevel+1}</div>
                     <div styleName="time">注册时间 {detail.createTime}</div>
                 </div>
                 <div styleName="bottomBar">
@@ -159,7 +168,7 @@ class Info extends React.Component {
             </div>
             <div styleName="total">
                 <div styleName="totalTitle">客户投资总额</div>
-                <div styleName="totalAmount"><span>¥{detail.totalInvestAmt}</span>万</div>
+                <div styleName="totalAmount"><span>¥{detail.totalInvestAmt}</span></div>
             </div>
             <div styleName="investBox">
                 <div styleName="invest">
@@ -191,8 +200,6 @@ class Info extends React.Component {
             <div styleName="remarkText">
                 <div styleName="remarkDes" style={desStyle}>
                     {detail.remark}
-                    {/*客户喜欢短期，回款会及时投资，<br/>很少提现 家为湖北 <br/>比较喜欢奖励和优惠<br/>*/}
-                    {/*客户喜欢短期，回款会及时投资，<br/>很少提现 家为湖北 <br/>比较喜欢奖励和优惠*/}
                 </div>
                 <div styleName="more" onClick={this.showMore}>
                     <span>{hidden ? '收起' : '更多'}</span>
