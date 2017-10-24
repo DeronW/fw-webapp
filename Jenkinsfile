@@ -51,26 +51,24 @@ node(node_name) {
     }
 
     stage('Build') {
-        // temp to use force compile @2017-10-24
+        // 是否强制重新刷新
+        if(params.FORCE) {
             sh 'npm run build:$PROJECT'
-    // // 是否强制重新刷新
-    //     if(params.FORCE) {
-    //         sh 'npm run build:$PROJECT'
-    //     }
-    //     if(!params.FORCE) {
-    //         sh '~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
-    //     }
+        }
+        if(!params.FORCE) {
+            sh '${WORKSPACE}/differential.compile.$PROJECT.sh'
+        }
     }
     
     stage('Publish') {
-        sh 'mkdir -p ~/workspace/front-$PROJECT/cdn/$PROJECT/placeholder/'
-        sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ /srv/static/$PROJECT/'
+        sh 'mkdir -p ${WORKSPACE}/cdn/$PROJECT/placeholder/'
+        sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ /srv/static/$PROJECT/'
 
         if(params.EXTRA_SERVER_IP) {
-            sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ www@$EXTRA_SERVER_IP:/static/$PROJECT/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP:/static/$PROJECT/'
         }
         if(params.EXTRA_SERVER_IP_2) {
-            sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
         }
     }
 }
