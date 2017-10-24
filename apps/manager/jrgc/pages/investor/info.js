@@ -116,16 +116,17 @@ class Info extends React.Component {
 
 
         let {within3MonthRate,four2SixMonthRate,seven2NineMonthRate,ten2TwelveMonthRate,moreThanOneYearRate}=analysis
+        let level = detail.userLevel  == 1 ?'普通用户':detail.userLevel
         return <div styleName="bg">
             <Header title="客户详情" history={history} />
             <div styleName="bar">
                 <div styleName="leftBar">
                     <img src={require('../../images/investor/info/man.png')} />
-                    <div styleName="level">{detail.userLevel}</div>
+                    <div styleName="level">{level}</div>
                 </div>
                 <div styleName="rightBar">
                     <div styleName="name">{detail.realName}<span>({detail.birthday})</span></div>
-                    <div styleName="amount">差<span>{detail.mumValue}元</span>年化投资额升级VIP2</div>
+                    <div styleName="amount">差<span>{detail.mumValue}元</span>年化投资额升级VIP{detail.userLevel+1}</div>
                     <div styleName="time">注册时间 {detail.createTime}</div>
                 </div>
                 <div styleName="bottomBar">

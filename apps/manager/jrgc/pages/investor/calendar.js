@@ -93,8 +93,9 @@ class Calendar extends React.Component {
     render() {
         let { history } = this.props
         let { month, year, selectedIndex, monthArrow, tab } = this.state
-        let { calendar } = this.props.investor.data
-        let { overview, calendarList, monthInfo, monthDueList } = calendar
+        let { overview, calendarList, monthInfo, monthDueList } = this.props.investor.data.calendar
+        let monthList = []
+        let timeList = []
 
         let tabFn = (item, index) => {
             return <div styleName="dueTab" key={index} onClick={() => this.switchTabHandler(item)}>
@@ -109,10 +110,10 @@ class Calendar extends React.Component {
                 <div styleName="receivable actual">{item.totalRealCount}笔回款</div>
             </div>
         }
-
-        let dueFn = (dueItem, dueIndex) => {
-            let toggleId = this.state.toggleList[dueIndex]
-
+        let dueFn = (dueItem,dueIndex) => {
+            // console.log(monthList)
+            // let toggleId = this.state.toggleList[dueIndex]
+            // console.log(toggleId)
             let personFn = (personItem, personIndex) => {
                 return <div styleName="investor" key={personItem.custId}>
                     <div styleName="investorName">{personItem.realName}</div>
@@ -120,15 +121,23 @@ class Calendar extends React.Component {
                     <div styleName="investorText">{personItem.principal} | {personItem.interest}</div>
                 </div>
             }
-            return <div styleName="dueItem" key={dueItem.createDate}>
+            return <div styleName="dueItem" key={dueIndex}>
                 <div styleName="dueDate">
-                    <div>{this.formatDateHandler(Object.keys(dueItem.createDate)[dueIndex])}</div>
+                    <div>{this.formatDateHandler(dueItem)}</div>
                     <div onClick={() => this.toggleHandler(dueIndex)}></div>
                 </div>
                 <div styleName="investorList">
-                    {toggleId && dueItem.createData.map(personFn)}
+                    {monthList.map(personFn)}
                 </div>
             </div>
+        }
+
+        let monthBox = () => {
+            for(var i in monthDueList){
+                timeList.push(i)
+                monthList.push(monthDueList[i])
+            }
+            timeList.map(dueFn)
         }
         let empty = <div styleName="empty">
             <img src={require('../../images/investor/empty.png')} />
@@ -186,7 +195,7 @@ class Calendar extends React.Component {
                 {['即将到期', '已到期'].map(tabFn)}
             </div>
             <div styleName="dueList">
-                {monthDueList&&monthDueList.length>0?monthDueList.map(dueFn):empty}
+                {monthBox()}
             </div>
         </div>
     }

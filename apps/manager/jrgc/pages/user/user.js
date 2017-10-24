@@ -97,7 +97,7 @@ class User extends React.Component {
                 images={banners.map(i => i.img)} />
         }
 
-        let headUrl = info.gender == 0?require('../../images/user/user/woman.png'):(info.gender==1 ? require('../../images/user/user/man.png'):require('../../images/user/user/man.png'))
+        let headUrl = info.gender == 0?require('../../images/user/user/woman.png'):(info.gender==1 ? require('../../images/user/user/man.png'):require('../../images/user/user/default.png'))
         return <div styleName="bg">
             <div styleName="bar">
                 <img styleName="portrait" src={headUrl} onClick={() => this.goPageHandler('/user-setting')} />
