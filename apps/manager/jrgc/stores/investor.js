@@ -97,6 +97,7 @@ export default class Investor {
     setCustTab = (tab) => {
         this.data.custmor.tab = tab
         this.data.custmor.type = '可用余额最高排序'
+        if(tab == '未投资') this.data.custmor.type = '最近回款时间排序'
     }
     setCustType = (type) => {
         this.data.custmor.type = type

@@ -111,7 +111,7 @@ class Calendar extends React.Component {
             </div>
         }
         let dueFn = (dueItem,dueIndex) => {
-            // console.log(monthList)
+            console.log(monthList)
             // let toggleId = this.state.toggleList[dueIndex]
             // console.log(toggleId)
             let personFn = (personItem, personIndex) => {
