@@ -1,10 +1,8 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { getJSONP } from 'fw-javascripts'
-
 
 import styles from '../../css/topic/school.css'
-import { Browser } from '../../helpers'
+import { Ajax, Browser } from '../../helpers'
 
 
 function gotoHandler(link, need_login) {
@@ -22,90 +20,93 @@ const TABS = [
     ["出借百科", 34], ["出借人技巧", 35], ["出借讲堂", 36]
 ]
 
-const t = {
-    "出借百科": 34,
-    "出借人技巧": 35,
-    "出借讲堂": 36
-}
-
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class School extends React.Component {
 
     state = {
         tab: '出借百科',
-        banner: '',
-        listData: []
+        banner: '', // not used
+        items_34: [],
+        items_35: [],
+        items_36: [],
+        items: {}
     }
 
     componentDidMount = () => {
-
-        this.getBannerFun();
-        this.getListHandler(34);
-    }
-
-    getBannerFun() {
-        getJSONP('https://fore.9888.cn/cms/api/appbanner.php', {
-            key: '0ca175b9c0f726a831d895e',
-            id: 37 // 37
-        }).then(data => {
-            this.setState({ banner: data[0].thumb })
+        this.fetchBanner()
+        TABS.forEach(i => {
+            this.fetchItems(i[0], i[1])
         })
     }
-    toggleTabHandler(t) {
-        this.setState({ tab: t });
-        if (t == "出借百科") {
-            this.getListHandler(34); //34
-        } else if (t == "出借人技巧") {
-            this.getListHandler(35); //35
-        } else {
-            this.getListHandler(36); //36
-        }
+
+    fetchBanner() {
+        Ajax({
+            fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
+            data: {
+                key: '0ca175b9c0f726a831d895e',
+                id: 37 // 37
+            },
+            silence: true,
+            loading: false
+        }).catch(data => this.setState({ banner: data[0].thumb }))
     }
-    getListHandler(id) {
-        getJSONP('https://fore.9888.cn/cms/api/appbanner.php', {
-            key: '0ca175b9c0f726a831d895e',
-            id: id
-        }).then(data => this.setState({ listData: data }))
+
+    switchTabHandler = t => {
+        this.setState({ tab: t })
+    }
+
+    fetchItems = (tab, id) => {
+        Ajax({
+            fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
+            data: {
+                key: '0ca175b9c0f726a831d895e',
+                id: id
+            },
+            silence: true,
+            loading: false
+        }).catch(data => {
+
+            let items = this.state.items
+            items[tab] = data
+
+            this.setState({ items: items })
+
+        })
     }
 
     render() {
 
-        let tabStyle = {
-            paddingBottom: Browser.inIOS ? "23px" : "26px"
-        }
+        let tab_item = (i, index) => {
+            let title = i[0], id = i[1]
+            let cn = this.state.tab == title ? "tab selected" : 'tab'
 
-        let tab = (t, i) => {
-            return <div className="tabBlock" key={i} onClick={() => this.toggleTabHandler(t)}>
-                <em style={tabStyle} className={this.state.tab == t ? "tab selected" : 'tab'}>{t}</em>
+            return <div styleName="tabBlock" key={index}
+                onClick={() => this.switchTabHandler(title)}>
+                <div styleName={cn}>{title}</div>
             </div>
         }
 
-        let item = (listData) => {
-
-            let cell = (item, index) => {
-                return <a className="cell" key={index} href={item.url}>
-                    <div className="cellText">{item.title}</div>
-                    <img className="iconArrow" src="images/arrow.png" />
-                </a>
-            };
-            return <div className="list">
-                {
-                    listData.map(cell)
-                }
-            </div>
-
+        let qa_item = (item, index) => {
+            return <a styleName="cell" key={index} href={item.url}>
+                <div styleName="cellText">{item.title}</div>
+                <img styleName="iconArrow" src={require("../../images/topic/school/arrow.png")} />
+            </a>
         }
 
-        return <div className="investSchool">
-            <img className="banner" src={this.state.banner} />
+        let data = this.state.items[this.state.tab] || []
+        // if (!(data instanceof Array)) data = []
 
-            <div className="tabGroup">
-                {["出借百科", "出借人技巧", "出借讲堂"].map(tab)}
-                <i className="dashed1"></i>
-                <i className="dashed2"></i>
+        return <div styleName="bg">
+            <img styleName="banner" src={require('../../images/topic/school/banner.jpg')} />
+
+            <div styleName="tabGroup">
+                {TABS.map(tab_item)}
+                <i styleName="dashed1"></i>
+                <i styleName="dashed2"></i>
             </div>
-            <div className="space"></div>
-            {item(this.state.listData)}
+            <div styleName="space"></div>
+            <div styleName="list"> {data.map(qa_item)}</div>
+
         </div>
     }
 }
