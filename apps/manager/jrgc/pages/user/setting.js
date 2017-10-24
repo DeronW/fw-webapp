@@ -50,7 +50,7 @@ class Setting extends React.Component{
                 <div styleName="set-item">
                     <img src={require('../../images/user/setting/name.png')}/>
                     <span>账号</span>
-                    <div styleName="loginName">胜多负少的</div>
+                    <div styleName="loginName">{loginName}</div>
                 </div>
                 <div styleName="set-item">
                     <img src={require('../../images/user/setting/code.png')}/>
