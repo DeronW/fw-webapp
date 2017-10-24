@@ -146,7 +146,7 @@ class Rebate extends React.Component {
                             <div styleName="count">¥{rebate_info.issuedRebate}</div>
                         </div>
                         <div styleName="lineItem">
-                            <div styleName="name">待发返利</div>
+                            <div styleName="name">待发返利<span>(以实际发放为准)</span></div>
                             <div styleName="count">¥{rebate_info.pendingRebate}</div>
                         </div>
                     </div>

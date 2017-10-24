@@ -124,6 +124,9 @@
     font-size: 24px;
     color: #999;
 }
+.name span{
+    font-size: 22px;
+}
 
 .count {
     font-size: 32px;
