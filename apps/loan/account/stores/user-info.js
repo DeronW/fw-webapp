@@ -11,7 +11,7 @@ export default class UserInfo {
     constructor(Post) {
         this.Post = Post;
 
-        this.initialData = {}; // saving copy for reset data
+        this.cachedData = {}; // cache saved data for reset
         this.data = {}; // for user input
         extendObservable(this.data, {
             // 基本信息
@@ -44,7 +44,7 @@ export default class UserInfo {
 
     inputHandler = (field, v) => this.data[field] = v
 
-    setInitialData = data => this.initialData = data;
+    cacheData = data => this.cachedData = data;
 
     setInputData = data => {
         this.data.realName = data.realName;
@@ -63,7 +63,7 @@ export default class UserInfo {
 
     fetchUserInfo = () => {
         this.Post('/api/userBase/v1/userInfoItem.json').then(data => {
-            this.setInitialData(data);
+            this.cacheData(data);
             this.setInputData(data);
         }, e => showToast(e.message))
     }
@@ -76,7 +76,7 @@ export default class UserInfo {
         }
     }
 
-    resetData = () => this.setInputData(this.initialData)
+    setDataFromCache = () => this.setInputData(this.cachedData)
 
     submitUserInfo = () => {
 
@@ -96,6 +96,13 @@ export default class UserInfo {
         };
 
         return this.Post('/api/userBase/v1/saveUserInfo.json', submitData)
+            .then(() => {
+                const savedData = Object.assign(submitData, {
+                    realName: this.data.realName,
+                    idCard: this.data.idCard
+                })
+                this.cacheData(savedData);
+            })
     }
 
 }
