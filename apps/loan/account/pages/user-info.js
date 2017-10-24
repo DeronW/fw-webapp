@@ -279,7 +279,6 @@ class UserInfo extends React.Component {
 
     componentWillUnmount() {
         if (this.state.showSubmitBtn) this.props.user_info.setDataFromCache();
-        console.log(this.props.user_info.data);
     }
 
     switchTab = tab => () => {
