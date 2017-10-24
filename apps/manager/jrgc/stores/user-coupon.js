@@ -59,7 +59,8 @@ export default class UserCoupon {
         return Utils.hashQuery.couponId
     }
     @computed get couponType() {
-        return Utils.hashQuery.couponType
+        let t = Number(Utils.hashQuery.couponType)+1
+        return t
     }
     setKeyword = (keyword) => {
         this.friends_data.keyword = keyword
@@ -68,6 +69,7 @@ export default class UserCoupon {
         this.friends_data.pageNo = 1
     }
     fetchFriendsList = (done) => {
+        alert(this.couponType)
         let { type, list, keyword } = this.friends_data
         if ( this.friends_data.pageNo == 0) return done && done()
         if (this.friends_data.pageNo == 1) list.splice(0,list.length)
