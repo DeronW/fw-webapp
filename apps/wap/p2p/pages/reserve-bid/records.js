@@ -90,10 +90,10 @@ class ReserveRecords extends React.Component {
                             styleName="statusNum">{item.addRate == 0 ? `${item.loanRate}%` : `${item.loanRate}%+${item.addRate}%`}<span
                             styleName="sprit">/</span>{item.repayPeriod}天</span>
                     </div>
-                    <div styleName="itemHeaderRight cancelBtn"
-                         onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
+                    {(!item.isFirstBid) && <div styleName="itemHeaderRight cancelBtn"
+                                                onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
                         取消预约
-                    </div>
+                    </div>}
                 </div>}
                 {item.status == 1 &&
                 <div styleName="itemHeader headerOver">
