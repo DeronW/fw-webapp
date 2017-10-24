@@ -277,6 +277,10 @@ class UserInfo extends React.Component {
         this.props.user_info.fetchUserInfo();
     }
 
+    componentWillUnmount() {
+        if (this.state.showSubmitBtn) this.props.user_info.resetData();
+    }
+
     switchTab = tab => () => {
         if (this.state.showSubmitBtn) return showToast('请先提交当前页信息!')
         this.setState({ currentTab: tab })
