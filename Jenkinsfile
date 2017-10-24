@@ -56,9 +56,6 @@ node(node_name) {
             sh 'npm run build:$PROJECT'
         }
         if(!params.FORCE) {
-            echo '2222222222'
-            sh "pwd"
-            sh "whoami"
             sh '~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
         }
     }
