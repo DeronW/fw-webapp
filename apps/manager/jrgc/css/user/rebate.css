@@ -20,7 +20,7 @@
 
 .tabs {
     height: 56px;
-    border: 1px solid #9b5b54;
+    border: 2px solid #9b5b54;
     float: left;
     position: absolute;
     top: 15px;
@@ -33,7 +33,7 @@
 .tab {
     width: 149px;
     height: 56px;
-    border-right: 1px solid #9b5b54;
+    border-right: 2px solid #9b5b54;
     float: left;
     text-align: center;
     line-height: 56px;
@@ -81,7 +81,7 @@
 }
 
 .chartTabActive {
-    border: 1px solid #9b5b54;
+    border: 2px solid #9b5b54;
     border-radius: 10px;
     color: #9b5b54;
 }
@@ -109,7 +109,7 @@
 .lineItem {
     width: 49%;
     height: 60px;
-    margin: 30px 0;
+    margin: 25px 0 35px 0;
     float: left;
     border-right: 1px solid #e3e5ea;
 }
@@ -131,7 +131,7 @@
 .count {
     font-size: 32px;
     color: #555;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .users {
@@ -152,7 +152,7 @@
     width: 660px;
     border-bottom: 1px solid #e3e5ea;
     height: 74px;
-    padding: 30px 30px 30px 0;
+    padding: 25px 30px 35px 0;
     margin-left: 30px;
 }
 
@@ -180,6 +180,13 @@
 
 .detailLine:last-child {
     margin-top: 10px;
+}
+.load{
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    color: #999;
+    padding: 20px 0;
 }
 
 

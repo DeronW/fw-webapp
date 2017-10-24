@@ -29,9 +29,9 @@ class ReserveRecords extends React.Component {
         let {reserve_bid, history} = this.props;
         let cb = () => {
             reserve_bid.cancelHandler(id).then((data) => {
-                if (data.cancelResult == '1') {
+                if (data.isCanCancel == '1') {
 
-                } else if (data.cancelResult == '0') {
+                } else if (data.isCanCancel == '0') {
                     Components.showToast("取消成功")
                     reserve_bid.getReserveList()
                 }
@@ -86,19 +86,23 @@ class ReserveRecords extends React.Component {
                     <span styleName="icon-status icon-status0"></span>
                     <div styleName="statusText">
                         {status}<br/>
-                        <span styleName="statusNum">{item.loanRate}%<span styleName="sprit">/</span>{item.repayPeriod}天</span>
+                        <span
+                            styleName="statusNum">{item.addRate == 0 ? `${item.loanRate}%` : `${item.loanRate}%+${item.addRate}%`}<span
+                            styleName="sprit">/</span>{item.repayPeriod}天</span>
                     </div>
-                    <div styleName="itemHeaderRight cancelBtn"
-                         onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
+                    {(!item.isFirstBid) && <div styleName="itemHeaderRight cancelBtn"
+                                                onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
                         取消预约
-                    </div>
+                    </div>}
                 </div>}
                 {item.status == 1 &&
                 <div styleName="itemHeader headerOver">
                     <span styleName="icon-status icon-status1"></span>
                     <div styleName="statusText">
                         {status}<br/>
-                        <span styleName="statusNum">{item.loanRate}%<span styleName="sprit">/</span>{item.repayPeriod}天</span>
+                        <span
+                            styleName="statusNum">{item.addRate == 0 ? `${item.loanRate}%` : `${item.loanRate}%+${item.addRate}%`}<span
+                            styleName="sprit">/</span>{item.repayPeriod}天</span>
                     </div>
                 </div>}
                 {item.status == 2 &&
@@ -106,7 +110,9 @@ class ReserveRecords extends React.Component {
                     <span styleName="icon-status icon-status2"></span>
                     <div styleName="statusText">
                         {status}<br/>
-                        <span styleName="statusNum">{item.loanRate}%<span styleName="sprit">/</span>{item.repayPeriod}天</span>
+                        <span
+                            styleName="statusNum">{item.addRate == 0 ? `${item.loanRate}%` : `${item.loanRate}%+${item.addRate}%`}<span
+                            styleName="sprit">/</span>{item.repayPeriod}天</span>
                     </div>
                 </div>}
                 <div styleName="infoContainer">
