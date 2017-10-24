@@ -9,9 +9,13 @@ import styles from '../../css/investor/search.css'
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Search extends React.Component {
+    state = {
+        isSearch:false
+    }
     componentDidMount(){
         let {resetSearchPageNo,fetchSearch} = this.props.investor
-
+        let { records } = this.props.investor.data.search
+        records.splice(0,records.length)
         resetSearchPageNo()
         Event.touchBottom(fetchSearch)
     }
@@ -27,7 +31,9 @@ class Search extends React.Component {
         setKeyword('')
     }
     searchHandler = () => {
-        let {fetchSearch} = this.props.investor
+        let {fetchSearch,resetSearchPageNo} = this.props.investor
+        this.setState({isSearch:true})
+        resetSearchPageNo()
         fetchSearch()
     }
     gotoInfo = (id) => {
@@ -36,6 +42,7 @@ class Search extends React.Component {
     }
     render() {
         let { history } = this.props
+        let { isSearch } =this.state
         let { search } = this.props.investor.data
         let { keyword } = search
 
@@ -64,9 +71,9 @@ class Search extends React.Component {
                 <div styleName="searchBtn" onClick={this.searchHandler}>搜索</div>
             </div>
             <div styleName="list">
-                {search.records && search.records.length>0 ? search.records.map(recordFn):empty}
+                {isSearch ? (search.records && search.records.length>0 ? search.records.map(recordFn):empty):''}
             </div>
-            <div styleName="load">已经全部加载完毕</div>
+            {search.records.length>0 && <div styleName="load">已经全部加载完毕</div>}
         </div>
     }
 }
