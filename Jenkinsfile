@@ -58,19 +58,19 @@ node(node_name) {
             sh 'npm run build:$PROJECT'
         }
         if(!params.FORCE) {
-            sh '/home/jenkins/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
+            sh '${WORKSPACE}/differential.compile.$PROJECT.sh'
         }
     }
     
     stage('Publish') {
-        sh 'mkdir -p ~/workspace/front-$PROJECT/cdn/$PROJECT/placeholder/'
-        sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ /srv/static/$PROJECT/'
+        sh 'mkdir -p ${WORKSPACE}/cdn/$PROJECT/placeholder/'
+        sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ /srv/static/$PROJECT/'
 
         if(params.EXTRA_SERVER_IP) {
-            sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ www@$EXTRA_SERVER_IP:/static/$PROJECT/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP:/static/$PROJECT/'
         }
         if(params.EXTRA_SERVER_IP_2) {
-            sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
         }
     }
 }
