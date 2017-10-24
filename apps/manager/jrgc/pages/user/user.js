@@ -102,7 +102,7 @@ class User extends React.Component {
             <div styleName="bar">
                 <img styleName="portrait" src={headUrl} onClick={() => this.goPageHandler('/user-setting')} />
                 <div styleName="barItem info">
-                    <div styleName="name">{info.loginName}</div>
+                    <div styleName="name">{info.mobile || info.loginName}</div>
                     <div styleName="des">{info.promotionCode}</div>
                 </div>
                 <div styleName="barItem" onClick={() => this.goPageHandler('/investor')}>

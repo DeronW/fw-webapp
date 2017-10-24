@@ -181,5 +181,12 @@
 .detailLine:last-child {
     margin-top: 10px;
 }
+.load{
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    color: #999;
+    padding: 20px 0;
+}
 
 
