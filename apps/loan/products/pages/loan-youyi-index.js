@@ -110,7 +110,7 @@ export default class LoopLoan extends React.Component {
                 <div styleName="loan-info-container">
                     <div styleName="loan-info">
                         <div styleName="loan-info-left">
-                            <div styleName="loan-info-num">{loopLoan.userStatus < 2 ? "---" : loopLoan.creditLine}</div>
+                            <div styleName="loan-info-num">{(loopLoan.userStatus < 2 || loopLoan.userStatus == 101) ? "---" : loopLoan.creditLine}</div>
                             <div styleName="loan-info-title">总额度(元){loopLoan.userStatus == 2 && loopLoan.creditLine == 0 && <span styleName="tip" onClick={this.questionShowHandler}></span>}</div>
                         </div>
                         <div styleName="loan-info-right">
