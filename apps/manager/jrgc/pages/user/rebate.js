@@ -154,8 +154,8 @@ class Rebate extends React.Component {
                 <div styleName="users">
                     <div styleName="userItem">
                         {current_list.custList&&current_list.custList.map(itemFn)}
-                        {(current_pageNo == '0' && current_list.custList.length > 0 ) && <div>已经全部加载完毕</div>}
                     </div>
+                    {current_list.custList.length > 0 && <div styleName="load">已经全部加载完毕</div>}
                 </div>
             </div>
         }

@@ -97,7 +97,7 @@ class BottomNavBar extends React.Component {
             require("../images/components/bottom-nav-bar/stats.gif") :
             require("../images/components/bottom-nav-bar/stats.png")
 
-        return <div style={{ height: "100px" }}>
+        return <div style={{ height: "100px" ,background:'#ebebeb'}}>
             <div style={getStyle('fixed_panel')}>
                 <a style={getStyle('tab_user')} onClick={() => link_handler('user')}>
                     <img src={icon_user} style={STYLE_ICON_BASE} /><div>我的</div>
