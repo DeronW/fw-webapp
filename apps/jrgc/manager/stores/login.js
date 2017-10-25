@@ -1,6 +1,7 @@
 import { extendObservable } from 'mobx'
 
 export default class Login {
+
     constructor(Post) {
         this.Post = Post
         this.data = {}
