@@ -15,8 +15,8 @@ class TransferCoupon extends React.Component {
     componentDidMount() {
         let { resetCouponPageNo,setCouponType,setCouponStatus, fetchCouponList } = this.props.user_coupon
         resetCouponPageNo()
-        setCouponType('0')
         setCouponStatus(1)
+        setCouponType('0')
         Event.touchBottom(fetchCouponList)
     }
     componentWillUnmount() {

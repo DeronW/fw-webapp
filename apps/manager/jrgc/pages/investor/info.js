@@ -125,7 +125,7 @@ class Info extends React.Component {
             return url
         }
         let levelFn = ()=>{
-            let level
+            let level ='普通用户'
             if(detail.userLevel == 1){
                 level = '普通用户'
                 nextLevel = 1
