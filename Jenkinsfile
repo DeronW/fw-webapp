@@ -60,7 +60,7 @@ node(node_name) {
             }
         }
         if(!params.FORCE) {
-            sh '${WORKSPACE}/differential.compile.$PROJECT.sh'
+            sh '${WORKSPACE}/differential.compile.$CLUSTER.$PROJECT.sh'
         }
     }
     
