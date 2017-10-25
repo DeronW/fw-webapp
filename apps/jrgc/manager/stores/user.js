@@ -154,4 +154,5 @@ export default class User {
             desc: '金融工场-中国领先的综合金融信息服务平台，回款提现免手续费。'
         })
     }
+    // NativeBridge.trigger('jrgc')
 }

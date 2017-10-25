@@ -51,7 +51,7 @@ class TransferFriends extends React.Component {
             this.props.user_coupon.presentCoupon(couponId, couponType, custId)
             .then(() => Components.showAlert("赠送成功"))
             .then(()=>{
-                history.push('/user-transfer-coupon')
+                history.goBack()
             })
         }
     }

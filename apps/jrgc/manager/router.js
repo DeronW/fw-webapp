@@ -11,6 +11,7 @@ import * as Stats from './pages/stats'
 import * as User from './pages/user'
 import * as Investor from './pages/investor'
 import Login from './pages/login.js';
+import Test from './pages/native-test.js';
 
 export default (stores) => {
     return <Router>
@@ -23,6 +24,7 @@ export default (stores) => {
                 <Route exact path="/stats-registered" component={Stats.Registered}/>
                 <Route exact path="/stats-invested-first-time" component={Stats.InvestedFirstTime}/>
 
+                <Route exact path="/test" component={Test}/>
                 <Route exact path="/login" component={Login}/>
                 {/*我的 相关页面*/}
                 <Route exact path="/" component={User.User}/>

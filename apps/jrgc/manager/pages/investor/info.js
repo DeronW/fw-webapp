@@ -32,6 +32,7 @@ class Info extends React.Component {
         let { detail } = this.props.investor.data.info
         let { info } =this.props.user.data.user
         if(info.userId == detail.custId) Components.showToast('优惠券不可以转赠给自己')
+
         history.push(`/user-transfer-coupon?custId=${detail.custId}&realName=${detail.realName}`)
     }
     getOption = (three,four,seven,ten,twelve) => ({
@@ -226,7 +227,7 @@ class Info extends React.Component {
                     {detail.remark}
                 </div>
                 <div styleName="more" onClick={this.showMore}>
-                    <span>{hidden ? '收起' : '更多'}</span>
+                    <span>{hidden ? '更多' : '收起'}</span>
                     <img style={{ transform: hidden ? 'rotate(180deg)' : 'rotate(0deg)' }}
                         src={require('../../images/investor/info/down.png')} />
                 </div>
