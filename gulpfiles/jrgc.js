@@ -1,9 +1,9 @@
 const eslint = require('gulp-eslint');
 
-const PROJ = 'manager'
+const PROJ = 'jrgc'
 
 const APP_NAMES = [{
-    name: 'jrgc',
+    name: 'manager',
     compiler: 'webpack'
 }]
 
