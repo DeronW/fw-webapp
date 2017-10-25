@@ -99,14 +99,14 @@ APP_NAMES.push(
         name: 'invest',
         compiler: 'webpack'
     },
-    // {
-    //     name: 'withdraw',
-    //     compiler: 'webpack'
-    // },
     {
         name: 'p2p',
         compiler: 'webpack'
     }
+    // {
+    //     name: 'withdraw',
+    //     compiler: 'webpack'
+    // }
 )
 
 
