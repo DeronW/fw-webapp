@@ -23,12 +23,14 @@ class October extends React.Component {
 
     fetchUserData = () => {
         Post('/api/octNovActivity/v1/getSelfInvestInfo.json').then(({ data }) => {
-            this.setState({ userData: {
-                isCompany: data.isPerson == 0,
-                inviteCnt: data.inviteCount,
-                inviteReward: data.reward,
-                invested: data.selfInvestAmt
-            } })
+            this.setState({
+                userData: {
+                    isCompany: data.isPerson == 0,
+                    inviteCnt: data.inviteCount,
+                    inviteReward: data.reward,
+                    invested: data.selfInvestAmt
+                }
+            })
         })
     }
 
@@ -39,17 +41,17 @@ class October extends React.Component {
             gcm: user.gcm
         }, () => {
             if (this.state.isLoggedIn) this.fetchUserData();
-        } ))
+        }))
     }
 
     render() {
         const { inMobile, isLoggedIn, gcm, userData } = this.state;
         return <div>
-            { inMobile ? (
+            {inMobile ? (
                 <Mobile isLoggedIn={isLoggedIn} gcm={gcm} {...userData} gotoHandler={gotoPage} />
             ) : (
-                <PC isLoggedIn={isLoggedIn} gcm={gcm} {...userData} gotoHandler={gotoPage} />
-            )}
+                    <PC isLoggedIn={isLoggedIn} gcm={gcm} {...userData} gotoHandler={gotoPage} />
+                )}
         </div>
     }
 
