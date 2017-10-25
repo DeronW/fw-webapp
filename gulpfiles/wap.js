@@ -3,7 +3,6 @@ const eslint = require('gulp-eslint');
 const PROJ = 'wap';
 
 let APP_NAMES = [
-    // 'home', // 首页
     // 'about-us', // 关于我们
     // 'faq', // 帮助中心
     // 'app-download', // app 下载页面
@@ -24,7 +23,6 @@ const USER_PAGES = [
     // 'user-evaluate-zx', //尊享投资风险承受能力评估
 ]
 
-
 // const NOTICE_PAGES = [
     // 内容展示页面
     // 'notice-corporate-structure', // 信息披露 公司结构
@@ -37,7 +35,7 @@ const TOPIC_PAGES = [
     'topic-hui-shang', // 徽商专题页面
     'topic-hui-shang-guide', //徽商用户引导页面
     // 'topic-score', // 玩转工分
-    'topic-interest-reward', // 年化加息奖励
+    // 'topic-interest-reward', // 年化加息奖励
     'topic-recommender-recruitment', //推荐人页面
     // 'topic-annual-commision', //年化佣金页面
     // 'topic-invite', //邀请返利, 邀请人,
@@ -100,14 +98,14 @@ APP_NAMES.push(
         name: 'invest',
         compiler: 'webpack'
     },
-    // {
-    //     name: 'withdraw',
-    //     compiler: 'webpack'
-    // },
     {
         name: 'p2p',
         compiler: 'webpack'
     }
+    // {
+    //     name: 'withdraw',
+    //     compiler: 'webpack'
+    // }
 )
 
 

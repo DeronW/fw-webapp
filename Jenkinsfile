@@ -25,7 +25,7 @@ node(node_name) {
 
         if(!params.FORCE) {
             sh 'git fetch'
-            sh 'git diff --stat=400 origin/$BRANCH > /tmp/webapp.$PROJECT.git.diff'
+            sh 'git diff --stat=400 origin/$BRANCH > /tmp/webapp.$CLUSTER.$PROJECT.git.diff'
         }
         
         git branch: BRANCH, credentialsId: '4cac0f9e-5bcd-4f50-a38f-d17f417bbeb5', url: 'git@10.105.101.118:front/webapp.git'
@@ -46,29 +46,39 @@ node(node_name) {
 
     stage('Differential check') {
         if(!params.FORCE) {
-            sh 'npm run pre-compile -- $PROJECT'
+            sh 'npm run pre-compile -- $CLUSTER $PROJECT'
         }
     }
 
     stage('Build') {
         // 是否强制重新刷新
         if(params.FORCE) {
-            sh 'npm run build:$PROJECT'
+            if(params.CLUSTER != 'default') {
+                sh 'npm run build:$CLUSTER:$PROJECT'
+            } else {
+                sh 'npm run build:$PROJECT'
+            }
         }
         if(!params.FORCE) {
-            sh '${WORKSPACE}/differential.compile.$PROJECT.sh'
+            sh '${WORKSPACE}/differential.compile.$CLUSTER.$PROJECT.sh'
         }
     }
     
     stage('Publish') {
         sh 'mkdir -p ${WORKSPACE}/cdn/$PROJECT/placeholder/'
+        sh 'mkdir -p ${WORKSPACE}/cdn/$CLUSTER/placeholder/'
+
         sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ /srv/static/$PROJECT/'
+        sh 'rsync -arI ${WORKSPACE}/cdn/$CLUSTER/ /srv/static/$CLUSTER/'
 
         if(params.EXTRA_SERVER_IP) {
             sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP:/static/$PROJECT/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$CLUSTER/ www@$EXTRA_SERVER_IP:/static/$CLUSTER/'
         }
         if(params.EXTRA_SERVER_IP_2) {
             sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$CLUSTER/ www@$EXTRA_SERVER_IP_2:/static/$CLUSTER/'
         }
     }
+    
 }

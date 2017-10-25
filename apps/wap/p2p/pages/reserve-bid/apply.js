@@ -58,6 +58,7 @@ class ReserveApply extends React.Component {
                     },
                     () => {
                         this.setState({pending: false})
+                        return new Promise((_, reject) => {})
                     })
                 .then(() => {
                     history.push(`/reserve-bid/records`)
@@ -115,12 +116,12 @@ class ReserveApply extends React.Component {
         }
 
         let single_info = () => {
-            let goals = ((reserve_bid.bid_data.reserveMoney * (context.loadRate / 100) * context.repayPeriod) / 360).toString().split(".")
+            let goals = ((reserve_bid.bid_data.reserveMoney * ((context.loadRate + context.addRate) / 100) * context.repayPeriod) / 360).toString().split(".")
             if (goals[1] && goals[1].length > 2) {
                 goals[1] = goals[1].substr(0, 2)
                 goals = `${goals[0]}.${goals[1]}`
             } else {
-                goals = (reserve_bid.bid_data.reserveMoney * (context.loadRate / 100) * context.repayPeriod) / 360
+                goals = (reserve_bid.bid_data.reserveMoney * ((context.loadRate + context.addRate) / 100) * context.repayPeriod) / 360
             }
             return <div styleName="infoContent">
                 <div styleName="infoAmount">
@@ -151,7 +152,7 @@ class ReserveApply extends React.Component {
                 bid_rate = bid.addRate == 0 ? '' : `+${bid.addRate}%`
             }
             if (bid) item = {
-                goals: (reserve_bid.bid_data.reserveMoney * (bid.loadRate / 100) * bid.repayPeriod) / 360,
+                goals: (reserve_bid.bid_data.reserveMoney * ((bid.loadRate + bid.addRate) / 100) * bid.repayPeriod) / 360,
                 rate: `${bid.loadRate}%${bid_rate}`,
                 term: bid.repayPeriod + '天',
                 indate: bid.bookValidPeriod + '天'
@@ -166,7 +167,7 @@ class ReserveApply extends React.Component {
             }
             return <div styleName="infoContent">
                 <div styleName="infoAmount">
-                    <div styleName="amountLeft">预计收益</div>
+                    <div styleName="amountLeft">预计收益<span styleName="coverBeans">(含加息工豆)</span></div>
                     <div styleName="amountRight">
                         &yen;{goals}
                     </div>

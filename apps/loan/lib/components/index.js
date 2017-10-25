@@ -1,6 +1,6 @@
-import ReactDOM, {render} from 'react-dom'
+import ReactDOM, { render } from 'react-dom'
 import React from 'react'
-import {createTemporaryDOMNode} from 'fw-components'
+import { createTemporaryDOMNode } from 'fw-components'
 
 
 import Header from './header.js'
@@ -16,7 +16,7 @@ let showBulletin = text => {
         ReactDOM.render(<Bulletin text={text} closeHandler={() => {
             ReactDOM.unmountComponentAtNode(node)
             document.body.removeChild(node)
-        }}/>, node)
+        }} />, node)
     })
 }
 
@@ -36,6 +36,10 @@ let showBlueAlert = function (title, options) {
             }}
         />, node)
     })
+}
+
+let showAddressSelector = function () {
+
 }
 
 export {

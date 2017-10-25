@@ -7,12 +7,10 @@ import AppRouter from './router'
 
 import * as Stores from './stores'
 
-
 let stores = {
     faxian: new Stores.FaXian(Ajax, Post),
     features: new Stores.Features(Get),
 }
-
 
 new StoreSpy(stores).wiretap()
 

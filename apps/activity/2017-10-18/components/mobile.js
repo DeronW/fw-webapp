@@ -57,7 +57,6 @@ class Mobile extends React.Component {
 
     toggleShowDesc = () => this.setState({ showDesc: !this.state.showDesc })
 
-    // loginHandler = () => this.props.gotoHandler('登录', 'https://www.gongchangp2p.com/api/activityPullNew/ActivityControl.shtml?code=ONLTHD')
     loginHandler = () => this.props.gotoHandler('登录')
 
     gotoMoreAboutInvite = () => {

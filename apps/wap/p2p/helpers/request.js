@@ -25,7 +25,9 @@ const Ajax = options => {
                     NativeBridge.login() :
                     location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
             } else {
-                options.silence ? reject(error) : setTimeout(() => reject(error), 1700)
+                if (options.silence) reject(error)
+                Components.showToast(error.message)
+                setTimeout(() => reject(error), 1700)
             }
         })
     })
