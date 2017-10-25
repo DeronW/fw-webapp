@@ -11,7 +11,6 @@ class Rewarding extends React.Component {
 
     state = {
         user_level: '',
-        user_reward: null,
         level_rewardings: []
     }
 
@@ -28,7 +27,7 @@ class Rewarding extends React.Component {
                 for (var i = 0; i < rule.length; i++) {
                     var interest = rule[i].addInterest;
                     var n = parseFloat(interest && interest.describe);
-                    level_rewardings.push(n)
+                    level_rewardings.push(n || null)
                 }
 
                 this.setState({ level_rewardings: level_rewardings })
