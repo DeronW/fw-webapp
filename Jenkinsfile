@@ -46,7 +46,7 @@ node(node_name) {
 
     stage('Differential check') {
         if(!params.FORCE) {
-            sh 'npm run pre-compile -- $PROJECT'
+            sh 'npm run pre-compile -- $CLUSTER $PROJECT'
         }
     }
 
@@ -54,7 +54,7 @@ node(node_name) {
         // 是否强制重新刷新
         if(params.FORCE) {
             if(params.PAGE) {
-                sh 'npm run build:$PROJECT:$PAGE'
+                sh 'npm run build:$CLUSTER:$PROJECT'
             } else {
                 sh 'npm run build:$PROJECT'
             }

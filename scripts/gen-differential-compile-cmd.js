@@ -2,8 +2,9 @@ let fs = require('fs')
 const util = require('gulp-util');
 
 // 需要传入一个参数是表示差量编译检测项目名称
-// example : npm run pre-compile -- loan
-const PROJ = process.argv[2];
+// example : npm run pre-compile -- jrgc manager
+const ORG = process.argv[2];
+const PROJ = process.argv[3];
 
 const sourceF = `/tmp/webapp.${PROJ}.git.diff`
 const targetF = `differential.compile.${PROJ}.sh`
