@@ -30,7 +30,7 @@ fs.readFile(sourceF, (err, data) => {
     if (CLUSTER == 'default') {
         reg_page = new RegExp(`apps/${PROJ}/([-\\w]+)/`)
     } else {
-        reg_page = new RegExp(`apps/${CLUSTER}/${PROJ}/([-\\w]+)/`)
+        reg_page = new RegExp(`apps/${CLUSTER}/(${PROJ})/`)
     }
 
     lines.forEach(line => {
@@ -63,8 +63,13 @@ fs.readFile(sourceF, (err, data) => {
         let tmp_sh_script = []
 
         for (let i in r.pages) {
-            if (r.pages.hasOwnProperty(i))
-                tmp_sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
+            if (r.pages.hasOwnProperty(i)) {
+                if (CLUSTER == 'default') {
+                    tmp_sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
+                } else {
+                    tmp_sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
+                }
+            }
         }
 
         if (tmp_sh_script.length > 0) {
