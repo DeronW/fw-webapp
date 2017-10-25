@@ -20,7 +20,7 @@ const Ajax = options => {
             if (error.code == 40101) {
                 console.log('here ! should go to login')
 
-                location.href = '/static/manager/jrgc/index.html#/login'
+                location.href = '/static/jrgc/manager/index.html#/login'
 
             } else {
                 // 如果不弹出错误, 就直接reject

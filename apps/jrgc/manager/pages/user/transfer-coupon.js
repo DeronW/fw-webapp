@@ -83,13 +83,14 @@ class TransferCoupon extends React.Component {
         let coupon_detail = (item, index) => {
             let coutent_style = item.conponType == '0' ? "contentItem contentBlue" : item.conponType == '1' ? "contentItem contentRed" : "contentItem contentYellow"
             let btn_style = item.conponType == '0' ? "giveBtn giveBtnBlue" : item.conponType == '1' ? "giveBtn giveBtnRed" : "giveBtn giveBtnYellow"
-            let unit = item.conponType == '2' ?'克':'元'
+            let unit = item.conponType == '2' ?'克':''
+            let m = item.conponType == '2' ?'':'￥'
 
             return <div styleName={coutent_style}
                         key={index}
                         onClick={() => this.transferHandler(item.couponId,item.conponType,item.beanCount,item.remark,item.overdueTime,item.investMultip,item.inverstPeriod)}>
                 <div styleName="itemLine itemUp">
-                    <div styleName="lineLeft"><span styleName="rmb">￥</span>{item.beanCount}<span styleName="rmb">{unit}</span></div>
+                    <div styleName="lineLeft"><span styleName="rmb">{m}</span>{item.beanCount}<span styleName="rmb">{unit}</span></div>
                     <div styleName={btn_style}>转赠</div>
                 </div>
                 <div styleName="itemLine itemDown">
