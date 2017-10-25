@@ -2,11 +2,17 @@ let fs = require('fs')
 const util = require('gulp-util');
 
 // 需要传入一个参数是表示差量编译检测项目名称
-// example : npm run pre-compile -- loan
-const PROJ = process.argv[2];
+// example : npm run pre-compile -- jrgc manager
+let CLUSTER = process.argv[2];
+let PROJ = process.argv[3];
 
-const sourceF = `/tmp/webapp.${PROJ}.git.diff`
-const targetF = `differential.compile.${PROJ}.sh`
+if (!PROJ) {
+    PROJ = CLUSTER
+    CLUSTER = 'default'
+}
+
+const sourceF = `/tmp/webapp.${CLUSTER}.${PROJ}.git.diff`
+const targetF = `differential.compile.${CLUSTER}.${PROJ}.sh`
 
 if (!PROJ) throw new Error('缺少参数, 待编译项目名称');
 
@@ -18,12 +24,16 @@ fs.readFile(sourceF, (err, data) => {
         npm: false,
         pages: {}
     }
-    let reg_page = new RegExp(`apps/${PROJ}/([-\\w]+)/`)
+
+    let reg_page = new RegExp(`apps/${CLUSTER == 'default' ? PROJ : CLUSTER}/([-\\w]+)/`)
 
     lines.forEach(line => {
-        ['Jenkinsfile', 'lib', 'public', 'tasks', 'scripts', `gulpfile.${PROJ}`].forEach(i => {
+        ['Jenkinsfile', 'lib', 'public', 'tasks', 'scripts',
+            `gulpfile.${CLUSTER}.${PROJ}`
+        ].forEach(i => {
             if (line.trim().startsWith(i)) r.lib = true
         });
+
         let m = line.match(reg_page);
         if (m) {
             if (m[1] == 'lib') {
@@ -39,16 +49,19 @@ fs.readFile(sourceF, (err, data) => {
     let sh_script = [];
     if (r.npm) sh_script.push('npm install')
     if (r.npm || r.lib) {
-        sh_script.push(`npm run build:${PROJ}`)
+        CLUSTER == 'default' ?
+            sh_script.push(`npm run build:${PROJ}`) :
+            sh_script.push(`npm run build:${CLUSTER}:${PROJ}`)
+
     } else {
-        // sh_script.push(`npm run gulp ${PROJ}:common_js`)
         let tmp_sh_script = []
+
         for (let i in r.pages) {
             if (r.pages.hasOwnProperty(i))
                 tmp_sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
         }
 
-        if (tmp_sh_script.length > 0) {
+        if (tmp_sh_script.length > 0 && CLUSTER == 'default') {
             sh_script.push(
                 `npm run gulp ${PROJ}:common_js`,
                 ...tmp_sh_script)

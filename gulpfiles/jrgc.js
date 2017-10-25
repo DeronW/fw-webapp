@@ -36,7 +36,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     // gulp.task(`lint:${PROJ}`, gulp.series(APP_NAMES.map((i) => `lint:${PROJ}:${i.name || i}`)))
 
     // define a empty activity:common_js function for compiler holder
-    gulp.task(`${PROJ}:common_js`, gulp.series(() => {
-        return new Promise(resolve => resolve())
-    }))
+    // gulp.task(`${PROJ}:common_js`, gulp.series(() => {
+    //     return new Promise(resolve => resolve())
+    // }))
 };
