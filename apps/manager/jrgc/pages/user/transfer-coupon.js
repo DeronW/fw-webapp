@@ -15,7 +15,7 @@ class TransferCoupon extends React.Component {
     componentDidMount() {
         let { resetCouponPageNo,setCouponType,setCouponStatus, fetchCouponList } = this.props.user_coupon
         resetCouponPageNo()
-        setCouponType('1')
+        setCouponType('0')
         setCouponStatus(1)
         Event.touchBottom(fetchCouponList)
     }
@@ -28,9 +28,9 @@ class TransferCoupon extends React.Component {
         this.setState({type:type})
         let t
         if(type == "返现券"){
-            t = '1'
-        }else if(type == "返息券"){
             t = '0'
+        }else if(type == "返息券"){
+            t = '1'
         }else{
             t = '2'
         }
@@ -81,8 +81,8 @@ class TransferCoupon extends React.Component {
                 onClick={() => this.typeHanlder(item)}>{item}</div>
         }
         let coupon_detail = (item, index) => {
-            let coutent_style = item.conponType == '1' ? "contentItem contentBlue" : item.conponType == '0' ? "contentItem contentRed" : "contentItem contentYellow"
-            let btn_style = item.conponType == '1' ? "giveBtn giveBtnBlue" : item.conponType == '0' ? "giveBtn giveBtnRed" : "giveBtn giveBtnYellow"
+            let coutent_style = item.conponType == '0' ? "contentItem contentBlue" : item.conponType == '1' ? "contentItem contentRed" : "contentItem contentYellow"
+            let btn_style = item.conponType == '0' ? "giveBtn giveBtnBlue" : item.conponType == '1' ? "giveBtn giveBtnRed" : "giveBtn giveBtnYellow"
             let unit = item.conponType == '2' ?'克':'元'
 
             return <div styleName={coutent_style}

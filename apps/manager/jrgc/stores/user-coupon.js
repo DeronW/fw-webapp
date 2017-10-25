@@ -12,7 +12,7 @@ export default class UserCoupon {
         extendObservable(this.coupon_data, {
             totalCount: 0,
             status: 1,
-            type: '1',
+            type: '0',
             pageNo: 1,
             records: []
         })
