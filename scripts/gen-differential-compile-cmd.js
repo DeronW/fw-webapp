@@ -67,7 +67,7 @@ fs.readFile(sourceF, (err, data) => {
                 if (CLUSTER == 'default') {
                     tmp_sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
                 } else {
-                    tmp_sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
+                    tmp_sh_script.push(`npm run gulp ${CLUSTER}:pack:${PROJ}:revision`)
                 }
             }
         }
@@ -92,7 +92,7 @@ fs.readFile(sourceF, (err, data) => {
         if (r.npm) {
             util.log(util.colors.yellow('package.json 包有更新, 需要执行 npm install'))
         } else {
-            util.log(util.colors.yellow('package.json 没有变更, 不用更新 npm'))
+            util.log(util.colors.yellow('package.json 不用更新 npm'))
         }
 
         fs.chmod(targetF, parseInt('755', 8));
