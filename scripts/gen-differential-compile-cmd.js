@@ -49,7 +49,7 @@ fs.readFile(sourceF, (err, data) => {
     let sh_script = [];
     if (r.npm) sh_script.push('npm install')
     if (r.npm || r.lib) {
-        CLUSTER != 'default' ?
+        CLUSTER == 'default' ?
             sh_script.push(`npm run build:${PROJ}`) :
             sh_script.push(`npm run build:${CLUSTER}:${PROJ}`)
 
