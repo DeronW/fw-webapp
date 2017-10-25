@@ -1,9 +1,9 @@
 const eslint = require('gulp-eslint');
 
-const PROJ = 'manager'
+const PROJ = 'jrgc'
 
 const APP_NAMES = [{
-    name: 'jrgc',
+    name: 'manager',
     compiler: 'webpack'
 }]
 
@@ -31,9 +31,9 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         }))
     })
 
-    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)))
+    // gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)))
 
-    gulp.task(`lint:${PROJ}`, gulp.series(APP_NAMES.map((i) => `lint:${PROJ}:${i.name || i}`)))
+    // gulp.task(`lint:${PROJ}`, gulp.series(APP_NAMES.map((i) => `lint:${PROJ}:${i.name || i}`)))
 
     // define a empty activity:common_js function for compiler holder
     gulp.task(`${PROJ}:common_js`, gulp.series(() => {
