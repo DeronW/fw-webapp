@@ -71,4 +71,5 @@ node(node_name) {
             sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
         }
     }
+    
 }
