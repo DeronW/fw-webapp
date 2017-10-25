@@ -69,7 +69,6 @@ export default class UserCoupon {
         this.friends_data.pageNo = 1
     }
     fetchFriendsList = (done) => {
-        alert(this.couponType)
         let { type, list, keyword } = this.friends_data
         if ( this.friends_data.pageNo == 0) return done && done()
         if (this.friends_data.pageNo == 1) list.splice(0,list.length)
