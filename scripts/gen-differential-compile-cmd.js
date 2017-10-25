@@ -29,7 +29,7 @@ fs.readFile(sourceF, (err, data) => {
 
     lines.forEach(line => {
         ['Jenkinsfile', 'lib', 'public', 'tasks', 'scripts',
-            `gulpfile.${CLUSTER}.${PROJ}`
+            `gulpfile.${PROJ}`, `gulpfile.${CLUSTER}.${PROJ}`
         ].forEach(i => {
             if (line.trim().startsWith(i)) r.lib = true
         });
