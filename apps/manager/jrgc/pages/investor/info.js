@@ -234,7 +234,7 @@ class Info extends React.Component {
                     <div styleName="accountName">TA的尊享账户</div>
                     <div styleName="accountText">
                         可用余额
-                        <span>{detail.zxBalance}元</span>
+                        <span>{detail.zxBalance}</span>
                         <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
@@ -242,7 +242,7 @@ class Info extends React.Component {
                     <div styleName="accountName">TA的微金账户</div>
                     <div styleName="accountText">
                         可用余额
-                        <span>{detail.wjBalance}元</span>
+                        <span>{detail.wjBalance}</span>
                         <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>

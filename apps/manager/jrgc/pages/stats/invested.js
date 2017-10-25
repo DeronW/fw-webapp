@@ -98,6 +98,7 @@ class Invested extends React.Component {
         if (sortBy === 'amountAnnual') sortValue = investor.annualInvestAmt;
         if (sortBy === 'balance') sortValue = investor.balance;
         return ({
+            custId:investor.custId,
             name: investor.custRealName,
             bid: investor.prdName,
             interest: investor.annualRate,
@@ -109,6 +110,10 @@ class Invested extends React.Component {
     gotoSearch = () => {
         let {history} = this.props
         history.push('/investor-search')
+    }
+    gotoHandler = (link) => {
+        let {history} = this.props
+        history.push(link)
     }
     render() {
         const { history, stats_investor } = this.props,
@@ -136,8 +141,8 @@ class Invested extends React.Component {
         }
 
         const genInvestorItem = (investor, i) => {
-            const { name, bid, interest, duration, sortBy, sortValue } = this.formatInvestItemData(investor);
-            return <div key={`${Date.now()}${i}`} styleName="investor-item">
+            const { custId,name, bid, interest, duration, sortBy, sortValue } = this.formatInvestItemData(investor);
+            return <div key={`${Date.now()}${i}`} styleName="investor-item" onClick={()=>this.gotoHandler(`investor-info?custId=${custId}`)}>
                 <div styleName="left-info">
                     <div styleName="left-top-info">{name}</div>
                     { sortBy !== '余额' &&
