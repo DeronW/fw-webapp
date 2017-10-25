@@ -9,7 +9,7 @@
     width: 100%;
     background: #ebebee;
     color: #333;
-    font-size: 32px;
+    font-size: 30px;
     box-sizing: border-box;
     padding-top: 20px;
 }
@@ -55,12 +55,12 @@
     float: right;
     width: 100px;
     height: 44px;
-    background: #fd4d4c;
     font-size: 26px;
-    color: #fff;
+    color: #7c9dc7;
     line-height: 44px;
-    border-radius: 24px;
+    border-radius: 22px;
     text-align: center;
+    border: solid 2px #7c9dc7;
 }
 
 .inputMoney {
@@ -126,7 +126,7 @@
 
 .amountLeft {
     float: left;
-    font-size: 32px;
+    font-size: 30px;
     color: #333;
 }
 
@@ -283,4 +283,9 @@
 
 .addRate {
     font-size: 30px;
+}
+
+.coverBeans {
+    font-size: 22px;
+    color: #999;
 }

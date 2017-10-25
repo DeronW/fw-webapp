@@ -9,7 +9,7 @@
     width: 100%;
     background: #fff;
     color: #333;
-    font-size: 32px;
+    font-size: 30px;
     box-sizing: border-box;
     margin-top: 20px;
 }
@@ -128,7 +128,7 @@
 
 .amountLeft {
     float: left;
-    font-size: 32px;
+    font-size: 30px;
     color: #333;
 }
 
@@ -268,4 +268,9 @@
 
 .typeItemChecked .color9 {
     color: #fd4d4c;
+}
+
+.coverBeans {
+    font-size: 22px;
+    color: #999;
 }
