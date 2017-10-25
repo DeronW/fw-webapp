@@ -72,13 +72,13 @@ class BottomNavBar extends React.Component {
             if (isActiveTab(tab)) return;
 
             if (tab == 'user') {
-                location.href = '/static/manager/jrgc/index.html#/'
+                location.href = '/static/jrgc/manager/index.html#/'
             }
             if (tab == 'investor') {
-                location.href = '/static/manager/jrgc/index.html#/investor'
+                location.href = '/static/jrgc/manager/index.html#/investor'
             }
             if (tab == 'stats') {
-                location.href = '/static/manager/jrgc/index.html#/stats'
+                location.href = '/static/jrgc/manager/index.html#/stats'
             }
         }
         const STYLE_ICON_BASE = {
