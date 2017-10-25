@@ -24,7 +24,6 @@ const USER_PAGES = [
     // 'user-evaluate-zx', //尊享投资风险承受能力评估
 ]
 
-
 // const NOTICE_PAGES = [
     // 内容展示页面
     // 'notice-corporate-structure', // 信息披露 公司结构
