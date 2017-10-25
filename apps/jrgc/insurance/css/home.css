@@ -1,0 +1,86 @@
+.banner {
+    display: block;
+    margin-top: 20px;
+    width: 720px;
+    height: 225px;
+}
+
+.car-insurance {
+    position: relative;
+    background: white;
+    height: 142px;
+    padding-top: 1px;
+}
+
+.car-insurance .v-line {
+    height: 1px;
+    background: #d8d8d8;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 30px;
+}
+
+.car-insurance-title {
+    font-size: 32px;
+    color: #555;
+    line-height: 40px;
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+.car-insurance-sub-title {
+    font-size: 24px;
+    color: #fd4d4c;
+    line-height: 30px;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.btn-start {
+    display: block;
+    position: absolute;
+    width: 192px;
+    height: 72px;
+    line-height: 72px;
+    color: white;
+    font-size: 32px;
+    top: 34px;
+    right: 30px;
+    background: #fd4d4c;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.partner {
+    border-bottom: 1px solid #d8d8d8;
+    height: 96px;
+    background: white;
+    line-height: 96px;
+    font-size: 24px;
+    color: #999;
+    padding-left: 30px;
+}
+
+.partner-title {
+    display: inline-block;
+    float: left;
+}
+
+.partner img {
+    margin-left: 20px;
+    float: left;
+}
+
+.faq-title {
+    font-size: 32px;
+    margin: 26px 30px 20px;
+    color: #999;
+}
+
+.faq-item {
+    font-size: 24px;
+    color: #999;
+    line-height: 36px;
+    margin: 8px 30px;
+}
