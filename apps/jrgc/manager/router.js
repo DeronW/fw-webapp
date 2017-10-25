@@ -12,6 +12,7 @@ import * as User from './pages/user'
 import * as Investor from './pages/investor'
 import Login from './pages/login.js';
 import Test from './pages/native-test.js';
+import NotFound from './pages/not-found.js'
 
 export default (stores) => {
     return <Router>
@@ -55,6 +56,8 @@ export default (stores) => {
                 <Route exact path="/investor-p2p-item" component={Investor.p2pItem} />
                 <Route exact path="/investor-calendar" component={Investor.Calendar} />
                 <Route exact path="/investor-calendar-day" component={Investor.calendarDay} />
+
+                <Route component={NotFound} />
             </Switch>
         </Provider>
     </Router>

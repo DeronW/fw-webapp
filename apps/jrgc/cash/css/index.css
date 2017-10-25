@@ -1,0 +1,17 @@
+html,
+body {
+    margin: 0;
+    font-family: 'PingFang SC', 'San Francisco', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 100%;
+}
+
+body {
+    background-color: #ebebeb;
+}
+
+a,
+a:active {
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    outline: 0;
+}
