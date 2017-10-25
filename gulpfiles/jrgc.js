@@ -8,6 +8,9 @@ const APP_NAMES = [{
 }, {
     name: 'insurance',
     compiler: 'webpack'
+}, {
+    name: 'cash',
+    compiler: 'webpack'
 }]
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
