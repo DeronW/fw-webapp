@@ -65,7 +65,7 @@ node(node_name) {
     // }
     
     stage('Publish') {
-        sh 'mkdir -p ${WORKSPACE}/cdn/$PROJECT/placeholder/'
+        sh 'mkdir -p ${WORKSPACE}/cdn/$CLUSTER/placeholder/'
 
         def publish_dir = params.PROJECT
 
