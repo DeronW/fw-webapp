@@ -5,6 +5,9 @@ const PROJ = 'jrgc'
 const APP_NAMES = [{
     name: 'manager',
     compiler: 'webpack'
+}, {
+    name: 'insurance',
+    compiler: 'webpack'
 }]
 
 module.exports = function (gulp, generate_task, CONSTANTS) {

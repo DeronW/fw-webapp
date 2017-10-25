@@ -25,11 +25,17 @@ fs.readFile(sourceF, (err, data) => {
         pages: {}
     }
 
-    let reg_page = new RegExp(`apps/${CLUSTER == 'default' ? PROJ : CLUSTER}/([-\\w]+)/`)
+    let reg_page
+
+    if (CLUSTER == 'default') {
+        reg_page = new RegExp(`apps/${PROJ}/([-\\w]+)/`)
+    } else {
+        reg_page = new RegExp(`apps/${CLUSTER}/(${PROJ})/`)
+    }
 
     lines.forEach(line => {
         ['Jenkinsfile', 'lib', 'public', 'tasks', 'scripts',
-            `gulpfile.${CLUSTER}.${PROJ}`
+            `gulpfiles/${PROJ}`, `gulpfiles/${CLUSTER}.${PROJ}`
         ].forEach(i => {
             if (line.trim().startsWith(i)) r.lib = true
         });
@@ -57,14 +63,21 @@ fs.readFile(sourceF, (err, data) => {
         let tmp_sh_script = []
 
         for (let i in r.pages) {
-            if (r.pages.hasOwnProperty(i))
-                tmp_sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
+            if (r.pages.hasOwnProperty(i)) {
+                if (CLUSTER == 'default') {
+                    tmp_sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
+                } else {
+                    tmp_sh_script.push(`npm run gulp ${CLUSTER}:pack:${PROJ}:revision`)
+                }
+            }
         }
 
-        if (tmp_sh_script.length > 0 && CLUSTER == 'default') {
-            sh_script.push(
-                `npm run gulp ${PROJ}:common_js`,
-                ...tmp_sh_script)
+        if (tmp_sh_script.length > 0) {
+            if (CLUSTER == 'default') {
+                sh_script.push(`npm run gulp ${PROJ}:common_js`)
+            }
+
+            sh_script.push(...tmp_sh_script)
         }
     }
 
@@ -79,7 +92,7 @@ fs.readFile(sourceF, (err, data) => {
         if (r.npm) {
             util.log(util.colors.yellow('package.json 包有更新, 需要执行 npm install'))
         } else {
-            util.log(util.colors.yellow('package.json 没有变更, 不用更新 npm'))
+            util.log(util.colors.yellow('package.json 不用更新 npm'))
         }
 
         fs.chmod(targetF, parseInt('755', 8));

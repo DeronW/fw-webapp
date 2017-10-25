@@ -1,6 +1,7 @@
 import { extendObservable } from 'mobx'
 
 export default class Login {
+
     constructor(Post) {
         this.Post = Post
         this.data = {}
@@ -9,6 +10,7 @@ export default class Login {
             loginName:''
         })
     }
+
     login = (username,password) => {
         //登录接口
         return this.Post('/finManager/user/login.shtml',{
@@ -20,6 +22,7 @@ export default class Login {
             this.data.loginName = data.userInfo.loginName
         })
     }
+
     exitHandler = () => {
         return this.Post('/finManager/user/logout.shtml')
     }

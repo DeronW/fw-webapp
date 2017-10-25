@@ -2,7 +2,7 @@ import { extendObservable, computed } from 'mobx'
 import { Utils, Components } from 'fw-javascripts'
 
 export default class Investor {
-    constructor(Get,Post) {
+    constructor(Get, Post) {
         this.Get = Get
         this.Post = Post
         this.data = {}
@@ -13,7 +13,7 @@ export default class Investor {
                 pageNo: 1,
                 tab: '全部客户',
                 type: '可用余额最高排序',
-                value:1,//1-全部-余额 2-全部-返利 3-全部-回款 4-在投-余额 5-在投-返利 6-在投-回款 7-空仓-余额 8-空仓-返利 9-未投-注册时间 10-未投-余额
+                value: 1,//1-全部-余额 2-全部-返利 3-全部-回款 4-在投-余额 5-在投-返利 6-在投-回款 7-空仓-余额 8-空仓-返利 9-未投-注册时间 10-未投-余额
                 sort: {
                     '全部客户': [
                         {
@@ -68,26 +68,26 @@ export default class Investor {
                 keyword: ''
             },
             info: {//客户详情
-                remarkToken:'',//修改备注的token
+                remarkToken: '',//修改备注的token
                 detail: {},
                 analysis: {},
             },
             bean: {
-                cashBalance:0,
-                overbeancount:0,
+                cashBalance: 0,
+                overbeancount: 0,
                 pageNo: 1,
                 records: []
             },
             score: {
-                frozenAmount:0,
-                iintegralNum:0,
-                willExpireAmount:0,
+                frozenAmount: 0,
+                iintegralNum: 0,
+                willExpireAmount: 0,
                 pageNo: 1,
                 records: []
             },
         })
     }
-    @computed get custId(){
+    @computed get custId() {
         return Utils.hashQuery.custId
     }
     //我的客户列表，包含全部、在投、空仓未投资四种类型，以及余额最高，返利最多，最近回款时间三种排序方式
@@ -98,7 +98,7 @@ export default class Investor {
     setCustTab = (tab) => {
         this.data.custmor.tab = tab
         this.data.custmor.type = '可用余额最高排序'
-        if(tab == '未投资') this.data.custmor.type = '最近回款时间排序'
+        if (tab == '未投资') this.data.custmor.type = '最近回款时间排序'
     }
     setCustType = (type) => {
         this.data.custmor.type = type
@@ -108,9 +108,9 @@ export default class Investor {
         this.fetchCustList()
     }
     fetchCustList = (done) => {
-        let { value,list,pageNo } = this.data.custmor
+        let { value, list, pageNo } = this.data.custmor
         if (pageNo == 0) return done && done()
-        if (pageNo == 1) list.splice(0,list.length)
+        if (pageNo == 1) list.splice(0, list.length)
 
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
@@ -193,7 +193,7 @@ export default class Investor {
         let { keyword, records } = this.data.search
         const PAGE_SIZE = 10
         if (this.data.search.pageNo == 0) return done && done()
-        if (this.data.search.pageNo == 1) records.splice(0,records.length)
+        if (this.data.search.pageNo == 1) records.splice(0, records.length)
 
         this.Post("/api/finManager/cust/v2/search.shtml", {
             keyword: keyword,
@@ -202,8 +202,8 @@ export default class Investor {
         }).then(data => {
             records.push(...data.pageData.result)
             this.data.search.pageNo < data.pageData.totalPage ?
-            this.data.search.pageNo++ :
-            this.data.search.pageNo = 0
+                this.data.search.pageNo++ :
+                this.data.search.pageNo = 0
             done && done()
         })
     }
@@ -230,10 +230,10 @@ export default class Investor {
 
     //查询客户工豆列表
     fetchBean = (done) => {
-        let { pageNo, records} = this.data.bean
+        let { pageNo, records } = this.data.bean
         const PAGE_SIZE = 10
         if (this.data.bean.pageNo == 0) return done && done()
-        if (pageNo == 1) records.splice(0,records.length)
+        if (pageNo == 1) records.splice(0, records.length)
         this.Get('/api/finManager/cust/v2/beanList.shtml', {
             custId: this.custId,
             pageNo: pageNo,
@@ -254,10 +254,10 @@ export default class Investor {
 
     //查询客户工分列表
     fetchScore = (done) => {
-        let { pageNo, records, frozenAmount,iintegralNum,willExpireAmount } = this.data.score
+        let { pageNo, records, frozenAmount, iintegralNum, willExpireAmount } = this.data.score
         const PAGE_SIZE = 10
         if (pageNo == 0) return done && done()
-        if (pageNo == 1) records.splice(0,records.length)
+        if (pageNo == 1) records.splice(0, records.length)
         this.Get('/api/finManager/cust/v2/scoreList.shtml', {
             custId: this.custId,
             pageNo: pageNo,
@@ -268,8 +268,8 @@ export default class Investor {
             willExpireAmount = data.willExpireAmount
             records.push(...data.pageData.result)
             this.data.score.pageNo < data.pageData.pagination.totalPage ?
-            this.data.score.pageNo++ :
-            this.data.score.pageNo = 0
+                this.data.score.pageNo++ :
+                this.data.score.pageNo = 0
 
             done && done()
         })
@@ -279,10 +279,10 @@ export default class Investor {
     }
     //客户备注修改
     editRemark = (remark) => {
-        this.Post('/api/finManager/cust/v2/custRemarkEdit.shtml',{
-            custId:this.custId,
-            remark:remark,
-            remarkToken:this.data.info.remarkToken
+        this.Post('/api/finManager/cust/v2/custRemarkEdit.shtml', {
+            custId: this.custId,
+            remark: remark,
+            remarkToken: this.data.info.remarkToken
         }).then(() => Components.showToast('保存成功'))
     }
 }

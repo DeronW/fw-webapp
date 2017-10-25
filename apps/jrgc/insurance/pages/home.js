@@ -9,7 +9,7 @@ import styles from '../css/home.css'
 
 function gotoHandler(link, history, need_login) {
 
-    let full_link = `${location.protocol}//${location.hostname}/static/insurance/weiyun-car/#${link}`;
+    let full_link = `${location.protocol}//${location.hostname}/static/jrgc/insurance/#${link}`;
 
     Browser.inApp ?
         NativeBridge.goto(full_link, need_login) :

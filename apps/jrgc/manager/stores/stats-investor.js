@@ -23,7 +23,7 @@ export default class StatsInvestor {
             'investedFirstTime-balance-0': '72'
         }
 
-        this.data = { };
+        this.data = {};
         extendObservable(this.data, {
             investorType: '',
             durationType: '',

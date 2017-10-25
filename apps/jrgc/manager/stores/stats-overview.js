@@ -6,20 +6,20 @@ export default class StatsOverview {
     constructor(Get) {
         this.get = Get;
 
-        this.data = { };
+        this.data = {};
         extendObservable(this.data, {
             statsDurationType: '1',
             graph: {
-                '1': { },
-                '2': { },
-                '3': { },
-                '4': { }
+                '1': {},
+                '2': {},
+                '3': {},
+                '4': {}
             },
             investor: {
-                '1': { },
-                '2': { },
-                '3': { },
-                '4': { }
+                '1': {},
+                '2': {},
+                '3': {},
+                '4': {}
             }
         })
     }

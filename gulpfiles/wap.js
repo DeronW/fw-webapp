@@ -3,7 +3,6 @@ const eslint = require('gulp-eslint');
 const PROJ = 'wap';
 
 let APP_NAMES = [
-    // 'home', // 首页
     // 'about-us', // 关于我们
     // 'faq', // 帮助中心
     // 'app-download', // app 下载页面
@@ -23,7 +22,6 @@ const USER_PAGES = [
     // 'user-evaluate-p2p', //p2p投资风险承受能力评估
     // 'user-evaluate-zx', //尊享投资风险承受能力评估
 ]
-
 
 // const NOTICE_PAGES = [
     // 内容展示页面
@@ -100,14 +98,14 @@ APP_NAMES.push(
         name: 'invest',
         compiler: 'webpack'
     },
-    // {
-    //     name: 'withdraw',
-    //     compiler: 'webpack'
-    // },
     {
         name: 'p2p',
         compiler: 'webpack'
     }
+    // {
+    //     name: 'withdraw',
+    //     compiler: 'webpack'
+    // }
 )
 
 
