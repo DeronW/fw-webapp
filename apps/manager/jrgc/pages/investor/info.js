@@ -113,15 +113,15 @@ class Info extends React.Component {
             overflow: hidden ? 'visible' : 'hidden'
         }
         let getHeadUrl = ()=>{
-            let url = '../../images/investor/info/default.png'
+            let url = require('../../images/investor/info/default.png')
             if(detail.isComp==0){
                 if(detail.gender==0){
-                    url = '../../images/investor/info/woman.png'
+                    url = require('../../images/investor/info/woman.png')
                 }else if(detail.gender==1){
-                    url = '../../images/investor/info/man.png'
+                    url = require('../../images/investor/info/man.png')
                 }
             }
-            return require(url)
+            return url
         }
         let {within3MonthRate,four2SixMonthRate,seven2NineMonthRate,ten2TwelveMonthRate,moreThanOneYearRate}=analysis
         let level = detail.userLevel  == 1 ?'普通用户':detail.userLevel
