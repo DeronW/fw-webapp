@@ -2,12 +2,12 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import ReactEcharts from 'echarts-for-react'
-import { Utils } from 'fw-javascripts'
+import { Utils,Components } from 'fw-javascripts'
 
 import { Header } from '../../components'
 import styles from '../../css/investor/info.css'
 
-@inject('investor')
+@inject('user','investor')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Info extends React.Component {
@@ -30,6 +30,8 @@ class Info extends React.Component {
     gotoTransferCoupon = () => {
         let { history } = this.props
         let { detail } = this.props.investor.data.info
+        let { info } =this.props.user.data.user
+        if(info.userId == detail.custId) Components.showToast('优惠券不可以转赠给自己')
         history.push(`/user-transfer-coupon?custId=${detail.custId}&realName=${detail.realName}`)
     }
     getOption = (three,four,seven,ten,twelve) => ({

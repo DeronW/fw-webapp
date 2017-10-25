@@ -36,6 +36,9 @@ class Coupon extends React.Component {
         let { history, investor_coupon } = this.props
         let { tab,totalCount, coupon } = investor_coupon.data
         let { tabName, type, record } = coupon[tab]
+        let remark = (item)=>{
+            return item.oldUserId ? '好友赠送':item.remark
+        }
 
         let tabFn = (item, index) => {
             return <div key={index} styleName={item == tab ? "tab tabActive" : "tab"}
@@ -76,7 +79,7 @@ class Coupon extends React.Component {
 
             return <div styleName={s} style={b} key={index}>
                 {t(conponType, item.beanCount)}
-                <div styleName="explain">{item.remark}</div>
+                <div styleName="explain">{remark(item)}</div>
                 <div styleName="time">有效期 {item.overdueTime}</div>
                 {limit(conponType, item.investMultip)}
                 <div styleName="day">投资期限 <span>{item.inverstPeriod}天</span> 可用</div>
