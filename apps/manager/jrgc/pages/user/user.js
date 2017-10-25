@@ -81,6 +81,9 @@ class User extends React.Component {
         let { history } = this.props
         history.push(link)
     }
+    shareHandler = () => {
+        this.props.user.nativeShare()
+    }
     render() {
         let { history } = this.props
         let { position } = this.state
@@ -96,11 +99,21 @@ class User extends React.Component {
                 onImageClick={this.onImageClickHandler}
                 images={banners.map(i => i.img)} />
         }
-
-        let headUrl = info.gender == 0?require('../../images/user/user/woman.png'):(info.gender==1 ? require('../../images/user/user/man.png'):require('../../images/user/user/default.png'))
+        let getHeadUrl = ()=>{
+            let url = require('../../images/user/user/default.png')
+            if(info.isComp==0){
+                if(info.gender==0){
+                    url = require('../../images/user/user/woman.png')
+                }else if(info.gender==1){
+                    url = require('../../images/user/user/man.png')
+                }
+            }
+            return url
+        }
+        // let headUrl = info.gender == 0 ? require('../../images/user/user/woman.png') : (info.gender == 1 ? require('../../images/user/user/man.png') : require('../../images/user/user/default.png'))
         return <div styleName="bg">
             <div styleName="bar">
-                <img styleName="portrait" src={headUrl} onClick={() => this.goPageHandler('/user-setting')} />
+                <img styleName="portrait" src={getHeadUrl()} onClick={() => this.goPageHandler('/user-setting')} />
                 <div styleName="barItem info">
                     <div styleName="name">{info.mobile || info.loginName}</div>
                     <div styleName="des">{info.promotionCode}</div>
@@ -148,7 +161,7 @@ class User extends React.Component {
                     非等额标包括还款方式为一次性还本付息、按月付息到期还本、按天一次性还本付息的一次性还本标；<br /><br />
                     等额标包括还款方式为按月还款和按季等额还款的标。该类标最终年化佣金乘以0.56且超过18个月标按18个月计算佣金。0.56为借款方占用投资方的资金使用率。
                 </div>
-                <div styleName="invest">邀请好友</div>
+                <div styleName="invest" onClick={this.shareHandler}>邀请好友</div>
                 <div styleName="couponBtn" onClick={() => this.goPageHandler('/user-transfer-coupon')}><span>{info.couponCount}</span></div>
             </div>
             <BottomNavBar history={history} />

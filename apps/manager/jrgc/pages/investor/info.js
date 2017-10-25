@@ -107,34 +107,56 @@ class Info extends React.Component {
         let { hidden} = this.state;
         let { info } = this.props.investor.data
         let { detail,analysis } = info
+        let nextLevel
 
         let desStyle = {
             height: hidden ? '100%' : '100px',
             overflow: hidden ? 'visible' : 'hidden'
         }
         let getHeadUrl = ()=>{
-            let url = '../../images/investor/info/default.png'
+            let url = require('../../images/investor/info/default.png')
             if(detail.isComp==0){
                 if(detail.gender==0){
-                    url = '../../images/investor/info/woman.png'
+                    url = require('../../images/investor/info/woman.png')
                 }else if(detail.gender==1){
-                    url = '../../images/investor/info/man.png'
+                    url = require('../../images/investor/info/man.png')
                 }
             }
-            return require(url)
+            return url
+        }
+        let levelFn = ()=>{
+            let level
+            if(detail.userLevel == 1){
+                level = '普通用户'
+                nextLevel = 1
+            }else if(detail.userLevel == 2){
+                level = '1'
+                nextLevel = 2
+            }else if(detail.userLevel == 3){
+                level = '2'
+                nextLevel = 3
+            }else if(detail.userLevel == 4){
+                level = '3'
+                nextLevel = 4
+            }else{
+                level = '4'
+                nextLevel = 5
+            }
+            return level
         }
         let {within3MonthRate,four2SixMonthRate,seven2NineMonthRate,ten2TwelveMonthRate,moreThanOneYearRate}=analysis
-        let level = detail.userLevel  == 1 ?'普通用户':detail.userLevel
+
+
         return <div styleName="bg">
             <Header title="客户详情" history={history} />
             <div styleName="bar">
                 <div styleName="leftBar">
                     <img src={getHeadUrl()} />
-                    <div styleName="level">{level}</div>
+                    <div styleName="level">{levelFn()}</div>
                 </div>
                 <div styleName="rightBar">
                     <div styleName="name">{detail.realName}<span>({detail.birthday})</span></div>
-                    <div styleName="amount">差<span>{detail.mumValue}元</span>年化投资额升级VIP{detail.userLevel+1}</div>
+                    {nextLevel < 5 && <div styleName="amount">差<span>{detail.mumValue}元</span>年化投资额升级VIP{nextLevel}</div>}
                     <div styleName="time">注册时间 {detail.createTime}</div>
                 </div>
                 <div styleName="bottomBar">

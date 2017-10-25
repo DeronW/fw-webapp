@@ -8,6 +8,8 @@
     resize: none;
     border: none;
     margin-bottom: 40px;
+    position: absolute;
+    top: 88px;
 }
 
 .area::-webkit-input-placeholder {
@@ -26,4 +28,7 @@
     border-radius: 4px;
     color: #fff;
     font-size: 32px;
+    position: absolute;
+    top: 935px;
+    left: 30px;
 }
