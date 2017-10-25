@@ -33,7 +33,7 @@ node(node_name) {
 
     stage('Update nodejs lib'){
         if(params.FORCE || params.INITIALIZE) {
-            sh 'npm install'
+            // sh 'npm install'
         } else {
             // 忽略掉 npm 的更新
             echo 'no need force update npm'
@@ -53,7 +53,11 @@ node(node_name) {
     stage('Build') {
         // 是否强制重新刷新
         if(params.FORCE) {
-            sh 'npm run build:$PROJECT'
+            if(params.PAGE) {
+                sh 'npm run build:$PROJECT:$PAGE'
+            } else {
+                sh 'npm run build:$PROJECT'
+            }
         }
         if(!params.FORCE) {
             sh '${WORKSPACE}/differential.compile.$PROJECT.sh'
@@ -71,4 +75,5 @@ node(node_name) {
             sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
         }
     }
+    
 }
