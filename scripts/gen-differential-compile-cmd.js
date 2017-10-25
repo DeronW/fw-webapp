@@ -24,7 +24,8 @@ fs.readFile(sourceF, (err, data) => {
         npm: false,
         pages: {}
     }
-    let reg_page = new RegExp(`apps/${CLUSTER}/([-\\w]+)/`)
+
+    let reg_page = new RegExp(`apps/${CLUSTER == 'default' ? PROJ : CLUSTER}/([-\\w]+)/`)
 
     lines.forEach(line => {
         ['Jenkinsfile', 'lib', 'public', 'tasks', 'scripts',
