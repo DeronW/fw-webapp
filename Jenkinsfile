@@ -53,7 +53,7 @@ node(node_name) {
     stage('Build') {
         // 是否强制重新刷新
         if(params.FORCE) {
-            if(params.PAGE) {
+            if(params.CLUSTER != 'default') {
                 sh 'npm run build:$CLUSTER:$PROJECT'
             } else {
                 sh 'npm run build:$PROJECT'
@@ -66,13 +66,20 @@ node(node_name) {
     
     stage('Publish') {
         sh 'mkdir -p ${WORKSPACE}/cdn/$PROJECT/placeholder/'
-        sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ /srv/static/$PROJECT/'
+
+        def publish_dir = params.PROJECT
+
+        if(params.CLUSTER != 'default') {
+            publish_dir = params.CLUSTER
+        }
+
+        sh 'rsync -arI ${WORKSPACE}/cdn/$publish_dir/ /srv/static/$publish_dir/'
 
         if(params.EXTRA_SERVER_IP) {
-            sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP:/static/$PROJECT/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$publish_dir/ www@$EXTRA_SERVER_IP:/static/$publish_dir/'
         }
         if(params.EXTRA_SERVER_IP_2) {
-            sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$publish_dir/ www@$EXTRA_SERVER_IP_2:/static/$publish_dir/'
         }
     }
     
