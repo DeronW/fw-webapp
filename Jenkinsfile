@@ -53,7 +53,11 @@ node(node_name) {
     stage('Build') {
         // 是否强制重新刷新
         if(params.FORCE) {
-            sh 'npm run build:$PROJECT'
+            if(params.PAGE) {
+                sh 'npm run build:$PROJECT:$PAGE'
+            } else {
+                sh 'npm run build:$PROJECT'
+            }
         }
         if(!params.FORCE) {
             sh '${WORKSPACE}/differential.compile.$PROJECT.sh'
