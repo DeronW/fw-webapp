@@ -1,14 +1,14 @@
-class BankList extends React.Component{
-    constructor(props){
+class BankList extends React.Component {
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             bankList: []
         }
         this.back_handler = this.back_handler.bind(this);
     }
     componentDidMount() {
         let user = $FW.Store.getUserDict();
-        $FXH.Post(`${API_PATH}/api/bankcard/v1/supportbank.json`,{
+        $FXH.Post(`${API_PATH}/api/bankcard/v1/supportbank.json`, {
             page: 1,
             pageSize: 100
         }).then(data => {
@@ -19,31 +19,31 @@ class BankList extends React.Component{
 
         })
     }
-    back_handler(){
+    back_handler() {
         window.history.back()
     }
     render() {
-    let bankLi = (todo, index) => {
-        return <div className="bank-branch">
-            <div className="bank-icon">
-                <img src={todo.logoUrl || 'images/logo.png'} />
+        let bankLi = (todo, index) => {
+            return <div className="bank-branch">
+                <div className="bank-icon">
+                    <img src={todo.logoUrl || 'images/logo.png'} />
+                </div>
+                <div className="bank-name">{todo.bankName}</div>
             </div>
-            <div className="bank-name">{todo.bankName}</div>
-        </div>
-    }
+        }
 
-    return (
-        <div>
-            <div className="banklist">
-                {this.state.bankList.map((todo, index) => bankLi(todo, index))}
+        return (
+            <div>
+                <div className="banklist">
+                    {this.state.bankList.map((todo, index) => bankLi(todo, index))}
+                </div>
+                <div className="know-btn-wrap">
+                    <div className="know-btn" onClick={this.back_handler}>
+                        我知道了</div>
+                </div>
             </div>
-            <div className="know-btn-wrap">
-                <div className="know-btn" onClick={this.back_handler}>
-                    我知道了</div>
-            </div>
-        </div>
-    )
-}
+        )
+    }
 }
 
 $FW.DOMReady(function () {
