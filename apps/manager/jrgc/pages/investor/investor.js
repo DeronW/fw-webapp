@@ -40,6 +40,7 @@ class Investor extends React.Component {
         resetCustPageNo()
         setCustType(t)
         setCustValue(sort[tab][i][t])
+        this.setState({ show: !this.state.show })
     }
     switchShow = () => {
         this.setState({ show: !this.state.show })
@@ -53,6 +54,28 @@ class Investor extends React.Component {
         let { history } = this.props
         let { tab,sort,type,list }= this.props.investor.data.custmor
 
+        let amount = (item) => {
+            let t
+            if(type == '可用余额最高排序'){
+                t = `￥${item.bankBalance}`
+            }else if(type == '返利最多排序'){
+                t = `￥${item.commissionAmt}`
+            }else{
+                t = item.createTime
+            }
+            return t
+        }
+        let remind = (item) => {
+            let r
+            if(type == '可用余额最高排序'){
+                r = '可用余额'
+            }else if(type == '返利最多排序'){
+                r = '返利'
+            }else{
+                r = '回款时间'
+            }
+            return r
+        }
         let tabFn = (item, index) => {
             return <div styleName={item == tab ? 'tab tabActive' : 'tab'}
                 key={index}
@@ -66,9 +89,9 @@ class Investor extends React.Component {
         let listFn = (item,index) => {
             return <div styleName="listItem" key={item.custId+index} onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
                 <div styleName="name">{item.realName}</div>
-                <div styleName="money">¥{item.bankBalance}</div>
+                <div styleName="money">{amount(item)}</div>
                 <div styleName="time">注册时间：{item.createTime}</div>
-                <div styleName="balance">可用余额</div>
+                <div styleName="balance">{remind(item)}</div>
             </div>
         }
         return <div styleName="bg">
