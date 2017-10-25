@@ -39,6 +39,7 @@ export default (stores) => {
                 <Route exact path='/topic/score' component={Topic.Score} />
                 <Route exact path='/topic/commission' component={Topic.Commission} />
                 <Route exact path='/topic/school' component={Topic.School} />
+                <Route exact path='/topic/rewarding' component={Topic.Rewarding} />
 
                 {/*发现模块  */}
                 <Route exact path='/fa-xian' component={Faxian.Home} />

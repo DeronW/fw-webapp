@@ -119,7 +119,7 @@ class ReserveApplyNovice extends React.Component {
                     </div>
                 </div>
             }
-            let goals_num = (novice_bid.novice_bid_data.reserveMoney * (context.loadRate / 100) * context.repayPeriod) / 360
+            let goals_num = (novice_bid.novice_bid_data.reserveMoney * ((context.loadRate + context.addRate) / 100) * context.repayPeriod) / 360
             let goals = goals_num.toString().split('.')
             if (goals[1] && goals[1].length > 2) {
                 goals[1] = goals[1].substr(0, 2)
@@ -130,7 +130,7 @@ class ReserveApplyNovice extends React.Component {
             return <div styleName="submitInfo">
                 <div styleName="infoContent">
                     <div styleName="infoAmount">
-                        <div styleName="amountLeft">预计收益</div>
+                        <div styleName="amountLeft">预计收益<span styleName="coverBeans">(含加息工豆)</span></div>
                         <div styleName="amountRight">
                             &yen;{goals}
                         </div>
@@ -139,7 +139,8 @@ class ReserveApplyNovice extends React.Component {
                         <div styleName="infoItem">
                             <div styleName="itemLeft">预期年化利率</div>
                             <div styleName="itemRight rightRed">
-                                {context.addRate == 0 ? context.loadRate + '%' : <span styleName="addRate">{`${context.loadRate}%+${context.addRate}%`}</span>}
+                                {context.addRate == 0 ? context.loadRate + '%' :
+                                    <span styleName="addRate">{`${context.loadRate}%+${context.addRate}%`}</span>}
                             </div>
                         </div>
                         {infoItem("期限", `${context.repayPeriod}天`)}
