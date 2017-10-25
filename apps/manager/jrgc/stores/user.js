@@ -147,12 +147,11 @@ export default class User {
     }
     //分享
     nativeShare = () => {
-        let inviteCode = Utils.hashQuery.yqm;
         NativeBridge.command.share({
-            title: '掌上钱包，随用随取',
-            image: 'https://static.9888.cn/images/loan/invitation.jpg',
-            link: `https://m.easyloan888.com/static/loan/outside-register/index.html?channelCode=OFFICIAL&invitationCode=${inviteCode}&jumpType=wx`,
-            desc: '缺钱不用愁，注册放心花，借款神器，急速到账'
+            title: '快去注册！金融工场免费赠送200元投资礼包啦！',
+            image: 'https://static.9888.cn/images/manager/share.jpg',
+            link: `https://m.9888.cn/mpwap/orderuser/toRegister.shtml?gcm=${this.data.user.info.promotionCode}`,
+            desc: '金融工场-中国领先的综合金融信息服务平台，回款提现免手续费。'
         })
     }
 }
