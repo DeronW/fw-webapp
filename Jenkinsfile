@@ -67,19 +67,22 @@ node(node_name) {
     stage('Publish') {
         sh 'mkdir -p ${WORKSPACE}/cdn/$CLUSTER/placeholder/'
 
-        def publish_dir = params.PROJECT
+        // def publish_dir = params.PROJECT
 
-        if(params.CLUSTER != 'default') {
-            publish_dir = params.CLUSTER
-        }
+        // if(params.CLUSTER != 'default') {
+        //     publish_dir = params.CLUSTER
+        // }
 
-        sh 'rsync -arI ${WORKSPACE}/cdn/${publish_dir}/ /srv/static/${publish_dir}/'
+        sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ /srv/static/$PROJECT/'
+        sh 'rsync -arI ${WORKSPACE}/cdn/$CLUSTER/ /srv/static/$CLUSTER/'
 
         if(params.EXTRA_SERVER_IP) {
-            sh 'rsync -arI ${WORKSPACE}/cdn/${publish_dir}/ www@$EXTRA_SERVER_IP:/static/${publish_dir}/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP:/static/$PROJECT/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$CLUSTER/ www@$EXTRA_SERVER_IP:/static/$CLUSTER/'
         }
         if(params.EXTRA_SERVER_IP_2) {
-            sh 'rsync -arI ${WORKSPACE}/cdn/${publish_dir}/ www@$EXTRA_SERVER_IP_2:/static/${publish_dir}/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
+            sh 'rsync -arI ${WORKSPACE}/cdn/$CLUSTER/ www@$EXTRA_SERVER_IP_2:/static/$CLUSTER/'
         }
     }
     
