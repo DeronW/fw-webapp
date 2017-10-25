@@ -28,7 +28,6 @@ const Ajax = options => {
                 if (options.silence) reject(error)
                 Components.showToast(error.message)
                 setTimeout(() => reject(error), 1700)
-                // options.silence ? reject(error) : setTimeout(() => reject(error), 1700)
             }
         })
     })

@@ -58,6 +58,7 @@ class ReserveApply extends React.Component {
                     },
                     () => {
                         this.setState({pending: false})
+                        return new Promise((_, reject) => {})
                     })
                 .then(() => {
                     history.push(`/reserve-bid/records`)
