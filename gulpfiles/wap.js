@@ -3,7 +3,6 @@ const eslint = require('gulp-eslint');
 const PROJ = 'wap';
 
 let APP_NAMES = [
-    // 'home', // 首页
     // 'about-us', // 关于我们
     // 'faq', // 帮助中心
     // 'app-download', // app 下载页面
