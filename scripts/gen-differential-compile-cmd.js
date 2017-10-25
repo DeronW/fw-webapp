@@ -67,10 +67,12 @@ fs.readFile(sourceF, (err, data) => {
                 tmp_sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
         }
 
-        if (tmp_sh_script.length > 0 && CLUSTER == 'default') {
-            sh_script.push(
-                `npm run gulp ${PROJ}:common_js`,
-                ...tmp_sh_script)
+        if (tmp_sh_script.length > 0) {
+            if (CLUSTER == 'default') {
+                sh_script.push(`npm run gulp ${PROJ}:common_js`)
+            }
+
+            sh_script.push(...tmp_sh_script)
         }
     }
 
