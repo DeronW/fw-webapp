@@ -14,6 +14,7 @@ class NotFound extends React.Component {
     render() {
         return <div styleName="bg">
             <Header title="404" history={this.props.history} />
+            <img styleName="img" src={require('../images/not-found/404bg.png')} />
             <div styleName="txt">404</div>
             <div styleName="txt">找不到页面了</div>
             <div styleName="txt">react router miss match</div>

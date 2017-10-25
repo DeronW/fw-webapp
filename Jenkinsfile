@@ -65,6 +65,7 @@ node(node_name) {
     }
     
     stage('Publish') {
+        sh 'mkdir -p ${WORKSPACE}/cdn/$PROJECT/placeholder/'
         sh 'mkdir -p ${WORKSPACE}/cdn/$CLUSTER/placeholder/'
 
         sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ /srv/static/$PROJECT/'
