@@ -4,16 +4,6 @@ import { Post } from '../../lib/helpers'
 import { observer, inject } from 'mobx-react'
 import styles from '../css/loan-youyi-city.css'
 
-function filtering(add,name,code){
-    let result = [];
-    for(let i=0;i<add.length;i++) {
-      if(code == add[i].id){
-        result = add[i][name];
-      }
-    }
-    return result;
-}
-
 let information =  [
   {id: 1, name: '北京', city: [
       {id: 1, name: '市辖区', district: [
