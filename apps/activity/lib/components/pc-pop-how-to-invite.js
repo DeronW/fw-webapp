@@ -65,7 +65,7 @@ class InviteRewardPop extends React.Component {
                 )}
 
                 <div styleName="pop-info">
-                    新手注册即送<span>200元</span>+<span>2.6g</span>黄金，
+                    新手注册即送<span>200元</span>+<span>2.1g</span>黄金，
                     首投还获<span>0.6%返息券</span>，
                     邀友最高再送<span>350元</span>
                     <a styleName="blue-anchor" href="https://www.9888keji.com/news/notice/2200.html" target="_blank">更多秘籍></a>

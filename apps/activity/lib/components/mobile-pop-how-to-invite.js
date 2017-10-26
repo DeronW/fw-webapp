@@ -33,7 +33,7 @@ class InviteRewardPop extends React.Component {
                     <div styleName="invite-desc">请好友在注册或投标时填写您的工场码</div>
                     <div styleName="gcm">{gcm}</div>
                     <div styleName="reward-for-new-coming">
-                        新手注册即送<span styleName="text-red">200元</span>+<span styleName="text-red">2.6g</span>黄金，
+                        新手注册即送<span styleName="text-red">200元</span>+<span styleName="text-red">2.1g</span>黄金，
                         首投还获<span styleName="text-red">0.6%</span>返息券，<br />
                         邀友最高再送<span styleName="text-red">350元</span>
                     </div>
@@ -48,7 +48,7 @@ class InviteRewardPop extends React.Component {
                     <div styleName="not-loggedIn-info-3">还没有工场码？注册即可拥有</div>
                     <div style={{ marginTop: '20px' }} styleName="btn" onClick={this.props.loginHandler}>登录注册</div>
                     <div styleName="reward-for-new-coming">
-                        新手注册即送<span styleName="text-red">200元</span>+<span styleName="text-red">2.6g</span>黄金，
+                        新手注册即送<span styleName="text-red">200元</span>+<span styleName="text-red">2.1g</span>黄金，
                         首投还获<span styleName="text-red">0.6%</span>返息券，<br />
                         邀友最高再送<span styleName="text-red">350元</span>
                     </div>

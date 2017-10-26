@@ -21,7 +21,7 @@ class Novice extends React.Component {
             <div styleName="pop-text">
                 <div styleName="p-text ruler">
                     <div styleName="p-title">活动规则：</div>
-                    1：新工友注册送200元返现券和2.6克返金券礼包<br />
+                    1：新工友注册送200元返现券和2.1克返金券礼包<br />
                     2：首投满额100元起即获得一张0.6%的返息券
                 </div>
                 <div styleName="p-text des">
