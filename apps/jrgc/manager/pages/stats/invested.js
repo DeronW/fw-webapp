@@ -150,7 +150,7 @@ class Invested extends React.Component {
                     }
                 </div>
                 <div styleName="right-info">
-                    <div styleName="right-top-info">{sortValue}</div>
+                    <div styleName="right-top-info">￥{sortValue}</div>
                     <div styleName="right-bottom-info">{sortBy}</div>
                 </div>
             </div>

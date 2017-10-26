@@ -106,8 +106,8 @@ class Calendar extends React.Component {
             return <div key={index} styleName={selectedIndex == index ? 'day daySelected' : 'day'} onClick={() => { this.selectedHandler(index, item.date) }}>
                 <div styleName="week">{item.day} {item.weekDate}</div>
                 <div styleName="circle"></div>
-                <div styleName="receivable">{item.totalPlanCount!=0&&`${item.totalPlanCount}笔回款`}</div>
-                <div styleName="receivable actual">{item.totalRealCount!=0 && `${item.totalRealCount}笔回款`}</div>
+                {item.totalPlanCount!=0&&<div styleName="receivable">{item.totalPlanCount}笔回款}</div>}
+                {item.totalRealCount!=0 && <div styleName="receivable actual">{item.totalRealCount}笔回款</div>}
             </div>
         }
         let dueFn = (dueItem,dueIndex) => {

@@ -31,9 +31,11 @@ class Info extends React.Component {
         let { history } = this.props
         let { detail } = this.props.investor.data.info
         let { info } =this.props.user.data.user
-        if(info.userId == detail.custId) Components.showToast('优惠券不可以转赠给自己')
-
-        history.push(`/user-transfer-coupon?custId=${detail.custId}&realName=${detail.realName}`)
+        if(info.userId == detail.custId) {
+            Components.showToast('优惠券不可以转赠给自己')
+        }else{
+            history.push(`/user-transfer-coupon?custId=${detail.custId}&realName=${detail.realName}`)
+        }
     }
     getOption = (three,four,seven,ten,twelve) => ({
         title: {
@@ -118,13 +120,13 @@ class Info extends React.Component {
         }
         let getHeadUrl = ()=>{
             let url = require('../../images/investor/info/default.png')
-            if(detail.isComp==0){
+            // if(detail.isComp==0){
                 if(detail.gender==0){
                     url = require('../../images/investor/info/woman.png')
                 }else if(detail.gender==1){
                     url = require('../../images/investor/info/man.png')
                 }
-            }
+            // }
             return url
         }
         let levelFn = ()=>{

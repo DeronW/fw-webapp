@@ -12,7 +12,7 @@ export default class UserCoupon {
         extendObservable(this.coupon_data, {
             totalCount: 0,
             status: 1,
-            type: '0',
+            type: '1',
             pageNo: 1,
             records: []
         })
@@ -25,10 +25,10 @@ export default class UserCoupon {
     //获取优惠券列表,可用优惠券，赠送记录（转赠优惠券）
     resetCouponPageNo = () => {
         this.coupon_data.pageNo = 1
+        this.coupon_data.records = []
     }
     setCouponType = (type) => {
         this.coupon_data.type = type
-        this.coupon_data.records.splice(0,this.coupon_data.records.length)
         this.fetchCouponList()
     }
     setCouponStatus = (status) => {
