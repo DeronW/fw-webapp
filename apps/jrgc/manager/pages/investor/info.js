@@ -133,16 +133,16 @@ class Info extends React.Component {
                 level = '普通用户'
                 nextLevel = 1
             }else if(detail.userLevel == 2){
-                level = '1'
+                level = 'VIP1'
                 nextLevel = 2
             }else if(detail.userLevel == 3){
-                level = '2'
+                level = 'VIP2'
                 nextLevel = 3
             }else if(detail.userLevel == 4){
-                level = '3'
+                level = 'VIP3'
                 nextLevel = 4
             }else{
-                level = '4'
+                level = 'VIP4'
                 nextLevel = 5
             }
             return level

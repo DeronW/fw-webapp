@@ -89,7 +89,7 @@ class Investor extends React.Component {
         }
         let listFn = (item,index) => {
             return <div styleName="listItem" key={item.custId+index} onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
-                <div styleName="name">{item.realName}</div>
+                <div styleName="name">{item.realName || item.mobile}</div>
                 <div styleName="money">{amount(item)}</div>
                 <div styleName="time">注册时间：{item.createTime}</div>
                 <div styleName="balance">{remind(item)}</div>

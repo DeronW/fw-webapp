@@ -59,7 +59,7 @@ class TransferFriends extends React.Component {
         let { history } = this.props
         let { isSearch } =this.state
         let { pageNo, list, keyword } = this.props.user_coupon.friends_data
-        let { beanCount, remark, overdueTime, investMultip, inverstPeriod,couponType } = Utils.hashQuery
+        let { beanCount,conponType, remark, overdueTime, investMultip, inverstPeriod,couponType } = Utils.hashQuery
         let u = couponType == '2' ? '克' : '元'
         let m = conponType == '0' ?'￥':''
 
