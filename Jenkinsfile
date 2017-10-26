@@ -33,7 +33,7 @@ node(node_name) {
 
     stage('Update nodejs lib'){
         if(params.FORCE || params.INITIALIZE) {
-            // sh 'npm install'
+            sh 'npm install'
         } else {
             // 忽略掉 npm 的更新
             echo 'no need force update npm'
@@ -65,6 +65,7 @@ node(node_name) {
     }
     
     stage('Publish') {
+        sh 'mkdir -p ${WORKSPACE}/cdn/$PROJECT/placeholder/'
         sh 'mkdir -p ${WORKSPACE}/cdn/$CLUSTER/placeholder/'
 
         sh 'rsync -arI ${WORKSPACE}/cdn/$PROJECT/ /srv/static/$PROJECT/'

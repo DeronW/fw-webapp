@@ -14,6 +14,7 @@ class Investor extends React.Component {
         show: false
     }
     componentDidMount() {
+        this.props.investor.resetCustPageNo()
         this.props.investor.fetchCustList()
         Event.touchBottom(this.props.investor.fetchCustList)
     }

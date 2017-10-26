@@ -1,0 +1,44 @@
+.address{
+    position:absolute;
+    bottom:0;
+    left:0;
+    z-index:121;
+    background:#fff;
+    width:100%;
+  }
+  .title h4{
+    display:inline-block;
+    margin-left:300px;
+    font-size:30px;
+    line-height:68px;
+    font-weight:normal;
+    color:#999;
+  }
+  .title span{
+    margin:42px 0 0 220px;
+    font-size:45px;
+    line-height:34px;
+    color:#D8D8D8;
+  }
+  .area{
+    display:inline-block;
+    font-size:28px;
+    margin-left:42px;
+    margin-top:15px;
+    margin-bottom:15px;
+    color:#333;
+  }
+
+  .item-wrap{
+     height:500px;
+     margin-bottom:30px;
+     overflow:scroll;
+  }
+ .item{
+   font-size:24px;
+   line-height:50px;
+   padding-left:42px;
+ }
+ .red{
+   color:red;
+ }
