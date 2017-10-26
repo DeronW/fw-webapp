@@ -2320,7 +2320,9 @@ let information =  [
           {id: 1853, name: '英德市'},
           {id: 1854, name: '连州市'}
       ]},
-      {id: 213, name: '东莞市', district: []},
+      {id: 213, name: '东莞市', district: [
+        
+      ]},
       {id: 214, name: '中山市', district: []},
       {id: 215, name: '潮州市', district: [
           {id: 1855, name: '湘桥区'},
@@ -3279,7 +3281,11 @@ let information =  [
           {id: 2624, name: '皋兰县'},
           {id: 2625, name: '榆中县'}
       ]},
-      {id: 299, name: '嘉峪关市', district: []},
+      {id: 299, name: '嘉峪关市', district: [
+        {id: 2628, name: '雄关区'},
+        {id: 2629, name: '长城区'},
+        {id: 2630, name: '镜铁区'}
+      ]},
       {id: 300, name: '金昌市', district: [
           {id: 2626, name: '金川区'},
           {id: 2627, name: '永昌县'}
@@ -3774,6 +3780,7 @@ export default class LoopLoanCity extends React.Component {
     cityReselectHandler = () => {
         this.setState({
             district:'',
+            provinceActive:false,
             districtActive:false,
             cityActive:true,
             titleActive:[false,true,false]
@@ -3783,10 +3790,10 @@ export default class LoopLoanCity extends React.Component {
     provinceReselectHandler = () => {
       this.setState({
         city:'',
-        cityList:[],
-        districtList:[],
+        province:'',
         cityActive:false,
         provinceActive:true,
+        districtActive:false,
         titleActive:[true,false,false]
     })
     }

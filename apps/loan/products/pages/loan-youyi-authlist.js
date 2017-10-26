@@ -43,9 +43,17 @@ export default class LoopLoanAuthlist extends React.Component {
                       {ing}
                     </div>
                     <div styleName="auth-box">
-                      <div styleName="auth-item"><img styleName="icon-img" src={require("../images/loan-youyi-authlist/icon3.png")}/>芝麻信用分认证</div>
-                      {fail}
+                        <div styleName="auth-item"><img styleName="icon-img" src={require("../images/loan-youyi-authlist/icon3.png")}/>芝麻信用分认证</div>
+                        {fail}
                     </div>
+                    <div styleName="auth-box">
+                        <div styleName="auth-item"><img styleName="icon-img" src={require("../images/loan-youyi-authlist/icon4.png")}/>亲密联系人</div>
+                        {fail}
+                    </div>
+                  <div styleName="auth-box">
+                        <div styleName="auth-item"><img styleName="icon-img" src={require("../images/loan-youyi-authlist/icon5.png")}/>现居住址</div>
+                        {fail}
+                   </div>
                 </div>
             </div>
         )

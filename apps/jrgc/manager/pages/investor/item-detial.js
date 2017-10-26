@@ -85,10 +85,10 @@ class itemDetial extends React.Component {
                     <span>利息</span>
                     <span>¥{item.interest}</span>
                 </div>
-                <div styleName="item">
+                {tab=="已回"&&<div styleName="item">
                     <span>违约金</span>
                     <span>¥{item.prepaymentPenalty}</span>
-                </div>
+                </div>}
                 <div styleName="item">
                     <span>总计金额</span>
                     <span styleName="red">¥{item.princAndIntest}</span>
@@ -98,7 +98,7 @@ class itemDetial extends React.Component {
         let empty = <div styleName="empty">
             <img src={require('../../images/investor/empty.png')}/>
         </div>
-        return <div>
+        return <div styleName="bg">
             <Header title="TA的回款明细" history={history}/>
             <div styleName="types">
                 {tabs.map(tabFn)}

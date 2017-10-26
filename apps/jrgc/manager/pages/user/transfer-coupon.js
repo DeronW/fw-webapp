@@ -83,7 +83,7 @@ class TransferCoupon extends React.Component {
         let coupon_detail = (item, index) => {
             let coutent_style = item.conponType == '0' ? "contentItem contentBlue" : item.conponType == '1' ? "contentItem contentRed" : "contentItem contentYellow"
             let btn_style = item.conponType == '0' ? "giveBtn giveBtnBlue" : item.conponType == '1' ? "giveBtn giveBtnRed" : "giveBtn giveBtnYellow"
-            let unit = item.conponType == '2' ?'克':''
+            let u = item.conponType == '2' ?'克':''
             let m = item.conponType == '0' ?'￥':''
             let remark = (item)=>{
                 return item.oldUserId ? '好友赠送':item.remark
@@ -92,7 +92,7 @@ class TransferCoupon extends React.Component {
                         key={index}
                         onClick={() => this.transferHandler(item.couponId,item.conponType,item.beanCount,item.remark,item.overdueTime,item.investMultip,item.inverstPeriod)}>
                 <div styleName="itemLine itemUp">
-                    <div styleName="lineLeft"><span styleName="rmb">{m}</span>{item.beanCount}<span styleName="rmb">{unit}</span></div>
+                    <div styleName="lineLeft"><span styleName="rmb">{m}</span>{item.beanCount}<span styleName="rmb">{u}</span></div>
                     <div styleName={btn_style}>转赠</div>
                 </div>
                 <div styleName="itemLine itemDown">
@@ -100,7 +100,7 @@ class TransferCoupon extends React.Component {
                     <div styleName="lineRight">有效期 {item.overdueTime}</div>
                 </div>
                 <div styleName="itemLine itemDes">
-                    <div styleName="lineLeft desLeft">投资 ¥{item.investMultip} 可用</div>
+                    <div styleName="lineLeft desLeft">{item.conponType=='2'?'购买':'投资' }{m}{item.investMultip}{u} 可用</div>
                     <div styleName="lineRight desRight">投资期限 {item.inverstPeriod}天 可用</div>
                 </div>
                 {item.isOver == '1' && <div styleName="labelOverdate"></div>}

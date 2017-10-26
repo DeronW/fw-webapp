@@ -69,7 +69,7 @@ class StatsOverview extends React.Component {
             lineStyle: { normal: { color: '#d75063' } },
             name: '年化投资额',
             type: 'line',
-            data: value
+            data: valueAnnual
         }, {
             symbolSize: 6,
             showAllSymbol: true,
@@ -77,7 +77,7 @@ class StatsOverview extends React.Component {
             lineStyle: { normal: { color: '#20629f' } },
             name: '投资额',
             type: 'line',
-            data: valueAnnual
+            data: value
         }]
     })
 
@@ -90,7 +90,7 @@ class StatsOverview extends React.Component {
             { date, value, valueAnnual } = graphFormatted,
             { invested, investAmount, investAmountAnnual, registered, investedFirstTime } = investorFormatted;
 
-        return <div>
+        return <div styleName="bg">
             <TabHeader history={history} current={currentTab} switchHandler={this.switchTab} />
 
             <div styleName="graph">
