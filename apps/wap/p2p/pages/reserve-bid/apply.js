@@ -124,6 +124,8 @@ class ReserveApply extends React.Component {
             } else {
                 goals = (reserve_bid.bid_data.reserveMoney * ((context.loadRate + context.addRate) / 100) * context.repayPeriod) / 360
             }
+
+            let year_rate = context.addRate == 0 ? `${context.loadRate}` : `${context.loadRate}%+${context.addRate}%`
             return <div styleName="infoContent">
                 <div styleName="infoAmount">
                     <div styleName="amountLeft">预计收益<span styleName="coverBeans">(含加息工豆)</span></div>
@@ -132,7 +134,7 @@ class ReserveApply extends React.Component {
                     </div>
                 </div>
                 <div styleName="itemWrapper">
-                    {infoItem("预期年化利率", `${context.loadRate}%`)}
+                    {infoItem("预期年化利率", year_rate)}
                     {infoItem("期限", `${context.repayPeriod}天`)}
                     {infoItem("预计起息时间", "预计今日起息")}
                     {infoItem("预约有效期", `${context.bookValidPeriod}天`)}
@@ -158,7 +160,6 @@ class ReserveApply extends React.Component {
                 term: bid.repayPeriod + '天',
                 indate: bid.bookValidPeriod + '天'
             }
-
             let goals = item.goals.toString().split('.')
             if (goals[1] && goals[1].length > 2) {
                 goals[1] = goals[1].substr(0, 2)
@@ -220,6 +221,9 @@ class ReserveApply extends React.Component {
                         《预约协议》
                     </span>
                 </span>
+                <div>
+                    如您投资的产品为42天或63天，考虑到复投期间存在匹配期，特殊情况，到期日会有延迟，具体以合同约定为准。
+                </div>
             </div>
             <div styleName="submitBtnContainer">
                 <div styleName="submitBtn" onClick={this.applyHandler}>立即预约</div>

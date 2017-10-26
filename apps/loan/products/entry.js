@@ -10,7 +10,8 @@ let stores = {
     mortgage: new Stores.Mortgage(Post),
     loopLoan: new Stores.LoopLoan(Post),
     fxh: new Stores.Fxh(Post),
-    fq: new Stores.Fq(Post)
+    fq: new Stores.Fq(Post),
+    contact: new Stores.Contact(Post)
 }
 
 new StoreSpy(stores).wiretap()

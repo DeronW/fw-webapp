@@ -90,10 +90,8 @@ class ReserveInfoIntro extends React.Component {
                 </div>
                 <div styleName="rulerContentNovice">
                     <div>
-                        1.预约成功后，系统将冻结预约金额，将实时为您匹配掌众优
-                        质资产；
-                        <br/>2.预约有效期为3天，3天内系统未成功为您匹配项目，预约冻
-                        结资金将实时解冻并退回至您的微金账户内；
+                        1.预约成功后，系统将冻结预约金额，将实时为您匹配掌众优质资产；
+                        <br/>2.预约有效期为3天，3天内系统未成功为您匹配项目，预约冻结资金将实时解冻并退回至您的微金账户内；
                         <br/>3.预约出借暂不支持使用工豆、返息券、返现券，敬请期待；
                     </div>
                     {ruler_control && over_text}
@@ -131,8 +129,8 @@ class ReserveInfoIntro extends React.Component {
                     <div styleName="textTitle">还款保障：</div>
                     <div styleName="sectionText textEpli">
                         一、闪电借款基于大数据风控建模体系，北京掌众金融信息服务有限公司通过自主研发出国内领先的“如来”风控引擎，<span>{intro_control ? '已' : '...'}</span>
+                        {intro_control && over_text}
                     </div>
-                    {intro_control && over_text}
                 </div>
                 {(!intro_control) && <div styleName="openBtn" onClick={this.IntroOpenHandler}>展开全部</div>}
             </div>
