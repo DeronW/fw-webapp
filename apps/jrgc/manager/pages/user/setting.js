@@ -34,7 +34,7 @@ class Setting extends React.Component{
     render(){
         let {history} = this.props
         let {close} = this.state
-        let { info,loginName } = this.props.user.data.user
+        let { info } = this.props.user.data.user
 
         let pop = <div styleName="pop-bg">
             <div styleName="pop">
@@ -50,7 +50,7 @@ class Setting extends React.Component{
                 <div styleName="set-item">
                     <img src={require('../../images/user/setting/name.png')}/>
                     <span>账号</span>
-                    <div styleName="loginName">{loginName}</div>
+                    <div styleName="loginName">{info.loginName}</div>
                 </div>
                 <div styleName="set-item">
                     <img src={require('../../images/user/setting/code.png')}/>
