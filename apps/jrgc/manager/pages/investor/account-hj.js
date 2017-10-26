@@ -37,11 +37,11 @@ class AccountHj extends React.Component {
                 <div styleName="infoName">持有黄金</div>
                 <div styleName="infoCount">{info.goldAmount} <span styleName="unit-hj">克</span></div>
                 <div styleName="infoLine line1">
-                    <div styleName="lineLeft">可用黄金</div>
-                    <div styleName="lineRight">总待收黄金</div>
+                    <div styleName="lineLeft">增金宝</div>
+                    <div styleName="lineRight">尊享金</div>
                 </div>
                 <div styleName="infoLine line2">
-                    <div styleName="lineLeft">{info.availableAmount}克(当前市值约¥{info.cuurMarketValue})</div>
+                    <div styleName="lineLeft">{info.availableAmount}克(当前市值约{info.cuurMarketValue}元)</div>
                     <div styleName="lineRight">
                         <span styleName="number">{info.waitAmount}克</span>
                     </div>
@@ -54,13 +54,13 @@ class AccountHj extends React.Component {
                     <div styleName="itemLineDown colorRed">{info.accProfitLoss}元</div>
                 </div>
                 <div styleName="priceItem">
-                    <div styleName="itemLineUp"><span styleName="itemName">实时金价(每克)</span>
+                    <div styleName="itemLineUp"><span styleName="itemName">实时金价</span>
                         <span styleName="icon-refresh" onClick={fetchGoldPrice}></span>
                     </div>
                     <div styleName="itemLineDown">{goldPrice}元/克</div>
                 </div>
                 <div styleName="priceItem itemLast">
-                    <div styleName="itemLineUp"><span>成交金价(每克)</span></div>
+                    <div styleName="itemLineUp"><span>成交金价</span></div>
                     <div styleName="itemLineDown">¥{info.dealPrice}元/克</div>
                 </div>
             </div>
