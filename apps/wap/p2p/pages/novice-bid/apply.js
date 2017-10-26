@@ -48,10 +48,12 @@ class ReserveApplyNovice extends React.Component {
             let coupon_id = is_used ? novice_bid.novice_bid_data.couponId : ''
             novice_bid.submitNoviceHandler(coupon_id)
                 .then(() => {
-                        Components.showToast('预约成功')
+                        return Components.showToast('预约成功')
                     },
                     () => {
                         this.setState({pending: false})
+                        return new Promise((_, reject) => {
+                        })
                     })
                 .then(() => {
                     history.push(`/novice-bid/success`)
