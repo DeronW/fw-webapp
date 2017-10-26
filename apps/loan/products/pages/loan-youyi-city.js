@@ -3696,6 +3696,7 @@ export default class LoopLoanCity extends React.Component {
 
     cityReselectHandler = () => {
         this.setState({
+            district:'',
             districtActive:false,
             cityActive:true,
             titleActive:[false,true,false]
