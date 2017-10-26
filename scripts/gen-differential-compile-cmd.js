@@ -89,11 +89,7 @@ fs.readFile(sourceF, (err, data) => {
                 '可以差量编译' :
                 '无更新, 不需要编译';
         util.log(util.colors.yellow(`完成差量编译检测:${t}`));
-        if (r.npm) {
-            util.log(util.colors.yellow('package.json 包有更新, 需要执行 npm install'))
-        } else {
-            util.log(util.colors.yellow('package.json 不用更新 npm'))
-        }
+        util.log(util.colors.yellow(r.npm ? '需要' : '不用', '更新 npm'))
 
         fs.chmod(targetF, parseInt('755', 8));
     });
