@@ -59,6 +59,7 @@
 .arrow{
     float:right;
     margin-top: 30px;
+    cursor: pointer;
 }
 .submit-btn-container {
     position: fixed;
@@ -94,17 +95,36 @@ input:-ms--input-placeholder {
 input::-webkit-input-placeholder {
     color: #ccc;
 }
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#000;
+    opacity: 0.6;
+}
+.pop-content{
+    position:absolute;
+    width:652px;
+    height:auto;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
 .select-label {
-  margin-left: 30px;
-  height: 64px;
-  line-height: 64px;
-  color: #999;
-  font-size: 20px;
+  /*margin-left: 30px;*/
+  height: 100px;
+  line-height: 100px;
+  color: #333;
+  font-size: 28px;
+  background:#fff;
+  text-align: center;
 }
 
 .option-grp {
   box-sizing: border-box;
-  padding-left: 30px;
+  /*padding-left: 30px;*/
   background-color: #fff;
 }
 
@@ -122,9 +142,10 @@ input::-webkit-input-placeholder {
   padding-right: 24px;
   color: #333;
   font-size: 28px;
+  padding: 0 30px;
 }
 
 .selected-option {
   composes: unselected-option;
-  background: url('../images/loan-fq-form/selected.png') no-repeat 630px;
+  background: url('../images/loan-fq-form/selected.png') no-repeat 590px;
 }

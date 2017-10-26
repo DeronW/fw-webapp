@@ -58,6 +58,7 @@
 .arrow{
     float:right;
     margin-top: 30px;
+    cursor:pointer;
 }
 .submit-btn-container {
     position: fixed;

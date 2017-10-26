@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
+import {render} from 'react-dom'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Components} from 'fw-javascripts'
@@ -7,7 +7,6 @@ import {Header} from '../../lib/components'
 import {Storage, NativeBridge, Browser} from '../../lib/helpers'
 
 import styles from '../css/loan-youyi-contact.css'
-
 
 const relationships = {
     '0': '父母',
@@ -18,51 +17,8 @@ const relationships = {
     '5': '同学',
     '6': '朋友'
 }
-// @inject('Contact')
-@observer
-@CSSModules(styles, {
-    "allowMultiple": true,
-    "errorWhenNotFound": false
-})
-class SelectItem extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            value:"0"
-        }
-    }
-    handleChange = (index,history) => {
-        this.setState({value: index});
 
-    }
-
-    genOptions = optKey => {
-        let {history} = this.props;
-        let {value} = this.state;
-            let optName = relationships[optKey];
-        return <div key={optName}
-            styleName={value == optKey ? 'selected-option' : 'unselected-option'}
-            onClick={() => this.handleChange(optKey,history)}>
-            {optName}
-        </div>
-    }
-    render(){
-        let {history} = this.props;
-        let relations_array = [];
-
-        const selectOptions = <div styleName="option-grp">
-                    { Object.keys(relationships).map(this.genOptions) }
-                </div>
-        return <div styleName="cover">
-            <div styleName="self">
-                <div styleName="select-label">选择联系人关系</div>
-                {selectOptions}
-            </div>
-        </div>
-    }
-}
-
-// @inject('Contact')
+@inject('contact')
 @observer
 @CSSModules(styles, {
     "allowMultiple": true,
@@ -78,9 +34,41 @@ export default class LoopLoanContact extends React.Component {
         deleteNameShow2: false,
         inputPhoneValue2: "",
         inputNameValue2: "",
-        selectShow:false
+        value: "",
+        value2: "",
+        popShow: false,
+        pop2Show: false
     }
     componentDidMount() {}
+    handleChange = (index) => {
+        this.setState({value: index, popShow: false});
+
+    }
+    handleChange2 = (index) => {
+        this.setState({value2: index, pop2Show: false});
+
+    }
+
+    genOptions = optKey => {
+        let {history} = this.props;
+        let {value} = this.state;
+        let optName = relationships[optKey];
+        return <div key={optName} styleName={value == optKey
+            ? 'selected-option'
+            : 'unselected-option'} onClick={() => this.handleChange(optKey)}>
+            {optName}
+        </div>
+    }
+    genOptions2 = optKey => {
+        let {history} = this.props;
+        let {value2} = this.state;
+        let optName = relationships[optKey];
+        return <div key={optName} styleName={value2 == optKey
+            ? 'selected-option'
+            : 'unselected-option'} onClick={() => this.handleChange2(optKey)}>
+            {optName}
+        </div>
+    }
     inputPhoneHandler1 = e => {
         let v = parseInt(e.target.value) || '';
         v = String(v).substr(0, 11)
@@ -121,9 +109,14 @@ export default class LoopLoanContact extends React.Component {
     clearName2 = () => {
         this.setState({deleteNameShow2: false, inputNameValue2: ""});
     }
-    choose = history => {
-        // this.setState({selectShow:true})
-        // history.push(`/loan-youyi-contact#1`)
+    choose1 = () => {
+        let {contact} = this.props;
+        this.setState({popShow: true})
+
+    }
+    choose2 = () => {
+        let {contact} = this.props;
+        this.setState({pop2Show: true})
     }
     render() {
         let {history} = this.props;
@@ -135,8 +128,35 @@ export default class LoopLoanContact extends React.Component {
             inputPhoneValue2,
             inputNameValue2,
             deletePhoneShow2,
-            deleteNameShow2
+            deleteNameShow2,
+            popShow,
+            pop2Show,
+            value,
+            value2
         } = this.state;
+
+        const selectOptions = <div styleName="option-grp">
+            {Object.keys(relationships).map(this.genOptions)}
+        </div>
+        const selectOptions2 = <div styleName="option-grp">
+            {Object.keys(relationships).map(this.genOptions2)}
+        </div>
+        const selectPop = <div>
+            <div styleName="modal"></div>
+            <div styleName="pop-content">
+                <div styleName="select-label">选择联系人关系</div>
+                {selectOptions}
+            </div>
+
+        </div>
+        const selectPop2 = <div>
+            <div styleName="modal"></div>
+            <div styleName="pop-content">
+                <div styleName="select-label">选择联系人关系</div>
+                {selectOptions2}
+            </div>
+
+        </div>
         return <div styleName="bg">
             <Header title="亲密联系人" history={history}/>
             <div styleName="content">
@@ -153,8 +173,9 @@ export default class LoopLoanContact extends React.Component {
                         </div>
                         <div styleName="item-select">
                             <div styleName="text">关系</div>
-                            <span styleName="s-text">选择关系</span>
-                        <img styleName="arrow" src={require("../images/loan-youyi-contact/entry.png")} onClick={this.choose(history)}/>
+                            {!value && <span styleName="s-text">选择关系</span>}
+                            {value && <span styleName="c-text">{relationships[value]}</span>}
+                            <img styleName="arrow" src={require("../images/loan-youyi-contact/entry.png")} onClick={this.choose1}/>
                         </div>
                     </div>
                 </div>
@@ -172,17 +193,22 @@ export default class LoopLoanContact extends React.Component {
                         </div>
                         <div styleName="item-select">
                             <div styleName="text">关系</div>
-                            <span styleName="s-text">选择关系</span>
-                            <img styleName="arrow" src={require("../images/loan-youyi-contact/entry.png")} alt=""/>
+                            {!value2 && <span styleName="s-text">选择关系</span>}
+                            {value2 && <span styleName="c-text">{relationships[value2]}</span>}
+                            <img styleName="arrow" src={require("../images/loan-youyi-contact/entry.png")} onClick={this.choose2}/>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div styleName="submit-btn-container">
+            {<div styleName="submit-btn-container">
                 <a styleName="submit-btn">确定</a>
-            </div>
-            {<SelectItem history={history} />}
+        </div>}
+            {/* {inputPhoneValue1&&inputPhoneValue2&&inputNameValue1&&inputNameValue2&&relationships[value1]&&relationships[value2]<div styleName="heghlight-submit-btn-container">
+                <a styleName="submit-btn">确定</a>
+        </div>} */}
+            {popShow && selectPop}
+            {pop2Show && selectPop2}
 
         </div>
     }
