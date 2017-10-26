@@ -18,8 +18,11 @@ class ReserveApplyNovice extends React.Component {
     componentDidMount() {
         window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
-        this.props.novice_bid.fetchNoviceProduct();
-        (this.props.novice_bid.novice_bid_data.couponId != "") && this.setState({is_used: true})
+        this.props.novice_bid.fetchNoviceProduct()
+            .then((data) => {
+                (data.couponId != "") && this.setState({is_used: true})
+            })
+
     }
 
     inputChangeHandler = name => e => {
@@ -48,12 +51,16 @@ class ReserveApplyNovice extends React.Component {
             let coupon_id = is_used ? novice_bid.novice_bid_data.couponId : ''
             novice_bid.submitNoviceHandler(coupon_id)
                 .then(() => {
-                        Components.showToast('预约成功')
+                        return Components.showToast('预约成功')
                     },
                     () => {
                         this.setState({pending: false})
+                        return new Promise((_, reject) => {
+                        })
                     })
                 .then(() => {
+                    //预约成功后触发首页刷新
+                    NativeBridge.trigger('home_refresh')
                     history.push(`/novice-bid/success`)
                 })
         }

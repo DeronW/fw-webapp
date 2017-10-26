@@ -18,7 +18,7 @@ class AccountHj extends React.Component {
 
     jumpToList = () => {
         let {history} = this.props
-        history.push('investor-hj-list')
+        history.push(`investor-hj-list?custId=${this.props.investor_account.custId}`)
     }
     showHandler = () => {
         this.setState({close:true})

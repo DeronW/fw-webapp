@@ -16,6 +16,7 @@ import LoopLoanAuthlist from './pages/loan-youyi-authlist.js'
 import LoopLoanCardAdd from './pages/loan-youyi-card-add.js'
 import LoopLoanContact from './pages/loan-youyi-contact.js'
 import LoopLoanAddress from './pages/loan-youyi-address.js'
+import LoopLoanCity from './pages/loan-youyi-city.js'
 
 import FxhIndex from './pages/loan-fxh-index.js'
 import FxhWant from './pages/loan-fxh-want.js'
@@ -42,6 +43,7 @@ export default (stores) => {
                 <Route exact path='/loan-youyi-card-add' component={LoopLoanCardAdd} />
                 <Route exact path='/loan-youyi-contact' component={LoopLoanContact} />
                 <Route exact path='/loan-youyi-address' component={LoopLoanAddress} />
+                <Route exact path='/loan-youyi-city' component={LoopLoanCity} />
 
                 <Route exact path='/loan-fxh-index' component={FxhIndex} />
                 <Route exact path='/loan-fxh-want' component={FxhWant} />

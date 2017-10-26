@@ -175,7 +175,7 @@
     font-size: 24px;
     color: #999999;
     line-height: 30px;
-    padding-bottom: 300px;
+    padding-bottom: 118px;
 }
 
 .protocolChecked {
@@ -196,6 +196,8 @@
 
 .protocolText {
     vertical-align: middle;
+    margin-bottom: 10px;
+    display: block;
 }
 
 .submitBtnContainer {

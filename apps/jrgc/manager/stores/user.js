@@ -147,12 +147,12 @@ export default class User {
     }
     //分享
     nativeShare = () => {
-        NativeBridge.command.share({
+        NativeBridge.trigger('share', JSON.stringify({
             title: '快去注册！金融工场免费赠送200元投资礼包啦！',
             image: 'https://static.9888.cn/images/manager/share.jpg',
             link: `https://m.9888.cn/mpwap/orderuser/toRegister.shtml?gcm=${this.data.user.info.promotionCode}`,
             desc: '金融工场-中国领先的综合金融信息服务平台，回款提现免手续费。'
-        })
+        }), true)
     }
     // NativeBridge.trigger('jrgc')
 }

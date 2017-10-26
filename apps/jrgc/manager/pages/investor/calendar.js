@@ -145,7 +145,7 @@ class Calendar extends React.Component {
         return <div styleName="bg">
             <Header title="回款日历" history={history} />
             <div styleName="capital">
-                <div styleName="capitalAmount">¥{overview.principal}万</div>
+                <div styleName="capitalAmount">¥{overview.principal}</div>
                 <div styleName="capitalText">总待收本金</div>
             </div>
             <div styleName="collect">
@@ -155,7 +155,7 @@ class Calendar extends React.Component {
                 </div>
                 <div styleName="collectItem">
                     <div styleName="collectText">总待收黄金</div>
-                    <div styleName="collectAmount">¥{overview.goldAmt}克</div>
+                    <div styleName="collectAmount">{overview.goldAmt}克</div>
                 </div>
             </div>
             <div styleName="monthBox">
@@ -179,14 +179,14 @@ class Calendar extends React.Component {
                 <div styleName="dateItem">
                     <div styleName="dateDemind">本月应回款</div>
                     <div styleName="dateAmountBox">
-                        <div styleName="dateAmount">￥{monthInfo.planAmt}万</div>
+                        <div styleName="dateAmount">￥{monthInfo.planAmt}</div>
                         <div styleName="dateAmount">{monthInfo.planGoldAmt}克</div>
                     </div>
                 </div>
                 <div styleName="dateItem">
                     <div styleName="dateDemind">本月已回款</div>
                     <div styleName="dateAmountBox">
-                        <div styleName="dateAmount">￥{monthInfo.realAmt}万</div>
+                        <div styleName="dateAmount">￥{monthInfo.realAmt}</div>
                         <div styleName="dateAmount">{monthInfo.realGoldAmt}克</div>
                     </div>
                 </div>

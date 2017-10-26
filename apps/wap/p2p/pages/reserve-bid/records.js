@@ -117,7 +117,7 @@ class ReserveRecords extends React.Component {
                 </div>}
                 <div styleName="infoContainer">
                     <div styleName="infoItem">
-                        <div styleName="infoItemLeft">预计收益</div>
+                        <div styleName="infoItemLeft">预计收益(含加息工豆)</div>
                         <div styleName="itemHeaderRight colorRed">￥{item.interest}元</div>
                     </div>
                     <div styleName="infoItem">
@@ -149,8 +149,11 @@ class ReserveRecords extends React.Component {
 
         let tab_style = Browser.inIOSApp ? 'tabWrapperIos' : 'tabWrapper'
 
+        let goBack = () => {
+            Browser.inApp && NativeBridge.close()
+        }
         return <div styleName="recordsPanel">
-            <Header title="我的预约" history={history}/>
+            <Header title="我的预约" goBack={goBack}/>
             <div styleName={tab_style}>
                 {['0', '1', '2'].map(tab_func)}
             </div>

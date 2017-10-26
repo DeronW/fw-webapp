@@ -33,5 +33,9 @@ NativeBridge.hide_header = function () {
     NativeBridge.trigger('hide_header');
 }
 
+NativeBridge.to_face = function(){
+    NativeBridge.trigger('to_face');
+}
+
 
 export default NativeBridge

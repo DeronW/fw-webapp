@@ -61,7 +61,7 @@ class TransferFriends extends React.Component {
         let { pageNo, list, keyword } = this.props.user_coupon.friends_data
         let { beanCount, remark, overdueTime, investMultip, inverstPeriod,couponType } = Utils.hashQuery
         let u = couponType == '2' ? '克' : '元'
-        let m = item.conponType == '0' ?'￥':''
+        let m = conponType == '0' ?'￥':''
 
         let coupon = () => {
             let coupon_style = couponType == '0' ? "couponItem typeBlue" : couponType == '1' ? "couponItem typeRed" : "couponItem typeYellow"
@@ -72,7 +72,7 @@ class TransferFriends extends React.Component {
                     <div styleName="lineRight desRight">有效期 {overdueTime}</div>
                 </div>
                 <div styleName="couponAddtion">
-                    <div styleName="lineLeft addLeft">投资 ¥{investMultip} 可用</div>
+                    <div styleName="lineLeft addLeft">{conponType=='2'?'购买':'投资' }{m}{investMultip}{u} 可用</div>
                     <div styleName="lineRight addRight">投资期限 ≥{inverstPeriod}天 可用</div>
                 </div>
             </div>
