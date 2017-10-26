@@ -58,7 +58,8 @@ class ReserveApply extends React.Component {
                     },
                     () => {
                         this.setState({pending: false})
-                        return new Promise((_, reject) => {})
+                        return new Promise((_, reject) => {
+                        })
                     })
                 .then(() => {
                     history.push(`/reserve-bid/records`)
@@ -125,7 +126,7 @@ class ReserveApply extends React.Component {
             }
             return <div styleName="infoContent">
                 <div styleName="infoAmount">
-                    <div styleName="amountLeft">预计收益</div>
+                    <div styleName="amountLeft">预计收益<span styleName="coverBeans">(含加息工豆)</span></div>
                     <div styleName="amountRight">
                         &yen;{goals}
                     </div>

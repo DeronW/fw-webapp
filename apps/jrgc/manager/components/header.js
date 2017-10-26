@@ -24,7 +24,9 @@ const Header = CSSModules(styles, {
         </div>
     </div>
 ))
+
 Header.defaultProps = {
     noBack: false
 }
+
 export default Header
