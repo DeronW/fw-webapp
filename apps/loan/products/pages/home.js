@@ -130,7 +130,7 @@ class Home extends React.Component {
                 <div styleName="text-a">恭喜您被选中</div>
                 <div styleName="text-b">
                     我们邀请您使用放心花新推出的借款产<br />
-                    品优易借。借款期限21天，综合费率8.5%，<br />
+                    品优易借。借款期限21天，综合费率16%，<br />
                     还款方式灵活，快去试试吧~<br />
                 </div>
                 <a styleName="btn-close" onClick={
