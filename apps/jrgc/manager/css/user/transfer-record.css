@@ -129,6 +129,7 @@
 }
 .empty img{
     display: inline-block;
+    text-align: center;
     vertical-align: middle;
     margin-top: 200px;
 }

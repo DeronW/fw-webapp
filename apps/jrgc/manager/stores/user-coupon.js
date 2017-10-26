@@ -28,6 +28,7 @@ export default class UserCoupon {
     }
     setCouponType = (type) => {
         this.coupon_data.type = type
+        this.coupon_data.records.splice(0,this.coupon_data.records.length)
         this.fetchCouponList()
     }
     setCouponStatus = (status) => {

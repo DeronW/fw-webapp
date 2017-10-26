@@ -47,7 +47,7 @@ export default class Investor {
                     ],
                     '未投资': [
                         {
-                            '最近回款时间排序': 9
+                            '可用余额最高排序': 10
                         }
                     ]
                 },
@@ -92,13 +92,11 @@ export default class Investor {
     }
     //我的客户列表，包含全部、在投、空仓未投资四种类型，以及余额最高，返利最多，最近回款时间三种排序方式
     resetCustPageNo = () => {
-        // this.data.custmor.list.splice(0,this.data.custmor.list.length)
         this.data.custmor.pageNo = 1
     }
     setCustTab = (tab) => {
         this.data.custmor.tab = tab
         this.data.custmor.type = '可用余额最高排序'
-        if (tab == '未投资') this.data.custmor.type = '最近回款时间排序'
     }
     setCustType = (type) => {
         this.data.custmor.type = type
@@ -109,12 +107,12 @@ export default class Investor {
     }
     fetchCustList = (done) => {
         let { value, list, pageNo } = this.data.custmor
-        if (pageNo == 0) return done && done()
-        if (pageNo == 1) list.splice(0, list.length)
+        if (this.data.custmor.pageNo == 0) return done && done()
+        if (this.data.custmor.pageNo == 1) list.splice(0, list.length)
 
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
-            pageNo: pageNo,
+            pageNo: this.data.custmor.pageNo,
             pageSize: 10
         }).then(data => {
             list.push(...data.pageData.result)
