@@ -226,12 +226,12 @@ const Model = {
     <DisplayItem field="" immutable=Bool history={history} />
 */
 const DisplayItem = inject('fq')(observer(CSSModules((props) => {
-    
+
         let { fq, field, immutable, history } = props,
             itemPlaceholder = Model[field].options !== undefined ? '请选择' : '请输入',
             itemStyleName = immutable ? 'item-container' : 'mutable-item-container';
 
-        var itemValue = fq.put_in_data[field];    
+        var itemValue = fq.put_in_data[field];
 
         if(Model[field].options !== undefined){
             let index = Model[field].options.findIndex(i=>i["value"] == itemValue);
@@ -240,7 +240,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                 itemValue = indexOption.text
             }
         }
-        
+
         return (
             <div className={styles[itemStyleName]}
                 onClick={() => { !immutable && fq.setCurrentPanel(history, field) }}>
@@ -250,10 +250,10 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                 </div>
             </div>
         )
-    
+
     }, styles)))
-    
-    
+
+
     /* parameters
         <InputItem field="" history={history} />
     */
@@ -261,19 +261,19 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
     @observer
     @CSSModules(styles)
     class InputItem extends React.Component {
-    
+
         state = { value: '' }
-    
+
         componentDidMount() {
             let { fq, field } = this.props;
             this.setState({ value: fq.put_in_data[field] })
         }
-    
+
         handleInput = e => {
             let v = e.target.value;
             this.setState({ value: v })
         }
-    
+
         handleSubmit = () => {
             let v = this.state.value;
             let { fq, field, history } = this.props;
@@ -289,12 +289,12 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             if(field == 'balance'){
                 err ? Components.showToast(err) :
                     fq.setPanelData(history, 'balance', v)
-                    fq.put_in_data.term = ''  
+                    fq.put_in_data.term = ''
             }else{
                 err ? Components.showToast(err) : fq.setPanelData(history, field, v)
-            }   
+            }
         }
-    
+
         render() {
             let { mortgage, field } = this.props,
                 value = this.state.value;
@@ -319,7 +319,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             )
         }
     }
-    
+
     /* parameters
         <SelectItem field="" history={history} />
     */
@@ -331,7 +331,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
         constructor(props){
             super(props)
         }
-        
+
         changeHandler = (v) => {
             this.props.fq.put_in_data['city'] = v;
         }
@@ -361,8 +361,8 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
 
             let itemOptions = Model[field].options.map((o)=>{new_array.push(o["text"])});
 
-            var itemValue = fq.put_in_data[field];      
-            
+            var itemValue = fq.put_in_data[field];
+
             if(Model[field].options !== undefined){
                 let index = Model[field].options.findIndex(i=>i["value"] == itemValue);
                 let indexOption = Model[field].options[index];
@@ -384,7 +384,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                 )
             }
 
-            const selectOptions = field == 'city' ? 
+            const selectOptions = field == 'city' ?
                 <CitySelector selected={fq.put_in_data['city']} changeHandler={v=>this.changeHandler(v)} closeHandler={this.closeHandler}/>
              : (
                 <div styleName="option-grp">
@@ -399,7 +399,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             )
         }
     }
-    
+
     @inject('fq')
     @observer
     @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
@@ -409,7 +409,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             document.title = '借款申请';
             this.props.fq.fetchPutInData();
         }
-    
+
         render() {
             let { fq, history } = this.props,
                 currentPanel = history.location.hash.slice(1);
@@ -417,7 +417,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             return (
                 <div styleName="cnt-container">
                     <Header title="借款申请" history={history} />
-    
+
                     {currentPanel && (
                         Model[currentPanel].options ?
                             <SelectItem field={currentPanel} history={history} />
@@ -438,14 +438,14 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                             <DisplayItem field="address" history={history}/>
                             <DisplayItem field="homeSituation" history={history}/>
                         </div>
-    
+
                         <div styleName="item-grp-name">紧急联系人</div>
                         <div styleName="item-grp">
                             <DisplayItem field="emContact" history={history} />
                             <DisplayItem field="emRelationship" history={history} />
                             <DisplayItem field="emMobile" history={history} />
                         </div>
-    
+
                         <div styleName="item-grp-name">工作信息</div>
                         <div styleName="item-grp">
                             <DisplayItem field="income" history={history} />
@@ -460,7 +460,7 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
                             </a>
                         </div>
                     </div>
-    
+
                         <div styleName="submit-btn-container">
                             <a styleName="submit-btn"
                                 style={{ 'background': fq.allFieldsFilled ? '#639afb' : '#ccc' }}
@@ -473,5 +473,5 @@ const DisplayItem = inject('fq')(observer(CSSModules((props) => {
             )
         }
     }
-    
+
     export default FqForm
