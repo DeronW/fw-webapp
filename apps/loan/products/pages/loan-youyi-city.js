@@ -4,19 +4,9 @@ import { Post } from '../../lib/helpers'
 import { observer, inject } from 'mobx-react'
 import styles from '../css/loan-youyi-city.css'
 
-function filtering(add,name,code){
-    let result = [];
-    for(let i=0;i<add.length;i++) {
-      if(code == add[i].id){
-        result = add[i][name];
-      }
-    }
-    return result;
-}
-
 let information =  [
   {id: 1, name: '北京', city: [
-      {id: 1, name: '北京市', district: [
+      {id: 1, name: '市辖区', district: [
           {id: 1, name: '东城区'},
           {id: 2, name: '西城区'},
           {id: 3, name: '崇文区'},
@@ -33,12 +23,12 @@ let information =  [
           {id: 14, name: '大兴区'},
           {id: 15, name: '怀柔区'},
           {id: 16, name: '平谷区'},
-          {id: 17, name: '密云县'},
-          {id: 18, name: '延庆县'}
+          {id: 17, name: '密云区'},
+          {id: 18, name: '延庆区'}
       ]}
   ]},
   {id: 2, name: '天津', city: [
-      {id: 2, name: '天津市', district: [
+      {id: 2, name: '市辖区', district: [
           {id: 19, name: '和平区'},
           {id: 20, name: '河东区'},
           {id: 21, name: '河西区'},
@@ -54,9 +44,9 @@ let information =  [
           {id: 31, name: '北辰区'},
           {id: 32, name: '武清区'},
           {id: 33, name: '宝坻区'},
-          {id: 34, name: '宁河县'},
-          {id: 35, name: '静海县'},
-          {id: 36, name: '蓟县'}
+          {id: 34, name: '宁河区'},
+          {id: 35, name: '静海区'},
+          {id: 36, name: '蓟州区'}
       ]}
   ]},
   {id: 3, name: '河北', city: [
@@ -894,7 +884,7 @@ let information =  [
       ]}
   ]},
   {id: 9, name: '上海', city: [
-      {id: 73, name: '上海市', district: [
+      {id: 73, name: '市辖区', district: [
           {id: 719, name: '黄浦区'},
           {id: 720, name: '卢湾区'},
           {id: 721, name: '徐汇区'},
@@ -913,7 +903,7 @@ let information =  [
           {id: 734, name: '青浦区'},
           {id: 735, name: '南汇区'},
           {id: 736, name: '奉贤区'},
-          {id: 737, name: '崇明县'}
+          {id: 737, name: '崇明区'}
       ]}
   ]},
   {id: 10, name: '江苏', city: [
@@ -929,8 +919,8 @@ let information =  [
           {id: 746, name: '雨花台区'},
           {id: 747, name: '江宁区'},
           {id: 748, name: '六合区'},
-          {id: 749, name: '溧水县'},
-          {id: 750, name: '高淳县'}
+          {id: 749, name: '溧水区'},
+          {id: 750, name: '高淳区'}
       ]},
       {id: 75, name: '无锡市', district: [
           {id: 751, name: '崇安区'},
@@ -1063,7 +1053,7 @@ let information =  [
           {id: 852, name: '桐庐县'},
           {id: 853, name: '淳安县'},
           {id: 854, name: '建德市'},
-          {id: 855, name: '富阳市'},
+          {id: 855, name: '富阳区'},
           {id: 856, name: '临安市'}
       ]},
       {id: 88, name: '宁波市', district: [
@@ -1110,10 +1100,10 @@ let information =  [
       ]},
       {id: 92, name: '绍兴市', district: [
           {id: 891, name: '越城区'},
-          {id: 892, name: '绍兴县'},
+          {id: 892, name: '柯桥区'},
           {id: 893, name: '新昌县'},
           {id: 894, name: '诸暨市'},
-          {id: 895, name: '上虞市'},
+          {id: 895, name: '上虞区'},
           {id: 896, name: '嵊州市'}
       ]},
       {id: 93, name: '金华市', district: [
@@ -2521,7 +2511,7 @@ let information =  [
       ]}
   ]},
   {id: 22, name: '重庆', city: [
-      {id: 234, name: '重庆市', district: [
+      {id: 234, name: '市辖区', district: [
           {id: 2000, name: '万州区'},
           {id: 2001, name: '涪陵区'},
           {id: 2002, name: '渝中区'},
@@ -3643,7 +3633,8 @@ export default class LoopLoanCity extends React.Component {
         provinceActive:true,
         cityActive:false,
         districtActive:false,
-        titleActive:[true,false,false]
+        titleActive:[true,false,false],
+        popShow:true
     }
 
     componentDidMount(){
@@ -3685,9 +3676,48 @@ export default class LoopLoanCity extends React.Component {
           titleActive:[false,false,true]
        })
     }
+
+    districtSelected = (item,index) => {
+        this.setState({
+           popShow:false,
+           district:item,
+           temAddInfo:this.state.province+""+this.state.city+""+item
+        })
+    }
+
+    cityReselectHandler = () => {
+        this.setState({
+            district:'',
+            districtActive:false,
+            cityActive:true,
+            titleActive:[false,true,false]
+        })
+    }
+
+    provinceReselectHandler = () => {
+      this.setState({
+        city:'',
+        cityList:[],
+        districtList:[],
+        cityActive:false,
+        provinceActive:true,
+        titleActive:[true,false,false]
+    })
+    }
+
+
+    closePopHandler = () => {
+        this.setState({popShow:false})
+    }
+
+    showPopHandler = () => {
+      this.setState({
+          popShow:true
+        })
+    }
         
     render() {
-        let {province,city,district,provinceList,cityList,districtList,provinceActive,cityActive,districtActive,titleActive} = this.state;
+        let {province,city,district,provinceList,cityList,districtList,provinceActive,cityActive,districtActive,titleActive, popShow, temAddInfo} = this.state;
         let provinceItem = (item,index) => {
            let handler = () => this.provinceSelected(item,index);
            return (
@@ -3708,24 +3738,23 @@ export default class LoopLoanCity extends React.Component {
        }
         return (
             <div>
-                <section>
-                <section styleName="address">
-                  <section styleName="title">
+                <div styleName="address-info" onClick={this.showPopHandler}>{temAddInfo}</div>
+                {popShow && <div styleName="address">
+                  <div styleName="title">
                     <h4>所在地区</h4>
-                    <span>×</span>
-                  </section>
-                  <section styleName="title">
-                      <div styleName={titleActive[0] ? "area red": "area"}>{province? province:'请选择'}</div>
-                      {province && <div styleName={titleActive[1] ? "area red" : "area"}>{city ? city : '请选择'}</div>}
+                    <span onClick={this.closePopHandler}>×</span>
+                  </div>
+                  <div styleName="title">
+                      <div styleName={titleActive[0] ? "area red": "area"} onClick={this.provinceReselectHandler}>{province? province:'请选择'}</div>
+                      {province && <div styleName={titleActive[1] ? "area red" : "area"} onClick={this.cityReselectHandler}>{city ? city : '请选择'}</div>}
                       {city && <div styleName={titleActive[2] ? "area red" : "area"}>{district ? district :'请选择'}</div>}
-                  </section>
+                  </div>
                   <div styleName="item-wrap">
                       {provinceActive && provinceList.map(provinceItem)}
                       {cityActive && cityList.map(cityItem)}
                       {districtActive && districtList.map(districtItem)}
                   </div>
-                </section>
-              </section>
+                </div>}
             </div>
         )
       }
