@@ -228,7 +228,7 @@ class Info extends React.Component {
                 </div>
                 <div styleName="more" onClick={this.showMore}>
                     <span>{hidden ? '更多' : '收起'}</span>
-                    <img style={{ transform: hidden ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                    <img style={{ transform: hidden ? 'rotate(0deg)' : 'rotate(180deg)' }}
                         src={require('../../images/investor/info/down.png')} />
                 </div>
             </div>
@@ -237,7 +237,7 @@ class Info extends React.Component {
                     <div styleName="accountName">TA的尊享账户</div>
                     <div styleName="accountText">
                         可用余额
-                        <span>{detail.zxBalance}</span>
+                        <span>{detail.zxBalance}元</span>
                         <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
@@ -245,7 +245,7 @@ class Info extends React.Component {
                     <div styleName="accountName">TA的微金账户</div>
                     <div styleName="accountText">
                         可用余额
-                        <span>{detail.wjBalance}</span>
+                        <span>{detail.wjBalance}元</span>
                         <img src={require('../../images/investor/info/arrow.png')} />
                     </div>
                 </div>
