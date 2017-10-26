@@ -3690,7 +3690,8 @@ export default class LoopLoanCity extends React.Component {
     districtSelected = (item,index) => {
         this.setState({
            popShow:false,
-           district:item
+           district:item,
+           temAddInfo:this.state.province+""+this.state.city+""+item
         })
     }
 
@@ -3720,11 +3721,13 @@ export default class LoopLoanCity extends React.Component {
     }
 
     showPopHandler = () => {
-      this.setState({popShow:true})
+      this.setState({
+          popShow:true
+        })
     }
         
     render() {
-        let {province,city,district,provinceList,cityList,districtList,provinceActive,cityActive,districtActive,titleActive, popShow} = this.state;
+        let {province,city,district,provinceList,cityList,districtList,provinceActive,cityActive,districtActive,titleActive, popShow, temAddInfo} = this.state;
         let provinceItem = (item,index) => {
            let handler = () => this.provinceSelected(item,index);
            return (
@@ -3745,7 +3748,7 @@ export default class LoopLoanCity extends React.Component {
        }
         return (
             <div>
-                <div styleName="address-info" onClick={this.showPopHandler}>{province+""+city+""+district}</div>
+                <div styleName="address-info" onClick={this.showPopHandler}>{temAddInfo}</div>
                 {popShow && <div styleName="address">
                   <div styleName="title">
                     <h4>所在地区</h4>
