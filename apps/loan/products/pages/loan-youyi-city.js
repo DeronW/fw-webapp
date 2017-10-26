@@ -3783,6 +3783,7 @@ export default class LoopLoanCity extends React.Component {
 
     provinceReselectHandler = () => {
       this.setState({
+        city:'',
         cityActive:false,
         provinceActive:true,
         titleActive:[true,false,false]
