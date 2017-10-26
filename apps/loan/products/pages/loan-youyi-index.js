@@ -22,14 +22,19 @@ export default class LoopLoan extends React.Component {
     state = {
         show: false,
         questionShow: false,
-        message:null
+        message:null,
+        authingShow:false
     }
 
     componentDidMount() {
         let { loopLoan } = this.props;
         document.title = '优易借';
         NativeBridge.hide_header();
-        loopLoan.get_baseinfo().catch((e) => {
+        loopLoan.get_baseinfo().then(()=>{
+            if(loopLoan.userStatus == 101){
+                this.setState({authingShow:true})
+            }
+        }).catch((e) => {
             if ([20005, 20009, 20013].indexOf(e.code) > -1) {
                 this.setState({ show: true, message:e.message })
             } else {
@@ -42,8 +47,10 @@ export default class LoopLoan extends React.Component {
         let { loopLoan, history } = this.props;
         if (loopLoan.userStatus == 0) {
             history.push('/loan-youyi-card')
-        } else if (loopLoan.userStatus == 1) {
-            gotoHandler(loopLoan.url, false, "芝麻信用授权", false)
+        } else if(loopLoan.userStatus == 1) {
+            loopLoan.get_authUrl().then(()=>{
+                gotoHandler(loopLoan.url, false, "芝麻信用授权", false)
+            });
         } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt) {
             history.push('/loan-youyi-form')
         } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt) {
@@ -65,6 +72,10 @@ export default class LoopLoan extends React.Component {
     closeHandler = () => {
         let { history } = this.props;
         Browser.inFXHApp ? NativeBridge.close() : history.push('/')
+    }
+
+    confirmHandler = () => {
+        this.setState({authingShow:false})
     }
 
     render() {
@@ -99,7 +110,7 @@ export default class LoopLoan extends React.Component {
                 <div styleName="loan-info-container">
                     <div styleName="loan-info">
                         <div styleName="loan-info-left">
-                            <div styleName="loan-info-num">{loopLoan.userStatus < 2 ? "---" : loopLoan.creditLine}</div>
+                            <div styleName="loan-info-num">{(loopLoan.userStatus < 2 || loopLoan.userStatus == 101) ? "---" : loopLoan.creditLine}</div>
                             <div styleName="loan-info-title">总额度(元){loopLoan.userStatus == 2 && loopLoan.creditLine == 0 && <span styleName="tip" onClick={this.questionShowHandler}></span>}</div>
                         </div>
                         <div styleName="loan-info-right">
@@ -112,12 +123,18 @@ export default class LoopLoan extends React.Component {
                 <div styleName="btn-container">
                     {loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt && <div styleName="btn-tip">最低{loopLoan.minLoanAmt}元起借</div>}
                     {loopLoan.userStatus == 1 && <div styleName="btn-tip">借款前请先完成芝麻信用分认证</div>}
-                    <div styleName="btn" onClick={this.clickHandler}>{btn_title}</div>
+                    {loopLoan.userStatus == 101 ? <div styleName="btn-gray">认证中</div> : <div styleName="btn" onClick={this.clickHandler}>{btn_title}</div>}
                 </div>
                 {this.state.show && <div styleName="mask">
                     <div styleName="popup">
                         <div styleName="popup-tip">{this.state.message}</div>
                         <div styleName="popup-btn" onClick={this.closeHandler}>知道了</div>
+                    </div>
+                </div>}
+                {this.state.authingShow && <div styleName="mask">
+                    <div styleName="popup">
+                        <div styleName="popup-tip">正在授信中，请稍后查看您的信用额度</div>
+                        <div styleName="popup-btn" onClick={this.confirmHandler}>确定</div>
                     </div>
                 </div>}
                 {this.state.questionShow && <div styleName="mask">

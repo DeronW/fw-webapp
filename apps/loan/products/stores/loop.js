@@ -56,9 +56,11 @@ export default class LoopLoan {
             this.productDesc = data.productDes;
             this.productUuid = data.productUuid;
             this.userStatus = data.userStatus;
-        }).then(() => {
-            return this.Post('/api/zhima/v1/credit/auth.json');
-        }).then((data) => {
+        });
+    }
+
+    get_authUrl = () => {
+        return this.Post('/api/zhima/v1/credit/auth.json').then((data) => {
             this.url = data.url
         });
     }
@@ -99,7 +101,7 @@ export default class LoopLoan {
         return this.Post('/api/zhima/v1/credit/callback.json', {
             params: params,
             sign: sign
-        },'silence').then((data) => {
+        },{silence:true}).then((data) => {
             this.zmScore = data.zmScore;
         });
     }
