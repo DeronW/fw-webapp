@@ -18,6 +18,12 @@ class QRCode extends React.Component {
         //     if (error) console.error(error)
         //     console.log('success!..');
         // })
+        // qrcode.toString(url,{
+        //     Default:'svg',
+        //     Type:'String'
+        // }, function (err, string) {
+
+        // })
     }
     render(){
         let {history} = this.props

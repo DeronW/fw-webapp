@@ -30,7 +30,7 @@ fs.readFile(sourceF, (err, data) => {
     if (CLUSTER == 'default') {
         reg_page = new RegExp(`apps/${PROJ}/([-\\w]+)/`)
     } else {
-        reg_page = new RegExp(`apps/${CLUSTER}/(${PROJ})/`)
+        reg_page = new RegExp(`apps/${CLUSTER}/(${PROJ})/*`)
     }
 
     lines.forEach(line => {

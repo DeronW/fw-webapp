@@ -253,14 +253,14 @@ class MiddlePanel extends React.Component {
                 组织架构
                 </div>
             <img src={require("../../images/notice/disclosure/org.jpg")} alt="" styleName="orgPic" />
-            <div styleName="shareTitle">实际控股人与持股5%以上的股东名单</div>
+            <div styleName="shareTitle">实际控股人</div>
             <div styleName="shareContent">
                 {/*<img src={require("../../images/notice/disclosure/logo3.png")} alt="" styleName="sharePic" />*/}
                 <p styleName="des">Decade Elite Global Limited</p>
             </div>
             <div styleName="chairmanRight">
                 <div styleName="chairmanRightTitle">
-                    管理团队
+                    高管团队
                     </div>
                 <div styleName="chairmanRightTitleContent">
                     {chairman.map(chairmanFn)}
