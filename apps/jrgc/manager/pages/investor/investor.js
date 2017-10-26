@@ -62,7 +62,7 @@ class Investor extends React.Component {
             }else if(type == '返利最多排序'){
                 t = `￥${item.commissionAmt}`
             }else{
-                t = item.createTime || '暂无回款'
+                t =  item.realName ? (item.createTime || '暂无回款'):'暂无回款'
             }
             return t
         }
