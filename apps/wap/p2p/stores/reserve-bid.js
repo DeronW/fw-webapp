@@ -1,5 +1,5 @@
-import {extendObservable, computed} from 'mobx'
-import {Utils} from 'fw-javascripts'
+import { extendObservable, computed } from 'mobx'
+import { Utils } from 'fw-javascripts'
 
 export default class ReserveBid {
     constructor(Post) {
@@ -10,9 +10,9 @@ export default class ReserveBid {
         extendObservable(this.records, {
             type: '0',
             tab: {
-                '0': {name: '预约中', page_no: 1, list: []},
-                '1': {name: '预约结束', page_no: 1, list: []},
-                '2': {name: '已取消', page_no: 1, list: []},
+                '0': { name: '预约中', page_no: 1, list: [] },
+                '1': { name: '预约结束', page_no: 1, list: [] },
+                '2': { name: '已取消', page_no: 1, list: [] },
             }
         })
 
@@ -27,7 +27,7 @@ export default class ReserveBid {
                 valueTime: '',//预计起息时间
                 startTime: '',//抢购时间
                 paymentTime: '',//预计到期时间
-                addRate:''
+                addRate: ''
             },
             accountAmount: null,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
@@ -72,7 +72,7 @@ export default class ReserveBid {
     }
 
     resetPageNo = () => {
-        let {tab, type} = this.records, current_tab = tab[type]
+        let { tab, type } = this.records, current_tab = tab[type]
         current_tab.page_no = 1
     }
 
@@ -82,20 +82,19 @@ export default class ReserveBid {
     }
 
     getReserveList = (done) => {
-        let {tab, type} = this.records, current_tab = tab[type]
+        let { tab, type } = this.records, current_tab = tab[type]
         if (current_tab.page_no === 0) return done && done();
         const PAGE_SIZE = 10
 
         if (current_tab.page_no == 1) current_tab.list.splice(0, current_tab.list.length)
         this.Post('/api/v1/appointRecordList.shtml', {
-            page: current_tab.page_no,
+            page: current_tab.page_no++,
             pageSize: PAGE_SIZE,
             status: type
-        }, {loading: false}).then(data => {
+        }, { loading: false }).then(data => {
             current_tab.list.push(...data.pageData.result)
 
-            current_tab.page_no < data.pageData.pagination.totalPage ?
-                current_tab.page_no++ :
+            if (current_tab.page_no >= data.pageData.pagination.totalPage)
                 current_tab.page_no = 0;
 
             done && done();
