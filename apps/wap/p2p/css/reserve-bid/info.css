@@ -240,7 +240,7 @@
 }
 
 .textTitle {
-    font-size: 26px;
+    font-size: 24px;
     color: #555;
     margin-bottom: 18px;
     font-family: PingFangSC-Regular, sans-serif;
@@ -249,6 +249,7 @@
 .sectionText {
     margin-bottom: 50px;
     font-family: PingFangSC-Regular, sans-serif;
+    font-size: 24px;
 }
 
 .bottomBox {
