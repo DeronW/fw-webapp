@@ -15,12 +15,6 @@ class ReserveSuccess extends React.Component {
         history.push('/reserve-bid/records')
     }
 
-    toHomeHandler = () => {
-        let {history} = this.props
-        // 跳到首页
-        NativeBridge.close()
-    }
-
     render() {
         let {history, novice_bid} = this.props
         return <div styleName="successPanel">
@@ -32,7 +26,7 @@ class ReserveSuccess extends React.Component {
                 <div><span styleName="colorRed">20元</span>现金奖励已经发放至您的账户，请查收</div>}
             </div>
             <div styleName="toRecords" onClick={this.toRecordsHandler}>查看记录</div>
-            <div styleName="toHome" onClick={this.toHomeHandler}>返回首页</div>
+            <div styleName="toHome" onClick={() => NativeBridge.close()}>返回首页</div>
         </div>
 
     }
