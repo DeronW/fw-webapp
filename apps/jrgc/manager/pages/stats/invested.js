@@ -146,7 +146,7 @@ class Invested extends React.Component {
                 <div styleName="left-info">
                     <div styleName="left-top-info">{name}</div>
                     { sortBy !== '余额' &&
-                        <div styleName="left-bottom-info">{bid} | {interest} | {duration}</div>
+                        <div styleName="left-bottom-info">{bid} | {interest}% | {duration}</div>
                     }
                 </div>
                 <div styleName="right-info">

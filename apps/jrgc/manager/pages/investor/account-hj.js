@@ -51,17 +51,17 @@ class AccountHj extends React.Component {
                 <div styleName="priceItem">
                     <div styleName="itemLineUp"><span styleName="itemName">累计盈亏</span><span
                         styleName="icon-question" onClick={this.showHandler}></span></div>
-                    <div styleName="itemLineDown colorRed">+¥{info.accProfitLoss}</div>
+                    <div styleName="itemLineDown colorRed">{info.accProfitLoss}元</div>
                 </div>
                 <div styleName="priceItem">
                     <div styleName="itemLineUp"><span styleName="itemName">实时金价(每克)</span>
                         <span styleName="icon-refresh" onClick={fetchGoldPrice}></span>
                     </div>
-                    <div styleName="itemLineDown">¥{goldPrice}</div>
+                    <div styleName="itemLineDown">{goldPrice}元/克</div>
                 </div>
                 <div styleName="priceItem itemLast">
                     <div styleName="itemLineUp"><span>成交金价(每克)</span></div>
-                    <div styleName="itemLineDown">¥{info.dealPrice}</div>
+                    <div styleName="itemLineDown">¥{info.dealPrice}元/克</div>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@ class AccountHj extends React.Component {
             </div>
 
             <div styleName="remain">
-                可用余额<span>¥{info.availableBalance}</span>
+                可用余额<span>{info.availableBalance}元</span>
             </div>
             {close && <div styleName="pop-bg">
                 <div styleName="pop">

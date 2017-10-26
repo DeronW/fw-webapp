@@ -38,7 +38,7 @@ class Score extends React.Component {
             <img src={require('../../images/investor/empty.png')} />
         </div>
         return <div>
-            <Header history={history} title="他的工分" />
+            <Header history={history} title="TA的工分" />
             <div styleName="total">
                 <div styleName="title">他的工分</div>
                 <div styleName="totalNumber">{iintegralNum}</div>
