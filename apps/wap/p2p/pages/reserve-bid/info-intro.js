@@ -102,9 +102,9 @@ class ReserveInfoIntro extends React.Component {
         let intro_section = () => {
             let {intro_control} = this.state
             let over_text = <div styleName="overText">
-                <div styleName="sectionText">
+                <span styleName="sectionText">
                     经成为国内实现纯在线自动化审核信审的平台，有效控制用户的欺诈与信用风险，保障客户的投资安全性。
-                </div>
+                </span>
                 <div styleName="sectionText">
                     二、闪电借款主要借款客户具备良好的经济偿还能力，属于可持续发展和培育的“高成长性人群”。
                 </div>
