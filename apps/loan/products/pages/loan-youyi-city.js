@@ -3774,6 +3774,7 @@ export default class LoopLoanCity extends React.Component {
     cityReselectHandler = () => {
         this.setState({
             district:'',
+            provinceActive:false,
             districtActive:false,
             cityActive:true,
             titleActive:[false,true,false]
@@ -3782,9 +3783,6 @@ export default class LoopLoanCity extends React.Component {
 
     provinceReselectHandler = () => {
       this.setState({
-        city:'',
-        cityList:[],
-        districtList:[],
         cityActive:false,
         provinceActive:true,
         titleActive:[true,false,false]
