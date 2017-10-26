@@ -182,11 +182,11 @@ class Info extends React.Component {
             <div styleName="infoBox">
                 <div styleName="infoItem">
                     <div styleName="infoText">投资平均收益率</div>
-                    <div styleName="infoValue">{analysis.investMeanProfit}</div>
+                    <div styleName="infoValue">{analysis.investMeanProfit}%</div>
                 </div>
                 <div styleName="infoItem">
                     <div styleName="infoText">投资平均周期</div>
-                    <div styleName="infoValue">{analysis.investMeanPhase}</div>
+                    <div styleName="infoValue">{analysis.investMeanPhase}天</div>
                 </div>
             </div>
             <div styleName="pie">

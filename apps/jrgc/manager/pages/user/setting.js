@@ -34,8 +34,8 @@ class Setting extends React.Component{
     render(){
         let {history} = this.props
         let {close} = this.state
-        let { loginName } = this.props.login.data
-        let { info } = this.props.user.data.user
+        let { info,loginName } = this.props.user.data.user
+
         let pop = <div styleName="pop-bg">
             <div styleName="pop">
                 <div styleName="reminder">提示</div>
