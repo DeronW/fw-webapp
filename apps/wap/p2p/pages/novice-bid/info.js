@@ -132,7 +132,7 @@ class ReserveInfoNovice extends React.Component {
             {intro_section()}
             {/*{jumpLink_section()}*/}
             {bottom_section()}
-            {records_section()}
+            {/*{records_section()}*/}
         </div>
     }
 }
