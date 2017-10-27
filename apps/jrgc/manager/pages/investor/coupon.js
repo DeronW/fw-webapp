@@ -71,7 +71,7 @@ class Coupon extends React.Component {
             if(item.inverstPeriod == 0){
                 return <div styleName="day">任意标可用</div>
             }else{
-                return <div styleName="day">投资期限 <span>{item.inverstPeriod}天</span> 可用</div>
+                return <div styleName="day">投资期限>= <span>{item.inverstPeriod}天</span> 可用</div>
             }
         }
         let couponFn = (item, index) => {
