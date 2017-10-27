@@ -83,8 +83,19 @@ class Coupon extends React.Component {
                 <div styleName="time">有效期 {item.overdueTime}</div>
                 {limit(conponType, item.investMultip)}
                 <div styleName="day">投资期限 <span>{item.inverstPeriod}天</span> 可用</div>
-                <div styleName="expire"></div>
+                {item.isOver == '1' && <div styleName="expire"></div>}
             </div>
+        }
+        let name = ()=>{
+            let n
+            if(tabName=='TA的优惠券'){
+                n = `可用${record[type].name}`
+            }else if(tabName=='使用记录'){
+                n = `已使用${record[type].name}`
+            }else{
+                n = `已过期${record[type].name}`
+            }
+            return n
         }
         let empty = <div styleName="empty">
             <img src={require('../../images/investor/empty.png')} />
@@ -100,7 +111,7 @@ class Coupon extends React.Component {
                 {['0', '1', '2'].map(typeFn)}
             </div>
             <div styleName="couponBox" onClick={this.gotoCoupon}>
-                <div styleName="title">{`可用${record[type].name}`}</div>
+                <div styleName="title">{name}</div>
                 <div styleName="num"><span>{totalCount}</span>张</div>
                 <div styleName="text"><span>送TA优惠券</span><img src={require('../../images/investor/coupon/right.png')} /></div>
             </div>
