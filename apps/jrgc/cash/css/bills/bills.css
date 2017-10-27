@@ -24,3 +24,31 @@
     font-size: 22px;
     color: #c7c0ff;
 }
+
+.totalInfo {
+    width: 100%;
+    height: 80px;
+    padding: 50px 0;
+    background: #ffffff;
+    display: table;
+    font-size: 50px;
+    color: rgba(135, 123, 231, 0.9);
+    margin-top: -1px;
+}
+
+.totalInfoLeft, .totalInfoRight {
+    width: 50%;
+    float: left;
+    height: 100%;
+    text-align: center;
+}
+
+.totalInfoLeft {
+    width: 49%;
+    border-right: 1px solid #e8e7f0;
+}
+
+.infoDes {
+    font-size: 22px;
+    color: #888888;
+}

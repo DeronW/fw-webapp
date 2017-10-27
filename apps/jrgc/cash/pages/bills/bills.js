@@ -15,6 +15,16 @@ class Bills extends React.Component {
                 <div styleName="totalTips">待还总金额(元)</div>
             </div>
             <div styleName="bg"></div>
+            <div styleName="totalInfo">
+                <div styleName="totalInfoLeft">
+                    <div>6</div>
+                    <div styleName="infoDes">待还总笔数</div>
+                </div>
+                <div styleName="totalInfoRight">
+                    <div>1</div>
+                    <div styleName="infoDes">逾期笔数</div>
+                </div>
+            </div>
         </div>
     }
 }
