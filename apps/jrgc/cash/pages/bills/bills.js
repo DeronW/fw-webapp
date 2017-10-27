@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
-import Header from '../../components/header'
+import {Header, NavBar} from '../../components'
 import styles from '../../css/bills/bills.css'
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
@@ -41,6 +41,7 @@ class Bills extends React.Component {
                     </div>
                 </div>
             </div>
+            <NavBar/>
         </div>
     }
 }
