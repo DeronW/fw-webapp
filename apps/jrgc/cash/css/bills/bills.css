@@ -1,0 +1,26 @@
+.totalCount {
+    width: 100%;
+    height: 316px;
+    background: #877be7;
+    font-size: 80px;
+    color: #fff;
+    text-align: center;
+    margin-top: -1px;
+    display: table;
+}
+
+.bg {
+    width: 100%;
+    height: 40px;
+    background: url("../../images/bills/bills/totalCountBg.png") no-repeat center bottom;
+    margin-top: -40px;
+}
+
+.totalNum {
+    margin-top: 80px;
+}
+
+.totalTips {
+    font-size: 22px;
+    color: #c7c0ff;
+}

@@ -11,11 +11,11 @@
     width: 100%;
     height: 88px;
     line-height: 88px;
-    background-color: #fff;
+    background-color: #877be7;
     text-align: center;
-    font-size: 36px;
-    color: #333;
-    border-bottom: 1px solid #d8d8d8;
+    font-size: 34px;
+    color: #fff;
+    /*border-bottom: 1px solid #d8d8d8;*/
 }
 
 .btn {
