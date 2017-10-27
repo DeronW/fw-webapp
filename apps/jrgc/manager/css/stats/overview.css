@@ -33,7 +33,7 @@
     width: 600px;
     height: 60px;
     margin-left: 72px;
-    border: 1px solid #9b5b54;
+    border: 2px solid #9b5b54;
     border-radius: 6px;
     overflow: hidden;
 }
@@ -45,7 +45,7 @@
     width: 25%;
     height: 58px;
     line-height: 58px;
-    border-right: 1px solid #9b5b54;
+    border-right: 2px solid #9b5b54;
     color: #9b5b54;
     font-size: 28px;
     text-align: center;
@@ -122,9 +122,10 @@
 }
 
 .invest-stats-name {
-    margin-top: 27px;
-    color: #999;
+    margin-top: 25px;
+    color: #555;
     font-size: 24px;
+    margin-bottom: 5px;
 }
 
 .invest-stats-value {

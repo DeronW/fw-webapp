@@ -12,6 +12,9 @@
     line-height: 48px;
     text-align: center;
     background: url("../../images/user/transfer-coupon/tabbg.png") no-repeat center;
+    position: fixed;
+    z-index: 99;
+    margin-top: -3px;
 }
 
 .tabOn {
@@ -34,6 +37,8 @@
     padding: 30px;
     background: #c6815f;
     color: #fff;
+    position: absolute;
+    top: 180px;
 }
 
 .countLeft {
@@ -56,6 +61,7 @@
     display: table;
     margin: 0 auto;
     height: 100%;
+    margin-top: 234px;
 }
 
 .contentItem {

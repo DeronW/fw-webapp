@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
-import { Turntable } from '../components'
+import { NavBar, Turntable } from '../components'
 
 
 class Home extends React.Component {
@@ -13,6 +13,7 @@ class Home extends React.Component {
     render() {
         return <div>
             <Turntable amountMax='3000' amountMin='500' changeHandler={this.handleAmountChange} />
+            <NavBar />
         </div>
     }
 }

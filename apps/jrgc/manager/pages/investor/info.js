@@ -120,13 +120,13 @@ class Info extends React.Component {
         }
         let getHeadUrl = ()=>{
             let url = require('../../images/investor/info/default.png')
-            // if(detail.isComp==0){
+            if(detail.isComp==0){
                 if(detail.gender==0){
                     url = require('../../images/investor/info/woman.png')
                 }else if(detail.gender==1){
                     url = require('../../images/investor/info/man.png')
                 }
-            // }
+            }
             return url
         }
         let levelFn = ()=>{
@@ -174,7 +174,7 @@ class Info extends React.Component {
                         <div styleName="itemBarText">优惠券(张)</div>
                     </div>
                     <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-score')}>
-                        <div styleName="itemBarNum">{detail.reditCount}万</div>
+                        <div styleName="itemBarNum">{detail.reditCount}{detail.reditCount>0?'万':''}</div>
                         <div styleName="itemBarText">工分</div>
                     </div>
                 </div>

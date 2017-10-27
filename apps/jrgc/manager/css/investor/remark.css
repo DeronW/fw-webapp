@@ -32,3 +32,10 @@
     top: 935px;
     left: 30px;
 }
+.maxLength{
+    position: absolute;
+    top: 840px;
+    right: 30px;
+    font-size: 22px;
+    color: #999;
+}
