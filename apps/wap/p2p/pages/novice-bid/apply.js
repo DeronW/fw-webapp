@@ -165,7 +165,7 @@ class ReserveApplyNovice extends React.Component {
                     <span styleName="couponLeftText">使用优惠券</span>
                 </div>
                 <div styleName="couponRight">
-                    <span styleName="rightRed">&yen;20</span>返现券，满<span styleName="rightRed">&yen;2000</span>可用
+                    <span styleName="rightRed">&yen;20</span>返现券，满<span styleName="rightRed">&yen;{novice_bid.novice_bid_data.couponInvestMultip}</span>可用
                 </div>
             </div>
         }

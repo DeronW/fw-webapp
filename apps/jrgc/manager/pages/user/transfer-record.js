@@ -28,9 +28,9 @@ class TransferRecord extends React.Component {
         this.setState({type:type})
         let t
         if(type == "返现券"){
-            t = '1'
-        }else if(type == "返息券"){
             t = '0'
+        }else if(type == "返息券"){
+            t = '1'
         }else{
             t = '2'
         }
@@ -43,6 +43,9 @@ class TransferRecord extends React.Component {
         let { totalCount, records } = this.props.user_coupon.coupon_data
         let { type } = this.state
 
+        let u = type == '返金券' ? '克' : ''
+        let m = type == '返现券' ?'￥':''
+
         let tab_func = (item, index) => {
             return <div styleName={item == type ? "tabItem tabItemOn" : "tabItem"} key={index}
                         onClick={() => this.typeHanlder(item)}>{item} </div>
@@ -51,10 +54,10 @@ class TransferRecord extends React.Component {
         let record_item = (item, index) => {
             return <div styleName={item.status>0 ? "recordItem itemUsed" : "recordItem"} key={index}>
                 <div styleName="itemLineUp">
-                    <div styleName="upLineLeft money"><span styleName="rmb">¥</span>{item.beanCount}</div>
+                    <div styleName="upLineLeft money"><span styleName="rmb">{m}</span>{item.beanCount}{u}</div>
                     <div styleName="upLineLeft reason">
                         <div>{item.remark}</div>
-                        <div>投资 ¥{item.investMultip} 可用</div>
+                        <div>{type == '返金券' ?'购买':'投资'}{m}{item.investMultip}{u}可用</div>
                     </div>
                     <div styleName="upLineLeft date">
                         <div styleName="dateLeft">有效期 {item.overdueTime}</div>
@@ -72,7 +75,7 @@ class TransferRecord extends React.Component {
         let empty = <div styleName="empty">
             <img src={require('../../images/investor/empty.png')} />
         </div>
-        return <div>
+        return <div styleName="bg">
             <Header title="转赠记录" history={history}/>
             <div styleName="tabWrapper">
                 {['返现券', '返息券', '返金券'].map(tab_func)}
@@ -83,7 +86,9 @@ class TransferRecord extends React.Component {
                     <div><span styleName="totalNumber">{totalCount}</span>张</div>
                 </div>
             </div>
-            {records && records.length>0?records.map(record_item):empty}
+            <div styleName="recordList">
+                {records && records.length>0?records.map(record_item):empty}
+            </div>
         </div>
     }
 }

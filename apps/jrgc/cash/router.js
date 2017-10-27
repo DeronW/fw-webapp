@@ -1,5 +1,5 @@
 import React from 'react'
-import { Provider } from 'mobx-react'
+import {Provider} from 'mobx-react'
 import {
     HashRouter as Router,
     Route,
@@ -8,6 +8,7 @@ import {
 
 
 import Home from './pages/home'
+import * as Bills from './pages/bills'
 
 
 export default (stores) => {
@@ -16,6 +17,9 @@ export default (stores) => {
             <Switch>
                 {/* 首页 */}
                 <Route exact path="/" component={Home}/>
+
+                {/* 账单 */}
+                <Route exact path="/bills" component={Bills.Bills}/>
             </Switch>
         </Provider>
     </Router>
