@@ -217,7 +217,7 @@
 .introduceBox {
     background-color: #fff;
     width: 100%;
-    height: auto;
+    height: 100%;
     line-height: 36px;
 }
 
@@ -233,10 +233,12 @@
 }
 
 .introduceText {
-    width: 650px;
-    padding: 30px 40px 30px 30px;
+    width: 660px;
+    padding: 30px 30px 0 30px;
     font-size: 24px;
     color: #555;
+    margin-bottom: 40px;
+
 }
 
 .textTitle {
@@ -323,7 +325,7 @@
     border-bottom: 1px solid #d8d8d8;
 }
 
-.bidItem:last-child{
+.bidItem:last-child {
     border-bottom: 0 none;
 }
 

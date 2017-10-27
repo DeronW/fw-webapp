@@ -61,8 +61,8 @@
 }
 
 .infoItem {
-    width: 670px;
-    margin-left: 50px;
+    width: 690px;
+    margin-left: 30px;
     height: 60px;
     line-height: 60px;
     display: table;
@@ -89,14 +89,14 @@
 }
 
 .cancelBtn {
-    width: 143px;
+    width: 140px;
     height: 54px;
     line-height: 54px;
     text-align: center;
     color: #7c9dc7;
     font-size: 24px;
-    margin-top: 18px;
-    border: 1px solid #7c9dc7;
+    margin-top: 4px;
+    border: 2px solid #7c9dc7;
     border-radius: 36px;
 }
 
@@ -114,6 +114,7 @@
 .emptyPanel img {
     margin-bottom: 10px;
     margin-top: 150px;
+    width: 40%;
 }
 
 .tabWrapper {
