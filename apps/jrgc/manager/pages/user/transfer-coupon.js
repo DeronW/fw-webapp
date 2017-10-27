@@ -44,7 +44,7 @@ class TransferCoupon extends React.Component {
         if(custId !== undefined){
             this.presentHandler(couponId,beanCount,couponType,realName,custId)
         }else{
-            history.push(`/user-transfer-friends?couponId=${couponId}&couponType=${couponType}&beanCount=${beanCount}&remark=${remark}&overdueTime=${overdueTime}&investMultip=${investMultip}&inverstPeriod=${inverstPeriod}`)
+            history.push(`/user-transfer-friends?couponId=${couponId}&couponType=${couponType}&beanCount=${beanCount}&remark=${decodeURLComponent(remark)}&overdueTime=${overdueTime}&investMultip=${investMultip}&inverstPeriod=${inverstPeriod}`)
         }
     }
     presentHandler = (couponId,beanCount,type,name,custId) => {
