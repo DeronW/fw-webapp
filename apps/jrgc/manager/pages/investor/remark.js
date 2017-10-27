@@ -9,7 +9,7 @@ import styles from '../../css/investor/remark.css'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Remark extends React.Component {
     state = {
-        value:''
+        value:this.props.investor.data.info.detail.remark || ''
     }
     changeHandler = (e) => {
         this.setState({value:e.target.value})

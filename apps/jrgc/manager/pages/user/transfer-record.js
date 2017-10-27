@@ -43,6 +43,9 @@ class TransferRecord extends React.Component {
         let { totalCount, records } = this.props.user_coupon.coupon_data
         let { type } = this.state
 
+        let u = type == '返金券' ? '克' : ''
+        let m = type == '返现券' ?'￥':''
+
         let tab_func = (item, index) => {
             return <div styleName={item == type ? "tabItem tabItemOn" : "tabItem"} key={index}
                         onClick={() => this.typeHanlder(item)}>{item} </div>
@@ -51,10 +54,10 @@ class TransferRecord extends React.Component {
         let record_item = (item, index) => {
             return <div styleName={item.status>0 ? "recordItem itemUsed" : "recordItem"} key={index}>
                 <div styleName="itemLineUp">
-                    <div styleName="upLineLeft money"><span styleName="rmb">¥</span>{item.beanCount}</div>
+                    <div styleName="upLineLeft money"><span styleName="rmb">{m}</span>{item.beanCount}{u}</div>
                     <div styleName="upLineLeft reason">
                         <div>{item.remark}</div>
-                        <div>投资 ¥{item.investMultip} 可用</div>
+                        <div>{type == '返金券' ?'投资':'购买'}{m}{item.investMultip}{u}可用</div>
                     </div>
                     <div styleName="upLineLeft date">
                         <div styleName="dateLeft">有效期 {item.overdueTime}</div>

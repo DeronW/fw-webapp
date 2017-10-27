@@ -111,6 +111,12 @@
     width: 146px;
     height: 104px;
     background: url("../../images/user/transfer-record/used.png") no-repeat center;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    margin-left: -69px;
+    background-size: 100%;
+    transform: rotate(30deg);
 }
 .labelUsed {
     width: 138px;
