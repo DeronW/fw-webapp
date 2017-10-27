@@ -10,7 +10,7 @@ export default class Investor {
         extendObservable(this.data, {
             custmor: {
                 list: [],
-                pageNo: 1,
+                pageNo: 0,
                 tab: '全部客户',
                 type: '可用余额最高排序',
                 value: 1,//1-全部-余额 2-全部-返利 3-全部-回款 4-在投-余额 5-在投-返利 6-在投-回款 7-空仓-余额 8-空仓-返利 9-未投-注册时间 10-未投-余额
@@ -108,16 +108,17 @@ export default class Investor {
     }
     fetchCustList = (done) => {
         let { value, list, pageNo } = this.data.custmor
-        if (this.data.custmor.pageNo == 0) return done && done()
+        if (this.data.custmor.pageNo == -1) return done && done()
         // if (this.data.custmor.pageNo == 1) list.splice(0, list.length)
 
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
-            pageNo: this.data.custmor.pageNo,
+            pageNo: this.data.custmor.pageNo++,
             pageSize: 10
         }).then(data => {
             list.push(...data.pageData.result)
-            this.data.custmor.pageNo < data.pageData.pagination.totalPage ? this.data.custmor.pageNo++ : this.data.custmor.pageNo = 0
+            if(this.data.custmor.pageNo >= data.pageData.pagination.totalPage)
+                 this.data.custmor.pageNo = -1
 
             done && done()
         })

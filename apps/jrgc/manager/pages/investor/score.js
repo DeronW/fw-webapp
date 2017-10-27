@@ -44,7 +44,7 @@ class Score extends React.Component {
         return <div>
             <Header history={history} title="TA的工分" />
             <div styleName="total">
-                <div styleName="title">他的工分</div>
+                <div styleName="title">TA的工分</div>
                 <div styleName="totalNumber">{iintegralNum}</div>
             </div>
             <div styleName="info">

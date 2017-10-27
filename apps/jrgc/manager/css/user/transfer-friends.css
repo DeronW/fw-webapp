@@ -33,6 +33,7 @@
     height: 164px;
     display: table;
     padding: 30px 20px 0 20px;
+    position: relative;
 }
 
 .typeBlue {
@@ -71,6 +72,8 @@
 
 .lineRight {
     float: right;
+    position: absolute;
+    right: 42px;
 }
 
 .couponAddtion {
@@ -78,7 +81,8 @@
     display: table;
     font-size: 20px;
     color: #999999;
-    margin-top:20px;
+    position: absolute;
+    bottom: 25px;
 }
 
 .inputBox {

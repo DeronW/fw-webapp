@@ -44,13 +44,13 @@ class Bean extends React.Component {
             <img src={require('../../images/investor/empty.png')} />
         </div>
         return <div>
-            <Header title="他的工豆" history={history} />
+            <Header title="TA的工豆" history={history} />
             <div styleName="beanInfo">
                 <div styleName="line1">TA的工豆</div>
                 <div styleName="line2">¥{cashBalance}<span styleName="lineCal">（总共{(cashBalance)*100}工豆，100工豆=0.01元）</span></div>
                 <div styleName="line3">即将过期：¥{overbeancount}</div>
             </div>
-            {records && records.length > 0 ? records.map(score_func) : empty}
+            {records && records.length > 0 ? records.map(bean_func) : empty}
         </div>
     }
 }
