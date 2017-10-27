@@ -9,10 +9,19 @@ import styles from '../../css/investor/remark.css'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Remark extends React.Component {
     state = {
-        value:''
+        maxLength:1000,
+        value:this.props.investor.data.info.detail.remark || ''
+    }
+    componentDidMount(){
+        this.getLength()
     }
     changeHandler = (e) => {
-        this.setState({value:e.target.value})
+        this.setState({value:e.target.value},this.getLength())
+    }
+    getLength = () => {
+        let {value} = this.state
+        let len = 1000-(value.length)
+        this.setState({maxLength:len})
     }
     keepHandler = () => {
         this.props.investor.editRemark(this.state.value)
@@ -20,14 +29,15 @@ class Remark extends React.Component {
 
     render() {
         let {history} = this.props
-        let { value } =this.state
+        let { value,maxLength } =this.state
         return <div>
             <Header title="客户备注" history={history}/>
-            <textarea name="" id="" cols="30" rows="10"  placeholder="还可以输入1000字"
+            <textarea name="" id="" maxlength="1000" cols="30" rows="10"
                 styleName="area"
                 value={value}
                 onChange={this.changeHandler}>
             </textarea>
+            <div styleName="maxLength">还可输入{maxLength}字</div>
             <div styleName="btnKeep" onClick={this.keepHandler}>保存</div>
         </div>
     }

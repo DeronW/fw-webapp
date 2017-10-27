@@ -18,6 +18,12 @@
     margin: 0 30px 42px 48px;
     position: relative;
 }
+.leftBar img{
+    width: 104px;
+    height: 104px;
+    display: inline-block;
+    border-radius: 50%;
+}
 .level{
     width: 80px;
     height: 30px;
@@ -31,6 +37,7 @@
     bottom: -16px;
     left: 14px;
     z-index: 2;
+    font-weight: bold;
 }
 .rightBar{
     float: left;
@@ -94,7 +101,6 @@
 }
 .infoItem{
     width: 50%;
-    text-align: center;
     height: 60px;
     float: left;
     background: #fff;
@@ -107,10 +113,12 @@
 .infoText{
     font-size: 24px;
     color: #999;
+    margin-left: 30px;
 }
 .infoValue{
     font-size: 32px;
     color: #555;
+    margin-left: 30px;
 }
 .pie{
     width: 100%;
@@ -247,6 +255,7 @@
 }
 .accountText{
     float: right;
+    color: #999;
 }
 .accountText span{
     color: #fd4d4c;
@@ -265,7 +274,7 @@
     display: table;
     background: #fff;
     padding-top: 5px;
-    box-shadow: 0px -5px 0px 0px #eae9e9,0px -5px 0px 0px #edecec,0px -5px 0px 0px #eeeded,
+    box-shadow: 0px -2px 0px 0px #eae9e9, 0px -2px 0px 0px #edecec, 0px 2px 0px 0px #eeeded;
 }
 .tabBarItem{
     display: block;

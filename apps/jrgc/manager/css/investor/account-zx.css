@@ -65,7 +65,10 @@
     padding-right: 30px;
     height: 62px;
     display: table;
-    border-bottom: 1px solid #e3e5ea;
+    border-bottom: 1px solid #eff0f3;
+}
+.itemDes:nth-child(2){
+    border-bottom: transparent;
 }
 
 .desLeft {
