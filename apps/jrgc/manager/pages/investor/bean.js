@@ -18,6 +18,9 @@ class Bean extends React.Component {
     componentWillUnmount() {
         Event.cancelTouchBottom()
     }
+    formatDate = (time)=>{
+        return new Date(time).toJSON().slice(0,10)
+    }
     render() {
         let { history } = this.props
         let { bean } = this.props.investor.data
@@ -33,7 +36,7 @@ class Bean extends React.Component {
                 </div>
                 <div styleName="beanItemDown">
                     <div styleName="beanDownLeft">{item.remark}</div>
-                    <div styleName="beanDownRight">有效期 {item.overdueTime}</div>
+                    <div styleName="beanDownRight">有效期 {this.formatDate(item.overdueTime)}</div>
                 </div>
             </div>
         }
@@ -43,7 +46,7 @@ class Bean extends React.Component {
         return <div>
             <Header title="他的工豆" history={history} />
             <div styleName="beanInfo">
-                <div styleName="line1">他的工豆</div>
+                <div styleName="line1">TA的工豆</div>
                 <div styleName="line2">¥{cashBalance}<span styleName="lineCal">（总共{(cashBalance)*100}工豆，100工豆=0.01元）</span></div>
                 <div styleName="line3">即将过期：¥{overbeancount}</div>
             </div>

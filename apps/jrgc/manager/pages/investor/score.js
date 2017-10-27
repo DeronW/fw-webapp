@@ -18,6 +18,10 @@ class Score extends React.Component {
     componentWillUnmount() {
         Event.cancelTouchBottom()
     }
+
+    formatDate = (time)=>{
+        return new Date(time).toJSON().slice(0,10)
+    }
     render() {
         let { history } = this.props
         let { score } = this.props.investor.data
@@ -29,7 +33,7 @@ class Score extends React.Component {
                     <div styleName={item.cashAmount > 0 ? "upLeft leftRed" : "upLeft leftGreen"}>
                         {item.cashAmount > 0 ? `+${item.cashAmount}` : item.cashAmount}
                     </div>
-                    <div styleName="upRight">{item.createtime}</div>
+                    <div styleName="upRight">{this.formatDate(item.createtime)}</div>
                 </div>
                 <div styleName="itemDown">{item.remark}</div>
             </div>
@@ -38,7 +42,7 @@ class Score extends React.Component {
             <img src={require('../../images/investor/empty.png')} />
         </div>
         return <div>
-            <Header history={history} title="他的工分" />
+            <Header history={history} title="TA的工分" />
             <div styleName="total">
                 <div styleName="title">他的工分</div>
                 <div styleName="totalNumber">{iintegralNum}</div>

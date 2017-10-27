@@ -100,7 +100,7 @@ class Rebate extends React.Component {
                     <div styleName="detailRight">¥{item.alreadyRebate}</div>
                 </div>
                 <div styleName="detailLine">
-                    <div styleName="detailLeft userDes">{item.prdName} | {item.annualRate}% | {item.repayPeriod}</div>
+                    <div styleName="detailLeft userDes">{item.prdName} | {item.annualRate}% | {item.repayPeriod || '活期'}</div>
                     <div styleName="detailRight userDate">{item.applyDate}</div>
                 </div>
             </div>

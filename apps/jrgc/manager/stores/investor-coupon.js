@@ -80,7 +80,7 @@ export default class InvestorCoupon {
             pageNo: pageNO,
             pageSize: 10,
         }).then(data => {
-            totalCount = data.pageData.pagination.totalCount
+            this.data.totalCount = data.pageData.pagination.totalCount
             records.push(...data.pageData.result)
             pageNO > data.pageData.pagination.totalPage ? pageNO++ : pageNO = 0
 

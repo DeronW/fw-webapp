@@ -39,7 +39,7 @@ class AccountZx extends React.Component {
                     <div styleName="incomeName">累计收益</div>
                     <div styleName="incomeCount">{eye ? `¥${info.totalAmount}` : '*******'}</div>
                 </div>
-                <img src={path} styleName="incomeRight" onClick={this.changeEyeHandler} />
+                {/*<img src={path} styleName="incomeRight" onClick={this.changeEyeHandler} />*/}
             </div>
 
             <div styleName="incomeInfo">
