@@ -59,8 +59,9 @@ class ReserveInfoIntro extends React.Component {
                 return <div styleName="bidItem" key={index}>
                     <div styleName="itemCeil ceilOne" onClick={() => this.toInfoHandler(item.id)}>
                         <div
-                            styleName="ceilUp">{item.loadRate}<span>%</span>
-                            <span styleName="addRate">{item.addRate == 0 ? '' : '+' + item.addRate + '%'}</span>
+                            styleName="ceilUp">{item.loadRate}<span styleName="loadPercent">%</span>
+                            <span styleName="addRate">{item.addRate == 0 ? '' :
+                                <span>+<span styleName="addRateNum">{item.addRate}</span>%</span>}</span>
                         </div>
                         <div styleName="ceilDown">预期年化利率</div>
                     </div>

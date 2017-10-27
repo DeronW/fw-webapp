@@ -323,6 +323,10 @@
     border-bottom: 1px solid #d8d8d8;
 }
 
+.bidItem:last-child{
+    border-bottom: 0 none;
+}
+
 .itemCeil {
     float: left;
     width: 33.3%;
@@ -375,7 +379,7 @@
     font-size: 60px;
 }
 
-.ceilOne .ceilUp span {
+.loadPercent {
     font-size: 30px;
 }
 
@@ -422,9 +426,12 @@
     top: 40px;
 }
 
-.addRate {
+.ceilOne .ceilUp .addRate {
     font-size: 30px;
-    font-weight: 700;
+}
+
+.ceilOne .ceilUp .addRateNum {
+    font-size: 40px;
 }
 
 
