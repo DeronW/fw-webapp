@@ -127,7 +127,7 @@ class ReserveInfoIntro extends React.Component {
                     </div>
                     <div styleName="textTitle">还款保障：</div>
                     <div styleName="sectionText textEpli">
-                        一、闪电借款基于大数据风控建模体系，北京掌众金融信息服务有限公司通过自主研发出国内领先的“如来”风控引擎，经成为国内实现纯在线自动化审核信审的平台，有效控制用户的欺诈与信用风险，保障客户的投资安全性<span>{intro_control ? '。' : '...'}</span>
+                        一、闪电借款基于大数据风控建模体系，北京掌众金融信息服务有限公司通过自主研发出国内领先的“如来”风控引擎，已经成为国内实现纯在线自动化审核信审的平台，有效控制用户的欺诈与信用风险，保障客户的投资安全性<span>{intro_control ? '。' : '...'}</span>
                     </div>
                     {intro_control && over_text}
                 </div>

@@ -118,11 +118,11 @@ class ReserveRecords extends React.Component {
                 <div styleName="infoContainer">
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">预计收益(含加息工豆)</div>
-                        <div styleName="itemHeaderRight colorRed">￥{item.interest}元</div>
+                        <div styleName="itemHeaderRight colorRed">￥{item.interest}</div>
                     </div>
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约金额</div>
-                        <div styleName="itemHeaderRight colorRed">￥{item.bookInvestAmt}元</div>
+                        <div styleName="itemHeaderRight colorRed">￥{item.bookInvestAmt}</div>
                     </div>
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约时间</div>
@@ -131,9 +131,9 @@ class ReserveRecords extends React.Component {
                         </div>
                     </div>
                     <div styleName="infoItem">
-                        <div styleName="infoItemLeft">预约到期日</div>
+                        <div styleName="infoItemLeft">预约还款时间</div>
                         <div styleName="itemHeaderRight">
-                            {new Date(parseInt(item.paymentDate)).toLocaleDateString().replace(/\//g, "-") + " " + new Date(parseInt(item.bookTime)).toTimeString().substr(0, 8)}
+                            {new Date(parseInt(item.paymentDate)).toLocaleDateString().replace(/\//g, "-") + new Date(parseInt(item.bookTime)).toTimeString().substr(0, 0)}
                         </div>
                     </div>
                 </div>

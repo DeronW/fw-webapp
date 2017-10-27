@@ -170,12 +170,13 @@
 }
 
 .submitProtocol {
-    width: 690px;
+    width: 660px;
     margin: 30px 0 0 30px;
     font-size: 24px;
     color: #999999;
     line-height: 30px;
-    padding-bottom: 148px;
+    padding-bottom: 138px;
+    padding-right: 30px;
 }
 
 .protocolChecked {
@@ -196,7 +197,7 @@
 
 .protocolText {
     vertical-align: middle;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     display: block;
 }
 
