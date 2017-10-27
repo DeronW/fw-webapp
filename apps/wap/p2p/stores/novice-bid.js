@@ -47,11 +47,13 @@ export default class NoviceBid {
             novice_data.minAmt = data.appointClaim.minAmt
             novice_data.avgLoanPeriod = data.appointClaim.avgLoanPeriod
             novice_data.couponId = data.couponId
+            novice_data.couponInvestMultip = data.couponInvestMultip
             return {
                 isRisk: novice_data.isRisk,
                 batchMaxmum: novice_data.batchMaxmum,
                 isCompany: novice_data.isCompany,
-                couponId: novice_data.couponId
+                couponId: novice_data.couponId,
+                couponInvestMultip: novice_data.couponInvestMultip
             }
         })
     }
