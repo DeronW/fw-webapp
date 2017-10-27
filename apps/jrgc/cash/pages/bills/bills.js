@@ -25,6 +25,22 @@ class Bills extends React.Component {
                     <div styleName="infoDes">逾期笔数</div>
                 </div>
             </div>
+
+            <div styleName="billItem">
+                <div styleName="itemTitle">
+                    <span styleName="itemIcon itemIcon0"></span>
+                    <span styleName="titleTime">到期时间 2017-09-24 08:21:45</span>
+                </div>
+                <div styleName="itemText">
+                    <div styleName="textLeft">
+                        <div><span styleName="number">900</span><span styleName="warn">已逾期</span></div>
+                        <div styleName="leftDes">待还金额(元)</div>
+                    </div>
+                    <div styleName="textRight">
+                        立即还款
+                    </div>
+                </div>
+            </div>
         </div>
     }
 }
