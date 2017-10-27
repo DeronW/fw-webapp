@@ -28,9 +28,9 @@ class TransferRecord extends React.Component {
         this.setState({type:type})
         let t
         if(type == "返现券"){
-            t = '1'
-        }else if(type == "返息券"){
             t = '0'
+        }else if(type == "返息券"){
+            t = '1'
         }else{
             t = '2'
         }

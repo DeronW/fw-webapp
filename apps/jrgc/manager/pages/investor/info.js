@@ -120,13 +120,13 @@ class Info extends React.Component {
         }
         let getHeadUrl = ()=>{
             let url = require('../../images/investor/info/default.png')
-            // if(detail.isComp==0){
+            if(detail.isComp==0){
                 if(detail.gender==0){
                     url = require('../../images/investor/info/woman.png')
                 }else if(detail.gender==1){
                     url = require('../../images/investor/info/man.png')
                 }
-            // }
+            }
             return url
         }
         let levelFn = ()=>{

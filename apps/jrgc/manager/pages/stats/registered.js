@@ -93,7 +93,7 @@ class Registered extends React.Component {
         if (sortBy === 'time') sortValue = investor.regTime;
         return ({
             name: investor.custRealName,
-            phone: investor.prdName,
+            phone: investor.mobile,
             sortBy: sortByCN,
             sortValue: sortValue
         })

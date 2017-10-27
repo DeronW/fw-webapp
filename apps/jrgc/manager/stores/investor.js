@@ -113,11 +113,12 @@ export default class Investor {
 
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
-            pageNo: this.data.custmor.pageNo,
+            pageNo: this.data.custmor.pageNo++,
             pageSize: 10
         }).then(data => {
             list.push(...data.pageData.result)
-            this.data.custmor.pageNo < data.pageData.pagination.totalPage ? this.data.custmor.pageNo++ : this.data.custmor.pageNo = 0
+            if(this.data.custmor.pageNo >= data.pageData.pagination.totalPage)
+                 this.data.custmor.pageNo = 0
 
             done && done()
         })
