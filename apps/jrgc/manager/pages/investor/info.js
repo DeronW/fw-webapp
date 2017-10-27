@@ -174,7 +174,7 @@ class Info extends React.Component {
                         <div styleName="itemBarText">优惠券(张)</div>
                     </div>
                     <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-score')}>
-                        <div styleName="itemBarNum">{detail.reditCount}万</div>
+                        <div styleName="itemBarNum">{detail.reditCount}{detail.reditCount>0?'万':''}</div>
                         <div styleName="itemBarText">工分</div>
                     </div>
                 </div>

@@ -22,6 +22,7 @@ class Coupon extends React.Component {
     }
     switchTab = tab => {
         if (tab == this.props.investor_coupon.data.tab) return
+        this.props.investor_coupon.resetPageNo()
         this.props.investor_coupon.setTab(tab)
         this.props.investor_coupon.fetchCustCoupon()
     }
@@ -29,6 +30,7 @@ class Coupon extends React.Component {
     switchType = type => {
         let { tab, coupon } = this.props.investor_coupon.data
         if (type == coupon[tab].type) return
+        this.props.investor_coupon.resetPageNo()
         this.props.investor_coupon.setType(type)
         this.props.investor_coupon.fetchCustCoupon()
     }
@@ -65,6 +67,13 @@ class Coupon extends React.Component {
                 return <div styleName="limit">购买<span>{investMultip}</span>克可用</div>
             }
         }
+        let day = (item) => {
+            if(item.inverstPeriod == 0){
+                return <div styleName="day">任意标可用</div>
+            }else{
+                return <div styleName="day">投资期限 <span>{item.inverstPeriod}天</span> 可用</div>
+            }
+        }
         let couponFn = (item, index) => {
             let conponType = item.conponType
 
@@ -82,7 +91,7 @@ class Coupon extends React.Component {
                 <div styleName="explain">{remark(item)}</div>
                 <div styleName="time">有效期 {item.overdueTime}</div>
                 {limit(conponType, item.investMultip)}
-                <div styleName="day">投资期限 <span>{item.inverstPeriod}天</span> 可用</div>
+                <div styleName="day">{}投资期限 <span>{item.inverstPeriod}天</span> 可用</div>
                 {item.isOver == '1' && <div styleName="expire"></div>}
             </div>
         }
@@ -104,14 +113,14 @@ class Coupon extends React.Component {
             <div styleName="header">
                 <a styleName="btnBack" onClick={history.goBack}></a>
                 <div styleName="tabs">
-                    {['1', '2', '3'].map(tabFn)}
+                    {['1', '2'].map(tabFn)}
                 </div>
             </div>
             <div styleName="coupons">
                 {['0', '1', '2'].map(typeFn)}
             </div>
             <div styleName="couponBox" onClick={this.gotoCoupon}>
-                <div styleName="title">{name}</div>
+                <div styleName="title">{name()}</div>
                 <div styleName="num"><span>{totalCount}</span>张</div>
                 <div styleName="text"><span>送TA优惠券</span><img src={require('../../images/investor/coupon/right.png')} /></div>
             </div>

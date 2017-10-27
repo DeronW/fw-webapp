@@ -57,7 +57,7 @@ class TransferRecord extends React.Component {
                     <div styleName="upLineLeft money"><span styleName="rmb">{m}</span>{item.beanCount}{u}</div>
                     <div styleName="upLineLeft reason">
                         <div>{item.remark}</div>
-                        <div>{type == '返金券' ?'投资':'购买'}{m}{item.investMultip}{u}可用</div>
+                        <div>{type == '返金券' ?'购买':'投资'}{m}{item.investMultip}{u}可用</div>
                     </div>
                     <div styleName="upLineLeft date">
                         <div styleName="dateLeft">有效期 {item.overdueTime}</div>
@@ -75,7 +75,7 @@ class TransferRecord extends React.Component {
         let empty = <div styleName="empty">
             <img src={require('../../images/investor/empty.png')} />
         </div>
-        return <div>
+        return <div styleName="bg">
             <Header title="转赠记录" history={history}/>
             <div styleName="tabWrapper">
                 {['返现券', '返息券', '返金券'].map(tab_func)}
@@ -86,7 +86,9 @@ class TransferRecord extends React.Component {
                     <div><span styleName="totalNumber">{totalCount}</span>张</div>
                 </div>
             </div>
-            {records && records.length>0?records.map(record_item):empty}
+            <div styleName="recordList">
+                {records && records.length>0?records.map(record_item):empty}
+            </div>
         </div>
     }
 }

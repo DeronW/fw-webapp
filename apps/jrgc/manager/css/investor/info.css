@@ -18,6 +18,12 @@
     margin: 0 30px 42px 48px;
     position: relative;
 }
+.leftBar img{
+    width: 104px;
+    height: 104px;
+    display: inline-block;
+    border-radius: 50%;
+}
 .level{
     width: 80px;
     height: 30px;

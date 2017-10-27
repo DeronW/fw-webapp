@@ -1,3 +1,7 @@
+.bg{
+    width: 100%;
+    overflow: hidden;
+}
 .tabWrapper {
     width: 100%;
     height: 88px;
@@ -7,6 +11,9 @@
     line-height: 48px;
     text-align: center;
     background: url("../../images/user/transfer-record/tabbg.png") no-repeat center;
+    position: fixed;
+    z-index: 99;
+    margin-top: -1px;
 }
 
 .tabItem {
@@ -29,8 +36,12 @@
     padding: 30px;
     background: #c6815f;
     color: #fff;
+    position: absolute;
+    top: 180px;
 }
-
+.recordList{
+    margin-top: 250px;
+}
 .recordLeft {
     float: left;
     font-size: 30px;
@@ -51,7 +62,7 @@
 }
 
 .itemLineUp {
-    width: 660px;
+    width: 100%;
     height: 39px;
     border-bottom: 1px solid #e3e5ea;
     display: table;
@@ -62,7 +73,7 @@
 }
 
 .itemLineDown {
-    width: 660px;
+    width: 100%;
     height: 60px;
     background: #f9f9f9;
     display: table;
@@ -84,12 +95,13 @@
 }
 
 .reason {
-    width: 270px;
+    width: 213px;
 }
 
 .date {
     float: right;
     text-align: right;
+    margin-right: 60px;
 }
 
 .rmb {
@@ -102,6 +114,7 @@
 
 .downRight {
     float: right;
+    margin-right: 60px;
 }
 
 .itemUsed .itemLineUp, .itemUsed .itemLineDown, .itemUsed .money {
