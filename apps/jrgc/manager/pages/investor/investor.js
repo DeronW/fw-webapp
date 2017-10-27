@@ -62,7 +62,7 @@ class Investor extends React.Component {
             }else if(type == '返利最多排序'){
                 t = `￥${item.commissionAmt}`
             }else{
-                t = item.createTime || '暂无回款'
+                t =  item.realName ? (item.createTime || '暂无回款'):'暂无回款'
             }
             return t
         }
@@ -89,7 +89,7 @@ class Investor extends React.Component {
         }
         let listFn = (item,index) => {
             return <div styleName="listItem" key={item.custId+index} onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
-                <div styleName="name">{item.realName}</div>
+                <div styleName="name">{item.realName || item.mobile}</div>
                 <div styleName="money">{amount(item)}</div>
                 <div styleName="time">注册时间：{item.createTime}</div>
                 <div styleName="balance">{remind(item)}</div>
