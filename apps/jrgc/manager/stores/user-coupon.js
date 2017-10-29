@@ -17,6 +17,7 @@ export default class UserCoupon {
             records: []
         })
         extendObservable(this.friends_data, {
+            coupon:{},
             pageNo: 1,
             list: [],
             keyword: ''
@@ -96,6 +97,14 @@ export default class UserCoupon {
             couponId: couponId,
             couponType: couponType,
             custId: custId
+        })
+    }
+    //转增好友页面
+    getCoupon = (couponId)=>{
+        this.Get('/api/finManager/coupon/v2/coupon.shtml',{
+            couponId:couponId
+        }).then(data => {
+            this.friends_data.coupon = data.result
         })
     }
 }

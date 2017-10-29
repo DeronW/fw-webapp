@@ -15,8 +15,9 @@ class TransferFriends extends React.Component {
         input_value: ''
     }
     componentDidMount() {
-        let { resetFriendsPageNo, fetchFriendsList } = this.props.user_coupon
+        let { resetFriendsPageNo, fetchFriendsList,getCoupon } = this.props.user_coupon
         resetFriendsPageNo()
+        getCoupon(Utils.hashQuery.couponId)
         Event.touchBottom(fetchFriendsList)
     }
     componentWillUnmount() {
@@ -58,22 +59,21 @@ class TransferFriends extends React.Component {
     render() {
         let { history } = this.props
         let { isSearch } =this.state
-        let { pageNo, list, keyword } = this.props.user_coupon.friends_data
-        let { beanCount,conponType, remark, overdueTime, investMultip, inverstPeriod,couponType } = Utils.hashQuery
+        let { pageNo, list, keyword,coupon } = this.props.user_coupon.friends_data
         let u = couponType == '2' ? '克' : ''
         let m = conponType == '0' ?'￥':''
 
         let coupon = () => {
-            let coupon_style = couponType == '0' ? "couponItem typeBlue" : couponType == '1' ? "couponItem typeRed" : "couponItem typeYellow"
+            let coupon_style = coupon.couponType == '0' ? "couponItem typeBlue" : coupon.couponType == '1' ? "couponItem typeRed" : "couponItem typeYellow"
             return <div styleName={coupon_style}>
-                <div styleName="couponValue"><span styleName="rmb">{m}</span>{beanCount}<span styleName="rmb">{u}</span></div>
+                <div styleName="couponValue"><span styleName="rmb">{m}</span>{coupon.beanCount}<span styleName="rmb">{u}</span></div>
                 <div styleName="couponDes">
-                    <div styleName="lineLeft desLeft">{decodeURIComponent(remark)}</div>
-                    <div styleName="lineRight desRight">有效期 {overdueTime}</div>
+                    <div styleName="lineLeft desLeft">{decodeURIComponent(coupon.remark)}</div>
+                    <div styleName="lineRight desRight">有效期 {coupon.overdueTime}</div>
                 </div>
                 <div styleName="couponAddtion">
-                    <div styleName="lineLeft addLeft">{conponType=='2'?'购买':'投资' }{m}{investMultip}{u} 可用</div>
-                    <div styleName="lineRight addRight">投资期限 ≥{inverstPeriod}天 可用</div>
+                    <div styleName="lineLeft addLeft">{coupon.conponType=='2'?'购买':'投资' }{m}{coupon.investMultip}{u} 可用</div>
+                    <div styleName="lineRight addRight">投资期限 ≥{coupon.inverstPeriod}天 可用</div>
                 </div>
             </div>
         }
