@@ -79,12 +79,29 @@ class p2pItem extends React.Component {
                 onClick={() => this.switchType(item)}>{item}
             </div>
         }
+        let status = (item)=>{
+            let ENUM = {
+                '1':'全部 ',
+                '100':'招标中 ',
+                '5':'回款中',
+                '6':'已回款'
+            }
+            return ENUM[item.status]
+        }
+        let collectionStatus = (item) => {
+            let ENUM = {
+                '0':'匹配中 ',
+                '1':'匹配成功  ',
+                '2':'匹配失败'
+            }
+            return ENUM[item.status]
+        }
         let t = () => {
             if (tab == '批量项目') {
                 return <div styleName="collection" onClick={() => this.gotoHandler(`/investor-item-collection?colPrdClaimId=${item.colId}&batchOrderId=${item.id}`)}>
                     <div styleName="title">
                         <span>{item.collName}</span>
-                        <div styleName="end">{item.status}</div>
+                        <div styleName="end">{collectionStatus(item)}</div>
                     </div>
                     <div styleName="item">
                         <span>项目周期</span>
@@ -138,7 +155,7 @@ class p2pItem extends React.Component {
                 return <div styleName="record">
                     <div styleName="title">
                         <span>{item.name}</span>
-                        <div styleName="end">{item.status}</div>
+                        <div styleName="end">{status(item)}</div>
                     </div>
                     <div styleName="item">
                         <span>预期年化利率</span>

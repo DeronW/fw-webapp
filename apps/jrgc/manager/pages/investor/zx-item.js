@@ -55,13 +55,21 @@ class zxItem extends React.Component {
                 onClick={() => this.switchTab(item)}>{record[item].name}
             </div>
         }
-
+        let status = (item)=>{
+            let ENUM = {
+                '1':'全部 ',
+                '100':'招标中 ',
+                '5':'回款中',
+                '6':'已回款'
+            }
+            return ENUM[item.status]
+        }
         let zx_item = (item, index) => {
             if (type == 'Ta的项目') {
                 return <div styleName="record">
                     <div styleName="title">
                         <span>{item.prdName}</span>
-                        <div styleName="end">{item.status}</div>
+                        <div styleName="end">{status(item)}</div>
                     </div>
                     <div styleName="item">
                         <span>预期年化利率</span>
