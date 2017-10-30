@@ -19,7 +19,16 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        document.querySelector('body').addEventListener('touchmove', e => e.preventDefault(), false)
+        const body = document.querySelector('body');
+
+        body.style.backgroundColor = '#fff';
+        body.addEventListener('touchmove', e => e.preventDefault(), false)
+    }
+
+    componentWillUnmount() {
+        const body = document.querySelector('body');
+
+        body.style.backgroundColor = '';
     }
 
     toggleAgreementCheck = () => this.setState({ agreementChecked: !this.state.agreementChecked })

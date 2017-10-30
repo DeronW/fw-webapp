@@ -17,6 +17,18 @@ class Home extends React.Component {
         loanAmount: 500,
     }
 
+    componentDidMount() {
+        const body = document.querySelector('body');
+
+        body.style.backgroundColor = '#fff';
+    }
+
+    componentWillUnmount() {
+        const body = document.querySelector('body');
+
+        body.style.backgroundColor = '';
+    }
+
     handleAmountChange = amount => this.setState({ loanAmount: amount })
 
     getStatusInfo = status => {

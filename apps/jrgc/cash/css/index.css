@@ -5,6 +5,10 @@ body {
     height: 100%;
 }
 
+body {
+    background-color: #f1f3fe;
+}
+
 a,
 a:active {
     -webkit-tap-highlight-color: transparent;
