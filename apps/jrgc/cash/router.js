@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 
+import Login from './pages/login'
 import Home from './pages/home'
 import * as Bills from './pages/bills'
 
@@ -15,6 +16,9 @@ export default (stores) => {
     return <Router>
         <Provider {...stores}>
             <Switch>
+                {/* 登录 */}
+                <Route exact path="/login" component={Login}/>
+
                 {/* 首页 */}
                 <Route exact path="/" component={Home}/>
 
