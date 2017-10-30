@@ -12,6 +12,5 @@ nb.goto = (link, need_login) => nb.trigger('goto', link, need_login)
 
 nb.toNative = (title) => nb.trigger('toNative', title);
 
-
 export default nb
 
