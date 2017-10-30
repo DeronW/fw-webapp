@@ -7,6 +7,7 @@ import styles from '../css/components/turntable.css'
 /* props:
     amountMin       | !number
     amountMax       | !number
+    loanStatus      | !string
     changeHandler   | !function
 */
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
@@ -26,7 +27,8 @@ class Turntable extends React.Component {
             [255, 194, 63],
             [249, 78, 148],
             [124, 99, 235]
-        ]
+        ],
+        loanStep: 500,
     }
 
     _introStartTime = null;
@@ -131,6 +133,8 @@ class Turntable extends React.Component {
     handleTouchEnd = () => this.setState({ touchStartFlag: false })
 
     calLoanAmount = () => {
+        const { loanStep } = this._MEASURE;
+
         let amount;
 
         const { cnt } = this._MEASURE,
@@ -141,7 +145,7 @@ class Turntable extends React.Component {
         if (!introAnimationFinished) {
             amount = amountMax;
         } else (
-            amount = amountMin + Math.max(0, Math.round(glowingCnt/cnt*(amountMax-amountMin)/100)*100)
+            amount = amountMin + Math.max(0, Math.round(glowingCnt/cnt*(amountMax-amountMin)/loanStep)*loanStep)
         )
 
         return amount
