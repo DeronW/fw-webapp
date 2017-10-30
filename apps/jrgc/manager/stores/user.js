@@ -43,7 +43,12 @@ export default class User {
             data: { key: '0ca175b9c0f726a831d895e', id: '30' },
             silence: true
         }).catch(data => {
-            this.data.user.banners = data.map(i => ({ url: i.url, img: i.thumb })).filter(x => x.url && !x.url.match('dougemall'))
+            let banners = data.map(i => ({ url: i.url, img: i.thumb }))
+
+            // 过滤掉, 商城相关的链接
+            banners = banners.filter(x => x.url && !x.url.match('dougemall'))
+
+            this.data.user.banners = banners
         })
     }
     getNoticeHandler = () => {
