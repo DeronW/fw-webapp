@@ -1,8 +1,8 @@
-import {extendObservable} from 'mobx'
-import {Components, Utils, Event} from 'fw-javascripts'
-import { NativeBridge }  from '../helpers'
+import { extendObservable } from 'mobx'
+import { Components, Utils, Event } from 'fw-javascripts'
+import { NativeBridge } from '../helpers'
 export default class User {
-    constructor(Ajax,Get, Post) {
+    constructor(Ajax, Get, Post) {
         this.Ajax = Ajax
         this.Get = Get
         this.Post = Post
@@ -25,13 +25,13 @@ export default class User {
             rebate_cust: {
                 type: '1',
                 list: {
-                    '1': {name: '全部', page_no: 1, custList: []},
-                    '2': {name: '微金', page_no: 1, custList: []},
-                    '3': {name: '尊享', page_no: 1, custList: []},
-                    '4': {name: '黄金', page_no: 1, custList: []}
+                    '1': { name: '全部', page_no: 1, custList: [] },
+                    '2': { name: '微金', page_no: 1, custList: [] },
+                    '3': { name: '尊享', page_no: 1, custList: [] },
+                    '4': { name: '黄金', page_no: 1, custList: [] }
                 }
             },
-            rebate_info:{
+            rebate_info: {
 
             }
         })
@@ -40,17 +40,17 @@ export default class User {
         this.Ajax({
             fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
             method: 'get',
-            data: {key: '0ca175b9c0f726a831d895e', id: '30'},
+            data: { key: '0ca175b9c0f726a831d895e', id: '30' },
             silence: true
         }).catch(data => {
-            this.data.user.banners = data.map(i => ({url: i.url, img: i.thumb}))
+            this.data.user.banners = data.map(i => ({ url: i.url, img: i.thumb })).filter(x => x.url && !x.url.match('dougemall'))
         })
     }
     getNoticeHandler = () => {
         return this.Ajax({
             fullUrl: 'https://fore.9888.cn/cms/api/appbanner.php',
             method: 'get',
-            data: {key: '0ca175b9c0f726a831d895e', id: '33'},
+            data: { key: '0ca175b9c0f726a831d895e', id: '33' },
             silence: true
         }).catch(data => {
             this.data.user.notice = data
@@ -78,25 +78,25 @@ export default class User {
     }
     //获取返利图标的sort_no
     fetchGraphSortNo = (tab_num, chart_num) => {
-        const ENUM ={
-            [[0,0]] :'11',
-            [[0,1]] :'12',
-            [[0,2]] :'13',
-            [[0,3]] :'14',
-            [[1,0]] :'21',
-            [[1,1]] :'22',
-            [[1,2]] :'23',
-            [[1,3]] :'24',
-            [[2,0]] :'31',
-            [[2,1]] :'32',
-            [[2,2]] :'33',
-            [[2,3]] :'34',
-            [[3,0]] :'41',
-            [[3,1]] :'42',
-            [[3,2]] :'43',
-            [[3,3]] :'44',
+        const ENUM = {
+            [[0, 0]]: '11',
+            [[0, 1]]: '12',
+            [[0, 2]]: '13',
+            [[0, 3]]: '14',
+            [[1, 0]]: '21',
+            [[1, 1]]: '22',
+            [[1, 2]]: '23',
+            [[1, 3]]: '24',
+            [[2, 0]]: '31',
+            [[2, 1]]: '32',
+            [[2, 2]]: '33',
+            [[2, 3]]: '34',
+            [[3, 0]]: '41',
+            [[3, 1]]: '42',
+            [[3, 2]]: '43',
+            [[3, 3]]: '44',
         }
-        return ENUM[[tab_num,chart_num]]
+        return ENUM[[tab_num, chart_num]]
     }
 
     //获取返利额数据
@@ -111,7 +111,7 @@ export default class User {
     }
     //重置页码
     resetPageNo = () => {
-        let {type, list} = this.data.rebate_cust, current_list = list[type]
+        let { type, list } = this.data.rebate_cust, current_list = list[type]
         current_list.page_no = 1
     }
 
@@ -124,7 +124,7 @@ export default class User {
     //获取返利客户列表
     fetchCustList = (done) => {
         const PAGE_SIZE = 10
-        let {type, list} = this.data.rebate_cust, current_list = list[type]
+        let { type, list } = this.data.rebate_cust, current_list = list[type]
         if (current_list.page_no === 0) return done && done();
         if (current_list.page_no == 1) current_list.custList.splice(0, current_list.custList.length)
         this.Get('/api/finManager/user/v2/rebateCustList.shtml', {
@@ -140,8 +140,8 @@ export default class User {
         })
     }
     //返利信息
-    fetchRebateInfo = ()=>{
-        this.Get('/api/finManager/user/v2/rebateInfo.shtml').then(data=>{
+    fetchRebateInfo = () => {
+        this.Get('/api/finManager/user/v2/rebateInfo.shtml').then(data => {
             this.data.rebate_info = data.result
         })
     }
