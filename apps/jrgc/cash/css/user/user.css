@@ -1,0 +1,132 @@
+.bannerBg {
+    width: 100%;
+    height: 400px;
+    background: url("../../images/user/user/banner.png") no-repeat center;
+    display: table;
+}
+
+.infoWrapper {
+    padding: 80px 0 0 80px;
+    display: table;
+}
+
+.infoWrapper img {
+    float: left;
+}
+
+.info {
+    float: left;
+    font-size: 36px;
+    color: #ffffff;
+    margin: 15px 0 0 20px;
+}
+
+.phone {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.label {
+    display: inline-block;
+    width: 106px;
+    height: 36px;
+    background-color: #7366d6;
+    border-radius: 20px;
+    font-size: 20px;
+    text-align: center;
+    color: #ffffff;
+    line-height: 36px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.numWrapper {
+    width: 100%;
+    height: 80px;
+    display: table;
+    text-align: center;
+    font-size: 24px;
+    color: #888888;
+    padding: 35px 0;
+    background: #ffffff;
+}
+
+.numLeft {
+    width: 49%;
+    float: left;
+    border-right: 1px solid #d8d8d8;
+}
+
+.numRight {
+    width: 50%;
+    float: left;
+}
+
+.number {
+    font-size: 36px;
+    color: #555555;
+}
+
+.bankWrapper {
+    background: #fff;
+    margin-top: 20px;
+}
+
+.bankItem {
+    width: 690px;
+    margin-left: 30px;
+    height: 88px;
+    line-height: 88px;
+    border-bottom: 1px solid #d8d8d8;
+    display: table;
+    font-size: 28px;
+    color: #888888;
+}
+
+.bankItem:last-child {
+    border-bottom: 0 none;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+    margin-right: 30px;
+    color: #555555;
+}
+
+.loginOut {
+    width: 640px;
+    height: 72px;
+    background-color: #ffffff;
+    border: solid 2px #fc4966;
+    margin: 120px auto 0;
+    font-size: 24px;
+    text-align: center;
+    color: #fc4966;
+    line-height: 72px;
+    border-radius: 40px;
+}
+
+.servePhone {
+    width: 100%;
+    font-size: 24px;
+    text-align: center;
+    color: #888888;
+    margin: 92px 0 20px;
+}
+
+.num {
+    color: #877be7;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.time {
+    font-size: 20px;
+    text-align: center;
+    color: #888888;
+}
+
