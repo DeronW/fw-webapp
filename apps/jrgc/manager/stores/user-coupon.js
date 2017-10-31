@@ -17,6 +17,7 @@ export default class UserCoupon {
             records: []
         })
         extendObservable(this.friends_data, {
+            coupon:{},
             pageNo: 1,
             list: [],
             keyword: ''
@@ -90,12 +91,22 @@ export default class UserCoupon {
             done && done()
         })
     }
+    //转增好友页面
+    getCoupon = (couponId)=>{
+        this.Get('/api/finManager/coupon/v2/coupon.shtml',{
+            couponId:this.couponId
+        }).then(data => {
+            this.friends_data.coupon = data.result
+        })
+    }
     //转增优惠券
-    presentCoupon = (couponId, couponType, custId) => {
+    presentCoupon = (custId) => {
+        let {coupon} = this.friends_data
         return this.Get('/api/finManager/coupon/v2/presentCoupon.shtml', {
-            couponId: couponId,
-            couponType: couponType,
+            couponId: this.couponId,
+            couponType: coupon.couponType,
             custId: custId
         })
     }
+
 }

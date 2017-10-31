@@ -2,27 +2,32 @@
     width: 100%;
     height: 100%;
     background: #ebebee;
+    position: relative;
 }
 .img{
     display: inline-block;
-    width: 140px;
-    height: 132px;
-    margin: 80px auto 45px;
+    position: absolute;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%)
 }
 .text{
-    width: 500px;
-    margin: auto;
+    width: 100%;
+    text-align: center;
     font-size: 40px;
     color: #555;
+    position: absolute;
+    top: 310px;
+    left: 0;
 }
 .text span{
     color: #fd4d4c;
 }
 .qr-bg{
-    width: 720px;
-    height: 521px;
-    margin-top: 120px;
-    background: url('../../images/user/qr-code/bg.jpg') no-repeat;
+    width: 561px;
+    height: 327px;
+    background: url('../../images/user/qr-code/bg.png') no-repeat;
+    margin: 550px 0px 0 120px;
 }
 .qr-text{
     width: 100%;
@@ -37,4 +42,12 @@
     left: 100px;
     width: 340px;
     height: 340px;
+}
+.qr-code{
+    position: absolute;
+    top: 490px;
+    left: 50%;
+    width: 385px;
+    height: 385px;
+    transform: translate(-50%);
 }

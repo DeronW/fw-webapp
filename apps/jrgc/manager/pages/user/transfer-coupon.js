@@ -38,14 +38,14 @@ class TransferCoupon extends React.Component {
         setCouponType(t)
     }
 
-    transferHandler = (couponId,couponType,beanCount,remark,overdueTime,investMultip,inverstPeriod) => {
+    transferHandler = (couponId,couponType,beanCount) => {
         alert(222)
         let { history } = this.props
         let {custId,realName} =Utils.hashQuery
         if(custId !== undefined){
             this.presentHandler(couponId,beanCount,couponType,realName,custId)
         }else{
-            history.push(`/user-transfer-friends?couponId=${couponId}&couponType=${couponType}&beanCount=${beanCount}&remark=${encodeURIComponent(remark)}&overdueTime=${overdueTime}&investMultip=${investMultip}&inverstPeriod=${inverstPeriod}`)
+            history.push(`/user-transfer-friends?couponId=${couponId}`)
         }
     }
     presentHandler = (couponId,beanCount,type,name,custId) => {
@@ -91,7 +91,7 @@ class TransferCoupon extends React.Component {
             }
             return <div styleName={coutent_style}
                         key={index}
-                        onClick={() => this.transferHandler(item.couponId,item.conponType,item.beanCount,item.remark,item.overdueTime,item.investMultip,item.inverstPeriod)}>
+                        onClick={() => this.transferHandler(item.couponId,item.conponType,item.beanCount)}>
                 <div styleName="itemLine itemUp">
                     <div styleName="lineLeft"><span styleName="rmb">{m}</span>{item.beanCount}<span styleName="rmb">{u}</span></div>
                     <div styleName={btn_style}>转赠</div>
