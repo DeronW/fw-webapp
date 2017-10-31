@@ -1,6 +1,6 @@
 import { NativeBridgeFactory } from 'fw-javascripts'
 
-let nb = new NativeBridgeFactory('FinancialWorkshop')
+let nb = new NativeBridgeFactory('FinancialManager')
 
 nb.close = () => nb.trigger('close')
 

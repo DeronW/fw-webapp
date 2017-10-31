@@ -68,7 +68,7 @@ class TransferFriends extends React.Component {
             return <div styleName={coupon_style}>
                 <div styleName="couponValue"><span styleName="rmb">{m}</span>{beanCount}<span styleName="rmb">{u}</span></div>
                 <div styleName="couponDes">
-                    <div styleName="lineLeft desLeft">{remark}</div>
+                    <div styleName="lineLeft desLeft">{decodeURIComponent(remark)}</div>
                     <div styleName="lineRight desRight">有效期 {overdueTime}</div>
                 </div>
                 <div styleName="couponAddtion">
