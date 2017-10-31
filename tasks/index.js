@@ -73,8 +73,9 @@ function generate_webpack_task(site_name, page_name, CONFIG) {
     }
 
     if (CONFIG.environment === 'development') {
-        gulp.task(`${site_name}:${page_name}`, gulp.series(compile_webpack))
+        gulp.task(`${site_name}:${page_name}`, gulp.series(watch_webpack))
         gulp.task(`${site_name}:${page_name}:watch`, gulp.series(watch_webpack))
+        gulp.task(`${site_name}:${page_name}:no-watch`, gulp.series(compile_webpack))
     }
     if (CONFIG.environment === 'production') {
         let pack_task = `${site_name}:${CONFIG.cmd_prefix}:${page_name}`
@@ -216,20 +217,22 @@ let generate_task = function (site_name, page_name, configs) {
 
     let common_javascripts = CONFIG.debug ? compile_common_javascripts : copy_common_javascripts;
 
-    gulp.task(task_name,
-        gulp.series(
-            compile_html,
-            compile_stylesheets,
-            compile_less,
-            compile_javascripts,
-            compile_react,
-            common_javascripts,
-            compile_images,
-            compile_common_assets,
-            compile_public_javascripts));
+    let task_list = gulp.series(
+        compile_html,
+        compile_stylesheets,
+        compile_less,
+        compile_javascripts,
+        compile_react,
+        common_javascripts,
+        compile_images,
+        compile_common_assets,
+        compile_public_javascripts)
+
+    gulp.task(`${task_name}:no-watch`, task_list);
+    gulp.task(task_name, gulp.series(task_list, monitor));
 
     CONFIG.debug ?
-        gulp.task(`${task_name}:watch`, gulp.series(task_name, monitor)) :
+        gulp.task(`${task_name}:watch`, gulp.series(task_name)) :
         gulp.task(`${task_name}:revision`, gulp.series(task_name, copy2cdn, compile_revision));
 
     if (!CONFIG.debug && !COMMON_JAVASCRIPTS_TASK[site_name]) {
