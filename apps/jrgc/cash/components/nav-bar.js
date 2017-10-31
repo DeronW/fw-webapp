@@ -11,9 +11,9 @@ class NavBar extends React.Component {
     render() {
         return <div styleName="placeholder">
             <div styleName="nav-bar">
-                <NavLink styleName="nav-item-home" activeClassName={styles['nav-item-active-home']} to="/">首页</NavLink>
-                <NavLink styleName="nav-item-bills" activeClassName={styles['nav-item-active-bills']} to="/bills">账单</NavLink>
-                <NavLink styleName="nav-item-user" activeClassName={styles['nav-item-active-user']} to="/user">我的</NavLink>
+                <NavLink exact styleName="nav-item-home" activeClassName={styles['nav-item-active-home']} to="/">首页</NavLink>
+                <NavLink exact styleName="nav-item-bills" activeClassName={styles['nav-item-active-bills']} to="/bills">账单</NavLink>
+                <NavLink exact styleName="nav-item-user" activeClassName={styles['nav-item-active-user']} to="/user">我的</NavLink>
             </div>
         </div>
     }

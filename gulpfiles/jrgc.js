@@ -36,4 +36,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             ]).pipe(eslint()).pipe(eslint.format())
         }))
     })
-};
+
+    gulp.task('manager', gulp.series('jrgc:manager'))
+    gulp.task('cash', gulp.series('jrgc:manager'))
+}

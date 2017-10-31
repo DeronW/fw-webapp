@@ -75,7 +75,7 @@ function generate_webpack_task(site_name, page_name, CONFIG) {
     if (CONFIG.environment === 'development') {
         gulp.task(`${site_name}:${page_name}`, gulp.series(watch_webpack))
         gulp.task(`${site_name}:${page_name}:watch`, gulp.series(watch_webpack))
-        gulp.task(`${site_name}:${page_name}:no-watch`, gulp.series(compile_webpack))
+        gulp.task(`${site_name}:${page_name}:nowatch`, gulp.series(compile_webpack))
     }
     if (CONFIG.environment === 'production') {
         let pack_task = `${site_name}:${CONFIG.cmd_prefix}:${page_name}`
@@ -228,7 +228,7 @@ let generate_task = function (site_name, page_name, configs) {
         compile_common_assets,
         compile_public_javascripts)
 
-    gulp.task(`${task_name}:no-watch`, task_list);
+    gulp.task(`${task_name}:nowatch`, task_list);
     gulp.task(task_name, gulp.series(task_list, monitor));
 
     CONFIG.debug ?

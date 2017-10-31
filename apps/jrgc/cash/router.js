@@ -10,6 +10,7 @@ import {
 import Login from './pages/login'
 import Home from './pages/home'
 import * as Bills from './pages/bills'
+import * as User from './pages/user'
 import LoanApply from './pages/loan-apply'
 import LoanStatus from './pages/loan-status'
 
@@ -30,6 +31,11 @@ export default (stores) => {
 
                 {/* 账单 */}
                 <Route exact path="/bills" component={Bills.Bills}/>
+                <Route exact path="/bills/details" component={Bills.Details}/>
+
+                {/* 我的 */}
+                <Route exact path="/user" component={User.User}/>
+                <Route exact path="/user/set-bank-card" component={User.SetBankCard}/>
             </Switch>
         </Provider>
     </Router>
