@@ -77,30 +77,55 @@
     height: 90px;
     line-height: 90px;
     vertical-align: middle;
+    position: relative;
 }
 
 .sort-asc {
     display: block;
-    height: 38px;
     margin-bottom: 9px;
-    background: url('../../images/stats/sort-icon.png') no-repeat center bottom;
+    /* height: 38px; */
+    /* background: url('../../images/stats/sort-icon.png') no-repeat center bottom; */
+    background: url('../../images/stats/sort-icon.png') no-repeat;
+    width: 13px;
+    height: 5px;
+    position: absolute;
+    top: 30px;
+    left: 6px;
 }
 
 .sort-asc-active {
     composes: sort-asc;
-    background: url('../../images/stats/sort-icon-active.png') no-repeat center bottom;
+    background: url('../../images/stats/sort-icon-active.png') no-repeat;
+    width: 19px;
+    height: 7px;
+    position: absolute;
+    top: 30px;
+    left: 3px;
+    /* background: url('../../images/stats/sort-icon-active.png') no-repeat center bottom; */
 }
 
 .sort-des {
     display: block;
-    height: 43px;
-    background: url('../../images/stats/sort-icon.png') no-repeat center bottom;
     transform: rotate(0.5turn);
+    /* height: 43px;
+    background: url('../../images/stats/sort-icon.png') no-repeat center bottom; */
+    background: url('../../images/stats/sort-icon.png') no-repeat;
+    width: 13px;
+    height: 5px;
+    position: absolute;
+    top: 43px;
+    left: 6px;
 }
 
 .sort-des-active {
     composes: sort-des;
-    background: url('../../images/stats/sort-icon-active.png') no-repeat center bottom;
+    /* background: url('../../images/stats/sort-icon-active.png') no-repeat center bottom; */
+    background: url('../../images/stats/sort-icon-active.png') no-repeat;
+    width: 19px;
+    height: 7px;
+    position: absolute;
+    top: 43px;
+    left: 4px;
 }
 
 .investor-list {

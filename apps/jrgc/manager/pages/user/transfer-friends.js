@@ -17,7 +17,7 @@ class TransferFriends extends React.Component {
     componentDidMount() {
         let { resetFriendsPageNo, fetchFriendsList,getCoupon } = this.props.user_coupon
         resetFriendsPageNo()
-        getCoupon(Utils.hashQuery.couponId)
+        getCoupon()
         Event.touchBottom(fetchFriendsList)
     }
     componentWillUnmount() {
@@ -37,19 +37,19 @@ class TransferFriends extends React.Component {
     presentHandler = (name, custId) => {
         //弹层
         let { history } = this.props
-        let { beanCount, couponId, couponType } = Utils.hashQuery
-        let unit = couponType == '2' ? '克' : '元'
+        let { coupon } = this.props.user_coupon.friends_data
+        let unit = coupon.couponType == '2' ? '克' : '元'
         let t
-        if(couponType=='0'){
+        if(coupon.couponType=='0'){
             t = "返现券"
-        }else if(couponType=='1'){
+        }else if(coupon.couponType=='1'){
             t = '返息券'
         }else{
             t = '返金券'
         }
-        let v = confirm(`确认将${beanCount}${unit}${t},赠送给${name}吗？`)
+        let v = confirm(`确认将${coupon.beanCount}${unit}${t},赠送给${name}吗？`)
         if (v == true) {
-            this.props.user_coupon.presentCoupon(couponId, couponType, custId)
+            this.props.user_coupon.presentCoupon(custId)
             .then(() => Components.showAlert("赠送成功"))
             .then(()=>{
                 history.goBack()
@@ -63,7 +63,7 @@ class TransferFriends extends React.Component {
         let u = couponType == '2' ? '克' : ''
         let m = conponType == '0' ?'￥':''
 
-        let coupon = () => {
+        let couponFn = () => {
             let coupon_style = coupon.couponType == '0' ? "couponItem typeBlue" : coupon.couponType == '1' ? "couponItem typeRed" : "couponItem typeYellow"
             return <div styleName={coupon_style}>
                 <div styleName="couponValue"><span styleName="rmb">{m}</span>{coupon.beanCount}<span styleName="rmb">{u}</span></div>
@@ -96,7 +96,7 @@ class TransferFriends extends React.Component {
             <Header title="转赠好友" history={history} />
             <div styleName="bg">
                 <div styleName="couponWrapper">
-                    {coupon()}
+                    {couponFn()}
                 </div>
                 <div styleName="searchWrapper">
                     <input type="text" styleName="inputBox" placeholder="请输入关键字" onChange={this.inputHandler}

@@ -17,7 +17,7 @@ let isActiveTab = (tab) => {
 let tabColor = (keyword) => {
     let cnd = isActiveTab(keyword);
     return {
-        color: cnd ? "#9b5b54" : "#999"
+        color: cnd ? "#f76850" : "#9b5b54"
     }
 }
 function getStyle(tab) {
@@ -82,9 +82,11 @@ class BottomNavBar extends React.Component {
             }
         }
         const STYLE_ICON_BASE = {
-            marginTop: '4px'
+            marginTop: '6px'
         }
-
+        const STYLE_TEXT_BASE = {
+            marginTop: '-6px'
+        }
         let icon_user = isActiveTab("user") ?
             require("../images/components/bottom-nav-bar/user.gif") :
             require("../images/components/bottom-nav-bar/user.png")
@@ -100,13 +102,13 @@ class BottomNavBar extends React.Component {
         return <div style={{ height: "100px" ,background:'#ebebeb'}}>
             <div style={getStyle('fixed_panel')}>
                 <a style={getStyle('tab_user')} onClick={() => link_handler('user')}>
-                    <img src={icon_user} style={STYLE_ICON_BASE} /><div>我的</div>
+                    <img src={icon_user} style={STYLE_ICON_BASE} /><div style={STYLE_TEXT_BASE}>我的</div>
                 </a>
                 <a style={getStyle('tab_investor')} onClick={() => link_handler('investor')}>
-                    <img src={icon_investor} style={STYLE_ICON_BASE} /><div>客户</div>
+                    <img src={icon_investor} style={STYLE_ICON_BASE} /><div style={STYLE_TEXT_BASE}>客户</div>
                 </a>
                 <a style={getStyle('tab_stats')} onClick={() => link_handler('stats')}>
-                    <img src={icon_stats} style={STYLE_ICON_BASE} /><div>业绩</div>
+                    <img src={icon_stats} style={STYLE_ICON_BASE} /><div style={STYLE_TEXT_BASE}>业绩</div>
                 </a>
             </div>
         </div>

@@ -91,20 +91,22 @@ export default class UserCoupon {
             done && done()
         })
     }
-    //转增优惠券
-    presentCoupon = (couponId, couponType, custId) => {
-        return this.Get('/api/finManager/coupon/v2/presentCoupon.shtml', {
-            couponId: couponId,
-            couponType: couponType,
-            custId: custId
-        })
-    }
     //转增好友页面
     getCoupon = (couponId)=>{
         this.Get('/api/finManager/coupon/v2/coupon.shtml',{
-            couponId:couponId
+            couponId:this.couponId
         }).then(data => {
             this.friends_data.coupon = data.result
         })
     }
+    //转增优惠券
+    presentCoupon = (custId) => {
+        let {coupon} = this.friends_data
+        return this.Get('/api/finManager/coupon/v2/presentCoupon.shtml', {
+            couponId: this.couponId,
+            couponType: coupon.couponType,
+            custId: custId
+        })
+    }
+
 }
