@@ -1,10 +1,10 @@
-import { Request, Components } from 'fw-javascripts'
+import { Request, RequestFactory, Components } from 'fw-javascripts'
 
 let API_PATH = document.getElementById('api-path').value;
 
 const Ajax = options => {
     // add default url prefix
-    options.url = `${API_PATH}/mpwap${options.url}`
+    options.url = `${API_PATH}${options.url}`
     if (options.fullUrl) options.url = options.fullUrl
 
     return Request(options).catch(error => {

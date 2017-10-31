@@ -43,4 +43,6 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         return new Promise(resolve => resolve())
     }))
 
-};
+    gulp.task('activity', gulp.series(`activity:${APP_NAMES[0].name}`))
+
+}

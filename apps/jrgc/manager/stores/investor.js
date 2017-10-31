@@ -92,7 +92,7 @@ export default class Investor {
     }
     //我的客户列表，包含全部、在投、空仓未投资四种类型，以及余额最高，返利最多，最近回款时间三种排序方式
     resetCustPageNo = () => {
-        this.data.custmor.pageNo = 1
+        this.data.custmor.pageNo = 0
         this.data.custmor.list = []
     }
     setCustTab = (tab) => {
@@ -109,7 +109,6 @@ export default class Investor {
     fetchCustList = (done) => {
         let { value, list, pageNo } = this.data.custmor
         if (this.data.custmor.pageNo == -1) return done && done()
-        // if (this.data.custmor.pageNo == 1) list.splice(0, list.length)
 
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
