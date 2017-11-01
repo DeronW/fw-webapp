@@ -33,14 +33,13 @@ class InvestedFirstTime extends React.Component {
         const investorType = 'investedFirstTime',
             { stats_overview, stats_investor } = this.props,
             { statsDurationType } = stats_overview.data,
-            { registered } = stats_overview.investorFormatted,
+            { investedFirstTime,registered } = stats_overview.investorFormatted,
             { investorCnt, sortBy, orderBy, pageNo } = this.state;
 
         stats_investor.initStats(investorType, statsDurationType);
-
         this.setState({
             statsDurationType: statsDurationType,
-            investorCnt: registered
+            investorCnt: investedFirstTime
         });
 
         this.loadMore(null)
