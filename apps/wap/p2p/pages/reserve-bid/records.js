@@ -29,9 +29,9 @@ class ReserveRecords extends React.Component {
         let { reserve_bid, history } = this.props;
         let cb = () => {
             reserve_bid.cancelHandler(id).then((data) => {
-                if (data.isCanCancel == '1') {
+                if (data.cancelResult == '1') {
 
-                } else if (data.isCanCancel == '0') {
+                } else if (data.cancelResult == '0') {
                     Components.showToast("取消成功")
                     reserve_bid.resetPageNo()
                     reserve_bid.getReserveList()
