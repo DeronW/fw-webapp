@@ -92,13 +92,17 @@ class Registered extends React.Component {
         let sortValue = '';
         if (sortBy === 'time') sortValue = investor.regTime;
         return ({
+            custId:investor.custId,
             name: investor.custRealName || '未实名',
             phone: investor.mobile,
             sortBy: sortByCN,
             sortValue: sortValue
         })
     }
-
+    gotoHandler = (link) => {
+        let {history} = this.props
+        history.push(link)
+    }
     render() {
         const { history, stats_investor } = this.props,
             { investorRawData } = stats_investor.data,
@@ -125,8 +129,8 @@ class Registered extends React.Component {
         }
 
         const genInvestorItem = (investor, i) => {
-            const { name, phone, sortBy, sortValue } = this.formatInvestItemData(investor);
-            return <div key={`${Date.now()}${i}`} styleName="investor-item">
+            const { custId,name, phone, sortBy, sortValue } = this.formatInvestItemData(investor);
+            return <div key={`${Date.now()}${i}`} styleName="investor-item" onClick={()=>this.gotoHandler(`investor-info?custId=${custId}`)}>
                 <div styleName="left-info">
                     <div styleName="left-top-info">{name}</div>
                     <div styleName="left-bottom-info">手机号: {phone}</div>
