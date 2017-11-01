@@ -39,7 +39,6 @@ class TransferCoupon extends React.Component {
     }
 
     transferHandler = (couponId,couponType,beanCount) => {
-        alert(222)
         let { history } = this.props
         let {custId,realName} =Utils.hashQuery
         if(custId !== undefined){
@@ -81,6 +80,13 @@ class TransferCoupon extends React.Component {
             return <div styleName={item == type ? "couponTabItem tabOn" : "couponTabItem"} key={index}
                 onClick={() => this.typeHanlder(item)}>{item}</div>
         }
+        let day = (item) => {
+            if(item.inverstPeriod == 0){
+                return <div styleName="lineRight desRight">任意标可用</div>
+            }else{
+                return <div styleName="lineRight desRight">投资期限>= <span>{item.inverstPeriod}天</span> 可用</div>
+            }
+        }
         let coupon_detail = (item, index) => {
             let coutent_style = item.conponType == '0' ? "contentItem contentBlue" : item.conponType == '1' ? "contentItem contentRed" : "contentItem contentYellow"
             let btn_style = item.conponType == '0' ? "giveBtn giveBtnBlue" : item.conponType == '1' ? "giveBtn giveBtnRed" : "giveBtn giveBtnYellow"
@@ -102,7 +108,7 @@ class TransferCoupon extends React.Component {
                 </div>
                 <div styleName="itemLine itemDes">
                     <div styleName="lineLeft desLeft">{item.conponType=='2'?'购买':'投资' }{m}{item.investMultip}{u} 可用</div>
-                    <div styleName="lineRight desRight">投资期限 {item.inverstPeriod}天 可用</div>
+                    {day(item)}
                 </div>
                 {item.isOver == '1' && <div styleName="labelOverdate"></div>}
             </div>

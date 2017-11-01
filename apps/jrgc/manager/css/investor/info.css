@@ -19,10 +19,11 @@
     position: relative;
 }
 .leftBar img{
-    max-width: 290px;
-    max-height: 290px;
     display: inline-block;
     border-radius: 50%;
+    width: 104px;
+    height: 104px;
+    overflow: hidden;
 }
 .level{
     width: 80px;

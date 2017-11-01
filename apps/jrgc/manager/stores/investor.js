@@ -10,7 +10,7 @@ export default class Investor {
         extendObservable(this.data, {
             custmor: {
                 list: [],
-                pageNo: 0,
+                pageNo: 1,
                 tab: '全部客户',
                 type: '可用余额最高排序',
                 value: 1,//1-全部-余额 2-全部-返利 3-全部-回款 4-在投-余额 5-在投-返利 6-在投-回款 7-空仓-余额 8-空仓-返利 9-未投-注册时间 10-未投-余额
@@ -92,7 +92,7 @@ export default class Investor {
     }
     //我的客户列表，包含全部、在投、空仓未投资四种类型，以及余额最高，返利最多，最近回款时间三种排序方式
     resetCustPageNo = () => {
-        this.data.custmor.pageNo = 0
+        this.data.custmor.pageNo = 1
         this.data.custmor.list = []
     }
     setCustTab = (tab) => {
@@ -108,16 +108,17 @@ export default class Investor {
     }
     fetchCustList = (done) => {
         let { value, list } = this.data.custmor
-        if (this.data.custmor.pageNo == -1) return done && done()
-
+        if (this.data.custmor.pageNo == 0) return done && done()
+        console.log(this.data.custmor.pageNo)
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
-            pageNo: this.data.custmor.pageNo++,
+            pageNo: this.data.custmor.pageNo,
             pageSize: 10
         }).then(data => {
             list.push(...data.pageData.result)
-            if(this.data.custmor.pageNo >= data.pageData.pagination.totalPage)
-                 this.data.custmor.pageNo = -1
+            this.data.custmor.pageNo < data.pageData.totalPage ?
+            this.data.custmor.pageNo++ :
+            this.data.custmor.pageNo = 0
 
             done && done()
         })
