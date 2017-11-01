@@ -158,6 +158,7 @@ class ReserveRecords extends React.Component {
 
         return <div styleName="recordsPanel">
             <Header title="我的预约" backArrowHandler={() => {
+                window.NNN = NativeBridge
                 NativeBridge.close()
             }} />
             <div styleName={tab_style}>
