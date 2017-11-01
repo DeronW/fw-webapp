@@ -181,7 +181,6 @@ class Investor extends React.Component {
             </div>
             {show_sort_type()}
             <div styleName="list">
-                {list && list.map(listFn)}
                 {fellow.records.map(listFn)}
             </div>
             <BottomNavBar />

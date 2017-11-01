@@ -77,7 +77,7 @@ export default class UserCoupon {
 
         this.Post('/api/finManager/coupon/v2/custList.shtml', {
             couponId: this.couponId,
-            couponType: this.couponType,
+            couponType: this.friends_data.coupon.conponType,
             keyword: keyword,
             pageNo: this.friends_data.pageNo,
             pageSize: 10
