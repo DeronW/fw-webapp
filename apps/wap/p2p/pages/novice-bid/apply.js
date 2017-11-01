@@ -102,7 +102,7 @@ class ReserveApplyNovice extends React.Component {
                 <div styleName="reserveMoney">抢购金额</div>
                 <div styleName="userMoney">
                     <div styleName="inputMoney">
-                        <input type="number" placeholder="100元起预约" value={novice_bid.novice_bid_data.reserveMoney}
+                        <input type="number" placeholder="100元起，限投30000" value={novice_bid.novice_bid_data.reserveMoney}
                                onChange={this.inputChangeHandler('reserveMoney')}/>
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
