@@ -13,7 +13,6 @@ function goBack(props) {
 
     // 如果传入自定义返回方法, 直接调用并结束
     if (props.backArrowHandler) {
-        alert(backArrowHandler)
         return props.backArrowHandler()
     }
 
