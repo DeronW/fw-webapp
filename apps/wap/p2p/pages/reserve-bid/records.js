@@ -33,6 +33,7 @@ class ReserveRecords extends React.Component {
 
                 } else if (data.isCanCancel == '0') {
                     Components.showToast("取消成功")
+                    reserve_bid.resetPageNo()
                     reserve_bid.getReserveList()
                 }
             })
