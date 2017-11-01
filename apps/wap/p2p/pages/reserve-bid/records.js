@@ -116,10 +116,13 @@ class ReserveRecords extends React.Component {
                     </div>
                 </div>}
                 <div styleName="infoContainer">
-                    <div styleName="infoItem">
+                    {item.status == 2 ? <div styleName="infoItem">
+                        <div styleName="infoItemLeft">实际投资金额</div>
+                        <div styleName="itemHeaderRight colorRed">￥{item.investAmt}</div>
+                    </div> : <div styleName="infoItem">
                         <div styleName="infoItemLeft">预计收益(含加息工豆)</div>
                         <div styleName="itemHeaderRight colorRed">￥{item.interest}</div>
-                    </div>
+                    </div>}
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约金额</div>
                         <div styleName="itemHeaderRight colorRed">￥{item.bookInvestAmt}</div>
