@@ -7,6 +7,26 @@ export default class Investor {
         this.Post = Post
         this.data = {}
 
+        this.MENU = {
+            '全部客户': [
+                { '可用余额最高排序': 1 },
+                { '返利最多排序': 2 },
+                { '最近回款时间排序': 3 }
+            ],
+            '在投': [
+                { '可用余额最高排序': 4 },
+                { '返利最多排序': 5 },
+                { '最近回款时间排序': 6 }
+            ],
+            '空仓': [
+                { '可用余额最高排序': 7 },
+                { '返利最多排序': 8 }
+            ],
+            '未投资': [
+                { '可用余额最高排序': 10 }
+            ]
+        }
+
         extendObservable(this.data, {
             custmor: {
                 list: [],
@@ -68,10 +88,67 @@ export default class Investor {
                 records: []
             },
         })
+
+        this.fellow = {}
+        extendObservable(this.fellow, {
+            pageNo: 1,
+            value: 1,
+            records: []
+        })
     }
+
+    /* *************************************/
+    /* *************************************/
+    /* *************************************/
+    // new 2017/11/01
+
+    resetFellowRecords(value = 1) {
+        this.fellow.pageNo = 1
+        this.fellow.value = value
+        this.fellow.records = []
+    }
+
+    appendFellowRecords(value, totalPage, records) {
+        let { pageNo } = this.fellow
+
+        if (this.fellow.value === value) {
+            this.fellow.pageNo = pageNo < totalPage ? pageNo + 1 : 0
+            this.fellow.records.push(...records)
+        }
+    }
+
+    fetchFellowRecords = (done) => {
+        let { value, pageNo } = this.fellow
+
+        if (pageNo == 0) return done && done()
+
+        this.Get('/api/finManager/cust/v2/myCustList.shtml', {
+            type: value,
+            pageNo: pageNo,
+            pageSize: 10
+        }).then(data => {
+            this.appendFellowRecords(
+                value,
+                data.pageData.pagination.totalPage,
+                data.pageData.result)
+
+            done && done()
+        })
+    }
+
+    switchSortType = (type) => {
+        this.resetFellowRecords(type)
+        this.fetchFellowRecords()
+    }
+
+    /* *************************************/
+    /* *************************************/
+    /* *************************************/
+
     @computed get custId() {
         return Utils.hashQuery.custId
     }
+
     //我的客户列表，包含全部、在投、空仓未投资四种类型，以及余额最高，返利最多，最近回款时间三种排序方式
     resetCustPageNo = () => {
         this.data.custmor.pageNo = 1
