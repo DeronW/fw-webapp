@@ -160,7 +160,7 @@ class Info extends React.Component {
                     <div styleName="level">{levelFn()}</div>
                 </div>
                 <div styleName="rightBar">
-                    <div styleName="name">{detail.realName}<span>({detail.birthday})</span></div>
+                    <div styleName="name">{detail.realName || detail.mobile}<span>({detail.birthday})</span></div>
                     {nextLevel < 5 && <div styleName="amount">差<span>{detail.mumValue}元</span>年化投资额升级VIP{nextLevel}</div>}
                     <div styleName="time">注册时间 {detail.createTime}</div>
                 </div>
@@ -219,12 +219,12 @@ class Info extends React.Component {
                     </div>
                 </div>
             </div>
-            <div styleName="remark" onClick="">
+            <div styleName="remark">
                 <div styleName="remarkTitle">备注</div>
                 <img src={require('../../images/investor/info/arrow.png')} />
                 <div styleName="remarkAmend" onClick={()=>this.gotoHandler('/investor-remark')}>修改</div>
             </div>
-            <div styleName="remarkText">
+            {detail.remark && <div styleName="remarkText">
                 <div styleName="remarkDes" style={desStyle}>
                     {detail.remark}
                 </div>
@@ -233,31 +233,31 @@ class Info extends React.Component {
                     <img style={{ transform: hidden ? 'rotate(0deg)' : 'rotate(180deg)' }}
                         src={require('../../images/investor/info/down.png')} />
                 </div>
-            </div>
+            </div>}
             <div styleName="account">
-                <div styleName="accountItem" onClick={() => this.gotoHandler('/investor-account-zx')}>
+                <div styleName="accountItem">
                     <div styleName="accountName">TA的尊享账户</div>
-                    <div styleName="accountText">
+                    {detail.zxOpenStatus>0 ? <div styleName="accountText" onClick={() => this.gotoHandler('/investor-account-zx')}>
                         可用余额
                         <span>{detail.zxBalance}元</span>
                         <img src={require('../../images/investor/info/arrow.png')} />
-                    </div>
+                    </div>:<div styleName="accountText">暂未开户</div>}
                 </div>
-                <div styleName="accountItem" onClick={() => this.gotoHandler('/investor-account-p2p')}>
+                <div styleName="accountItem">
                     <div styleName="accountName">TA的微金账户</div>
-                    <div styleName="accountText">
+                    {detail.wjOpenStatus>0 ?<div styleName="accountText" onClick={() => this.gotoHandler('/investor-account-p2p')}>
                         可用余额
                         <span>{detail.wjBalance}元</span>
                         <img src={require('../../images/investor/info/arrow.png')} />
-                    </div>
+                    </div>:<div styleName="accountText">暂未开户</div>}
                 </div>
-                <div styleName="accountItem" onClick={() => this.gotoHandler('/investor-account-hj')}>
+                <div styleName="accountItem">
                     <div styleName="accountName">TA的黄金账户</div>
-                    <div styleName="accountText">
+                    {detail.goldOpenStatus>0 ?<div styleName="accountText"  onClick={() => this.gotoHandler('/investor-account-hj')}>
                         持有黄金
                         <span>{detail.goldAmount}克</span>
                         <img src={require('../../images/investor/info/arrow.png')} />
-                    </div>
+                    </div>:<div styleName="accountText">暂未开户</div>}
                 </div>
             </div>
             <div styleName="tabBar">

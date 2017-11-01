@@ -45,7 +45,7 @@ class HjList extends React.Component {
             return <div styleName="detailItem" key={index}>
                 <div styleName="detailTitle">
                     <div styleName="titleLeft">优享金12065</div>
-                    <div styleName="titleRight">未起算</div>
+                    <div styleName="titleRight">{item.orderStatusName}</div>
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">成交金价(每克)</div>

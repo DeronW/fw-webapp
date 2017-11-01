@@ -19,8 +19,8 @@
     position: relative;
 }
 .leftBar img{
-    width: 104px;
-    height: 104px;
+    max-width: 290px;
+    max-height: 290px;
     display: inline-block;
     border-radius: 50%;
 }
@@ -189,7 +189,7 @@
     box-sizing: border-box;
     padding: 0 30px;
     border-bottom: 1px solid #eaeaea;
-    background: #f9f9f9;
+    background: #fff;
 }
 .remarkTitle{
     font-size: 28px;
@@ -213,8 +213,7 @@
     font-size: 24px;
     color: #999;
     position: relative;
-    background: #fff;
-    margin-bottom: 20px;
+    background: #f9f9f9;
 }
 .remarkDes{
     height: 100px;
@@ -235,7 +234,7 @@
 .account{
     width: 100%;
     padding-left: 30px;
-    height: 264px;
+    height: 315px;
     background: #fff;
     box-sizing: border-box;
 }
@@ -249,6 +248,7 @@
     display: table;
     padding-right: 30px;
     box-sizing: border-box;
+    margin-top: 20px;
 }
 .accountName{
     float: left;

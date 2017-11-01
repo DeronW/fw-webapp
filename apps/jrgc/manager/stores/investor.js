@@ -107,7 +107,7 @@ export default class Investor {
         this.fetchCustList()
     }
     fetchCustList = (done) => {
-        let { value, list, pageNo } = this.data.custmor
+        let { value, list } = this.data.custmor
         if (this.data.custmor.pageNo == -1) return done && done()
 
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
