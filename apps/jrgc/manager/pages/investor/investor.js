@@ -13,17 +13,20 @@ class Investor extends React.Component {
     state = {
         show: false
     }
+
     componentDidMount() {
         this.props.investor.resetCustPageNo()
         this.props.investor.fetchCustList()
         Event.touchBottom(this.props.investor.fetchCustList)
     }
+
     componentWillUnmount() {
         Event.cancelTouchBottom()
     }
+
     switchTab = (t) => {
-        let {resetCustPageNo,setCustTab,setCustValue,fetchCustList} = this.props.investor
-        let { tab,type,sort } = this.props.investor.data.custmor
+        let { resetCustPageNo, setCustTab, setCustValue, fetchCustList } = this.props.investor
+        let { tab, type, sort } = this.props.investor.data.custmor
 
         if (t == tab) return
         resetCustPageNo()
@@ -33,9 +36,9 @@ class Investor extends React.Component {
         let next_type = Object.values(next_tab[0])[0]
         setCustValue(next_type)
     }
-    switchType = (t,i) => {
-        let {resetCustPageNo,setCustType,setCustValue,fetchCustList} = this.props.investor
-        let { tab,type,sort } = this.props.investor.data.custmor
+    switchType = (t, i) => {
+        let { resetCustPageNo, setCustType, setCustValue, fetchCustList } = this.props.investor
+        let { tab, type, sort } = this.props.investor.data.custmor
 
         if (t == type) return
         resetCustPageNo()
@@ -53,26 +56,26 @@ class Investor extends React.Component {
     render() {
         let { show } = this.state
         let { history } = this.props
-        let { tab,sort,type,list }= this.props.investor.data.custmor
+        let { tab, sort, type, list } = this.props.investor.data.custmor
 
         let amount = (item) => {
             let t
-            if(type == '可用余额最高排序'){
+            if (type == '可用余额最高排序') {
                 t = `￥${item.bankBalance}`
-            }else if(type == '返利最多排序'){
+            } else if (type == '返利最多排序') {
                 t = `￥${item.commissionAmt}`
-            }else{
-                t =  item.realName ? (item.createTime || '暂无回款'):'暂无回款'
+            } else {
+                t = item.realName ? (item.createTime || '暂无回款') : '暂无回款'
             }
             return t
         }
         let remind = (item) => {
             let r
-            if(type == '可用余额最高排序'){
+            if (type == '可用余额最高排序') {
                 r = '可用余额'
-            }else if(type == '返利最多排序'){
+            } else if (type == '返利最多排序') {
                 r = '总返利'
-            }else{
+            } else {
                 r = '回款时间'
             }
             return r
@@ -85,10 +88,10 @@ class Investor extends React.Component {
         let selectFn = (item, index) => {
             return <div styleName={Object.keys(item)[0] == type ? 'selectActive' : 'selectItem'}
                 key={item + index}
-                onClick={() => this.switchType(Object.keys(item)[0],index)}>{Object.keys(item)[0]}</div>
+                onClick={() => this.switchType(Object.keys(item)[0], index)}>{Object.keys(item)[0]}</div>
         }
-        let listFn = (item,index) => {
-            return <div styleName="listItem" key={item.custId+index} onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
+        let listFn = (item, index) => {
+            return <div styleName="listItem" key={item.custId + index} onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
                 <div styleName="name">{item.realName || item.mobile}</div>
                 <div styleName="money">{amount(item)}</div>
                 <div styleName="time">注册时间：{item.createTime}</div>
@@ -112,7 +115,7 @@ class Investor extends React.Component {
             </div>
             <div styleName="container">
                 <div styleName="tabs">
-                    {['全部客户','在投','空仓','未投资'].map(tabFn)}
+                    {['全部客户', '在投', '空仓', '未投资'].map(tabFn)}
                 </div>
                 <div styleName="filter" onClick={() => this.switchShow()}>
                     <span>筛选</span><img src={require("../../images/investor/investor/filter.png")} />
@@ -124,7 +127,7 @@ class Investor extends React.Component {
                 </div>
             </div>}
             <div styleName="list">
-                {list&&list.map(listFn)}
+                {list && list.map(listFn)}
             </div>
             <BottomNavBar />
         </div>
