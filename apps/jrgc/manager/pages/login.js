@@ -2,12 +2,12 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { showToast } from 'fw-components';
+import { Post } from '../helpers'
 
 import { Header } from '../components'
 import styles from '../css/login.css'
 
-@inject("login")
-@observer
+
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Login extends React.Component {
     state = {
@@ -15,27 +15,24 @@ class Login extends React.Component {
         password: ''
     }
 
-    changeName = e => {
-        this.setState({ username: e.target.value })
-    }
-
-    changePwd = e => {
-        if (e.target.value.length <= 16) {
-            this.setState({ password: e.target.value })
-        }
+    changeHandler = name => e => {
+        this.setState({ [name]: e.target.value })
     }
     submitHandler = () => {
         let { username, password } = this.state
         let { history } = this.props
-        if(!username) showToast("用户名不能为空")
-        if(!password) showToast("密码不能为空")
-
-        this.props.login.login(username,password).then(()=>{
+        if (!username) showToast("用户名不能为空")
+        if (!password) showToast("密码不能为空")
+        Post('/finManager/user/login.shtml', {
+            username: username,
+            pwd: password,
+            sourceType: 3
+        }).then(() => {
             history.push('/')
         })
     }
     render() {
-        let { history, login } = this.props
+        let { history } = this.props
         let { username, password } = this.state
 
         return <div styleName="bg">
@@ -45,17 +42,19 @@ class Login extends React.Component {
                 <input
                     placeholder="用户名/邮箱/手机号"
                     value={username}
-                    onChange={this.changeName} />
+                    onChange={this.changeHandler('username')} />
             </div>
             <div styleName="password">
                 <i></i>
                 <input
                     type="password"
+                    maxLength="16"
                     placeholder="登录密码"
                     value={password}
-                    onChange={this.changePwd}/>
+                    onChange={this.changeHandler('password')} />
             </div>
             <div styleName="submit" onClick={this.submitHandler}>登录</div>
+            <div styleName="remind">●请使用金融工场账号密码登录</div>
         </div>
     }
 }

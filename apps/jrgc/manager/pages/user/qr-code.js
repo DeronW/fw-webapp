@@ -7,7 +7,7 @@ import {BannerGroup} from 'fw-components'
 import {Header, BottomNavBar} from '../../components';
 import styles from '../../css/user/qr-code.css'
 
-@inject('login',"user")
+@inject("user")
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class QRCode extends React.Component {
@@ -24,7 +24,6 @@ class QRCode extends React.Component {
     }
     render(){
         let {history} = this.props
-        let { headUrl } = this.props.login.data
         let { info } = this.props.user.data.user
         let { url } = this.state
 

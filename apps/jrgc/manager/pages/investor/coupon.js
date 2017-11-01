@@ -91,7 +91,7 @@ class Coupon extends React.Component {
                 <div styleName="explain">{remark(item)}</div>
                 <div styleName="time">有效期 {item.overdueTime}</div>
                 {limit(conponType, item.investMultip)}
-                <div styleName="day">{}投资期限 <span>{item.inverstPeriod}天</span> 可用</div>
+                {day(item)}
                 {item.isOver == '1' && <div styleName="expire"></div>}
             </div>
         }

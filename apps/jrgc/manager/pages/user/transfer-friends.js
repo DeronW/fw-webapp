@@ -60,11 +60,18 @@ class TransferFriends extends React.Component {
         let { history } = this.props
         let { isSearch } =this.state
         let { pageNo, list, keyword,coupon } = this.props.user_coupon.friends_data
-        let u = couponType == '2' ? '克' : ''
-        let m = conponType == '0' ?'￥':''
+        let u = coupon.conponType == '2' ? '克' : ''
+        let m = coupon.conponType == '0' ?'￥':''
 
+        let day = () => {
+            if(coupon.inverstPeriod == 0){
+                return <div styleName="lineRight addRight">任意标可用</div>
+            }else{
+                return <div styleName="lineRight addRight">投资期限>= <span>{coupon.inverstPeriod}天</span> 可用</div>
+            }
+        }
         let couponFn = () => {
-            let coupon_style = coupon.couponType == '0' ? "couponItem typeBlue" : coupon.couponType == '1' ? "couponItem typeRed" : "couponItem typeYellow"
+            let coupon_style = coupon.conponType == '0' ? "couponItem typeBlue" : coupon.conponType == '1' ? "couponItem typeRed" : "couponItem typeYellow"
             return <div styleName={coupon_style}>
                 <div styleName="couponValue"><span styleName="rmb">{m}</span>{coupon.beanCount}<span styleName="rmb">{u}</span></div>
                 <div styleName="couponDes">
@@ -72,8 +79,8 @@ class TransferFriends extends React.Component {
                     <div styleName="lineRight desRight">有效期 {coupon.overdueTime}</div>
                 </div>
                 <div styleName="couponAddtion">
-                    <div styleName="lineLeft addLeft">{coupon.conponType=='2'?'购买':'投资' }{m}{coupon.investMultip}{u} 可用</div>
-                    <div styleName="lineRight addRight">投资期限 ≥{coupon.inverstPeriod}天 可用</div>
+                    <div styleName="lineLeft addLeft">{coupon.conponType=='2'?'购买':'投资' }{m}{coupon.investMultip}{u}可用</div>
+                    {day()}
                 </div>
             </div>
         }

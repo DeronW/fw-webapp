@@ -233,7 +233,7 @@ let generate_task = function (site_name, page_name, configs) {
 
     CONFIG.debug ?
         gulp.task(`${task_name}:watch`, gulp.series(task_name)) :
-        gulp.task(`${task_name}:revision`, gulp.series(task_name, copy2cdn, compile_revision));
+        gulp.task(`${task_name}:revision`, gulp.series(`${task_name}:nowatch`, copy2cdn, compile_revision));
 
     if (!CONFIG.debug && !COMMON_JAVASCRIPTS_TASK[site_name]) {
         gulp.task(`${site_name}:common_js`, gulp.series(

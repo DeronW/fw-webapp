@@ -1,39 +1,41 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import { Event, Components, Utils } from 'fw-javascripts'
-import {BannerGroup} from 'fw-components'
+import { BannerGroup } from 'fw-components'
+import { Post } from '../../helpers'
 
-import {Header, BottomNavBar} from '../../components';
+import { Header, BottomNavBar } from '../../components';
 import styles from '../../css/user/setting.css'
 
-@inject("login","user")
+
+@inject("user")
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-class Setting extends React.Component{
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+class Setting extends React.Component {
     state = {
-        close:false
+        close: false
     }
-    exitLoginHandler = () =>{
-        let {history} = this.props
-        this.setState({close:false})
-        this.props.login.exitHandler()
-                        .then(()=>Components.showToast('退出成功'))
-                        .then(() => history.push('/login'))
+    exitLoginHandler = () => {
+        let { history } = this.props
+        this.setState({ close: false })
+        Post('/finManager/user/logout.shtml')
+            .then(() => Components.showToast('退出成功'))
+            .then(() => history.push('/login'))
     }
     showPopHandler = () => {
-        this.setState({close:true})
+        this.setState({ close: true })
     }
     closePopHandler = () => {
-        this.setState({close:false})
+        this.setState({ close: false })
     }
     gotoQRCode = () => {
-        let {history} = this.props
+        let { history } = this.props
         history.push('/user-qr-code')
     }
-    render(){
-        let {history} = this.props
-        let {close} = this.state
+    render() {
+        let { history } = this.props
+        let { close } = this.state
         let { info } = this.props.user.data.user
 
         let pop = <div styleName="pop-bg">
@@ -45,19 +47,19 @@ class Setting extends React.Component{
             </div>
         </div>
         return <div styleName="bg">
-            <Header title="个人设置" history={history}/>
+            <Header title="个人设置" history={history} />
             <div styleName="set">
                 <div styleName="set-item">
-                    <img src={require('../../images/user/setting/name.png')}/>
+                    <img src={require('../../images/user/setting/name.png')} />
                     <span>账号</span>
                     <div styleName="loginName">{info.loginName}</div>
                 </div>
                 <div styleName="set-item">
-                    <img src={require('../../images/user/setting/code.png')}/>
+                    <img src={require('../../images/user/setting/code.png')} />
                     <span>工场码</span>
                     <div styleName="loginName gcm" onClick={this.gotoQRCode}>
                         {info.promotionCode}
-                        <img src={require('../../images/user/setting/arrow.png')}/>
+                        <img src={require('../../images/user/setting/arrow.png')} />
                     </div>
                 </div>
             </div>

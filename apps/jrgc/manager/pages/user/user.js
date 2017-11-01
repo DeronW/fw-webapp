@@ -2,9 +2,23 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { BannerGroup } from 'fw-components'
+import { NativeBridge,Browser } from '../../helpers'
 
 import { Header, BottomNavBar } from '../../components';
 import styles from '../../css/user/user.css'
+
+window.NNN = NativeBridge
+
+function gotoHandler(link){
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if (Browser.inApp) {
+        NativeBridge.goto(link)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
 
 @inject("user")
 @observer
@@ -29,12 +43,6 @@ class User extends React.Component {
         })
     }
 
-    gotoHandler = (link) => {
-        if (link.indexOf('://') < 0) {
-            link = location.protocol + '//' + location.hostname + link;
-        }
-        location.href = encodeURI(link);
-    }
     startMoveNotice = () => {
         let delay = 30, duration = 3000, step = 2, singleH = 40, p, position_index;
         let { notice } = this.props.user.data.user
@@ -74,7 +82,7 @@ class User extends React.Component {
         for (let i = 0; i < bs.length; i++) {
             if (i == index) link = bs[i].url;
         }
-        if (link) this.gotoHandler(link);
+        if (link) gotoHandler(link);
     }
     goPageHandler(link) {
         let { history } = this.props
@@ -90,7 +98,7 @@ class User extends React.Component {
         let { info, banners, notice } = this.props.user.data.user
 
         let noticeFn = (item, index) => {
-            return <div styleName="noticeItem" key={index} onClick={() => this.gotoHandler(item.url)}>{item.title}</div>
+            return <div styleName="noticeItem" key={index} onClick={() => gotoHandler(item.url)}>{item.title}</div>
         }
 
         if (banners && banners.length > 0) {
