@@ -153,8 +153,10 @@ class ReserveRecords extends React.Component {
 
         let tab_style = Browser.inIOSApp ? 'tabWrapperIos' : 'tabWrapper'
 
+        // {/* backArrowHandler={() => NativeBridge.close()} */}
+
         return <div styleName="recordsPanel">
-            <Header title="我的预约" backArrowHandler={() => NativeBridge.close()} />
+            <Header title="我的预约" history={history} />
             <div styleName={tab_style}>
                 {['0', '1', '2'].map(tab_func)}
             </div>
