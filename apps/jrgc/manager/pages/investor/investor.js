@@ -28,34 +28,37 @@ class Investor extends React.Component {
         Event.cancelTouchBottom()
     }
 
-    switchTab = (t) => {
-        let { resetCustPageNo, setCustTab, setCustValue, fetchCustList } = this.props.investor
-        let { tab, type, sort } = this.props.investor.data.custmor
+    // switchTab = (t) => {
+    //     let { resetCustPageNo, setCustTab, setCustValue, fetchCustList } = this.props.investor
+    //     let { tab, type, sort } = this.props.investor.data.custmor
 
-        if (t == tab) return
-        resetCustPageNo()
-        setCustTab(t)
+    //     if (t == tab) return
+    //     resetCustPageNo()
+    //     setCustTab(t)
 
-        let next_tab = sort[t]
-        let next_type = Object.values(next_tab[0])[0]
-        setCustValue(next_type)
-    }
-    switchType = (t, i) => {
-        let { resetCustPageNo, setCustType, setCustValue, fetchCustList } = this.props.investor
-        let { tab, type, sort } = this.props.investor.data.custmor
+    //     let next_tab = sort[t]
+    //     let next_type = Object.values(next_tab[0])[0]
+    //     setCustValue(next_type)
+    // }
+    // switchType = (t, i) => {
+    //     let { resetCustPageNo, setCustType, setCustValue, fetchCustList } = this.props.investor
+    //     let { tab, type, sort } = this.props.investor.data.custmor
 
-        if (t == type) return
-        resetCustPageNo()
-        setCustType(t)
-        setCustValue(sort[tab][i][t])
-        this.setState({ show: !this.state.show })
-    }
+    //     if (t == type) return
+    //     resetCustPageNo()
+    //     setCustType(t)
+    //     setCustValue(sort[tab][i][t])
+    //     this.setState({ show: !this.state.show })
+    // }
 
     switchTypeHandler = type => {
         this.props.investor.switchSortType(type)
     }
 
-    switchShow = () => {
+    // switchShow = () => {
+    //     this.setState({ show: !this.state.show })
+    // }
+    toggleShow = () => {
         this.setState({ show: !this.state.show })
     }
     gotoHandler = (link) => {
@@ -65,7 +68,7 @@ class Investor extends React.Component {
     render() {
         let { show } = this.state
         let { history } = this.props
-        let { tab, sort, type, list } = this.props.investor.data.custmor
+        // let { tab, sort, type, list } = this.props.investor.data.custmor
         let { fellow, MENU } = this.props.investor
 
         let amount = (item) => {
@@ -91,17 +94,18 @@ class Investor extends React.Component {
             return r
         }
 
-        let tabFn = (item, index) => {
-            return <div styleName={item == tab ? 'tab tabActive' : 'tab'}
-                key={index}
-                onClick={() => this.switchTab(item)}>{item}</div>
-        }
+        // let tabFn = (item, index) => {
+        //     return <div styleName={item == tab ? 'tab tabActive' : 'tab'}
+        //         key={index}
+        //         onClick={() => this.switchTab(item)}>{item}</div>
+        // }
 
-        let selectFn = (item, index) => {
-            return <div styleName={Object.keys(item)[0] == type ? 'selectActive' : 'selectItem'}
-                key={item + index}
-                onClick={() => this.switchType(Object.keys(item)[0], index)}>{Object.keys(item)[0]}</div>
-        }
+        // let selectFn = (item, index) => {
+        //     return <div styleName={Object.keys(item)[0] == type ? 'selectActive' : 'selectItem'}
+        //         key={item + index}
+        //         onClick={() => this.switchType(Object.keys(item)[0], index)}>{Object.keys(item)[0]}</div>
+        // }
+
         let listFn = (item, index) => {
             return <div styleName="listItem" key={item.custId + index} onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
                 <div styleName="name">{item.realName || item.mobile}</div>
@@ -114,6 +118,7 @@ class Investor extends React.Component {
         let tab_level_one = (item) => {
             let types = MENU[item].map(x => Object.values(x)[0])
             let act = types.indexOf(fellow.value) > -1
+
             let cn = act ? 'tab tabActive' : 'tab'
             return <div styleName={cn} key={item}
                 onClick={() => this.switchTypeHandler(types[0])}>{item}</div>
@@ -125,7 +130,10 @@ class Investor extends React.Component {
 
             return <div styleName={fellow.value == value ? 'selectActive' : 'selectItem'}
                 key={value}
-                onClick={() => this.switchTypeHandler(value)}>{txt}</div>
+                onClick={() => {
+                    this.toggleShow()
+                    this.switchTypeHandler(value)
+                }}>{txt}</div>
         }
 
         let show_sort_type = () => {
@@ -139,9 +147,6 @@ class Investor extends React.Component {
                     break
                 }
             }
-
-            let types = MENU[item].map(x => Object.values(x)[0])
-            let act = types.indexOf(fellow.value) > -1
 
             return <div styleName="mask">
                 <div styleName="select">
