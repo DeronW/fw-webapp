@@ -1,6 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
+import {Event, Components} from 'fw-javascripts'
 
 import styles from '../../css/investor/p2p-item.css'
 
@@ -17,6 +18,10 @@ class p2pItem extends React.Component {
         fetchInvestInfoP2P()
         resetCategoryPageNo()
         fetchPrdInvestP2P()
+        Event.touchBottom(fetchPrdInvestP2P)
+    }
+    componentWillUnmount() {
+        Event.cancelTouchBottom()
     }
     gotoHandler = (link) => {
         let { history } = this.props
@@ -82,7 +87,7 @@ class p2pItem extends React.Component {
         let status = (item)=>{
             let ENUM = {
                 '1':'全部 ',
-                '100':'招标中 ',
+                '100':'招标中',
                 '5':'回款中',
                 '6':'已回款'
             }
@@ -90,13 +95,13 @@ class p2pItem extends React.Component {
         }
         let collectionStatus = (item) => {
             let ENUM = {
-                '0':'匹配中 ',
-                '1':'匹配成功  ',
+                '0':'匹配中',
+                '1':'匹配成功',
                 '2':'匹配失败'
             }
             return ENUM[item.status]
         }
-        let t = () => {
+        let t = (item) => {
             if (tab == '批量项目') {
                 return <div styleName="collection" onClick={() => this.gotoHandler(`/investor-item-collection?colPrdClaimId=${item.colId}&batchOrderId=${item.id}`)}>
                     <div styleName="title">
@@ -109,7 +114,7 @@ class p2pItem extends React.Component {
                     </div>
                     <div styleName="item">
                         <span>预期年化收益率</span>
-                        <span styleName="bold">{item.collRate}</span>
+                        <span styleName="bold">{item.collRate}%</span>
                     </div>
                     <div styleName="item">
                         <span>出借金额</span>
@@ -124,13 +129,13 @@ class p2pItem extends React.Component {
                 return <div styleName="record">
                     <div styleName="title">
                         <span>{item.prdClaimsId}</span>
-                        <div styleName="end">{item.status}</div>
+                        <div styleName="end">{status(item)}</div>
                     </div>
                     <div styleName="item">
                         <span>预期年化利率</span>
-                        <span styleName="bold">{item.annualRate}</span>
+                        <span styleName="bold">{item.annualRate}%</span>
                     </div>
-                    {item.gradeIncreases && <div styleName="item">
+                    {item.gradeIncreases > 0 && <div styleName="item">
                         <span>年化加息奖励</span>
                         <span styleName="bold">{item.gradeIncreases}</span>
                     </div>}
@@ -159,7 +164,7 @@ class p2pItem extends React.Component {
                     </div>
                     <div styleName="item">
                         <span>预期年化利率</span>
-                        <span styleName="bold">{item.annualRate}</span>
+                        <span styleName="bold">{item.annualRate}%</span>
                     </div>
                     <div styleName="item">
                         <span>年化加息奖励</span>
