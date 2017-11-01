@@ -45,7 +45,7 @@ class Turntable extends React.Component {
         }, 300)
 
         document.querySelector("body").addEventListener("touchmove", function(e) {
-            if (e.target.id.indexOf('turntable') > -1) e.preventDefault()
+            if (e.target.className.indexOf('turntable') > -1) e.preventDefault()
         }, false);
     }
 
