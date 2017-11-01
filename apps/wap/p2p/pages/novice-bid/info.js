@@ -95,7 +95,7 @@ class ReserveInfoNovice extends React.Component {
                 </div>
                 <div styleName="rulerContent">
                     1、您投的新手标所匹配的资产是期限为21天消费贷。
-                    <br/>2、结果可在金融工场app-我的-预约记录中查看。
+                    <br/>2、结果可在金融工场app-我的-我的预约中查看。
                     <br/>3、2%奖励将以工豆形式在标的起息后发到您的工豆账户中。
                     <br/>4、奖励工豆可在您再次出借时抵现（100个工豆=1元）。
                     <br/>5、工豆是平台对新用户的奖励，不可提现。
