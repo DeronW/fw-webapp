@@ -158,9 +158,7 @@ class ReserveRecords extends React.Component {
 
         return <div styleName="recordsPanel">
             <Header title="我的预约" backArrowHandler={() => {
-                alert(1)
                 NativeBridge.close()
-                alert(2)
             }} />
             <div styleName={tab_style}>
                 {['0', '1', '2'].map(tab_func)}
