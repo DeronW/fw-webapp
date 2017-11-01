@@ -1,9 +1,18 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { NativeBridge }  from '../helpers'
+import { NativeBridge,Browser }  from '../helpers'
 
-
+function gotoHandler(link){
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if (Browser.inApp) {
+        NativeBridge.goto(link)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
 class Test extends React.Component {
     shareHandler = ()=> {
         // NativeBridge.share({
@@ -22,9 +31,13 @@ class Test extends React.Component {
             desc: '金融工场-中国领先的综合金融信息服务平台，回款提现免手续费。'
         }), true)
     }
+    gotoUrl = () => {
+        gotoHandler('https://www.baidu.com/')
+    }
     render() {
         return <div>
             <button style={{width:'300px',height:'300px'}} onClick={this.shareHandler}>邀请分享</button>
+            <button style={{width:'300px',height:'300px'}} onClick={this.gotoUrl}>跳转</button>
         </div>
 
     }
