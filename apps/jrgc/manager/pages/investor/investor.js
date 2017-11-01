@@ -73,9 +73,9 @@ class Investor extends React.Component {
 
         let amount = (item) => {
             let t
-            if (type == '可用余额最高排序') {
+            if ([1,4,7,9].indexOf(fellow.value)>-1) {
                 t = `￥${item.bankBalance}`
-            } else if (type == '返利最多排序') {
+            } else if ([2,5,8].indexOf(fellow.value)>-1) {
                 t = `￥${item.commissionAmt}`
             } else {
                 t = item.realName ? (item.createTime || '暂无回款') : '暂无回款'
@@ -84,9 +84,9 @@ class Investor extends React.Component {
         }
         let remind = (item) => {
             let r
-            if (type == '可用余额最高排序') {
+            if ([1,4,7,9].indexOf(fellow.value)>-1) {
                 r = '可用余额'
-            } else if (type == '返利最多排序') {
+            } else if ([2,5,8].indexOf(fellow.value)>-1) {
                 r = '总返利'
             } else {
                 r = '回款时间'
