@@ -8,7 +8,7 @@ function gotoHandler(link){
         link = location.protocol + '//' + location.hostname + link;
     }
     if (Browser.inApp) {
-        NativeBridge.goto(link)
+        NativeBridge.trigger('goto',link)
     } else {
         location.href = encodeURI(link);
     }
