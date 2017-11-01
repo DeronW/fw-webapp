@@ -97,7 +97,7 @@ class Rebate extends React.Component {
             return <div styleName="itemDetail" key={item.custId+index} onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
                 <div styleName="detailLine">
                     <div styleName="detailLeft">{item.custRealName}</div>
-                    <div styleName="detailRight">{item.flexibleTermRebate ? `¥${item.alreadyRebate}+${item.flexibleTermRebate}`:`¥${item.alreadyRebate}`}</div>
+                    <div styleName="detailRight">{item.flexibleTermRebate!=="0.00" ? `¥${item.alreadyRebate}+${item.flexibleTermRebate}`:`¥${item.alreadyRebate}`}</div>
                 </div>
                 <div styleName="detailLine">
                     <div styleName="detailLeft userDes">{item.prdName} | {item.annualRate}% | {item.repayPeriod || '活期'}</div>
