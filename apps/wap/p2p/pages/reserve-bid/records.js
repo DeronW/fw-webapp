@@ -116,10 +116,13 @@ class ReserveRecords extends React.Component {
                     </div>
                 </div>}
                 <div styleName="infoContainer">
-                    <div styleName="infoItem">
+                    {item.status == 2 ? <div styleName="infoItem">
+                        <div styleName="infoItemLeft">实际投资金额</div>
+                        <div styleName="itemHeaderRight colorRed">￥{item.investAmt}</div>
+                    </div> : <div styleName="infoItem">
                         <div styleName="infoItemLeft">预计收益(含加息工豆)</div>
                         <div styleName="itemHeaderRight colorRed">￥{item.interest}</div>
-                    </div>
+                    </div>}
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约金额</div>
                         <div styleName="itemHeaderRight colorRed">￥{item.bookInvestAmt}</div>
@@ -130,12 +133,12 @@ class ReserveRecords extends React.Component {
                             {new Date(parseInt(item.bookTime)).toLocaleDateString().replace(/\//g, "-") + " " + new Date(parseInt(item.bookTime)).toTimeString().substr(0, 8)}
                         </div>
                     </div>
-                    <div styleName="infoItem">
+                    {item.status != 2 && <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约还款时间</div>
                         <div styleName="itemHeaderRight">
                             {new Date(parseInt(item.paymentDate)).toLocaleDateString().replace(/\//g, "-") + new Date(parseInt(item.bookTime)).toTimeString().substr(0, 0)}
                         </div>
-                    </div>
+                    </div>}
                 </div>
                 {(item.status == 0 || item.status == 1) && <div styleName="infoItem infoProtocol">
                     <div styleName="infoItemLeft">预约协议</div>

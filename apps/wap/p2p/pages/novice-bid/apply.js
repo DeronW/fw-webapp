@@ -61,7 +61,7 @@ class ReserveApplyNovice extends React.Component {
                 .then(() => {
                     //预约成功后触发首页刷新
                     NativeBridge.trigger('home_refresh')
-                    history.push(`/novice-bid/success`)
+                    history.push(`/novice-bid/success?is_used=${this.state.is_used}`)
                 })
         }
         novice_bid.fetchNoviceProduct().then(data => {
@@ -165,7 +165,8 @@ class ReserveApplyNovice extends React.Component {
                     <span styleName="couponLeftText">使用优惠券</span>
                 </div>
                 <div styleName="couponRight">
-                    <span styleName="rightRed">&yen;20</span>返现券，满<span styleName="rightRed">&yen;{novice_bid.novice_bid_data.couponInvestMultip}</span>可用
+                    <span styleName="rightRed">&yen;20</span>返现券，满<span
+                    styleName="rightRed">&yen;{novice_bid.novice_bid_data.couponInvestMultip}</span>可用
                 </div>
             </div>
         }

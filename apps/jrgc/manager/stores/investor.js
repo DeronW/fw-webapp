@@ -7,51 +7,53 @@ export default class Investor {
         this.Post = Post
         this.data = {}
 
+        this.MENU = {
+            '全部客户': [
+                { '可用余额最高排序': 1 },
+                { '返利最多排序': 2 },
+                { '最近回款时间排序': 3 }
+            ],
+            '在投': [
+                { '可用余额最高排序': 4 },
+                { '返利最多排序': 5 },
+                { '最近回款时间排序': 6 }
+            ],
+            '空仓': [
+                { '可用余额最高排序': 7 },
+                { '返利最多排序': 8 }
+            ],
+            '未投资': [
+                { '可用余额最高排序': 10 }
+            ]
+        }
+
         extendObservable(this.data, {
-            custmor: {
-                list: [],
-                pageNo: 1,
-                tab: '全部客户',
-                type: '可用余额最高排序',
-                value: 1,//1-全部-余额 2-全部-返利 3-全部-回款 4-在投-余额 5-在投-返利 6-在投-回款 7-空仓-余额 8-空仓-返利 9-未投-注册时间 10-未投-余额
-                sort: {
-                    '全部客户': [
-                        {
-                            '可用余额最高排序': 1
-                        },
-                        {
-                            '返利最多排序': 2
-                        },
-                        {
-                            '最近回款时间排序': 3
-                        }
-                    ],
-                    '在投': [
-                        {
-                            '可用余额最高排序': 4
-                        },
-                        {
-                            '返利最多排序': 5
-                        },
-                        {
-                            '最近回款时间排序': 6
-                        }
-                    ],
-                    '空仓': [
-                        {
-                            '可用余额最高排序': 7
-                        },
-                        {
-                            '返利最多排序': 8
-                        }
-                    ],
-                    '未投资': [
-                        {
-                            '可用余额最高排序': 10
-                        }
-                    ]
-                },
-            },
+            // custmor: {
+            //     list: [],
+            //     pageNo: 1,
+            //     tab: '全部客户',
+            //     type: '可用余额最高排序',
+            //     value: 1,//1-全部-余额 2-全部-返利 3-全部-回款 4-在投-余额 5-在投-返利 6-在投-回款 7-空仓-余额 8-空仓-返利 9-未投-注册时间 10-未投-余额
+            //     sort: {
+            //         '全部客户': [
+            //             { '可用余额最高排序': 1 },
+            //             { '返利最多排序': 2 },
+            //             { '最近回款时间排序': 3 }
+            //         ],
+            //         '在投': [
+            //             { '可用余额最高排序': 4 },
+            //             { '返利最多排序': 5 },
+            //             { '最近回款时间排序': 6 }
+            //         ],
+            //         '空仓': [
+            //             { '可用余额最高排序': 7 },
+            //             { '返利最多排序': 8 }
+            //         ],
+            //         '未投资': [
+            //             { '可用余额最高排序': 10 }
+            //         ]
+            //     },
+            // },
             calendar: {//回款日历
                 overview: {},//总回款信息
                 calendarList: [],//月份回款日历
@@ -86,43 +88,101 @@ export default class Investor {
                 records: []
             },
         })
+
+        this.fellow = {}
+        extendObservable(this.fellow, {
+            pageNo: 1,
+            value: 1,
+            records: []
+        })
     }
-    @computed get custId() {
-        return Utils.hashQuery.custId
+
+    /* *************************************/
+    /* *************************************/
+    /* *************************************/
+    // new 2017/11/01
+
+    resetFellowRecords(value = 1) {
+        this.fellow.pageNo = 1
+        this.fellow.value = value
+        this.fellow.records = []
     }
-    //我的客户列表，包含全部、在投、空仓未投资四种类型，以及余额最高，返利最多，最近回款时间三种排序方式
-    resetCustPageNo = () => {
-        this.data.custmor.pageNo = 1
-        this.data.custmor.list = []
+
+    appendFellowRecords(value, totalPage, records) {
+        let { pageNo } = this.fellow
+
+        if (this.fellow.value === value) {
+            this.fellow.pageNo = pageNo < totalPage ? pageNo + 1 : 0
+            this.fellow.records.push(...records)
+        }
     }
-    setCustTab = (tab) => {
-        this.data.custmor.tab = tab
-        this.data.custmor.type = '可用余额最高排序'
-    }
-    setCustType = (type) => {
-        this.data.custmor.type = type
-    }
-    setCustValue = (value) => {
-        this.data.custmor.value = value
-        this.fetchCustList()
-    }
-    fetchCustList = (done) => {
-        let { value, list } = this.data.custmor
-        if (this.data.custmor.pageNo == 0) return done && done()
-        console.log(this.data.custmor.pageNo)
+
+    fetchFellowRecords = (done) => {
+        let { value, pageNo } = this.fellow
+
+        if (pageNo == 0) return done && done()
+
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
-            pageNo: this.data.custmor.pageNo,
+            pageNo: pageNo,
             pageSize: 10
         }).then(data => {
-            list.push(...data.pageData.result)
-            this.data.custmor.pageNo < data.pageData.totalPage ?
-            this.data.custmor.pageNo++ :
-            this.data.custmor.pageNo = 0
+            this.appendFellowRecords(
+                value,
+                data.pageData.pagination.totalPage,
+                data.pageData.result)
 
             done && done()
         })
     }
+
+    switchSortType = (type) => {
+        this.resetFellowRecords(type)
+        this.fetchFellowRecords()
+    }
+
+    /* *************************************/
+    /* *************************************/
+    /* *************************************/
+
+    @computed get custId() {
+        return Utils.hashQuery.custId
+    }
+
+    //我的客户列表，包含全部、在投、空仓未投资四种类型，以及余额最高，返利最多，最近回款时间三种排序方式
+    // resetCustPageNo = () => {
+    //     this.data.custmor.pageNo = 1
+    //     this.data.custmor.list = []
+    // }
+    // setCustTab = (tab) => {
+    //     this.data.custmor.tab = tab
+    //     this.data.custmor.type = '可用余额最高排序'
+    // }
+    // setCustType = (type) => {
+    //     this.data.custmor.type = type
+    // }
+    // setCustValue = (value) => {
+    //     this.data.custmor.value = value
+    //     this.fetchCustList()
+    // }
+    // fetchCustList = (done) => {
+    //     let { value, list, pageNo } = this.data.custmor
+
+    //     if (pageNo == 0) return done && done()
+
+    //     this.Get('/api/finManager/cust/v2/myCustList.shtml', {
+    //         type: value,
+    //         pageNo: pageNo,
+    //         pageSize: 10
+    //     }).then(data => {
+    //         list.push(...data.pageData.result)
+    //         this.data.custmor.pageNo =
+    //             this.data.custmor.pageNo < data.pageData.pagination.totalPage ?
+    //                 pageNo + 1 : 0
+
+    //         done && done()
+    //     })
+    // }
 
     //回款日历-总回款信息接口
     fetchOverview = () => {

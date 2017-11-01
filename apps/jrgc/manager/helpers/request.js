@@ -24,10 +24,12 @@ const Ajax = options => {
 
             } else {
                 // 如果不弹出错误, 就直接reject
-                if (options.silence) reject(error)
-
-                Components.showToast(error.message)
-                setTimeout(() => reject(error), 1700)
+                if (options.silence) {
+                    reject(error)
+                } else {
+                    Components.showToast(error.message)
+                    setTimeout(() => reject(error), 1700)
+                }
             }
         })
     })
