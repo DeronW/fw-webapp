@@ -166,7 +166,7 @@ class p2pItem extends React.Component {
                         <span>预期年化利率</span>
                         <span styleName="bold">{item.annualRate}%</span>
                     </div>
-                    {item.addInterestRate && <div styleName="item">
+                    {item.addInterestRate > 0 && <div styleName="item">
                         <span>年化加息奖励</span>
                         <span styleName="bold">{item.addInterestRate}</span>
                     </div>}
