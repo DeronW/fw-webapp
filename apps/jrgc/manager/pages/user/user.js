@@ -7,6 +7,8 @@ import { NativeBridge,Browser } from '../../helpers'
 import { Header, BottomNavBar } from '../../components';
 import styles from '../../css/user/user.css'
 
+window.NNN = NativeBridge
+
 function gotoHandler(link){
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
