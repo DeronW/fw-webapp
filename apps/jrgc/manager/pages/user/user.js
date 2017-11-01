@@ -14,10 +14,6 @@ function gotoHandler(link) {
         link = location.protocol + '//' + location.hostname + link;
     }
     NativeBridge.trigger('goto', link)
-    // if (Browser.inApp) {
-    // } else {
-    //     location.href = encodeURI(link);
-    // }
 }
 
 @inject("user")
