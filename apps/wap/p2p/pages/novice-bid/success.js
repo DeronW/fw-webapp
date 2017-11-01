@@ -31,7 +31,7 @@ class ReserveSuccess extends React.Component {
             <div styleName="content">
                 <div styleName="icon"></div>
                 <div styleName="tips">新手标抢购成功</div>
-                {this.state.is_used &&
+                {this.state.is_used === 'true' &&
                 <div><span styleName="colorRed">20元</span>现金奖励已经发放至您的账户，请查收</div>}
             </div>
             <div styleName="toRecords" onClick={this.toRecordsHandler}>查看记录</div>
