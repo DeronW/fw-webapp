@@ -66,3 +66,13 @@
     color: #fff;
     font-size: 32px;
 }
+.remind{
+    font-size: 24px;
+    color: #999;
+    width: 100%;
+    height: 50px;
+    background: #ebebeb;
+    padding-top: 20px;
+    box-sizing: border-box;
+    padding-left: 30px;
+}

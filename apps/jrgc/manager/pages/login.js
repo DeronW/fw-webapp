@@ -56,6 +56,7 @@ class Login extends React.Component {
                     onChange={this.changePwd}/>
             </div>
             <div styleName="submit" onClick={this.submitHandler}>登录</div>
+            <div styleName="remind">●请使用金融工场账号密码登录</div>
         </div>
     }
 }
