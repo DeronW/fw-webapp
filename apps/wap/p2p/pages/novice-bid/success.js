@@ -24,8 +24,6 @@ class ReserveSuccess extends React.Component {
 
     render() {
         let {history, novice_bid} = this.props
-        console.log(Utils.hashQuery.is_used)
-        console.log(this.state.is_used)
         return <div styleName="successPanel">
             <Header noClose title="抢购成功" history={history}/>
             <div styleName="content">
