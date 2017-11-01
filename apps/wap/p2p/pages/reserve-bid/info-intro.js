@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Header} from '../../components/'
 import styles from '../../css/reserve-bid/info.css'
-import {NativeBridge} from '../../helpers'
+import {NativeBridge,Browser} from '../../helpers'
 
 @inject('reserve_bid')
 @observer
@@ -149,6 +149,12 @@ class ReserveInfoIntro extends React.Component {
                 <div styleName="jumpLinkArrow"></div>
             </div>
         }
+        let records_section = () => {
+            let record_btn_style = Browser.inIOSApp ? "recordBtnIos" : "recordBtn"
+            return <div styleName={record_btn_style} onClick={() => history.push('/reserve-bid/records')}>
+                预约记录
+            </div>
+        }
         return <div styleName="infoPanel">
             <Header noClose title="预约" history={history}/>
             {banner_section()}
@@ -159,6 +165,7 @@ class ReserveInfoIntro extends React.Component {
             <div styleName="bottomBox">
                 <div styleName="reserveBtn" onClick={this.reserveHandler}>立即预约</div>
             </div>
+            {records_section()}
         </div>
     }
 }
