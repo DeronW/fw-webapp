@@ -4,12 +4,19 @@ import {observer, inject} from 'mobx-react'
 import styles from '../../css/novice-bid/success.css'
 import Header from '../../components/header'
 import {NativeBridge} from '../../helpers'
+import {Utils} from 'fw-javascripts'
 
 
 @inject('novice_bid')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveSuccess extends React.Component {
+    state = {is_used: false}
+
+    componentDidMount() {
+        this.setState({is_used: Utils.hashQuery.is_used})
+    }
+
     toRecordsHandler = () => {
         let {history} = this.props
         history.push('/reserve-bid/records')
@@ -22,7 +29,7 @@ class ReserveSuccess extends React.Component {
             <div styleName="content">
                 <div styleName="icon"></div>
                 <div styleName="tips">新手标抢购成功</div>
-                {novice_bid.novice_bid_data.couponId != '' &&
+                {this.state.is_used &&
                 <div><span styleName="colorRed">20元</span>现金奖励已经发放至您的账户，请查收</div>}
             </div>
             <div styleName="toRecords" onClick={this.toRecordsHandler}>查看记录</div>
