@@ -57,19 +57,19 @@ class HjList extends React.Component {
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">预期赠金克重</div>
-                    <div styleName="dataLineRight">{item.perGiveGoldAmount}</div>
+                    <div styleName="dataLineRight">{item.perGiveGoldAmount && item.perGiveGoldAmount !== "0.000" ? item.perGiveGoldAmount:'--'}</div>
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">已获赠金克重</div>
-                    <div styleName="dataLineRight">{item.hasGiveGoldAmount}</div>
+                    <div styleName="dataLineRight">{item.hasGiveGoldAmount && item.hasGiveGoldAmount !== "0.000" ? item.hasGiveGoldAmount :'--'}</div>
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">起算日</div>
-                    <div styleName="dataLineRight">{item.startDate}</div>
+                    <div styleName="dataLineRight">{item.startDate || '--'}</div>
                 </div>
                 <div styleName="dataLine">
                     <div styleName="dataLineLeft">到期日</div>
-                    <div styleName="dataLineRight">{item.expiredDate}</div>
+                    <div styleName="dataLineRight">{item.expiredDate || '--'}</div>
                 </div>
             </div>
         }
