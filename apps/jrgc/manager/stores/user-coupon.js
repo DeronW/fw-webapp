@@ -28,12 +28,12 @@ export default class UserCoupon {
         this.coupon_data.pageNo = 1
         this.coupon_data.records = []
     }
+    setCouponStatus = (status) => {
+        this.coupon_data.status = status
+    }
     setCouponType = (type) => {
         this.coupon_data.type = type
         this.fetchCouponList()
-    }
-    setCouponStatus = (status) => {
-        this.coupon_data.status = status
     }
     fetchCouponList = (done) => {
         let {records} = this.coupon_data
