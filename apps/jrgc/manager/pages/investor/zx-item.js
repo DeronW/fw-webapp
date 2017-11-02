@@ -42,7 +42,7 @@ class zxItem extends React.Component {
         let { history } = this.props
         let { type } = this.props.investor_account.data_zx.project
 
-        let { info, tab, record,totalCount } = this.props.investor_account.data_zx.project
+        let { info, tab, record, totalCount } = this.props.investor_account.data_zx.project
         let types = type == 'Ta的项目' ? ['100', '3', '4'] : ['', '5', '6']
 
         let typeFn = (item, index) => {
@@ -55,12 +55,12 @@ class zxItem extends React.Component {
                 onClick={() => this.switchTab(item)}>{record[item].name}
             </div>
         }
-        let status = (item)=>{
+        let status = (item) => {
             let ENUM = {
-                '1':'全部 ',
-                '100':'招标中 ',
-                '5':'回款中',
-                '6':'已回款'
+                '1': '全部 ',
+                '100': '招标中 ',
+                '5': '回款中',
+                '6': '已回款'
             }
             return ENUM[item.status]
         }
@@ -73,19 +73,19 @@ class zxItem extends React.Component {
                     </div>
                     <div styleName="item">
                         <span>预期年化利率</span>
-                        <span styleName="bold">{item.annualRate}</span>
+                        <span styleName="bold">{item.annualRate}%</span>
                     </div>
-                    <div styleName="item">
+                    {item.gradeIncreases > 0 && <div styleName="item">
                         <span>年化加息奖励</span>
                         <span styleName="bold">{item.gradeIncreases}</span>
-                    </div>
+                    </div>}
                     <div styleName="item">
                         <span>起息日</span>
-                        <span>{item.effactiveDate}</span>
+                        <span>{item.effactiveDate || '--'}</span>
                     </div>
                     <div styleName="item">
                         <span>实际回款日</span>
-                        <span>{item.repayPerDate}</span>
+                        <span>{item.repayPerDate || '--'}</span>
                     </div>
                     <div styleName="item">
                         <span>投资金额</span>
@@ -104,15 +104,15 @@ class zxItem extends React.Component {
                     </div>
                     <div styleName="item">
                         <span>预期年化利率</span>
-                        <span styleName="bold">{item.transfereeYearRate}</span>
+                        <span styleName="bold">{item.transfereeYearRate}%</span>
                     </div>
                     <div styleName="item">
                         <span>起息日</span>
-                        <span>{item.startInervestTime}</span>
+                        <span>{item.startInervestTime || '--'}</span>
                     </div>
                     <div styleName="item">
                         <span>计划回款日</span>
-                        <span>{item.repayPerDate}</span>
+                        <span>{item.repayPerDate || '--'}</span>
                     </div>
                     <div styleName="item">
                         <span>实付金额</span>

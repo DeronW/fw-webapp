@@ -56,7 +56,7 @@
     display: block;
     height: 43px;
     background: url('../../images/stats/sort-icon.png') no-repeat center bottom;
-    transform: rotate(0.5turn);
+    transform: rotate(180deg);
 }
 
 .sort-des-active {

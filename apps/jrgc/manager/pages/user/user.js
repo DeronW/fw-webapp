@@ -2,22 +2,18 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { BannerGroup } from 'fw-components'
-import { NativeBridge,Browser } from '../../helpers'
+import { NativeBridge, Browser } from '../../helpers'
 
 import { Header, BottomNavBar } from '../../components';
 import styles from '../../css/user/user.css'
 
 window.NNN = NativeBridge
 
-function gotoHandler(link){
+function gotoHandler(link) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
-    if (Browser.inApp) {
-        NativeBridge.goto(link)
-    } else {
-        location.href = encodeURI(link);
-    }
+    NativeBridge.trigger('goto', link)
 }
 
 @inject("user")
@@ -106,12 +102,12 @@ class User extends React.Component {
                 onImageClick={this.onImageClickHandler}
                 images={banners.map(i => i.img)} />
         }
-        let getHeadUrl = ()=>{
+        let getHeadUrl = () => {
             let url = require('../../images/user/user/default.png')
-            if(info.isComp==0){
-                if(info.gender==0){
+            if (info.isComp == 0) {
+                if (info.gender == 0) {
                     url = require('../../images/user/user/woman.png')
-                }else if(info.gender==1){
+                } else if (info.gender == 1) {
                     url = require('../../images/user/user/man.png')
                 }
             }

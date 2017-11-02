@@ -13,8 +13,7 @@ function goBack(props) {
 
     // 如果传入自定义返回方法, 直接调用并结束
     if (props.backArrowHandler) {
-        props.backArrowHandler()
-        return
+        return props.backArrowHandler()
     }
 
     // 写了一大堆, 其实是为了兼容在App中点击返回箭头的时候, 关闭当前webviwe

@@ -33,14 +33,13 @@ class InvestedFirstTime extends React.Component {
         const investorType = 'investedFirstTime',
             { stats_overview, stats_investor } = this.props,
             { statsDurationType } = stats_overview.data,
-            { registered } = stats_overview.investorFormatted,
+            { investedFirstTime,registered } = stats_overview.investorFormatted,
             { investorCnt, sortBy, orderBy, pageNo } = this.state;
 
         stats_investor.initStats(investorType, statsDurationType);
-
         this.setState({
             statsDurationType: statsDurationType,
-            investorCnt: registered
+            investorCnt: investedFirstTime
         });
 
         this.loadMore(null)
@@ -94,6 +93,7 @@ class InvestedFirstTime extends React.Component {
         if (sortBy === 'time') sortValue = investor.applyDate;
         if (sortBy === 'balance') sortValue = investor.balance;
         return ({
+            custId:investor.custId,
             name: investor.custRealName,
             bid: investor.prdName,
             interest: investor.annualRate,
@@ -101,6 +101,10 @@ class InvestedFirstTime extends React.Component {
             sortBy: sortByCN,
             sortValue: sortValue
         })
+    }
+    gotoHandler = (link) => {
+        let {history} = this.props
+        history.push(link)
     }
 
     render() {
@@ -129,8 +133,8 @@ class InvestedFirstTime extends React.Component {
         }
 
         const genInvestorItem = (investor, i) => {
-            const { name, bid, interest, duration, sortBy, sortValue } = this.formatInvestItemData(investor);
-            return <div key={`${Date.now()}${i}`} styleName="investor-item">
+            const { custId,name, bid, interest, duration, sortBy, sortValue } = this.formatInvestItemData(investor);
+            return <div key={`${Date.now()}${i}`} styleName="investor-item" onClick={()=>this.gotoHandler(`investor-info?custId=${custId}`)}>
                 <div styleName="left-info">
                     <div styleName="left-top-info">{name}</div>
                     { sortBy !== '余额' &&

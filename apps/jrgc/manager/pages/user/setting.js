@@ -16,6 +16,9 @@ class Setting extends React.Component {
     state = {
         close: false
     }
+    componentDidMount(){
+        this.props.user.fetchInfo()
+    }
     exitLoginHandler = () => {
         let { history } = this.props
         this.setState({ close: false })

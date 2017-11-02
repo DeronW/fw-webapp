@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Header} from '../../components/'
 import styles from '../../css/reserve-bid/info.css'
-import {NativeBridge} from '../../helpers'
+import {NativeBridge, Browser} from '../../helpers'
 
 @inject('reserve_bid')
 @observer
@@ -118,6 +118,28 @@ class ReserveInfoIntro extends React.Component {
                     <br/>
                     掌众金融坚持“移动普惠，让生活更好”，以小额分散为基本原则，以风控机器人为技术驱动，通过互联网、大数据技术帮助“信用空白”用户建立信用档案，让信用变得更有价值！
                 </div>
+                <div styleName="textTitle">项目风险提示：</div>
+                <div styleName="sectionText">出借前请认真阅读并充分知悉相关风险，谨慎出借：</div>
+                <div styleName="sectionText"> 一、借款人信用风险</div>
+                <div styleName="sectionText">
+                    出借人出借资金的过程中，如果借款人信用状况恶化，借款人短期或者长期丧失还款能力（包括但不限于借款人收入情况、财产状况发生变化，人身出现意外、发生疾病、死亡、企业吊销、注销等情况），或者借款人的还款意愿发生变化时，会出现借款人逾期支付本息的违约风险，甚至出现出借人本息损失的风险。
+                </div>
+                <div styleName="sectionText">二、债权转让延迟的风险</div>
+                <div styleName="sectionText">
+                    出借人申请债权转让，工场微金平台会积极协助出借人寻找债权受让人完成债权转让；但自接到出借人债权转让申请后，债权转让完成时间取决于转让债权在平台的实际成交时间，因此出借人债权转让的日期存在一定的不确定性，本平台不保证一定能够在出借人需求的时间协助出借人寻找到合适的债权受让人。
+                </div>
+                <div styleName="sectionText">三、不可抗力</div>
+                <div styleName="sectionText">由于战争、动乱、自然灾害、黑客、系统停机维护、网络服务器故障、电信部门技术设备调整等不可抗力因素的出现而可能导致出借人资产损失的风险。</div>
+                <div styleName="sectionText">四、出借利率风险</div>
+                <div styleName="sectionText">
+                    借款及相关服务协议所指“借款利率”均为出借人出借时所期望的年化利率，不代表出借人最终实际收益；在出借实际收益未达到所期望的利率的情况下，出借人仅能根据实际收益取得相关出借收益。
+                </div>
+                <div styleName="sectionText">五、政策风险</div>
+                <div styleName="sectionText">国家宏观政策、财政政策、货币政策、行业政策、地区发展政策的变动可能会对出借方执行产生不利影响，北京凤凰信用管理有限公司对此政策风险不承担责任。
+                </div>
+                <div styleName="sectionText">六、其他风险</div>
+                <div styleName="sectionText">本风险提示的揭示事项仅为列举性质，未能详尽列明出借人所面临的全部风险和可能导致出借人资产损失的所有因素。</div>
+                <div styleName="sectionText">市场有风险，出借需谨慎</div>
             </div>
             return <div styleName="introduceBox">
                 <div styleName="introduceTitle">
@@ -149,6 +171,12 @@ class ReserveInfoIntro extends React.Component {
                 <div styleName="jumpLinkArrow"></div>
             </div>
         }
+        let records_section = () => {
+            let record_btn_style = Browser.inIOSApp ? "recordBtnIos" : "recordBtn"
+            return <div styleName={record_btn_style} onClick={() => history.push('/reserve-bid/records')}>
+                预约记录
+            </div>
+        }
         return <div styleName="infoPanel">
             <Header noClose title="预约" history={history}/>
             {banner_section()}
@@ -159,6 +187,7 @@ class ReserveInfoIntro extends React.Component {
             <div styleName="bottomBox">
                 <div styleName="reserveBtn" onClick={this.reserveHandler}>立即预约</div>
             </div>
+            {records_section()}
         </div>
     }
 }

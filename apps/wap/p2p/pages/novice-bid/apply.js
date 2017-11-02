@@ -61,7 +61,7 @@ class ReserveApplyNovice extends React.Component {
                 .then(() => {
                     //预约成功后触发首页刷新
                     NativeBridge.trigger('home_refresh')
-                    history.push(`/novice-bid/success`)
+                    history.push(`/novice-bid/success?is_used=${this.state.is_used}`)
                 })
         }
         novice_bid.fetchNoviceProduct().then(data => {
@@ -102,7 +102,7 @@ class ReserveApplyNovice extends React.Component {
                 <div styleName="reserveMoney">抢购金额</div>
                 <div styleName="userMoney">
                     <div styleName="inputMoney">
-                        <input type="number" placeholder="100元起预约" value={novice_bid.novice_bid_data.reserveMoney}
+                        <input type="number" placeholder="100元起，限投30000" value={novice_bid.novice_bid_data.reserveMoney}
                                onChange={this.inputChangeHandler('reserveMoney')}/>
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
@@ -165,7 +165,8 @@ class ReserveApplyNovice extends React.Component {
                     <span styleName="couponLeftText">使用优惠券</span>
                 </div>
                 <div styleName="couponRight">
-                    <span styleName="rightRed">&yen;20</span>返现券，满<span styleName="rightRed">&yen;{novice_bid.novice_bid_data.couponInvestMultip}</span>可用
+                    <span styleName="rightRed">&yen;20</span>返现券，满<span
+                    styleName="rightRed">&yen;{novice_bid.novice_bid_data.couponInvestMultip}</span>可用
                 </div>
             </div>
         }
@@ -183,11 +184,11 @@ class ReserveApplyNovice extends React.Component {
         let novice_intro = () => {
             return <div styleName="introPanel">
                 新手标简介
-                <br/>1、您投的新手标所匹配的资产是期限为21天消费贷，即工场微金预约宝产品。
-                <br/>2、结果可在金融工场app-我的-点击预约宝(非预约按钮)预约记录中查看。
+                <br/>1、您投的新手标所匹配的资产是期限为21天消费贷。
+                <br/>2、结果可在金融工场app-我的-我的预约中查看。
                 <br/>3、2%奖励将以工豆形式在标的起息后发到您的工豆账户中。
                 <br/>4、奖励工豆可在您再次出借时抵现（100个工豆=1元）。
-                5、工豆是平台对新用户的奖励，不可提现。
+                <br/>5、工豆是平台对新用户的奖励，不可提现。
             </div>
         }
 

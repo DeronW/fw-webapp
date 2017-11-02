@@ -9,6 +9,9 @@
     position: absolute;
     top: 180px;
     left: 50%;
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
     transform: translateX(-50%)
 }
 .text{
@@ -28,6 +31,7 @@
     height: 327px;
     background: url('../../images/user/qr-code/bg.png') no-repeat;
     margin: 550px 0px 0 120px;
+    position: relative;
 }
 .qr-text{
     width: 100%;
@@ -45,8 +49,8 @@
 }
 .qr-code{
     position: absolute;
-    top: 490px;
-    left: 50%;
+    top: -175px;
+    left: 44%;
     width: 385px;
     height: 385px;
     transform: translate(-50%);

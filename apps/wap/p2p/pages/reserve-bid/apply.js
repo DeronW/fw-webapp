@@ -125,7 +125,7 @@ class ReserveApply extends React.Component {
                 goals = (reserve_bid.bid_data.reserveMoney * ((context.loadRate + context.addRate) / 100) * context.repayPeriod) / 360
             }
 
-            let year_rate = context.addRate == 0 ? `${context.loadRate}` : `${context.loadRate}%+${context.addRate}%`
+            let year_rate = context.addRate == 0 ? `${context.loadRate}%` : `${context.loadRate}%+${context.addRate}%`
             return <div styleName="infoContent">
                 <div styleName="infoAmount">
                     <div styleName="amountLeft">预计收益<span styleName="coverBeans">(含加息工豆)</span></div>
