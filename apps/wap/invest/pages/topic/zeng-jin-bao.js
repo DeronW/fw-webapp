@@ -8,19 +8,19 @@ import styles from '../../css/topic/zeng-jin-bao.css'
 const TABS = [
     {
         text: '项目简介',
-        pos: 262,
+        pos: 142,
     }, {
         text: '资金安全',
-        pos: 1920
+        pos: 1840
     }, {
         text: '投资案例',
-        pos: 2662
+        pos: 2682
     }, {
         text: '合作机构',
-        pos: 4256
+        pos: 4176
     }, {
         text: '常见问题',
-        pos: 4706
+        pos: 4626
     },
 ]
 
