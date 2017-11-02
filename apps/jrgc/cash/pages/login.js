@@ -11,6 +11,8 @@ import styles from '../css/login.css'
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class Login extends React.Component {
 
+    _timer = null
+
     state = {
         phone: '',
         sms: '',
@@ -23,6 +25,8 @@ class Login extends React.Component {
 
         body.style.backgroundColor = '#fff';
         body.addEventListener('touchmove', e => e.preventDefault(), false)
+
+        if (this._timer) clearInterval(this._timer)
     }
 
     componentWillUnmount() {
@@ -39,11 +43,11 @@ class Login extends React.Component {
 
         // request
 
-        const timer = setInterval(() => {
+        this._timer = setInterval(() => {
             const { smsTimer } = this.state;
 
             if (smsTimer === 1) {
-                clearInterval(timer);
+                clearInterval(this._timer);
                 return this.setState({ smsTimer: 60 })
             }
 
