@@ -26,7 +26,6 @@ function goBack(props) {
 
     setTimeout(() => {
         window.onpopstate = old_pop
-        alert('moved:' + moved + ', ' + NativeBridge.isReady)
         !moved && NativeBridge.close()
     }, 100)
 }
