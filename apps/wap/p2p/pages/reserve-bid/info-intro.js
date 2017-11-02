@@ -100,7 +100,9 @@ class ReserveInfoIntro extends React.Component {
                     </div>
                     {ruler_control && over_text}
                 </div>
-                {(!ruler_control) && <div styleName="openBtn" onClick={this.rulerControlHandler}>展开全部</div>}
+                <div styleName="openBtn" onClick={() => {
+                    this.setState({ruler_control: !this.state.ruler_control})
+                }}>{ruler_control ? "收起部分" : "展开全部"}</div>
             </div>
         }
         let intro_section = () => {
@@ -162,7 +164,9 @@ class ReserveInfoIntro extends React.Component {
                     </div>
                     {intro_control && over_text}
                 </div>
-                {(!intro_control) && <div styleName="openBtn" onClick={this.IntroOpenHandler}>展开全部</div>}
+                <div styleName="openBtn" onClick={() => {
+                    this.setState({intro_control: !this.state.intro_control})
+                }}>{intro_control ? "收起部分" : "展开全部"}</div>
             </div>
         }
         let faq_section = () => {

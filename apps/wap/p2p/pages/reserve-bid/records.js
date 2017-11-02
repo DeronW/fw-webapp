@@ -135,7 +135,7 @@ class ReserveRecords extends React.Component {
                         </div>
                     </div>
                     {item.status != 2 && <div styleName="infoItem">
-                        <div styleName="infoItemLeft">预约还款时间</div>
+                        <div styleName="infoItemLeft">预计还款时间</div>
                         <div styleName="itemHeaderRight">
                             {new Date(parseInt(item.paymentDate)).toLocaleDateString().replace(/\//g, "-") + new Date(parseInt(item.bookTime)).toTimeString().substr(0, 0)}
                         </div>
