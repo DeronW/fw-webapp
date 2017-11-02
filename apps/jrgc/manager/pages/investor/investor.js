@@ -175,7 +175,7 @@ class Investor extends React.Component {
                     {/*['全部客户', '在投', '空仓', '未投资'].map(tabFn)*/}
                     {['全部客户', '在投', '空仓', '未投资'].map(tab_level_one)}
                 </div>
-                <div styleName="filter" onClick={() => this.switchShow()}>
+                <div styleName="filter" onClick={() => this.toggleShow()}>
                     <span>筛选</span><img src={require("../../images/investor/investor/filter.png")} />
                 </div>
             </div>
