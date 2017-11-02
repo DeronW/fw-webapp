@@ -1,0 +1,121 @@
+.container * {
+    box-sizing: border-box;
+}
+
+.step-container {
+    height: 778px;
+    background-image: url('../images/credit/dots.png'), url('../images/credit/dots.png'), url('../images/credit/dots.png'), url('../images/credit/dots.png'), url('../images/credit/dots.png'), url('../images/credit/dots.png');
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-position: 280px 173px, 280px 273px, 280px 373px, 280px 473px, 280px 573px;
+    background-color: #fff;
+    padding: 119px 0 0 261px;
+}
+
+.step {
+    height: 43px;
+    line-height: 43px;
+    padding-left: 82px;
+    margin-bottom: 57px;
+    background-repeat: no-repeat;
+    background-position: left;
+    font-size: 30px;
+}
+
+.step-fail {
+    composes: step;
+    background-image: url('../images/credit/fail.png');
+}
+
+.step-waiting {
+    composes: step;
+    background-image: url('../images/credit/waiting.png');
+}
+
+.step-0 {
+    composes: step;
+    background-image: url('../images/credit/0-0.png');
+}
+
+.step-0-success {
+    composes: step;
+    background-image: url('../images/credit/0-1.png');
+}
+
+.step-0 {
+    composes: step;
+    background-image: url('../images/credit/0-0.png');
+}
+
+.step-0-success {
+    composes: step;
+    background-image: url('../images/credit/0-1.png');
+}
+
+.step-1 {
+    composes: step;
+    background-image: url('../images/credit/1-0.png');
+}
+
+.step-1-success {
+    composes: step;
+    background-image: url('../images/credit/1-1.png');
+}
+
+.step-2 {
+    composes: step;
+    background-image: url('../images/credit/2-0.png');
+}
+
+.step-2-success {
+    composes: step;
+    background-image: url('../images/credit/2-1.png');
+}
+
+.step-3 {
+    composes: step;
+    background-image: url('../images/credit/3-0.png');
+}
+
+.step-3-success {
+    composes: step;
+    background-image: url('../images/credit/3-1.png');
+}
+
+.step-4 {
+    composes: step;
+    background-image: url('../images/credit/4-0.png');
+}
+
+.step-4-success {
+    composes: step;
+    background-image: url('../images/credit/4-1.png');
+}
+
+.step-5 {
+    composes: step;
+    background-image: url('../images/credit/5-0.png');
+}
+
+.step-5-success {
+    composes: step;
+    background-image: url('../images/credit/5-1.png');
+}
+
+.next-btn {
+    width: 660px;
+    height: 72px;
+    line-height: 72px;
+    margin: 40px auto 21px;
+    border-radius: 36px;
+    background-color: #ff4663;
+    box-shadow: 0px 8px 8px 0 rgba(239, 40, 95, 0.26);
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+}
+
+.next-step-tip {
+    color: #888;
+    font-size: 24px;
+    text-align: center;
+}
