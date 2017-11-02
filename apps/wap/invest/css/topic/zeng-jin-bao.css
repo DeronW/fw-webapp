@@ -40,7 +40,7 @@ body {
     position: -ms-sticky;
     position: -o-sticky;
     position: sticky;
-    top: 80px;
+    top: 0;
     z-index: 999;
     display: table;
     width: 100%;

@@ -8,19 +8,19 @@ import styles from '../../css/topic/zeng-jin-bao.css'
 const TABS = [
     {
         text: '项目简介',
-        pos: 142,
+        pos: 172,
     }, {
         text: '资金安全',
-        pos: 1840
+        pos: 1920
     }, {
         text: '投资案例',
-        pos: 2682
+        pos: 2662
     }, {
         text: '合作机构',
-        pos: 4176
+        pos: 4196
     }, {
         text: '常见问题',
-        pos: 4626
+        pos: 4706
     },
 ]
 
@@ -37,7 +37,7 @@ class ZengJinBao extends React.Component {
     }
 
     scrollWatcher = () => {
-        let scrolled = document.documentElement.scrollTop,
+        let scrolled = document.documentElement.scrollTop + document.body.scrollTop,
             currentTab = 0;
         for (var i = 0; i < TABS.length; i++) {
             if (scrolled + 1 >= TABS[i].pos) {
