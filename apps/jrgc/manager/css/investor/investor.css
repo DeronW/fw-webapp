@@ -15,7 +15,6 @@
     text-align: center;
     font-size: 36px;
     color: #333;
-    position: relative;
 }
 .searchBtn{
     width: 33px;
@@ -27,7 +26,7 @@
 }
 .investor{
     width: 100%;
-    margin: 20px 0;
+    margin: 88px 0 20px;
     height: 180px;
     background: #fff;
     display: table;

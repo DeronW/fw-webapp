@@ -15,16 +15,10 @@ class itemDetial extends React.Component {
     }
 
     componentDidMount(){
-        let {fetchZXPayment,resetZXPaymentPageNo,fetchPaymentP2P,resetP2PPaymentPageNo} = this.props.investor_account
-        if(Utils.hashQuery.type === "zx"){
-            resetZXPaymentPageNo()
-            fetchZXPayment()
-            Event.touchBottom(fetchZXPayment)
-        }else{
-            resetP2PPaymentPageNo()
-            fetchPaymentP2P()
-            Event.touchBottom(fetchPaymentP2P)
-        }
+        let {fetchPayment,resetPaymentPageNo} = this.props.investor_account
+        resetPaymentPageNo()
+        fetchPayment()
+        Event.touchBottom(fetchPayment)
     }
     componentWillUnmount() {
         Event.cancelTouchBottom()
@@ -38,26 +32,16 @@ class itemDetial extends React.Component {
         }else{
             t = 1
         }
-        if(Utils.hashQuery.type === "zx"){
-            this.props.investor_account.resetZXPaymentPageNo()
-            this.props.investor_account.setZXPaymentType(t)
-        }else{
-            this.props.investor_account.resetP2PPaymentPageNo()
-            this.props.investor_account.setP2PPaymentType(t)
-        }
+        this.props.investor_account.resetPaymentPageNo()
+        this.props.investor_account.setPaymentType(t)
     }
 
     render() {
         let {history} = this.props
         let {tab} = this.state
         let tabs = ['未回', '已回']
-        let d
-        if(Utils.hashQuery.type === "zx"){
-            d = this.props.investor_account.data_zx.detail
-        }else{
-            d = this.props.investor_account.data_p2p.detail
-        }
-        let { payments,type,totalCount } = d
+
+        let { payments,type,totalCount } = this.props.investor_account.data.detail
         let tabFn = (item, index) => {
             return <div key={index} styleName={item == tab ? "type typeActive" : "type"}
                         onClick={() => this.switchTab(item)}>{item}

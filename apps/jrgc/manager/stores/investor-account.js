@@ -74,7 +74,16 @@ export default class InvestorAccount {
             totalCount: 0
         })
         extendObservable(this.data, {
-            overview: {}//尊享和微金的款项总览
+            overview: {},//尊享和微金的款项总览
+            detail: {
+                info: {},
+                totalCount: 0,
+                type: '0',
+                payments: {
+                    '0': { pageNo: 1, list: [] },
+                    '1': { pageNo: 1, list: [] }
+                }
+            },
         })
     }
     //获取客户id
@@ -97,6 +106,42 @@ export default class InvestorAccount {
             })
         }
     }
+    //尊享、微金设置回款明细的状态
+    setPaymentType = (type) => {
+        this.data.detail.type = type
+        this.fetchPayment()
+    }
+
+    //尊享、微金重置回款明细的页码
+    resetPaymentPageNo = () => {
+        let { type, payments } = this.data.detail, current_payment = payments[type]
+        current_payment.pageNo = 1
+    }
+    //尊享、微金他的回款明细
+    fetchPayment = (done) => {
+        let url = '/api/finManager/cust/v2/zxPayment.shtml'//zx
+        if(Utils.hashQuery.type == "p2p"){
+            url = '/api/finManager/cust/v2/wjPayment.shtml'
+        }
+        let { type, payments } = this.data.detail, current_payment = payments[type]
+        const PAGE_SIZE = 10
+        if (current_payment.pageNo == 0) return done && done()
+        if (current_payment.pageNo == 1) current_payment.list.splice(0, current_payment.list.length)
+        this.Get(url, {
+            custId: this.custId,
+            pageNo: current_payment.pageNo,
+            pageSize: PAGE_SIZE,
+            status: type
+        }).then(data => {
+            this.data.detail.totalCount = data.pageData.pagination.totalCount
+            current_payment.list.push(...data.pageData.result)
+            current_payment.pageNo < data.pageData.pagination.totalPage
+                ? current_payment.pageNo++
+                : current_payment.pageNo = 0
+            done && done()
+        })
+    }
+
     //TA的尊享-投资(项目)头部信息
     fetchInvestInfoZX = () => {
         this.Get('/api/finManager/cust/v2/zxPrdInvestInfo.shtml', {
@@ -151,37 +196,8 @@ export default class InvestorAccount {
             this.data_zx.detail.info = data.result
         })
     }
-    //设置尊享回款明细的状态
-    setZXPaymentType = (type) => {
-        this.data_zx.detail.type = type
-        this.fetchZXPayment()
-    }
 
-    //重置尊享回款明细的页码
-    resetZXPaymentPageNo = () => {
-        let { type, payments } = this.data_zx.detail, current_payment = payments[type]
-        current_payment.pageNo = 1
-    }
-    //尊享  他的回款明细
-    fetchZXPayment = (done) => {
-        let { type, payments } = this.data_zx.detail, current_payment = payments[type]
-        const PAGE_SIZE = 10
-        if (current_payment.pageNo == 0) return done && done()
-        if (current_payment.pageNo == 1) current_payment.list.splice(0, current_payment.list.length)
-        this.Get('/api/finManager/cust/v2/zxPayment.shtml', {
-            custId: this.custId,
-            pageNo: current_payment.pageNo,
-            pageSize: PAGE_SIZE,
-            status: type
-        }).then(data => {
-            this.data_zx.detail.totalCount = data.pageData.pagination.totalCount
-            current_payment.list.push(...data.pageData.result)
-            current_payment.pageNo < data.pageData.pagination.totalPage
-                ? current_payment.pageNo++
-                : current_payment.pageNo = 0
-            done && done()
-        })
-    }
+
 
     //TA的微金账户首页
     fetchAccountP2P = () => {
@@ -273,37 +289,6 @@ export default class InvestorAccount {
             done && done()
         })
     }
-    //设置微金回款明细的状态
-    setP2PPaymentType = (type) => {
-        this.data_p2p.detail.type = type
-        this.fetchPaymentP2P()
-    }
-
-    //重置微金回款明细的页码
-    resetP2PPaymentPageNo = () => {
-        this.data_p2p.detail.pageNo = 1
-    }
-    //TA的微金-回款明细
-    fetchPaymentP2P = (done) => {
-        let { type, payments } = this.data_p2p.detail, current_payment = payments[type]
-        const PAGE_SIZE = 10
-        if (current_payment.pageNo == 0) return done && done()
-        if (current_payment.pageNo == 1) current_payment.list.splice(0, current_payment.list.length)
-        this.Get('/api/finManager/cust/v2/wjPayment.shtml', {
-            custId: this.custId,
-            pageNo: current_payment.pageNo,
-            pageSize: PAGE_SIZE,
-            status: type
-        }).then(data => {
-            this.data_p2p.detail.totalCount = data.pageData.pagination.totalCount
-            current_payment.list.push(...data.pageData.result)
-            current_payment.pageNo < data.pageData.pagination.totalPage
-                ? current_payment.pageNo++
-                : current_payment.pageNo = 0
-            done && done()
-        })
-    }
-
     //黄金账户信息页
     fetchAccountHj = () => {
         this.Get('/api/finManager/cust/v2/goldAccount.shtml', {
