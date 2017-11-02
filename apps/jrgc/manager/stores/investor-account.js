@@ -15,8 +15,10 @@ export default class InvestorAccount {
                 info: {},
                 totalCount: 0,
                 type: '0',
-                pageNo: 1,
-                list: []
+                payments: {
+                    '0': { pageNo: 1, list: [] },
+                    '1': { pageNo: 1, list: [] }
+                }
             },
             project: {
                 info: {},
@@ -283,21 +285,21 @@ export default class InvestorAccount {
     }
     //TA的微金-回款明细
     fetchPaymentP2P = (done) => {
-        let { pageNo, list, type } = this.data_p2p.detail
-
-        if (pageNo == 0) return done && done()
-        if (pageNo == 1) list.splice(0, list.length)
+        let { type, payments } = this.data_p2p.detail, current_payment = payments[type]
+        const PAGE_SIZE = 10
+        if (current_payment.pageNo == 0) return done && done()
+        if (current_payment.pageNo == 1) current_payment.list.splice(0, current_payment.list.length)
         this.Get('/api/finManager/cust/v2/wjPayment.shtml', {
             custId: this.custId,
-            pageNo: pageNo,
-            pageSize: 10,
+            pageNo: current_payment.pageNo,
+            pageSize: PAGE_SIZE,
             status: type
         }).then(data => {
             this.data_p2p.detail.totalCount = data.pageData.pagination.totalCount
-            list.push(...data.pageData.result)
-            this.data_p2p.detail.pageNo < data.pageData.pagination.totalPage
-                ? this.data_p2p.detail.pageNo++
-                : this.data_p2p.detail.pageNo = 0
+            current_payment.list.push(...data.pageData.result)
+            current_payment.pageNo < data.pageData.pagination.totalPage
+                ? current_payment.pageNo++
+                : current_payment.pageNo = 0
             done && done()
         })
     }

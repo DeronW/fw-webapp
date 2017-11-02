@@ -45,25 +45,29 @@ class itemDetial extends React.Component {
             this.props.investor_account.resetP2PPaymentPageNo()
             this.props.investor_account.setP2PPaymentType(t)
         }
-
     }
 
     render() {
         let {history} = this.props
         let {tab} = this.state
         let tabs = ['未回', '已回']
-        let { payments,type,totalCount } = this.props.investor_account.data_zx.detail
-
+        let d
+        if(Utils.hashQuery.type === "zx"){
+            d = this.props.investor_account.data_zx.detail
+        }else{
+            d = this.props.investor_account.data_p2p.detail
+        }
+        let { payments,type,totalCount } = d
         let tabFn = (item, index) => {
             return <div key={index} styleName={item == tab ? "type typeActive" : "type"}
                         onClick={() => this.switchTab(item)}>{item}
             </div>
         }
         let recordFn = (item,index) => {
-            return <div styleName="record">
+            return <div styleName="record" key={index}>
                 <div styleName="title">
                     <span>{item.prdName}<i></i></span>
-                    <div styleName="end">{item.state}</div>
+                    <div styleName="end"></div>
                 </div>
                 <div styleName="item">
                     <span>投标日期</span>

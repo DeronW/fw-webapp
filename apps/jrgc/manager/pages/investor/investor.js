@@ -56,9 +56,6 @@ class Investor extends React.Component {
         this.props.investor.switchSortType(type)
     }
 
-    // switchShow = () => {
-    //     this.setState({ show: !this.state.show })
-    // }
     toggleShow = () => {
         this.setState({ show: !this.state.show })
     }

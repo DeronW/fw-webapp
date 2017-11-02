@@ -121,7 +121,6 @@ export default class Investor {
         let { value, pageNo } = this.fellow
 
         if (pageNo == 0) return done && done()
-
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
             pageNo: pageNo,
