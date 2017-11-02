@@ -52,6 +52,7 @@ class Investor extends React.Component {
     // }
 
     switchTypeHandler = type => {
+        if(this.props.investor.fellow.value == type) return
         this.props.investor.switchSortType(type)
     }
 
@@ -78,13 +79,13 @@ class Investor extends React.Component {
             } else if ([2,5,8].indexOf(fellow.value)>-1) {
                 t = `￥${item.commissionAmt}`
             } else {
-                t = item.realName ? (item.createTime || '暂无回款') : '暂无回款'
+                t = item.realName ? (item.repayPerDate || '暂无回款') : '暂无回款'
             }
             return t
         }
         let remind = (item) => {
             let r
-            if ([1,4,7,9].indexOf(fellow.value)>-1) {
+            if ([1,4,7,10].indexOf(fellow.value)>-1) {
                 r = '可用余额'
             } else if ([2,5,8].indexOf(fellow.value)>-1) {
                 r = '总返利'
