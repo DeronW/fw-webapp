@@ -119,7 +119,6 @@ export default class Investor {
 
     fetchFellowRecords = (done) => {
         let { value, pageNo } = this.fellow
-
         if (pageNo == 0) return done && done()
         this.Get('/api/finManager/cust/v2/myCustList.shtml', {
             type: value,
@@ -130,8 +129,9 @@ export default class Investor {
                 value,
                 data.pageData.pagination.totalPage,
                 data.pageData.result)
-
             done && done()
+        }, () => {
+
         })
     }
 
@@ -322,9 +322,9 @@ export default class Investor {
             pageNo: pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {
-            frozenAmount = data.frozenAmount
-            iintegralNum = data.iintegralNum
-            willExpireAmount = data.willExpireAmount
+            this.data.score.frozenAmount = data.frozenAmount
+            this.data.score.iintegralNum = data.iintegralNum
+            this.data.score.willExpireAmount = data.willExpireAmount
             records.push(...data.pageData.result)
             this.data.score.pageNo < data.pageData.pagination.totalPage ?
                 this.data.score.pageNo++ :

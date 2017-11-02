@@ -18,7 +18,7 @@ class Investor extends React.Component {
         // this.props.investor.resetCustPageNo()
         // this.props.investor.fetchCustList()
         // Event.touchBottom(this.props.investor.fetchCustList)
-
+        window.scrollTo(0,0)
         this.props.investor.switchSortType()
         Event.touchBottom(this.props.investor.fetchFellowRecords)
 
@@ -53,6 +53,8 @@ class Investor extends React.Component {
 
     switchTypeHandler = type => {
         if(this.props.investor.fellow.value == type) return
+
+        window.scrollTo(0,0)
         this.props.investor.switchSortType(type)
     }
 
