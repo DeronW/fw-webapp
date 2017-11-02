@@ -71,7 +71,7 @@ class Investor extends React.Component {
 
         let amount = (item) => {
             let t
-            if ([1,4,7,9].indexOf(fellow.value)>-1) {
+            if ([1,4,7,10].indexOf(fellow.value)>-1) {
                 t = `￥${item.bankBalance}`
             } else if ([2,5,8].indexOf(fellow.value)>-1) {
                 t = `￥${item.commissionAmt}`

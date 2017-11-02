@@ -31,7 +31,11 @@
     background: #f9f9f9;
     font-size: 24px;
     color: #333;
-    margin:88px 0 20px;
+    margin:95px 0 20px;
+    position: fixed;
+}
+.records{
+    margin-top: 170px;
 }
 .record{
     width:100%;
