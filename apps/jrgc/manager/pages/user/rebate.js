@@ -113,7 +113,7 @@ class Rebate extends React.Component {
                     {item}
                 </div>
             }
-            return <div>
+            return <div styleName="allChartBox">
                 <div styleName="allChart">
                     <div styleName="chartWrapper">
                         {<ReactEcharts option={
