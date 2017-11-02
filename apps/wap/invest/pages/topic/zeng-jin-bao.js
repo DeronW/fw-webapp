@@ -32,6 +32,7 @@ class ZengJinBao extends React.Component {
     }
 
     componentDidMount() {
+        document.title="增金宝"
         window.addEventListener('scroll', this.scrollWatcher, false);
     }
 
@@ -62,7 +63,7 @@ class ZengJinBao extends React.Component {
         }
 
         return <div>
-            <Header noClose title="增金宝" history={this.props.history} />
+            {/*<Header noClose title="增金宝" history={this.props.history} />*/}
 
             <div styleName="banner">
                 <img src={require('../../images/topic/zeng-jin-bao/banner.png')} />

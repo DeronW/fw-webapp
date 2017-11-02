@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import {Event, Components} from 'fw-javascripts'
+import { Event, Components } from 'fw-javascripts'
 
 import styles from '../../css/investor/p2p-item.css'
 
@@ -84,20 +84,20 @@ class p2pItem extends React.Component {
                 onClick={() => this.switchType(item)}>{item}
             </div>
         }
-        let status = (item)=>{
+        let status = (item) => {
             let ENUM = {
-                '1':'全部 ',
-                '100':'招标中',
-                '5':'回款中',
-                '6':'已回款'
+                '1': '全部 ',
+                '100': '招标中',
+                '5': '回款中',
+                '6': '已回款'
             }
             return ENUM[item.status]
         }
         let collectionStatus = (item) => {
             let ENUM = {
-                '0':'匹配中',
-                '1':'匹配成功',
-                '2':'匹配失败'
+                '0': '匹配中',
+                '1': '匹配成功',
+                '2': '匹配失败'
             }
             return ENUM[item.status]
         }
@@ -137,16 +137,20 @@ class p2pItem extends React.Component {
                     </div>
                     {item.gradeIncreases > 0 && <div styleName="item">
                         <span>年化加息奖励</span>
-                        <span styleName="bold">{item.gradeIncreases}</span>
+                        <span styleName="bold">{item.gradeIncreases}%</span>
                     </div>}
                     <div styleName="item">
                         <span>起息日</span>
                         <span>{item.effactiveDate || '--'}</span>
                     </div>
-                    <div styleName="item">
-                        <span>实际回款日</span>
+                    {!item.paidTime && <div styleName="item">
+                        <span>计划回款日</span>
                         <span>{item.repayPerDate || '--'}</span>
-                    </div>
+                    </div>}
+                    {item.paidTime && <div styleName="item">
+                        <span>实际回款日</span>
+                        <span>{item.paidTime}</span>
+                    </div>}
                     <div styleName="item">
                         <span>出借金额</span>
                         <span styleName="red">¥{item.investAmt}</span>
@@ -168,7 +172,7 @@ class p2pItem extends React.Component {
                     </div>
                     {item.addInterestRate > 0 && <div styleName="item">
                         <span>年化加息奖励</span>
-                        <span styleName="bold">{item.addInterestRate}</span>
+                        <span styleName="bold">{item.addInterestRate}%</span>
                     </div>}
                     <div styleName="item">
                         <span>起息日</span>

@@ -77,16 +77,20 @@ class zxItem extends React.Component {
                     </div>
                     {item.gradeIncreases > 0 && <div styleName="item">
                         <span>年化加息奖励</span>
-                        <span styleName="bold">{item.gradeIncreases}</span>
+                        <span styleName="bold">{item.gradeIncreases}%</span>
                     </div>}
                     <div styleName="item">
                         <span>起息日</span>
-                        <span>{item.effactiveDate || '--'}</span>
+                        <span>{item.loanDate || '--'}</span>
                     </div>
-                    <div styleName="item">
-                        <span>实际回款日</span>
+                    {!item.paidTime && <div styleName="item">
+                        <span>计划回款日</span>
                         <span>{item.repayPerDate || '--'}</span>
-                    </div>
+                    </div>}
+                    {item.paidTime && <div styleName="item">
+                        <span>实际回款日</span>
+                        <span>{item.paidTime}</span>
+                    </div>}
                     <div styleName="item">
                         <span>投资金额</span>
                         <span styleName="red">¥{item.investAmt}</span>
