@@ -27,10 +27,13 @@ const Header = CSSModules(styles, {
         let moved = false
         window.onpopstate = () => moved = true
 
+        alert(moved)
+
         props.history && props.history.goBack()
 
         setTimeout(() => {
             window.onpopstate = old_pop
+            alert(moved)
             !moved && NativeBridge.close()
         }, 100)
     }
