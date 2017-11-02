@@ -130,8 +130,6 @@ export default class Investor {
                 data.pageData.pagination.totalPage,
                 data.pageData.result)
             done && done()
-        }, () => {
-
         })
     }
 
@@ -147,41 +145,6 @@ export default class Investor {
     @computed get custId() {
         return Utils.hashQuery.custId
     }
-
-    //我的客户列表，包含全部、在投、空仓未投资四种类型，以及余额最高，返利最多，最近回款时间三种排序方式
-    // resetCustPageNo = () => {
-    //     this.data.custmor.pageNo = 1
-    //     this.data.custmor.list = []
-    // }
-    // setCustTab = (tab) => {
-    //     this.data.custmor.tab = tab
-    //     this.data.custmor.type = '可用余额最高排序'
-    // }
-    // setCustType = (type) => {
-    //     this.data.custmor.type = type
-    // }
-    // setCustValue = (value) => {
-    //     this.data.custmor.value = value
-    //     this.fetchCustList()
-    // }
-    // fetchCustList = (done) => {
-    //     let { value, list, pageNo } = this.data.custmor
-
-    //     if (pageNo == 0) return done && done()
-
-    //     this.Get('/api/finManager/cust/v2/myCustList.shtml', {
-    //         type: value,
-    //         pageNo: pageNo,
-    //         pageSize: 10
-    //     }).then(data => {
-    //         list.push(...data.pageData.result)
-    //         this.data.custmor.pageNo =
-    //             this.data.custmor.pageNo < data.pageData.pagination.totalPage ?
-    //                 pageNo + 1 : 0
-
-    //         done && done()
-    //     })
-    // }
 
     //回款日历-总回款信息接口
     fetchOverview = () => {
