@@ -9,6 +9,7 @@ import {
 
 import Login from './pages/login'
 import Home from './pages/home'
+import Credit from './pages/credit'
 import * as Bills from './pages/bills'
 import * as User from './pages/user'
 import LoanApply from './pages/loan-apply'
@@ -24,6 +25,9 @@ export default (stores) => {
 
                 {/* 首页 */}
                 <Route exact path="/" component={Home}/>
+
+                {/* 授信 */}
+                <Route exact path="/credit" component={Credit} />
 
                 {/* 借款 */}
                 <Route exact path="/loan/apply" component={LoanApply} />
