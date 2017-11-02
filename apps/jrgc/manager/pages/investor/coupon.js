@@ -10,7 +10,8 @@ import styles from '../../css/investor/coupon.css'
 class Coupon extends React.Component {
 
     componentDidMount() {
-        let { resetPageNo, fetchCustCoupon } = this.props.investor_coupon
+        let { initTabAndType,resetPageNo, fetchCustCoupon } = this.props.investor_coupon
+        initTabAndType()
         resetPageNo()
         fetchCustCoupon()
     }

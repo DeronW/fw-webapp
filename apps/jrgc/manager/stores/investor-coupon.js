@@ -59,8 +59,13 @@ export default class InvestorCoupon {
         let { type, record } = coupon[tab]
         coupon[tab].record[type].pageNO = 1
     }
+    initTabAndType = () => {
+        this.data.tab = '1'
+        this.data.coupon['1'].type = '0'
+    }
     setTab = (tab) => {
         this.data.tab = tab
+        this.data.coupon[tab].type = '0'
     }
     setType = (type) => {
         let { tab, coupon } = this.data
