@@ -71,7 +71,6 @@
     "gulp": "node node_modules/gulp/bin/gulp.js",
     "build:mall": "npm run clean && npm run gulp mall:common_js && npm run gulp build:mall",
     "build:wap": "npm run clean && npm run gulp wap:common_js && npm run gulp build:wap",
-    // "build:activity": "npm run clean && npm run gulp build:activity",
     "build:jrgc:insurance": "npm run clean && npm run gulp jrgc:pack:insurance:revision",
     "build:jrgc:manager": "npm run clean && npm run gulp jrgc:pack:manager:revision",
     "build:jrgc:cash": "npm run clean && npm run gulp jrgc:pack:cash:revision",
