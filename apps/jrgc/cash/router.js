@@ -13,6 +13,7 @@ import Home from './pages/home'
 
 import Credit from './pages/credit'
 import CreditEmc from './pages/credit-emc'
+import CreditMsp from './pages/credit-msp'
 
 import * as Bills from './pages/bills'
 
@@ -35,6 +36,7 @@ export default (stores) => {
                 {/* 授信 */}
                 <Route exact path="/credit" component={Credit} />
                 <Route exact path="/credit/emc" component={CreditEmc} />
+                <Route exact path="/credit/msp" component={CreditMsp} />
 
                 {/* 借款 */}
                 <Route exact path="/loan/apply" component={LoanApply} />

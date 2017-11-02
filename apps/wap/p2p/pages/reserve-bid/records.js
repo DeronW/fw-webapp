@@ -157,7 +157,7 @@ class ReserveRecords extends React.Component {
         // history={history}
 
         return <div styleName="recordsPanel">
-            <Header title="我的预 约" history={history} />
+            <Header title="我的预约" history={history} />
             <div styleName={tab_style}>
                 {['0', '1', '2'].map(tab_func)}
             </div>
