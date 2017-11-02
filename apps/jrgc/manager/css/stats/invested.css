@@ -204,7 +204,7 @@
     background: url('../../images/stats/empty-bg.png') no-repeat center;
 }
 .invest-search{
-    position: absolute;
+    position: fixed;
     width: 33px;
     height: 30px;
     background: url('../../images/stats/search-icon.png') no-repeat center;

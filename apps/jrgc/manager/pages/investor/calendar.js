@@ -87,7 +87,11 @@ class Calendar extends React.Component {
     }
     formatDateHandler = (date) => {
         let d = new Date(date)
-        var t = d.getFullYear() + "年" + Number(d.getMonth()+1) + "月" + d.getDate() + "日"
+        let day = d.getDate()
+        if(day < 10){
+            day = '0'+day
+        }
+        var t = d.getFullYear() + "年" + Number(d.getMonth()+1) + "月" + day+ "日"
         return t
     }
     render() {
@@ -104,7 +108,7 @@ class Calendar extends React.Component {
         }
         let dayFn = (item, index) => {
             return <div key={index} styleName={selectedIndex == index ? 'day daySelected' : 'day'} onClick={() => { this.selectedHandler(index, item.date) }}>
-                <div styleName="week">{item.day} {item.weekDate}</div>
+                <div styleName="week">{item.day.length==2?`0${item.day}`:item.day} {item.weekDate}</div>
                 <div styleName="circle"></div>
                 {item.totalPlanCount>0 && <div styleName="receivable">{item.totalPlanCount}笔回款</div>}
                 {item.totalRealCount>0 && <div styleName="receivable actual">{item.totalRealCount}笔回款</div>}
@@ -123,7 +127,7 @@ class Calendar extends React.Component {
             return <div styleName="dueItem" key={dueIndex}>
                 <div styleName="dueDate">
                     <div>{this.formatDateHandler(dueItem)}</div>
-                    <div styleName={toggleId?'arrowBottom':'arrowTop'} onClick={() => this.toggleHandler(dueIndex)}></div>
+                    <div styleName={toggleId?'arrowTop':'arrowBottom'} onClick={() => this.toggleHandler(dueIndex)}></div>
                 </div>
                 <div styleName="investorList">
                     {toggleId && monthList[dueIndex].map(personFn)}
@@ -136,7 +140,7 @@ class Calendar extends React.Component {
                 timeList.push(i)
                 monthList.push(monthDueList[i])
             }
-            let t = timeList.length>0?timeList.map(dueFn):empty
+            let t = timeList.length>0?timeList.sort().map(dueFn):empty
             return t
         }
         let empty = <div styleName="empty">

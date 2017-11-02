@@ -11,6 +11,7 @@
     color: #555;
     display: table;
     background: #fff;
+    position: fixed;
 }
 .type{
     width: 50%;
@@ -30,7 +31,11 @@
     background: #f9f9f9;
     font-size: 24px;
     color: #333;
-    margin-bottom: 20px;
+    margin:95px 0 20px;
+    position: fixed;
+}
+.records{
+    margin-top: 170px;
 }
 .record{
     width:100%;

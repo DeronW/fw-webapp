@@ -82,6 +82,8 @@ class BottomNavBar extends React.Component {
             }
         }
         const STYLE_ICON_BASE = {
+            width:'58px',
+            height:'58px',
             marginTop: '6px'
         }
         const STYLE_TEXT_BASE = {

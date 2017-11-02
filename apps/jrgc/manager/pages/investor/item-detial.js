@@ -15,16 +15,10 @@ class itemDetial extends React.Component {
     }
 
     componentDidMount(){
-        let {fetchZXPayment,resetZXPaymentPageNo,fetchPaymentP2P,resetP2PPaymentPageNo} = this.props.investor_account
-        if(Utils.hashQuery.type === "zx"){
-            resetZXPaymentPageNo()
-            fetchZXPayment()
-            Event.touchBottom(fetchZXPayment)
-        }else{
-            resetP2PPaymentPageNo()
-            fetchPaymentP2P()
-            Event.touchBottom(fetchPaymentP2P)
-        }
+        let {fetchPayment,resetPaymentPageNo} = this.props.investor_account
+        resetPaymentPageNo()
+        fetchPayment()
+        Event.touchBottom(fetchPayment)
     }
     componentWillUnmount() {
         Event.cancelTouchBottom()
@@ -38,32 +32,26 @@ class itemDetial extends React.Component {
         }else{
             t = 1
         }
-        if(Utils.hashQuery.type === "zx"){
-            this.props.investor_account.resetZXPaymentPageNo()
-            this.props.investor_account.setZXPaymentType(t)
-        }else{
-            this.props.investor_account.resetP2PPaymentPageNo()
-            this.props.investor_account.setP2PPaymentType(t)
-        }
-
+        this.props.investor_account.resetPaymentPageNo()
+        this.props.investor_account.setPaymentType(t)
     }
 
     render() {
         let {history} = this.props
         let {tab} = this.state
         let tabs = ['未回', '已回']
-        let { payments,type,totalCount } = this.props.investor_account.data_zx.detail
 
+        let { payments,type,totalCount } = this.props.investor_account.data.detail
         let tabFn = (item, index) => {
             return <div key={index} styleName={item == tab ? "type typeActive" : "type"}
                         onClick={() => this.switchTab(item)}>{item}
             </div>
         }
         let recordFn = (item,index) => {
-            return <div styleName="record">
+            return <div styleName="record" key={index}>
                 <div styleName="title">
                     <span>{item.prdName}<i></i></span>
-                    <div styleName="end">{item.state}</div>
+                    <div styleName="end"></div>
                 </div>
                 <div styleName="item">
                     <span>投标日期</span>

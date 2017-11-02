@@ -18,7 +18,7 @@ class Investor extends React.Component {
         // this.props.investor.resetCustPageNo()
         // this.props.investor.fetchCustList()
         // Event.touchBottom(this.props.investor.fetchCustList)
-
+        window.scrollTo(0,0)
         this.props.investor.switchSortType()
         Event.touchBottom(this.props.investor.fetchFellowRecords)
 
@@ -53,12 +53,11 @@ class Investor extends React.Component {
 
     switchTypeHandler = type => {
         if(this.props.investor.fellow.value == type) return
+
+        window.scrollTo(0,0)
         this.props.investor.switchSortType(type)
     }
 
-    // switchShow = () => {
-    //     this.setState({ show: !this.state.show })
-    // }
     toggleShow = () => {
         this.setState({ show: !this.state.show })
     }
@@ -74,7 +73,7 @@ class Investor extends React.Component {
 
         let amount = (item) => {
             let t
-            if ([1,4,7,9].indexOf(fellow.value)>-1) {
+            if ([1,4,7,10].indexOf(fellow.value)>-1) {
                 t = `￥${item.bankBalance}`
             } else if ([2,5,8].indexOf(fellow.value)>-1) {
                 t = `￥${item.commissionAmt}`

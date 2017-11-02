@@ -60,6 +60,7 @@
     font-size: 24px;
     color: #fff;
     margin-top: 88px;
+    position: fixed;
 }
 .earnings .text{
     position: absolute;
@@ -102,6 +103,8 @@
     color: #555;
     display: table;
     background: #fff;
+    position: fixed;
+    top: 288px;
 }
 .type{
     width: 33.33%;
@@ -121,6 +124,11 @@
     background: #f9f9f9;
     font-size: 24px;
     color: #333;
+    position: fixed;
+    top: 380px;
+}
+.records{
+    margin-top: 88px;
 }
 .record{
     width:100%;
@@ -181,6 +189,7 @@
     width: 100%;
     height: 100%;
     text-align: center;
+    margin-top: 500px;
 }
 .empty img{
     vertical-align: middle;
