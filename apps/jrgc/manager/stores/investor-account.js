@@ -116,6 +116,7 @@ export default class InvestorAccount {
     resetPaymentPageNo = () => {
         let { type, payments } = this.data.detail, current_payment = payments[type]
         current_payment.pageNo = 1
+        this.data.detail.type = '0'
     }
     //尊享、微金他的回款明细
     fetchPayment = (done) => {
