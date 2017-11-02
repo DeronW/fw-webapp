@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/components/header.css'
-import { Browser, NativeBridge } from '../helpers/'
+import { Browser, NativeBridge } from '../helpers'
 
 /*
  parameters
@@ -26,6 +26,7 @@ function goBack(props) {
 
     setTimeout(() => {
         window.onpopstate = old_pop
+        alert('moved:' + moved + ', ' + NativeBridge.isReady)
         !moved && NativeBridge.close()
     }, 100)
 }
@@ -34,6 +35,8 @@ const Header = CSSModules(styles, {
     allowMultiple: true,
     errorWhenNotFound: false
 })(props => {
+
+
     let back = !props.noBack &&
         <a styleName="btn btn-back" onClick={() => goBack(props)}></a>
 

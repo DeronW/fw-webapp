@@ -121,7 +121,7 @@
     width: 100%;
     box-sizing: border-box;
 
-    padding-left: 100px;
+    padding-left: 90px;
     height: 84px;
     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAABUAgMAAADWh+joAAAADFBMVEX////r6+7Y2Njw8PKbCcP3AAAAUElEQVRo3u3UsQ0AIRADwZO+gK+OJqmC0qgBAnSWZmIHG7kAAAAAAJr668q3DsaigSYi3yMyGmgg8j0io4EGIt8jMhoAAAAAeGUEEv1KzUAbvsYxdKbypygAAAAASUVORK5CYII=") no-repeat center;
     display: table;
@@ -151,7 +151,7 @@
 }
 
 .tab_item_1 {
-    width: 130px;
+    width: 135px;
     margin-right: 100px;
 }
 
