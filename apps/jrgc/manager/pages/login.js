@@ -36,11 +36,13 @@ class Login extends React.Component {
         let { username, password } = this.state
 
         return <div styleName="bg">
-            <Header title="登录" history={history} noBack />
+            <div styleName="bgUp"></div>
+            <img styleName="logo" src={require('../images/login/logo.png')}/>
+            <div styleName="remind">请使用金融工场账户登录</div>
             <div styleName="username">
                 <i></i>
                 <input
-                    placeholder="用户名/邮箱/手机号"
+                    placeholder="手机号/用户名"
                     value={username}
                     onChange={this.changeHandler('username')} />
             </div>
@@ -53,8 +55,8 @@ class Login extends React.Component {
                     value={password}
                     onChange={this.changeHandler('password')} />
             </div>
+            <div styleName="bgDown"></div>
             <div styleName="submit" onClick={this.submitHandler}>登录</div>
-            <div styleName="remind">●请使用金融工场账号密码登录</div>
         </div>
     }
 }
