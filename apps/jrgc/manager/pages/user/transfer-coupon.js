@@ -69,7 +69,7 @@ class TransferCoupon extends React.Component {
         }
         let v = confirm(`确认将${beanCount}${unit}${t},赠送给${name}吗？`)
         if (v == true) {
-            this.props.user_coupon.presentCouponFriends(couponId, type, custId)
+            this.props.user_coupon.presentCouponFriends(couponId, custId)
                 .then(() => Components.showAlert("赠送成功"))
                 .then(() => {
                     this.props.user_coupon.resetCouponPageNo()
