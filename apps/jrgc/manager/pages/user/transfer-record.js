@@ -45,6 +45,7 @@ class TransferRecord extends React.Component {
 
         let u = type == '返金券' ? '克' : ''
         let m = type == '返现券' ? '￥' : ''
+        let r = type == '返息券' ? '%' : ''
 
         let tab_func = (item, index) => {
             return <div styleName={item == type ? "tabItem tabItemOn" : "tabItem"} key={index}
@@ -54,14 +55,14 @@ class TransferRecord extends React.Component {
         let record_item = (item, index) => {
             return <div styleName={item.status > 0 ? "recordItem itemUsed" : "recordItem"} key={index}>
                 <div styleName="itemLineUp">
-                    <div styleName="upLineLeft money"><span styleName="rmb">{m}</span>{item.beanCount}{u}</div>
+                    <div styleName="upLineLeft money"><span styleName="rmb">{m}</span>{item.beanCount}{r}{u}</div>
                     <div styleName="upLineLeft reason">
                         <div>{item.remark}</div>
                         <div>{type == '返金券' ? '购买' : '投资'}{m}{item.investMultip}{u}可用</div>
                     </div>
                     <div styleName="upLineLeft date">
                         <div styleName="dateLeft">有效期 {item.overdueTime}</div>
-                        <div styleName="dateRight">投资期限 {item.inverstPeriod}天 可用</div>
+                        <div styleName="dateRight">投资期限 ≥{item.inverstPeriod}天 可用</div>
                     </div>
                 </div>
                 <div styleName="itemLineDown">
