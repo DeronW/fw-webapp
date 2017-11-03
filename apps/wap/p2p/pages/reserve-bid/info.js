@@ -61,7 +61,7 @@ class ReserveInfo extends React.Component {
                         <span>{context.repayPeriod}</span>
                     </div>
                     <div styleName="rateDown">
-                        理财期限(天)
+                        期限(天)
                     </div>
                 </div>
                 <div styleName="tipsBox">
