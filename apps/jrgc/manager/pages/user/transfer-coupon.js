@@ -69,7 +69,7 @@ class TransferCoupon extends React.Component {
         }
         let v = confirm(`确认将${beanCount}${unit}${t},赠送给${name}吗？`)
         if (v == true) {
-            this.props.user_coupon.presentCouponFriends(couponId, custId)
+            this.props.user_coupon.presentCouponFriends(couponId,type, custId)
                 .then(() => Components.showAlert("赠送成功"))
                 .then(() => {
                     this.props.user_coupon.resetCouponPageNo()
@@ -106,7 +106,7 @@ class TransferCoupon extends React.Component {
             }
             return <div styleName={coutent_style}
                 key={index}
-                onClick={() => this.transferHandler(Utils.hashQuery.couponId, item.conponType, item.beanCount)}>
+                onClick={() => this.transferHandler(item.couponId, item.conponType, item.beanCount)}>
                 <div styleName="itemLine itemUp">
                     <div styleName="lineLeft"><span styleName="rmb">{m}</span>{item.beanCount}<span styleName="rmb">{u}</span></div>
                     <div styleName={btn_style}>转赠</div>
