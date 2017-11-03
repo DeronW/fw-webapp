@@ -225,10 +225,12 @@ export default class InvestorAccount {
     }
     setProjectTabP2P = (tab) => {
         this.data_p2p.project.tab = tab
+        this.resetCategoryPageNo()
         this.fetchPrdInvestP2P()
     }
     setProjectCategory2P = (type) => {
         this.data_p2p.project.category = type
+        this.resetCategoryPageNo()
         this.fetchPrdInvestP2P()
     }
     //TA的微金-TA的项目列表
@@ -334,6 +336,7 @@ export default class InvestorAccount {
     //重置type
     resetGoldListType = (status) => {
         this.data_hj.type = status
+        this.resetGoldListPageNo()
         this.fetchGoldList()
     }
     //重置页码
