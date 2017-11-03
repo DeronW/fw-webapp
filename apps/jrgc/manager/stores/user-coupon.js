@@ -85,7 +85,6 @@ export default class UserCoupon {
     }
     resetFriendsPageNo = () => {
         this.friends_data.pageNo = 1
-        this.friends_data.keyword = ''
     }
     fetchFriendsList = (done) => {
         let { type, list, keyword } = this.friends_data
