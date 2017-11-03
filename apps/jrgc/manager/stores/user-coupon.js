@@ -1,5 +1,5 @@
-import {extendObservable, computed} from 'mobx'
-import {Utils, Components} from 'fw-javascripts'
+import { extendObservable, computed } from 'mobx'
+import { Utils, Components } from 'fw-javascripts'
 
 export default class UserCoupon {
     constructor(Get, Post) {
@@ -29,15 +29,18 @@ export default class UserCoupon {
         this.coupon_data.pageNo = 1
         this.coupon_data.records = []
     }
+
     setCouponStatus = (status) => {
         this.coupon_data.status = status
     }
+
     setCouponType = (type) => {
         this.coupon_data.type = type
         this.fetchCouponList()
     }
+
     fetchCouponList = (done) => {
-        let {records} = this.coupon_data
+        let { records } = this.coupon_data
 
         if (this.coupon_data.pageNo == 0) return done && done()
         if (this.coupon_data.pageNo == 1) records.splice(0, records.length)
@@ -76,7 +79,7 @@ export default class UserCoupon {
         this.friends_data.keyword = ''
     }
     fetchFriendsList = (done) => {
-        let {type, list, keyword} = this.friends_data
+        let { type, list, keyword } = this.friends_data
         if (this.friends_data.pageNo == 0) return done && done()
         if (this.friends_data.pageNo == 1) list.splice(0, list.length)
 
@@ -106,8 +109,8 @@ export default class UserCoupon {
     }
     //转增优惠券
     presentCoupon = (custId) => {
-        let {coupon} = this.friends_data
-        let couponType = Number(coupon.conponType)+1
+        let { coupon } = this.friends_data
+        let couponType = Number(coupon.conponType) + 1
         return this.Get('/api/finManager/coupon/v2/presentCoupon.shtml', {
             couponId: this.couponId,
             couponType: couponType,
