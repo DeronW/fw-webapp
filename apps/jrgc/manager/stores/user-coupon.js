@@ -120,7 +120,7 @@ export default class UserCoupon {
         let { coupon } = this.friends_data
         let couponType = Number(coupon.conponType) + 1
         return this.Get('/api/finManager/coupon/v2/presentCoupon.shtml', {
-            couponId: this.couponId,
+            couponId: Utils.hashQuery.couponId,
             couponType: couponType,
             custId: custId
         })
