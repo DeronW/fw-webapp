@@ -219,7 +219,7 @@ class p2pItem extends React.Component {
             {tab !== '批量项目' && <div styleName="types">
                 {types.map(typeFn)}
             </div>}
-            <div styleName="number">共<span>{totalCount}</span>笔记录</div>
+            <div styleName="number" style={tab == '批量项目'?{top:'290px'}:{}}>共<span>{totalCount}</span>笔记录</div>
             <div styleName="records">
                 {records && records.length > 0 ? records.map(recordFn) : empty}
                 {records.length > 0 && <div styleName="load">已经全部加载完毕</div>}
