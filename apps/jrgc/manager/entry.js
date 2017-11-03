@@ -14,7 +14,7 @@ let stores = {
     investor_coupon: new Stores.InvestorCoupon(Get, Post),
     investor_account: new Stores.InvestorAccount(Get, Post),
     stats_overview: new Stores.StatsOverview(Get),
-    stats_investor: new Stores.StatsInvestor(Get)
+    stats_investor: new Stores.StatsInvestor(Get,Post)
 }
 
 // new StoreSpy(stores).wiretap()

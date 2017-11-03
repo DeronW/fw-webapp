@@ -3,8 +3,9 @@ import { observable, extendObservable, computed } from 'mobx'
 
 export default class StatsInvestor {
 
-    constructor(Get) {
+    constructor(Get,Post) {
         this.get = Get;
+        this.post = Post;
 
         this.SORT_PARAM_DICT = {
             'invested-amount-1': '11',
@@ -49,7 +50,7 @@ export default class StatsInvestor {
 
         if (pageNo === 1) investorRawData.splice(0, investorRawData.length);
 
-        return this.get('/api/finManager/achievement/v2/custList.shtml', {
+        return this.post('/api/finManager/achievement/v2/custList.shtml', {
             orderType: sortNo,
             timeType: durationType,
             pageNo: pageNo,
