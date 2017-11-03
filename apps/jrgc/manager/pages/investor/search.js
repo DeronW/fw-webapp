@@ -10,7 +10,8 @@ import styles from '../../css/investor/search.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Search extends React.Component {
     state = {
-        isSearch: false
+        isSearch: false,
+        pending:false
     }
     componentDidMount() {
         let { resetSearchPageNo, fetchSearch,setKeyword } = this.props.investor
@@ -34,7 +35,13 @@ class Search extends React.Component {
         let { fetchSearch, resetSearchPageNo } = this.props.investor
         this.setState({ isSearch: true })
         resetSearchPageNo()
-        fetchSearch()
+        if(this.state.pending) return
+        this.setState({pending:true})
+        fetchSearch().then(()=>{
+            this.setState({pending:false})
+        },()=>{
+            this.setState({pending:false})
+        })
     }
     gotoInfo = (id) => {
         let { history } = this.props

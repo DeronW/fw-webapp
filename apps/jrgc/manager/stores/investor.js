@@ -222,7 +222,7 @@ export default class Investor {
         if (this.data.search.pageNo == 0) return done && done()
         if (this.data.search.pageNo == 1) records.splice(0, records.length)
 
-        this.Post(url, {
+        return this.Post(url, {
             keyword: keyword,
             orderType:sortNo,
             timeType:timeType,
