@@ -13,12 +13,19 @@ class TransferCoupon extends React.Component {
         type: '返现券'
     }
     componentDidMount() {
-        let { resetCouponPageNo, setCouponType, setCouponStatus, fetchCouponList } = this.props.user_coupon
-        resetCouponPageNo()
+        // let { resetCouponPageNo, setCouponType, setCouponStatus, fetchCouponList } = this.props.user_coupon
+        // resetCouponPageNo()
+        // setCouponStatus(1)
+        // setCouponType('0')
+
+        // Event.touchBottom(fetchCouponList)
+
+        let { fetchCouponList, switchTypeHandler, setCouponStatus } = this.props.user_coupon
+
         setCouponStatus(1)
-        setCouponType('0')
-        
-        Event.touchBottom(fetchCouponList)
+        switchTypeHandler('0').then(() => {
+            Event.touchBottom(fetchCouponList)
+        })
     }
 
     componentWillUnmount() {
@@ -26,7 +33,7 @@ class TransferCoupon extends React.Component {
     }
 
     typeHanlder = (type) => {
-        let { resetCouponPageNo, setCouponType } = this.props.user_coupon
+        let { resetCouponPageNo, switchTypeHandler } = this.props.user_coupon
         if (type == this.state.type) return
         this.setState({ type: type })
         let t
@@ -37,8 +44,7 @@ class TransferCoupon extends React.Component {
         } else {
             t = '2'
         }
-        resetCouponPageNo()
-        setCouponType(t)
+        switchTypeHandler(t)
     }
 
     transferHandler = (couponId, couponType, beanCount) => {

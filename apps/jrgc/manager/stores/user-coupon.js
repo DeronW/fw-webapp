@@ -36,7 +36,15 @@ export default class UserCoupon {
 
     setCouponType = (type) => {
         this.coupon_data.type = type
-        this.fetchCouponList()
+        // this.fetchCouponList()
+    }
+
+    switchTypeHandler = type => {
+        this.coupon_data.type = type
+        this.coupon_data.records = []
+        this.coupon_data.pageNo = 1
+
+        return this.fetchCouponList()
     }
 
     fetchCouponList = (done) => {
@@ -44,7 +52,8 @@ export default class UserCoupon {
 
         if (this.coupon_data.pageNo == 0) return done && done()
         if (this.coupon_data.pageNo == 1) records.splice(0, records.length)
-        this.Get('/api/finManager/coupon/v2/myCouponList.shtml', {
+
+        return this.Get('/api/finManager/coupon/v2/myCouponList.shtml', {
             couponStatus: this.coupon_data.status,
             couponType: this.coupon_data.type,
             pageNo: this.coupon_data.pageNo++,
