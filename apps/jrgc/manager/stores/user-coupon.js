@@ -73,6 +73,7 @@ export default class UserCoupon {
     }
     resetFriendsPageNo = () => {
         this.friends_data.pageNo = 1
+        this.friends_data.keyword = ''
     }
     fetchFriendsList = (done) => {
         let {type, list, keyword} = this.friends_data
@@ -106,9 +107,10 @@ export default class UserCoupon {
     //转增优惠券
     presentCoupon = (custId) => {
         let {coupon} = this.friends_data
+        let couponType = Number(coupon.conponType)+1
         return this.Get('/api/finManager/coupon/v2/presentCoupon.shtml', {
             couponId: this.couponId,
-            couponType: coupon.couponType,
+            couponType: couponType,
             custId: custId
         })
     }

@@ -2,12 +2,12 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import ReactEcharts from 'echarts-for-react'
-import { Utils,Components } from 'fw-javascripts'
+import { Utils, Components } from 'fw-javascripts'
 
 import { Header } from '../../components'
 import styles from '../../css/investor/info.css'
 
-@inject('user','investor')
+@inject('user', 'investor')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Info extends React.Component {
@@ -30,14 +30,14 @@ class Info extends React.Component {
     gotoTransferCoupon = () => {
         let { history } = this.props
         let { detail } = this.props.investor.data.info
-        let { info } =this.props.user.data.user
-        if(info.userId == detail.custId) {
+        let { info } = this.props.user.data.user
+        if (info.userId == detail.custId) {
             Components.showToast('优惠券不可以转赠给自己')
-        }else{
+        } else {
             history.push(`/user-transfer-coupon?custId=${detail.custId}&realName=${detail.realName}`)
         }
     }
-    getOption = (three,four,seven,ten,twelve) => ({
+    getOption = (three, four, seven, ten, twelve) => ({
         title: {
             text: '客户整体投资期限分析',
             textStyle: {
@@ -109,48 +109,56 @@ class Info extends React.Component {
 
     render() {
         let { history } = this.props
-        let { hidden} = this.state;
+        let { hidden } = this.state;
         let { info } = this.props.investor.data
-        let { detail,analysis } = info
+        let { detail, analysis } = info
         let nextLevel
 
         let desStyle = {
             height: hidden ? '100%' : '100px',
             overflow: hidden ? 'visible' : 'hidden'
         }
-        let getHeadUrl = ()=>{
+        let getHeadUrl = () => {
             let url = require('../../images/investor/info/default.png')
-            if(detail.isComp==0){
-                if(detail.gender==0){
+            if (detail.isComp == 0) {
+                if (detail.gender == 0) {
                     url = require('../../images/investor/info/woman.png')
-                }else if(detail.gender==1){
+                } else if (detail.gender == 1) {
                     url = require('../../images/investor/info/man.png')
                 }
             }
             return url
         }
-        let levelFn = ()=>{
-            let level ='普通用户'
-            if(detail.userLevel == 1){
+        let levelFn = () => {
+            let level = '普通用户'
+            if (detail.userLevel == 1) {
                 level = '普通用户'
                 nextLevel = 1
-            }else if(detail.userLevel == 2){
+            } else if (detail.userLevel == 2) {
                 level = 'VIP1'
                 nextLevel = 2
-            }else if(detail.userLevel == 3){
+            } else if (detail.userLevel == 3) {
                 level = 'VIP2'
                 nextLevel = 3
-            }else if(detail.userLevel == 4){
+            } else if (detail.userLevel == 4) {
                 level = 'VIP3'
                 nextLevel = 4
-            }else{
+            } else {
                 level = 'VIP4'
                 nextLevel = 5
             }
             return level
         }
-        let {within3MonthRate,four2SixMonthRate,seven2NineMonthRate,ten2TwelveMonthRate,moreThanOneYearRate}=analysis
-
+        let { within3MonthRate, four2SixMonthRate, seven2NineMonthRate, ten2TwelveMonthRate, moreThanOneYearRate } = analysis
+        let format = (score) => {
+            let s
+            if (score.toString().length > 3) {
+                s = `${Utils.format.price(score / 10000, 2)}万`
+            } else {
+                s = score
+            }
+            return s
+        }
 
         return <div styleName="bg">
             <Header title="客户详情" history={history} />
@@ -174,7 +182,7 @@ class Info extends React.Component {
                         <div styleName="itemBarText">优惠券(张)</div>
                     </div>
                     <div styleName="itemBar" onClick={() => this.gotoHandler('/investor-score')}>
-                        <div styleName="itemBarNum">{detail.reditCount}{detail.reditCount>0?'万':''}</div>
+                        <div styleName="itemBarNum">{detail.reditCount > 0 ? format(detail.reditCount) : 0}</div>
                         <div styleName="itemBarText">工分</div>
                     </div>
                 </div>
@@ -190,7 +198,7 @@ class Info extends React.Component {
                 </div>
             </div>
             <div styleName="pie">
-                <ReactEcharts option={this.getOption(within3MonthRate,four2SixMonthRate,seven2NineMonthRate,ten2TwelveMonthRate,moreThanOneYearRate)}
+                <ReactEcharts option={this.getOption(within3MonthRate, four2SixMonthRate, seven2NineMonthRate, ten2TwelveMonthRate, moreThanOneYearRate)}
                     style={{ height: '100%', width: '100%' }} />
             </div>
             <div styleName="total">
@@ -222,7 +230,7 @@ class Info extends React.Component {
             <div styleName="remark">
                 <div styleName="remarkTitle">备注</div>
                 <img src={require('../../images/investor/info/arrow.png')} />
-                <div styleName="remarkAmend" onClick={()=>this.gotoHandler('/investor-remark')}>修改</div>
+                <div styleName="remarkAmend" onClick={() => this.gotoHandler('/investor-remark')}>修改</div>
             </div>
             {detail.remark && <div styleName="remarkText">
                 <div styleName="remarkDes" style={desStyle}>
@@ -237,27 +245,27 @@ class Info extends React.Component {
             <div styleName="account">
                 <div styleName="accountItem">
                     <div styleName="accountName">TA的尊享账户</div>
-                    {detail.zxOpenStatus>0 ? <div styleName="accountText" onClick={() => this.gotoHandler('/investor-account-zx')}>
+                    {detail.zxOpenStatus > 0 ? <div styleName="accountText" onClick={() => this.gotoHandler('/investor-account-zx')}>
                         可用余额
                         <span>{detail.zxBalance}元</span>
                         <img src={require('../../images/investor/info/arrow.png')} />
-                    </div>:<div styleName="accountText">暂未开户</div>}
+                    </div> : <div styleName="accountText">暂未开户</div>}
                 </div>
                 <div styleName="accountItem">
                     <div styleName="accountName">TA的微金账户</div>
-                    {detail.wjOpenStatus>0 ?<div styleName="accountText" onClick={() => this.gotoHandler('/investor-account-p2p')}>
+                    {detail.wjOpenStatus > 0 ? <div styleName="accountText" onClick={() => this.gotoHandler('/investor-account-p2p')}>
                         可用余额
                         <span>{detail.wjBalance}元</span>
                         <img src={require('../../images/investor/info/arrow.png')} />
-                    </div>:<div styleName="accountText">暂未开户</div>}
+                    </div> : <div styleName="accountText">暂未开户</div>}
                 </div>
                 <div styleName="accountItem">
                     <div styleName="accountName">TA的黄金账户</div>
-                    {detail.goldOpenStatus>0 ?<div styleName="accountText"  onClick={() => this.gotoHandler('/investor-account-hj')}>
+                    {detail.goldOpenStatus > 0 ? <div styleName="accountText" onClick={() => this.gotoHandler('/investor-account-hj')}>
                         持有黄金
                         <span>{detail.goldAmount}克</span>
                         <img src={require('../../images/investor/info/arrow.png')} />
-                    </div>:<div styleName="accountText">暂未开户</div>}
+                    </div> : <div styleName="accountText">暂未开户</div>}
                 </div>
             </div>
             <div styleName="tabBar">

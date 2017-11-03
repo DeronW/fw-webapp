@@ -47,7 +47,7 @@ class Bean extends React.Component {
             <Header title="TA的工豆" history={history} />
             <div styleName="beanInfo">
                 <div styleName="line1">TA的工豆</div>
-                <div styleName="line2">¥{cashBalance / 100}<span styleName="lineCal">（总共{cashBalance}工豆，100工豆=0.01元）</span></div>
+                <div styleName="line2">¥{Utils.format.price(cashBalance / 100,2)}<span styleName="lineCal">（总共{cashBalance}工豆，100工豆=0.01元）</span></div>
                 <div styleName="line3">即将过期：¥{overbeancount}</div>
             </div>
             {records && records.length > 0 ? records.map(bean_func) : empty}
