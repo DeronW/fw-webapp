@@ -159,7 +159,10 @@ class Info extends React.Component {
             }
             return s
         }
-
+        let mobileFormat = (mobile) => {
+            if(!mobile) return
+            return mobile.toString().substr(0,3)+"****"+mobile.toString().substr(-4)
+        }
         return <div styleName="bg">
             <Header title="客户详情" history={history} />
             <div styleName="bar">
@@ -168,7 +171,7 @@ class Info extends React.Component {
                     <div styleName="level">{levelFn()}</div>
                 </div>
                 <div styleName="rightBar">
-                    <div styleName="name">{detail.realName || detail.mobile}<span>({detail.birthday})</span></div>
+                    <div styleName="name">{detail.realName || mobileFormat(detail.mobile)}<span>({detail.birthday})</span></div>
                     {nextLevel < 5 && <div styleName="amount">差<span>{detail.mumValue}元</span>年化投资额升级VIP{nextLevel}</div>}
                     <div styleName="time">注册时间 {detail.createTime}</div>
                 </div>

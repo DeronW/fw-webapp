@@ -67,22 +67,14 @@ class Investor extends React.Component {
             }
             return r
         }
-
-        // let tabFn = (item, index) => {
-        //     return <div styleName={item == tab ? 'tab tabActive' : 'tab'}
-        //         key={index}
-        //         onClick={() => this.switchTab(item)}>{item}</div>
-        // }
-
-        // let selectFn = (item, index) => {
-        //     return <div styleName={Object.keys(item)[0] == type ? 'selectActive' : 'selectItem'}
-        //         key={item + index}
-        //         onClick={() => this.switchType(Object.keys(item)[0], index)}>{Object.keys(item)[0]}</div>
-        // }
+        let mobileFormat = (mobile) => {
+            if(!mobile) return
+            return mobile.toString().substr(0,3)+"****"+mobile.toString().substr(-4)
+        }
 
         let listFn = (item, index) => {
             return <div styleName="listItem" key={item.custId + index} onClick={() => this.gotoHandler(`/investor-info?custId=${item.custId}`)}>
-                <div styleName="name">{item.realName || item.mobile}</div>
+                <div styleName="name">{item.realName || mobileFormat(item.mobile)}</div>
                 <div styleName="money">{amount(item)}</div>
                 <div styleName="time">注册时间：{item.createTime}</div>
                 <div styleName="balance">{remind(item)}</div>

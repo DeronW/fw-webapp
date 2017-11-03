@@ -91,7 +91,7 @@ export default class UserCoupon {
         if (this.friends_data.pageNo == 0) return done && done()
         if (this.friends_data.pageNo == 1) list.splice(0, list.length)
 
-        this.Post('/api/finManager/coupon/v2/custList.shtml', {
+        return this.Post('/api/finManager/coupon/v2/custList.shtml', {
             couponId: this.couponId,
             couponType: Number(this.friends_data.coupon.conponType) + 1,
             keyword: keyword,

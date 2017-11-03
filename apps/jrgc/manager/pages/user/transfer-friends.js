@@ -12,7 +12,8 @@ class TransferFriends extends React.Component {
     state = {
         coupon_type: 0,
         isSearch:false,
-        input_value: ''
+        input_value: '',
+        pending:false
     }
     componentDidMount() {
         let { resetFriendsPageNo, fetchFriendsList,getCoupon } = this.props.user_coupon
@@ -25,8 +26,13 @@ class TransferFriends extends React.Component {
     }
     searchFriendsHandler = () => {
         this.setState({isSearch:true})
+        if(this.state.pending) return
+        this.setState({pending:true})
+
         this.props.user_coupon.resetFriendsPageNo()
-        this.props.user_coupon.fetchFriendsList()
+        this.props.user_coupon.fetchFriendsList().then(()=>{
+            this.setState({pending:false})
+        })
     }
     inputHandler = (e) => {
         this.props.user_coupon.setKeyword(e.target.value)
