@@ -1,41 +1,41 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import { Event, Components, Utils } from 'fw-javascripts'
-import {Header, BottomNavBar} from '../../components'
+import { Header, BottomNavBar } from '../../components'
 import styles from '../../css/user/transfer-record.css'
 
 @inject('user_coupon')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class TransferRecord extends React.Component {
     state = {
-        type:'返现券'
+        type: '返现券'
     }
     componentDidMount() {
-        let { resetCouponPageNo,setCouponStatus, fetchCouponList } = this.props.user_coupon
+        let { fetchCouponList, switchTypeHandler, setCouponStatus } = this.props.user_coupon
+
         setCouponStatus(4)
-        resetCouponPageNo()
-        fetchCouponList()
-        Event.touchBottom(fetchCouponList)
+        switchTypeHandler('0').then(() => {
+            Event.touchBottom(fetchCouponList)
+        })
     }
     componentWillUnmount() {
         Event.cancelTouchBottom()
     }
     typeHanlder = (type) => {
-        let { resetCouponPageNo,setCouponType } = this.props.user_coupon
+        let { switchTypeHandler  } = this.props.user_coupon
         if (type == this.state.type) return
-        this.setState({type:type})
+        this.setState({ type: type })
         let t
-        if(type == "返现券"){
+        if (type == "返现券") {
             t = '0'
-        }else if(type == "返息券"){
+        } else if (type == "返息券") {
             t = '1'
-        }else{
+        } else {
             t = '2'
         }
-        resetCouponPageNo()
-        setCouponType(t)
+        switchTypeHandler(t)
     }
 
     render() {
@@ -44,20 +44,20 @@ class TransferRecord extends React.Component {
         let { type } = this.state
 
         let u = type == '返金券' ? '克' : ''
-        let m = type == '返现券' ?'￥':''
+        let m = type == '返现券' ? '￥' : ''
 
         let tab_func = (item, index) => {
             return <div styleName={item == type ? "tabItem tabItemOn" : "tabItem"} key={index}
-                        onClick={() => this.typeHanlder(item)}>{item} </div>
+                onClick={() => this.typeHanlder(item)}>{item} </div>
         }
 
         let record_item = (item, index) => {
-            return <div styleName={item.status>0 ? "recordItem itemUsed" : "recordItem"} key={index}>
+            return <div styleName={item.status > 0 ? "recordItem itemUsed" : "recordItem"} key={index}>
                 <div styleName="itemLineUp">
                     <div styleName="upLineLeft money"><span styleName="rmb">{m}</span>{item.beanCount}{u}</div>
                     <div styleName="upLineLeft reason">
                         <div>{item.remark}</div>
-                        <div>{type == '返金券' ?'购买':'投资'}{m}{item.investMultip}{u}可用</div>
+                        <div>{type == '返金券' ? '购买' : '投资'}{m}{item.investMultip}{u}可用</div>
                     </div>
                     <div styleName="upLineLeft date">
                         <div styleName="dateLeft">有效期 {item.overdueTime}</div>
@@ -76,7 +76,7 @@ class TransferRecord extends React.Component {
             <img src={require('../../images/investor/empty.png')} />
         </div>
         return <div styleName="bg">
-            <Header title="转赠记录" history={history}/>
+            <Header title="转赠记录" history={history} />
             <div styleName="tabWrapper">
                 {['返现券', '返息券', '返金券'].map(tab_func)}
             </div>
@@ -87,7 +87,8 @@ class TransferRecord extends React.Component {
                 </div>
             </div>
             <div styleName="recordList">
-                {records && records.length>0?records.map(record_item):empty}
+                {records.map(record_item)}
+                {records.length == 0 && empty}
             </div>
         </div>
     }

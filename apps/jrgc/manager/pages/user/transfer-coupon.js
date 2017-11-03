@@ -33,7 +33,7 @@ class TransferCoupon extends React.Component {
     }
 
     typeHanlder = (type) => {
-        let { resetCouponPageNo, switchTypeHandler } = this.props.user_coupon
+        let { switchTypeHandler } = this.props.user_coupon
         if (type == this.state.type) return
         this.setState({ type: type })
         let t
