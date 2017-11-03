@@ -26,11 +26,14 @@ class TransferFriends extends React.Component {
     }
     searchFriendsHandler = () => {
         this.setState({isSearch:true})
+        console.log(this.state.pending)
         if(this.state.pending) return
         this.setState({pending:true})
 
         this.props.user_coupon.resetFriendsPageNo()
         this.props.user_coupon.fetchFriendsList().then(()=>{
+            this.setState({pending:false})
+        },()=>{
             this.setState({pending:false})
         })
     }

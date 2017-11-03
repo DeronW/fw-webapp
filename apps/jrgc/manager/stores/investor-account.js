@@ -107,8 +107,10 @@ export default class InvestorAccount {
         }
     }
     //尊享、微金设置回款明细的状态
-    setPaymentType = (type) => {
-        this.data.detail.type = type
+    setPaymentType = (t) => {
+        let { type, payments } = this.data.detail, current_payment = payments[type]
+        current_payment.pageNo = 1
+        this.data.detail.type = t
         this.fetchPayment()
     }
 
@@ -156,8 +158,10 @@ export default class InvestorAccount {
         let pro = this.data_zx.project
         pro.record[pro.tab].pageNO = 1
     }
-    setTabZX = (tab) => {
-        this.data_zx.project.tab = tab
+    setTabZX = (t) => {
+        let { tab, record, type } = this.data_zx.project
+        record[tab].pageNo = 1
+        this.data_zx.project.tab = t
         this.fetchProjectZX()
     }
     setTypeZX = (type) => {
@@ -167,8 +171,8 @@ export default class InvestorAccount {
     fetchProjectZX = (done) => {
         let url
         let { tab, record, type } = this.data_zx.project
-        if (record[tab].pageNO == 0) return done && done()
-        if (record[tab].pageNO == 1) record[tab].records.splice(0, record[tab].records.length)
+        if (record[tab].pageNo == 0) return done && done()
+        if (record[tab].pageNo == 1) record[tab].records.splice(0, record[tab].records.length)
 
         if (type == "Ta的项目") {
             url = '/api/finManager/cust/v2/zxPrdInvest.shtml'

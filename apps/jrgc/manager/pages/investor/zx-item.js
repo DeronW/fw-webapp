@@ -64,6 +64,7 @@ class zxItem extends React.Component {
             }
             return ENUM[item.status]
         }
+        console.log(record[tab].records)
         let zx_item = (item, index) => {
             if (type == 'Ta的项目') {
                 return <div styleName="record">
@@ -154,7 +155,8 @@ class zxItem extends React.Component {
             </div>
             <div styleName="number">共<span>{totalCount}</span>笔记录</div>
             <div styleName="records">
-                {record[tab].records.length > 0 ? record[tab].records.map(zx_item) : empty}
+                {record[tab].records.map(zx_item)}
+                {record[tab].records.length == 0 && empty}
                 {record[tab].records.length > 0 && <div styleName="load">已经全部加载完毕</div>}
             </div>
         </div>
