@@ -47,15 +47,20 @@ class Search extends React.Component {
         let { history } = this.props
         history.push(`/investor-info?custId=${id}`)
     }
+
     render() {
         let { history } = this.props
         let { isSearch } = this.state
         let { search } = this.props.investor.data
         let { keyword } = search
 
+        let mobileFormat = (mobile) => {
+            if(!mobile) return
+            return mobile.toString().substr(0,3)+"****"+mobile.toString().substr(-4)
+        }
         let recordFn = (item, index) => {
             return <div styleName="listItem" key={index} onClick={() => this.gotoInfo(item.custId)}>
-                <div styleName="name">{item.realName || item.custRealName}</div>
+                <div styleName="name">{item.realName || item.custRealName || mobileFormat(item.mobile)}</div>
                 <div styleName="time">注册时间：{item.createTime || item.regTime}</div>
                 <div styleName="mobile">
                     <span>{item.mobile}</span>
