@@ -222,7 +222,7 @@ class ReserveApply extends React.Component {
                     </span>
                 </span>
                 <div>
-                    如您投资的产品为42天或63天，考虑到复投期间存在匹配期，特殊情况，到期日会有延迟，具体以合同约定为准。
+                    如您出借的产品为42天或63天，考虑到复投期间存在匹配期，特殊情况，到期日会有延迟，具体以合同约定为准。
                 </div>
             </div>
             <div styleName="submitBtnContainer">
