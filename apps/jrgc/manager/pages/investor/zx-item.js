@@ -12,7 +12,9 @@ class zxItem extends React.Component {
         type: 'Ta的项目',
     }
     componentDidMount() {
-        let { fetchInvestInfoZX, fetchProjectZX, fetchTransferProjectZX, resetPageNoZX } = this.props.investor_account
+        let { setTabZX,setTypeZX,fetchInvestInfoZX, fetchProjectZX, fetchTransferProjectZX, resetPageNoZX } = this.props.investor_account
+        setTabZX('100')
+        setTypeZX('Ta的项目')
         resetPageNoZX()
         fetchInvestInfoZX()
         fetchProjectZX()
@@ -64,7 +66,6 @@ class zxItem extends React.Component {
             }
             return ENUM[item.status]
         }
-        console.log(record[tab].records)
         let zx_item = (item, index) => {
             if (type == 'Ta的项目') {
                 return <div styleName="record">
