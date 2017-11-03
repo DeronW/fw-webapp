@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Event, Components } from 'fw-javascripts'
+import { Utils, Event, Components } from 'fw-javascripts'
 import { Header, BottomNavBar } from '../../components'
 import styles from '../../css/investor/search.css'
 
@@ -10,29 +10,29 @@ import styles from '../../css/investor/search.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Search extends React.Component {
     state = {
-        isSearch:false
+        isSearch: false
     }
-    componentDidMount(){
-        let {resetSearchPageNo,fetchSearch} = this.props.investor
+    componentDidMount() {
+        let { resetSearchPageNo, fetchSearch,setKeyword } = this.props.investor
         let { records } = this.props.investor.data.search
-        records.splice(0,records.length)
+        records.splice(0, records.length)
         resetSearchPageNo()
         Event.touchBottom(fetchSearch)
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         Event.cancelTouchBottom()
     }
     changeValue = e => {
-        let {setKeyword} = this.props.investor
-        setKeyword( e.target.value)
+        let { setKeyword } = this.props.investor
+        setKeyword(e.target.value)
     }
     clearhandler = () => {
-        let {setKeyword} = this.props.investor
+        let { setKeyword } = this.props.investor
         setKeyword('')
     }
     searchHandler = () => {
-        let {fetchSearch,resetSearchPageNo} = this.props.investor
-        this.setState({isSearch:true})
+        let { fetchSearch, resetSearchPageNo } = this.props.investor
+        this.setState({ isSearch: true })
         resetSearchPageNo()
         fetchSearch()
     }
@@ -42,14 +42,14 @@ class Search extends React.Component {
     }
     render() {
         let { history } = this.props
-        let { isSearch } =this.state
+        let { isSearch } = this.state
         let { search } = this.props.investor.data
         let { keyword } = search
 
-        let recordFn = (item,index) => {
+        let recordFn = (item, index) => {
             return <div styleName="listItem" key={index} onClick={() => this.gotoInfo(item.custId)}>
-                <div styleName="name">{item.realName}</div>
-                <div styleName="time">注册时间：{item.createTime}</div>
+                <div styleName="name">{item.realName || item.custRealName}</div>
+                <div styleName="time">注册时间：{item.createTime || item.regTime}</div>
                 <div styleName="mobile">
                     <span>{item.mobile}</span>
                     <img src={require("../../images/investor/search/arrow.png")} />
@@ -71,9 +71,9 @@ class Search extends React.Component {
                 <div styleName="searchBtn" onClick={this.searchHandler}>搜索</div>
             </div>
             <div styleName="list">
-                {isSearch ? (search.records && search.records.length>0 ? search.records.map(recordFn):empty):''}
+                {isSearch ? (search.records && search.records.length > 0 ? search.records.map(recordFn) : empty) : ''}
             </div>
-            {search.records.length>0 && <div styleName="load">已经全部加载完毕</div>}
+            {search.records.length > 0 && <div styleName="load">已经全部加载完毕</div>}
         </div>
     }
 }

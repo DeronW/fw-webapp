@@ -26,7 +26,6 @@ export default class Investor {
                 { '可用余额最高排序': 10 }
             ]
         }
-
         extendObservable(this.data, {
             // custmor: {
             //     list: [],
@@ -145,7 +144,6 @@ export default class Investor {
     @computed get custId() {
         return Utils.hashQuery.custId
     }
-
     //回款日历-总回款信息接口
     fetchOverview = () => {
         this.Get('/api/finManager/cust/v2/paymentOverview.shtml').then(data => {
@@ -213,12 +211,21 @@ export default class Investor {
     }
     fetchSearch = (done) => {
         let { keyword, records } = this.data.search
+        let {type,sortNo,timeType} = Utils.hashQuery
+        let url = '/api/finManager/cust/v2/search.shtml'
+        console.log(type=='stats')
+        if(type == "stats"){
+            url = '/api/finManager/achievement/v2/custList.shtml'
+        }
+
         const PAGE_SIZE = 10
         if (this.data.search.pageNo == 0) return done && done()
         if (this.data.search.pageNo == 1) records.splice(0, records.length)
 
-        this.Post("/api/finManager/cust/v2/search.shtml", {
+        this.Post(url, {
             keyword: keyword,
+            orderType:sortNo,
+            timeType:timeType,
             pageNo: this.data.search.pageNo,
             pageSize: PAGE_SIZE
         }).then(data => {

@@ -108,8 +108,11 @@ class Invested extends React.Component {
         })
     }
     gotoSearch = () => {
-        let {history} = this.props
-        history.push('/investor-search')
+        let {history,stats_investor} = this.props
+        let { sortBy, orderBy, pageNo } = this.state
+        let sortNo = stats_investor._getSortNo(sortBy, orderBy)
+
+        history.push(`/investor-search?sortNo=${sortNo}&type=stats&timeType=${stats_investor.data.durationType}`)
     }
     gotoHandler = (link) => {
         let {history} = this.props

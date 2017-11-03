@@ -103,6 +103,13 @@ class Registered extends React.Component {
         let {history} = this.props
         history.push(link)
     }
+    gotoSearch = () => {
+        let {history,stats_investor} = this.props
+        let { sortBy, orderBy, pageNo } = this.state
+        let sortNo = stats_investor._getSortNo(sortBy, orderBy)
+
+        history.push(`/investor-search?sortNo=${sortNo}&type=stats&timeType=${stats_investor.data.durationType}`)
+    }
     render() {
         const { history, stats_investor } = this.props,
             { investorRawData } = stats_investor.data,
@@ -143,7 +150,7 @@ class Registered extends React.Component {
 
         return <div>
             <Header title={`${currentTabName}注册客户(${investorCnt})`} history={history} />
-
+            <div styleName="invest-search" onClick={this.gotoSearch}></div>
             <div styleName="sort-tab">
                 { ['time'].map(genSortTabItems) }
             </div>
