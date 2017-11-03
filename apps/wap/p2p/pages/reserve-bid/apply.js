@@ -100,7 +100,7 @@ class ReserveApply extends React.Component {
         let {context} = reserve_bid.bid_data
         let {type_tab} = this.state
         let infoItem = (name, value) => {
-            return <div styleName={name == '预约有效期' ? "infoItem itemLast" : "infoItem"}>
+            return <div styleName={name == '复投次数' ? "infoItem itemLast" : "infoItem"}>
                 <div styleName="itemLeft">{name}</div>
                 <div styleName={name == "预期年化利率" ? "itemRight rightRed" : "itemRight"}>{value}</div>
             </div>
@@ -126,6 +126,7 @@ class ReserveApply extends React.Component {
             }
 
             let year_rate = context.addRate == 0 ? `${context.loadRate}%` : `${context.loadRate}%+${context.addRate}%`
+            let complex_count = context.repayPeriod == '21' ? '0次' : context.repayPeriod == '42' ? '1次' : context.repayPeriod == '63' ? '2次' : '-次'
             return <div styleName="infoContent">
                 <div styleName="infoAmount">
                     <div styleName="amountLeft">预计收益<span styleName="coverBeans">(含加息工豆)</span></div>
@@ -138,6 +139,7 @@ class ReserveApply extends React.Component {
                     {infoItem("期限", `${context.repayPeriod}天`)}
                     {infoItem("预计起息时间", "预计今日起息")}
                     {infoItem("预约有效期", `${context.bookValidPeriod}天`)}
+                    {infoItem("复投次数", complex_count)}
                 </div>
             </div>
         }
@@ -167,6 +169,7 @@ class ReserveApply extends React.Component {
             } else {
                 goals = item.goals
             }
+            let complex_number = item.term == '21天' ? '0次' : item.term == '42天' ? '1次' : item.term == '63天' ? '2次' : '--次'
             return <div styleName="infoContent">
                 <div styleName="infoAmount">
                     <div styleName="amountLeft">预计收益<span styleName="coverBeans">(含加息工豆)</span></div>
@@ -179,6 +182,7 @@ class ReserveApply extends React.Component {
                     {infoItem("期限", item.term)}
                     {infoItem("预计起息时间", "预计今日起息")}
                     {infoItem("预约有效期", item.indate)}
+                    {infoItem("复投次数", complex_number)}
                 </div>
             </div>
         }
