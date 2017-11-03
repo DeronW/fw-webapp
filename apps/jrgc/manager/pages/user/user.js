@@ -167,7 +167,7 @@ class User extends React.Component {
                 <div styleName="invest" onClick={this.shareHandler}>邀请好友</div>
                 <div styleName="couponBtn" onClick={() => this.goPageHandler('/user-transfer-coupon')}><span>{info.couponCount}</span></div>
             </div>
-            <div style={{marginTop:'40px'}}>copyright@jrgc v1.0.3</div>
+            {/*<div style={{marginTop:'40px'}}>copyright@jrgc v1.0.3</div>*/}
             <BottomNavBar history={history} />
         </div>
     }
