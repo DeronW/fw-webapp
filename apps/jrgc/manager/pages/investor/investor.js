@@ -15,9 +15,6 @@ class Investor extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.investor.resetCustPageNo()
-        // this.props.investor.fetchCustList()
-        // Event.touchBottom(this.props.investor.fetchCustList)
         window.scrollTo(0,0)
         this.props.investor.switchSortType()
         Event.touchBottom(this.props.investor.fetchFellowRecords)
@@ -27,29 +24,6 @@ class Investor extends React.Component {
     componentWillUnmount() {
         Event.cancelTouchBottom()
     }
-
-    // switchTab = (t) => {
-    //     let { resetCustPageNo, setCustTab, setCustValue, fetchCustList } = this.props.investor
-    //     let { tab, type, sort } = this.props.investor.data.custmor
-
-    //     if (t == tab) return
-    //     resetCustPageNo()
-    //     setCustTab(t)
-
-    //     let next_tab = sort[t]
-    //     let next_type = Object.values(next_tab[0])[0]
-    //     setCustValue(next_type)
-    // }
-    // switchType = (t, i) => {
-    //     let { resetCustPageNo, setCustType, setCustValue, fetchCustList } = this.props.investor
-    //     let { tab, type, sort } = this.props.investor.data.custmor
-
-    //     if (t == type) return
-    //     resetCustPageNo()
-    //     setCustType(t)
-    //     setCustValue(sort[tab][i][t])
-    //     this.setState({ show: !this.state.show })
-    // }
 
     switchTypeHandler = type => {
         if(this.props.investor.fellow.value == type) return
