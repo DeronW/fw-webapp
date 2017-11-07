@@ -100,7 +100,7 @@ class ReserveApply extends React.Component {
     toProtocol = () => {
         let id
         if (this.state.type_tab == -1 && (!this.props.reserve_bid.applyInvestClaimId)) {
-            id = 0
+            id = 1
         } else {
             id = this.state.applyId
         }
