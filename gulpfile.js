@@ -22,5 +22,5 @@ const CONSTANTS = Object.assign({},
 require('./gulpfiles/wap.js')(gulp, gt, CONSTANTS)
 require('./gulpfiles/mall.js')(gulp, gt, CONSTANTS)
 // require('./gulpfiles/activity.js')(gulp, gt, CONSTANTS)
-require('./gulpfiles/insurance.js')(gulp, gt, CONSTANTS)
+// require('./gulpfiles/insurance.js')(gulp, gt, CONSTANTS)
 require('./gulpfiles/jrgc.js')(gulp, gt, CONSTANTS)

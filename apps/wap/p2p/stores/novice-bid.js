@@ -78,7 +78,9 @@ export default class NoviceBid {
     }
 
     getContractHandler = () => {
-        return this.Post('/api/v1/appointContractMess.shtml').then(data => {
+        return this.Post('/api/v1/appointContractMess.shtml', {
+            applyInvestClaimId: this.applyInvestClaimId
+        }).then(data => {
             this.novice_bid_data.contractMsg = data.contractMsg
             return {
                 contractMsg: this.novice_bid_data.contractMsg
