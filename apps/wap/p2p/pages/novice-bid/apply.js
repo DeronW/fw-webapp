@@ -174,7 +174,8 @@ class ReserveApplyNovice extends React.Component {
         let procotol_panel = () => {
             return <div styleName="submitProtocol protocolNovice">
                 <span styleName="protocolText">本人已阅读并签署
-                    <span styleName="applyProtocol" onClick={() => history.push(`/novice-bid/protocol`)}>
+                    <span styleName="applyProtocol"
+                          onClick={() => history.push(`/novice-bid/protocol?applyInvestClaimId=${novice_bid.applyInvestClaimId}`)}>
                         《预约协议》
                     </span>
                 </span>

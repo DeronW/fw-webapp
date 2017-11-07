@@ -221,7 +221,7 @@ class ReserveApply extends React.Component {
             </div>
             <div styleName="submitProtocol">
                 <span styleName="protocolText">本人已阅读并签署
-                    <span styleName="applyProtocol" onClick={() => history.push(`/reserve-bid/protocol`)}>
+                    <span styleName="applyProtocol" onClick={() => history.push(`/reserve-bid/protocol?applyInvestClaimId=${reserve_bid.applyInvestClaimId}`)}>
                         《预约协议》
                     </span>
                 </span>
