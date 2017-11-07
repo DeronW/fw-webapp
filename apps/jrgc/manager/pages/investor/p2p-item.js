@@ -32,13 +32,14 @@ class p2pItem extends React.Component {
         this.setState({ tab: tab })
         if (tab == 'Ta的项目') {
             this.setState({ type: '未起息' })
-            this.props.investor_account.setProjectCategory2P('100')
+            this.props.investor_account.setProjectCategoryP2P('100')
         } else if (tab == '转入项目') {
             this.setState({ type: '全部' })
-            this.props.investor_account.setProjectCategory2P('')
+            this.props.investor_account.setProjectCategoryP2P('')
         }
         this.props.investor_account.resetCategoryPageNo()
         this.props.investor_account.setProjectTabP2P(tab)
+        this.props.investor_account.fetchPrdInvestP2P()
     }
     switchType = (type) => {
         let { tab } = this.state
@@ -63,7 +64,8 @@ class p2pItem extends React.Component {
             }
         }
         this.props.investor_account.resetCategoryPageNo()
-        this.props.investor_account.setProjectCategory2P(t)
+        this.props.investor_account.setProjectCategoryP2P(t)
+        this.props.investor_account.fetchPrdInvestP2P()
     }
     render() {
         let { history } = this.props
@@ -141,7 +143,7 @@ class p2pItem extends React.Component {
                     </div>}
                     <div styleName="item">
                         <span>起息日</span>
-                        <span>{item.effactiveDate || '--'}</span>
+                        <span>{item.loanDate || '--'}</span>
                     </div>
                     {!item.paidTime && <div styleName="item">
                         <span>计划回款日</span>
