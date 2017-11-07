@@ -1,5 +1,5 @@
-import { extendObservable, computed } from 'mobx'
-import { Utils } from 'fw-javascripts'
+import {extendObservable, computed} from 'mobx'
+import {Utils} from 'fw-javascripts'
 
 export default class ReserveBid {
     constructor(Post) {
@@ -10,9 +10,9 @@ export default class ReserveBid {
         extendObservable(this.records, {
             type: '0',
             tab: {
-                '0': { name: '预约中', page_no: 1, list: [] },
-                '1': { name: '预约结束', page_no: 1, list: [] },
-                '2': { name: '已取消', page_no: 1, list: [] },
+                '0': {name: '预约中', page_no: 1, list: []},
+                '1': {name: '预约结束', page_no: 1, list: []},
+                '2': {name: '已取消', page_no: 1, list: []},
             }
         })
 
@@ -72,7 +72,7 @@ export default class ReserveBid {
     }
 
     resetPageNo = () => {
-        let { tab, type } = this.records, current_tab = tab[type]
+        let {tab, type} = this.records, current_tab = tab[type]
         current_tab.page_no = 1
     }
 
@@ -82,7 +82,7 @@ export default class ReserveBid {
     }
 
     getReserveList = (done) => {
-        let { tab, type } = this.records, current_tab = tab[type]
+        let {tab, type} = this.records, current_tab = tab[type]
         if (current_tab.page_no === 0) return done && done();
         const PAGE_SIZE = 10
 
@@ -91,7 +91,7 @@ export default class ReserveBid {
             page: current_tab.page_no++,
             pageSize: PAGE_SIZE,
             status: type
-        }, { loading: false }).then(data => {
+        }, {loading: false}).then(data => {
             current_tab.list.push(...data.pageData.result)
 
             if (current_tab.page_no >= data.pageData.pagination.totalPage)
@@ -123,7 +123,9 @@ export default class ReserveBid {
     }
 
     getContractHandler = () => {
-        return this.Post('/api/v1/appointContractMess.shtml').then(data => {
+        return this.Post('/api/v1/appointContractMess.shtml', {
+            applyInvestClaimId: this.applyInvestClaimId
+        }).then(data => {
             this.bid_data.contractMsg = data.contractMsg
             return {
                 contractMsg: this.bid_data.contractMsg
