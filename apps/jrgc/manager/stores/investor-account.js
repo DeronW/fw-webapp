@@ -123,7 +123,7 @@ export default class InvestorAccount {
     //尊享、微金他的回款明细
     fetchPayment = (done) => {
         let url = '/api/finManager/cust/v2/zxPayment.shtml'//zx
-        if(Utils.hashQuery.type == "p2p"){
+        if (Utils.hashQuery.type == "p2p") {
             url = '/api/finManager/cust/v2/wjPayment.shtml'
         }
         let { type, payments } = this.data.detail, current_payment = payments[type]
@@ -231,6 +231,12 @@ export default class InvestorAccount {
         this.data_p2p.project.category = type
         this.resetCategoryPageNo()
     }
+    initTabAndCategory = () => {
+        this.resetCategoryPageNo()
+        this.data_p2p.project.tab = 'Ta的项目'
+        this.data_p2p.project.category = '100'
+        return this.fetchPrdInvestP2P()
+    }
     //TA的微金-TA的项目列表
     fetchPrdInvestP2P = (done) => {
         let { tab, pageNo, category, records } = this.data_p2p.project
@@ -242,9 +248,10 @@ export default class InvestorAccount {
         } else {
             url = '/api/finManager/cust/v2/wjSwitchPrdInvest.shtml'
         }
+        console.log(url)
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0, records.length)
-        this.Get(url, {
+        return this.Get(url, {
             custId: this.custId,
             flag: category,
             callStatus: category,
@@ -269,6 +276,7 @@ export default class InvestorAccount {
     //TA的微金-批量标详情
     fetchBatchInfo = () => {
         this.Get('/api/finManager/cust/v2/wjBatchInvest.shtml', {
+            custId: this.custId,
             colPrdClaimId: this.colPrdClaimId
         }).then(data => {
             this.props.data_p2p.batch.info = data
@@ -281,8 +289,9 @@ export default class InvestorAccount {
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0, records.length)
         this.Get('/api/finManager/cust/v2/wjChildBatchPrdList.shtml', {
+            custId: this.custId,
             batchOrderId: this.batchOrderId,
-            colPrdClaimsId: this.colPrdClaimsId,
+            colPrdClaimsId: this.colPrdClaimId,
             pageNo: pageNo,
             pageSize: 10
         }).then(data => {

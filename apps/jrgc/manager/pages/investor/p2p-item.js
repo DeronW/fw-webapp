@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Event, Components } from 'fw-javascripts'
+import { Event, Components,Utils } from 'fw-javascripts'
 
 import styles from '../../css/investor/p2p-item.css'
 
@@ -14,11 +14,11 @@ class p2pItem extends React.Component {
         type: '未起息'
     }
     componentDidMount() {
-        let { fetchInvestInfoP2P, resetCategoryPageNo, fetchPrdInvestP2P } = this.props.investor_account
-        fetchInvestInfoP2P()
-        resetCategoryPageNo()
-        fetchPrdInvestP2P()
-        Event.touchBottom(fetchPrdInvestP2P)
+        let { initTabAndCategory, fetchPrdInvestP2P } = this.props.investor_account
+
+        initTabAndCategory().then(() => {
+            Event.touchBottom(fetchPrdInvestP2P)
+        })
     }
     componentWillUnmount() {
         Event.cancelTouchBottom()
@@ -105,7 +105,7 @@ class p2pItem extends React.Component {
         }
         let t = (item) => {
             if (tab == '批量项目') {
-                return <div styleName="collection" onClick={() => this.gotoHandler(`/investor-item-collection?colPrdClaimId=${item.colId}&batchOrderId=${item.id}`)}>
+                return <div styleName="collection" onClick={() => this.gotoHandler(`/investor-item-collection?custId=${Utils.hashQuery.custId}&colPrdClaimId=${item.colId}&batchOrderId=${item.id}`)}>
                     <div styleName="title">
                         <span>{item.collName}</span>
                         <div styleName="end">{collectionStatus(item)}</div>
