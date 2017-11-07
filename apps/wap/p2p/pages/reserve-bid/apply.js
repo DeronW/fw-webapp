@@ -104,7 +104,7 @@ class ReserveApply extends React.Component {
         } else {
             id = this.state.applyId
         }
-        this.porps.history.push(`/reserve-bid/protocol?applyInvestClaimId=${id}`)
+        this.props.history.push(`/reserve-bid/protocol?applyInvestClaimId=${id}`)
     }
 
     render() {
