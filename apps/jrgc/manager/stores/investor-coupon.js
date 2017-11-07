@@ -57,11 +57,13 @@ export default class InvestorCoupon {
     resetPageNo = () => {
         let { tab, coupon } = this.data
         let { type, record } = coupon[tab]
-        coupon[tab].record[type].pageNO = 1
+        coupon[tab].record[type].pageNo = 1
     }
     initTabAndType = () => {
         this.data.tab = '1'
         this.data.coupon['1'].type = '0'
+        this.resetPageNo()
+        return this.fetchCustCoupon()
     }
     setTab = (tab) => {
         this.data.tab = tab
@@ -74,20 +76,20 @@ export default class InvestorCoupon {
     fetchCustCoupon = (done) => {
         let { totalCount, tab, coupon } = this.data
         let { type, record } = coupon[tab]
-        let { pageNO, records } = record[type]
+        let { pageNo, records } = record[type]
 
-        if (pageNO == 0) return done && done()
-        if (pageNO == 1) records.splice(0, records.length)
-        this.Get('/api/finManager/coupon/v2/custCouponList.shtml', {
+        if (pageNo == 0) return done && done()
+        if (pageNo == 1) records.splice(0, records.length)
+        return this.Get('/api/finManager/coupon/v2/custCouponList.shtml', {
             couponStatus: tab,
             couponType: type,
             custId: this.custId,
-            pageNo: pageNO,
+            pageNo: pageNo,
             pageSize: 10,
         }).then(data => {
             this.data.totalCount = data.pageData.pagination.totalCount
             records.push(...data.pageData.result)
-            pageNO > data.pageData.pagination.totalPage ? pageNO++ : pageNO = 0
+            pageNo > data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
 
             done && done()
         })

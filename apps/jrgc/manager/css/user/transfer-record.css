@@ -37,7 +37,7 @@
     background: #c6815f;
     color: #fff;
     position: absolute;
-    top: 179px;
+    top: 176px;
 }
 .recordList{
     margin-top: 250px;
@@ -95,13 +95,14 @@
 }
 
 .reason {
-    width: 213px;
+    /* width: 213px; */
 }
 
 .date {
     float: right;
     text-align: right;
     margin-right: 60px;
+    /* width: 260px; */
 }
 
 .rmb {

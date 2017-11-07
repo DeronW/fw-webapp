@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-
+import { Event, Components, Utils } from 'fw-javascripts'
 import styles from '../../css/investor/coupon.css'
 
 @inject("investor","investor_coupon")
@@ -11,9 +11,12 @@ class Coupon extends React.Component {
 
     componentDidMount() {
         let { initTabAndType,resetPageNo, fetchCustCoupon } = this.props.investor_coupon
-        initTabAndType()
-        resetPageNo()
-        fetchCustCoupon()
+        initTabAndType().then(()=>{
+            Event.touchBottom(fetchCustCoupon)
+        })
+    }
+    componentWillUnmount() {
+        Event.cancelTouchBottom()
     }
     gotoCoupon = () => {
         let { history } = this.props
