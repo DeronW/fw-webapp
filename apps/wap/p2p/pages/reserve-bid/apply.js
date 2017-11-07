@@ -97,6 +97,16 @@ class ReserveApply extends React.Component {
         this.setState({applyId: this.props.reserve_bid.applyInvestClaimId || item.id})
     }
 
+    toProtocol = () => {
+        let id
+        if (this.state.type_tab == -1 && (!this.props.reserve_bid.applyInvestClaimId)) {
+            id = 0
+        } else {
+            id = this.state.applyId
+        }
+        this.porps.history.push(`/reserve-bid/protocol?applyInvestClaimId=${id}`)
+    }
+
     render() {
         let {reserve_bid, history} = this.props
         let {context} = reserve_bid.bid_data
@@ -224,7 +234,7 @@ class ReserveApply extends React.Component {
             <div styleName="submitProtocol">
                 <span styleName="protocolText">本人已阅读并签署
                     <span styleName="applyProtocol"
-                          onClick={() => history.push(`/reserve-bid/protocol?applyInvestClaimId=${this.state.applyId}`)}>
+                          onClick={this.toProtocol}>
                         《预约协议》
                     </span>
                 </span>
