@@ -22,12 +22,21 @@ class itemCollection extends React.Component {
         let { history } = this.props
         let { info,totalCount,records } = this.props.investor_account.data_p2p.batch
         let SVGCircleProgress = Components.SVGCircleProgress
-
+        let status = (s)=>{
+            let ENUM = {
+                '2': '等待满标',
+                '3': '流标',
+                '4': '满标',
+                '5': '回款中',
+                '6': '已回款',
+            }
+            return ENUM[s]
+        }
         let recordFn = (item,index) => {
-            return  <div styleName="record">
+            return  <div styleName="record" key={item.id}>
                 <div styleName="title">
                     <span>{item.prdName}</span>
-                    <div styleName="end">{item.status}</div>
+                    <div styleName="end">{status(item.status)}</div>
                 </div>
                 <div styleName="item">
                     <span>预期年化收益率</span>
@@ -35,11 +44,11 @@ class itemCollection extends React.Component {
                 </div>
                 <div styleName="item">
                     <span>起息日</span>
-                    <span>{item.loanDate}天</span>
+                    <span>{item.loanDate || '--'}</span>
                 </div>
                 <div styleName="item">
                     <span>计划回款日</span>
-                    <span>{item.repayTime}天</span>
+                    <span>{item.repayTime || '--'}</span>
                 </div>
                 <div styleName="item">
                     <span>出借金额</span>
@@ -54,6 +63,7 @@ class itemCollection extends React.Component {
         let empty = <div styleName="empty">
             <img src={require('../../images/investor/empty.png')}/>
         </div>
+        console.log(info.percentage)
         return <div styleName="bg">
             <div styleName="bar">
                 <div styleName="header">
@@ -69,8 +79,8 @@ class itemCollection extends React.Component {
                     <div styleName="number">可投项目 {info.canBuyCount}个</div>
                 </div>
                 <div styleName="circle">
-                    <SVGCircleProgress percent={Number(info.percentage)} weight={12}
-                        radius={120} bgColor={'#64353f'} progressColor={'#fde143'} />
+                    {info.percentage &&<SVGCircleProgress percent={info.percentage} weight={12}
+                        radius={120} bgColor={'#64353f'} progressColor={'#fde143'} />}
                     <div styleName="percent">{info.percentage}%</div>
                 </div>
             </div>
