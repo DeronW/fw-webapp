@@ -11,6 +11,7 @@ class Coupon extends React.Component {
 
     componentDidMount() {
         let { initTabAndType,resetPageNo, fetchCustCoupon } = this.props.investor_coupon
+        window.scrollTo(0,0)
         initTabAndType().then(()=>{
             Event.touchBottom(fetchCustCoupon)
         })

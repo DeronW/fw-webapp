@@ -79,17 +79,17 @@ export default class InvestorCoupon {
         let { pageNo, records } = record[type]
 
         if (pageNo == 0) return done && done()
-        if (pageNo == 1) records.splice(0, records.length)
+        if (pageNo == 1) record[type].records.splice(0, record[type].records.length)
         return this.Get('/api/finManager/coupon/v2/custCouponList.shtml', {
             couponStatus: tab,
             couponType: type,
             custId: this.custId,
-            pageNo: pageNo,
+            pageNo: record[type].pageNo,
             pageSize: 10,
         }).then(data => {
             this.data.totalCount = data.pageData.pagination.totalCount
             records.push(...data.pageData.result)
-            pageNo > data.pageData.pagination.totalPage ? pageNo++ : pageNo = 0
+            record[type].pageNo < data.pageData.pagination.totalPage ? record[type].pageNo++ : record[type].pageNo = 0
 
             done && done()
         })
