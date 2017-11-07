@@ -60,8 +60,8 @@ class itemCollection extends React.Component {
                     <a styleName="btn" onClick={history.goBack}> </a>
                     {info.colName}
                 </div>
-                <div styleName="earnings">年化收益 <span>{item.colRate}</span></div>
-                <div styleName="time">投资期限 <span>{item.colPeriod}天</span></div>
+                <div styleName="earnings">年化收益 <span>{info.colRate}</span></div>
+                <div styleName="time">投资期限 <span>{info.colPeriod}天</span></div>
                 <div styleName="info">
                     <div styleName="start">100元起</div>
                     <div styleName="start">一次结清</div>
