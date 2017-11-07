@@ -279,7 +279,7 @@ export default class InvestorAccount {
             custId: this.custId,
             colPrdClaimId: this.colPrdClaimId
         }).then(data => {
-            this.props.data_p2p.batch.info = data
+            this.data_p2p.batch.info = data
         })
     }
     //批量标子标列表

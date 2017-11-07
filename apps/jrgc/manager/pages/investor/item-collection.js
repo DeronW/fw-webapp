@@ -37,7 +37,7 @@ class itemCollection extends React.Component {
                     <span>起息日</span>
                     <span>{item.loadDate}天</span>
                 </div>
-                <div>
+                <div styleName="item">
                     <span>计划回款日</span>
                     <span>{item.repayTime }天</span>
                 </div>
