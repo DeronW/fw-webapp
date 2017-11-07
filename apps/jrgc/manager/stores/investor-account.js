@@ -242,7 +242,6 @@ export default class InvestorAccount {
         } else {
             url = '/api/finManager/cust/v2/wjSwitchPrdInvest.shtml'
         }
-        console.log(url)
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0, records.length)
         this.Get(url, {
