@@ -60,8 +60,8 @@ class itemCollection extends React.Component {
                     <a styleName="btn" onClick={history.goBack}> </a>
                     {info.colName}
                 </div>
-                <div styleName="earnings">年化收益 <span>{info.colRate}</span></div>
-                <div styleName="time">投资期限 <span>{info.colPeriod}天</span></div>
+                <div styleName="earnings">年化收益 <span>{info.colRate}%</span></div>
+                <div styleName="time">投资期限 <span>{info.colPeriod}</span></div>
                 <div styleName="info">
                     <div styleName="start">100元起</div>
                     <div styleName="start">一次结清</div>
@@ -69,9 +69,9 @@ class itemCollection extends React.Component {
                     <div styleName="number">可投项目 {info.canBuyCount}个</div>
                 </div>
                 <div styleName="circle">
-                    <SVGCircleProgress percent={info.percentage} weight={12}
+                    <SVGCircleProgress percent={100-(info.percentage)} weight={12}
                         radius={120} bgColor={'#64353f'} progressColor={'#fde143'} />
-                    <div styleName="percent">{info.percentage}</div>
+                    <div styleName="percent">{info.percentage}%</div>
                 </div>
             </div>
             <div styleName="invest">投资详情（{totalCount}个子标）</div>

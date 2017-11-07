@@ -235,6 +235,7 @@ export default class InvestorAccount {
         this.resetCategoryPageNo()
         this.data_p2p.project.tab = 'Ta的项目'
         this.data_p2p.project.category = '100'
+        this.fetchInvestInfoP2P()
         return this.fetchPrdInvestP2P()
     }
     //TA的微金-TA的项目列表
