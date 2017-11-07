@@ -226,12 +226,10 @@ export default class InvestorAccount {
     setProjectTabP2P = (tab) => {
         this.data_p2p.project.tab = tab
         this.resetCategoryPageNo()
-        this.fetchPrdInvestP2P()
     }
-    setProjectCategory2P = (type) => {
+    setProjectCategoryP2P = (type) => {
         this.data_p2p.project.category = type
         this.resetCategoryPageNo()
-        this.fetchPrdInvestP2P()
     }
     //TA的微金-TA的项目列表
     fetchPrdInvestP2P = (done) => {
@@ -244,6 +242,7 @@ export default class InvestorAccount {
         } else {
             url = '/api/finManager/cust/v2/wjSwitchPrdInvest.shtml'
         }
+        console.log(url)
         if (pageNo == 0) return done && done()
         if (pageNo == 1) records.splice(0, records.length)
         this.Get(url, {
