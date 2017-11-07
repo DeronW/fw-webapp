@@ -12,14 +12,15 @@ import {NativeBridge} from '../../helpers/'
 class ReserveApply extends React.Component {
     state = {
         pending: false,
-        type_tab: -1
+        type_tab: -1,
+        applyId: ''
     }
 
     componentDidMount() {
         window.scrollTo(0, 0)
         NativeBridge.trigger('hide_header')
         this.props.reserve_bid.fetchProduct()
-        console.log(this.props.reserve_bid.bid_data.bids)
+        this.setState({applyId: this.props.reserve_bid.applyInvestClaimId})
     }
 
     inputChangeHandler = name => e => {
@@ -91,8 +92,11 @@ class ReserveApply extends React.Component {
 
     }
 
-    switchTypeHandler = (index) => {
+    switchTypeHandler = (index, item) => {
         this.setState({type_tab: index})
+        if (this.state.applyId == '') {
+            this.setState({applyId: item.id})
+        }
     }
 
     render() {
@@ -110,7 +114,7 @@ class ReserveApply extends React.Component {
             return <div
                 styleName={(item.id == reserve_bid.applyInvestClaimId || type_tab == index) ? "typeItem typeItemChecked" : "typeItem"}
                 key={index}
-                onClick={() => this.switchTypeHandler(index)}>
+                onClick={() => this.switchTypeHandler(index, item)}>
                 {item.loadRate}%{item.addRate == 0 ? "" : '+' + item.addRate + '%'}<span
                 styleName="color9">/</span>{item.repayPeriod}天
             </div>
@@ -221,7 +225,8 @@ class ReserveApply extends React.Component {
             </div>
             <div styleName="submitProtocol">
                 <span styleName="protocolText">本人已阅读并签署
-                    <span styleName="applyProtocol" onClick={() => history.push(`/reserve-bid/protocol?applyInvestClaimId=${reserve_bid.applyInvestClaimId}`)}>
+                    <span styleName="applyProtocol"
+                          onClick={() => history.push(`/reserve-bid/protocol?applyInvestClaimId=${this.state.applyId}`)}>
                         《预约协议》
                     </span>
                 </span>
