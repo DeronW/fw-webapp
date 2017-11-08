@@ -195,7 +195,7 @@ class MiddlePanel extends React.Component {
                     <p styleName="radress">北京市朝阳区朝阳门外大街18号11层1105内008号</p>
                     <p styleName="rline">2012年5月23日</p>
                     <p styleName="rline">2012-05-23至2062-05-22</p>
-                    <p styleName="rline">康忠芹</p>
+                    <p styleName="rline">魏薇</p>
                     <p styleName="rrange">
                         企业信用征集、评定；企业信用管理咨询；经济贸易咨询；投资咨询；企业管理咨询；市场调查；投资管理；资产管理；软件开发；设计、制作、代理、发布广告；技术咨询；技术服务；委托生产电子产品、照相器材、计算机、软件及辅助设备；航空机票票务代理；经营电信业务；互联网信息服务；销售化工产品。（企业依法自主选择经营项目，开展经营活动；销售化工产品、“经营电信业务”；“互联网信息服务”以及依法须经批准的项目，经相关部门批准后依批准的内容开展经营活动；不得从事本市产业政策禁止和限制类项目的经营活动。）</p>
                     <p styleName="rline">开业</p>
@@ -203,7 +203,7 @@ class MiddlePanel extends React.Component {
                     <p styleName="rsite newLine">北京朝阳区朝阳门外大街18号11层1105内008号</p>
                     <p styleName="rcase">
                         工场微金与徽商银行建立合作，由徽商银行提供资金存管服务，为平台、出借人、借款人和其他业务参与方分别开立独立的银行电子账户，每个主体各自资金存管在各自名下的账户中。可最大限度的保障出借人、借款人的资金安全。</p>
-                    <p styleName="rline"><a styleName="rlineLook" target="_blank">点击查看</a></p>
+                    <p styleName="rline"><a styleName="rlineLook" target="_blank" href="/static/wap/protocol-user-service/index.html">点击查看</a></p>
                     <p styleName="rline rlineTop">400-0322-988</p>
                     <p styleName="rline">kefu@9888.cn</p>
                 </div>
