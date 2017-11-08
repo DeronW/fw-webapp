@@ -156,7 +156,7 @@
 }
 .rule{
     width: 720px;
-    height: 380px;
+    height: 420px;
     background: #fff;
     font-size: 24px;
     color: #999;
@@ -169,7 +169,7 @@
     width: 322px;
     height: 68px;
     text-align: center;
-    margin: 40px auto 0;
+    margin: 40px auto 30px;
     line-height: 68px;
     background: #fd4d4c;
     color: #fff;

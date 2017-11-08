@@ -23,7 +23,6 @@ class Login extends React.Component {
         let { history } = this.props
         if (!username) showToast("用户名不能为空")
         if (!password) showToast("密码不能为空")
-        console.log(encodeURIComponent(password))
         Post('/finManager/user/login.shtml', {
             username: username,
             pwd: encodeURIComponent(password),

@@ -24,7 +24,7 @@ module.exports = {
         //dev_api_path: '//localhost/fake-api'
     },
     jrgc: {
-        dev_api_path: '//localhost/fake-api'
-        // dev_api_path: '//fe.9888.cn/api/test-d/wap'
+        // dev_api_path: '//localhost/fake-api'
+        dev_api_path: '//fe.9888.cn/api/test-d/wap'
     }
 }
