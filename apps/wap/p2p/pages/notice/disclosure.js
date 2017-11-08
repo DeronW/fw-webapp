@@ -203,7 +203,7 @@ class MiddlePanel extends React.Component {
                     <p styleName="rsite newLine">北京朝阳区朝阳门外大街18号11层1105内008号</p>
                     <p styleName="rcase">
                         工场微金与徽商银行建立合作，由徽商银行提供资金存管服务，为平台、出借人、借款人和其他业务参与方分别开立独立的银行电子账户，每个主体各自资金存管在各自名下的账户中。可最大限度的保障出借人、借款人的资金安全。</p>
-                    <p styleName="rline"><a styleName="rlineLook" target="_blank">点击查看</a></p>
+                    <p styleName="rline"><a styleName="rlineLook" target="_blank" href="/static/wap/protocol-user-service/index.html">点击查看</a></p>
                     <p styleName="rline rlineTop">400-0322-988</p>
                     <p styleName="rline">kefu@9888.cn</p>
                 </div>
