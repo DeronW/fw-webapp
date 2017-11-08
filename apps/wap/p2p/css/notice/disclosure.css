@@ -432,8 +432,7 @@
 
 .orgPic {
     display: block;
-    width: 712px;
-    height: 620px;
+    width: 100%;
     margin: 50px auto;
 }
 
@@ -518,7 +517,6 @@
 }
 
 .personRTitle {
-    width: 200px;
     height: 120px;
     font-size: 24px;
     padding-left: 40px;
