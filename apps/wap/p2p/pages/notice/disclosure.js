@@ -135,7 +135,7 @@ class MiddlePanel extends React.Component {
         let chairman = [
             {
                 img: require("../../images/notice/disclosure/men2.png"),
-                name: '魏薇·董事长',
+                name: '魏薇·董事长兼CEO',
                 job: '',
                 profile: '毕业于中国人民大学。曾任北京联合开元投资担保有限公司副总经理和联合创业集团有限公司营运管理中心总经理。经过10余年金融行业管理岗位的历练，拥有丰富的网贷行业实战经验和全面而独到的行业视角及理念，是小微金融的领军人物，普惠金融体系的积极践行者。'
             },
