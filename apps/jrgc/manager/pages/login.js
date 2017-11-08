@@ -51,7 +51,6 @@ class Login extends React.Component {
                 <i></i>
                 <input
                     type="password"
-                    maxLength="16"
                     placeholder="登录密码"
                     value={password}
                     onChange={this.changeHandler('password')} />
