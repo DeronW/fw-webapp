@@ -3,32 +3,11 @@ const eslint = require('gulp-eslint');
 const PROJ = 'wap';
 
 let APP_NAMES = [
-    // 'about-us', // 关于我们
-    // 'faq', // 帮助中心
-    // 'app-download', // app 下载页面
-    // 'guide-cookbook', // 用户使用引导页面
-    // test page
-    // 'test-native-bridge',
-    // 'fa-xian',
-    // 'coupon-center'
 ];
 
 const USER_PAGES = [
-    // 用户页面
     'user-level', // 用户等级详情
-    // 'user-contribute', // 用户贡献值
-    // 'vip-prerogative', // VIP特权详情页
-    // 'user-evaluate', // 投资风险承受能力评估
-    // 'user-evaluate-p2p', //p2p投资风险承受能力评估
-    // 'user-evaluate-zx', //尊享投资风险承受能力评估
 ]
-
-// const NOTICE_PAGES = [
-    // 内容展示页面
-    // 'notice-corporate-structure', // 信息披露 公司结构
-    // 'notice-safeguard', // 资金安全保障
-    // 'notice-risk-prompt', // 风险揭示
-// ]
 
 const TOPIC_PAGES = [
     // 专题页面
@@ -74,38 +53,12 @@ const OUTSIDE_PAGES = [
     'outside-register-aisidi' //爱施德注册页面
 ]
 
-// const P2P = [
-    // 'p2p-invite', //P2P邀请返利, 邀请人
-    // 'p2p-interest-reward', //P2P年化加息奖励
-    // 'p2p-vip-prerogative',
-    // 'p2p-policy', //政策法规页面
-    // 'p2p-pdf',
-    // 'p2p-fa-xian', //微金发现页面
-    // 'p2p-faq', //微金帮助中心页面
-    // 'p2p-app-download', //微金app下载页面
-    // 'p2p-notice-safeguard', //p2p资金安全保障
-    // 'p2p-notice-information-disclosure', //微金信息披露
-    // 'p2p-topic-invest-school', //微金投资学堂页面
-// ]
-
 APP_NAMES.push(
     ...USER_PAGES,
     ...TOPIC_PAGES,
-    // ...HUISHANG_PAGES,
+    ...HUISHANG_PAGES,
     ...SHOUSHAN, // 这是给首山提现用的页面
-    // ...OUTSIDE_PAGES,
-    {
-        name: 'invest',
-        compiler: 'webpack'
-    },
-    {
-        name: 'p2p',
-        compiler: 'webpack'
-    }
-    // {
-    //     name: 'withdraw',
-    //     compiler: 'webpack'
-    // }
+    ...OUTSIDE_PAGES
 )
 
 
