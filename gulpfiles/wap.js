@@ -113,4 +113,9 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
     gulp.task(`lint:${PROJ}`, gulp.series(APP_NAMES.map(i => `lint:${PROJ}:${i.name || i}`)))
 
+    gulp.task('build:sspay', gulp.series(
+        'wap:pack:shoushan-reset-deal-password:revision',
+        'wap:pack:shoushan-cash:revision',
+        'wap:pack:shoushan-cash-records:revision'
+    ))
 };

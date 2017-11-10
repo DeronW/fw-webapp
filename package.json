@@ -20,8 +20,8 @@
     "es6-promise": "^4.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.3.0",
-    "fw-components": "^0.4.0",
-    "fw-javascripts": "^0.5.1",
+    "fw-components": "0.4.0",
+    "fw-javascripts": "0.5.1",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "^7.0.0",
     "gulp-changed": "3.0.0",
@@ -71,6 +71,7 @@
     "gulp": "node node_modules/gulp/bin/gulp.js",
     "build:mall": "npm run clean && npm run gulp mall:common_js && npm run gulp build:mall",
     "build:wap": "npm run clean && npm run gulp wap:common_js && npm run gulp build:wap",
+    "build:sspay": "npm run clean && npm run gulp build:sspay",
     "pre-compile": "node scripts/gen-differential-compile-cmd.js"
   }
 }
