@@ -1,0 +1,195 @@
+body {
+    background-color: #f0f0f0;
+}
+
+input,
+button,
+select,
+textarea {
+    outline: none;
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #ccc;
+}
+.main-panel-wrap{
+    position:absolute;
+    left:0;
+    right:0;
+}
+.main-panel {
+    position: relative;
+}
+
+.field-item {
+    height: 86px;
+    border-bottom: 1px solid #ebeaea;
+    background: white;
+    padding: 0 30px 0 30px;
+    .name-text {
+        float: left;
+        font-size: 28px;
+        line-height: 86px;
+        color: #666;
+    }
+    .r {
+        float: right;
+        .text {
+            float: left;
+            line-height: 86px;
+            font-size: 28px;
+            color: #333;
+            width: 470px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-align:right;
+        }
+        .arrow-icon {
+            float: right;
+            width: 50px;
+            height: 86px;
+            margin: 0 -20px 0 0;
+            background: url(../images/arrow-icon.png) no-repeat center;
+        }
+        input {
+            width: 470px;
+            margin: 0 30px 0 0;
+            height: 30px;
+            padding: 28px 0;
+            font-size: 30px;
+            color: #333;
+            line-height: 30px;
+            border: none;
+            text-align: right;
+        }
+    }
+    .no {
+        .text {
+            padding: 0 25px 0 0;
+        }
+    }
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.section-title {
+    padding: 0 30px;
+    font-size: 20px;
+    line-height: 50px;
+    color: #999;
+}
+
+.agree {
+    padding: 20px 30px;
+    .agree-icon {
+        float: left;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #dadada;
+        background-color: #fff;
+        border-radius: 50%;
+    }
+    .select-icon {
+        width: 32px;
+        height: 32px;
+        background: #6aa4f0 url(../images/agree-icon.png) no-repeat center;
+        border: none;
+    }
+    .text {
+        margin: -4px 0 0 0;
+        line-height: 32px;
+        color: #999;
+        font-size: 20px;
+        a {
+            color: #6aa4f0;
+        }
+    }
+}
+
+.btn-area {
+    height: 128px;
+    .btn {
+        margin: 22px 30px;
+        height: 83px;
+        color: #fff;
+        font-size: 30px;
+        line-height: 83px;
+        text-align: center;
+        background-color: #6aa4f0;
+        border-radius: 5px;
+    }
+}
+
+.field-edit-panel {
+    position: fixed;
+    top: 100px;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    background: #f0f0f0;
+    .option-item {
+        background: white;
+        padding-left: 30px;
+        height: 86px;
+        line-height: 86px;
+        font-size: 28px;
+        border-bottom: 1px solid #ebeaea;
+        &.active {
+            background: white url(../images/select-icon.png) no-repeat 650px center;
+        }
+    }
+    .scroll-panel {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        overflow: scroll;
+        .city-list {
+            display: table;
+            width: 100%;
+            margin: 1px 0 180px 0;
+        }
+        .quick-select {
+            position: fixed;
+            top: 50%;
+            -wekbit-transform:translateY(-50%);
+            transform:translateY(-50%);
+            right: 0;
+            padding: 10px 0;
+            width: 60px;
+            div {
+                display: block;
+                font-size: 22px;
+                text-align: center;
+                color: #649cfe;
+                line-height: 32px;
+            }
+        }
+    }
+}
+.hot-city-title{
+  font-size:28px;
+  color:#999;
+  padding-left:30px;
+  margin:10px 0;
+}
+.hot-cities{
+  padding: 20px 0 0 24px;
+  background-color: #fff;
+}
+.hot-city-item{
+  display:inline-block;
+  width: 210px;
+  height: 80px;
+  line-height: 80px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #649cfe;
+  border-radius: 4px;
+  color: #649cfe;
+  text-align: center;
+  font-size:28px;
+}

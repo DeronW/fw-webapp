@@ -20,4 +20,5 @@ const CONSTANTS = Object.assign({},
 
 // gulpfile 本地扩展配置
 require('./gulpfiles/wap.js')(gulp, gt, CONSTANTS)
+require('./gulpfiles/loan.js')(gulp, gt, CONSTANTS)
 require('./gulpfiles/mall.js')(gulp, gt, CONSTANTS)

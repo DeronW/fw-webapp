@@ -1,0 +1,247 @@
+body {
+	background-color: #f0f0f0;
+}
+
+.bank-management-cnt {
+	margin-top: 34px;
+}
+.margin-bottom1{
+  margin-bottom:200px;
+}
+.margin-bottom2{
+  margin-bottom:34px;
+}
+.bank-management-list:nth-child(1n) .list{
+  background-color: #ed6667;
+}
+.bank-management-list:nth-child(2n) .list{
+  background-color: #78c09f;
+}
+.bank-management-list:nth-child(3n) .list{
+  background-color: #7b9ad3;
+}
+.bank-management-list {
+	position: relative;
+	padding: 0 34px;
+	margin: 0 0 34px 0;
+
+	.list {
+		height: 216px;
+		margin: 0 4px;
+
+		border-radius: 16px 16px 0 0;
+
+		.list-cnt {
+			color: #fff;
+			padding: 18px 40px;
+
+			.t {
+        height:64px;
+				font-size: 32px;
+				line-height: 64px;
+        padding-bottom:20px;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+				.bank-logo {
+					float: left;
+          .img-wrap{
+            border-radius:50%;
+            float: left;
+            width:64px;
+            height:57px;
+            padding-top:7px;
+            background:rgba(255, 255, 255, 0.5);
+            text-align:center;
+            margin-right: 10px;
+          }
+					img {
+            display:block;
+						width: 40px;
+						height: 40px;
+						border: 5px solid rgba(255, 255, 255, 0.2);
+						border-radius: 50%;
+            background:#fff;
+            margin:0 auto;
+            vertical-align: middle;
+					}
+				}
+
+				.text {
+					float: right;
+				}
+			}
+
+			.b {
+				margin: 20px 0 0 0;
+				.card-info {
+					float: left;
+
+					.text {
+						display: block;
+						font-size: 28px;
+						line-height: 30px;
+            margin-bottom:10px;
+					}
+
+					.card-text {
+						display: block;
+						font-size: 36px;
+						line-height: 40px;
+					}
+				}
+
+				.relieve-bind-btn {
+					float: right;
+					width:124px;
+					height: 50px;
+					margin: 25px 0 0 0;
+					line-height: 50px;
+					text-align: center;
+					font-size: 28px;
+					background-color: #fff;
+					border-radius: 5px;
+					color: #ed6667;
+				}
+			}
+		}
+	}
+
+	.lin {
+		height: 1px;
+		background:rgba(0, 0, 0, 0.5);
+		border-bottom: 1px solid #fff;
+	}
+
+	.list-back {
+		position: absolute;
+		left: 310px;
+		top: 0;
+		z-index: 1;
+		width: 117px;
+		height: 190px;
+		background-color: rgba(255, 255, 255, 0.1);
+		-webkit-transform: skew(-45deg);
+		   -moz-transform: skew(-45deg);
+			 -o-transform: skew(-45deg);
+				transform: skew(-45deg);
+	}
+
+	.list-back-1 {
+		position: absolute;
+		left: 460px;
+		top: 0;
+		width: 40px;
+		height: 190px;
+		background-color: rgba(255, 255, 255, 0.1);
+		-webkit-transform: skew(-45deg);
+		   -moz-transform: skew(-45deg);
+			 -o-transform: skew(-45deg);
+				transform: skew(-45deg);
+	}
+}
+
+
+.green-list {
+	.list {
+		background-color: #51c08d;
+
+		.list-cnt {
+			.b {
+				.relieve-bind-btn {
+					color: #51c08d;
+				}
+			}
+		}
+	}
+}
+
+.blue-list {
+	.list {
+		background-color: #658cd9;
+		.list-cnt {
+			.b {
+				.relieve-bind-btn {
+					color: #658cd9;
+				}
+			}
+		}
+	}
+}
+.management-tip{
+  padding:0 34px;
+  font-size:27px;
+  color:#999;
+  line-height:40px;
+}
+.fixed-bottom-part{
+  width:100%;
+  padding:22px 0;
+  background:#fff;
+  position:fixed;
+  bottom:0;
+}
+.fixed-tip{
+  font-size:27px;
+  color:#999;
+  text-align:center;
+}
+.add-card-btn{
+  display:block;
+  width:654px;
+  height:84px;
+  line-height:84px;
+  background:#6aa4f0;
+  text-align:center;
+  font-size:34px;
+  color:#fff;
+  border-radius:8px;
+  margin:20px auto 0;
+}
+.mask{
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.7);
+  position:fixed;
+  top:0;
+  left:0;
+}
+.verify-pop{
+  width:580px;
+  padding:57px 37px 37px;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#fff;
+  background:#fff;
+  border-radius:8px;
+}
+.verify-tip{
+  font-size:32px;
+  line-height:40px;
+  color:#666;
+  text-align:center;
+}
+.verify-btn{
+  display:block;
+  width:580px;
+  height:84px;
+  line-height:84px;
+  background:#6aa4f0;
+  text-align:center;
+  font-size:34px;
+  color:#fff;
+  border-radius:8px;
+  margin-top:90px;
+}
+.verify-pop-close{
+  width:20px;
+  height:20px;
+  background:url(../images/close.jpg) no-repeat;
+  position:absolute;
+  top:30px;
+  right:30px;
+}
+.dis{
+  display:none;
+}
