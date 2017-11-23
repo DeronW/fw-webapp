@@ -45,8 +45,8 @@ class SetCashCard extends React.Component{
     changeBankNum(e) {
         let input = e.target, v = input.value;
         // 把银行卡号, 每隔4个数字添加一个空格
-        v = v.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");
-        if (v.length < 19 + 5)
+        //v = v.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");
+        if (v.length < 20)
             this.setState({ bankNum: v });
     }
     blurBankNum(e) {
