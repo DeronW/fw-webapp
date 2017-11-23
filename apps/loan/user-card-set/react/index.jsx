@@ -136,7 +136,7 @@ class SetCashCard extends React.Component{
                 cardType: cardType,
                 idCard: id,
                 mobile: phone,
-                operatorType: USER.status < 2 ? 1 : 2
+                operatorType: 1
             }).then((data) => {
                 let oGid = data.bindBankInfo.operatorBankcardGid;
                 window.location.href = `/static/loan/user-verify-phone/index.html?phone=${phone}&operatorBankcardGid=${oGid}`;
